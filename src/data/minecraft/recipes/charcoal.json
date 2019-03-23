@@ -1,0 +1,10 @@
+{
+  "craftTime": 1000,
+  "type": "smelting",
+  "ingredient": {
+    "tag": "minecraft:logs"
+  },
+  "result": "minecraft:charcoal",
+  "experience": 0.15,
+  "cookingtime": 200
+}

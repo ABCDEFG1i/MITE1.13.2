@@ -1,0 +1,19 @@
+{
+  "craftTime": 1000,
+  "type": "crafting_shaped",
+  "pattern": [
+    "#X#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "X": {
+      "item": "minecraft:cocoa_beans"
+    }
+  },
+  "result": {
+    "item": "minecraft:cookie",
+    "count": 8
+  }
+}

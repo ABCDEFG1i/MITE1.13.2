@@ -1,0 +1,16 @@
+{
+  "craftTime": 1000,
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:cactus_green"
+    }
+  ],
+  "result": {
+    "item": "minecraft:cyan_dye",
+    "count": 2
+  }
+}

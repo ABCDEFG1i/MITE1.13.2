@@ -1,0 +1,16 @@
+{
+  "craftTime": 1000,
+  "type": "crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:birch_planks"
+    }
+  },
+  "result": {
+    "item": "minecraft:birch_pressure_plate"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "craftTime": 1000,
+  "type": "crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:granite"
+    }
+  },
+  "result": {
+    "item": "minecraft:polished_granite",
+    "count": 4
+  }
+}

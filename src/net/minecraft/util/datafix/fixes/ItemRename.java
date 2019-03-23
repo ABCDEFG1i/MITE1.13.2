@@ -1,0 +1,43 @@
+package net.minecraft.util.datafix.fixes;
+
+import com.mojang.datafixers.DSL;
+import com.mojang.datafixers.DataFix;
+import com.mojang.datafixers.TypeRewriteRule;
+import com.mojang.datafixers.schemas.Schema;
+import com.mojang.datafixers.types.Type;
+import com.mojang.datafixers.util.Pair;
+import java.util.Objects;
+import java.util.function.Function;
+import net.minecraft.util.datafix.TypeReferences;
+
+public abstract class ItemRename extends DataFix {
+   private final String field_206356_a;
+
+   public ItemRename(Schema p_i49641_1_, String p_i49641_2_) {
+      super(p_i49641_1_, false);
+      this.field_206356_a = p_i49641_2_;
+   }
+
+   public TypeRewriteRule makeRule() {
+      Type<Pair<String, String>> type = DSL.named(TypeReferences.ITEM_NAME.typeName(), DSL.namespacedString());
+      if (!Objects.equals(this.getInputSchema().getType(TypeReferences.ITEM_NAME), type)) {
+         throw new IllegalStateException("item name type is not what was expected.");
+      } else {
+         return this.fixTypeEverywhere(this.field_206356_a, type, (p_211012_1_) -> {
+            return (p_206354_1_) -> {
+               return p_206354_1_.mapSecond(this::func_206355_a);
+            };
+         });
+      }
+   }
+
+   protected abstract String func_206355_a(String p_206355_1_);
+
+   public static DataFix create(Schema p_207476_0_, String p_207476_1_, final Function<String, String> p_207476_2_) {
+      return new ItemRename(p_207476_0_, p_207476_1_) {
+         protected String func_206355_a(String p_206355_1_) {
+            return p_207476_2_.apply(p_206355_1_);
+         }
+      };
+   }
+}
