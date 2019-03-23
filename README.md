@@ -13,5 +13,5 @@ Go to the underground world and dig diamonds then get rich overnight._**
 * Rename the downloaded MITE1.13.2.jar to 1.13.2.jar
 * Replace the original version of 1.13.2.jar
 * Start the game.Have fun
-
+ 
  
