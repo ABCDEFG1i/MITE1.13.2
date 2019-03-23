@@ -1,4 +1,4 @@
-[中文版](https://github.com/X1AOYu233/MITE1.13.2/README_CN.MD)
+[中文版](https://github.com/X1AOYu233/MITE1.13.2/README_CN.md)
 # MITE1.13.2
 **_It’s impossible for a person to just make a few carrots and make a night vision potion.
 Go to the underground world and dig diamonds then get rich overnight._**
