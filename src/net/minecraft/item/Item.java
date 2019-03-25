@@ -801,10 +801,9 @@ public class Item implements IItemProvider {
       registerItem("wooden_shovel", new ItemSpade(ItemTier.WOOD, 1.5F, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("wooden_pickaxe", new ItemPickaxe(ItemTier.WOOD, 1, -2.8F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("wooden_axe", new ItemAxe(ItemTier.WOOD, 6.0F, -3.2F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
-      registerItem("stone_sword", new ItemSword(ItemTier.STONE, 3, -2.4F, (new Item.Properties()).func_200916_a(ItemGroup.COMBAT)));
-      registerItem("stone_shovel", new ItemSpade(ItemTier.STONE, 1.5F, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
-      registerItem("stone_pickaxe", new ItemPickaxe(ItemTier.STONE, 1, -2.8F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
-      registerItem("stone_axe", new ItemAxe(ItemTier.STONE, 7.0F, -3.2F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
+      registerItem("flint_shovel", new ItemSpade(ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
+      registerItem("flint_pickaxe", new ItemPickaxe(ItemTier.FLINT, 1, -2.8F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
+      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 7.0F, -3.2F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("diamond_sword", new ItemSword(ItemTier.DIAMOND, 3, -2.4F, (new Item.Properties()).func_200916_a(ItemGroup.COMBAT)));
       registerItem("diamond_shovel", new ItemSpade(ItemTier.DIAMOND, 1.5F, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("diamond_pickaxe", new ItemPickaxe(ItemTier.DIAMOND, 1, -2.8F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
@@ -820,7 +819,6 @@ public class Item implements IItemProvider {
       registerItem("feather", new Item((new Item.Properties()).func_200916_a(ItemGroup.MATERIALS)));
       registerItem("gunpowder", new Item((new Item.Properties()).func_200916_a(ItemGroup.MATERIALS)));
       registerItem("wooden_hoe", new ItemHoe(ItemTier.WOOD, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
-      registerItem("stone_hoe", new ItemHoe(ItemTier.STONE, -2.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("iron_hoe", new ItemHoe(ItemTier.IRON, -1.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("diamond_hoe", new ItemHoe(ItemTier.DIAMOND, 0.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
       registerItem("golden_hoe", new ItemHoe(ItemTier.GOLD, -3.0F, (new Item.Properties()).func_200916_a(ItemGroup.TOOLS)));
