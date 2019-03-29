@@ -25,8 +25,7 @@ public class Items {
    public static final Item WOODEN_SHOVEL;
    public static final Item WOODEN_PICKAXE;
    public static final Item WOODEN_AXE;
-   public static final Item STONE_SWORD;
-   public static final Item STONE_SHOVEL;
+   public static final Item FLINT_SHOVEL;
    public static final Item STONE_PICKAXE;
    public static final Item STONE_AXE;
    public static final Item DIAMOND_SWORD;
@@ -44,7 +43,6 @@ public class Items {
    public static final Item FEATHER;
    public static final Item GUNPOWDER;
    public static final Item WOODEN_HOE;
-   public static final Item STONE_HOE;
    public static final Item IRON_HOE;
    public static final Item DIAMOND_HOE;
    public static final Item GOLDEN_HOE;
@@ -352,8 +350,7 @@ public class Items {
          WOODEN_SHOVEL = getRegisteredItem("wooden_shovel");
          WOODEN_PICKAXE = getRegisteredItem("wooden_pickaxe");
          WOODEN_AXE = getRegisteredItem("wooden_axe");
-         STONE_SWORD = getRegisteredItem("stone_sword");
-         STONE_SHOVEL = getRegisteredItem("stone_shovel");
+         FLINT_SHOVEL = getRegisteredItem("stone_shovel");
          STONE_PICKAXE = getRegisteredItem("stone_pickaxe");
          STONE_AXE = getRegisteredItem("stone_axe");
          DIAMOND_SWORD = getRegisteredItem("diamond_sword");
@@ -371,7 +368,6 @@ public class Items {
          FEATHER = getRegisteredItem("feather");
          GUNPOWDER = getRegisteredItem("gunpowder");
          WOODEN_HOE = getRegisteredItem("wooden_hoe");
-         STONE_HOE = getRegisteredItem("stone_hoe");
          IRON_HOE = getRegisteredItem("iron_hoe");
          DIAMOND_HOE = getRegisteredItem("diamond_hoe");
          GOLDEN_HOE = getRegisteredItem("golden_hoe");

@@ -62,7 +62,7 @@ public class EntityWitherSkeleton extends AbstractSkeleton {
    }
 
    protected void setEquipmentBasedOnDifficulty(DifficultyInstance p_180481_1_) {
-      this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.STONE_SWORD));
+      this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.WOODEN_SWORD));
    }
 
    protected void setEnchantmentBasedOnDifficulty(DifficultyInstance p_180483_1_) {

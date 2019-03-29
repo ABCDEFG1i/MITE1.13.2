@@ -11,8 +11,8 @@ public enum ItemTier implements IItemTier {
    WOOD(0, 59, 2.0F, 0.0F, 15, () -> {
       return Ingredient.fromTag(ItemTags.PLANKS);
    }),
-   STONE(1, 131, 4.0F, 1.0F, 5, () -> {
-      return Ingredient.fromItems(Blocks.COBBLESTONE);
+   FLINT(1, 131, 4.0F, 1.0F, 5, () -> {
+      return Ingredient.fromItems(Items.FLINT);
    }),
    IRON(2, 250, 6.0F, 2.0F, 14, () -> {
       return Ingredient.fromItems(Items.IRON_INGOT);
