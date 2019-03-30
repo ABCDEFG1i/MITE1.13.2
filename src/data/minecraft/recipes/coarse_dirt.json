@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "DG",
@@ -13,6 +12,7 @@
       "item": "minecraft:gravel"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:coarse_dirt",
     "count": 4

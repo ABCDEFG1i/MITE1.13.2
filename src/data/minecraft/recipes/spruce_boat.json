@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "boat",
   "pattern": [
@@ -11,6 +10,7 @@
       "item": "minecraft:spruce_planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:spruce_boat"
   }

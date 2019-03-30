@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -12,6 +11,7 @@
       "item": "minecraft:feather"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:writable_book"
   }

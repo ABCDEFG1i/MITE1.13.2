@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     " R ",
@@ -14,6 +13,7 @@
       "item": "minecraft:glowstone"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:redstone_lamp"
   }

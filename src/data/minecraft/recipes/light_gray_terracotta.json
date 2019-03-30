@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "stained_terracotta",
   "pattern": [
@@ -15,6 +14,7 @@
       "item": "minecraft:light_gray_dye"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:light_gray_terracotta",
     "count": 8

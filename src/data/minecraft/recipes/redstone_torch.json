@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "X",
@@ -13,6 +12,7 @@
       "item": "minecraft:redstone"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:redstone_torch"
   }

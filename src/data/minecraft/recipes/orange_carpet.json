@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "carpet",
   "pattern": [
@@ -10,6 +9,7 @@
       "item": "minecraft:orange_wool"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:orange_carpet",
     "count": 3

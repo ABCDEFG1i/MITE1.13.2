@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "smelting",
   "ingredient": {
     "item": "minecraft:chicken"

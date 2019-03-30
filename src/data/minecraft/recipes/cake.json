@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "AAA",
@@ -20,6 +19,7 @@
       "item": "minecraft:egg"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:cake"
   }

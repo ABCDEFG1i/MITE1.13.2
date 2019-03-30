@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "wooden_fence_gate",
   "pattern": [
@@ -14,6 +13,7 @@
       "item": "minecraft:acacia_planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:acacia_fence_gate"
   }

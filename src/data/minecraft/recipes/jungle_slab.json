@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "wooden_slab",
   "pattern": [
@@ -10,6 +9,7 @@
       "item": "minecraft:jungle_planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:jungle_slab",
     "count": 6

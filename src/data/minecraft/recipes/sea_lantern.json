@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "SCS",
@@ -14,6 +13,7 @@
       "item": "minecraft:prismarine_crystals"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:sea_lantern"
   }

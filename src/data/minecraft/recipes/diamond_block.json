@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "###",
@@ -11,6 +10,7 @@
       "item": "minecraft:diamond"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:diamond_block"
   }

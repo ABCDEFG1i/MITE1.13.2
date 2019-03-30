@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -15,6 +14,7 @@
       "item": "minecraft:leather"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:book"
   }

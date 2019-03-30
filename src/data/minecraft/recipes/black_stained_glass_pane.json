@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "stained_glass_pane",
   "pattern": [
@@ -11,6 +10,7 @@
       "item": "minecraft:black_stained_glass"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:black_stained_glass_pane",
     "count": 16

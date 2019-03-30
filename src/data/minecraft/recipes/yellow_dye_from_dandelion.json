@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "yellow_dye",
   "ingredients": [
@@ -7,6 +6,7 @@
       "item": "minecraft:dandelion"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:dandelion_yellow"
   }

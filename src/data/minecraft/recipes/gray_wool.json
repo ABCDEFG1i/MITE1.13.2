@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "wool",
   "ingredients": [
@@ -10,6 +9,7 @@
       "item": "minecraft:white_wool"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:gray_wool"
   }

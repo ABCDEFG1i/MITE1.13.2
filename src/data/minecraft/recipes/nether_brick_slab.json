@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "###"
@@ -9,6 +8,7 @@
       "item": "minecraft:nether_bricks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:nether_brick_slab",
     "count": 6

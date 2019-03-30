@@ -1,11 +1,11 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
       "item": "minecraft:coal_block"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:coal",
     "count": 9

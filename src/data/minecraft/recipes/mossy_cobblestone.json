@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -9,6 +8,7 @@
       "item": "minecraft:vine"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:mossy_cobblestone"
   }

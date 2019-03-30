@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "GGG",
@@ -17,6 +16,7 @@
       "tag": "minecraft:wooden_slabs"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:daylight_detector"
   }

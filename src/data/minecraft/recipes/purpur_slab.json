@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "###"
@@ -14,6 +13,7 @@
       }
     ]
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:purpur_slab",
     "count": 6

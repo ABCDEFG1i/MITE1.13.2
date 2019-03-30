@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "iron_ingot",
   "pattern": [
@@ -12,6 +11,7 @@
       "item": "minecraft:iron_nugget"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:iron_ingot"
   }

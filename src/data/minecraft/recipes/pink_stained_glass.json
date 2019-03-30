@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "stained_glass",
   "pattern": [
@@ -15,6 +14,7 @@
       "item": "minecraft:pink_dye"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:pink_stained_glass",
     "count": 8

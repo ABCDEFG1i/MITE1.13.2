@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "bed",
   "pattern": [
@@ -14,6 +13,7 @@
       "tag": "minecraft:planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:yellow_bed"
   }

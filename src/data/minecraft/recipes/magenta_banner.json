@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "banner",
   "pattern": [
@@ -15,6 +14,7 @@
       "item": "minecraft:stick"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:magenta_banner"
   }

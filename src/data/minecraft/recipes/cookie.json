@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "#X#"
@@ -12,6 +11,7 @@
       "item": "minecraft:cocoa_beans"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:cookie",
     "count": 8

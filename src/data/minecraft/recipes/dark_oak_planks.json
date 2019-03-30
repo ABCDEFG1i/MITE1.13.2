@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "planks",
   "ingredients": [
@@ -7,6 +6,7 @@
       "tag": "minecraft:dark_oak_logs"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:dark_oak_planks",
     "count": 4

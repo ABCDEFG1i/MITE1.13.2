@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "stained_terracotta",
   "pattern": [
@@ -15,6 +14,7 @@
       "item": "minecraft:lapis_lazuli"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:blue_terracotta",
     "count": 8
