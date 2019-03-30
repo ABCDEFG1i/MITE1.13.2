@@ -25,9 +25,6 @@ public class Items {
    public static final Item WOODEN_SHOVEL;
    public static final Item WOODEN_PICKAXE;
    public static final Item WOODEN_AXE;
-   public static final Item FLINT_SHOVEL;
-   public static final Item STONE_PICKAXE;
-   public static final Item STONE_AXE;
    public static final Item DIAMOND_SWORD;
    public static final Item DIAMOND_SHOVEL;
    public static final Item DIAMOND_PICKAXE;
@@ -317,6 +314,12 @@ public class Items {
    public static final Item NAUTILUS_SHELL;
    public static final Item HEART_OF_THE_SEA;
 
+   //MITE Items Start
+
+   public static final Item FLINT_SHOVEL;
+   public static final Item SALAD;
+   public static final Item FLINT_AXE;
+
    private static Item getRegisteredItem(String p_179554_0_) {
       Item item = IRegistry.field_212630_s.func_212608_b(new ResourceLocation(p_179554_0_));
       if (item == null) {
@@ -350,9 +353,6 @@ public class Items {
          WOODEN_SHOVEL = getRegisteredItem("wooden_shovel");
          WOODEN_PICKAXE = getRegisteredItem("wooden_pickaxe");
          WOODEN_AXE = getRegisteredItem("wooden_axe");
-         FLINT_SHOVEL = getRegisteredItem("stone_shovel");
-         STONE_PICKAXE = getRegisteredItem("stone_pickaxe");
-         STONE_AXE = getRegisteredItem("stone_axe");
          DIAMOND_SWORD = getRegisteredItem("diamond_sword");
          DIAMOND_SHOVEL = getRegisteredItem("diamond_shovel");
          DIAMOND_PICKAXE = getRegisteredItem("diamond_pickaxe");
@@ -641,6 +641,12 @@ public class Items {
          PHANTOM_MEMBRANE = getRegisteredItem("phantom_membrane");
          NAUTILUS_SHELL = getRegisteredItem("nautilus_shell");
          HEART_OF_THE_SEA = getRegisteredItem("heart_of_the_sea");
+
+         //MITE Items Start
+
+         FLINT_SHOVEL = getRegisteredItem("flint_shovel");
+         FLINT_AXE = getRegisteredItem("flint_axe");
+         SALAD = getRegisteredItem("bowl_salad");
       }
    }
 }

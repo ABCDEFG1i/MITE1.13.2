@@ -2,7 +2,7 @@
   "parent": "minecraft:story/mine_stone",
   "display": {
     "icon": {
-      "item": "minecraft:stone_pickaxe"
+      "item": "minecraft:flint"
     },
     "title": {
       "translate": "advancements.story.upgrade_tools.title"
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:stone_pickaxe"
+            "item": "minecraft:flint"
           }
         ]
       }

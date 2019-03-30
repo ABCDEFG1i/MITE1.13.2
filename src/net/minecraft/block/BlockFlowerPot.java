@@ -1,7 +1,6 @@
 package net.minecraft.block;
 
 import com.google.common.collect.Maps;
-import java.util.Map;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,16 +9,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import java.util.Map;
 
 public class BlockFlowerPot extends Block {
    private static final Map<Block, Block> field_196451_b = Maps.newHashMap();
@@ -76,14 +73,14 @@ public class BlockFlowerPot extends Block {
       return this.field_196452_c == Blocks.AIR ? super.getItem(p_185473_1_, p_185473_2_, p_185473_3_) : new ItemStack(this.field_196452_c);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Blocks.FLOWER_POT;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
       if (this.field_196452_c != Blocks.AIR) {
-         spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(this.field_196452_c));
+          spawnAsEntity(worldIn, blockAt, new ItemStack(this.field_196452_c));
       }
 
    }

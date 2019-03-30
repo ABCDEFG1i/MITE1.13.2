@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Random;
 
 public class BlockRedstoneOre extends Block {
    public static final BooleanProperty LIT = BlockRedstoneTorch.LIT;
@@ -58,7 +59,7 @@ public class BlockRedstoneOre extends Block {
 
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.REDSTONE;
    }
 
@@ -70,11 +71,11 @@ public class BlockRedstoneOre extends Block {
       return 4 + p_196264_2_.nextInt(2);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
-      if (this.getItemDropped(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_5_) != this) {
-         int i = 1 + p_196255_2_.rand.nextInt(5);
-         this.dropXpOnBlockBreak(p_196255_2_, p_196255_3_, i);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
+        if (this.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel) != this) {
+            int i = 1 + worldIn.rand.nextInt(5);
+            this.dropXpOnBlockBreak(worldIn, blockAt, i);
       }
 
    }

@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,17 +12,15 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.PistonType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityPiston;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class BlockPistonMoving extends BlockContainer {
    public static final DirectionProperty FACING = BlockPistonExtension.FACING;
@@ -81,15 +78,15 @@ public class BlockPistonMoving extends BlockContainer {
       }
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_2_.isRemote) {
-         TileEntityPiston tileentitypiston = this.getTilePistonAt(p_196255_2_, p_196255_3_);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        if (!worldIn.isRemote) {
+            TileEntityPiston tileentitypiston = this.getTilePistonAt(worldIn, blockAt);
          if (tileentitypiston != null) {
-            tileentitypiston.getPistonState().dropBlockAsItem(p_196255_2_, p_196255_3_, 0);
+             tileentitypiston.getPistonState().dropBlockAsItem(worldIn, blockAt, 0);
          }
       }
    }

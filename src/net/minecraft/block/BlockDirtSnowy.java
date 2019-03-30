@@ -38,7 +38,7 @@ public class BlockDirtSnowy extends Block {
       p_206840_1_.add(SNOWY);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Blocks.DIRT;
    }
 }

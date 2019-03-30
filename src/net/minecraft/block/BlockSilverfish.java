@@ -1,13 +1,14 @@
 package net.minecraft.block;
 
 import com.google.common.collect.Maps;
-import java.util.Map;
-import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Map;
+import java.util.Random;
 
 public class BlockSilverfish extends Block {
    private final Block mimickedBlock;
@@ -35,11 +36,11 @@ public class BlockSilverfish extends Block {
       return new ItemStack(this.mimickedBlock);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_2_.isRemote && p_196255_2_.getGameRules().getBoolean("doTileDrops")) {
-         EntitySilverfish entitysilverfish = new EntitySilverfish(p_196255_2_);
-         entitysilverfish.setLocationAndAngles((double)p_196255_3_.getX() + 0.5D, (double)p_196255_3_.getY(), (double)p_196255_3_.getZ() + 0.5D, 0.0F, 0.0F);
-         p_196255_2_.spawnEntity(entitysilverfish);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        if (!worldIn.isRemote && worldIn.getGameRules().getBoolean("doTileDrops")) {
+            EntitySilverfish entitysilverfish = new EntitySilverfish(worldIn);
+            entitysilverfish.setLocationAndAngles((double) blockAt.getX() + 0.5D, (double) blockAt.getY(), (double) blockAt.getZ() + 0.5D, 0.0F, 0.0F);
+            worldIn.spawnEntity(entitysilverfish);
          entitysilverfish.spawnExplosionParticle();
       }
 

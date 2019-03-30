@@ -22,18 +22,18 @@ public class ItemFood extends Item {
    private PotionEffect potionId;
    private float potionEffectProbability;
 
-   public ItemFood(int p_i48492_1_, float p_i48492_2_, boolean p_i48492_3_, Item.Properties p_i48492_4_) {
-      super(p_i48492_4_);
-      this.healAmount = p_i48492_1_;
-      this.meat = p_i48492_3_;
-      this.saturationModifier = p_i48492_2_;
+    public ItemFood(int foodLevel, float saturationModifier, boolean isMeat, Item.Properties itemProperties) {
+        super(itemProperties);
+        this.healAmount = foodLevel;
+        this.meat = isMeat;
+        this.saturationModifier = saturationModifier;
    }
 
    public ItemStack onItemUseFinish(ItemStack p_77654_1_, World p_77654_2_, EntityLivingBase p_77654_3_) {
       if (p_77654_3_ instanceof EntityPlayer) {
          EntityPlayer entityplayer = (EntityPlayer)p_77654_3_;
          entityplayer.getFoodStats().addStats(this, p_77654_1_);
-         p_77654_2_.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, p_77654_2_.rand.nextFloat() * 0.1F + 0.9F);
+         p_77654_2_.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, p_77654_2_.rand.nextFloat() * 0.1F + 0.9F);
          this.onFoodEaten(p_77654_1_, p_77654_2_, entityplayer);
          entityplayer.func_71029_a(StatList.ITEM_USED.func_199076_b(this));
          if (entityplayer instanceof EntityPlayerMP) {

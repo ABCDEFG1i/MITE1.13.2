@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -13,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockNetherWart extends BlockBush {
    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
@@ -41,24 +42,24 @@ public class BlockNetherWart extends BlockBush {
       super.tick(p_196267_1_, p_196267_2_, p_196267_3_, p_196267_4_);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_2_.isRemote) {
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        if (!worldIn.isRemote) {
          int i = 1;
-         if (p_196255_1_.get(AGE) >= 3) {
-            i = 2 + p_196255_2_.rand.nextInt(3);
-            if (p_196255_5_ > 0) {
-               i += p_196255_2_.rand.nextInt(p_196255_5_ + 1);
+            if (blockCurrentState.get(AGE) >= 3) {
+                i = 2 + worldIn.rand.nextInt(3);
+                if (fortuneLevel > 0) {
+                    i += worldIn.rand.nextInt(fortuneLevel + 1);
             }
          }
 
          for(int j = 0; j < i; ++j) {
-            spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(Items.NETHER_WART));
+             spawnAsEntity(worldIn, blockAt, new ItemStack(Items.NETHER_WART));
          }
 
       }
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 

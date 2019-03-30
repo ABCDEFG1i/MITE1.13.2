@@ -1,8 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.BlockItemUseContext;
@@ -16,6 +13,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
 
 public class BlockHugeMushroom extends Block {
    public static final BooleanProperty NORTH = BlockSixWay.NORTH;
@@ -38,8 +39,8 @@ public class BlockHugeMushroom extends Block {
       return Math.max(0, p_196264_2_.nextInt(9) - 6);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return (IItemProvider)(this.smallBlock == null ? Items.AIR : this.smallBlock);
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+      return (this.smallBlock == null ? Items.AIR : this.smallBlock);
    }
 
    public IBlockState getStateForPlacement(BlockItemUseContext p_196258_1_) {

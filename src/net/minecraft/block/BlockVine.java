@@ -1,8 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Map;
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,12 +12,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.stats.StatList;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -28,6 +20,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
 
 public class BlockVine extends Block {
    public static final BooleanProperty UP = BlockSixWay.UP;
@@ -311,7 +307,7 @@ public class BlockVine extends Block {
       return flag ? iblockstate1 : null;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 

@@ -18,37 +18,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.longs.LongIterator;
-import java.awt.GraphicsEnvironment;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.Proxy;
-import java.net.URLEncoder;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
-import java.security.KeyPair;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.function.BooleanSupplier;
-import javax.annotation.Nullable;
-import javax.imageio.ImageIO;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.FunctionManager;
 import net.minecraft.command.CommandSource;
@@ -56,7 +25,6 @@ import net.minecraft.command.Commands;
 import net.minecraft.command.ICommandSource;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.ReportedException;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Bootstrap;
@@ -67,14 +35,7 @@ import net.minecraft.network.play.server.SPacketTimeUpdate;
 import net.minecraft.profiler.ISnooperInfo;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.profiler.Snooper;
-import net.minecraft.resources.FolderPackFinder;
-import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourcePack;
-import net.minecraft.resources.ResourcePackInfo;
-import net.minecraft.resources.ResourcePackList;
-import net.minecraft.resources.ResourcePackType;
-import net.minecraft.resources.ServerPackFinder;
-import net.minecraft.resources.SimpleReloadableResourceManager;
+import net.minecraft.resources.*;
 import net.minecraft.scoreboard.ServerScoreboard;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.management.PlayerList;
@@ -82,45 +43,41 @@ import net.minecraft.server.management.PlayerProfileCache;
 import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraft.server.management.UserListWhitelist;
 import net.minecraft.tags.NetworkTagManager;
-import net.minecraft.util.DefaultUncaughtExceptionHandler;
-import net.minecraft.util.IProgressUpdate;
-import net.minecraft.util.IThreadListener;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.Util;
-import net.minecraft.util.WorldOptimizer;
+import net.minecraft.util.*;
 import net.minecraft.util.datafix.DataFixesManager;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.ForcedChunksSaveData;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.GameType;
-import net.minecraft.world.ServerWorldEventHandler;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.world.WorldServerDemo;
-import net.minecraft.world.WorldServerMulti;
-import net.minecraft.world.WorldSettings;
-import net.minecraft.world.WorldType;
+import net.minecraft.world.*;
 import net.minecraft.world.chunk.storage.AnvilSaveConverter;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.storage.ISaveFormat;
-import net.minecraft.world.storage.ISaveHandler;
-import net.minecraft.world.storage.SessionLockException;
-import net.minecraft.world.storage.WorldInfo;
-import net.minecraft.world.storage.WorldSavedDataStorage;
+import net.minecraft.world.storage.*;
 import net.minecraft.world.storage.loot.LootTableManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.Validate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.Proxy;
+import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyPair;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Queue;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.BooleanSupplier;
 
 public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, ICommandSource, Runnable {
    private static final Logger LOGGER = LogManager.getLogger();
@@ -231,7 +188,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
             public void setLoadingProgress(int p_73718_1_) {
                if (Util.milliTime() - this.startTime >= 1000L) {
                   this.startTime = Util.milliTime();
-                  MinecraftServer.LOGGER.info("Converting... {}%", (int)p_73718_1_);
+                  MinecraftServer.LOGGER.info("Converting... {}%", p_73718_1_);
                }
 
             }
@@ -271,7 +228,6 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
                   try {
                      Thread.sleep(1000L);
                   } catch (InterruptedException var8) {
-                     ;
                   }
                }
             }
@@ -368,7 +324,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          if (resourcepackinfo != null) {
             list.add(resourcepackinfo);
          } else {
-            LOGGER.warn("Missing data pack {}", (Object)s);
+            LOGGER.warn("Missing data pack {}", s);
          }
       }
 
@@ -418,7 +374,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          this.setCurrentTaskAndPercentDone(new TextComponentTranslation("menu.preparingSpawn"), set.size() * 100 / 625);
       }
 
-      LOGGER.info("Time elapsed: {} ms", (long)stopwatch.elapsed(TimeUnit.MILLISECONDS));
+      LOGGER.info("Time elapsed: {} ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
 
       for(DimensionType dimensiontype : DimensionType.func_212681_b()) {
          ForcedChunksSaveData forcedchunkssavedata = p_71222_1_.func_212426_a(dimensiontype, ForcedChunksSaveData::new, "chunks");
@@ -444,7 +400,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          try {
             this.setResourcePack("level://" + URLEncoder.encode(p_175584_1_, StandardCharsets.UTF_8.toString()) + "/" + "resources.zip", "");
          } catch (UnsupportedEncodingException var5) {
-            LOGGER.warn("Something went wrong url encoding {}", (Object)p_175584_1_);
+            LOGGER.warn("Something went wrong url encoding {}", p_175584_1_);
          }
       }
 
@@ -481,7 +437,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
             }
 
             try {
-               worldserver.saveAllChunks(true, (IProgressUpdate)null);
+               worldserver.saveAllChunks(true, null);
             } catch (SessionLockException sessionlockexception) {
                LOGGER.warn(sessionlockexception.getMessage());
             }
@@ -571,7 +527,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
                this.serverIsRunning = true;
             }
          } else {
-            this.finalTick((CrashReport)null);
+            this.finalTick(null);
          }
       } catch (Throwable throwable1) {
          LOGGER.error("Encountered an unexpected exception", throwable1);
@@ -584,7 +540,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
 
          File file1 = new File(new File(this.getDataDirectory(), "crash-reports"), "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-server.txt");
          if (crashreport.saveToFile(file1)) {
-            LOGGER.error("This crash report has been saved to: {}", (Object)file1.getAbsolutePath());
+            LOGGER.error("This crash report has been saved to: {}", file1.getAbsolutePath());
          } else {
             LOGGER.error("We were unable to save this crash report to disk.");
          }
@@ -621,7 +577,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
             ByteBuffer bytebuffer = Base64.getEncoder().encode(bytebuf.nioBuffer());
             p_184107_1_.setFavicon("data:image/png;base64," + StandardCharsets.UTF_8.decode(bytebuffer));
          } catch (Exception exception) {
-            LOGGER.error("Couldn't load server icon", (Throwable)exception);
+            LOGGER.error("Couldn't load server icon", exception);
          } finally {
             bytebuf.release();
          }
@@ -797,7 +753,6 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
                   try {
                      i = Integer.parseInt(s4);
                   } catch (NumberFormatException var15) {
-                     ;
                   }
                } else if ("--singleplayer".equals(s3) && s4 != null) {
                   flag4 = true;
@@ -866,7 +821,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          thread.setUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler(LOGGER));
          Runtime.getRuntime().addShutdownHook(thread);
       } catch (Exception exception) {
-         LOGGER.fatal("Failed to start the minecraft server", (Throwable)exception);
+         LOGGER.fatal("Failed to start the minecraft server", exception);
       }
 
    }
@@ -1331,9 +1286,13 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          this.addScheduledTask(this::reload);
       } else {
          this.getPlayerList().saveAllPlayerData();
+          System.out.println("resourcePacks");
          this.resourcePacks.reloadPacksFromFinders();
+          System.out.println("loadDataPacks");
          this.loadDataPacks(this.func_71218_a(DimensionType.OVERWORLD).getWorldInfo());
+          System.out.println("Player reload");
          this.getPlayerList().reloadResources();
+          System.out.println("Player finished");
       }
    }
 
@@ -1342,7 +1301,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
 
       for(ResourcePackInfo resourcepackinfo : this.resourcePacks.func_198978_b()) {
          if (!p_195568_1_.getDisabledDataPacks().contains(resourcepackinfo.getName()) && !list.contains(resourcepackinfo)) {
-            LOGGER.info("Found new data pack {}, loading it automatically", (Object)resourcepackinfo.getName());
+            LOGGER.info("Found new data pack {}, loading it automatically", resourcepackinfo.getName());
             resourcepackinfo.getPriority().func_198993_a(list, resourcepackinfo, (p_200247_0_) -> {
                return p_200247_0_;
             }, false);
@@ -1406,7 +1365,7 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
    }
 
    public CommandSource getCommandSource() {
-      return new CommandSource(this, this.func_71218_a(DimensionType.OVERWORLD) == null ? Vec3d.ZERO : new Vec3d(this.func_71218_a(DimensionType.OVERWORLD).getSpawnPoint()), Vec2f.ZERO, this.func_71218_a(DimensionType.OVERWORLD), 4, "Server", new TextComponentString("Server"), this, (Entity)null);
+      return new CommandSource(this, this.func_71218_a(DimensionType.OVERWORLD) == null ? Vec3d.ZERO : new Vec3d(this.func_71218_a(DimensionType.OVERWORLD).getSpawnPoint()), Vec2f.ZERO, this.func_71218_a(DimensionType.OVERWORLD), 4, "Server", new TextComponentString("Server"), this, null);
    }
 
    public boolean shouldReceiveFeedback() {

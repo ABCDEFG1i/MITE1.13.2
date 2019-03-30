@@ -63,7 +63,7 @@ public class BlockKelp extends Block implements ILiquidContainer {
       return block != Blocks.MAGMA_BLOCK && (block == this || Block.doesSideFillSquare(iblockstate.getCollisionShape(p_196260_2_, blockpos), EnumFacing.UP));
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Blocks.KELP;
    }
 

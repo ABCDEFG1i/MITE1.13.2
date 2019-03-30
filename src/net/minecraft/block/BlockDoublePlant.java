@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +21,8 @@ import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class BlockDoublePlant extends BlockBush {
    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
@@ -92,8 +93,8 @@ public class BlockDoublePlant extends BlockBush {
       p_196391_1_.dropBlockAsItem(p_196391_2_, p_196391_3_, 0);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return (IItemProvider)(p_199769_1_.get(HALF) == DoubleBlockHalf.LOWER ? super.getItemDropped(p_199769_1_, p_199769_2_, p_199769_3_, p_199769_4_) : Items.AIR);
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return (blockCurrentState.get(HALF) == DoubleBlockHalf.LOWER ? super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel) : Items.AIR);
    }
 
    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> p_206840_1_) {

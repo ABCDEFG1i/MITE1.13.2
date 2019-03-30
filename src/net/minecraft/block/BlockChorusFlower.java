@@ -1,7 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +19,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockChorusFlower extends Block {
    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_5;
    private final BlockChorusPlant field_196405_b;
@@ -31,7 +32,7 @@ public class BlockChorusFlower extends Block {
       this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)));
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 
@@ -71,7 +72,7 @@ public class BlockChorusFlower extends Block {
                   flag = true;
                }
 
-               if (flag && areAllNeighborsEmpty(p_196267_2_, blockpos, (EnumFacing)null) && p_196267_2_.isAirBlock(p_196267_3_.up(2))) {
+               if (flag && areAllNeighborsEmpty(p_196267_2_, blockpos, null) && p_196267_2_.isAirBlock(p_196267_3_.up(2))) {
                   p_196267_2_.setBlockState(p_196267_3_, this.field_196405_b.makeConnections(p_196267_2_, p_196267_3_), 2);
                   this.placeGrownFlower(p_196267_2_, blockpos, i);
                } else if (i < 4) {
@@ -197,7 +198,7 @@ public class BlockChorusFlower extends Block {
 
       for(int j = 0; j < i; ++j) {
          BlockPos blockpos = p_185601_1_.up(j + 1);
-         if (!areAllNeighborsEmpty(p_185601_0_, blockpos, (EnumFacing)null)) {
+         if (!areAllNeighborsEmpty(p_185601_0_, blockpos, null)) {
             return;
          }
 

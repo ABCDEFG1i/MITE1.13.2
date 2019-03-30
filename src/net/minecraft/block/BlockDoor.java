@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -20,12 +19,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -35,6 +29,8 @@ import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class BlockDoor extends Block {
    public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
@@ -213,11 +209,11 @@ public class BlockDoor extends Block {
    }
 
    private void playSound(World p_196426_1_, BlockPos p_196426_2_, boolean p_196426_3_) {
-      p_196426_1_.playEvent((EntityPlayer)null, p_196426_3_ ? this.getOpenSound() : this.getCloseSound(), p_196426_2_, 0);
+      p_196426_1_.playEvent(null, p_196426_3_ ? this.getOpenSound() : this.getCloseSound(), p_196426_2_, 0);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return (IItemProvider)(p_199769_1_.get(HALF) == DoubleBlockHalf.UPPER ? Items.AIR : super.getItemDropped(p_199769_1_, p_199769_2_, p_199769_3_, p_199769_4_));
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return (blockCurrentState.get(HALF) == DoubleBlockHalf.UPPER ? Items.AIR : super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel));
    }
 
    public EnumPushReaction getPushReaction(IBlockState p_149656_1_) {

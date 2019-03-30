@@ -1,12 +1,9 @@
 package net.minecraft.block;
 
-import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -23,12 +20,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityShulkerBox;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -41,6 +33,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockShulkerBox extends BlockContainer {
    public static final EnumProperty<EnumFacing> FACING = BlockDirectional.FACING;
@@ -86,7 +81,7 @@ public class BlockShulkerBox extends BlockContainer {
             boolean flag;
             if (((TileEntityShulkerBox)tileentity).getAnimationStatus() == TileEntityShulkerBox.AnimationStatus.CLOSED) {
                AxisAlignedBB axisalignedbb = VoxelShapes.func_197868_b().getBoundingBox().expand((double)(0.5F * (float)enumfacing.getXOffset()), (double)(0.5F * (float)enumfacing.getYOffset()), (double)(0.5F * (float)enumfacing.getZOffset())).contract((double)enumfacing.getXOffset(), (double)enumfacing.getYOffset(), (double)enumfacing.getZOffset());
-               flag = p_196250_2_.isCollisionBoxesEmpty((Entity)null, axisalignedbb.offset(p_196250_3_.offset(enumfacing)));
+               flag = p_196250_2_.isCollisionBoxesEmpty(null, axisalignedbb.offset(p_196250_3_.offset(enumfacing)));
             } else {
                flag = true;
             }
@@ -121,7 +116,7 @@ public class BlockShulkerBox extends BlockContainer {
       super.onBlockHarvested(p_176208_1_, p_176208_2_, p_176208_3_, p_176208_4_);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
    }
 
    public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, IBlockState p_180633_3_, EntityLivingBase p_180633_4_, ItemStack p_180633_5_) {
@@ -144,7 +139,7 @@ public class BlockShulkerBox extends BlockContainer {
                itemstack.getOrCreateTag().setTag("BlockEntityTag", ((TileEntityShulkerBox)tileentity).saveToNbt(new NBTTagCompound()));
                if (tileentityshulkerbox.hasCustomName()) {
                   itemstack.setDisplayName(tileentityshulkerbox.getCustomName());
-                  tileentityshulkerbox.setCustomName((ITextComponent)null);
+                  tileentityshulkerbox.setCustomName(null);
                }
 
                spawnAsEntity(p_196243_2_, p_196243_3_, itemstack);

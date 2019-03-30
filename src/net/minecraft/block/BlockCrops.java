@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -15,6 +14,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockCrops extends BlockBush implements IGrowable {
    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
@@ -134,16 +135,16 @@ public class BlockCrops extends BlockBush implements IGrowable {
       return Items.WHEAT;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, 0);
-      if (!p_196255_2_.isRemote) {
-         int i = this.getAge(p_196255_1_);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, 0);
+        if (!worldIn.isRemote) {
+            int i = this.getAge(blockCurrentState);
          if (i >= this.getMaxAge()) {
-            int j = 3 + p_196255_5_;
+             int j = 3 + fortuneLevel;
 
             for(int k = 0; k < j; ++k) {
-               if (p_196255_2_.rand.nextInt(2 * this.getMaxAge()) <= i) {
-                  spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(this.getSeedsItem()));
+                if (worldIn.rand.nextInt(2 * this.getMaxAge()) <= i) {
+                    spawnAsEntity(worldIn, blockAt, new ItemStack(this.getSeedsItem()));
                }
             }
          }
@@ -151,8 +152,8 @@ public class BlockCrops extends BlockBush implements IGrowable {
       }
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return this.isMaxAge(p_199769_1_) ? this.getCropsItem() : this.getSeedsItem();
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return this.isMaxAge(blockCurrentState) ? this.getCropsItem() : this.getSeedsItem();
    }
 
    public ItemStack getItem(IBlockReader p_185473_1_, BlockPos p_185473_2_, IBlockState p_185473_3_) {

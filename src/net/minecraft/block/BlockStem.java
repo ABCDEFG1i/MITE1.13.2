@@ -1,7 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,6 +15,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockStem extends BlockBush implements IGrowable {
    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_7;
@@ -60,16 +61,16 @@ public class BlockStem extends BlockBush implements IGrowable {
       }
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
-      if (!p_196255_2_.isRemote) {
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
+        if (!worldIn.isRemote) {
          Item item = this.getSeedItem();
          if (item != null) {
-            int i = p_196255_1_.get(AGE);
+             int i = blockCurrentState.get(AGE);
 
             for(int j = 0; j < 3; ++j) {
-               if (p_196255_2_.rand.nextInt(15) <= i) {
-                  spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(item));
+                if (worldIn.rand.nextInt(15) <= i) {
+                    spawnAsEntity(worldIn, blockAt, new ItemStack(item));
                }
             }
 
@@ -86,7 +87,7 @@ public class BlockStem extends BlockBush implements IGrowable {
       }
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 

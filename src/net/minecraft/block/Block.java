@@ -127,7 +127,7 @@ public class Block implements IItemProvider {
                                                           IBooleanFunction.ONLY_SECOND).withOffset(
                 (double) p_199601_3_.getX(), (double) p_199601_3_.getY(), (double) p_199601_3_.getZ());
 
-        for (Entity entity : p_199601_2_.func_72839_b((Entity) null, voxelshape.getBoundingBox())) {
+        for (Entity entity : p_199601_2_.func_72839_b(null, voxelshape.getBoundingBox())) {
             double d0 = VoxelShapes.func_212437_a(EnumFacing.Axis.Y,
                                                   entity.getEntityBoundingBox().offset(0.0D, 1.0D, 0.0D),
                                                   Stream.of(voxelshape), -1.0D);
@@ -500,21 +500,17 @@ public class Block implements IItemProvider {
                                                                             .setHardnessAndResistance(0.5F)));
         register("cobweb", new BlockWeb(Block.Properties.createBlockProperties(Material.WEB).setNonSolid()
                                                         .setHardnessAndResistance(4.0F)));
-        Block block16 = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                           .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block17 = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                           .instantDestruction().setSoundType(SoundType.PLANT));
-        Block deadBush = new BlockDeadBush(Block.Properties.createBlockProperties(Material.VINE, MaterialColor.WOOD)
-                                                           .setNonSolid().instantDestruction()
+        Block grass = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT));
+        Block fern = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT));
+        Block deadBush = new BlockDeadBush(Block.Properties.createBlockProperties(Material.VINE, MaterialColor.WOOD).setNonSolid().setHardnessAndResistance(0.1F)
                                                            .setSoundType(SoundType.PLANT));
-        register("grass", block16);
-        register("fern", block17);
+        register("grass", grass);
+        register("fern", fern);
         register("dead_bush", deadBush);
-        Block block19 = new BlockSeaGrass(Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid()
+        Block seaGrass = new BlockSeaGrass(Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid()
                                                           .instantDestruction().setSoundType(SoundType.WET_GRASS));
-        register("seagrass", block19);
-        register("tall_seagrass", new BlockSeaGrassTall(block19, Block.Properties.createBlockProperties(
-                Material.SEA_GRASS).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("seagrass", seaGrass);
+        register("tall_seagrass", new BlockSeaGrassTall(seaGrass, Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.WET_GRASS)));
         register("piston", new BlockPistonBase(false, Block.Properties.createBlockProperties(Material.PISTON)
                                                                       .setHardnessAndResistance(0.5F)));
         register("piston_head", new BlockPistonExtension(
@@ -1039,7 +1035,7 @@ public class Block implements IItemProvider {
         register("potted_dark_oak_sapling", new BlockFlowerPot(darkOakSapling,
                                                                Block.Properties.createBlockProperties(Material.CIRCUITS)
                                                                                .instantDestruction()));
-        register("potted_fern", new BlockFlowerPot(block17, Block.Properties.createBlockProperties(Material.CIRCUITS)
+        register("potted_fern", new BlockFlowerPot(fern, Block.Properties.createBlockProperties(Material.CIRCUITS)
                                                                             .instantDestruction()));
         register("potted_dandelion", new BlockFlowerPot(block20,
                                                         Block.Properties.createBlockProperties(Material.CIRCUITS)
@@ -1394,10 +1390,8 @@ public class Block implements IItemProvider {
                                                                   .instantDestruction().setSoundType(SoundType.PLANT)));
         register("peony", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
                                                               .instantDestruction().setSoundType(SoundType.PLANT)));
-        register("tall_grass", new BlockShearableDoublePlant(block16, Block.Properties.createBlockProperties(
-                Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
-        register("large_fern", new BlockShearableDoublePlant(block17, Block.Properties.createBlockProperties(
-                Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("tall_grass", new BlockShearableDoublePlant(grass, Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT)));
+        register("large_fern", new BlockShearableDoublePlant(fern, Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT)));
         register("white_banner", new BlockBanner(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
                 Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
         register("orange_banner", new BlockBanner(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(
@@ -1670,7 +1664,7 @@ public class Block implements IItemProvider {
                  new BlockStructureVoid(Block.Properties.createBlockProperties(Material.STRUCTURE_VOID).setNonSolid()));
         register("observer", new BlockObserver(
                 Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F)));
-        register("shulker_box", new BlockShulkerBox((EnumDyeColor) null, Block.Properties.createBlockProperties(
+        register("shulker_box", new BlockShulkerBox(null, Block.Properties.createBlockProperties(
                 Material.ROCK, MaterialColor.PURPLE).setHardnessAndResistance(2.0F).variableOpacity()));
         register("white_shulker_box", new BlockShulkerBox(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
                 Material.ROCK, MaterialColor.SNOW).setHardnessAndResistance(2.0F).variableOpacity()));
@@ -2146,15 +2140,15 @@ public class Block implements IItemProvider {
     }
 
     @Deprecated
-    public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-        if (!p_196255_2_.isRemote) {
-            int i = this.getItemsToDropCount(p_196255_1_, p_196255_5_, p_196255_2_, p_196255_3_, p_196255_2_.rand);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        if (!worldIn.isRemote) {
+            int i = this.getItemsToDropCount(blockCurrentState, fortuneLevel, worldIn, blockAt, worldIn.rand);
 
             for (int j = 0; j < i; ++j) {
-                if (!(p_196255_4_ < 1.0F) || !(p_196255_2_.rand.nextFloat() > p_196255_4_)) {
-                    Item item = this.getItemDropped(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_5_).asItem();
+                if (!(chanceToDrop < 1.0F) || !(worldIn.rand.nextFloat() > chanceToDrop)) {
+                    Item item = this.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel).asItem();
                     if (item != Items.AIR) {
-                        spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(item));
+                        spawnAsEntity(worldIn, blockAt, new ItemStack(item));
                     }
                 }
             }
@@ -2246,7 +2240,7 @@ public class Block implements IItemProvider {
         return new ItemStack(this);
     }
 
-    public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
         return this;
     }
 

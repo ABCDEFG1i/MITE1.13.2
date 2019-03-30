@@ -24,10 +24,13 @@ public class FoodStats {
         this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + p_75113_1_, 40.0F);
     }
 
-    public void addStats(int p_75122_1_, float p_75122_2_) {
-        this.foodLevel = Math.min(p_75122_1_ + this.foodLevel, this.maxFoodLevel);
-        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float) p_75122_1_ * p_75122_2_ * 2.0F,
-                                            (float) this.foodLevel);
+    public void addStats(int foodLevel, float foodSaturationLevel) {
+        this.foodLevel = Math.min(foodLevel + this.foodLevel, this.maxFoodLevel);
+        //MITEMODDED changed to make the food saturation can big than the food level
+        // Origin:
+        // this.foodSaturationLevel = Math.min(this.foodSaturationLevel + (float) p_75122_1_ * p_75122_2_ * 2.0F,
+        //                                            (float) this.foodLevel);
+        this.foodSaturationLevel = Math.min(this.foodSaturationLevel + foodSaturationLevel, this.maxFoodLevel);
     }
 
     public void addStats(ItemFood p_151686_1_, ItemStack p_151686_2_) {
@@ -43,21 +46,18 @@ public class FoodStats {
     }
 
     public int getMaxFoodLevel() {
-        synchronized (this) {
-            return this.maxFoodLevel;
-        }
+        return this.maxFoodLevel;
     }
 
     public void setMaxFoodLevel(int maxFoodLevel) {
-        synchronized (this) {
-            this.maxFoodLevel = maxFoodLevel;
-        }
+        this.maxFoodLevel = maxFoodLevel;
     }
 
     public float getSaturationLevel() {
         return this.foodSaturationLevel;
     }
 
+    //MITEMODDED Changed to make always can eat food
     public boolean needFood() {
         return true;
     }
@@ -102,24 +102,26 @@ public class FoodStats {
         //         }
         //      } else
 
+        ++this.foodTimer;
         //MITEMODDED Remove the health's food level requirement
         // Origin:
         //    if (isNaturalRegeneration && this.foodLevel >= 18 && player.shouldHeal()) {
         if (isNaturalRegeneration && player.shouldHeal()) {
-            ++this.foodTimer;
             if (this.foodTimer >= player.getNaturalHealSpeed()) {
                 player.heal(1.0F);
                 this.addExhaustion(6.0F);
                 this.foodTimer = 0;
             }
-        } else if (this.foodLevel <= 0) {
-            ++this.foodTimer;
-            if (this.foodTimer >= 80) {
-                if (player.getHealth() > 10.0F || enumdifficulty == EnumDifficulty.HARD ||
-                    player.getHealth() > 1.0F && enumdifficulty == EnumDifficulty.NORMAL) {
-                    player.attackEntityFrom(DamageSource.STARVE, 1.0F);
-                }
-
+        }
+        if (this.foodLevel <= 0 && this.foodSaturationLevel <= 0) {
+            if (this.foodTimer >= 120) {
+                //MITEMODDED Changed to make you always can hunger to die
+                // Origin:
+                // if (player.getHealth() > 10.0F || enumdifficulty == EnumDifficulty.HARD || player
+                //                        .getHealth() > 1.0F && enumdifficulty == EnumDifficulty.NORMAL) {
+                //                    player.attackEntityFrom(DamageSource.STARVE, 1.0F);
+                //                }
+                player.attackEntityFrom(DamageSource.STARVE, 1.0F);
                 this.foodTimer = 0;
             }
         } else {

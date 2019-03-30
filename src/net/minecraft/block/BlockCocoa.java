@@ -1,7 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -20,6 +18,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockCocoa extends BlockHorizontal implements IGrowable {
    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_2;
@@ -54,7 +55,7 @@ public class BlockCocoa extends BlockHorizontal implements IGrowable {
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
       int i = p_196244_1_.get(AGE);
-      switch((EnumFacing)p_196244_1_.get(HORIZONTAL_FACING)) {
+      switch(p_196244_1_.get(HORIZONTAL_FACING)) {
       case SOUTH:
          return COCOA_SOUTH_AABB[i];
       case NORTH:
@@ -89,15 +90,15 @@ public class BlockCocoa extends BlockHorizontal implements IGrowable {
       return p_196271_2_ == p_196271_1_.get(HORIZONTAL_FACING) && !p_196271_1_.isValidPosition(p_196271_4_, p_196271_5_) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(p_196271_1_, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      int i = p_196255_1_.get(AGE);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        int i = blockCurrentState.get(AGE);
       int j = 1;
       if (i >= 2) {
          j = 3;
       }
 
       for(int k = 0; k < j; ++k) {
-         spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(Items.COCOA_BEANS));
+          spawnAsEntity(worldIn, blockAt, new ItemStack(Items.COCOA_BEANS));
       }
 
    }

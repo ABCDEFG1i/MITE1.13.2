@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
@@ -21,6 +20,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+
 public class BlockSeaGrassTall extends BlockShearableDoublePlant implements ILiquidContainer {
    public static final EnumProperty<DoubleBlockHalf> field_208065_c = BlockShearableDoublePlant.field_208063_b;
    protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
@@ -37,7 +38,7 @@ public class BlockSeaGrassTall extends BlockShearableDoublePlant implements ILiq
       return Block.doesSideFillSquare(p_200014_1_.getCollisionShape(p_200014_2_, p_200014_3_), EnumFacing.UP) && p_200014_1_.getBlock() != Blocks.MAGMA_BLOCK;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 
