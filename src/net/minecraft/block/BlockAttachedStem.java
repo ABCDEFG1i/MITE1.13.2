@@ -2,7 +2,6 @@ package net.minecraft.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import java.util.Map;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,6 +18,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import java.util.Map;
 
 public class BlockAttachedStem extends BlockBush {
    public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
@@ -51,7 +52,7 @@ public class BlockAttachedStem extends BlockBush {
       }
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 

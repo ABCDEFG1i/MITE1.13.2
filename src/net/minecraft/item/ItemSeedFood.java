@@ -11,18 +11,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 
 public class ItemSeedFood extends ItemFood {
-   private final IBlockState field_195972_b;
+    private final IBlockState planetBlockState;
 
-   public ItemSeedFood(int p_i48473_1_, float p_i48473_2_, Block p_i48473_3_, Item.Properties p_i48473_4_) {
-      super(p_i48473_1_, p_i48473_2_, false, p_i48473_4_);
-      this.field_195972_b = p_i48473_3_.getDefaultState();
+    public ItemSeedFood(int foodLevel, float foodSaturation, Block planetBlock, Item.Properties properties) {
+        super(foodLevel, foodSaturation, false, properties);
+        this.planetBlockState = planetBlock.getDefaultState();
    }
 
    public EnumActionResult onItemUse(ItemUseContext p_195939_1_) {
       IWorld iworld = p_195939_1_.getWorld();
       BlockPos blockpos = p_195939_1_.getPos().up();
-      if (p_195939_1_.getFace() == EnumFacing.UP && iworld.isAirBlock(blockpos) && this.field_195972_b.isValidPosition(iworld, blockpos)) {
-         iworld.setBlockState(blockpos, this.field_195972_b, 11);
+       if (p_195939_1_.getFace() == EnumFacing.UP && iworld.isAirBlock(blockpos) && this.planetBlockState.isValidPosition(iworld, blockpos)) {
+           iworld.setBlockState(blockpos, this.planetBlockState, 11);
          EntityPlayer entityplayer = p_195939_1_.getPlayer();
          ItemStack itemstack = p_195939_1_.getItem();
          if (entityplayer instanceof EntityPlayerMP) {

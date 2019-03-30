@@ -22,7 +22,7 @@ public class BlockShearableDoublePlant extends BlockDoublePlant {
 
    public boolean isReplaceable(IBlockState p_196253_1_, BlockItemUseContext p_196253_2_) {
       boolean flag = super.isReplaceable(p_196253_1_, p_196253_2_);
-      return flag && p_196253_2_.getItem().getItem() == this.asItem() ? false : flag;
+      return (!flag || p_196253_2_.getItem().getItem() != this.asItem()) && flag;
    }
 
    protected void harvest(IBlockState p_196391_1_, World p_196391_2_, BlockPos p_196391_3_, ItemStack p_196391_4_) {
@@ -34,7 +34,7 @@ public class BlockShearableDoublePlant extends BlockDoublePlant {
 
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return p_199769_1_.get(field_208063_b) == DoubleBlockHalf.LOWER && this == Blocks.TALL_GRASS && p_199769_2_.rand.nextInt(8) == 0 ? Items.WHEAT_SEEDS : Items.AIR;
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return blockCurrentState.get(field_208063_b) == DoubleBlockHalf.LOWER && this == Blocks.TALL_GRASS && worldIn.rand.nextInt(8) == 0 ? Items.WHEAT_SEEDS : Items.AIR;
    }
 }

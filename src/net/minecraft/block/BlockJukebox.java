@@ -14,7 +14,6 @@ import net.minecraft.tileentity.TileEntityJukebox;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -55,7 +54,7 @@ public class BlockJukebox extends BlockContainer {
             ItemStack itemstack = tileentityjukebox.getRecord();
             if (!itemstack.isEmpty()) {
                p_203419_1_.playEvent(1010, p_203419_2_, 0);
-               p_203419_1_.playRecord(p_203419_2_, (SoundEvent)null);
+               p_203419_1_.playRecord(p_203419_2_, null);
                tileentityjukebox.setRecord(ItemStack.EMPTY);
                float f = 0.7F;
                double d0 = (double)(p_203419_1_.rand.nextFloat() * 0.7F) + (double)0.15F;
@@ -77,9 +76,9 @@ public class BlockJukebox extends BlockContainer {
       }
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_2_.isRemote) {
-         super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, 0);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        if (!worldIn.isRemote) {
+            super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, 0);
       }
    }
 

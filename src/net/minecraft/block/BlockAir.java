@@ -27,7 +27,7 @@ public class BlockAir extends Block {
       return false;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
+   public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
    }
 
    public boolean isAir(IBlockState p_196261_1_) {

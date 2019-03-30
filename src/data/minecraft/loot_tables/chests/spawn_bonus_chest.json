@@ -5,26 +5,6 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minecraft:stone_axe",
-                    "weight": 1
-                },
-                {
-                    "type": "item",
-                    "name": "minecraft:wooden_axe",
-                    "weight": 3
-                }
-            ]
-        },
-        {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "item",
-                    "name": "minecraft:stone_pickaxe",
-                    "weight": 1
-                },
-                {
-                    "type": "item",
                     "name": "minecraft:wooden_pickaxe",
                     "weight": 3
                 }

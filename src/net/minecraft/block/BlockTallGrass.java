@@ -1,7 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,6 +13,9 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class BlockTallGrass extends BlockBush implements IGrowable {
    protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
@@ -26,8 +27,8 @@ public class BlockTallGrass extends BlockBush implements IGrowable {
       return SHAPE;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return p_199769_2_.rand.nextInt(8) == 0 ? Items.WHEAT_SEEDS : Items.AIR;
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return worldIn.rand.nextInt(8) == 0 ? Items.WHEAT_SEEDS : Items.AIR;
    }
 
    public int getItemsToDropCount(IBlockState p_196251_1_, int p_196251_2_, World p_196251_3_, BlockPos p_196251_4_, Random p_196251_5_) {

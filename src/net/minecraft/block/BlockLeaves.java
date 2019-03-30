@@ -1,7 +1,5 @@
 package net.minecraft.block;
 
-import java.util.Random;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -25,6 +23,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockLeaves extends Block {
    public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE_1_7;
@@ -104,8 +105,8 @@ public class BlockLeaves extends Block {
       return p_196264_2_.nextInt(20) == 0 ? 1 : 0;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      Block block = p_199769_1_.getBlock();
+   public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+      Block block = blockCurrentState.getBlock();
       if (block == Blocks.OAK_LEAVES) {
          return Blocks.OAK_SAPLING;
       } else if (block == Blocks.SPRUCE_LEAVES) {
@@ -121,29 +122,39 @@ public class BlockLeaves extends Block {
       }
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_2_.isRemote) {
-         int i = this.getSaplingDropChance(p_196255_1_);
-         if (p_196255_5_ > 0) {
-            i -= 2 << p_196255_5_;
-            if (i < 10) {
-               i = 10;
+   public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+      if (!worldIn.isRemote) {
+         //drop saplings
+         int saplingDropChance = this.getSaplingDropChance(blockCurrentState);
+         if (fortuneLevel > 0) {
+            //Equals 2 * 2^fortuneLevel    8                            4                          2
+            //So Fortune ||| will decrease 16 ,Fortune || will decrease 8, Fortune | will decrease 4
+            saplingDropChance -= 2 << fortuneLevel;
+            if (saplingDropChance < 10) {
+               saplingDropChance = 10;
             }
          }
 
-         if (p_196255_2_.rand.nextInt(i) == 0) {
-            spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(this.getItemDropped(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_5_)));
+         if (worldIn.rand.nextInt(saplingDropChance) == 0) {
+            spawnAsEntity(worldIn, blockAt, new ItemStack(this.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel)));
+         }
+         //drop sticks
+         saplingDropChance = 50;
+         if (worldIn.rand.nextInt(saplingDropChance) == 0) {
+            spawnAsEntity(worldIn, blockAt, new ItemStack(Items.STICK, 1));
          }
 
-         i = 200;
-         if (p_196255_5_ > 0) {
-            i -= 10 << p_196255_5_;
-            if (i < 40) {
-               i = 40;
+
+         //drop apples
+         saplingDropChance = 200;
+         if (fortuneLevel > 0) {
+            saplingDropChance -= 10 << fortuneLevel;
+            if (saplingDropChance < 40) {
+               saplingDropChance = 40;
             }
          }
 
-         this.dropApple(p_196255_2_, p_196255_3_, p_196255_1_, i);
+         this.dropApple(worldIn, blockAt, blockCurrentState, saplingDropChance);
       }
 
    }

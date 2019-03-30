@@ -2,20 +2,12 @@ package net.minecraft.block;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Fluids;
-import net.minecraft.init.Items;
-import net.minecraft.init.Particles;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.init.*;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -34,6 +26,10 @@ import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class BlockFlowingFluid extends Block implements IBucketPickupHandler {
    public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_0_15;
@@ -82,7 +78,7 @@ public class BlockFlowingFluid extends Block implements IBucketPickupHandler {
 
    @OnlyIn(Dist.CLIENT)
    public boolean isSideInvisible(IBlockState p_200122_1_, IBlockState p_200122_2_, EnumFacing p_200122_3_) {
-      return p_200122_2_.getFluidState().getFluid().isEquivalentTo(this.fluid) ? true : super.isSolid(p_200122_1_);
+      return p_200122_2_.getFluidState().getFluid().isEquivalentTo(this.fluid) || super.isSolid(p_200122_1_);
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
@@ -97,7 +93,7 @@ public class BlockFlowingFluid extends Block implements IBucketPickupHandler {
       return EnumBlockRenderType.INVISIBLE;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 
@@ -161,7 +157,7 @@ public class BlockFlowingFluid extends Block implements IBucketPickupHandler {
       double d0 = (double)p_180688_2_.getX();
       double d1 = (double)p_180688_2_.getY();
       double d2 = (double)p_180688_2_.getZ();
-      p_180688_1_.playSound((EntityPlayer)null, p_180688_2_, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_180688_1_.getRandom().nextFloat() - p_180688_1_.getRandom().nextFloat()) * 0.8F);
+      p_180688_1_.playSound(null, p_180688_2_, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_180688_1_.getRandom().nextFloat() - p_180688_1_.getRandom().nextFloat()) * 0.8F);
 
       for(int i = 0; i < 8; ++i) {
          p_180688_1_.spawnParticle(Particles.LARGE_SMOKE, d0 + Math.random(), d1 + 1.2D, d2 + Math.random(), 0.0D, 0.0D, 0.0D);

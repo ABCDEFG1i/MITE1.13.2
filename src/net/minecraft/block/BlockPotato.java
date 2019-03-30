@@ -24,11 +24,11 @@ public class BlockPotato extends BlockCrops {
       return Items.POTATO;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
-      if (!p_196255_2_.isRemote) {
-         if (this.isMaxAge(p_196255_1_) && p_196255_2_.rand.nextInt(50) == 0) {
-            spawnAsEntity(p_196255_2_, p_196255_3_, new ItemStack(Items.POISONOUS_POTATO));
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
+        if (!worldIn.isRemote) {
+            if (this.isMaxAge(blockCurrentState) && worldIn.rand.nextInt(50) == 0) {
+                spawnAsEntity(worldIn, blockAt, new ItemStack(Items.POISONOUS_POTATO));
          }
 
       }

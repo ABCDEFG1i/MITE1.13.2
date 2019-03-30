@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_stone_pickaxe": {
+    "has_stick": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:stone_pickaxe"
+            "item": "minecraft:stick"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_stone_pickaxe",
+      "has_stick",
       "has_the_recipe"
     ]
   ]

@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,6 +20,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class BlockTNT extends Block {
    public static final BooleanProperty field_212569_a = BlockStateProperties.field_212646_x;
@@ -48,9 +49,9 @@ public class BlockTNT extends Block {
 
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      if (!p_196255_1_.get(field_212569_a)) {
-         super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
+   public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+      if (!blockCurrentState.get(field_212569_a)) {
+         super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
       }
    }
 
@@ -71,14 +72,14 @@ public class BlockTNT extends Block {
    }
 
    public void explode(World p_196534_1_, BlockPos p_196534_2_) {
-      this.explode(p_196534_1_, p_196534_2_, (EntityLivingBase)null);
+      this.explode(p_196534_1_, p_196534_2_, null);
    }
 
    private void explode(World p_196535_1_, BlockPos p_196535_2_, @Nullable EntityLivingBase p_196535_3_) {
       if (!p_196535_1_.isRemote) {
          EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(p_196535_1_, (double)((float)p_196535_2_.getX() + 0.5F), (double)p_196535_2_.getY(), (double)((float)p_196535_2_.getZ() + 0.5F), p_196535_3_);
          p_196535_1_.spawnEntity(entitytntprimed);
-         p_196535_1_.playSound((EntityPlayer)null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+         p_196535_1_.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
       }
    }
 

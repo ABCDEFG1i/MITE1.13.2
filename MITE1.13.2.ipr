@@ -4,8 +4,32 @@
     <artifact type="jar" build-on-make="true" name="MITE1.13.2:jar">
       <output-path>E:/MC/Install/.minecraft/versions/MITE1.13.2</output-path>
       <root id="archive" name="MITE1.13.2.jar">
-        <element id="module-output" name="MITE1.13.2" />
         <element id="library" level="project" name="natives" />
+        <element id="directory" name="assets">
+          <element id="file-copy" path="$PROJECT_DIR$/src/assets/.mcassetsroot" />
+          <element id="dir-copy" path="$PROJECT_DIR$/src/assets" />
+        </element>
+        <element id="directory" name="data">
+          <element id="dir-copy" path="$PROJECT_DIR$/src/data" />
+          <element id="file-copy" path="$PROJECT_DIR$/src/data/.mcassetsroot" />
+        </element>
+        <element id="directory" name="mcp">
+          <element id="dir-copy" path="$PROJECT_DIR$/out/production/MITE1.13.2/mcp" />
+        </element>
+        <element id="directory" name="net">
+          <element id="dir-copy" path="$PROJECT_DIR$/out/production/MITE1.13.2/net" />
+        </element>
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="file-copy" path="$PROJECT_DIR$/src/Log4j-config.xsd" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/Log4j-events.dtd" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/Log4j-events.xsd" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/Log4j-levels.xsd" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/log4j2.xml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/log4j2_server.xml" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/pack.mcmeta" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/pack.png" />
       </root>
     </artifact>
   </component>
@@ -145,7 +169,9 @@
       <words>
         <w>andesite</w>
         <w>diorite</w>
+        <w>havent</w>
         <w>itemstack</w>
+        <w>mcassetsroot</w>
         <w>mitemodded</w>
         <w>pickaxe</w>
         <w>prismarine</w>

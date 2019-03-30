@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.BlockFaceShape;
@@ -23,12 +22,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -38,6 +32,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class BlockBed extends BlockHorizontal implements ITileEntityProvider {
    public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
@@ -193,8 +189,8 @@ public class BlockBed extends BlockHorizontal implements ITileEntityProvider {
       return p_196258_1_.getWorld().getBlockState(blockpos1).isReplaceable(p_196258_1_) ? this.getDefaultState().with(HORIZONTAL_FACING, enumfacing) : null;
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      return (IItemProvider)(p_199769_1_.get(PART) == BedPart.FOOT ? Items.AIR : super.getItemDropped(p_199769_1_, p_199769_2_, p_199769_3_, p_199769_4_));
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+        return (blockCurrentState.get(PART) == BedPart.FOOT ? Items.AIR : super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel));
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {

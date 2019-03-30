@@ -13,12 +13,17 @@ public class BlockGravel extends BlockFalling {
       super(p_i48384_1_);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
-      if (p_199769_4_ > 3) {
-         p_199769_4_ = 3;
+   public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
+      if (fortuneLevel > 3) {
+         fortuneLevel = 3;
       }
 
-      return (IItemProvider)(p_199769_2_.rand.nextInt(10 - p_199769_4_ * 3) == 0 ? Items.FLINT : super.getItemDropped(p_199769_1_, p_199769_2_, p_199769_3_, p_199769_4_));
+      //Changed to make it more hard to get flint
+      if (worldIn.rand.nextInt(32 - fortuneLevel * 6) == 0) {
+         return Items.FLINT;
+      } else {
+         return super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel);
+      }
    }
 
    @OnlyIn(Dist.CLIENT)

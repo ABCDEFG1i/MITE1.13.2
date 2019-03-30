@@ -72,7 +72,7 @@ public class BlockCake extends Block {
       return p_196260_2_.getBlockState(p_196260_3_.down()).getMaterial().isSolid();
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 

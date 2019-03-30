@@ -3986,5 +3986,9 @@
   "color.minecraft.brown": "Brown",
   "color.minecraft.green": "Green",
   "color.minecraft.red": "Red",
-  "color.minecraft.black": "Black"
+  "color.minecraft.black": "Black",
+  "MITEStart": "----------------------------------------------",
+  "item.minecraft.flint_shovel": "Flint Shovel",
+  "item.minecraft.flint_axe": "Flint Axe",
+  "item.minecraft.bowl_salad": "Salad"
 }

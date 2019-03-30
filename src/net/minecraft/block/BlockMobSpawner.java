@@ -21,14 +21,14 @@ public class BlockMobSpawner extends BlockContainer {
       return new TileEntityMobSpawner();
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.AIR;
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      super.dropBlockAsItemWithChance(p_196255_1_, p_196255_2_, p_196255_3_, p_196255_4_, p_196255_5_);
-      int i = 15 + p_196255_2_.rand.nextInt(15) + p_196255_2_.rand.nextInt(15);
-      this.dropXpOnBlockBreak(p_196255_2_, p_196255_3_, i);
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        super.dropBlockAsItemWithChance(blockCurrentState, worldIn, blockAt, chanceToDrop, fortuneLevel);
+        int i = 15 + worldIn.rand.nextInt(15) + worldIn.rand.nextInt(15);
+        this.dropXpOnBlockBreak(worldIn, blockAt, i);
    }
 
    public EnumBlockRenderType getRenderType(IBlockState p_149645_1_) {

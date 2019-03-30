@@ -1,6 +1,5 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,6 +15,8 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public abstract class BlockAbstractBanner extends BlockContainer {
    private final EnumDyeColor color;
@@ -37,7 +38,7 @@ public abstract class BlockAbstractBanner extends BlockContainer {
       return new TileEntityBanner(this.color);
    }
 
-   public IItemProvider getItemDropped(IBlockState p_199769_1_, World p_199769_2_, BlockPos p_199769_3_, int p_199769_4_) {
+    public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       return Items.WHITE_BANNER;
    }
 
@@ -50,8 +51,8 @@ public abstract class BlockAbstractBanner extends BlockContainer {
       return tileentity instanceof TileEntityBanner ? ((TileEntityBanner)tileentity).getItem(p_185473_3_) : super.getItem(p_185473_1_, p_185473_2_, p_185473_3_);
    }
 
-   public void dropBlockAsItemWithChance(IBlockState p_196255_1_, World p_196255_2_, BlockPos p_196255_3_, float p_196255_4_, int p_196255_5_) {
-      spawnAsEntity(p_196255_2_, p_196255_3_, this.getItem(p_196255_2_, p_196255_3_, p_196255_1_));
+    public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+        spawnAsEntity(worldIn, blockAt, this.getItem(worldIn, blockAt, blockCurrentState));
    }
 
    public void harvestBlock(World p_180657_1_, EntityPlayer p_180657_2_, BlockPos p_180657_3_, IBlockState p_180657_4_, @Nullable TileEntity p_180657_5_, ItemStack p_180657_6_) {
@@ -59,7 +60,7 @@ public abstract class BlockAbstractBanner extends BlockContainer {
          spawnAsEntity(p_180657_1_, p_180657_3_, ((TileEntityBanner)p_180657_5_).getItem(p_180657_4_));
          p_180657_2_.func_71029_a(StatList.BLOCK_MINED.func_199076_b(this));
       } else {
-         super.harvestBlock(p_180657_1_, p_180657_2_, p_180657_3_, p_180657_4_, (TileEntity)null, p_180657_6_);
+         super.harvestBlock(p_180657_1_, p_180657_2_, p_180657_3_, p_180657_4_, null, p_180657_6_);
       }
 
    }
