@@ -319,6 +319,7 @@ public class Items {
    public static final Item FLINT_SHOVEL;
    public static final Item SALAD;
    public static final Item FLINT_AXE;
+   public static final Item FLINT_HATCHET;
 
    private static Item getRegisteredItem(String p_179554_0_) {
       Item item = IRegistry.field_212630_s.func_212608_b(new ResourceLocation(p_179554_0_));
@@ -647,6 +648,7 @@ public class Items {
          FLINT_SHOVEL = getRegisteredItem("flint_shovel");
          FLINT_AXE = getRegisteredItem("flint_axe");
          SALAD = getRegisteredItem("bowl_salad");
+         FLINT_HATCHET = getRegisteredItem("flint_hatchet");
       }
    }
 }

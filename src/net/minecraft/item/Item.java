@@ -1088,8 +1088,9 @@ public class Item implements IItemProvider {
 
       //MITEMODDED MITE Items start
       registerItem("flint_shovel", new ItemSpade(ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 7.0F, -3.2F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 2.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("bowl_salad", new ItemFood(1, 1F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
+      registerItem("flint_hatchet", new ItemAxe(ItemTier.FLINT,1.5F,-3.0F,(new Item.Properties()).setItemGroup(ItemGroup.TOOLS).setMaxDamage(43)));
    }
 
    private static void register(Block p_179216_0_) {
