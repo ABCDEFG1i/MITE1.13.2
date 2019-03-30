@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "SSS",
@@ -14,6 +13,7 @@
       "item": "minecraft:ink_sac"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:dark_prismarine"
   }

@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "bonemeal",
   "ingredients": [
@@ -7,6 +6,7 @@
       "item": "minecraft:bone"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:bone_meal",
     "count": 3

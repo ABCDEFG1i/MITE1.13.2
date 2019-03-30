@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "wooden_trapdoor",
   "pattern": [
@@ -11,6 +10,7 @@
       "item": "minecraft:birch_planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:birch_trapdoor",
     "count": 2

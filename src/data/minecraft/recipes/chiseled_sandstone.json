@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "#",
@@ -10,6 +9,7 @@
       "item": "minecraft:sandstone_slab"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:chiseled_sandstone"
   }

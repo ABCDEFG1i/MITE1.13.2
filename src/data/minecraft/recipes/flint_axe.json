@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "XX",
@@ -11,9 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "minecraft:flint"
+      "item": "minecraft:cobblestone"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:flint_axe"
   }

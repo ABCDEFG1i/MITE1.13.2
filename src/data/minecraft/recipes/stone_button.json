@@ -1,11 +1,11 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
       "item": "minecraft:stone"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:stone_button"
   }

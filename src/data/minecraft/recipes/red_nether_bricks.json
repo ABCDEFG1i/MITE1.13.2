@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "NW",
@@ -13,6 +12,7 @@
       "item": "minecraft:nether_brick"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:red_nether_bricks"
   }

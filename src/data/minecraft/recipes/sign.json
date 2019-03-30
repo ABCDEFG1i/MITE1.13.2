@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "###",
@@ -14,6 +13,7 @@
       "item": "minecraft:stick"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:sign",
     "count": 3

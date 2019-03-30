@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -9,6 +8,7 @@
       "item": "minecraft:blaze_powder"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:ender_eye"
   }

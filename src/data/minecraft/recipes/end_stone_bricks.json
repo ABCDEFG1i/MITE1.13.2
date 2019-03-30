@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "##",
@@ -10,6 +9,7 @@
       "item": "minecraft:end_stone"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:end_stone_bricks",
     "count": 4

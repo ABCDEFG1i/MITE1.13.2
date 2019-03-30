@@ -1,11 +1,11 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
       "item": "minecraft:sugar_cane"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:sugar"
   }

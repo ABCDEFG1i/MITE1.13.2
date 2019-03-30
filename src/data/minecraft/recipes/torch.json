@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "X",
@@ -18,6 +17,7 @@
       }
     ]
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:torch",
     "count": 4

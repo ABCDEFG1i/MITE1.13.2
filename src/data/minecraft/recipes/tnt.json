@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "X#X",
@@ -19,6 +18,7 @@
       "item": "minecraft:gunpowder"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:tnt"
   }

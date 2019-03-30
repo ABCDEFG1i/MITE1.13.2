@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "XX",
@@ -14,6 +13,7 @@
       "item": "minecraft:diamond"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:diamond_axe"
   }

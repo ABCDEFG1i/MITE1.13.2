@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "stained_glass",
   "pattern": [
@@ -15,6 +14,7 @@
       "item": "minecraft:dandelion_yellow"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:yellow_stained_glass",
     "count": 8

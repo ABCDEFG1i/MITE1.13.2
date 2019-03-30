@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -30,6 +29,7 @@
       "item": "minecraft:ice"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:packed_ice"
   }

@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "concrete_powder",
   "ingredients": [
@@ -31,6 +30,7 @@
       "item": "minecraft:gravel"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:cyan_concrete_powder",
     "count": 8

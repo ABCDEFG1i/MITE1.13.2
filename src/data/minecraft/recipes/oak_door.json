@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "group": "wooden_door",
   "pattern": [
@@ -12,6 +11,7 @@
       "item": "minecraft:oak_planks"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:oak_door",
     "count": 3

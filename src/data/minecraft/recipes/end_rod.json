@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "/",
@@ -13,6 +12,7 @@
       "item": "minecraft:blaze_rod"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:end_rod",
     "count": 4

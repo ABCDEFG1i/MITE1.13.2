@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "magenta_dye",
   "ingredients": [
@@ -7,6 +6,7 @@
       "item": "minecraft:allium"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:magenta_dye"
   }

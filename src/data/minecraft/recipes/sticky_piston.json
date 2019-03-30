@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "S",
@@ -13,6 +12,7 @@
       "item": "minecraft:slime_ball"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:sticky_piston"
   }

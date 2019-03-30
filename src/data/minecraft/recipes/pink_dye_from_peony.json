@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shapeless",
   "group": "pink_dye",
   "ingredients": [
@@ -7,6 +6,7 @@
       "item": "minecraft:peony"
     }
   ],
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:pink_dye",
     "count": 2

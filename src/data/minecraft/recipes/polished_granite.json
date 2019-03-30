@@ -1,5 +1,4 @@
 {
-  "craftTime": 1000,
   "type": "crafting_shaped",
   "pattern": [
     "SS",
@@ -10,6 +9,7 @@
       "item": "minecraft:granite"
     }
   },
+  "craftTime": 1000,
   "result": {
     "item": "minecraft:polished_granite",
     "count": 4
