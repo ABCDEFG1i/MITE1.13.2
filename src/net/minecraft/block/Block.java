@@ -230,7 +230,7 @@ public class Block implements IItemProvider {
         register("grass_block", new BlockGrass(Block.Properties.createBlockProperties(Material.GRASS).needsRandomTick()
                                                                .setHardnessAndResistance(0.6F)
                                                                .setSoundType(SoundType.PLANT)));
-        register("dirt", new Block(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT)
+        register("dirt", new BlockFalling(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT)
                                                    .setHardnessAndResistance(0.5F).setSoundType(SoundType.GROUND)));
         register("coarse_dirt", new Block(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT)
                                                           .setHardnessAndResistance(0.5F)
