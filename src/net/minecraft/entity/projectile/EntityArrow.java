@@ -186,7 +186,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
       }
 
       if (this.inGround && !flag) {
-         if (this.inBlockState != iblockstate && this.world.isCollisionBoxesEmpty((Entity)null, this.getEntityBoundingBox().grow(0.05D))) {
+         if (this.inBlockState != iblockstate && this.world.isCollisionBoxesEmpty(null, this.getEntityBoundingBox().grow(0.05D))) {
             this.inGround = false;
             this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
             this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
@@ -245,7 +245,6 @@ public abstract class EntityArrow extends Entity implements IProjectile {
          }
 
          for(this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f3) * (double)(180F / (float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-            ;
          }
 
          while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
@@ -581,7 +580,7 @@ public abstract class EntityArrow extends Entity implements IProjectile {
       }
    }
 
-   public static enum PickupStatus {
+   public enum PickupStatus {
       DISALLOWED,
       ALLOWED,
       CREATIVE_ONLY;

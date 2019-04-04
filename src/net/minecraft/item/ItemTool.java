@@ -1,7 +1,6 @@
 package net.minecraft.item;
 
 import com.google.common.collect.Multimap;
-import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,18 +10,20 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Set;
+
 public class ItemTool extends ItemTiered {
    private final Set<Block> effectiveBlocks;
    protected float efficiency;
    protected float attackDamage;
    protected float attackSpeed;
 
-   protected ItemTool(float p_i48512_1_, float p_i48512_2_, IItemTier p_i48512_3_, Set<Block> p_i48512_4_, Item.Properties p_i48512_5_) {
-      super(p_i48512_3_, p_i48512_5_);
-      this.effectiveBlocks = p_i48512_4_;
-      this.efficiency = p_i48512_3_.getEfficiency();
-      this.attackDamage = p_i48512_1_ + p_i48512_3_.getAttackDamage();
-      this.attackSpeed = p_i48512_2_;
+   protected ItemTool(float attackDamage, float attackSpeed, IItemTier itemTier, Set<Block> effectiveBlocks, Item.Properties p_i48512_5_) {
+      super(itemTier, p_i48512_5_);
+      this.effectiveBlocks = effectiveBlocks;
+      this.efficiency = itemTier.getEfficiency();
+      this.attackDamage = attackDamage + itemTier.getAttackDamage();
+      this.attackSpeed = attackSpeed;
    }
 
    public float getDestroySpeed(ItemStack p_150893_1_, IBlockState p_150893_2_) {

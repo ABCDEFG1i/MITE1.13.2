@@ -14,7 +14,7 @@ public class GuiShareToLan extends GuiScreen {
    private GuiButton allowCheatsButton;
    private GuiButton gameModeButton;
    private String gameMode = "survival";
-   private boolean allowCheats;
+   private boolean allowCheats = false;
 
    public GuiShareToLan(GuiScreen p_i1055_1_) {
       this.lastScreen = p_i1055_1_;
@@ -23,7 +23,7 @@ public class GuiShareToLan extends GuiScreen {
    protected void initGui() {
       this.addButton(new GuiButton(101, this.width / 2 - 155, this.height - 28, 150, 20, I18n.format("lanServer.start")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiShareToLan.this.mc.displayGuiScreen((GuiScreen)null);
+            GuiShareToLan.this.mc.displayGuiScreen(null);
             int i = HttpUtil.getSuitableLanPort();
             ITextComponent itextcomponent;
             if (GuiShareToLan.this.mc.getIntegratedServer().func_195565_a(GameType.getByName(GuiShareToLan.this.gameMode), GuiShareToLan.this.allowCheats, i)) {
@@ -41,26 +41,11 @@ public class GuiShareToLan extends GuiScreen {
          }
       });
       this.gameModeButton = this.addButton(new GuiButton(104, this.width / 2 - 155, 100, 150, 20, I18n.format("selectWorld.gameMode")) {
-         public void onClick(double p_194829_1_, double p_194829_3_) {
-            if ("spectator".equals(GuiShareToLan.this.gameMode)) {
-               GuiShareToLan.this.gameMode = "creative";
-            } else if ("creative".equals(GuiShareToLan.this.gameMode)) {
-               GuiShareToLan.this.gameMode = "adventure";
-            } else if ("adventure".equals(GuiShareToLan.this.gameMode)) {
-               GuiShareToLan.this.gameMode = "survival";
-            } else {
-               GuiShareToLan.this.gameMode = "spectator";
-            }
-
-            GuiShareToLan.this.updateDisplayNames();
-         }
       });
+      this.gameModeButton.enabled = false;
       this.allowCheatsButton = this.addButton(new GuiButton(103, this.width / 2 + 5, 100, 150, 20, I18n.format("selectWorld.allowCommands")) {
-         public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiShareToLan.this.allowCheats = !GuiShareToLan.this.allowCheats;
-            GuiShareToLan.this.updateDisplayNames();
-         }
       });
+      this.allowCheatsButton.enabled = false;
       this.updateDisplayNames();
    }
 

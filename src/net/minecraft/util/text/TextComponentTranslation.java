@@ -149,7 +149,7 @@ public class TextComponentTranslation extends TextComponentBase {
 
    public Stream<ITextComponent> func_212640_c() {
       this.ensureInitialized();
-      return Streams.<ITextComponent>concat(this.children.stream(), this.siblings.stream()).flatMap(ITextComponent::func_212640_c);
+      return Streams.concat(this.children.stream(), this.siblings.stream()).flatMap(ITextComponent::func_212640_c);
    }
 
    public String getUnformattedComponentText() {

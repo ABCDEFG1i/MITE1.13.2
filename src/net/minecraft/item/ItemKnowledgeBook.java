@@ -38,7 +38,7 @@ public class ItemKnowledgeBook extends Item {
                String s = nbttaglist.getStringTagAt(i);
                IRecipe irecipe = p_77659_1_.getServer().getRecipeManager().getRecipe(new ResourceLocation(s));
                if (irecipe == null) {
-                  LOGGER.error("Invalid recipe: {}", (Object)s);
+                  LOGGER.error("Invalid recipe: {}", s);
                   return new ActionResult<>(EnumActionResult.FAIL, itemstack);
                }
 
@@ -51,7 +51,7 @@ public class ItemKnowledgeBook extends Item {
 
          return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
       } else {
-         LOGGER.error("Tag not valid: {}", (Object)nbttagcompound);
+         LOGGER.error("Tag not valid: {}", nbttagcompound);
          return new ActionResult<>(EnumActionResult.FAIL, itemstack);
       }
    }

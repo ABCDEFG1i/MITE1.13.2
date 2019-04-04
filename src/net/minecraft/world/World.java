@@ -167,7 +167,6 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
    public IBlockState getGroundAboveSeaLevel(BlockPos p_184141_1_) {
       BlockPos blockpos;
       for(blockpos = new BlockPos(p_184141_1_.getX(), this.getSeaLevel(), p_184141_1_.getZ()); !this.isAirBlock(blockpos.up()); blockpos = blockpos.up()) {
-         ;
       }
 
       return this.getBlockState(blockpos);
@@ -1051,7 +1050,7 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
             if (this.isBlockLoaded(blockpos) && this.worldBorder.contains(blockpos)) {
                try {
                   this.profiler.startSection(() -> {
-                     return String.valueOf((Object)TileEntityType.getId(tileentity.getType()));
+                     return String.valueOf(TileEntityType.getId(tileentity.getType()));
                   });
                   ((ITickable)tileentity).tick();
                   this.profiler.endSection();
@@ -1213,7 +1212,7 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
       if (p_195585_2_.isEmpty()) {
          return true;
       } else {
-         List<Entity> list = this.func_72839_b((Entity)null, p_195585_2_.getBoundingBox());
+         List<Entity> list = this.func_72839_b(null, p_195585_2_.getBoundingBox());
 
          for(int i = 0; i < list.size(); ++i) {
             Entity entity = list.get(i);
@@ -1334,11 +1333,11 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
    }
 
    public Explosion createExplosion(@Nullable Entity p_72876_1_, double p_72876_2_, double p_72876_4_, double p_72876_6_, float p_72876_8_, boolean p_72876_9_) {
-      return this.createExplosion(p_72876_1_, (DamageSource)null, p_72876_2_, p_72876_4_, p_72876_6_, p_72876_8_, false, p_72876_9_);
+      return this.createExplosion(p_72876_1_, null, p_72876_2_, p_72876_4_, p_72876_6_, p_72876_8_, false, p_72876_9_);
    }
 
    public Explosion newExplosion(@Nullable Entity p_72885_1_, double p_72885_2_, double p_72885_4_, double p_72885_6_, float p_72885_8_, boolean p_72885_9_, boolean p_72885_10_) {
-      return this.createExplosion(p_72885_1_, (DamageSource)null, p_72885_2_, p_72885_4_, p_72885_6_, p_72885_8_, p_72885_9_, p_72885_10_);
+      return this.createExplosion(p_72885_1_, null, p_72885_2_, p_72885_4_, p_72885_6_, p_72885_8_, p_72885_9_, p_72885_10_);
    }
 
    public Explosion createExplosion(@Nullable Entity p_211529_1_, @Nullable DamageSource p_211529_2_, double p_211529_3_, double p_211529_5_, double p_211529_7_, float p_211529_9_, boolean p_211529_10_, boolean p_211529_11_) {
@@ -2061,12 +2060,16 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
 
    @Nullable
    public EntityPlayer getNearestAttackablePlayer(Entity p_184142_1_, double p_184142_2_, double p_184142_4_) {
-      return this.getNearestAttackablePlayer(p_184142_1_.posX, p_184142_1_.posY, p_184142_1_.posZ, p_184142_2_, p_184142_4_, (Function<EntityPlayer, Double>)null, (Predicate<EntityPlayer>)null);
+      return this.getNearestAttackablePlayer(p_184142_1_.posX, p_184142_1_.posY, p_184142_1_.posZ, p_184142_2_, p_184142_4_,
+              null,
+              null);
    }
 
    @Nullable
    public EntityPlayer getNearestAttackablePlayer(BlockPos p_184139_1_, double p_184139_2_, double p_184139_4_) {
-      return this.getNearestAttackablePlayer((double)((float)p_184139_1_.getX() + 0.5F), (double)((float)p_184139_1_.getY() + 0.5F), (double)((float)p_184139_1_.getZ() + 0.5F), p_184139_2_, p_184139_4_, (Function<EntityPlayer, Double>)null, (Predicate<EntityPlayer>)null);
+      return this.getNearestAttackablePlayer((double)((float)p_184139_1_.getX() + 0.5F), (double)((float)p_184139_1_.getY() + 0.5F), (double)((float)p_184139_1_.getZ() + 0.5F), p_184139_2_, p_184139_4_,
+              null,
+              null);
    }
 
    @Nullable
@@ -2282,7 +2285,7 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
    }
 
    public void playEvent(int p_175718_1_, BlockPos p_175718_2_, int p_175718_3_) {
-      this.playEvent((EntityPlayer)null, p_175718_1_, p_175718_2_, p_175718_3_);
+      this.playEvent(null, p_175718_1_, p_175718_2_, p_175718_3_);
    }
 
    public void playEvent(@Nullable EntityPlayer p_180498_1_, int p_180498_2_, BlockPos p_180498_3_, int p_180498_4_) {
@@ -2413,7 +2416,7 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
 
    public LongSet func_212412_ag() {
       ForcedChunksSaveData forcedchunkssavedata = this.func_212411_a(this.dimension.getType(), ForcedChunksSaveData::new, "chunks");
-      return (LongSet)(forcedchunkssavedata != null ? LongSets.unmodifiable(forcedchunkssavedata.func_212438_a()) : LongSets.EMPTY_SET);
+      return forcedchunkssavedata != null ? LongSets.unmodifiable(forcedchunkssavedata.func_212438_a()) : LongSets.EMPTY_SET;
    }
 
    public boolean func_212416_f(int p_212416_1_, int p_212416_2_) {

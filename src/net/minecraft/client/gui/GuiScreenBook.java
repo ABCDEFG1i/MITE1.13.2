@@ -65,14 +65,14 @@ public class GuiScreenBook extends GuiScreen {
          this.bookPages = nbttagcompound.getTagList("pages", 8).copy();
          this.bookTotalPages = this.bookPages.size();
          if (this.bookTotalPages < 1) {
-            this.bookPages.add((INBTBase)(new NBTTagString("")));
+            this.bookPages.add(new NBTTagString(""));
             this.bookTotalPages = 1;
          }
       }
 
       if (this.bookPages == null && p_i49849_3_) {
          this.bookPages = new NBTTagList();
-         this.bookPages.add((INBTBase)(new NBTTagString("")));
+         this.bookPages.add(new NBTTagString(""));
          this.bookTotalPages = 1;
       }
 
@@ -94,7 +94,7 @@ public class GuiScreenBook extends GuiScreen {
          });
          this.buttonDone = this.addButton(new GuiButton(0, this.width / 2 + 2, 196, 98, 20, I18n.format("gui.done")) {
             public void onClick(double p_194829_1_, double p_194829_3_) {
-               GuiScreenBook.this.mc.displayGuiScreen((GuiScreen)null);
+               GuiScreenBook.this.mc.displayGuiScreen(null);
                GuiScreenBook.this.sendBookToServer(false);
             }
          });
@@ -102,7 +102,7 @@ public class GuiScreenBook extends GuiScreen {
             public void onClick(double p_194829_1_, double p_194829_3_) {
                if (GuiScreenBook.this.bookGettingSigned) {
                   GuiScreenBook.this.sendBookToServer(true);
-                  GuiScreenBook.this.mc.displayGuiScreen((GuiScreen)null);
+                  GuiScreenBook.this.mc.displayGuiScreen(null);
                }
 
             }
@@ -119,7 +119,7 @@ public class GuiScreenBook extends GuiScreen {
       } else {
          this.buttonDone = this.addButton(new GuiButton(0, this.width / 2 - 100, 196, 200, 20, I18n.format("gui.done")) {
             public void onClick(double p_194829_1_, double p_194829_3_) {
-               GuiScreenBook.this.mc.displayGuiScreen((GuiScreen)null);
+               GuiScreenBook.this.mc.displayGuiScreen(null);
                GuiScreenBook.this.sendBookToServer(false);
             }
          });
@@ -196,7 +196,7 @@ public class GuiScreenBook extends GuiScreen {
 
    private void addNewPage() {
       if (this.bookPages != null && this.bookPages.size() < 50) {
-         this.bookPages.add((INBTBase)(new NBTTagString("")));
+         this.bookPages.add(new NBTTagString(""));
          ++this.bookTotalPages;
          this.bookIsModified = true;
       }
@@ -218,7 +218,7 @@ public class GuiScreenBook extends GuiScreen {
       } else if (this.bookIsUnsigned) {
          if (this.bookGettingSigned) {
             if (this.bookTitle.length() < 16 && SharedConstants.isAllowedCharacter(p_charTyped_1_)) {
-               this.bookTitle = this.bookTitle + Character.toString(p_charTyped_1_);
+               this.bookTitle = this.bookTitle + p_charTyped_1_;
                this.updateButtons();
                this.bookIsModified = true;
                return true;
@@ -265,7 +265,7 @@ public class GuiScreenBook extends GuiScreen {
       case 335:
          if (!this.bookTitle.isEmpty()) {
             this.sendBookToServer(true);
-            this.mc.displayGuiScreen((GuiScreen)null);
+            this.mc.displayGuiScreen(null);
          }
 
          return true;
@@ -287,7 +287,7 @@ public class GuiScreenBook extends GuiScreen {
 
    private void pageSetCurrent(String p_146457_1_) {
       if (this.bookPages != null && this.currPage >= 0 && this.currPage < this.bookPages.size()) {
-         this.bookPages.set(this.currPage, (INBTBase)(new NBTTagString(p_146457_1_)));
+         this.bookPages.set(this.currPage, new NBTTagString(p_146457_1_));
          this.bookIsModified = true;
       }
 
@@ -407,14 +407,13 @@ public class GuiScreenBook extends GuiScreen {
                return true;
             }
          } catch (Throwable var5) {
-            ;
          }
 
          return false;
       } else {
          boolean flag = super.handleComponentClick(p_175276_1_);
          if (flag && clickevent.getAction() == ClickEvent.Action.RUN_COMMAND) {
-            this.mc.displayGuiScreen((GuiScreen)null);
+            this.mc.displayGuiScreen(null);
          }
 
          return flag;

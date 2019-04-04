@@ -784,10 +784,7 @@ public class Item implements IItemProvider {
       registerItem("gold_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("iron_sword", new ItemSword(ItemTier.IRON, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
       registerItem("wooden_sword", new ItemSword(ItemTier.WOOD, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
-      registerItem("wooden_shovel", new ItemSpade(ItemTier.WOOD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("wooden_pickaxe", new ItemPickaxe(ItemTier.WOOD, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("wooden_axe", new ItemAxe(ItemTier.WOOD, 6.0F, -3.2F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("diamond_sword", new ItemSword(ItemTier.DIAMOND, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+      registerItem("wooden_shovel", new ItemSpade(ItemTier.WOOD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));registerItem("diamond_sword", new ItemSword(ItemTier.DIAMOND, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
       registerItem("diamond_shovel", new ItemSpade(ItemTier.DIAMOND, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("diamond_pickaxe", new ItemPickaxe(ItemTier.DIAMOND, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("diamond_axe", new ItemAxe(ItemTier.DIAMOND, 5.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
@@ -801,7 +798,6 @@ public class Item implements IItemProvider {
       registerItem("string", new ItemString((new Item.Properties()).setItemGroup(ItemGroup.MISC)));
       registerItem("feather", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("gunpowder", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
-      registerItem("wooden_hoe", new ItemHoe(ItemTier.WOOD, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("iron_hoe", new ItemHoe(ItemTier.IRON, -1.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("diamond_hoe", new ItemHoe(ItemTier.DIAMOND, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("golden_hoe", new ItemHoe(ItemTier.GOLD, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
@@ -1088,8 +1084,9 @@ public class Item implements IItemProvider {
 
       //MITEMODDED MITE Items start
       registerItem("flint_shovel", new ItemSpade(ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 7.0F, -3.2F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 2.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("bowl_salad", new ItemFood(1, 1F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
+      registerItem("flint_hatchet", new ItemAxe(ItemTier.FLINT,1.5F,-3.0F,(new Item.Properties()).setItemGroup(ItemGroup.TOOLS).setMaxDamage(43)));
    }
 
    private static void register(Block p_179216_0_) {

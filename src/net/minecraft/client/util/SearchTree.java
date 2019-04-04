@@ -70,7 +70,7 @@ public class SearchTree<T> implements ISearchTree<T> {
          return this.byName.search(p_194038_1_);
       } else {
          List<T> list = this.byDomain.search(p_194038_1_.substring(0, i).trim());
-         String s = p_194038_1_.substring(i + 1, p_194038_1_.length()).trim();
+         String s = p_194038_1_.substring(i + 1).trim();
          List<T> list1 = this.byPath.search(s);
          List<T> list2 = this.byName.search(s);
          return Lists.newArrayList(new SearchTree.IntersectingIterator<>(list.iterator(), new SearchTree.MergingIterator<>(list1.iterator(), list2.iterator(), this.numericContents), this.numericContents));
@@ -104,7 +104,7 @@ public class SearchTree<T> implements ISearchTree<T> {
             }
          }
 
-         return (T)this.endOfData();
+         return this.endOfData();
       }
    }
 
@@ -124,7 +124,7 @@ public class SearchTree<T> implements ISearchTree<T> {
          boolean flag = !this.leftItr.hasNext();
          boolean flag1 = !this.rightItr.hasNext();
          if (flag && flag1) {
-            return (T)this.endOfData();
+            return this.endOfData();
          } else if (flag) {
             return this.rightItr.next();
          } else if (flag1) {
@@ -135,7 +135,7 @@ public class SearchTree<T> implements ISearchTree<T> {
                this.rightItr.next();
             }
 
-            return (T)(i <= 0 ? this.leftItr.next() : this.rightItr.next());
+            return i <= 0 ? this.leftItr.next() : this.rightItr.next();
          }
       }
    }

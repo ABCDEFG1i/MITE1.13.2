@@ -74,7 +74,7 @@ public class ItemTagsProvider extends TagsProvider<Item> {
          for(Block block : ((Tag.ListEntry<Block>)p_200439_1_).getTaggedItems()) {
             Item item = block.asItem();
             if (item == Items.AIR) {
-               LOGGER.warn("Itemless block copied to item tag: {}", (Object)IRegistry.field_212618_g.func_177774_c(block));
+               LOGGER.warn("Itemless block copied to item tag: {}", IRegistry.field_212618_g.func_177774_c(block));
             } else {
                list.add(item);
             }

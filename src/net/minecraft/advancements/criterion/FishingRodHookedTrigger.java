@@ -104,9 +104,7 @@ public class FishingRodHookedTrigger implements ICriterionTrigger<FishingRodHook
                   }
                }
 
-               if (!flag) {
-                  return false;
-               }
+                return flag;
             }
 
             return true;

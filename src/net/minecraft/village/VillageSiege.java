@@ -134,7 +134,8 @@ public class VillageSiege {
          EntityZombie entityzombie;
          try {
             entityzombie = new EntityZombie(this.world);
-            entityzombie.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombie)), (IEntityLivingData)null, (NBTTagCompound)null);
+            entityzombie.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityzombie)), null,
+                    null);
          } catch (Exception exception) {
             exception.printStackTrace();
             return false;
@@ -152,7 +153,8 @@ public class VillageSiege {
    private Vec3d findRandomSpawnPos(BlockPos p_179867_1_) {
       for(int i = 0; i < 10; ++i) {
          BlockPos blockpos = p_179867_1_.add(this.world.rand.nextInt(16) - 8, this.world.rand.nextInt(6) - 3, this.world.rand.nextInt(16) - 8);
-         if (this.village.isBlockPosWithinSqVillageRadius(blockpos) && WorldEntitySpawner.func_209382_a(EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND, this.world, blockpos, (EntityType<? extends EntityLiving>)null)) {
+         if (this.village.isBlockPosWithinSqVillageRadius(blockpos) && WorldEntitySpawner.func_209382_a(EntitySpawnPlacementRegistry.SpawnPlacementType.ON_GROUND, this.world, blockpos,
+                 null)) {
             return new Vec3d((double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ());
          }
       }

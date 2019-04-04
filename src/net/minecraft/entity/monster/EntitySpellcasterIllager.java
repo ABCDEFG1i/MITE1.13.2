@@ -172,7 +172,7 @@ public abstract class EntitySpellcasterIllager extends AbstractIllager {
       protected abstract EntitySpellcasterIllager.SpellType getSpellType();
    }
 
-   public static enum SpellType {
+   public enum SpellType {
       NONE(0, 0.0D, 0.0D, 0.0D),
       SUMMON_VEX(1, 0.7D, 0.7D, 0.8D),
       FANGS(2, 0.4D, 0.3D, 0.35D),
@@ -183,7 +183,7 @@ public abstract class EntitySpellcasterIllager extends AbstractIllager {
       private final int id;
       private final double[] particleSpeed;
 
-      private SpellType(int p_i47561_3_, double p_i47561_4_, double p_i47561_6_, double p_i47561_8_) {
+      SpellType(int p_i47561_3_, double p_i47561_4_, double p_i47561_6_, double p_i47561_8_) {
          this.id = p_i47561_3_;
          this.particleSpeed = new double[]{p_i47561_4_, p_i47561_6_, p_i47561_8_};
       }

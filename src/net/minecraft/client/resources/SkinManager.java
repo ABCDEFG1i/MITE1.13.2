@@ -52,7 +52,7 @@ public class SkinManager {
    }
 
    public ResourceLocation loadSkin(MinecraftProfileTexture p_152792_1_, Type p_152792_2_) {
-      return this.loadSkin(p_152792_1_, p_152792_2_, (SkinManager.SkinAvailableCallback)null);
+      return this.loadSkin(p_152792_1_, p_152792_2_, null);
    }
 
    public ResourceLocation loadSkin(final MinecraftProfileTexture p_152789_1_, final Type p_152789_2_, @Nullable final SkinManager.SkinAvailableCallback p_152789_3_) {
@@ -96,7 +96,6 @@ public class SkinManager {
          try {
             map.putAll(this.sessionService.getTextures(p_152790_1_, p_152790_3_));
          } catch (InsecureTextureException var7) {
-            ;
          }
 
          if (map.isEmpty()) {
@@ -110,7 +109,6 @@ public class SkinManager {
                try {
                   map.putAll(this.sessionService.getTextures(p_152790_1_, p_152790_3_));
                } catch (InsecureTextureException var6) {
-                  ;
                }
             }
          }

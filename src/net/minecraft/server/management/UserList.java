@@ -76,7 +76,7 @@ public class UserList<K, V extends UserListEntry<K>> {
       try {
          this.writeChanges();
       } catch (IOException ioexception) {
-         LOGGER.warn("Could not save the list after adding a user.", (Throwable)ioexception);
+         LOGGER.warn("Could not save the list after adding a user.", ioexception);
       }
 
    }
@@ -84,7 +84,7 @@ public class UserList<K, V extends UserListEntry<K>> {
    @Nullable
    public V getEntry(K p_152683_1_) {
       this.removeExpired();
-      return (V)(this.values.get(this.getObjectKey(p_152683_1_)));
+      return this.values.get(this.getObjectKey(p_152683_1_));
    }
 
    public void removeEntry(K p_152684_1_) {
@@ -93,7 +93,7 @@ public class UserList<K, V extends UserListEntry<K>> {
       try {
          this.writeChanges();
       } catch (IOException ioexception) {
-         LOGGER.warn("Could not save the list after removing a user.", (Throwable)ioexception);
+         LOGGER.warn("Could not save the list after removing a user.", ioexception);
       }
 
    }
@@ -123,7 +123,7 @@ public class UserList<K, V extends UserListEntry<K>> {
 
       for(V v : this.values.values()) {
          if (v.hasBanExpired()) {
-            list.add((K)v.getValue());
+            list.add(v.getValue());
          }
       }
 
@@ -134,7 +134,7 @@ public class UserList<K, V extends UserListEntry<K>> {
    }
 
    protected UserListEntry<K> createEntry(JsonObject p_152682_1_) {
-      return new UserListEntry<>((K)null, p_152682_1_);
+      return new UserListEntry<>(null, p_152682_1_);
    }
 
    public Collection<V> func_199043_f() {
@@ -150,7 +150,7 @@ public class UserList<K, V extends UserListEntry<K>> {
          bufferedwriter = Files.newWriter(this.saveFile, StandardCharsets.UTF_8);
          bufferedwriter.write(s);
       } finally {
-         IOUtils.closeQuietly((Writer)bufferedwriter);
+         IOUtils.closeQuietly(bufferedwriter);
       }
 
    }
@@ -172,7 +172,7 @@ public class UserList<K, V extends UserListEntry<K>> {
                }
             }
          } finally {
-            IOUtils.closeQuietly((Reader)bufferedreader);
+            IOUtils.closeQuietly(bufferedreader);
          }
 
       }

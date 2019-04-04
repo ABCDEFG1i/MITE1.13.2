@@ -155,7 +155,8 @@ public class GuiScreenRealmsProxy extends GuiScreen {
    }
 
    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-      return this.proxy.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_) ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+      return this.proxy.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_) || super.mouseClicked(
+              p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
    }
 
    public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_) {
@@ -163,15 +164,18 @@ public class GuiScreenRealmsProxy extends GuiScreen {
    }
 
    public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
-      return this.proxy.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_) ? true : super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
+      return this.proxy.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_,
+              p_mouseDragged_8_) || super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_,
+              p_mouseDragged_6_, p_mouseDragged_8_);
    }
 
    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
-      return this.proxy.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) ? true : super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+      return this.proxy.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) || super.keyPressed(
+              p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
    }
 
    public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {
-      return this.proxy.charTyped(p_charTyped_1_, p_charTyped_2_) ? true : super.charTyped(p_charTyped_1_, p_charTyped_2_);
+      return this.proxy.charTyped(p_charTyped_1_, p_charTyped_2_) || super.charTyped(p_charTyped_1_, p_charTyped_2_);
    }
 
    public void confirmResult(boolean p_confirmResult_1_, int p_confirmResult_2_) {

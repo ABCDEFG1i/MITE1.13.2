@@ -20,13 +20,13 @@ public interface IToast {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Visibility {
+   enum Visibility {
       SHOW(SoundEvents.UI_TOAST_IN),
       HIDE(SoundEvents.UI_TOAST_OUT);
 
       private final SoundEvent sound;
 
-      private Visibility(SoundEvent p_i47607_3_) {
+      Visibility(SoundEvent p_i47607_3_) {
          this.sound = p_i47607_3_;
       }
 

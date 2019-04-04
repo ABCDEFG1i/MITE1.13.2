@@ -72,7 +72,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
       this.setHealth(this.getMaxHealth());
       this.setSize(0.9F, 3.5F);
       this.isImmuneToFire = true;
-      ((PathNavigateGround)this.getNavigator()).setCanSwim(true);
+      this.getNavigator().setCanSwim(true);
       this.experienceValue = 50;
    }
 
@@ -305,7 +305,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
                }
 
                if (flag) {
-                  this.world.playEvent((EntityPlayer)null, 1022, new BlockPos(this), 0);
+                  this.world.playEvent(null, 1022, new BlockPos(this), 0);
                }
             }
          }
@@ -382,7 +382,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
    }
 
    private void launchWitherSkullToCoords(int p_82209_1_, double p_82209_2_, double p_82209_4_, double p_82209_6_, boolean p_82209_8_) {
-      this.world.playEvent((EntityPlayer)null, 1024, new BlockPos(this), 0);
+      this.world.playEvent(null, 1024, new BlockPos(this), 0);
       double d0 = this.getHeadX(p_82209_1_);
       double d1 = this.getHeadY(p_82209_1_);
       double d2 = this.getHeadZ(p_82209_1_);

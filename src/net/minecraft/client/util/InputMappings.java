@@ -101,7 +101,7 @@ public class InputMappings {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Type {
+   public enum Type {
       KEYSYM("key.keyboard"),
       SCANCODE("scancode"),
       MOUSE("key.mouse");
@@ -115,7 +115,7 @@ public class InputMappings {
          p_197943_0_.inputs.addKey(p_197943_2_, inputmappings$input);
       }
 
-      private Type(String p_i48056_3_) {
+      Type(String p_i48056_3_) {
          this.name = p_i48056_3_;
       }
 

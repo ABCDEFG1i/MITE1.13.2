@@ -41,7 +41,7 @@ public abstract class AbstractStateHolder<O, S> implements IStateHolder<S> {
    }
 
    public <T extends Comparable<T>> S cycle(IProperty<T> p_177231_1_) {
-      return (S)this.with(p_177231_1_, (T)(cyclePropertyValue(p_177231_1_.getAllowedValues(), this.get(p_177231_1_))));
+      return this.with(p_177231_1_, cyclePropertyValue(p_177231_1_.getAllowedValues(), this.get(p_177231_1_)));
    }
 
    protected static <T> T cyclePropertyValue(Collection<T> p_177232_0_, T p_177232_1_) {
@@ -85,7 +85,7 @@ public abstract class AbstractStateHolder<O, S> implements IStateHolder<S> {
       if (comparable == null) {
          throw new IllegalArgumentException("Cannot get property " + p_177229_1_ + " as it does not exist in " + this.object);
       } else {
-         return (T)(p_177229_1_.getValueClass().cast(comparable));
+         return p_177229_1_.getValueClass().cast(comparable);
       }
    }
 
@@ -121,7 +121,7 @@ public abstract class AbstractStateHolder<O, S> implements IStateHolder<S> {
             }
          }
 
-         this.propertyToStateMap = (Table<IProperty<?>, Comparable<?>, S>)(table.isEmpty() ? table : ArrayTable.create(table));
+         this.propertyToStateMap = table.isEmpty() ? table : ArrayTable.create(table);
       }
    }
 

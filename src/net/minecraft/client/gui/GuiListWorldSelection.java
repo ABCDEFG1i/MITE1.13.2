@@ -40,7 +40,7 @@ public class GuiListWorldSelection extends GuiListExtended<GuiListWorldSelection
          try {
             this.field_212331_y = isaveformat.getSaveList();
          } catch (AnvilConverterException anvilconverterexception) {
-            LOGGER.error("Couldn't load level list", (Throwable)anvilconverterexception);
+            LOGGER.error("Couldn't load level list", anvilconverterexception);
             this.mc.displayGuiScreen(new GuiErrorScreen(I18n.format("selectWorld.unable_to_load"), anvilconverterexception.getMessage()));
             return;
          }

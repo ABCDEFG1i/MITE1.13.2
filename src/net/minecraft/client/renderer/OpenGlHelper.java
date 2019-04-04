@@ -266,7 +266,6 @@ public class OpenGlHelper {
          Processor[] aprocessor = (new SystemInfo()).getHardware().getProcessors();
          cpu = String.format("%dx %s", aprocessor.length, aprocessor[0]).replaceAll("\\s+", " ");
       } catch (Throwable var3) {
-         ;
       }
 
    }
@@ -783,9 +782,9 @@ public class OpenGlHelper {
    }
 
    @OnlyIn(Dist.CLIENT)
-   static enum FboMode {
+   enum FboMode {
       BASE,
       ARB,
-      EXT;
+      EXT
    }
 }

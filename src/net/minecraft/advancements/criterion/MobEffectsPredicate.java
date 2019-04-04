@@ -38,12 +38,13 @@ public class MobEffectsPredicate {
       if (this == ANY) {
          return true;
       } else {
-         return p_193469_1_ instanceof EntityLivingBase ? this.test(((EntityLivingBase)p_193469_1_).getActivePotionMap()) : false;
+         return p_193469_1_ instanceof EntityLivingBase && this.test(
+                 ((EntityLivingBase) p_193469_1_).getActivePotionMap());
       }
    }
 
    public boolean test(EntityLivingBase p_193472_1_) {
-      return this == ANY ? true : this.test(p_193472_1_.getActivePotionMap());
+      return this == ANY || this.test(p_193472_1_.getActivePotionMap());
    }
 
    public boolean test(Map<Potion, PotionEffect> p_193470_1_) {
@@ -113,7 +114,7 @@ public class MobEffectsPredicate {
       }
 
       public InstancePredicate() {
-         this(MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, (Boolean)null, (Boolean)null);
+         this(MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, null, null);
       }
 
       public boolean test(@Nullable PotionEffect p_193463_1_) {

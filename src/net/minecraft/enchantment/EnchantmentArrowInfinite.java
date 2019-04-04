@@ -20,6 +20,6 @@ public class EnchantmentArrowInfinite extends Enchantment {
    }
 
    public boolean canApplyTogether(Enchantment p_77326_1_) {
-      return p_77326_1_ instanceof EnchantmentMending ? false : super.canApplyTogether(p_77326_1_);
+      return !(p_77326_1_ instanceof EnchantmentMending) && super.canApplyTogether(p_77326_1_);
    }
 }

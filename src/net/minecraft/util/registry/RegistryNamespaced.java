@@ -27,7 +27,7 @@ public class RegistryNamespaced<V> implements IRegistry<V> {
       Validate.notNull(p_177775_3_);
       this.field_186802_b = null;
       if (this.field_82596_a.containsKey(p_177775_2_)) {
-         field_148743_a.debug("Adding duplicate key '{}' to registry", (Object)p_177775_2_);
+         field_148743_a.debug("Adding duplicate key '{}' to registry", p_177775_2_);
       }
 
       this.field_82596_a.put(p_177775_2_, p_177775_3_);
@@ -85,7 +85,7 @@ public class RegistryNamespaced<V> implements IRegistry<V> {
       if (this.field_186802_b == null) {
          Collection<?> collection = this.field_82596_a.values();
          if (collection.isEmpty()) {
-            return (V)null;
+            return null;
          }
 
          this.field_186802_b = collection.toArray(new Object[collection.size()]);

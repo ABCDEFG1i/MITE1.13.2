@@ -57,7 +57,7 @@ public class TileEntitySkull extends TileEntity implements ITickable {
       } else if (p_145839_1_.hasKey("ExtraType", 8)) {
          String s = p_145839_1_.getString("ExtraType");
          if (!StringUtils.isNullOrEmpty(s)) {
-            this.setPlayerProfile(new GameProfile((UUID)null, s));
+            this.setPlayerProfile(new GameProfile(null, s));
          }
       }
 
@@ -114,7 +114,7 @@ public class TileEntitySkull extends TileEntity implements ITickable {
             if (gameprofile == null) {
                return p_174884_0_;
             } else {
-               Property property = Iterables.getFirst(gameprofile.getProperties().get("textures"), (Property)null);
+               Property property = Iterables.getFirst(gameprofile.getProperties().get("textures"), null);
                if (property == null) {
                   gameprofile = sessionService.fillProfileProperties(gameprofile, true);
                }

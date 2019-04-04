@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mite1.13.2" default="compile.module.mite1.13.2">
+  <dirname property="module.mite1.13.2.basedir" file="${ant.file.module_mite1.13.2}"/>
+  
+  <property name="module.jdk.home.mite1.13.2" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mite1.13.2" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mite1.13.2" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mite1.13.2" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="mite1.13.2.output.dir" value="${module.mite1.13.2.basedir}/out/production/MITE1.13.2"/>
+  <property name="mite1.13.2.testoutput.dir" value="${module.mite1.13.2.basedir}/out/test/MITE1.13.2"/>
+  
+  <path id="mite1.13.2.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mite1.13.2.module.production.classpath">
+    <path refid="${module.jdk.classpath.mite1.13.2}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.runtime.production.module.classpath">
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.module.classpath">
+    <path refid="${module.jdk.classpath.mite1.13.2}"/>
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.runtime.module.classpath">
+    <pathelement location="${mite1.13.2.testoutput.dir}"/>
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mite1.13.2">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mite1.13.2">
+    <patternset refid="excluded.from.module.mite1.13.2"/>
+  </patternset>
+  
+  <path id="mite1.13.2.module.sourcepath">
+    <dirset dir="${module.mite1.13.2.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mite1.13.2" depends="compile.module.mite1.13.2.production,compile.module.mite1.13.2.tests" description="Compile module MITE1.13.2"/>
+  
+  <target name="compile.module.mite1.13.2.production" depends="register.custom.compilers" description="Compile module MITE1.13.2; production classes">
+    <mkdir dir="${mite1.13.2.output.dir}"/>
+    <javac destdir="${mite1.13.2.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mite1.13.2}/javac">
+      <compilerarg line="${compiler.args.mite1.13.2}"/>
+      <bootclasspath refid="mite1.13.2.module.bootclasspath"/>
+      <classpath refid="mite1.13.2.module.production.classpath"/>
+      <src refid="mite1.13.2.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mite1.13.2"/>
+    </javac>
+
+    <copy todir="${mite1.13.2.output.dir}">
+      <fileset dir="${module.mite1.13.2.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mite1.13.2.tests" depends="register.custom.compilers,compile.module.mite1.13.2.production" description="compile module MITE1.13.2; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.mite1.13.2" description="cleanup module">
+    <delete dir="${mite1.13.2.output.dir}"/>
+    <delete dir="${mite1.13.2.testoutput.dir}"/>
+  </target>
+</project>

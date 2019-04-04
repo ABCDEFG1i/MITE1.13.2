@@ -101,7 +101,7 @@ public class TileEntityChestRenderer<T extends TileEntity & IChestLid> extends T
    }
 
    private void func_199346_a(T p_199346_1_, float p_199346_2_, ModelChest p_199346_3_) {
-      float f = ((IChestLid)p_199346_1_).getLidAngle(p_199346_2_);
+      float f = p_199346_1_.getLidAngle(p_199346_2_);
       f = 1.0F - f;
       f = 1.0F - f * f * f;
       p_199346_3_.func_205058_b().rotateAngleX = -(f * ((float)Math.PI / 2F));

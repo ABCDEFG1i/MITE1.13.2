@@ -30,8 +30,7 @@ public class LayeredColorMaskTexture extends AbstractTexture {
       try (
          IResource iresource = p_195413_1_.getResource(this.textureLocation);
          NativeImage nativeimage = NativeImage.read(iresource.getInputStream());
-         NativeImage nativeimage1 = new NativeImage(nativeimage.getWidth(), nativeimage.getHeight(), false);
-      ) {
+         NativeImage nativeimage1 = new NativeImage(nativeimage.getWidth(), nativeimage.getHeight(), false)) {
          nativeimage1.copyImageData(nativeimage);
 
          for(int i = 0; i < 17 && i < this.listTextures.size() && i < this.listDyeColors.size(); ++i) {
@@ -39,8 +38,7 @@ public class LayeredColorMaskTexture extends AbstractTexture {
             if (s != null) {
                try (
                   IResource iresource1 = p_195413_1_.getResource(new ResourceLocation(s));
-                  NativeImage nativeimage2 = NativeImage.read(iresource1.getInputStream());
-               ) {
+                  NativeImage nativeimage2 = NativeImage.read(iresource1.getInputStream())) {
                   int j = this.listDyeColors.get(i).func_196057_c();
                   if (nativeimage2.getWidth() == nativeimage1.getWidth() && nativeimage2.getHeight() == nativeimage1.getHeight()) {
                      for(int k = 0; k < nativeimage2.getHeight(); ++k) {
@@ -64,7 +62,7 @@ public class LayeredColorMaskTexture extends AbstractTexture {
          nativeimage1.uploadTextureSub(0, 0, 0, false);
          GlStateManager.pixelTransferf(3357, 0.0F);
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't load layered color mask image", (Throwable)ioexception);
+         LOGGER.error("Couldn't load layered color mask image", ioexception);
       }
 
    }

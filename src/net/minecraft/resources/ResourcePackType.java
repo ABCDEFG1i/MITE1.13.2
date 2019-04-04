@@ -6,7 +6,7 @@ public enum ResourcePackType {
 
    private final String directoryName;
 
-   private ResourcePackType(String p_i47913_3_) {
+   ResourcePackType(String p_i47913_3_) {
       this.directoryName = p_i47913_3_;
    }
 

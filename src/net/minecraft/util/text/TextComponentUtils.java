@@ -128,6 +128,6 @@ public class TextComponentUtils {
    }
 
    public static ITextComponent toTextComponent(Message p_202465_0_) {
-      return (ITextComponent)(p_202465_0_ instanceof ITextComponent ? (ITextComponent)p_202465_0_ : new TextComponentString(p_202465_0_.getString()));
+      return p_202465_0_ instanceof ITextComponent ? (ITextComponent)p_202465_0_ : new TextComponentString(p_202465_0_.getString());
    }
 }

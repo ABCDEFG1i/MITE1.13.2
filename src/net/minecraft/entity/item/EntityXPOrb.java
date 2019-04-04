@@ -188,7 +188,7 @@ public class EntityXPOrb extends Entity {
             }
 
             if (this.xpValue > 0) {
-               p_70100_1_.func_195068_e(this.xpValue);
+               p_70100_1_.addXpValue(this.xpValue);
             }
 
             this.setDead();

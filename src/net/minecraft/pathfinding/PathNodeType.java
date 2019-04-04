@@ -23,7 +23,7 @@ public enum PathNodeType {
 
    private final float priority;
 
-   private PathNodeType(float p_i46653_3_) {
+   PathNodeType(float p_i46653_3_) {
       this.priority = p_i46653_3_;
    }
 

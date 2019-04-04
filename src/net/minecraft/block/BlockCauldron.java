@@ -83,7 +83,7 @@ public class BlockCauldron extends Block {
 
                p_196250_4_.addStat(StatList.FILL_CAULDRON);
                this.setWaterLevel(p_196250_2_, p_196250_3_, p_196250_1_, 3);
-               p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+               p_196250_2_.playSound(null, p_196250_3_, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
 
             return true;
@@ -100,7 +100,7 @@ public class BlockCauldron extends Block {
 
                p_196250_4_.addStat(StatList.USE_CAULDRON);
                this.setWaterLevel(p_196250_2_, p_196250_3_, p_196250_1_, 0);
-               p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+               p_196250_2_.playSound(null, p_196250_3_, SoundEvents.ITEM_BUCKET_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
 
             return true;
@@ -119,7 +119,7 @@ public class BlockCauldron extends Block {
                   }
                }
 
-               p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+               p_196250_2_.playSound(null, p_196250_3_, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
                this.setWaterLevel(p_196250_2_, p_196250_3_, p_196250_1_, i - 1);
             }
 
@@ -135,7 +135,7 @@ public class BlockCauldron extends Block {
                   }
                }
 
-               p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+               p_196250_2_.playSound(null, p_196250_3_, SoundEvents.ITEM_BOTTLE_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
                this.setWaterLevel(p_196250_2_, p_196250_3_, p_196250_1_, i + 1);
             }
 

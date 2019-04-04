@@ -72,7 +72,7 @@ public class ShapelessRecipe implements IRecipe,ITimedRecipe {
             }
          }
 
-         return i == this.recipeItems.size() && recipeitemhelper.canCraft(this, (IntList)null);
+         return i == this.recipeItems.size() && recipeitemhelper.canCraft(this, null);
       }
    }
 

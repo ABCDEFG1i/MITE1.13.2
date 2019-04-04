@@ -87,7 +87,7 @@ public enum EnumEnchantmentType {
       }
    };
 
-   private EnumEnchantmentType() {
+   EnumEnchantmentType() {
    }
 
    public abstract boolean canEnchantItem(Item p_77557_1_);

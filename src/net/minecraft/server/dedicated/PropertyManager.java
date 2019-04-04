@@ -29,13 +29,12 @@ public class PropertyManager {
                try {
                   fileinputstream.close();
                } catch (IOException var11) {
-                  ;
                }
             }
 
          }
       } else {
-         LOGGER.warn("{} does not exist", (Object)p_i46372_1_);
+         LOGGER.warn("{} does not exist", p_i46372_1_);
          this.generateNewProperties();
       }
 
@@ -60,7 +59,6 @@ public class PropertyManager {
             try {
                fileoutputstream.close();
             } catch (IOException var10) {
-               ;
             }
          }
 

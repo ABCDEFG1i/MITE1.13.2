@@ -33,7 +33,7 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
          GlStateManager.pushMatrix();
          GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
          GlStateManager.rotatef(f1, 0.0F, 1.0F, 0.0F);
-         this.field_205122_g.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+         this.field_205122_g.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
          GlStateManager.popMatrix();
       } else if (p_199341_1_.isActive()) {
          float f3 = p_199341_1_.func_205036_a(p_199341_8_) * (180F / (float)Math.PI);
@@ -44,7 +44,7 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
          GlStateManager.pushMatrix();
          GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.3F + f2 * 0.2F, (float)p_199341_6_ + 0.5F);
          GlStateManager.rotatef(f3, 0.5F, 1.0F, 0.5F);
-         this.field_205123_h.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+         this.field_205123_h.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
          GlStateManager.popMatrix();
          int i = 3;
          int j = p_199341_1_.ticksExisted / 3 % TileEntityConduitRenderer.WindModel.field_205078_a;
@@ -55,14 +55,14 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
             this.bindTexture(field_205120_e);
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
             GlStateManager.scalef(0.875F, 0.875F, 0.875F);
             GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
             break;
          case 1:
@@ -70,14 +70,14 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
             GlStateManager.rotatef(90.0F, 1.0F, 0.0F, 0.0F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
             GlStateManager.scalef(0.875F, 0.875F, 0.875F);
             GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
             break;
          case 2:
@@ -85,14 +85,14 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
             GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
             GlStateManager.pushMatrix();
             GlStateManager.translatef((float)p_199341_2_ + 0.5F, (float)p_199341_4_ + 0.5F, (float)p_199341_6_ + 0.5F);
             GlStateManager.scalef(0.875F, 0.875F, 0.875F);
             GlStateManager.rotatef(180.0F, 1.0F, 0.0F, 0.0F);
             GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
-            this.field_205124_i.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+            this.field_205124_i.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
             GlStateManager.popMatrix();
          }
 
@@ -114,7 +114,7 @@ public class TileEntityConduitRenderer extends TileEntityRenderer<TileEntityCond
          GlStateManager.rotatef(-vec2f.y, 0.0F, 1.0F, 0.0F);
          GlStateManager.rotatef(vec2f.x, 1.0F, 0.0F, 0.0F);
          GlStateManager.rotatef(180.0F, 0.0F, 0.0F, 1.0F);
-         this.field_207748_l.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.083333336F);
+         this.field_207748_l.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.083333336F);
          GlStateManager.popMatrix();
       }
 

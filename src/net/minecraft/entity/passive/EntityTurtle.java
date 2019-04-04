@@ -406,7 +406,7 @@ public class EntityTurtle extends EntityAnimal {
          if (this.field_203121_f.isChild() && !this.field_203121_f.isInWater()) {
             return super.shouldExecute();
          } else {
-            return !this.field_203121_f.func_203022_dF() && !this.field_203121_f.isInWater() && !this.field_203121_f.func_203020_dx() ? super.shouldExecute() : false;
+            return (!this.field_203121_f.func_203022_dF() && !this.field_203121_f.isInWater() && !this.field_203121_f.func_203020_dx()) && super.shouldExecute();
          }
       }
 
@@ -433,7 +433,8 @@ public class EntityTurtle extends EntityAnimal {
       }
 
       public boolean shouldExecute() {
-         return this.field_203122_f.func_203020_dx() && this.field_203122_f.getDistanceSq(this.field_203122_f.getHome()) < 81.0D ? super.shouldExecute() : false;
+         return (this.field_203122_f.func_203020_dx() && this.field_203122_f.getDistanceSq(
+                 this.field_203122_f.getHome()) < 81.0D) && super.shouldExecute();
       }
 
       public boolean shouldContinueExecuting() {
@@ -448,7 +449,7 @@ public class EntityTurtle extends EntityAnimal {
                this.field_203122_f.func_203015_s(true);
             } else if (this.field_203122_f.field_203028_bF > 200) {
                World world = this.field_203122_f.world;
-               world.playSound((EntityPlayer)null, blockpos, SoundEvents.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3F, 0.9F + world.rand.nextFloat() * 0.2F);
+               world.playSound(null, blockpos, SoundEvents.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3F, 0.9F + world.rand.nextFloat() * 0.2F);
                world.setBlockState(this.destinationBlock.up(), Blocks.TURTLE_EGG.getDefaultState().with(BlockTurtleEgg.EGGS, Integer.valueOf(this.field_203122_f.rand.nextInt(4) + 1)), 3);
                this.field_203122_f.func_203017_r(false);
                this.field_203122_f.func_203015_s(false);
@@ -492,7 +493,7 @@ public class EntityTurtle extends EntityAnimal {
 
          if (entityplayermp != null) {
             entityplayermp.addStat(StatList.ANIMALS_BRED);
-            CriteriaTriggers.BRED_ANIMALS.trigger(entityplayermp, this.animal, this.targetMate, (EntityAgeable)null);
+            CriteriaTriggers.BRED_ANIMALS.trigger(entityplayermp, this.animal, this.targetMate, null);
          }
 
          this.field_203107_f.func_203017_r(true);
@@ -659,7 +660,7 @@ public class EntityTurtle extends EntityAnimal {
       }
 
       public boolean shouldExecute() {
-         return !this.entity.isInWater() && !this.field_203123_h.func_203022_dF() && !this.field_203123_h.func_203020_dx() ? super.shouldExecute() : false;
+         return (!this.entity.isInWater() && !this.field_203123_h.func_203022_dF() && !this.field_203123_h.func_203020_dx()) && super.shouldExecute();
       }
    }
 

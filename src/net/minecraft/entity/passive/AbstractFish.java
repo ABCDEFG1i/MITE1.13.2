@@ -52,7 +52,8 @@ public abstract class AbstractFish extends EntityWaterMob implements IAnimal {
 
    public boolean func_205020_a(IWorld p_205020_1_, boolean p_205020_2_) {
       BlockPos blockpos = new BlockPos(this);
-      return p_205020_1_.getBlockState(blockpos).getBlock() == Blocks.WATER && p_205020_1_.getBlockState(blockpos.up()).getBlock() == Blocks.WATER ? super.func_205020_a(p_205020_1_, p_205020_2_) : false;
+      return (p_205020_1_.getBlockState(blockpos).getBlock() == Blocks.WATER && p_205020_1_.getBlockState(
+              blockpos.up()).getBlock() == Blocks.WATER) && super.func_205020_a(p_205020_1_, p_205020_2_);
    }
 
    public boolean canDespawn() {

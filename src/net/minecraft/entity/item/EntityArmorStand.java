@@ -175,7 +175,7 @@ public class EntityArmorStand extends EntityLivingBase {
             itemstack.write(nbttagcompound);
          }
 
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       p_70014_1_.setTag("ArmorItems", nbttaglist);
@@ -187,7 +187,7 @@ public class EntityArmorStand extends EntityLivingBase {
             itemstack1.write(nbttagcompound1);
          }
 
-         nbttaglist1.add((INBTBase)nbttagcompound1);
+         nbttaglist1.add(nbttagcompound1);
       }
 
       p_70014_1_.setTag("HandItems", nbttaglist1);
@@ -500,7 +500,7 @@ public class EntityArmorStand extends EntityLivingBase {
    }
 
    private void playBrokenSound() {
-      this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_ARMORSTAND_BREAK, this.getSoundCategory(), 1.0F, 1.0F);
+      this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_ARMORSTAND_BREAK, this.getSoundCategory(), 1.0F, 1.0F);
    }
 
    protected float updateDistance(float p_110146_1_, float p_110146_2_) {

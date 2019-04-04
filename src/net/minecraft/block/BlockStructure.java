@@ -33,7 +33,7 @@ public class BlockStructure extends BlockContainer {
 
    public boolean onBlockActivated(IBlockState p_196250_1_, World p_196250_2_, BlockPos p_196250_3_, EntityPlayer p_196250_4_, EnumHand p_196250_5_, EnumFacing p_196250_6_, float p_196250_7_, float p_196250_8_, float p_196250_9_) {
       TileEntity tileentity = p_196250_2_.getTileEntity(p_196250_3_);
-      return tileentity instanceof TileEntityStructure ? ((TileEntityStructure)tileentity).usedBy(p_196250_4_) : false;
+      return tileentity instanceof TileEntityStructure && ((TileEntityStructure) tileentity).usedBy(p_196250_4_);
    }
 
    public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, IBlockState p_180633_3_, @Nullable EntityLivingBase p_180633_4_, ItemStack p_180633_5_) {

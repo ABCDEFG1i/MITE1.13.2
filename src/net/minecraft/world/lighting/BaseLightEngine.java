@@ -99,7 +99,7 @@ public abstract class BaseLightEngine implements ILightEngine {
    protected void enqueueLightChange(ChunkPos p_202669_1_, int p_202669_2_, int p_202669_3_, int p_202669_4_, int p_202669_5_) {
       int i = p_202669_2_ - p_202669_1_.getXStart() + 16;
       int j = p_202669_4_ - p_202669_1_.getZStart() + 16;
-      this.lightQueue.enqueue(this.packLightChange((EnumFacing)null, i, p_202669_3_, j, p_202669_5_));
+      this.lightQueue.enqueue(this.packLightChange(null, i, p_202669_3_, j, p_202669_5_));
    }
 
    protected void enqueueLightChange(ChunkPos p_202659_1_, BlockPos p_202659_2_, int p_202659_3_) {

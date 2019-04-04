@@ -43,7 +43,7 @@ public class RecipeList {
             this.canFit.remove(irecipe);
          }
 
-         if (flag && p_194210_1_.canCraft(irecipe, (IntList)null)) {
+         if (flag && p_194210_1_.canCraft(irecipe, null)) {
             this.craftable.add(irecipe);
          } else {
             this.craftable.remove(irecipe);

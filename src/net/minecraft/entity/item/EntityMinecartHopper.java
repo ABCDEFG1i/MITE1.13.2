@@ -137,7 +137,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {
       super.readEntityFromNBT(p_70037_1_);
       this.transferTicker = p_70037_1_.getInteger("TransferCooldown");
-      this.isBlocked = p_70037_1_.hasKey("Enabled") ? p_70037_1_.getBoolean("Enabled") : true;
+      this.isBlocked = !p_70037_1_.hasKey("Enabled") || p_70037_1_.getBoolean("Enabled");
    }
 
    public void setTransferTicker(int p_98042_1_) {

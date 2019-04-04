@@ -31,7 +31,7 @@ public enum ItemTier implements IItemTier {
    private final int enchantability;
    private final LazyLoadBase<Ingredient> repairMaterial;
 
-   private ItemTier(int p_i48458_3_, int p_i48458_4_, float p_i48458_5_, float p_i48458_6_, int p_i48458_7_, Supplier<Ingredient> p_i48458_8_) {
+   ItemTier(int p_i48458_3_, int p_i48458_4_, float p_i48458_5_, float p_i48458_6_, int p_i48458_7_, Supplier<Ingredient> p_i48458_8_) {
       this.harvestLevel = p_i48458_3_;
       this.maxUses = p_i48458_4_;
       this.efficiency = p_i48458_5_;

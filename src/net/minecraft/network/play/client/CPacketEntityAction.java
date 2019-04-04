@@ -52,7 +52,7 @@ public class CPacketEntityAction implements Packet<INetHandlerPlayServer> {
       return this.auxData;
    }
 
-   public static enum Action {
+   public enum Action {
       START_SNEAKING,
       STOP_SNEAKING,
       STOP_SLEEPING,
@@ -61,6 +61,6 @@ public class CPacketEntityAction implements Packet<INetHandlerPlayServer> {
       START_RIDING_JUMP,
       STOP_RIDING_JUMP,
       OPEN_INVENTORY,
-      START_FALL_FLYING;
+      START_FALL_FLYING
    }
 }

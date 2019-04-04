@@ -73,14 +73,14 @@ public class ScoreCriteria {
       return this.field_197917_q;
    }
 
-   public static enum RenderType {
+   public enum RenderType {
       INTEGER("integer"),
       HEARTS("hearts");
 
       private final String field_211840_c;
       private static final Map<String, ScoreCriteria.RenderType> field_211841_d;
 
-      private RenderType(String p_i49784_3_) {
+      RenderType(String p_i49784_3_) {
          this.field_211840_c = p_i49784_3_;
       }
 

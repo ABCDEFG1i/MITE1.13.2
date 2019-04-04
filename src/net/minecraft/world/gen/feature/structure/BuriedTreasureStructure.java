@@ -10,7 +10,8 @@ import net.minecraft.world.gen.feature.Feature;
 
 public class BuriedTreasureStructure extends Structure<BuriedTreasureConfig> {
    protected boolean hasStartAt(IChunkGenerator<?> p_202372_1_, Random p_202372_2_, int p_202372_3_, int p_202372_4_) {
-      Biome biome = p_202372_1_.getBiomeProvider().getBiome(new BlockPos((p_202372_3_ << 4) + 9, 0, (p_202372_4_ << 4) + 9), (Biome)null);
+      Biome biome = p_202372_1_.getBiomeProvider().getBiome(new BlockPos((p_202372_3_ << 4) + 9, 0, (p_202372_4_ << 4) + 9),
+              null);
       if (p_202372_1_.hasStructure(biome, Feature.BURIED_TREASURE)) {
          ((SharedSeedRandom)p_202372_2_).setSeed(p_202372_1_.getSeed(), p_202372_3_, p_202372_4_, 10387320);
          BuriedTreasureConfig buriedtreasureconfig = (BuriedTreasureConfig)p_202372_1_.getStructureConfig(biome, Feature.BURIED_TREASURE);
@@ -25,7 +26,8 @@ public class BuriedTreasureStructure extends Structure<BuriedTreasureConfig> {
    }
 
    protected StructureStart makeStart(IWorld p_202369_1_, IChunkGenerator<?> p_202369_2_, SharedSeedRandom p_202369_3_, int p_202369_4_, int p_202369_5_) {
-      Biome biome = p_202369_2_.getBiomeProvider().getBiome(new BlockPos((p_202369_4_ << 4) + 9, 0, (p_202369_5_ << 4) + 9), (Biome)null);
+      Biome biome = p_202369_2_.getBiomeProvider().getBiome(new BlockPos((p_202369_4_ << 4) + 9, 0, (p_202369_5_ << 4) + 9),
+              null);
       return new BuriedTreasureStructure.Start(p_202369_1_, p_202369_2_, p_202369_3_, p_202369_4_, p_202369_5_, biome);
    }
 

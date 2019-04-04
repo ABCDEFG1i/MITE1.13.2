@@ -13,7 +13,7 @@ public enum GenLayerZoom implements IAreaTransformer1 {
       }
    };
 
-   private GenLayerZoom() {
+   GenLayerZoom() {
    }
 
    public AreaDimension apply(AreaDimension p_202706_1_) {

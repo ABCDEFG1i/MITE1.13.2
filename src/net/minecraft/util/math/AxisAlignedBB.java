@@ -222,7 +222,7 @@ public class AxisAlignedBB {
 
    @Nullable
    public RayTraceResult calculateIntercept(Vec3d p_72327_1_, Vec3d p_72327_2_) {
-      return this.calculateIntercept(p_72327_1_, p_72327_2_, (BlockPos)null);
+      return this.calculateIntercept(p_72327_1_, p_72327_2_, null);
    }
 
    @Nullable

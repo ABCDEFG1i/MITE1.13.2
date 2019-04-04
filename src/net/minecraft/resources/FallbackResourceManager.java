@@ -61,7 +61,7 @@ public class FallbackResourceManager implements IResourceManager {
 
    protected InputStream func_199019_a(ResourceLocation p_199019_1_, IResourcePack p_199019_2_) throws IOException {
       InputStream inputstream = p_199019_2_.getResourceStream(this.type, p_199019_1_);
-      return (InputStream)(LOGGER.isDebugEnabled() ? new FallbackResourceManager.LeakComplainerInputStream(inputstream, p_199019_1_, p_199019_2_.getName()) : inputstream);
+      return LOGGER.isDebugEnabled() ? new LeakComplainerInputStream(inputstream, p_199019_1_, p_199019_2_.getName()) : inputstream;
    }
 
    private void func_199022_d(ResourceLocation p_199022_1_) throws IOException {

@@ -86,7 +86,8 @@ public abstract class AbstractClientPlayer extends EntityPlayer {
       TextureManager texturemanager = Minecraft.getInstance().getTextureManager();
       ITextureObject itextureobject = texturemanager.getTexture(p_110304_0_);
       if (itextureobject == null) {
-         itextureobject = new ThreadDownloadImageData((File)null, String.format("http://skins.minecraft.net/MinecraftSkins/%s.png", StringUtils.stripControlCodes(p_110304_1_)), DefaultPlayerSkin.getDefaultSkin(getOfflineUUID(p_110304_1_)), new ImageBufferDownload());
+         itextureobject = new ThreadDownloadImageData(
+                 null, String.format("http://skins.minecraft.net/MinecraftSkins/%s.png", StringUtils.stripControlCodes(p_110304_1_)), DefaultPlayerSkin.getDefaultSkin(getOfflineUUID(p_110304_1_)), new ImageBufferDownload());
          texturemanager.loadTexture(p_110304_0_, itextureobject);
       }
 

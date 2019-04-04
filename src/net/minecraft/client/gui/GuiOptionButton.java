@@ -11,7 +11,7 @@ public abstract class GuiOptionButton extends GuiButton {
    private final GameSettings.Options enumOptions;
 
    public GuiOptionButton(int p_i45011_1_, int p_i45011_2_, int p_i45011_3_, String p_i45011_4_) {
-      this(p_i45011_1_, p_i45011_2_, p_i45011_3_, (GameSettings.Options)null, p_i45011_4_);
+      this(p_i45011_1_, p_i45011_2_, p_i45011_3_, null, p_i45011_4_);
    }
 
    public GuiOptionButton(int p_i45013_1_, int p_i45013_2_, int p_i45013_3_, @Nullable GameSettings.Options p_i45013_4_, String p_i45013_5_) {

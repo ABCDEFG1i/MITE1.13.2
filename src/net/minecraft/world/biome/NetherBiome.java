@@ -23,7 +23,8 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 
 public final class NetherBiome extends Biome {
    protected NetherBiome() {
-      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(NETHER_SURFACE_BUILDER, NETHERRACK_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.NETHER).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder(NETHER_SURFACE_BUILDER, NETHERRACK_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.NETHER).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent(
+              null));
       this.addStructure(Feature.FORTRESS, new FortressConfig());
       this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(NETHER_CAVE_WORLD_CARVER, new ProbabilityConfig(0.2F)));
       this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createCompositeFeature(Feature.LIQUIDS, new LiquidsConfig(Fluids.LAVA), HEIGHT_VERY_BIASED_RANGE, new CountRangeConfig(20, 8, 16, 256)));

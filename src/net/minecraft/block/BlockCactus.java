@@ -39,7 +39,6 @@ public class BlockCactus extends Block {
          if (p_196267_2_.isAirBlock(blockpos)) {
             int i;
             for(i = 1; p_196267_2_.getBlockState(p_196267_3_.down(i)).getBlock() == this; ++i) {
-               ;
             }
 
             if (i < 3) {

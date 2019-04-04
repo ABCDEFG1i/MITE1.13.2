@@ -27,12 +27,12 @@ public class GuiOptionsRowList extends GuiListExtended<GuiOptionsRowList.Row> {
          return null;
       } else {
          int i = p_195092_4_.getOrdinal();
-         return (GuiButton)(p_195092_4_.isFloat() ? new GuiOptionSlider(i, p_195092_1_, p_195092_2_, p_195092_3_, 20, p_195092_4_, 0.0D, 1.0D) : new GuiOptionButton(i, p_195092_1_, p_195092_2_, p_195092_3_, 20, p_195092_4_, p_195092_0_.gameSettings.getKeyBinding(p_195092_4_)) {
+         return p_195092_4_.isFloat() ? new GuiOptionSlider(i, p_195092_1_, p_195092_2_, p_195092_3_, 20, p_195092_4_, 0.0D, 1.0D) : new GuiOptionButton(i, p_195092_1_, p_195092_2_, p_195092_3_, 20, p_195092_4_, p_195092_0_.gameSettings.getKeyBinding(p_195092_4_)) {
             public void onClick(double p_194829_1_, double p_194829_3_) {
                p_195092_0_.gameSettings.setOptionValue(p_195092_4_, 1);
                this.displayString = p_195092_0_.gameSettings.getKeyBinding(GameSettings.Options.byOrdinal(this.id));
             }
-         });
+         };
       }
    }
 
@@ -57,7 +57,8 @@ public class GuiOptionsRowList extends GuiListExtended<GuiOptionsRowList.Row> {
       }
 
       public Row(int p_i48072_2_, GameSettings.Options p_i48072_3_) {
-         this(GuiOptionsRowList.func_195092_b(GuiOptionsRowList.this.mc, p_i48072_2_ / 2 - 155, 0, 310, p_i48072_3_), (GuiButton)null);
+         this(GuiOptionsRowList.func_195092_b(GuiOptionsRowList.this.mc, p_i48072_2_ / 2 - 155, 0, 310, p_i48072_3_),
+                 null);
       }
 
       public Row(int p_i48073_2_, GameSettings.Options p_i48073_3_, @Nullable GameSettings.Options p_i48073_4_) {

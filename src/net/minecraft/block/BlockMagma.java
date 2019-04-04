@@ -56,7 +56,7 @@ public class BlockMagma extends Block {
    public void randomTick(IBlockState p_196265_1_, World p_196265_2_, BlockPos p_196265_3_, Random p_196265_4_) {
       BlockPos blockpos = p_196265_3_.up();
       if (p_196265_2_.getFluidState(p_196265_3_).isTagged(FluidTags.WATER)) {
-         p_196265_2_.playSound((EntityPlayer)null, p_196265_3_, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_196265_2_.rand.nextFloat() - p_196265_2_.rand.nextFloat()) * 0.8F);
+         p_196265_2_.playSound(null, p_196265_3_, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_196265_2_.rand.nextFloat() - p_196265_2_.rand.nextFloat()) * 0.8F);
          if (p_196265_2_ instanceof WorldServer) {
             ((WorldServer)p_196265_2_).spawnParticle(Particles.LARGE_SMOKE, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.25D, (double)blockpos.getZ() + 0.5D, 8, 0.5D, 0.25D, 0.5D, 0.0D);
          }

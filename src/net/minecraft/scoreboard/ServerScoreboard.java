@@ -34,7 +34,7 @@ public class ServerScoreboard extends Scoreboard {
 
    public void broadcastScoreUpdate(String p_96516_1_) {
       super.broadcastScoreUpdate(p_96516_1_);
-      this.server.getPlayerList().sendPacketToAllPlayers(new SPacketUpdateScore(ServerScoreboard.Action.REMOVE, (String)null, p_96516_1_, 0));
+      this.server.getPlayerList().sendPacketToAllPlayers(new SPacketUpdateScore(ServerScoreboard.Action.REMOVE, null, p_96516_1_, 0));
       this.markSaveDataDirty();
    }
 
@@ -204,8 +204,8 @@ public class ServerScoreboard extends Scoreboard {
       return i;
    }
 
-   public static enum Action {
+   public enum Action {
       CHANGE,
-      REMOVE;
+      REMOVE
    }
 }

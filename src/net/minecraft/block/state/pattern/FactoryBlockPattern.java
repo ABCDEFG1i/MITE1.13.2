@@ -25,7 +25,7 @@ public class FactoryBlockPattern {
    }
 
    public FactoryBlockPattern aisle(String... p_177659_1_) {
-      if (!ArrayUtils.isEmpty((Object[])p_177659_1_) && !StringUtils.isEmpty(p_177659_1_[0])) {
+      if (!ArrayUtils.isEmpty(p_177659_1_) && !StringUtils.isEmpty(p_177659_1_[0])) {
          if (this.depth.isEmpty()) {
             this.aisleHeight = p_177659_1_.length;
             this.rowWidth = p_177659_1_[0].length();
@@ -41,7 +41,7 @@ public class FactoryBlockPattern {
 
                for(char c0 : s.toCharArray()) {
                   if (!this.symbolMap.containsKey(c0)) {
-                     this.symbolMap.put(c0, (Predicate<BlockWorldState>)null);
+                     this.symbolMap.put(c0, null);
                   }
                }
             }

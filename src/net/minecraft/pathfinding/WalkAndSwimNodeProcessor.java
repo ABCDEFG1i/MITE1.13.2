@@ -145,7 +145,7 @@ public class WalkAndSwimNodeProcessor extends WalkNodeProcessor {
 
             if (pathnodetype == PathNodeType.OPEN) {
                AxisAlignedBB axisalignedbb = new AxisAlignedBB((double)p_203245_1_ - d1 + 0.5D, (double)p_203245_2_ + 0.001D, (double)p_203245_3_ - d1 + 0.5D, (double)p_203245_1_ + d1 + 0.5D, (double)((float)p_203245_2_ + this.entity.height), (double)p_203245_3_ + d1 + 0.5D);
-               if (!this.entity.world.isCollisionBoxesEmpty((Entity)null, axisalignedbb)) {
+               if (!this.entity.world.isCollisionBoxesEmpty(null, axisalignedbb)) {
                   return null;
                }
 

@@ -11,7 +11,7 @@ public class ServerRecipePlacerFurnace extends ServerRecipePlacer {
 
    protected void tryPlaceRecipe(IRecipe p_201508_1_, boolean p_201508_2_) {
       this.matches = this.recipeBookContainer.matches(p_201508_1_);
-      int i = this.recipeItemHelper.getBiggestCraftableStack(p_201508_1_, (IntList)null);
+      int i = this.recipeItemHelper.getBiggestCraftableStack(p_201508_1_, null);
       if (this.matches) {
          ItemStack itemstack = this.recipeBookContainer.getSlot(0).getStack();
          if (itemstack.isEmpty() || i <= itemstack.getCount()) {

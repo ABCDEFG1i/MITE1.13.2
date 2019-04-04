@@ -8,7 +8,7 @@ public enum Half implements IStringSerializable {
 
    private final String field_212249_f;
 
-   private Half(String p_i49337_3_) {
+   Half(String p_i49337_3_) {
       this.field_212249_f = p_i49337_3_;
    }
 

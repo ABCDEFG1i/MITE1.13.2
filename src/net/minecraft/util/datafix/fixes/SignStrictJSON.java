@@ -58,14 +58,12 @@ public class SignStrictJSON extends NamedEntityFix {
                   itextcomponent = new TextComponentString("");
                }
             } catch (JsonParseException var8) {
-               ;
             }
 
             if (itextcomponent == null) {
                try {
                   itextcomponent = ITextComponent.Serializer.fromJson(s);
                } catch (JsonParseException var7) {
-                  ;
                }
             }
 
@@ -73,7 +71,6 @@ public class SignStrictJSON extends NamedEntityFix {
                try {
                   itextcomponent = ITextComponent.Serializer.fromJsonLenient(s);
                } catch (JsonParseException var6) {
-                  ;
                }
             }
 

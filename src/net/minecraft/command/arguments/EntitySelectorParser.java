@@ -166,7 +166,8 @@ public class EntitySelectorParser {
 
       if (!this.level.isUnbounded()) {
          this.filter = this.filter.and((p_197371_1_) -> {
-            return !(p_197371_1_ instanceof EntityPlayerMP) ? false : this.level.test(((EntityPlayerMP)p_197371_1_).experienceLevel);
+            return p_197371_1_ instanceof EntityPlayerMP && this.level.test(
+                    ((EntityPlayerMP) p_197371_1_).experienceLevel);
          });
       }
 

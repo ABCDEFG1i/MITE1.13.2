@@ -49,7 +49,8 @@ public class EntityHasScore implements LootCondition {
          return false;
       } else {
          String s = p_186631_1_.getScoreboardName();
-         return !p_186631_2_.entityHasObjective(s, scoreobjective) ? false : p_186631_4_.isInRange(p_186631_2_.getOrCreateScore(s, scoreobjective).getScorePoints());
+         return p_186631_2_.entityHasObjective(s, scoreobjective) && p_186631_4_.isInRange(
+                 p_186631_2_.getOrCreateScore(s, scoreobjective).getScorePoints());
       }
    }
 

@@ -83,11 +83,12 @@ public class ItemDebugStick extends Item {
    }
 
    private static <T extends Comparable<T>> IBlockState cycleProperty(IBlockState p_195960_0_, IProperty<T> p_195960_1_, boolean p_195960_2_) {
-      return p_195960_0_.with(p_195960_1_, (T)(getAdjacentValue(p_195960_1_.getAllowedValues(), p_195960_0_.get(p_195960_1_), p_195960_2_)));
+      return p_195960_0_.with(p_195960_1_,
+              getAdjacentValue(p_195960_1_.getAllowedValues(), p_195960_0_.get(p_195960_1_), p_195960_2_));
    }
 
    private static <T> T getAdjacentValue(Iterable<T> p_195959_0_, @Nullable T p_195959_1_, boolean p_195959_2_) {
-      return (T)(p_195959_2_ ? Util.getElementBefore(p_195959_0_, p_195959_1_) : Util.getElementAfter(p_195959_0_, p_195959_1_));
+      return p_195959_2_ ? Util.getElementBefore(p_195959_0_, p_195959_1_) : Util.getElementAfter(p_195959_0_, p_195959_1_);
    }
 
    private static void sendMessage(EntityPlayer p_195956_0_, ITextComponent p_195956_1_) {

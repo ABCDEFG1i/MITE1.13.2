@@ -73,9 +73,9 @@ public class SPacketCombatEvent implements Packet<INetHandlerPlayClient> {
       return this.eventType == SPacketCombatEvent.Event.ENTITY_DIED;
    }
 
-   public static enum Event {
+   public enum Event {
       ENTER_COMBAT,
       END_COMBAT,
-      ENTITY_DIED;
+      ENTITY_DIED
    }
 }

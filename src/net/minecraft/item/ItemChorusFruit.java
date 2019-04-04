@@ -28,7 +28,7 @@ public class ItemChorusFruit extends ItemFood {
             }
 
             if (p_77654_3_.attemptTeleport(d3, d4, d5)) {
-               p_77654_2_.playSound((EntityPlayer)null, d0, d1, d2, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+               p_77654_2_.playSound(null, d0, d1, d2, SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
                p_77654_3_.playSound(SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, 1.0F, 1.0F);
                break;
             }

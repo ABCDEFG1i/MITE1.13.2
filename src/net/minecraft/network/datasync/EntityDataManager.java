@@ -42,7 +42,6 @@ public class EntityDataManager {
                LOGGER.debug("defineId called for: {} from {}", p_187226_0_, oclass, new RuntimeException());
             }
          } catch (ClassNotFoundException var5) {
-            ;
          }
       }
 

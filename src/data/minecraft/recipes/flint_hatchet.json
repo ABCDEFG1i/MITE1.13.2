@@ -1,20 +1,18 @@
 {
   "type": "crafting_shaped",
   "pattern": [
-    "XXX",
-    " # ",
-    " # "
+    "SF"
   ],
   "key": {
-    "#": {
+    "S": {
       "item": "minecraft:stick"
     },
-    "X": {
-      "tag": "minecraft:planks"
+    "F": {
+      "item": "minecraft:flint"
     }
   },
   "craftTime": 1000,
   "result": {
-    "item": "minecraft:wooden_pickaxe"
+    "item": "minecraft:flint_hatchet"
   }
 }

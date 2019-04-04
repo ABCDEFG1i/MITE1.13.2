@@ -40,7 +40,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class TileEntityBeacon extends TileEntityLockable implements ISidedInventory, ITickable {
    public static final Potion[][] EFFECTS_LIST = new Potion[][]{{MobEffects.SPEED, MobEffects.HASTE}, {MobEffects.RESISTANCE, MobEffects.JUMP_BOOST}, {MobEffects.STRENGTH}, {MobEffects.REGENERATION}};
-   private static final Set<Potion> VALID_EFFECTS = Arrays.stream(EFFECTS_LIST).<Potion>flatMap(Arrays::stream).collect(Collectors.toSet());
+   private static final Set<Potion> VALID_EFFECTS = Arrays.stream(EFFECTS_LIST).flatMap(Arrays::stream).collect(Collectors.toSet());
    private final List<TileEntityBeacon.BeamSegment> beamSegments = Lists.newArrayList();
    @OnlyIn(Dist.CLIENT)
    private long beamRenderCounter;
@@ -84,7 +84,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ISidedInvent
    }
 
    public void playSound(SoundEvent p_205736_1_) {
-      this.world.playSound((EntityPlayer)null, this.pos, p_205736_1_, SoundCategory.BLOCKS, 1.0F, 1.0F);
+      this.world.playSound(null, this.pos, p_205736_1_, SoundCategory.BLOCKS, 1.0F, 1.0F);
    }
 
    private void addEffectsToPlayers() {
@@ -311,7 +311,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ISidedInvent
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.customName != null ? this.customName : new TextComponentTranslation("container.beacon"));
+      return this.customName != null ? this.customName : new TextComponentTranslation("container.beacon");
    }
 
    public boolean hasCustomName() {

@@ -60,13 +60,17 @@ public abstract class ItemGroup {
       public ItemStack createIcon() {
          return new ItemStack(Items.IRON_AXE);
       }
-   }).setRelevantEnchantmentTypes(new EnumEnchantmentType[]{EnumEnchantmentType.ALL, EnumEnchantmentType.DIGGER, EnumEnchantmentType.FISHING_ROD, EnumEnchantmentType.BREAKABLE});
+   }).setRelevantEnchantmentTypes(EnumEnchantmentType.ALL, EnumEnchantmentType.DIGGER, EnumEnchantmentType.FISHING_ROD,
+           EnumEnchantmentType.BREAKABLE);
    public static final ItemGroup COMBAT = (new ItemGroup(9, "combat") {
       @OnlyIn(Dist.CLIENT)
       public ItemStack createIcon() {
          return new ItemStack(Items.GOLDEN_SWORD);
       }
-   }).setRelevantEnchantmentTypes(new EnumEnchantmentType[]{EnumEnchantmentType.ALL, EnumEnchantmentType.ARMOR, EnumEnchantmentType.ARMOR_FEET, EnumEnchantmentType.ARMOR_HEAD, EnumEnchantmentType.ARMOR_LEGS, EnumEnchantmentType.ARMOR_CHEST, EnumEnchantmentType.BOW, EnumEnchantmentType.WEAPON, EnumEnchantmentType.WEARABLE, EnumEnchantmentType.BREAKABLE, EnumEnchantmentType.TRIDENT});
+   }).setRelevantEnchantmentTypes(EnumEnchantmentType.ALL, EnumEnchantmentType.ARMOR, EnumEnchantmentType.ARMOR_FEET,
+           EnumEnchantmentType.ARMOR_HEAD, EnumEnchantmentType.ARMOR_LEGS, EnumEnchantmentType.ARMOR_CHEST,
+           EnumEnchantmentType.BOW, EnumEnchantmentType.WEAPON, EnumEnchantmentType.WEARABLE, EnumEnchantmentType.BREAKABLE,
+           EnumEnchantmentType.TRIDENT);
    public static final ItemGroup BREWING = new ItemGroup(10, "brewing") {
       @OnlyIn(Dist.CLIENT)
       public ItemStack createIcon() {

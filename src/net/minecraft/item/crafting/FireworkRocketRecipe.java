@@ -66,7 +66,7 @@ public class FireworkRocketRecipe extends IRecipeHidden {
             } else if (INGREDIENT_FIREWORK_STAR.test(itemstack1)) {
                NBTTagCompound nbttagcompound1 = itemstack1.getChildTag("Explosion");
                if (nbttagcompound1 != null) {
-                  nbttaglist.add((INBTBase)nbttagcompound1);
+                  nbttaglist.add(nbttagcompound1);
                }
             }
          }

@@ -263,7 +263,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
       for(int i = 0; i < this.villagerInventory.getSizeInventory(); ++i) {
          ItemStack itemstack = this.villagerInventory.getStackInSlot(i);
          if (!itemstack.isEmpty()) {
-            nbttaglist.add((INBTBase)itemstack.write(new NBTTagCompound()));
+            nbttaglist.add(itemstack.write(new NBTTagCompound()));
          }
       }
 
@@ -633,7 +633,8 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
 
    public EntityVillager createChild(EntityAgeable p_90011_1_) {
       EntityVillager entityvillager = new EntityVillager(this.world);
-      entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, (NBTTagCompound)null);
+      entityvillager.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), null,
+              null);
       return entityvillager;
    }
 
@@ -645,7 +646,8 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
       if (!this.world.isRemote && !this.isDead) {
          EntityWitch entitywitch = new EntityWitch(this.world);
          entitywitch.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-         entitywitch.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entitywitch)), (IEntityLivingData)null, (NBTTagCompound)null);
+         entitywitch.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(entitywitch)), null,
+                 null);
          entitywitch.setNoAI(this.isAIDisabled());
          if (this.hasCustomName()) {
             entitywitch.setCustomName(this.getCustomName());

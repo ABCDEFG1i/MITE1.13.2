@@ -151,7 +151,7 @@ public class Scoreboard {
 
       for(int i = 0; i < 19; ++i) {
          if (this.getObjectiveInDisplaySlot(i) == p_96519_1_) {
-            this.setObjectiveInDisplaySlot(i, (ScoreObjective)null);
+            this.setObjectiveInDisplaySlot(i, null);
          }
       }
 
@@ -333,7 +333,7 @@ public class Scoreboard {
    public void removeEntity(Entity p_181140_1_) {
       if (p_181140_1_ != null && !(p_181140_1_ instanceof EntityPlayer) && !p_181140_1_.isEntityAlive()) {
          String s = p_181140_1_.getCachedUniqueIdString();
-         this.removeObjectiveFromEntity(s, (ScoreObjective)null);
+         this.removeObjectiveFromEntity(s, null);
          this.removePlayerFromTeams(s);
       }
    }
@@ -349,7 +349,7 @@ public class Scoreboard {
             nbttagcompound.setString("Objective", p_197896_1_.getObjective().getName());
             nbttagcompound.setInteger("Score", p_197896_1_.getScorePoints());
             nbttagcompound.setBoolean("Locked", p_197896_1_.isLocked());
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          });
       });
       return nbttaglist;

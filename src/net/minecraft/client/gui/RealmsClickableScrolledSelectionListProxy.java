@@ -48,11 +48,12 @@ public class RealmsClickableScrolledSelectionListProxy extends GuiSlot {
    }
 
    public boolean mouseScrolled(double p_mouseScrolled_1_) {
-      return this.field_207723_v.mouseScrolled(p_mouseScrolled_1_) ? true : super.mouseScrolled(p_mouseScrolled_1_);
+      return this.field_207723_v.mouseScrolled(p_mouseScrolled_1_) || super.mouseScrolled(p_mouseScrolled_1_);
    }
 
    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-      return this.field_207723_v.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_) ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+      return this.field_207723_v.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_,
+              p_mouseClicked_5_) || super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
    }
 
    public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_) {
@@ -60,7 +61,9 @@ public class RealmsClickableScrolledSelectionListProxy extends GuiSlot {
    }
 
    public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
-      return this.field_207723_v.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_) ? true : super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
+      return this.field_207723_v.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_,
+              p_mouseDragged_6_, p_mouseDragged_8_) || super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_,
+              p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
    }
 
    public void renderSelected(int p_207719_1_, int p_207719_2_, int p_207719_3_, Tezzelator p_207719_4_) {

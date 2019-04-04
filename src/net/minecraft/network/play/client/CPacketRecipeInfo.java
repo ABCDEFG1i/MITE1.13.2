@@ -88,8 +88,8 @@ public class CPacketRecipeInfo implements Packet<INetHandlerPlayServer> {
       return this.field_202499_f;
    }
 
-   public static enum Purpose {
+   public enum Purpose {
       SHOWN,
-      SETTINGS;
+      SETTINGS
    }
 }

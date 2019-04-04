@@ -93,7 +93,7 @@ public class KilledTrigger implements ICriterionTrigger<KilledTrigger.Instance> 
       }
 
       public boolean test(EntityPlayerMP p_192270_1_, Entity p_192270_2_, DamageSource p_192270_3_) {
-         return !this.killingBlow.test(p_192270_1_, p_192270_3_) ? false : this.entity.test(p_192270_1_, p_192270_2_);
+         return this.killingBlow.test(p_192270_1_, p_192270_3_) && this.entity.test(p_192270_1_, p_192270_2_);
       }
 
       public JsonElement serialize() {

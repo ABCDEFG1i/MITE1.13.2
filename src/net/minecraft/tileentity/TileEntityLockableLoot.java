@@ -101,12 +101,12 @@ public abstract class TileEntityLockableLoot extends TileEntityLockable implemen
    }
 
    public ItemStack getStackInSlot(int p_70301_1_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       return this.getItems().get(p_70301_1_);
    }
 
    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       ItemStack itemstack = ItemStackHelper.getAndSplit(this.getItems(), p_70298_1_, p_70298_2_);
       if (!itemstack.isEmpty()) {
          this.markDirty();
@@ -116,12 +116,12 @@ public abstract class TileEntityLockableLoot extends TileEntityLockable implemen
    }
 
    public ItemStack removeStackFromSlot(int p_70304_1_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       return ItemStackHelper.getAndRemove(this.getItems(), p_70304_1_);
    }
 
    public void setInventorySlotContents(int p_70299_1_, @Nullable ItemStack p_70299_2_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       this.getItems().set(p_70299_1_, p_70299_2_);
       if (p_70299_2_.getCount() > this.getInventoryStackLimit()) {
          p_70299_2_.setCount(this.getInventoryStackLimit());

@@ -120,7 +120,7 @@ public class EntitySpider extends EntityMob {
    }
 
    public boolean isPotionApplicable(PotionEffect p_70687_1_) {
-      return p_70687_1_.getPotion() == MobEffects.POISON ? false : super.isPotionApplicable(p_70687_1_);
+      return p_70687_1_.getPotion() != MobEffects.POISON && super.isPotionApplicable(p_70687_1_);
    }
 
    public boolean isBesideClimbableBlock() {
@@ -144,7 +144,7 @@ public class EntitySpider extends EntityMob {
       if (this.world.rand.nextInt(100) == 0) {
          EntitySkeleton entityskeleton = new EntitySkeleton(this.world);
          entityskeleton.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-         entityskeleton.onInitialSpawn(p_204210_1_, (IEntityLivingData)null, (NBTTagCompound)null);
+         entityskeleton.onInitialSpawn(p_204210_1_, null, null);
          this.world.spawnEntity(entityskeleton);
          entityskeleton.startRiding(this);
       }
@@ -178,7 +178,7 @@ public class EntitySpider extends EntityMob {
       public boolean shouldContinueExecuting() {
          float f = this.attacker.getBrightness();
          if (f >= 0.5F && this.attacker.getRNG().nextInt(100) == 0) {
-            this.attacker.setAttackTarget((EntityLivingBase)null);
+            this.attacker.setAttackTarget(null);
             return false;
          } else {
             return super.shouldContinueExecuting();
@@ -197,7 +197,7 @@ public class EntitySpider extends EntityMob {
 
       public boolean shouldExecute() {
          float f = this.taskOwner.getBrightness();
-         return f >= 0.5F ? false : super.shouldExecute();
+         return !(f >= 0.5F) && super.shouldExecute();
       }
    }
 

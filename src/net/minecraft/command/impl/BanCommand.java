@@ -25,7 +25,8 @@ public class BanCommand {
       p_198235_0_.register(Commands.literal("ban").requires((p_198238_0_) -> {
          return p_198238_0_.getServer().getPlayerList().getBannedPlayers().isLanServer() && p_198238_0_.hasPermissionLevel(3);
       }).then(Commands.argument("targets", GameProfileArgument.gameProfile()).executes((p_198234_0_) -> {
-         return banGameProfiles(p_198234_0_.getSource(), GameProfileArgument.getGameProfiles(p_198234_0_, "targets"), (ITextComponent)null);
+         return banGameProfiles(p_198234_0_.getSource(), GameProfileArgument.getGameProfiles(p_198234_0_, "targets"),
+                 null);
       }).then(Commands.argument("reason", MessageArgument.message()).executes((p_198237_0_) -> {
          return banGameProfiles(p_198237_0_.getSource(), GameProfileArgument.getGameProfiles(p_198237_0_, "targets"), MessageArgument.getMessage(p_198237_0_, "reason"));
       }))));
@@ -37,7 +38,8 @@ public class BanCommand {
 
       for(GameProfile gameprofile : p_198236_1_) {
          if (!userlistbans.isBanned(gameprofile)) {
-            UserListBansEntry userlistbansentry = new UserListBansEntry(gameprofile, (Date)null, p_198236_0_.getName(), (Date)null, p_198236_2_ == null ? null : p_198236_2_.getString());
+            UserListBansEntry userlistbansentry = new UserListBansEntry(gameprofile, null, p_198236_0_.getName(),
+                    null, p_198236_2_ == null ? null : p_198236_2_.getString());
             userlistbans.addEntry(userlistbansentry);
             ++i;
             p_198236_0_.sendFeedback(new TextComponentTranslation("commands.ban.success", TextComponentUtils.func_197679_a(gameprofile), userlistbansentry.getBanReason()), true);

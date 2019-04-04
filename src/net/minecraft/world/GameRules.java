@@ -72,7 +72,7 @@ public class GameRules {
 
    public boolean getBoolean(String p_82766_1_) {
       GameRules.Value gamerules$value = this.rules.get(p_82766_1_);
-      return gamerules$value != null ? gamerules$value.getBoolean() : false;
+      return gamerules$value != null && gamerules$value.getBoolean();
    }
 
    public int getInt(String p_180263_1_) {
@@ -93,7 +93,7 @@ public class GameRules {
 
    public void readFromNBT(NBTTagCompound p_82768_1_) {
       for(String s : p_82768_1_.getKeySet()) {
-         this.setOrCreateGameRule(s, p_82768_1_.getString(s), (MinecraftServer)null);
+         this.setOrCreateGameRule(s, p_82768_1_.getString(s), null);
       }
 
    }
@@ -117,7 +117,7 @@ public class GameRules {
       public Value(String p_i48618_1_, GameRules.ValueType p_i48618_2_, BiConsumer<MinecraftServer, GameRules.Value> p_i48618_3_) {
          this.type = p_i48618_2_;
          this.changeCallback = p_i48618_3_;
-         this.setValue(p_i48618_1_, (MinecraftServer)null);
+         this.setValue(p_i48618_1_, null);
       }
 
       public void setValue(String p_201200_1_, @Nullable MinecraftServer p_201200_2_) {
@@ -128,13 +128,11 @@ public class GameRules {
          try {
             this.valueInteger = Integer.parseInt(p_201200_1_);
          } catch (NumberFormatException var5) {
-            ;
          }
 
          try {
             this.valueDouble = Double.parseDouble(p_201200_1_);
          } catch (NumberFormatException var4) {
-            ;
          }
 
          if (p_201200_2_ != null) {
@@ -185,7 +183,7 @@ public class GameRules {
       }
    }
 
-   public static enum ValueType {
+   public enum ValueType {
       ANY_VALUE(StringArgumentType::greedyString, (p_196224_0_, p_196224_1_) -> {
          return p_196224_0_.getArgument(p_196224_1_, String.class);
       }),
@@ -199,7 +197,7 @@ public class GameRules {
       private final Supplier<ArgumentType<?>> argumentType;
       private final BiFunction<CommandContext<CommandSource>, String, String> argumentGetter;
 
-      private ValueType(Supplier<ArgumentType<?>> p_i47626_3_, BiFunction<CommandContext<CommandSource>, String, String> p_i47626_4_) {
+      ValueType(Supplier<ArgumentType<?>> p_i47626_3_, BiFunction<CommandContext<CommandSource>, String, String> p_i47626_4_) {
          this.argumentType = p_i47626_3_;
          this.argumentGetter = p_i47626_4_;
       }

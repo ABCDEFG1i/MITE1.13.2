@@ -440,7 +440,6 @@ public class GameSettings {
          return this.chatLinksPrompt;
       case SNOOPER_ENABLED:
          if (this.snooperEnabled) {
-            ;
          }
 
          return false;
@@ -582,7 +581,7 @@ public class GameSettings {
                Iterator<String> iterator = COLON_SPLITTER.omitEmptyStrings().limit(2).split(s).iterator();
                nbttagcompound.setString(iterator.next(), iterator.next());
             } catch (Exception var10) {
-               LOGGER.warn("Skipping bad option: {}", (Object)s);
+               LOGGER.warn("Skipping bad option: {}", s);
             }
          }
 
@@ -868,7 +867,7 @@ public class GameSettings {
 
          KeyBinding.resetKeyBindingArrayAndHash();
       } catch (Exception exception) {
-         LOGGER.error("Failed to load options", (Throwable)exception);
+         LOGGER.error("Failed to load options", exception);
       }
 
    }
@@ -879,7 +878,6 @@ public class GameSettings {
       try {
          i = Integer.parseInt(p_189988_1_.getString("version"));
       } catch (RuntimeException var4) {
-         ;
       }
 
       return NBTUtil.func_210822_a(this.mc.getDataFixer(), DataFixTypes.OPTIONS, p_189988_1_, i);
@@ -982,9 +980,9 @@ public class GameSettings {
             printwriter.println("modelPart_" + enumplayermodelparts.getPartName() + ":" + this.setModelParts.contains(enumplayermodelparts));
          }
       } catch (Exception exception) {
-         LOGGER.error("Failed to save options", (Throwable)exception);
+         LOGGER.error("Failed to save options", exception);
       } finally {
-         IOUtils.closeQuietly((Writer)printwriter);
+         IOUtils.closeQuietly(printwriter);
       }
 
       this.sendSettingsToServer();
@@ -1057,13 +1055,13 @@ public class GameSettings {
          }
 
          if (resourcepackinfoclient == null) {
-            LOGGER.warn("Removed resource pack {} from options because it doesn't seem to exist anymore", (Object)s);
+            LOGGER.warn("Removed resource pack {} from options because it doesn't seem to exist anymore", s);
             iterator.remove();
          } else if (!resourcepackinfoclient.func_195791_d().func_198968_a() && !this.incompatibleResourcePacks.contains(s)) {
-            LOGGER.warn("Removed resource pack {} from options because it is no longer compatible", (Object)s);
+            LOGGER.warn("Removed resource pack {} from options because it is no longer compatible", s);
             iterator.remove();
          } else if (resourcepackinfoclient.func_195791_d().func_198968_a() && this.incompatibleResourcePacks.contains(s)) {
-            LOGGER.info("Removed resource pack {} from incompatibility list because it's now compatible", (Object)s);
+            LOGGER.info("Removed resource pack {} from incompatibility list because it's now compatible", s);
             this.incompatibleResourcePacks.remove(s);
          } else {
             set.add(resourcepackinfoclient);
@@ -1074,7 +1072,7 @@ public class GameSettings {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Options {
+   public enum Options {
       INVERT_MOUSE("options.invertMouse", false, true),
       SENSITIVITY("options.sensitivity", true, false),
       FOV("options.fov", true, false, 30.0D, 110.0D, 1.0F),
@@ -1136,11 +1134,11 @@ public class GameSettings {
          return null;
       }
 
-      private Options(String p_i1015_3_, boolean p_i1015_4_, boolean p_i1015_5_) {
+      Options(String p_i1015_3_, boolean p_i1015_4_, boolean p_i1015_5_) {
          this(p_i1015_3_, p_i1015_4_, p_i1015_5_, 0.0D, 1.0D, 0.0F);
       }
 
-      private Options(String p_i47986_3_, boolean p_i47986_4_, boolean p_i47986_5_, double p_i47986_6_, double p_i47986_8_, float p_i47986_10_) {
+      Options(String p_i47986_3_, boolean p_i47986_4_, boolean p_i47986_5_, double p_i47986_6_, double p_i47986_8_, float p_i47986_10_) {
          this.translation = p_i47986_3_;
          this.isFloat = p_i47986_4_;
          this.isBoolean = p_i47986_5_;

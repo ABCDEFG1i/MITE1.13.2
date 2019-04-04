@@ -87,7 +87,8 @@ public interface IChunk extends IBlockReader {
    void setLightFor(EnumLightType p_201580_1_, boolean p_201580_2_, BlockPos p_201580_3_, int p_201580_4_);
 
    default void markBlockForPostprocessing(BlockPos p_201594_1_) {
-      LogManager.getLogger().warn("Trying to mark a block for PostProcessing @ {}, but this operation is not supported.", (Object)p_201594_1_);
+      LogManager.getLogger().warn("Trying to mark a block for PostProcessing @ {}, but this operation is not supported.",
+              p_201594_1_);
    }
 
    default void addTileEntity(NBTTagCompound p_201591_1_) {

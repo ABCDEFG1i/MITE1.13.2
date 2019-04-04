@@ -59,7 +59,7 @@ public class ProtoChunkScheduler extends Scheduler<ChunkPos, ChunkStatus, ChunkP
             } catch (ReportedException reportedexception) {
                throw reportedexception;
             } catch (Exception exception) {
-               LOGGER.error("Couldn't load protochunk", (Throwable)exception);
+               LOGGER.error("Couldn't load protochunk", exception);
                chunkprimer = null;
             }
 
@@ -96,9 +96,10 @@ public class ProtoChunkScheduler extends Scheduler<ChunkPos, ChunkStatus, ChunkP
                   this.chunkLoader.saveChunk(this.world, chunkprimer);
                   chunkprimer.setModified(false);
                } catch (IOException ioexception) {
-                  LOGGER.error("Couldn't save chunk", (Throwable)ioexception);
+                  LOGGER.error("Couldn't save chunk", ioexception);
                } catch (SessionLockException sessionlockexception) {
-                  LOGGER.error("Couldn't save chunk; already in use by another instance of Minecraft?", (Throwable)sessionlockexception);
+                  LOGGER.error("Couldn't save chunk; already in use by another instance of Minecraft?",
+                          sessionlockexception);
                }
             }
 

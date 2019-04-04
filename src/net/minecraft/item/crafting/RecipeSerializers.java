@@ -75,11 +75,11 @@ public class RecipeSerializers {
       }
 
       public T read(ResourceLocation p_199425_1_, JsonObject p_199425_2_) {
-         return (T)(this.function.apply(p_199425_1_));
+         return this.function.apply(p_199425_1_);
       }
 
       public T read(ResourceLocation p_199426_1_, PacketBuffer p_199426_2_) {
-         return (T)(this.function.apply(p_199426_1_));
+         return this.function.apply(p_199426_1_);
       }
 
       public void write(PacketBuffer p_199427_1_, T p_199427_2_) {

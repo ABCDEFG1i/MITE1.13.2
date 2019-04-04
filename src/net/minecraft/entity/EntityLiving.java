@@ -309,7 +309,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             itemstack.write(nbttagcompound);
          }
 
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       p_70014_1_.setTag("ArmorItems", nbttaglist);
@@ -321,21 +321,21 @@ public abstract class EntityLiving extends EntityLivingBase {
             itemstack1.write(nbttagcompound1);
          }
 
-         nbttaglist1.add((INBTBase)nbttagcompound1);
+         nbttaglist1.add(nbttagcompound1);
       }
 
       p_70014_1_.setTag("HandItems", nbttaglist1);
       NBTTagList nbttaglist2 = new NBTTagList();
 
       for(float f : this.inventoryArmorDropChances) {
-         nbttaglist2.add((INBTBase)(new NBTTagFloat(f)));
+         nbttaglist2.add(new NBTTagFloat(f));
       }
 
       p_70014_1_.setTag("ArmorDropChances", nbttaglist2);
       NBTTagList nbttaglist3 = new NBTTagList();
 
       for(float f1 : this.inventoryHandsDropChances) {
-         nbttaglist3.add((INBTBase)(new NBTTagFloat(f1)));
+         nbttaglist3.add(new NBTTagFloat(f1));
       }
 
       p_70014_1_.setTag("HandDropChances", nbttaglist3);
@@ -940,7 +940,8 @@ public abstract class EntityLiving extends EntityLivingBase {
             itemstack.shrink(1);
             return true;
          } else {
-            return this.processInteract(p_184230_1_, p_184230_2_) ? true : super.processInitialInteract(p_184230_1_, p_184230_2_);
+            return this.processInteract(p_184230_1_, p_184230_2_) || super.processInitialInteract(p_184230_1_,
+                    p_184230_2_);
          }
       }
    }
@@ -974,7 +975,7 @@ public abstract class EntityLiving extends EntityLivingBase {
          }
 
          if (!this.world.isRemote && p_110160_1_ && this.world instanceof WorldServer) {
-            ((WorldServer)this.world).getEntityTracker().sendToTracking(this, new SPacketEntityAttach(this, (Entity)null));
+            ((WorldServer)this.world).getEntityTracker().sendToTracking(this, new SPacketEntityAttach(this, null));
          }
       }
 
@@ -1148,9 +1149,7 @@ public abstract class EntityLiving extends EntityLivingBase {
       if (this.world.isDaytime() && !this.world.isRemote) {
          float f = this.getBrightness();
          BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ);
-         if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
-            return true;
-         }
+          return f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos);
       }
 
       return false;

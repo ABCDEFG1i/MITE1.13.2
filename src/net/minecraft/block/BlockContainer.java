@@ -54,7 +54,7 @@ public abstract class BlockContainer extends Block implements ITileEntityProvide
          itemstack.setDisplayName(((INameable)p_180657_5_).getCustomName());
          spawnAsEntity(p_180657_1_, p_180657_3_, itemstack);
       } else {
-         super.harvestBlock(p_180657_1_, p_180657_2_, p_180657_3_, p_180657_4_, (TileEntity)null, p_180657_6_);
+         super.harvestBlock(p_180657_1_, p_180657_2_, p_180657_3_, p_180657_4_, null, p_180657_6_);
       }
 
    }
@@ -62,6 +62,6 @@ public abstract class BlockContainer extends Block implements ITileEntityProvide
    public boolean eventReceived(IBlockState p_189539_1_, World p_189539_2_, BlockPos p_189539_3_, int p_189539_4_, int p_189539_5_) {
       super.eventReceived(p_189539_1_, p_189539_2_, p_189539_3_, p_189539_4_, p_189539_5_);
       TileEntity tileentity = p_189539_2_.getTileEntity(p_189539_3_);
-      return tileentity == null ? false : tileentity.receiveClientEvent(p_189539_4_, p_189539_5_);
+      return tileentity != null && tileentity.receiveClientEvent(p_189539_4_, p_189539_5_);
    }
 }

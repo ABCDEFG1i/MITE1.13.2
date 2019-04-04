@@ -115,7 +115,7 @@ public class EntityTrident extends EntityArrow {
       }
 
       Entity entity1 = this.func_212360_k();
-      DamageSource damagesource = DamageSource.causeTridentDamage(this, (Entity)(entity1 == null ? this : entity1));
+      DamageSource damagesource = DamageSource.causeTridentDamage(this, entity1 == null ? this : entity1);
       this.dealtDamage = true;
       SoundEvent soundevent = SoundEvents.ITEM_TRIDENT_HIT;
       if (entity.attackEntityFrom(damagesource, f) && entity instanceof EntityLivingBase) {

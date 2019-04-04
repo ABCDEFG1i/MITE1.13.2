@@ -11,7 +11,7 @@ public enum EnumHandSide {
 
    private final ITextComponent handName;
 
-   private EnumHandSide(ITextComponent p_i46806_3_) {
+   EnumHandSide(ITextComponent p_i46806_3_) {
       this.handName = p_i46806_3_;
    }
 

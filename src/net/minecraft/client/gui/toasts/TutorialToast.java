@@ -65,7 +65,7 @@ public class TutorialToast implements IToast {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Icons {
+   public enum Icons {
       MOVEMENT_KEYS(0, 0),
       MOUSE(1, 0),
       TREE(2, 0),
@@ -75,7 +75,7 @@ public class TutorialToast implements IToast {
       private final int column;
       private final int row;
 
-      private Icons(int p_i47576_3_, int p_i47576_4_) {
+      Icons(int p_i47576_3_, int p_i47576_4_) {
          this.column = p_i47576_3_;
          this.row = p_i47576_4_;
       }

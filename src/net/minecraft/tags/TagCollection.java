@@ -106,7 +106,7 @@ public class TagCollection<T> {
                } catch (RuntimeException | IOException ioexception) {
                   LOGGER.error("Couldn't read {} tag list {} from {} in data pack {}", this.itemTypeName, resourcelocation1, resourcelocation, iresource.getPackName(), ioexception);
                } finally {
-                  IOUtils.closeQuietly((Closeable)iresource);
+                  IOUtils.closeQuietly(iresource);
                }
             }
          } catch (IOException ioexception1) {

@@ -84,7 +84,7 @@ public class CrashReport {
          p_71506_1_.append("Stacktrace:\n");
 
          for(StackTraceElement stacktraceelement : this.stacktrace) {
-            p_71506_1_.append("\t").append("at ").append((Object)stacktraceelement);
+            p_71506_1_.append("\t").append("at ").append(stacktraceelement);
             p_71506_1_.append("\n");
          }
 
@@ -122,8 +122,8 @@ public class CrashReport {
          throwable.printStackTrace(printwriter);
          s = stringwriter.toString();
       } finally {
-         IOUtils.closeQuietly((Writer)stringwriter);
-         IOUtils.closeQuietly((Writer)printwriter);
+         IOUtils.closeQuietly(stringwriter);
+         IOUtils.closeQuietly(printwriter);
       }
 
       return s;

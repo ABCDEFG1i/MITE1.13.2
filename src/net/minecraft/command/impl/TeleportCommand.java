@@ -31,19 +31,26 @@ public class TeleportCommand {
       LiteralCommandNode<CommandSource> literalcommandnode = p_198809_0_.register(Commands.literal("teleport").requires((p_198816_0_) -> {
          return p_198816_0_.hasPermissionLevel(2);
       }).then(Commands.argument("targets", EntityArgument.multipleEntities()).then(Commands.argument("location", Vec3Argument.vec3()).executes((p_198807_0_) -> {
-         return func_200559_a(p_198807_0_.getSource(), EntityArgument.getEntities(p_198807_0_, "targets"), p_198807_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198807_0_, "location"), (ILocationArgument)null, (TeleportCommand.Facing)null);
+         return func_200559_a(p_198807_0_.getSource(), EntityArgument.getEntities(p_198807_0_, "targets"), p_198807_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198807_0_, "location"),
+                 null,
+                 null);
       }).then(Commands.argument("rotation", RotationArgument.rotation()).executes((p_198811_0_) -> {
-         return func_200559_a(p_198811_0_.getSource(), EntityArgument.getEntities(p_198811_0_, "targets"), p_198811_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198811_0_, "location"), RotationArgument.getRotation(p_198811_0_, "rotation"), (TeleportCommand.Facing)null);
+         return func_200559_a(p_198811_0_.getSource(), EntityArgument.getEntities(p_198811_0_, "targets"), p_198811_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198811_0_, "location"), RotationArgument.getRotation(p_198811_0_, "rotation"),
+                 null);
       })).then(Commands.literal("facing").then(Commands.literal("entity").then(Commands.argument("facingEntity", EntityArgument.singleEntity()).executes((p_198806_0_) -> {
-         return func_200559_a(p_198806_0_.getSource(), EntityArgument.getEntities(p_198806_0_, "targets"), p_198806_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198806_0_, "location"), (ILocationArgument)null, new TeleportCommand.Facing(EntityArgument.getSingleEntity(p_198806_0_, "facingEntity"), EntityAnchorArgument.Type.FEET));
+         return func_200559_a(p_198806_0_.getSource(), EntityArgument.getEntities(p_198806_0_, "targets"), p_198806_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198806_0_, "location"),
+                 null, new TeleportCommand.Facing(EntityArgument.getSingleEntity(p_198806_0_, "facingEntity"), EntityAnchorArgument.Type.FEET));
       }).then(Commands.argument("facingAnchor", EntityAnchorArgument.entityAnchor()).executes((p_198812_0_) -> {
-         return func_200559_a(p_198812_0_.getSource(), EntityArgument.getEntities(p_198812_0_, "targets"), p_198812_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198812_0_, "location"), (ILocationArgument)null, new TeleportCommand.Facing(EntityArgument.getSingleEntity(p_198812_0_, "facingEntity"), EntityAnchorArgument.getEntityAnchor(p_198812_0_, "facingAnchor")));
+         return func_200559_a(p_198812_0_.getSource(), EntityArgument.getEntities(p_198812_0_, "targets"), p_198812_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198812_0_, "location"),
+                 null, new TeleportCommand.Facing(EntityArgument.getSingleEntity(p_198812_0_, "facingEntity"), EntityAnchorArgument.getEntityAnchor(p_198812_0_, "facingAnchor")));
       })))).then(Commands.argument("facingLocation", Vec3Argument.vec3()).executes((p_198805_0_) -> {
-         return func_200559_a(p_198805_0_.getSource(), EntityArgument.getEntities(p_198805_0_, "targets"), p_198805_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198805_0_, "location"), (ILocationArgument)null, new TeleportCommand.Facing(Vec3Argument.getVec3(p_198805_0_, "facingLocation")));
+         return func_200559_a(p_198805_0_.getSource(), EntityArgument.getEntities(p_198805_0_, "targets"), p_198805_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_198805_0_, "location"),
+                 null, new TeleportCommand.Facing(Vec3Argument.getVec3(p_198805_0_, "facingLocation")));
       })))).then(Commands.argument("destination", EntityArgument.singleEntity()).executes((p_198814_0_) -> {
          return func_201126_a(p_198814_0_.getSource(), EntityArgument.getEntities(p_198814_0_, "targets"), EntityArgument.getSingleEntity(p_198814_0_, "destination"));
       }))).then(Commands.argument("location", Vec3Argument.vec3()).executes((p_200560_0_) -> {
-         return func_200559_a(p_200560_0_.getSource(), Collections.singleton(p_200560_0_.getSource().assertIsEntity()), p_200560_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_200560_0_, "location"), LocationInput.func_200383_d(), (TeleportCommand.Facing)null);
+         return func_200559_a(p_200560_0_.getSource(), Collections.singleton(p_200560_0_.getSource().assertIsEntity()), p_200560_0_.getSource().getWorld(), Vec3Argument.func_200385_b(p_200560_0_, "location"), LocationInput.func_200383_d(),
+                 null);
       })).then(Commands.argument("destination", EntityArgument.singleEntity()).executes((p_200562_0_) -> {
          return func_201126_a(p_200562_0_.getSource(), Collections.singleton(p_200562_0_.getSource().assertIsEntity()), EntityArgument.getSingleEntity(p_200562_0_, "destination"));
       })));
@@ -54,7 +61,8 @@ public class TeleportCommand {
 
    private static int func_201126_a(CommandSource p_201126_0_, Collection<? extends Entity> p_201126_1_, Entity p_201126_2_) {
       for(Entity entity : p_201126_1_) {
-         func_201127_a(p_201126_0_, entity, p_201126_0_.getWorld(), p_201126_2_.posX, p_201126_2_.posY, p_201126_2_.posZ, EnumSet.noneOf(SPacketPlayerPosLook.EnumFlags.class), p_201126_2_.rotationYaw, p_201126_2_.rotationPitch, (TeleportCommand.Facing)null);
+         func_201127_a(p_201126_0_, entity, p_201126_0_.getWorld(), p_201126_2_.posX, p_201126_2_.posY, p_201126_2_.posZ, EnumSet.noneOf(SPacketPlayerPosLook.EnumFlags.class), p_201126_2_.rotationYaw, p_201126_2_.rotationPitch,
+                 null);
       }
 
       if (p_201126_1_.size() == 1) {

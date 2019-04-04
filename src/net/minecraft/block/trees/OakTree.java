@@ -10,6 +10,6 @@ import net.minecraft.world.gen.feature.TreeFeature;
 public class OakTree extends AbstractTree {
    @Nullable
    protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random p_196936_1_) {
-      return (AbstractTreeFeature<NoFeatureConfig>)(p_196936_1_.nextInt(10) == 0 ? new BigTreeFeature(true) : new TreeFeature(true));
+      return p_196936_1_.nextInt(10) == 0 ? new BigTreeFeature(true) : new TreeFeature(true);
    }
 }

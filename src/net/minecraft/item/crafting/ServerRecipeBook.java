@@ -72,14 +72,14 @@ public class ServerRecipeBook extends RecipeBook {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(ResourceLocation resourcelocation : this.recipes) {
-         nbttaglist.add((INBTBase)(new NBTTagString(resourcelocation.toString())));
+         nbttaglist.add(new NBTTagString(resourcelocation.toString()));
       }
 
       nbttagcompound.setTag("recipes", nbttaglist);
       NBTTagList nbttaglist1 = new NBTTagList();
 
       for(ResourceLocation resourcelocation1 : this.newRecipes) {
-         nbttaglist1.add((INBTBase)(new NBTTagString(resourcelocation1.toString())));
+         nbttaglist1.add(new NBTTagString(resourcelocation1.toString()));
       }
 
       nbttagcompound.setTag("toBeDisplayed", nbttaglist1);
@@ -97,7 +97,7 @@ public class ServerRecipeBook extends RecipeBook {
          ResourceLocation resourcelocation = new ResourceLocation(nbttaglist.getStringTagAt(i));
          IRecipe irecipe = this.recipeManager.getRecipe(resourcelocation);
          if (irecipe == null) {
-            LOGGER.error("Tried to load unrecognized recipe: {} removed now.", (Object)resourcelocation);
+            LOGGER.error("Tried to load unrecognized recipe: {} removed now.", resourcelocation);
          } else {
             this.unlock(irecipe);
          }
@@ -109,7 +109,7 @@ public class ServerRecipeBook extends RecipeBook {
          ResourceLocation resourcelocation1 = new ResourceLocation(nbttaglist1.getStringTagAt(j));
          IRecipe irecipe1 = this.recipeManager.getRecipe(resourcelocation1);
          if (irecipe1 == null) {
-            LOGGER.error("Tried to load unrecognized recipe: {} removed now.", (Object)resourcelocation1);
+            LOGGER.error("Tried to load unrecognized recipe: {} removed now.", resourcelocation1);
          } else {
             this.markNew(irecipe1);
          }

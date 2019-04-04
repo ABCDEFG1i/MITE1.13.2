@@ -77,7 +77,8 @@ public class ConsumeItemTrigger implements ICriterionTrigger<ConsumeItemTrigger.
       }
 
       public static ConsumeItemTrigger.Instance func_203913_a(IItemProvider p_203913_0_) {
-         return new ConsumeItemTrigger.Instance(new ItemPredicate((Tag<Item>)null, p_203913_0_.asItem(), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new EnchantmentPredicate[0], (PotionType)null, NBTPredicate.ANY));
+         return new ConsumeItemTrigger.Instance(new ItemPredicate(null, p_203913_0_.asItem(), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new EnchantmentPredicate[0],
+                 null, NBTPredicate.ANY));
       }
 
       public boolean test(ItemStack p_193193_1_) {

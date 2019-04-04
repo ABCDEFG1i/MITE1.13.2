@@ -16,7 +16,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public final class VoxelShapes {
-   private static final VoxelShape field_197886_a = new VoxelShapeArray(new VoxelShapePartBitSet(0, 0, 0), (DoubleList)(new DoubleArrayList(new double[]{0.0D})), (DoubleList)(new DoubleArrayList(new double[]{0.0D})), (DoubleList)(new DoubleArrayList(new double[]{0.0D})));
+   private static final VoxelShape field_197886_a = new VoxelShapeArray(new VoxelShapePartBitSet(0, 0, 0),
+           new DoubleArrayList(new double[]{0.0D}),
+           new DoubleArrayList(new double[]{0.0D}),
+           new DoubleArrayList(new double[]{0.0D}));
    private static final VoxelShape field_197887_b = Util.make(() -> {
       VoxelShapePart voxelshapepart = new VoxelShapePartBitSet(1, 1, 1);
       voxelshapepart.func_199625_a(0, 0, 0, true, true);
@@ -116,7 +119,7 @@ public final class VoxelShapes {
             IDoubleListMerger idoublelistmerger1 = func_199410_a(idoublelistmerger.func_212435_a().size() - 1, p_197882_0_.getValues(EnumFacing.Axis.Y), p_197882_1_.getValues(EnumFacing.Axis.Y), flag, flag1);
             IDoubleListMerger idoublelistmerger2 = func_199410_a((idoublelistmerger.func_212435_a().size() - 1) * (idoublelistmerger1.func_212435_a().size() - 1), p_197882_0_.getValues(EnumFacing.Axis.Z), p_197882_1_.getValues(EnumFacing.Axis.Z), flag, flag1);
             VoxelShapePartBitSet voxelshapepartbitset = VoxelShapePartBitSet.func_197852_a(p_197882_0_.field_197768_g, p_197882_1_.field_197768_g, idoublelistmerger, idoublelistmerger1, idoublelistmerger2, p_197882_2_);
-            return (VoxelShape)(idoublelistmerger instanceof DoubleCubeMergingList && idoublelistmerger1 instanceof DoubleCubeMergingList && idoublelistmerger2 instanceof DoubleCubeMergingList ? new VoxelShapeCube(voxelshapepartbitset) : new VoxelShapeArray(voxelshapepartbitset, idoublelistmerger.func_212435_a(), idoublelistmerger1.func_212435_a(), idoublelistmerger2.func_212435_a()));
+            return idoublelistmerger instanceof DoubleCubeMergingList && idoublelistmerger1 instanceof DoubleCubeMergingList && idoublelistmerger2 instanceof DoubleCubeMergingList ? new VoxelShapeCube(voxelshapepartbitset) : new VoxelShapeArray(voxelshapepartbitset, idoublelistmerger.func_212435_a(), idoublelistmerger1.func_212435_a(), idoublelistmerger2.func_212435_a());
          }
       }
    }
@@ -226,7 +229,7 @@ public final class VoxelShapes {
          if (p_199410_1_ instanceof SimpleDoubleMerger) {
             return (IDoubleListMerger)p_199410_1_;
          } else {
-            return (IDoubleListMerger)(p_199410_2_ instanceof SimpleDoubleMerger ? (IDoubleListMerger)p_199410_2_ : new SimpleDoubleMerger(p_199410_1_));
+            return p_199410_2_ instanceof SimpleDoubleMerger ? (IDoubleListMerger)p_199410_2_ : new SimpleDoubleMerger(p_199410_1_);
          }
       } else {
          return new IndirectMerger(p_199410_1_, p_199410_2_, p_199410_3_, p_199410_4_);

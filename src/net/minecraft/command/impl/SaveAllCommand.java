@@ -50,7 +50,7 @@ public class SaveAllCommand {
 
       boolean flag1;
       try {
-         p_198612_0_.saveAllChunks(true, (IProgressUpdate)null);
+         p_198612_0_.saveAllChunks(true, null);
          if (p_198612_1_) {
             p_198612_0_.flushToDisk();
          }

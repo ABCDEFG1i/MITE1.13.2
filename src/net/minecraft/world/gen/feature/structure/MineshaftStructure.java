@@ -68,7 +68,7 @@ public class MineshaftStructure extends Structure<MineshaftConfig> {
       }
    }
 
-   public static enum Type {
+   public enum Type {
       NORMAL,
       MESA;
 

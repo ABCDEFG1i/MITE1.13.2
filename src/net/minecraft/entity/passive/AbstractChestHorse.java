@@ -84,7 +84,7 @@ public abstract class AbstractChestHorse extends AbstractHorse {
                NBTTagCompound nbttagcompound = new NBTTagCompound();
                nbttagcompound.setByte("Slot", (byte)i);
                itemstack.write(nbttagcompound);
-               nbttaglist.add((INBTBase)nbttagcompound);
+               nbttaglist.add(nbttagcompound);
             }
          }
 

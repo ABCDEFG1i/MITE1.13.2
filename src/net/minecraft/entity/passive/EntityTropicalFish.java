@@ -215,7 +215,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
       }
    }
 
-   static enum Type {
+   enum Type {
       KOB(0, 0),
       SUNSTREAK(0, 1),
       SNOOPER(0, 2),
@@ -233,7 +233,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
       private final int field_212553_n;
       private static final EntityTropicalFish.Type[] field_212554_o = values();
 
-      private Type(int p_i49832_3_, int p_i49832_4_) {
+      Type(int p_i49832_3_, int p_i49832_4_) {
          this.field_212552_m = p_i49832_3_;
          this.field_212553_n = p_i49832_4_;
       }

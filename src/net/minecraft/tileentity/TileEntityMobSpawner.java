@@ -65,7 +65,7 @@ public class TileEntityMobSpawner extends TileEntity implements ITickable {
    }
 
    public boolean receiveClientEvent(int p_145842_1_, int p_145842_2_) {
-      return this.spawnerLogic.setDelayToMin(p_145842_1_) ? true : super.receiveClientEvent(p_145842_1_, p_145842_2_);
+      return this.spawnerLogic.setDelayToMin(p_145842_1_) || super.receiveClientEvent(p_145842_1_, p_145842_2_);
    }
 
    public boolean onlyOpsCanSetNbt() {

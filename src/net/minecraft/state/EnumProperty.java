@@ -21,7 +21,7 @@ public class EnumProperty<T extends Enum<T> & IStringSerializable> extends Abstr
       this.allowedValues = ImmutableSet.copyOf(p_i45649_3_);
 
       for(T t : p_i45649_3_) {
-         String s = ((IStringSerializable)t).getName();
+         String s = t.getName();
          if (this.nameToValue.containsKey(s)) {
             throw new IllegalArgumentException("Multiple values have the same name '" + s + "'");
          }
@@ -40,7 +40,7 @@ public class EnumProperty<T extends Enum<T> & IStringSerializable> extends Abstr
    }
 
    public String getName(T p_177702_1_) {
-      return ((IStringSerializable)p_177702_1_).getName();
+      return p_177702_1_.getName();
    }
 
    public boolean equals(Object p_equals_1_) {
@@ -66,7 +66,7 @@ public class EnumProperty<T extends Enum<T> & IStringSerializable> extends Abstr
    }
 
    public static <T extends Enum<T> & IStringSerializable> EnumProperty<T> create(String p_177708_0_, Class<T> p_177708_1_, Predicate<T> p_177708_2_) {
-      return create(p_177708_0_, p_177708_1_, Arrays.<T>stream(p_177708_1_.getEnumConstants()).filter(p_177708_2_).collect(Collectors.toList()));
+      return create(p_177708_0_, p_177708_1_, Arrays.stream(p_177708_1_.getEnumConstants()).filter(p_177708_2_).collect(Collectors.toList()));
    }
 
    public static <T extends Enum<T> & IStringSerializable> EnumProperty<T> create(String p_177706_0_, Class<T> p_177706_1_, T... p_177706_2_) {

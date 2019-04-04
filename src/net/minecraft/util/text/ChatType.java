@@ -7,7 +7,7 @@ public enum ChatType {
 
    private final byte id;
 
-   private ChatType(byte p_i47429_3_) {
+   ChatType(byte p_i47429_3_) {
       this.id = p_i47429_3_;
    }
 

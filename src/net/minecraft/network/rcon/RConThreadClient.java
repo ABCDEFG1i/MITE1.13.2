@@ -6,6 +6,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.nio.charset.StandardCharsets;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -88,7 +90,7 @@ public class RConThreadClient extends RConThreadBase {
          } catch (IOException var18) {
             return;
          } catch (Exception exception1) {
-            LOGGER.error("Exception whilst parsing RCON input", (Throwable)exception1);
+            LOGGER.error("Exception whilst parsing RCON input", exception1);
             return;
          } finally {
             this.closeSocket();
@@ -101,7 +103,7 @@ public class RConThreadClient extends RConThreadBase {
    private void sendResponse(int p_72654_1_, int p_72654_2_, String p_72654_3_) throws IOException {
       ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream(1248);
       DataOutputStream dataoutputstream = new DataOutputStream(bytearrayoutputstream);
-      byte[] abyte = p_72654_3_.getBytes("UTF-8");
+      byte[] abyte = p_72654_3_.getBytes(StandardCharsets.UTF_8);
       dataoutputstream.writeInt(Integer.reverseBytes(abyte.length + 10));
       dataoutputstream.writeInt(Integer.reverseBytes(p_72654_1_));
       dataoutputstream.writeInt(Integer.reverseBytes(p_72654_2_));

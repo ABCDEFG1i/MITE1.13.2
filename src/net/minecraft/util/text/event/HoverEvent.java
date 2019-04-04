@@ -31,14 +31,10 @@ public class HoverEvent {
             return false;
          } else {
             if (this.value != null) {
-               if (!this.value.equals(hoverevent.value)) {
-                  return false;
-               }
-            } else if (hoverevent.value != null) {
-               return false;
-            }
+                return this.value.equals(hoverevent.value);
+            } else
+                return hoverevent.value == null;
 
-            return true;
          }
       } else {
          return false;
@@ -55,7 +51,7 @@ public class HoverEvent {
       return i;
    }
 
-   public static enum Action {
+   public enum Action {
       SHOW_TEXT("show_text", true),
       SHOW_ITEM("show_item", true),
       SHOW_ENTITY("show_entity", true);
@@ -66,7 +62,7 @@ public class HoverEvent {
       private final boolean allowedInChat;
       private final String canonicalName;
 
-      private Action(String p_i45157_3_, boolean p_i45157_4_) {
+      Action(String p_i45157_3_, boolean p_i45157_4_) {
          this.canonicalName = p_i45157_3_;
          this.allowedInChat = p_i45157_4_;
       }

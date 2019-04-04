@@ -59,7 +59,7 @@ public class AdvancementToast implements IToast {
          }
 
          RenderHelper.enableGUIStandardItemLighting();
-         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI((EntityLivingBase)null, displayinfo.getIcon(), 8, 8);
+         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(null, displayinfo.getIcon(), 8, 8);
          return p_193653_2_ >= 5000L ? IToast.Visibility.HIDE : IToast.Visibility.SHOW;
       } else {
          return IToast.Visibility.HIDE;

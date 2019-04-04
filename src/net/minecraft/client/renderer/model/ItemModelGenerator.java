@@ -33,17 +33,19 @@ public class ItemModelGenerator {
       }
 
       map.put("particle", p_209579_2_.func_178300_b("particle") ? p_209579_2_.func_178308_c("particle") : map.get("layer0"));
-      ModelBlock modelblock = new ModelBlock((ResourceLocation)null, list, map, false, false, p_209579_2_.func_181682_g(), p_209579_2_.func_187966_f());
+      ModelBlock modelblock = new ModelBlock(null, list, map, false, false, p_209579_2_.func_181682_g(), p_209579_2_.func_187966_f());
       modelblock.field_178317_b = p_209579_2_.field_178317_b;
       return modelblock;
    }
 
    private List<BlockPart> func_178394_a(int p_178394_1_, String p_178394_2_, TextureAtlasSprite p_178394_3_) {
       Map<EnumFacing, BlockPartFace> map = Maps.newHashMap();
-      map.put(EnumFacing.SOUTH, new BlockPartFace((EnumFacing)null, p_178394_1_, p_178394_2_, new BlockFaceUV(new float[]{0.0F, 0.0F, 16.0F, 16.0F}, 0)));
-      map.put(EnumFacing.NORTH, new BlockPartFace((EnumFacing)null, p_178394_1_, p_178394_2_, new BlockFaceUV(new float[]{16.0F, 0.0F, 0.0F, 16.0F}, 0)));
+      map.put(EnumFacing.SOUTH, new BlockPartFace(
+              null, p_178394_1_, p_178394_2_, new BlockFaceUV(new float[]{0.0F, 0.0F, 16.0F, 16.0F}, 0)));
+      map.put(EnumFacing.NORTH, new BlockPartFace(
+              null, p_178394_1_, p_178394_2_, new BlockFaceUV(new float[]{16.0F, 0.0F, 0.0F, 16.0F}, 0)));
       List<BlockPart> list = Lists.newArrayList();
-      list.add(new BlockPart(new Vector3f(0.0F, 0.0F, 7.5F), new Vector3f(16.0F, 16.0F, 8.5F), map, (BlockPartRotation)null, true));
+      list.add(new BlockPart(new Vector3f(0.0F, 0.0F, 7.5F), new Vector3f(16.0F, 16.0F, 8.5F), map, null, true));
       list.addAll(this.func_178397_a(p_178394_3_, p_178394_2_, p_178394_1_));
       return list;
    }
@@ -127,19 +129,20 @@ public class ItemModelGenerator {
          f8 = f8 * f11;
          f9 = f9 * f11;
          Map<EnumFacing, BlockPartFace> map = Maps.newHashMap();
-         map.put(itemmodelgenerator$spanfacing.func_178367_a(), new BlockPartFace((EnumFacing)null, p_178397_3_, p_178397_2_, new BlockFaceUV(new float[]{f6, f8, f7, f9}, 0)));
+         map.put(itemmodelgenerator$spanfacing.func_178367_a(), new BlockPartFace(
+                 null, p_178397_3_, p_178397_2_, new BlockFaceUV(new float[]{f6, f8, f7, f9}, 0)));
          switch(itemmodelgenerator$spanfacing) {
          case UP:
-            list.add(new BlockPart(new Vector3f(f2, f3, 7.5F), new Vector3f(f4, f3, 8.5F), map, (BlockPartRotation)null, true));
+            list.add(new BlockPart(new Vector3f(f2, f3, 7.5F), new Vector3f(f4, f3, 8.5F), map, null, true));
             break;
          case DOWN:
-            list.add(new BlockPart(new Vector3f(f2, f5, 7.5F), new Vector3f(f4, f5, 8.5F), map, (BlockPartRotation)null, true));
+            list.add(new BlockPart(new Vector3f(f2, f5, 7.5F), new Vector3f(f4, f5, 8.5F), map, null, true));
             break;
          case LEFT:
-            list.add(new BlockPart(new Vector3f(f2, f3, 7.5F), new Vector3f(f2, f5, 8.5F), map, (BlockPartRotation)null, true));
+            list.add(new BlockPart(new Vector3f(f2, f3, 7.5F), new Vector3f(f2, f5, 8.5F), map, null, true));
             break;
          case RIGHT:
-            list.add(new BlockPart(new Vector3f(f4, f3, 7.5F), new Vector3f(f4, f5, 8.5F), map, (BlockPartRotation)null, true));
+            list.add(new BlockPart(new Vector3f(f4, f3, 7.5F), new Vector3f(f4, f5, 8.5F), map, null, true));
          }
       }
 
@@ -198,7 +201,8 @@ public class ItemModelGenerator {
    }
 
    private boolean func_199339_a(TextureAtlasSprite p_199339_1_, int p_199339_2_, int p_199339_3_, int p_199339_4_, int p_199339_5_, int p_199339_6_) {
-      return p_199339_3_ >= 0 && p_199339_4_ >= 0 && p_199339_3_ < p_199339_5_ && p_199339_4_ < p_199339_6_ ? p_199339_1_.isPixelTransparent(p_199339_2_, p_199339_3_, p_199339_4_) : true;
+      return p_199339_3_ < 0 || p_199339_4_ < 0 || p_199339_3_ >= p_199339_5_ || p_199339_4_ >= p_199339_6_ || p_199339_1_.isPixelTransparent(
+              p_199339_2_, p_199339_3_, p_199339_4_);
    }
 
    @OnlyIn(Dist.CLIENT)
@@ -242,7 +246,7 @@ public class ItemModelGenerator {
    }
 
    @OnlyIn(Dist.CLIENT)
-   static enum SpanFacing {
+   enum SpanFacing {
       UP(EnumFacing.UP, 0, -1),
       DOWN(EnumFacing.DOWN, 0, 1),
       LEFT(EnumFacing.EAST, -1, 0),
@@ -252,7 +256,7 @@ public class ItemModelGenerator {
       private final int field_178373_f;
       private final int field_178374_g;
 
-      private SpanFacing(EnumFacing p_i46215_3_, int p_i46215_4_, int p_i46215_5_) {
+      SpanFacing(EnumFacing p_i46215_3_, int p_i46215_4_, int p_i46215_5_) {
          this.field_178376_e = p_i46215_3_;
          this.field_178373_f = p_i46215_4_;
          this.field_178374_g = p_i46215_5_;

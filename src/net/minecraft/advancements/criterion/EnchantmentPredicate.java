@@ -34,9 +34,7 @@ public class EnchantmentPredicate {
          }
 
          int i = p_192463_1_.get(this.enchantment);
-         if (this.levels != null && !this.levels.test(i)) {
-            return false;
-         }
+          return this.levels == null || this.levels.test(i);
       } else if (this.levels != null) {
          for(Integer integer : p_192463_1_.values()) {
             if (this.levels.test(integer)) {

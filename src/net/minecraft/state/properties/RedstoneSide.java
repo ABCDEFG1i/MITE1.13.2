@@ -9,7 +9,7 @@ public enum RedstoneSide implements IStringSerializable {
 
    private final String name;
 
-   private RedstoneSide(String p_i49333_3_) {
+   RedstoneSide(String p_i49333_3_) {
       this.name = p_i49333_3_;
    }
 

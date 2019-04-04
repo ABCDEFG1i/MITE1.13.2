@@ -60,7 +60,7 @@ public class BlockHorizontalFace extends BlockHorizontal {
    }
 
    protected static EnumFacing func_196365_i(IBlockState p_196365_0_) {
-      switch((AttachFace)p_196365_0_.get(FACE)) {
+      switch(p_196365_0_.get(FACE)) {
       case CEILING:
          return EnumFacing.DOWN;
       case FLOOR:

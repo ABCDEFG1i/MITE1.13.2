@@ -42,7 +42,7 @@ public class TileEntityItemStackRenderer {
    private static final TileEntityShulkerBox[] SHULKER_BOXES = Arrays.stream(EnumDyeColor.values()).sorted(Comparator.comparingInt(EnumDyeColor::getId)).map(TileEntityShulkerBox::new).toArray((p_199929_0_) -> {
       return new TileEntityShulkerBox[p_199929_0_];
    });
-   private static final TileEntityShulkerBox SHULKER_BOX = new TileEntityShulkerBox((EnumDyeColor)null);
+   private static final TileEntityShulkerBox SHULKER_BOX = new TileEntityShulkerBox(null);
    public static TileEntityItemStackRenderer instance = new TileEntityItemStackRenderer();
    private final TileEntityChest chestBasic = new TileEntityChest();
    private final TileEntityChest chestTrap = new TileEntityTrappedChest();
@@ -85,7 +85,7 @@ public class TileEntityItemStackRenderer {
             if (nbttagcompound.hasKey("SkullOwner", 10)) {
                gameprofile = NBTUtil.readGameProfileFromNBT(nbttagcompound.getCompoundTag("SkullOwner"));
             } else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isBlank(nbttagcompound.getString("SkullOwner"))) {
-               GameProfile gameprofile1 = new GameProfile((UUID)null, nbttagcompound.getString("SkullOwner"));
+               GameProfile gameprofile1 = new GameProfile(null, nbttagcompound.getString("SkullOwner"));
                gameprofile = TileEntitySkull.updateGameProfile(gameprofile1);
                nbttagcompound.removeTag("SkullOwner");
                nbttagcompound.setTag("SkullOwner", NBTUtil.writeGameProfile(new NBTTagCompound(), gameprofile));
@@ -95,7 +95,7 @@ public class TileEntityItemStackRenderer {
          if (TileEntitySkullRenderer.instance != null) {
             GlStateManager.pushMatrix();
             GlStateManager.disableCull();
-            TileEntitySkullRenderer.instance.render(0.0F, 0.0F, 0.0F, (EnumFacing)null, 180.0F, ((BlockAbstractSkull)((ItemBlock)item).getBlock()).getSkullType(), gameprofile, -1, 0.0F);
+            TileEntitySkullRenderer.instance.render(0.0F, 0.0F, 0.0F, null, 180.0F, ((BlockAbstractSkull)((ItemBlock)item).getBlock()).getSkullType(), gameprofile, -1, 0.0F);
             GlStateManager.enableCull();
             GlStateManager.popMatrix();
          }

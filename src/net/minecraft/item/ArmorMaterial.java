@@ -39,7 +39,7 @@ public enum ArmorMaterial implements IArmorMaterial {
    private final float toughness;
    private final LazyLoadBase<Ingredient> repairMaterial;
 
-   private ArmorMaterial(String p_i48533_3_, int p_i48533_4_, int[] p_i48533_5_, int p_i48533_6_, SoundEvent p_i48533_7_, float p_i48533_8_, Supplier<Ingredient> p_i48533_9_) {
+   ArmorMaterial(String p_i48533_3_, int p_i48533_4_, int[] p_i48533_5_, int p_i48533_6_, SoundEvent p_i48533_7_, float p_i48533_8_, Supplier<Ingredient> p_i48533_9_) {
       this.name = p_i48533_3_;
       this.maxDamageFactor = p_i48533_4_;
       this.damageReductionAmountArray = p_i48533_5_;

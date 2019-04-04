@@ -16,7 +16,7 @@ public enum GameType {
    private final int id;
    private final String name;
 
-   private GameType(int p_i48711_3_, String p_i48711_4_) {
+   GameType(int p_i48711_3_, String p_i48711_4_) {
       this.id = p_i48711_3_;
       this.name = p_i48711_4_;
    }

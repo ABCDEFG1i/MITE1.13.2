@@ -57,17 +57,17 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
    }
 
    public ItemStack getStackInSlot(int p_70301_1_) {
-      this.addLoot((EntityPlayer)null);
+      this.addLoot(null);
       return this.minecartContainerItems.get(p_70301_1_);
    }
 
    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-      this.addLoot((EntityPlayer)null);
+      this.addLoot(null);
       return ItemStackHelper.getAndSplit(this.minecartContainerItems, p_70298_1_, p_70298_2_);
    }
 
    public ItemStack removeStackFromSlot(int p_70304_1_) {
-      this.addLoot((EntityPlayer)null);
+      this.addLoot(null);
       ItemStack itemstack = this.minecartContainerItems.get(p_70304_1_);
       if (itemstack.isEmpty()) {
          return ItemStack.EMPTY;
@@ -78,7 +78,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
    }
 
    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-      this.addLoot((EntityPlayer)null);
+      this.addLoot(null);
       this.minecartContainerItems.set(p_70299_1_, p_70299_2_);
       if (!p_70299_2_.isEmpty() && p_70299_2_.getCount() > this.getInventoryStackLimit()) {
          p_70299_2_.setCount(this.getInventoryStackLimit());
@@ -227,7 +227,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
    }
 
    public void clear() {
-      this.addLoot((EntityPlayer)null);
+      this.addLoot(null);
       this.minecartContainerItems.clear();
    }
 

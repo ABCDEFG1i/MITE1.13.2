@@ -123,7 +123,7 @@ public class BlockTripWire extends Block {
       IBlockState iblockstate = p_176288_1_.getBlockState(p_176288_2_);
       boolean flag = iblockstate.get(POWERED);
       boolean flag1 = false;
-      List<? extends Entity> list = p_176288_1_.func_72839_b((Entity)null, iblockstate.getShape(p_176288_1_, p_176288_2_).getBoundingBox().offset(p_176288_2_));
+      List<? extends Entity> list = p_176288_1_.func_72839_b(null, iblockstate.getShape(p_176288_1_, p_176288_2_).getBoundingBox().offset(p_176288_2_));
       if (!list.isEmpty()) {
          for(Entity entity : list) {
             if (!entity.doesEntityNotTriggerPressurePlate()) {

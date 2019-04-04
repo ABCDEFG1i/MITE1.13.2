@@ -146,7 +146,7 @@ public class CrashReportCategory {
 
          for(StackTraceElement stacktraceelement : this.stackTrace) {
             p_85072_1_.append("\n\tat ");
-            p_85072_1_.append((Object)stacktraceelement);
+            p_85072_1_.append(stacktraceelement);
          }
       }
 

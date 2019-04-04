@@ -96,7 +96,7 @@ public class ShaderGroup implements AutoCloseable {
          jsonexception.setFilenameAndFlush(p_152765_2_.getPath());
          throw jsonexception;
       } finally {
-         IOUtils.closeQuietly((Closeable)iresource);
+         IOUtils.closeQuietly(iresource);
       }
 
    }
@@ -131,7 +131,7 @@ public class ShaderGroup implements AutoCloseable {
          throw new JsonException("Output target '" + s2 + "' does not exist");
       } else {
          Shader shader = this.addShader(s, framebuffer, framebuffer1);
-         JsonArray jsonarray = JsonUtils.getJsonArray(jsonobject, "auxtargets", (JsonArray)null);
+         JsonArray jsonarray = JsonUtils.getJsonArray(jsonobject, "auxtargets", null);
          if (jsonarray != null) {
             int i = 0;
 
@@ -150,7 +150,7 @@ public class ShaderGroup implements AutoCloseable {
                      } catch (FileNotFoundException var29) {
                         throw new JsonException("Render target or texture '" + s3 + "' does not exist");
                      } finally {
-                        IOUtils.closeQuietly((Closeable)iresource);
+                        IOUtils.closeQuietly(iresource);
                      }
 
                      p_152764_1_.bindTexture(resourcelocation);
@@ -180,7 +180,7 @@ public class ShaderGroup implements AutoCloseable {
             }
          }
 
-         JsonArray jsonarray1 = JsonUtils.getJsonArray(jsonobject, "uniforms", (JsonArray)null);
+         JsonArray jsonarray1 = JsonUtils.getJsonArray(jsonobject, "uniforms", null);
          if (jsonarray1 != null) {
             int l = 0;
 
@@ -302,7 +302,6 @@ public class ShaderGroup implements AutoCloseable {
       }
 
       for(this.lastStamp = p_148018_1_; this.time > 20.0F; this.time -= 20.0F) {
-         ;
       }
 
       for(Shader shader : this.listShaders) {

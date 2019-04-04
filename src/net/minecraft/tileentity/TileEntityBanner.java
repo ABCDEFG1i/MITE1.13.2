@@ -52,7 +52,7 @@ public class TileEntityBanner extends TileEntity implements INameable {
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.name != null ? this.name : new TextComponentTranslation("block.minecraft.banner"));
+      return this.name != null ? this.name : new TextComponentTranslation("block.minecraft.banner");
    }
 
    public boolean hasCustomName() {

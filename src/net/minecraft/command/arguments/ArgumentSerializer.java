@@ -16,7 +16,7 @@ public class ArgumentSerializer<T extends ArgumentType<?>> implements IArgumentS
    }
 
    public T read(PacketBuffer p_197071_1_) {
-      return (T)(this.factory.get());
+      return this.factory.get();
    }
 
    public void func_212244_a(T p_212244_1_, JsonObject p_212244_2_) {

@@ -74,7 +74,7 @@ public class BlockRendererDispatcher implements IResourceManagerReloadListener {
       } catch (Throwable throwable) {
          CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Tesselating liquid in world");
          CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being tesselated");
-         CrashReportCategory.addBlockInfo(crashreportcategory, p_205318_1_, (IBlockState)null);
+         CrashReportCategory.addBlockInfo(crashreportcategory, p_205318_1_, null);
          throw new ReportedException(crashreport);
       }
    }

@@ -84,7 +84,7 @@ public class BannerAddPatternRecipe extends IRecipeHidden {
          NBTTagCompound nbttagcompound = new NBTTagCompound();
          nbttagcompound.setString("Pattern", bannerpattern.getHashname());
          nbttagcompound.setInteger("Color", enumdyecolor.getId());
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       return itemstack;

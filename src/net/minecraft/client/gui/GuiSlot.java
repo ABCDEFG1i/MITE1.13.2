@@ -297,11 +297,11 @@ public abstract class GuiSlot extends GuiEventHandler {
    }
 
    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
-      return !this.isVisible() ? false : super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+      return this.isVisible() && super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
    }
 
    public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {
-      return !this.isVisible() ? false : super.charTyped(p_charTyped_1_, p_charTyped_2_);
+      return this.isVisible() && super.charTyped(p_charTyped_1_, p_charTyped_2_);
    }
 
    public int getListWidth() {

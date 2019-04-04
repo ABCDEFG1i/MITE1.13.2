@@ -185,7 +185,8 @@ public class CommandSource implements ISuggestionProvider {
    }
 
    private void logFeedback(ITextComponent p_197020_1_) {
-      ITextComponent itextcomponent = (new TextComponentTranslation("chat.type.admin", this.getDisplayName(), p_197020_1_)).applyTextStyles(new TextFormatting[]{TextFormatting.GRAY, TextFormatting.ITALIC});
+      ITextComponent itextcomponent = (new TextComponentTranslation("chat.type.admin", this.getDisplayName(), p_197020_1_)).applyTextStyles(
+              TextFormatting.GRAY, TextFormatting.ITALIC);
       if (this.server.getGameRules().getBoolean("sendCommandFeedback")) {
          for(EntityPlayerMP entityplayermp : this.server.getPlayerList().getPlayers()) {
             if (entityplayermp != this.source && this.server.getPlayerList().canSendCommands(entityplayermp.getGameProfile())) {

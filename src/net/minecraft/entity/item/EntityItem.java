@@ -279,7 +279,7 @@ public class EntityItem extends Entity {
 
    public ITextComponent getName() {
       ITextComponent itextcomponent = this.getCustomName();
-      return (ITextComponent)(itextcomponent != null ? itextcomponent : new TextComponentTranslation(this.getItem().getTranslationKey()));
+      return itextcomponent != null ? itextcomponent : new TextComponentTranslation(this.getItem().getTranslationKey());
    }
 
    public boolean canBeAttackedWithItem() {

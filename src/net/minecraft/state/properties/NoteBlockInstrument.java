@@ -24,7 +24,7 @@ public enum NoteBlockInstrument implements IStringSerializable {
    private final String name;
    private final SoundEvent sound;
 
-   private NoteBlockInstrument(String p_i49336_3_, SoundEvent p_i49336_4_) {
+   NoteBlockInstrument(String p_i49336_3_, SoundEvent p_i49336_4_) {
       this.name = p_i49336_3_;
       this.sound = p_i49336_4_;
    }

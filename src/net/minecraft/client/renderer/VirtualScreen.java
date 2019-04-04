@@ -91,7 +91,7 @@ public final class VirtualScreen implements AutoCloseable {
    }
 
    public void close() {
-      GLFWMonitorCallback glfwmonitorcallback = GLFW.glfwSetMonitorCallback((GLFWMonitorCallbackI)null);
+      GLFWMonitorCallback glfwmonitorcallback = GLFW.glfwSetMonitorCallback(null);
       if (glfwmonitorcallback != null) {
          glfwmonitorcallback.free();
       }

@@ -123,6 +123,6 @@ public class NetHandlerLoginClient implements INetHandlerLoginClient {
 
    public void func_209521_a(SPacketCustomPayloadLogin p_209521_1_) {
       this.field_209525_d.accept(new TextComponentTranslation("connect.negotiating"));
-      this.networkManager.sendPacket(new CPacketCustomPayloadLogin(p_209521_1_.getTransaction(), (PacketBuffer)null));
+      this.networkManager.sendPacket(new CPacketCustomPayloadLogin(p_209521_1_.getTransaction(), null));
    }
 }

@@ -20,9 +20,9 @@ public class GuiIngameMenu extends GuiScreen {
             this.enabled = false;
             GuiIngameMenu.this.mc.world.sendQuittingDisconnectingPacket();
             if (flag) {
-               GuiIngameMenu.this.mc.loadWorld((WorldClient)null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
+               GuiIngameMenu.this.mc.loadWorld(null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
             } else {
-               GuiIngameMenu.this.mc.loadWorld((WorldClient)null);
+               GuiIngameMenu.this.mc.loadWorld(null);
             }
 
             if (flag) {
@@ -42,7 +42,7 @@ public class GuiIngameMenu extends GuiScreen {
 
       this.addButton(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 24 + -16, I18n.format("menu.returnToGame")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiIngameMenu.this.mc.displayGuiScreen((GuiScreen)null);
+            GuiIngameMenu.this.mc.displayGuiScreen(null);
             GuiIngameMenu.this.mc.mouseHelper.grabMouse();
          }
       });

@@ -11,7 +11,9 @@ final class VoxelShapeArray extends VoxelShape {
    private final DoubleList zPoints;
 
    VoxelShapeArray(VoxelShapePart p_i47693_1_, double[] p_i47693_2_, double[] p_i47693_3_, double[] p_i47693_4_) {
-      this(p_i47693_1_, (DoubleList)DoubleArrayList.wrap(Arrays.copyOf(p_i47693_2_, p_i47693_1_.getXSize() + 1)), (DoubleList)DoubleArrayList.wrap(Arrays.copyOf(p_i47693_3_, p_i47693_1_.getYSize() + 1)), (DoubleList)DoubleArrayList.wrap(Arrays.copyOf(p_i47693_4_, p_i47693_1_.getZSize() + 1)));
+      this(p_i47693_1_, DoubleArrayList.wrap(Arrays.copyOf(p_i47693_2_, p_i47693_1_.getXSize() + 1)),
+              DoubleArrayList.wrap(Arrays.copyOf(p_i47693_3_, p_i47693_1_.getYSize() + 1)),
+              DoubleArrayList.wrap(Arrays.copyOf(p_i47693_4_, p_i47693_1_.getZSize() + 1)));
    }
 
    VoxelShapeArray(VoxelShapePart p_i47694_1_, DoubleList p_i47694_2_, DoubleList p_i47694_3_, DoubleList p_i47694_4_) {

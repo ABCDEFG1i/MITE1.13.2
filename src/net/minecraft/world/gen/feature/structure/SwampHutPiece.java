@@ -92,7 +92,8 @@ public class SwampHutPiece extends ScatteredStructurePiece {
                EntityWitch entitywitch = new EntityWitch(p_74875_1_.getWorld());
                entitywitch.enablePersistence();
                entitywitch.setLocationAndAngles((double)l + 0.5D, (double)i1, (double)k + 0.5D, 0.0F, 0.0F);
-               entitywitch.onInitialSpawn(p_74875_1_.getDifficultyForLocation(new BlockPos(l, i1, k)), (IEntityLivingData)null, (NBTTagCompound)null);
+               entitywitch.onInitialSpawn(p_74875_1_.getDifficultyForLocation(new BlockPos(l, i1, k)), null,
+                       null);
                p_74875_1_.spawnEntity(entitywitch);
             }
          }

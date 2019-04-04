@@ -29,7 +29,7 @@ public class ItemStackHelper {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setByte("Slot", (byte)i);
             itemstack.write(nbttagcompound);
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          }
       }
 

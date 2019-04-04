@@ -74,7 +74,7 @@ public class BlockModelRenderer {
       }
 
       p_199326_7_.setSeed(p_199326_8_);
-      List<BakedQuad> list1 = p_199326_2_.func_200117_a(p_199326_3_, (EnumFacing)null, p_199326_7_);
+      List<BakedQuad> list1 = p_199326_2_.func_200117_a(p_199326_3_, null, p_199326_7_);
       if (!list1.isEmpty()) {
          this.renderQuadsSmooth(p_199326_1_, p_199326_3_, p_199326_4_, p_199326_5_, list1, afloat, bitset, blockmodelrenderer$ambientocclusionface);
          flag = true;
@@ -98,7 +98,7 @@ public class BlockModelRenderer {
       }
 
       p_199325_7_.setSeed(p_199325_8_);
-      List<BakedQuad> list1 = p_199325_2_.func_200117_a(p_199325_3_, (EnumFacing)null, p_199325_7_);
+      List<BakedQuad> list1 = p_199325_2_.func_200117_a(p_199325_3_, null, p_199325_7_);
       if (!list1.isEmpty()) {
          this.renderQuadsFlat(p_199325_1_, p_199325_3_, p_199325_4_, -1, true, p_199325_5_, list1, bitset);
          flag = true;
@@ -217,7 +217,7 @@ public class BlockModelRenderer {
       for(int j = p_187496_7_.size(); i < j; ++i) {
          BakedQuad bakedquad = p_187496_7_.get(i);
          if (p_187496_5_) {
-            this.fillQuadBounds(p_187496_2_, bakedquad.func_178209_a(), bakedquad.func_178210_d(), (float[])null, p_187496_8_);
+            this.fillQuadBounds(p_187496_2_, bakedquad.func_178209_a(), bakedquad.func_178210_d(), null, p_187496_8_);
             BlockPos blockpos = p_187496_8_.get(0) ? p_187496_3_.offset(bakedquad.func_178210_d()) : p_187496_3_;
             p_187496_4_ = p_187496_2_.getPackedLightmapCoords(p_187496_1_, blockpos);
          }
@@ -241,7 +241,7 @@ public class BlockModelRenderer {
    }
 
    public void func_178262_a(IBakedModel p_178262_1_, float p_178262_2_, float p_178262_3_, float p_178262_4_, float p_178262_5_) {
-      this.func_187495_a((IBlockState)null, p_178262_1_, p_178262_2_, p_178262_3_, p_178262_4_, p_178262_5_);
+      this.func_187495_a(null, p_178262_1_, p_178262_2_, p_178262_3_, p_178262_4_, p_178262_5_);
    }
 
    public void func_187495_a(@Nullable IBlockState p_187495_1_, IBakedModel p_187495_2_, float p_187495_3_, float p_187495_4_, float p_187495_5_, float p_187495_6_) {
@@ -254,12 +254,13 @@ public class BlockModelRenderer {
       }
 
       random.setSeed(42L);
-      this.renderModelBrightnessColorQuads(p_187495_3_, p_187495_4_, p_187495_5_, p_187495_6_, p_187495_2_.func_200117_a(p_187495_1_, (EnumFacing)null, random));
+      this.renderModelBrightnessColorQuads(p_187495_3_, p_187495_4_, p_187495_5_, p_187495_6_, p_187495_2_.func_200117_a(p_187495_1_,
+              null, random));
    }
 
    public void func_178266_a(IBakedModel p_178266_1_, IBlockState p_178266_2_, float p_178266_3_, boolean p_178266_4_) {
       GlStateManager.rotatef(90.0F, 0.0F, 1.0F, 0.0F);
-      int i = this.blockColors.getColor(p_178266_2_, (IWorldReaderBase)null, (BlockPos)null, 0);
+      int i = this.blockColors.getColor(p_178266_2_, null, null, 0);
       float f = (float)(i >> 16 & 255) / 255.0F;
       float f1 = (float)(i >> 8 & 255) / 255.0F;
       float f2 = (float)(i & 255) / 255.0F;
@@ -479,7 +480,7 @@ public class BlockModelRenderer {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum EnumNeighborInfo {
+   public enum EnumNeighborInfo {
       DOWN(new EnumFacing[]{EnumFacing.WEST, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH}, 0.5F, true, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.SOUTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.SOUTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.NORTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.NORTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.NORTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.NORTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.SOUTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.SOUTH}),
       UP(new EnumFacing[]{EnumFacing.EAST, EnumFacing.WEST, EnumFacing.NORTH, EnumFacing.SOUTH}, 1.0F, true, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.SOUTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.SOUTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.NORTH, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.NORTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.NORTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.FLIP_NORTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.NORTH}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.SOUTH, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.FLIP_SOUTH, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.SOUTH}),
       NORTH(new EnumFacing[]{EnumFacing.UP, EnumFacing.DOWN, EnumFacing.EAST, EnumFacing.WEST}, 0.8F, true, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.UP, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.UP, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_UP, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_UP, BlockModelRenderer.Orientation.FLIP_WEST}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.UP, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.UP, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_UP, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_UP, BlockModelRenderer.Orientation.FLIP_EAST}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.DOWN, BlockModelRenderer.Orientation.FLIP_EAST, BlockModelRenderer.Orientation.DOWN, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_DOWN, BlockModelRenderer.Orientation.EAST, BlockModelRenderer.Orientation.FLIP_DOWN, BlockModelRenderer.Orientation.FLIP_EAST}, new BlockModelRenderer.Orientation[]{BlockModelRenderer.Orientation.DOWN, BlockModelRenderer.Orientation.FLIP_WEST, BlockModelRenderer.Orientation.DOWN, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_DOWN, BlockModelRenderer.Orientation.WEST, BlockModelRenderer.Orientation.FLIP_DOWN, BlockModelRenderer.Orientation.FLIP_WEST}),
@@ -502,7 +503,7 @@ public class BlockModelRenderer {
          p_209260_0_[EnumFacing.EAST.getIndex()] = EAST;
       });
 
-      private EnumNeighborInfo(EnumFacing[] p_i46236_3_, float p_i46236_4_, boolean p_i46236_5_, BlockModelRenderer.Orientation[] p_i46236_6_, BlockModelRenderer.Orientation[] p_i46236_7_, BlockModelRenderer.Orientation[] p_i46236_8_, BlockModelRenderer.Orientation[] p_i46236_9_) {
+      EnumNeighborInfo(EnumFacing[] p_i46236_3_, float p_i46236_4_, boolean p_i46236_5_, BlockModelRenderer.Orientation[] p_i46236_6_, BlockModelRenderer.Orientation[] p_i46236_7_, BlockModelRenderer.Orientation[] p_i46236_8_, BlockModelRenderer.Orientation[] p_i46236_9_) {
          this.corners = p_i46236_3_;
          this.doNonCubicWeight = p_i46236_5_;
          this.vert0Weights = p_i46236_6_;
@@ -517,7 +518,7 @@ public class BlockModelRenderer {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Orientation {
+   public enum Orientation {
       DOWN(EnumFacing.DOWN, false),
       UP(EnumFacing.UP, false),
       NORTH(EnumFacing.NORTH, false),
@@ -533,13 +534,13 @@ public class BlockModelRenderer {
 
       private final int shape;
 
-      private Orientation(EnumFacing p_i46233_3_, boolean p_i46233_4_) {
+      Orientation(EnumFacing p_i46233_3_, boolean p_i46233_4_) {
          this.shape = p_i46233_3_.getIndex() + (p_i46233_4_ ? EnumFacing.values().length : 0);
       }
    }
 
    @OnlyIn(Dist.CLIENT)
-   static enum VertexTranslations {
+   enum VertexTranslations {
       DOWN(0, 1, 2, 3),
       UP(2, 3, 0, 1),
       NORTH(3, 0, 1, 2),
@@ -560,7 +561,7 @@ public class BlockModelRenderer {
          p_209261_0_[EnumFacing.EAST.getIndex()] = EAST;
       });
 
-      private VertexTranslations(int p_i46234_3_, int p_i46234_4_, int p_i46234_5_, int p_i46234_6_) {
+      VertexTranslations(int p_i46234_3_, int p_i46234_4_, int p_i46234_5_, int p_i46234_6_) {
          this.vert0 = p_i46234_3_;
          this.vert1 = p_i46234_4_;
          this.vert2 = p_i46234_5_;

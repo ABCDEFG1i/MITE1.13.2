@@ -5,7 +5,7 @@ import net.minecraft.world.gen.layer.traits.IC0Transformer;
 import net.minecraft.world.gen.layer.traits.ICastleTransformer;
 
 public class GenLayerEdge {
-   public static enum CoolWarm implements ICastleTransformer {
+   public enum CoolWarm implements ICastleTransformer {
       INSTANCE;
 
       public int apply(IContext p_202748_1_, int p_202748_2_, int p_202748_3_, int p_202748_4_, int p_202748_5_, int p_202748_6_) {
@@ -13,7 +13,7 @@ public class GenLayerEdge {
       }
    }
 
-   public static enum HeatIce implements ICastleTransformer {
+   public enum HeatIce implements ICastleTransformer {
       INSTANCE;
 
       public int apply(IContext p_202748_1_, int p_202748_2_, int p_202748_3_, int p_202748_4_, int p_202748_5_, int p_202748_6_) {
@@ -21,7 +21,7 @@ public class GenLayerEdge {
       }
    }
 
-   public static enum Special implements IC0Transformer {
+   public enum Special implements IC0Transformer {
       INSTANCE;
 
       public int apply(IContext p_202726_1_, int p_202726_2_) {

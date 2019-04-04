@@ -38,8 +38,7 @@ public class TextureGlyphProviderUnicode implements IGlyphProvider {
 
          try (
             IResource iresource = this.resourceManager.getResource(resourcelocation);
-            NativeImage nativeimage = NativeImage.read(NativeImage.PixelFormat.RGBA, iresource.getInputStream());
-         ) {
+            NativeImage nativeimage = NativeImage.read(NativeImage.PixelFormat.RGBA, iresource.getInputStream())) {
             if (nativeimage.getWidth() == 256 && nativeimage.getHeight() == 256) {
                int j = 0;
 
@@ -57,7 +56,6 @@ public class TextureGlyphProviderUnicode implements IGlyphProvider {
                }
             }
          } catch (IOException var43) {
-            ;
          }
 
          Arrays.fill(p_i49737_2_, c0, c0 + 256, (byte)0);
@@ -129,7 +127,8 @@ public class TextureGlyphProviderUnicode implements IGlyphProvider {
             TextureGlyphProviderUnicode textureglyphproviderunicode = new TextureGlyphProviderUnicode(p_211246_1_, abyte, this.template);
             return textureglyphproviderunicode;
          } catch (IOException var17) {
-            TextureGlyphProviderUnicode.LOGGER.error("Cannot load {}, unicode glyphs will not render correctly", (Object)this.sizes);
+            TextureGlyphProviderUnicode.LOGGER.error("Cannot load {}, unicode glyphs will not render correctly",
+                    this.sizes);
             return null;
          }
       }

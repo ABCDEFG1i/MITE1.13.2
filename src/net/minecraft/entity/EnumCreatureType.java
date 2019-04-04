@@ -17,7 +17,7 @@ public enum EnumCreatureType {
    private final boolean isPeacefulCreature;
    private final boolean isAnimal;
 
-   private EnumCreatureType(Class<? extends IAnimal> p_i47849_3_, int p_i47849_4_, boolean p_i47849_5_, boolean p_i47849_6_) {
+   EnumCreatureType(Class<? extends IAnimal> p_i47849_3_, int p_i47849_4_, boolean p_i47849_5_, boolean p_i47849_6_) {
       this.creatureClass = p_i47849_3_;
       this.maxNumberOfCreature = p_i47849_4_;
       this.isPeacefulCreature = p_i47849_5_;

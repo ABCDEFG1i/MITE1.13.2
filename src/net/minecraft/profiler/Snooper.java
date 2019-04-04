@@ -34,7 +34,6 @@ public class Snooper {
 
    public void start() {
       if (!this.isRunning) {
-         ;
       }
 
    }

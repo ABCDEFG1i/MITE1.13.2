@@ -17,7 +17,6 @@ public class GrassColorReloadListener implements IResourceManagerReloadListener 
       try {
          GrassColors.func_77479_a(TextureUtil.makePixelArray(p_195410_1_, GRASS_LOCATION));
       } catch (IOException var3) {
-         ;
       }
 
    }

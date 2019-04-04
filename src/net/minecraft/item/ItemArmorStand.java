@@ -34,7 +34,7 @@ public class ItemArmorStand extends Item {
             double d0 = (double)blockpos.getX();
             double d1 = (double)blockpos.getY();
             double d2 = (double)blockpos.getZ();
-            List<Entity> list = world.func_72839_b((Entity)null, new AxisAlignedBB(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
+            List<Entity> list = world.func_72839_b(null, new AxisAlignedBB(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
             if (!list.isEmpty()) {
                return EnumActionResult.FAIL;
             } else {
@@ -48,7 +48,7 @@ public class ItemArmorStand extends Item {
                   this.applyRandomRotations(entityarmorstand, world.rand);
                   EntityType.func_208048_a(world, p_195939_1_.getPlayer(), entityarmorstand, itemstack.getTag());
                   world.spawnEntity(entityarmorstand);
-                  world.playSound((EntityPlayer)null, entityarmorstand.posX, entityarmorstand.posY, entityarmorstand.posZ, SoundEvents.ENTITY_ARMOR_STAND_PLACE, SoundCategory.BLOCKS, 0.75F, 0.8F);
+                  world.playSound(null, entityarmorstand.posX, entityarmorstand.posY, entityarmorstand.posZ, SoundEvents.ENTITY_ARMOR_STAND_PLACE, SoundCategory.BLOCKS, 0.75F, 0.8F);
                }
 
                itemstack.shrink(1);

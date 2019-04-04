@@ -82,11 +82,11 @@ public class ItemRenderer implements IResourceManagerReloadListener {
 
       for(EnumFacing enumfacing : EnumFacing.values()) {
          random.setSeed(42L);
-         this.renderQuads(bufferbuilder, p_191967_1_.func_200117_a((IBlockState)null, enumfacing, random), p_191967_2_, p_191967_3_);
+         this.renderQuads(bufferbuilder, p_191967_1_.func_200117_a(null, enumfacing, random), p_191967_2_, p_191967_3_);
       }
 
       random.setSeed(42L);
-      this.renderQuads(bufferbuilder, p_191967_1_.func_200117_a((IBlockState)null, (EnumFacing)null, random), p_191967_2_, p_191967_3_);
+      this.renderQuads(bufferbuilder, p_191967_1_.func_200117_a(null, null, random), p_191967_2_, p_191967_3_);
       tessellator.draw();
    }
 
@@ -170,7 +170,7 @@ public class ItemRenderer implements IResourceManagerReloadListener {
 
    public boolean shouldRenderItemIn3D(ItemStack p_175050_1_) {
       IBakedModel ibakedmodel = this.itemModelMesher.func_178089_a(p_175050_1_);
-      return ibakedmodel == null ? false : ibakedmodel.func_177556_c();
+      return ibakedmodel != null && ibakedmodel.func_177556_c();
    }
 
    public void func_181564_a(ItemStack p_181564_1_, ItemCameraTransforms.TransformType p_181564_2_) {
@@ -199,7 +199,7 @@ public class ItemRenderer implements IResourceManagerReloadListener {
    }
 
    public IBakedModel func_204206_b(ItemStack p_204206_1_) {
-      return this.func_184393_a(p_204206_1_, (World)null, (EntityLivingBase)null);
+      return this.func_184393_a(p_204206_1_, null, null);
    }
 
    private IBakedModel func_204207_a(IBakedModel p_204207_1_, ItemStack p_204207_2_, @Nullable World p_204207_3_, @Nullable EntityLivingBase p_204207_4_) {
@@ -291,18 +291,18 @@ public class ItemRenderer implements IResourceManagerReloadListener {
          this.zLevel += 50.0F;
 
          try {
-            this.func_191962_a(p_184391_2_, p_184391_3_, p_184391_4_, this.func_184393_a(p_184391_2_, (World)null, p_184391_1_));
+            this.func_191962_a(p_184391_2_, p_184391_3_, p_184391_4_, this.func_184393_a(p_184391_2_, null, p_184391_1_));
          } catch (Throwable throwable) {
             CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Rendering item");
             CrashReportCategory crashreportcategory = crashreport.makeCategory("Item being rendered");
             crashreportcategory.addDetail("Item Type", () -> {
-               return String.valueOf((Object)p_184391_2_.getItem());
+               return String.valueOf(p_184391_2_.getItem());
             });
             crashreportcategory.addDetail("Item Damage", () -> {
                return String.valueOf(p_184391_2_.getDamage());
             });
             crashreportcategory.addDetail("Item NBT", () -> {
-               return String.valueOf((Object)p_184391_2_.getTag());
+               return String.valueOf(p_184391_2_.getTag());
             });
             crashreportcategory.addDetail("Item Foil", () -> {
                return String.valueOf(p_184391_2_.hasEffect());
@@ -315,7 +315,7 @@ public class ItemRenderer implements IResourceManagerReloadListener {
    }
 
    public void renderItemOverlays(FontRenderer p_175030_1_, ItemStack p_175030_2_, int p_175030_3_, int p_175030_4_) {
-      this.renderItemOverlayIntoGUI(p_175030_1_, p_175030_2_, p_175030_3_, p_175030_4_, (String)null);
+      this.renderItemOverlayIntoGUI(p_175030_1_, p_175030_2_, p_175030_3_, p_175030_4_, null);
    }
 
    public void renderItemOverlayIntoGUI(FontRenderer p_180453_1_, ItemStack p_180453_2_, int p_180453_3_, int p_180453_4_, @Nullable String p_180453_5_) {

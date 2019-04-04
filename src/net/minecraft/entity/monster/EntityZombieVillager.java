@@ -146,7 +146,8 @@ public class EntityZombieVillager extends EntityZombie {
       EntityVillager entityvillager = new EntityVillager(this.world);
       entityvillager.copyLocationAndAnglesFrom(this);
       entityvillager.setProfession(this.getProfession());
-      entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, (NBTTagCompound)null, false);
+      entityvillager.finalizeMobSpawn(this.world.getDifficultyForLocation(new BlockPos(entityvillager)), null,
+              null, false);
       entityvillager.setLookingForHome();
       if (this.isChild()) {
          entityvillager.setGrowingAge(-24000);
@@ -168,7 +169,7 @@ public class EntityZombieVillager extends EntityZombie {
       }
 
       entityvillager.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
-      this.world.playEvent((EntityPlayer)null, 1027, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
+      this.world.playEvent(null, 1027, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
    }
 
    protected int getConversionProgress() {

@@ -18,7 +18,7 @@ public class CPacketLoginStart implements Packet<INetHandlerLoginServer> {
    }
 
    public void readPacketData(PacketBuffer p_148837_1_) throws IOException {
-      this.profile = new GameProfile((UUID)null, p_148837_1_.readString(16));
+      this.profile = new GameProfile(null, p_148837_1_.readString(16));
    }
 
    public void writePacketData(PacketBuffer p_148840_1_) throws IOException {

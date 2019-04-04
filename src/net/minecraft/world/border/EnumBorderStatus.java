@@ -11,7 +11,7 @@ public enum EnumBorderStatus {
 
    private final int color;
 
-   private EnumBorderStatus(int p_i45647_3_) {
+   EnumBorderStatus(int p_i45647_3_) {
       this.color = p_i45647_3_;
    }
 

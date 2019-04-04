@@ -119,9 +119,9 @@ public class SPacketRecipeBook implements Packet<INetHandlerPlayClient> {
       return this.state;
    }
 
-   public static enum State {
+   public enum State {
       INIT,
       ADD,
-      REMOVE;
+      REMOVE
    }
 }

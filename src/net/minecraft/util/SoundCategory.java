@@ -20,7 +20,7 @@ public enum SoundCategory {
    private static final Map<String, SoundCategory> SOUND_CATEGORIES = Arrays.stream(values()).collect(Collectors.toMap(SoundCategory::getName, Function.identity()));
    private final String name;
 
-   private SoundCategory(String p_i46833_3_) {
+   SoundCategory(String p_i46833_3_) {
       this.name = p_i46833_3_;
    }
 

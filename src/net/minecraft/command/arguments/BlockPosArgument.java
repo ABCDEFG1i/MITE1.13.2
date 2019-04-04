@@ -46,7 +46,7 @@ public class BlockPosArgument implements ArgumentType<ILocationArgument> {
    }
 
    public ILocationArgument parse(StringReader p_parse_1_) throws CommandSyntaxException {
-      return (ILocationArgument)(p_parse_1_.canRead() && p_parse_1_.peek() == '^' ? LocalLocationArgument.func_200142_a(p_parse_1_) : LocationInput.func_200148_a(p_parse_1_));
+      return p_parse_1_.canRead() && p_parse_1_.peek() == '^' ? LocalLocationArgument.func_200142_a(p_parse_1_) : LocationInput.func_200148_a(p_parse_1_);
    }
 
    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> p_listSuggestions_1_, SuggestionsBuilder p_listSuggestions_2_) {

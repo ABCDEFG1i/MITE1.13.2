@@ -1165,9 +1165,9 @@ public class Chunk implements IChunk {
       return this.neighborCount == 8;
    }
 
-   public static enum EnumCreateEntityType {
+   public enum EnumCreateEntityType {
       IMMEDIATE,
       QUEUED,
-      CHECK;
+      CHECK
    }
 }

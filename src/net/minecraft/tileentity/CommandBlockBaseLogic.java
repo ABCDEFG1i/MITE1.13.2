@@ -39,7 +39,7 @@ public abstract class CommandBlockBaseLogic implements ICommandSource {
    }
 
    public ITextComponent getLastOutput() {
-      return (ITextComponent)(this.lastOutput == null ? new TextComponentString("") : this.lastOutput);
+      return this.lastOutput == null ? new TextComponentString("") : this.lastOutput;
    }
 
    public NBTTagCompound writeToNBT(NBTTagCompound p_189510_1_) {

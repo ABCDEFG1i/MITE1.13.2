@@ -19,7 +19,10 @@ public class ItemShears extends Item {
       }
 
       Block block = p_179218_3_.getBlock();
-      return !p_179218_3_.isIn(BlockTags.LEAVES) && block != Blocks.COBWEB && block != Blocks.GRASS && block != Blocks.FERN && block != Blocks.DEAD_BUSH && block != Blocks.VINE && block != Blocks.TRIPWIRE && !block.isIn(BlockTags.WOOL) ? super.onBlockDestroyed(p_179218_1_, p_179218_2_, p_179218_3_, p_179218_4_, p_179218_5_) : true;
+      return p_179218_3_.isIn(
+              BlockTags.LEAVES) || block == Blocks.COBWEB || block == Blocks.GRASS || block == Blocks.FERN || block == Blocks.DEAD_BUSH || block == Blocks.VINE || block == Blocks.TRIPWIRE || block.isIn(
+              BlockTags.WOOL) || super.onBlockDestroyed(p_179218_1_, p_179218_2_, p_179218_3_, p_179218_4_,
+              p_179218_5_);
    }
 
    public boolean canHarvestBlock(IBlockState p_150897_1_) {

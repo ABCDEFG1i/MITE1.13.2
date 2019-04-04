@@ -3990,5 +3990,7 @@
   "MITEStart": "----------------------------------------------",
   "item.minecraft.flint_shovel": "Flint Shovel",
   "item.minecraft.flint_axe": "Flint Axe",
-  "item.minecraft.bowl_salad": "Salad"
+  "item.minecraft.bowl_salad": "Salad",
+  "item.minecraft.flint_hatchet": "Flint Hatchet",
+  "selectWorld.notification": "(Only show supported worlds)"
 }

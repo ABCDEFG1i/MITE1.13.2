@@ -22,7 +22,7 @@ public class AnvilSaveHandler extends SaveHandler {
    }
 
    public void saveWorldInfoWithPlayer(WorldInfo p_75755_1_, @Nullable NBTTagCompound p_75755_2_) {
-      p_75755_1_.setSaveVersion(19133);
+      p_75755_1_.setSaveVersion(413495445);
       super.saveWorldInfoWithPlayer(p_75755_1_, p_75755_2_);
    }
 

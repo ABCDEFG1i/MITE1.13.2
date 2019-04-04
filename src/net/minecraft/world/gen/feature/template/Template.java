@@ -79,9 +79,9 @@ public class Template {
                   nbttagcompound.removeTag("z");
                   list1.add(new Template.BlockInfo(blockpos3, iblockstate, nbttagcompound));
                } else if (!iblockstate.isOpaqueCube(p_186254_1_, blockpos$mutableblockpos) && !iblockstate.isFullCube()) {
-                  list2.add(new Template.BlockInfo(blockpos3, iblockstate, (NBTTagCompound)null));
+                  list2.add(new Template.BlockInfo(blockpos3, iblockstate, null));
                } else {
-                  list.add(new Template.BlockInfo(blockpos3, iblockstate, (NBTTagCompound)null));
+                  list.add(new Template.BlockInfo(blockpos3, iblockstate, null));
                }
             }
          }
@@ -326,9 +326,9 @@ public class Template {
             Vec3d vec3d = getTransformedPos(template$entityinfo.pos, p_207668_3_, p_207668_4_, p_207668_5_);
             Vec3d vec3d1 = vec3d.add((double)p_207668_2_.getX(), (double)p_207668_2_.getY(), (double)p_207668_2_.getZ());
             NBTTagList nbttaglist = new NBTTagList();
-            nbttaglist.add((INBTBase)(new NBTTagDouble(vec3d1.x)));
-            nbttaglist.add((INBTBase)(new NBTTagDouble(vec3d1.y)));
-            nbttaglist.add((INBTBase)(new NBTTagDouble(vec3d1.z)));
+            nbttaglist.add(new NBTTagDouble(vec3d1.x));
+            nbttaglist.add(new NBTTagDouble(vec3d1.y));
+            nbttaglist.add(new NBTTagDouble(vec3d1.z));
             nbttagcompound.setTag("Pos", nbttaglist);
             nbttagcompound.setUniqueId("UUID", UUID.randomUUID());
 
@@ -473,7 +473,7 @@ public class Template {
                nbttagcompound.setTag("nbt", template$blockinfo.tileentityData);
             }
 
-            nbttaglist1.add((INBTBase)nbttagcompound);
+            nbttaglist1.add(nbttagcompound);
 
             for(int l = 1; l < this.blocks.size(); ++l) {
                Template.BasicPalette template$basicpalette1 = list.get(l);
@@ -486,7 +486,7 @@ public class Template {
             NBTTagList nbttaglist2 = new NBTTagList();
 
             for(IBlockState iblockstate : template$basicpalette) {
-               nbttaglist2.add((INBTBase)NBTUtil.writeBlockState(iblockstate));
+               nbttaglist2.add(NBTUtil.writeBlockState(iblockstate));
             }
 
             p_189552_1_.setTag("palette", nbttaglist2);
@@ -497,10 +497,10 @@ public class Template {
                NBTTagList nbttaglist4 = new NBTTagList();
 
                for(IBlockState iblockstate1 : template$basicpalette2) {
-                  nbttaglist4.add((INBTBase)NBTUtil.writeBlockState(iblockstate1));
+                  nbttaglist4.add(NBTUtil.writeBlockState(iblockstate1));
                }
 
-               nbttaglist3.add((INBTBase)nbttaglist4);
+               nbttaglist3.add(nbttaglist4);
             }
 
             p_189552_1_.setTag("palettes", nbttaglist3);
@@ -517,7 +517,7 @@ public class Template {
             nbttagcompound1.setTag("nbt", template$entityinfo.entityData);
          }
 
-         nbttaglist.add((INBTBase)nbttagcompound1);
+         nbttaglist.add(nbttagcompound1);
       }
 
       p_189552_1_.setTag("entities", nbttaglist);
@@ -588,7 +588,7 @@ public class Template {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(int i : p_186267_1_) {
-         nbttaglist.add((INBTBase)(new NBTTagInt(i)));
+         nbttaglist.add(new NBTTagInt(i));
       }
 
       return nbttaglist;
@@ -598,7 +598,7 @@ public class Template {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(double d0 : p_186264_1_) {
-         nbttaglist.add((INBTBase)(new NBTTagDouble(d0)));
+         nbttaglist.add(new NBTTagDouble(d0));
       }
 
       return nbttaglist;

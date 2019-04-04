@@ -189,7 +189,7 @@ public class EntityPolarBear extends EntityAnimal {
 
    class AIAttackPlayer extends EntityAINearestAttackableTarget<EntityPlayer> {
       public AIAttackPlayer() {
-         super(EntityPolarBear.this, EntityPlayer.class, 20, true, true, (Predicate<EntityPlayer>)null);
+         super(EntityPolarBear.this, EntityPlayer.class, 20, true, true, null);
       }
 
       public boolean shouldExecute() {
@@ -204,7 +204,7 @@ public class EntityPolarBear extends EntityAnimal {
                }
             }
 
-            EntityPolarBear.this.setAttackTarget((EntityLivingBase)null);
+            EntityPolarBear.this.setAttackTarget(null);
             return false;
          }
       }
@@ -280,7 +280,7 @@ public class EntityPolarBear extends EntityAnimal {
       }
 
       public boolean shouldExecute() {
-         return !EntityPolarBear.this.isChild() && !EntityPolarBear.this.isBurning() ? false : super.shouldExecute();
+         return (EntityPolarBear.this.isChild() || EntityPolarBear.this.isBurning()) && super.shouldExecute();
       }
    }
 

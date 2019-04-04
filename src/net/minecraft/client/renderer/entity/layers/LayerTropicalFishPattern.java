@@ -23,7 +23,7 @@ public class LayerTropicalFishPattern implements LayerRenderer<EntityTropicalFis
 
    public void doRenderLayer(EntityTropicalFish p_177141_1_, float p_177141_2_, float p_177141_3_, float p_177141_4_, float p_177141_5_, float p_177141_6_, float p_177141_7_, float p_177141_8_) {
       if (!p_177141_1_.isInvisible()) {
-         ModelBase modelbase = (ModelBase)(p_177141_1_.getSize() == 0 ? this.modelA : this.modelB);
+         ModelBase modelbase = p_177141_1_.getSize() == 0 ? this.modelA : this.modelB;
          this.field_204250_a.bindTexture(p_177141_1_.getPatternTexture());
          float[] afloat = p_177141_1_.func_204222_dD();
          GlStateManager.color3f(afloat[0], afloat[1], afloat[2]);

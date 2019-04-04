@@ -27,10 +27,10 @@ public class CPacketResourcePackStatus implements Packet<INetHandlerPlayServer> 
       p_148833_1_.handleResourcePackStatus(this);
    }
 
-   public static enum Action {
+   public enum Action {
       SUCCESSFULLY_LOADED,
       DECLINED,
       FAILED_DOWNLOAD,
-      ACCEPTED;
+      ACCEPTED
    }
 }

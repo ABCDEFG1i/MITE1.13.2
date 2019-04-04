@@ -90,7 +90,7 @@ public class FilePack extends AbstractResourcePack {
 
    public void close() {
       if (this.zipFile != null) {
-         IOUtils.closeQuietly((Closeable)this.zipFile);
+         IOUtils.closeQuietly(this.zipFile);
          this.zipFile = null;
       }
 

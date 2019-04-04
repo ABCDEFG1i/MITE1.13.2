@@ -86,7 +86,7 @@ public class PlayerProfileCache {
       };
       p_187319_0_.findProfilesByNames(new String[]{p_187319_1_}, Agent.MINECRAFT, profilelookupcallback);
       if (!isOnlineMode() && agameprofile[0] == null) {
-         UUID uuid = EntityPlayer.getUUID(new GameProfile((UUID)null, p_187319_1_));
+         UUID uuid = EntityPlayer.getUUID(new GameProfile(null, p_187319_1_));
          GameProfile gameprofile = new GameProfile(uuid, p_187319_1_);
          profilelookupcallback.onProfileLookupSucceeded(gameprofile);
       }
@@ -103,7 +103,7 @@ public class PlayerProfileCache {
    }
 
    public void addEntry(GameProfile p_152649_1_) {
-      this.addEntry(p_152649_1_, (Date)null);
+      this.addEntry(p_152649_1_, null);
    }
 
    private void addEntry(GameProfile p_152651_1_, Date p_152651_2_) {
@@ -189,11 +189,9 @@ public class PlayerProfileCache {
             }
          }
       } catch (FileNotFoundException var9) {
-         ;
       } catch (JsonParseException var10) {
-         ;
       } finally {
-         IOUtils.closeQuietly((Reader)bufferedreader);
+         IOUtils.closeQuietly(bufferedreader);
       }
 
    }
@@ -207,11 +205,10 @@ public class PlayerProfileCache {
          bufferedwriter.write(s);
          return;
       } catch (FileNotFoundException var8) {
-         ;
       } catch (IOException var9) {
          return;
       } finally {
-         IOUtils.closeQuietly((Writer)bufferedwriter);
+         IOUtils.closeQuietly(bufferedwriter);
       }
 
    }

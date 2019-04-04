@@ -176,7 +176,7 @@ public class Bootstrap {
             EnumFacing enumfacing = p_82487_1_.getBlockState().get(BlockDispenser.FACING);
             EntityType<?> entitytype = ((ItemSpawnEgg)p_82487_2_.getItem()).getType(p_82487_2_.getTag());
             if (entitytype != null) {
-               entitytype.spawnEntity(p_82487_1_.getWorld(), p_82487_2_, (EntityPlayer)null, p_82487_1_.getBlockPos().offset(enumfacing), enumfacing != EnumFacing.UP, false);
+               entitytype.spawnEntity(p_82487_1_.getWorld(), p_82487_2_, null, p_82487_1_.getBlockPos().offset(enumfacing), enumfacing != EnumFacing.UP, false);
             }
 
             p_82487_2_.shrink(1);
@@ -238,7 +238,7 @@ public class Bootstrap {
             ItemBucket itembucket = (ItemBucket)p_82487_2_.getItem();
             BlockPos blockpos = p_82487_1_.getBlockPos().offset(p_82487_1_.getBlockState().get(BlockDispenser.FACING));
             World world = p_82487_1_.getWorld();
-            if (itembucket.tryPlaceContainedLiquid((EntityPlayer)null, world, blockpos, (RayTraceResult)null)) {
+            if (itembucket.tryPlaceContainedLiquid(null, world, blockpos, null)) {
                itembucket.onLiquidPlaced(world, p_82487_2_, blockpos);
                return new ItemStack(Items.BUCKET);
             } else {
@@ -299,7 +299,7 @@ public class Bootstrap {
                }
             }
 
-            if (this.successful && p_82487_2_.attemptDamageItem(1, world.rand, (EntityPlayerMP)null)) {
+            if (this.successful && p_82487_2_.attemptDamageItem(1, world.rand, null)) {
                p_82487_2_.setCount(0);
             }
 
@@ -311,7 +311,8 @@ public class Bootstrap {
             this.successful = true;
             World world = p_82487_1_.getWorld();
             BlockPos blockpos = p_82487_1_.getBlockPos().offset(p_82487_1_.getBlockState().get(BlockDispenser.FACING));
-            if (!ItemBoneMeal.applyBonemeal(p_82487_2_, world, blockpos) && !ItemBoneMeal.func_203173_b(p_82487_2_, world, blockpos, (EnumFacing)null)) {
+            if (!ItemBoneMeal.applyBonemeal(p_82487_2_, world, blockpos) && !ItemBoneMeal.func_203173_b(p_82487_2_, world, blockpos,
+                    null)) {
                this.successful = false;
             } else if (!world.isRemote) {
                world.playEvent(2005, blockpos, 0);
@@ -324,9 +325,10 @@ public class Bootstrap {
          protected ItemStack dispenseStack(IBlockSource p_82487_1_, ItemStack p_82487_2_) {
             World world = p_82487_1_.getWorld();
             BlockPos blockpos = p_82487_1_.getBlockPos().offset(p_82487_1_.getBlockState().get(BlockDispenser.FACING));
-            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double)blockpos.getX() + 0.5D, (double)blockpos.getY(), (double)blockpos.getZ() + 0.5D, (EntityLivingBase)null);
+            EntityTNTPrimed entitytntprimed = new EntityTNTPrimed(world, (double)blockpos.getX() + 0.5D, (double)blockpos.getY(), (double)blockpos.getZ() + 0.5D,
+                    null);
             world.spawnEntity(entitytntprimed);
-            world.playSound((EntityPlayer)null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, entitytntprimed.posX, entitytntprimed.posY, entitytntprimed.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
             p_82487_2_.shrink(1);
             return p_82487_2_;
          }
@@ -533,7 +535,7 @@ public class Bootstrap {
       private final EnumFacing field_196015_j;
 
       public DispensePlaceContext(World p_i47754_1_, BlockPos p_i47754_2_, EnumFacing p_i47754_3_, ItemStack p_i47754_4_, EnumFacing p_i47754_5_) {
-         super(p_i47754_1_, (EntityPlayer)null, p_i47754_4_, p_i47754_2_, p_i47754_5_, 0.5F, 0.0F, 0.5F);
+         super(p_i47754_1_, null, p_i47754_4_, p_i47754_2_, p_i47754_5_, 0.5F, 0.0F, 0.5F);
          this.field_196015_j = p_i47754_3_;
       }
 

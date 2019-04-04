@@ -54,7 +54,7 @@ public class BlockPistonBase extends BlockDirectional {
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
       if (p_196244_1_.get(EXTENDED)) {
-         switch((EnumFacing)p_196244_1_.get(FACING)) {
+         switch(p_196244_1_.get(FACING)) {
          case DOWN:
             return PISTON_BASE_DOWN_AABB;
          case UP:
@@ -173,7 +173,7 @@ public class BlockPistonBase extends BlockDirectional {
          }
 
          p_189539_2_.setBlockState(p_189539_3_, p_189539_1_.with(EXTENDED, Boolean.valueOf(true)), 67);
-         p_189539_2_.playSound((EntityPlayer)null, p_189539_3_, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.5F, p_189539_2_.rand.nextFloat() * 0.25F + 0.6F);
+         p_189539_2_.playSound(null, p_189539_3_, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.5F, p_189539_2_.rand.nextFloat() * 0.25F + 0.6F);
       } else if (p_189539_4_ == 1 || p_189539_4_ == 2) {
          TileEntity tileentity1 = p_189539_2_.getTileEntity(p_189539_3_.offset(enumfacing));
          if (tileentity1 instanceof TileEntityPiston) {
@@ -209,7 +209,7 @@ public class BlockPistonBase extends BlockDirectional {
             p_189539_2_.removeBlock(p_189539_3_.offset(enumfacing));
          }
 
-         p_189539_2_.playSound((EntityPlayer)null, p_189539_3_, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, p_189539_2_.rand.nextFloat() * 0.15F + 0.6F);
+         p_189539_2_.playSound(null, p_189539_3_, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, p_189539_2_.rand.nextFloat() * 0.15F + 0.6F);
       }
 
       return true;

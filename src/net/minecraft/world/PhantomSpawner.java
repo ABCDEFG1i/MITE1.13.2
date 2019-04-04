@@ -51,7 +51,8 @@ public class PhantomSpawner {
                                  for(int i1 = 0; i1 < l; ++i1) {
                                     EntityPhantom entityphantom = new EntityPhantom(p_203232_1_);
                                     entityphantom.moveToBlockPosAndAngles(blockpos1, 0.0F, 0.0F);
-                                    ientitylivingdata = entityphantom.onInitialSpawn(difficultyinstance, ientitylivingdata, (NBTTagCompound)null);
+                                    ientitylivingdata = entityphantom.onInitialSpawn(difficultyinstance, ientitylivingdata,
+                                            null);
                                     p_203232_1_.spawnEntity(entityphantom);
                                  }
 

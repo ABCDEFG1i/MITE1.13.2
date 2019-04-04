@@ -174,7 +174,7 @@ public class EntityTracker {
          try {
             throw new ReportedException(crashreport);
          } catch (ReportedException reportedexception) {
-            LOGGER.error("\"Silently\" catching entity tracking error.", (Throwable)reportedexception);
+            LOGGER.error("\"Silently\" catching entity tracking error.", reportedexception);
          }
       }
 

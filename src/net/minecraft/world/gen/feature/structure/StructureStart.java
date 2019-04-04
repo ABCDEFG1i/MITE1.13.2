@@ -81,7 +81,7 @@ public abstract class StructureStart {
          NBTTagList lvt_4_1_ = new NBTTagList();
          synchronized(this.components) {
             for(StructurePiece structurepiece : this.components) {
-               lvt_4_1_.add((INBTBase)structurepiece.createStructureBaseNBT());
+               lvt_4_1_.add(structurepiece.createStructureBaseNBT());
             }
          }
 

@@ -21,6 +21,8 @@ public class FoodStats {
     }
 
     public void addExhaustion(float p_75113_1_) {
+        //MITEMODDED Easier to be hungry
+        p_75113_1_ *= 1.5;
         this.foodExhaustionLevel = Math.min(this.foodExhaustionLevel + p_75113_1_, 40.0F);
     }
 

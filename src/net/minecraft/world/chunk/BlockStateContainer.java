@@ -34,7 +34,7 @@ public class BlockStateContainer<T> implements IBlockStatePaletteResizer<T> {
    private void lock() {
       if (this.lock.isLocked() && !this.lock.isHeldByCurrentThread()) {
          String s = Thread.getAllStackTraces().keySet().stream().filter(Objects::nonNull).map((p_210458_0_) -> {
-            return p_210458_0_.getName() + ": \n\tat " + (String)Arrays.stream(p_210458_0_.getStackTrace()).map(Object::toString).collect(Collectors.joining("\n\tat "));
+            return p_210458_0_.getName() + ": \n\tat " + Arrays.stream(p_210458_0_.getStackTrace()).map(Object::toString).collect(Collectors.joining("\n\tat "));
          }).collect(Collectors.joining("\n"));
          CrashReport crashreport = new CrashReport("Writing into PalettedContainer from multiple threads", new IllegalStateException());
          CrashReportCategory crashreportcategory = crashreport.makeCategory("Thread dumps");
@@ -110,12 +110,12 @@ public class BlockStateContainer<T> implements IBlockStatePaletteResizer<T> {
    }
 
    public T get(int p_186016_1_, int p_186016_2_, int p_186016_3_) {
-      return (T)this.get(getIndex(p_186016_1_, p_186016_2_, p_186016_3_));
+      return this.get(getIndex(p_186016_1_, p_186016_2_, p_186016_3_));
    }
 
    protected T get(int p_186015_1_) {
       T t = this.palette.getBlockState(this.storage.getAt(p_186015_1_));
-      return (T)(t == null ? this.defaultState : t);
+      return t == null ? this.defaultState : t;
    }
 
    @OnlyIn(Dist.CLIENT)
@@ -178,7 +178,7 @@ public class BlockStateContainer<T> implements IBlockStatePaletteResizer<T> {
       int[] aint = new int[4096];
 
       for(int i = 0; i < 4096; ++i) {
-         aint[i] = blockstatepalettehashmap.idFor((T)this.get(i));
+         aint[i] = blockstatepalettehashmap.idFor(this.get(i));
       }
 
       NBTTagList nbttaglist = new NBTTagList();

@@ -43,7 +43,7 @@ public class ServerHangWatchdog implements Runnable {
                   error.setStackTrace(threadinfo.getStackTrace());
                }
 
-               stringbuilder.append((Object)threadinfo);
+               stringbuilder.append(threadinfo);
                stringbuilder.append("\n");
             }
 
@@ -53,7 +53,7 @@ public class ServerHangWatchdog implements Runnable {
             crashreportcategory.addCrashSection("Threads", stringbuilder);
             File file1 = new File(new File(this.server.getDataDirectory(), "crash-reports"), "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-server.txt");
             if (crashreport.saveToFile(file1)) {
-               LOGGER.error("This crash report has been saved to: {}", (Object)file1.getAbsolutePath());
+               LOGGER.error("This crash report has been saved to: {}", file1.getAbsolutePath());
             } else {
                LOGGER.error("We were unable to save this crash report to disk.");
             }
@@ -64,7 +64,6 @@ public class ServerHangWatchdog implements Runnable {
          try {
             Thread.sleep(i + this.maxTickTime - j);
          } catch (InterruptedException var15) {
-            ;
          }
       }
 

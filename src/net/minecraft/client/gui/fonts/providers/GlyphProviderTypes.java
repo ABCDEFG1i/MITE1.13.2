@@ -23,7 +23,7 @@ public enum GlyphProviderTypes {
    private final String name;
    private final Function<JsonObject, IGlyphProviderFactory> factoryDeserializer;
 
-   private GlyphProviderTypes(String p_i49766_3_, Function<JsonObject, IGlyphProviderFactory> p_i49766_4_) {
+   GlyphProviderTypes(String p_i49766_3_, Function<JsonObject, IGlyphProviderFactory> p_i49766_4_) {
       this.name = p_i49766_3_;
       this.factoryDeserializer = p_i49766_4_;
    }

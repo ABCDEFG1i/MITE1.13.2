@@ -42,7 +42,7 @@ public class ModelRenderer {
    }
 
    public ModelRenderer(ModelBase p_i1173_1_) {
-      this(p_i1173_1_, (String)null);
+      this(p_i1173_1_, null);
    }
 
    public ModelRenderer(ModelBase p_i46358_1_, int p_i46358_2_, int p_i46358_3_) {

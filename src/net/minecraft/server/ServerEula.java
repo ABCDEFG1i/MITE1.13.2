@@ -31,10 +31,10 @@ public class ServerEula {
          properties.load(fileinputstream);
          flag = Boolean.parseBoolean(properties.getProperty("eula", "false"));
       } catch (Exception var8) {
-         LOG.warn("Failed to load {}", (Object)p_154347_1_);
+         LOG.warn("Failed to load {}", p_154347_1_);
          this.createEULAFile();
       } finally {
-         IOUtils.closeQuietly((InputStream)fileinputstream);
+         IOUtils.closeQuietly(fileinputstream);
       }
 
       return flag;
@@ -56,7 +56,7 @@ public class ServerEula {
          } catch (Exception exception) {
             LOG.warn("Failed to save {}", this.eulaFile, exception);
          } finally {
-            IOUtils.closeQuietly((OutputStream)fileoutputstream);
+            IOUtils.closeQuietly(fileoutputstream);
          }
 
       }

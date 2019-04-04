@@ -213,7 +213,7 @@ public class ServerListEntryNormal extends ServerSelectionList.Entry {
             this.mc.getTextureManager().loadTexture(this.serverIcon, this.icon);
          } catch (Throwable throwable) {
             LOGGER.error("Invalid icon for server {} ({})", this.server.serverName, this.server.serverIP, throwable);
-            this.server.setBase64EncodedIconData((String)null);
+            this.server.setBase64EncodedIconData(null);
          }
       }
 

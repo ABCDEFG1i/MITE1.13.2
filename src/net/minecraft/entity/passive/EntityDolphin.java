@@ -512,7 +512,7 @@ public class EntityDolphin extends EntityWaterMob {
 
       public boolean shouldExecute() {
          this.field_206836_c = this.field_206834_a.world.getClosestPlayerToEntity(this.field_206834_a, 10.0D);
-         return this.field_206836_c == null ? false : this.field_206836_c.isSwimming();
+         return this.field_206836_c != null && this.field_206836_c.isSwimming();
       }
 
       public boolean shouldContinueExecuting() {

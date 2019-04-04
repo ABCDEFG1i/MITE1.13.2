@@ -130,7 +130,7 @@ public class EntityMinecartTNT extends EntityMinecart {
       if (!this.world.isRemote) {
          this.world.setEntityState(this, (byte)10);
          if (!this.isSilent()) {
-            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
          }
       }
 
@@ -150,7 +150,9 @@ public class EntityMinecartTNT extends EntityMinecart {
    }
 
    public boolean canExplosionDestroyBlock(Explosion p_174816_1_, IBlockReader p_174816_2_, BlockPos p_174816_3_, IBlockState p_174816_4_, float p_174816_5_) {
-      return !this.isIgnited() || !p_174816_4_.isIn(BlockTags.RAILS) && !p_174816_2_.getBlockState(p_174816_3_.up()).isIn(BlockTags.RAILS) ? super.canExplosionDestroyBlock(p_174816_1_, p_174816_2_, p_174816_3_, p_174816_4_, p_174816_5_) : false;
+      return (!this.isIgnited() || !p_174816_4_.isIn(BlockTags.RAILS) && !p_174816_2_.getBlockState(
+              p_174816_3_.up()).isIn(BlockTags.RAILS)) && super.canExplosionDestroyBlock(p_174816_1_, p_174816_2_,
+              p_174816_3_, p_174816_4_, p_174816_5_);
    }
 
    protected void readEntityFromNBT(NBTTagCompound p_70037_1_) {

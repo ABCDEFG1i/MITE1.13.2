@@ -84,7 +84,7 @@ public class ItemFireworkRocket extends Item {
       }
    }
 
-   public static enum Shape {
+   public enum Shape {
       SMALL_BALL(0, "small_ball"),
       LARGE_BALL(1, "large_ball"),
       STAR(2, "star"),
@@ -99,7 +99,7 @@ public class ItemFireworkRocket extends Item {
       private final int field_196078_g;
       private final String field_196079_h;
 
-      private Shape(int p_i47931_3_, String p_i47931_4_) {
+      Shape(int p_i47931_3_, String p_i47931_4_) {
          this.field_196078_g = p_i47931_3_;
          this.field_196079_h = p_i47931_4_;
       }

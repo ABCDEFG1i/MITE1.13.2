@@ -125,8 +125,8 @@ public abstract class EntityFireball extends Entity {
    protected abstract void onImpact(RayTraceResult p_70227_1_);
 
    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-      p_70014_1_.setTag("direction", this.newDoubleNBTList(new double[]{this.motionX, this.motionY, this.motionZ}));
-      p_70014_1_.setTag("power", this.newDoubleNBTList(new double[]{this.accelerationX, this.accelerationY, this.accelerationZ}));
+      p_70014_1_.setTag("direction", this.newDoubleNBTList(this.motionX, this.motionY, this.motionZ));
+      p_70014_1_.setTag("power", this.newDoubleNBTList(this.accelerationX, this.accelerationY, this.accelerationZ));
       p_70014_1_.setInteger("life", this.ticksAlive);
    }
 

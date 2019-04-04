@@ -90,7 +90,7 @@ public class PhaseHoldingPattern extends PhaseBase {
             k = k + 12;
          }
 
-         this.currentPath = this.dragon.findPath(j, k, (PathPoint)null);
+         this.currentPath = this.dragon.findPath(j, k, null);
          if (this.currentPath != null) {
             this.currentPath.incrementPathIndex();
          }

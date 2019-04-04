@@ -32,20 +32,20 @@ public class RegistryNamespacedDefaultedByKey<V> extends RegistryNamespaced<V> {
    }
 
    public V func_82594_a(@Nullable ResourceLocation p_82594_1_) {
-      V v = (V)this.func_212608_b(p_82594_1_);
-      return (V)(v == null ? this.defaultValue : v);
+      V v = this.func_212608_b(p_82594_1_);
+      return v == null ? this.defaultValue : v;
    }
 
    @Nonnull
    public V func_148754_a(int p_148754_1_) {
-      V v = (V)super.func_148754_a(p_148754_1_);
-      return (V)(v == null ? this.defaultValue : v);
+      V v = super.func_148754_a(p_148754_1_);
+      return v == null ? this.defaultValue : v;
    }
 
    @Nonnull
    public V func_186801_a(Random p_186801_1_) {
-      V v = (V)super.func_186801_a(p_186801_1_);
-      return (V)(v == null ? this.defaultValue : v);
+      V v = super.func_186801_a(p_186801_1_);
+      return v == null ? this.defaultValue : v;
    }
 
    public ResourceLocation func_212609_b() {

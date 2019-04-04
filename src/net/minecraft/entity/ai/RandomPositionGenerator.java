@@ -12,12 +12,12 @@ import net.minecraft.util.math.Vec3d;
 public class RandomPositionGenerator {
    @Nullable
    public static Vec3d findRandomTarget(EntityCreature p_75463_0_, int p_75463_1_, int p_75463_2_) {
-      return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, (Vec3d)null);
+      return findRandomTargetBlock(p_75463_0_, p_75463_1_, p_75463_2_, null);
    }
 
    @Nullable
    public static Vec3d getLandPos(EntityCreature p_191377_0_, int p_191377_1_, int p_191377_2_) {
-      return generateRandomPos(p_191377_0_, p_191377_1_, p_191377_2_, (Vec3d)null, false, 0.0D);
+      return generateRandomPos(p_191377_0_, p_191377_1_, p_191377_2_, null, false, 0.0D);
    }
 
    @Nullable
@@ -139,7 +139,6 @@ public class RandomPositionGenerator {
       } else {
          BlockPos blockpos;
          for(blockpos = p_191378_0_.up(); blockpos.getY() < p_191378_1_.world.getHeight() && p_191378_1_.world.getBlockState(blockpos).getMaterial().isSolid(); blockpos = blockpos.up()) {
-            ;
          }
 
          return blockpos;

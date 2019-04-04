@@ -70,7 +70,7 @@ public class SoundManager {
          SoundSystemConfig.addLibrary(LibraryLWJGL3.class);
          SoundSystemConfig.setCodec("ogg", CodecJOrbis.class);
       } catch (SoundSystemException soundsystemexception) {
-         LOGGER.error(LOG_MARKER, "Error linking with the LibraryJavaSound plug-in", (Throwable)soundsystemexception);
+         LOGGER.error(LOG_MARKER, "Error linking with the LibraryJavaSound plug-in", soundsystemexception);
       }
 
    }
@@ -81,7 +81,7 @@ public class SoundManager {
       for(SoundEvent soundevent : IRegistry.field_212633_v) {
          ResourceLocation resourcelocation = soundevent.getSoundName();
          if (this.sndHandler.getAccessor(resourcelocation) == null) {
-            LOGGER.warn("Missing sound for event: {}", (Object)IRegistry.field_212633_v.func_177774_c(soundevent));
+            LOGGER.warn("Missing sound for event: {}", IRegistry.field_212633_v.func_177774_c(soundevent));
             UNABLE_TO_PLAY.add(resourcelocation);
          }
       }
@@ -104,7 +104,7 @@ public class SoundManager {
 
                   public void importantMessage(String p_importantMessage_1_, int p_importantMessage_2_) {
                      if (p_importantMessage_1_.startsWith("Author:")) {
-                        SoundManager.LOGGER.info("SoundSystem {}", (Object)p_importantMessage_1_);
+                        SoundManager.LOGGER.info("SoundSystem {}", p_importantMessage_1_);
                      } else if (!p_importantMessage_1_.isEmpty()) {
                         SoundManager.LOGGER.warn(p_importantMessage_1_);
                      }
@@ -113,7 +113,7 @@ public class SoundManager {
 
                   public void errorMessage(String p_errorMessage_1_, String p_errorMessage_2_, int p_errorMessage_3_) {
                      if (!p_errorMessage_2_.isEmpty()) {
-                        SoundManager.LOGGER.error("Error in class '{}'", (Object)p_errorMessage_1_);
+                        SoundManager.LOGGER.error("Error in class '{}'", p_errorMessage_1_);
                         SoundManager.LOGGER.error(p_errorMessage_2_);
                      }
 
@@ -135,7 +135,7 @@ public class SoundManager {
             thread.setUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler(LOGGER));
             thread.start();
          } catch (RuntimeException runtimeexception) {
-            LOGGER.error(LOG_MARKER, "Error starting SoundSystem. Turning off sounds & music", (Throwable)runtimeexception);
+            LOGGER.error(LOG_MARKER, "Error starting SoundSystem. Turning off sounds & music", runtimeexception);
             this.options.setSoundLevel(SoundCategory.MASTER, 0.0F);
             this.options.saveOptions();
          }
@@ -234,14 +234,13 @@ public class SoundManager {
                }
 
                iterator.remove();
-               LOGGER.debug(LOG_MARKER, "Removed channel {} because it's not playing anymore", (Object)s1);
+               LOGGER.debug(LOG_MARKER, "Removed channel {} because it's not playing anymore", s1);
                this.sndSystem.removeSource(s1);
                this.playingSoundsStopTime.remove(s1);
 
                try {
                   this.categorySounds.remove(isound.getCategory(), s1);
                } catch (RuntimeException var9) {
-                  ;
                }
 
                if (isound instanceof ITickableSound) {
@@ -297,7 +296,7 @@ public class SoundManager {
          ResourceLocation resourcelocation = p_148611_1_.getSoundLocation();
          if (soundeventaccessor == null) {
             if (UNABLE_TO_PLAY.add(resourcelocation)) {
-               LOGGER.warn(LOG_MARKER, "Unable to play unknown soundEvent: {}", (Object)resourcelocation);
+               LOGGER.warn(LOG_MARKER, "Unable to play unknown soundEvent: {}", resourcelocation);
             }
 
          } else {
@@ -308,12 +307,12 @@ public class SoundManager {
             }
 
             if (this.sndSystem.getMasterVolume() <= 0.0F) {
-               LOGGER.debug(LOG_MARKER, "Skipped playing soundEvent: {}, master volume was zero", (Object)resourcelocation);
+               LOGGER.debug(LOG_MARKER, "Skipped playing soundEvent: {}, master volume was zero", resourcelocation);
             } else {
                Sound sound = p_148611_1_.getSound();
                if (sound == SoundHandler.MISSING_SOUND) {
                   if (UNABLE_TO_PLAY.add(resourcelocation)) {
-                     LOGGER.warn(LOG_MARKER, "Unable to play empty soundEvent: {}", (Object)resourcelocation);
+                     LOGGER.warn(LOG_MARKER, "Unable to play empty soundEvent: {}", resourcelocation);
                   }
 
                } else {
@@ -327,7 +326,7 @@ public class SoundManager {
                   float f1 = this.getClampedVolume(p_148611_1_);
                   float f2 = this.getClampedPitch(p_148611_1_);
                   if (f1 == 0.0F && !p_148611_1_.canBeSilent()) {
-                     LOGGER.debug(LOG_MARKER, "Skipped playing sound {}, volume was zero.", (Object)sound.getSoundLocation());
+                     LOGGER.debug(LOG_MARKER, "Skipped playing sound {}, volume was zero.", sound.getSoundLocation());
                   } else {
                      boolean flag = p_148611_1_.canRepeat() && p_148611_1_.getRepeatDelay() == 0;
                      String s = MathHelper.getRandomUUID(ThreadLocalRandom.current()).toString();
@@ -362,7 +361,7 @@ public class SoundManager {
 
    private void preload(Sound p_204260_1_) {
       ResourceLocation resourcelocation = p_204260_1_.getSoundAsOggLocation();
-      LOGGER.info(LOG_MARKER, "Preloading sound {}", (Object)resourcelocation);
+      LOGGER.info(LOG_MARKER, "Preloading sound {}", resourcelocation);
       this.sndSystem.loadSound(getURLForSoundResource(resourcelocation), resourcelocation.toString());
    }
 
@@ -379,7 +378,7 @@ public class SoundManager {
          String s = entry.getKey();
          boolean flag = this.isPlaying(entry.getValue());
          if (flag) {
-            LOGGER.debug(LOG_MARKER, "Pausing channel {}", (Object)s);
+            LOGGER.debug(LOG_MARKER, "Pausing channel {}", s);
             this.sndSystem.pause(s);
             this.pausedChannels.add(s);
          }
@@ -389,7 +388,7 @@ public class SoundManager {
 
    public void resume() {
       for(String s : this.pausedChannels) {
-         LOGGER.debug(LOG_MARKER, "Resuming channel {}", (Object)s);
+         LOGGER.debug(LOG_MARKER, "Resuming channel {}", s);
          this.sndSystem.play(s);
       }
 
@@ -416,7 +415,7 @@ public class SoundManager {
       };
 
       try {
-         return new URL((URL)null, s, urlstreamhandler);
+         return new URL(null, s, urlstreamhandler);
       } catch (MalformedURLException var4) {
          throw new Error("TODO: Sanely handle url exception! :D");
       }

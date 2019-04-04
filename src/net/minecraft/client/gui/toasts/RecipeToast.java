@@ -48,9 +48,9 @@ public class RecipeToast implements IToast {
 
          GlStateManager.pushMatrix();
          GlStateManager.scalef(0.6F, 0.6F, 1.0F);
-         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI((EntityLivingBase)null, itemstack, 3, 3);
+         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(null, itemstack, 3, 3);
          GlStateManager.popMatrix();
-         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI((EntityLivingBase)null, irecipe.getRecipeOutput(), 8, 8);
+         p_193653_1_.getMinecraft().getItemRenderer().renderItemAndEffectIntoGUI(null, irecipe.getRecipeOutput(), 8, 8);
          return p_193653_2_ - this.firstDrawTime >= 5000L ? IToast.Visibility.HIDE : IToast.Visibility.SHOW;
       }
    }

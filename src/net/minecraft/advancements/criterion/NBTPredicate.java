@@ -16,7 +16,7 @@ import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.JsonUtils;
 
 public class NBTPredicate {
-   public static final NBTPredicate ANY = new NBTPredicate((NBTTagCompound)null);
+   public static final NBTPredicate ANY = new NBTPredicate(null);
    @Nullable
    private final NBTTagCompound tag;
 
@@ -25,11 +25,11 @@ public class NBTPredicate {
    }
 
    public boolean test(ItemStack p_193478_1_) {
-      return this == ANY ? true : this.test(p_193478_1_.getTag());
+      return this == ANY || this.test(p_193478_1_.getTag());
    }
 
    public boolean test(Entity p_193475_1_) {
-      return this == ANY ? true : this.test(writeToNBTWithSelectedItem(p_193475_1_));
+      return this == ANY || this.test(writeToNBTWithSelectedItem(p_193475_1_));
    }
 
    public boolean test(@Nullable INBTBase p_193477_1_) {
@@ -41,7 +41,7 @@ public class NBTPredicate {
    }
 
    public JsonElement serialize() {
-      return (JsonElement)(this != ANY && this.tag != null ? new JsonPrimitive(this.tag.toString()) : JsonNull.INSTANCE);
+      return this != ANY && this.tag != null ? new JsonPrimitive(this.tag.toString()) : JsonNull.INSTANCE;
    }
 
    public static NBTPredicate deserialize(@Nullable JsonElement p_193476_0_) {

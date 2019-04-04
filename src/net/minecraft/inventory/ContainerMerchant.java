@@ -90,7 +90,7 @@ public class ContainerMerchant extends Container {
 
    public void onContainerClosed(EntityPlayer p_75134_1_) {
       super.onContainerClosed(p_75134_1_);
-      this.merchant.setCustomer((EntityPlayer)null);
+      this.merchant.setCustomer(null);
       super.onContainerClosed(p_75134_1_);
       if (!this.world.isRemote) {
          ItemStack itemstack = this.merchantInventory.removeStackFromSlot(0);

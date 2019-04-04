@@ -38,7 +38,7 @@ public class LanguageMap {
 
          this.lastUpdateTimeInMilliseconds = Util.milliTime();
       } catch (JsonParseException jsonparseexception) {
-         LOGGER.error("Couldn't read strings from /assets/minecraft/lang/en_us.json", (Throwable)jsonparseexception);
+         LOGGER.error("Couldn't read strings from /assets/minecraft/lang/en_us.json", jsonparseexception);
       }
 
    }

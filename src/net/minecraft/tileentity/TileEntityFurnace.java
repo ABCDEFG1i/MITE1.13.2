@@ -102,9 +102,6 @@ public class TileEntityFurnace extends TileEntityLockable implements ISidedInven
       setBurnTime(map, Items.SIGN, 200);
       setBurnTime(map, Items.WOODEN_SHOVEL, 200);
       setBurnTime(map, Items.WOODEN_SWORD, 200);
-      setBurnTime(map, Items.WOODEN_HOE, 200);
-      setBurnTime(map, Items.WOODEN_AXE, 200);
-      setBurnTime(map, Items.WOODEN_PICKAXE, 200);
       setBurnTime(map, ItemTags.WOODEN_DOORS, 200);
       setBurnTime(map, ItemTags.BOATS, 200);
       setBurnTime(map, ItemTags.WOOL, 100);
@@ -164,7 +161,7 @@ public class TileEntityFurnace extends TileEntityLockable implements ISidedInven
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.furnaceCustomName != null ? this.furnaceCustomName : new TextComponentTranslation("container.furnace"));
+      return this.furnaceCustomName != null ? this.furnaceCustomName : new TextComponentTranslation("container.furnace");
    }
 
    public boolean hasCustomName() {
@@ -330,7 +327,7 @@ public class TileEntityFurnace extends TileEntityLockable implements ISidedInven
          }
 
          if (!this.world.isRemote) {
-            this.canUseRecipe(this.world, (EntityPlayerMP)null, p_201565_1_);
+            this.canUseRecipe(this.world, null, p_201565_1_);
          }
 
          if (itemstack.getItem() == Blocks.WET_SPONGE.asItem() && !this.furnaceItemStacks.get(1).isEmpty() && this.furnaceItemStacks.get(1).getItem() == Items.BUCKET) {
@@ -394,9 +391,7 @@ public class TileEntityFurnace extends TileEntityLockable implements ISidedInven
    public boolean canExtractItem(int p_180461_1_, ItemStack p_180461_2_, EnumFacing p_180461_3_) {
       if (p_180461_3_ == EnumFacing.DOWN && p_180461_1_ == 1) {
          Item item = p_180461_2_.getItem();
-         if (item != Items.WATER_BUCKET && item != Items.BUCKET) {
-            return false;
-         }
+          return item == Items.WATER_BUCKET || item == Items.BUCKET;
       }
 
       return true;

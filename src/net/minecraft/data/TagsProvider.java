@@ -39,7 +39,7 @@ public abstract class TagsProvider<T> implements IDataProvider {
       TagCollection<T> tagcollection = new TagCollection<>((p_200428_0_) -> {
          return false;
       }, (p_200430_0_) -> {
-         return (T)null;
+         return null;
       }, "", false, "generated");
 
       for(Entry<Tag<T>, Tag.Builder<T>> entry : this.tagToBuilder.entrySet()) {
@@ -55,7 +55,7 @@ public abstract class TagsProvider<T> implements IDataProvider {
          this.setCollection(tagcollection);
 
          try {
-            String s = GSON.toJson((JsonElement)jsonobject);
+            String s = GSON.toJson(jsonobject);
             String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
             if (!Objects.equals(p_200398_1_.getPreviousHash(path), s1) || !Files.exists(path)) {
                Files.createDirectories(path.getParent());

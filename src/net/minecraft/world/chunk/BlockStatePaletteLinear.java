@@ -44,7 +44,7 @@ public class BlockStatePaletteLinear<T> implements IBlockStatePalette<T> {
 
    @Nullable
    public T getBlockState(int p_186039_1_) {
-      return (T)(p_186039_1_ >= 0 && p_186039_1_ < this.arraySize ? this.states[p_186039_1_] : null);
+      return p_186039_1_ >= 0 && p_186039_1_ < this.arraySize ? this.states[p_186039_1_] : null;
    }
 
    @OnlyIn(Dist.CLIENT)

@@ -49,7 +49,7 @@ public class FunctionObject {
                ParseResults<CommandSource> parseresults = p_197000_1_.getServer().getCommandManager().getDispatcher().parse(stringreader, p_197000_1_.getCommandSource());
                if (parseresults.getReader().canRead()) {
                   if (parseresults.getExceptions().size() == 1) {
-                     throw (CommandSyntaxException)parseresults.getExceptions().values().iterator().next();
+                     throw parseresults.getExceptions().values().iterator().next();
                   }
 
                   if (parseresults.getContext().getRange().isEmpty()) {

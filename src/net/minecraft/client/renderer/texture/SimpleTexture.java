@@ -22,8 +22,7 @@ public class SimpleTexture extends AbstractTexture {
    public void loadTexture(IResourceManager p_195413_1_) throws IOException {
       try (
          IResource iresource = p_195413_1_.getResource(this.textureLocation);
-         NativeImage nativeimage = NativeImage.read(iresource.getInputStream());
-      ) {
+         NativeImage nativeimage = NativeImage.read(iresource.getInputStream())) {
          boolean flag = false;
          boolean flag1 = false;
          if (iresource.hasMetadata()) {

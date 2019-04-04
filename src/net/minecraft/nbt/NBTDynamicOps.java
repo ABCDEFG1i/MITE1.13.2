@@ -246,17 +246,17 @@ public class NBTDynamicOps implements DynamicOps<INBTBase> {
             ArrayList<Byte> arraylist2 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210815_0_) -> {
                return ((NBTTagByte)p_210815_0_).getByte();
             }));
-            return new NBTTagByteArray((List<Byte>)arraylist2);
+            return new NBTTagByteArray(arraylist2);
          } else if (inbtbase instanceof NBTTagInt) {
             ArrayList<Integer> arraylist1 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210818_0_) -> {
                return ((NBTTagInt)p_210818_0_).getInt();
             }));
-            return new NBTTagIntArray((List<Integer>)arraylist1);
+            return new NBTTagIntArray(arraylist1);
          } else if (inbtbase instanceof NBTTagLong) {
             ArrayList<Long> arraylist = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210816_0_) -> {
                return ((NBTTagLong)p_210816_0_).getLong();
             }));
-            return new NBTTagLongArray((List<Long>)arraylist);
+            return new NBTTagLongArray(arraylist);
          } else {
             NBTTagList nbttaglist = new NBTTagList();
 

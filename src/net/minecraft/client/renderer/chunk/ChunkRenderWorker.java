@@ -31,7 +31,7 @@ public class ChunkRenderWorker implements Runnable {
    private boolean shouldRun = true;
 
    public ChunkRenderWorker(ChunkRenderDispatcher p_i46201_1_) {
-      this(p_i46201_1_, (RegionRenderCacheBuilder)null);
+      this(p_i46201_1_, null);
    }
 
    public ChunkRenderWorker(ChunkRenderDispatcher p_i46202_1_, @Nullable RegionRenderCacheBuilder p_i46202_2_) {
@@ -61,7 +61,8 @@ public class ChunkRenderWorker implements Runnable {
       try {
          if (p_178474_1_.getStatus() != ChunkRenderTask.Status.PENDING) {
             if (!p_178474_1_.isFinished()) {
-               LOGGER.warn("Chunk render task was {} when I expected it to be pending; ignoring task", (Object)p_178474_1_.getStatus());
+               LOGGER.warn("Chunk render task was {} when I expected it to be pending; ignoring task",
+                       p_178474_1_.getStatus());
             }
 
             return;
@@ -106,7 +107,8 @@ public class ChunkRenderWorker implements Runnable {
          try {
             if (p_178474_1_.getStatus() != ChunkRenderTask.Status.COMPILING) {
                if (!p_178474_1_.isFinished()) {
-                  LOGGER.warn("Chunk render task was {} when I expected it to be compiling; aborting task", (Object)p_178474_1_.getStatus());
+                  LOGGER.warn("Chunk render task was {} when I expected it to be compiling; aborting task",
+                          p_178474_1_.getStatus());
                }
 
                this.freeRenderBuilder(p_178474_1_);
@@ -147,7 +149,8 @@ public class ChunkRenderWorker implements Runnable {
                      }
 
                      if (!p_178474_1_.isFinished()) {
-                        ChunkRenderWorker.LOGGER.warn("Chunk render task was {} when I expected it to be uploading; aborting task", (Object)p_178474_1_.getStatus());
+                        ChunkRenderWorker.LOGGER.warn("Chunk render task was {} when I expected it to be uploading; aborting task",
+                                p_178474_1_.getStatus());
                      }
                   } finally {
                      p_178474_1_.getLock().unlock();

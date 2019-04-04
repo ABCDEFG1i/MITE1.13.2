@@ -70,7 +70,6 @@ public class VanillaPack implements IResourcePack {
          try {
             set.addAll(this.func_195781_a(p_195758_3_, "minecraft", field_199754_a.resolve(p_195758_1_.getDirectoryName()).resolve("minecraft"), p_195758_2_, p_195758_4_));
          } catch (IOException var26) {
-            ;
          }
 
          if (p_195758_1_ == ResourcePackType.CLIENT_RESOURCES) {
@@ -79,7 +78,6 @@ public class VanillaPack implements IResourcePack {
             try {
                enumeration = field_211688_b.getClassLoader().getResources(p_195758_1_.getDirectoryName() + "/minecraft");
             } catch (IOException var25) {
-               ;
             }
 
             while(enumeration != null && enumeration.hasMoreElements()) {
@@ -89,7 +87,6 @@ public class VanillaPack implements IResourcePack {
                      set.addAll(this.func_195781_a(p_195758_3_, "minecraft", Paths.get(uri), p_195758_2_, p_195758_4_));
                   }
                } catch (IOException | URISyntaxException var24) {
-                  ;
                }
             }
          }
@@ -117,12 +114,11 @@ public class VanillaPack implements IResourcePack {
                set.addAll(this.func_195781_a(p_195758_3_, "minecraft", path1, p_195758_2_, p_195758_4_));
             }
          } else {
-            LOGGER.error("Unsupported scheme {} trying to list vanilla resources (NYI?)", (Object)uri1);
+            LOGGER.error("Unsupported scheme {} trying to list vanilla resources (NYI?)", uri1);
          }
       } catch (NoSuchFileException | FileNotFoundException var28) {
-         ;
       } catch (IOException | URISyntaxException urisyntaxexception) {
-         LOGGER.error("Couldn't get a list of all vanilla resources", (Throwable)urisyntaxexception);
+         LOGGER.error("Couldn't get a list of all vanilla resources", urisyntaxexception);
       }
 
       return set;
@@ -151,7 +147,6 @@ public class VanillaPack implements IResourcePack {
             try {
                return Files.newInputStream(path);
             } catch (IOException var7) {
-               ;
             }
          }
       }
@@ -183,10 +178,10 @@ public class VanillaPack implements IResourcePack {
    @Nullable
    public <T> T getMetadata(IMetadataSectionSerializer<T> p_195760_1_) throws IOException {
       try (InputStream inputstream = this.getRootResourceStream("pack.mcmeta")) {
-         Object object = AbstractResourcePack.<T>getResourceMetadata(p_195760_1_, inputstream);
+         Object object = AbstractResourcePack.getResourceMetadata(p_195760_1_, inputstream);
          return (T)object;
       } catch (FileNotFoundException | RuntimeException var16) {
-         return (T)null;
+         return null;
       }
    }
 

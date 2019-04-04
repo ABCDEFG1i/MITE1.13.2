@@ -68,13 +68,13 @@ public class LayerCustomHead implements LayerRenderer<EntityLivingBase> {
                } else if (nbttagcompound.hasKey("SkullOwner", 8)) {
                   String s = nbttagcompound.getString("SkullOwner");
                   if (!StringUtils.isBlank(s)) {
-                     gameprofile = TileEntitySkull.updateGameProfile(new GameProfile((UUID)null, s));
+                     gameprofile = TileEntitySkull.updateGameProfile(new GameProfile(null, s));
                      nbttagcompound.setTag("SkullOwner", NBTUtil.writeGameProfile(new NBTTagCompound(), gameprofile));
                   }
                }
             }
 
-            TileEntitySkullRenderer.instance.render(-0.5F, 0.0F, -0.5F, (EnumFacing)null, 180.0F, ((BlockAbstractSkull)((ItemBlock)item).getBlock()).getSkullType(), gameprofile, -1, p_177141_2_);
+            TileEntitySkullRenderer.instance.render(-0.5F, 0.0F, -0.5F, null, 180.0F, ((BlockAbstractSkull)((ItemBlock)item).getBlock()).getSkullType(), gameprofile, -1, p_177141_2_);
          } else if (!(item instanceof ItemArmor) || ((ItemArmor)item).getEquipmentSlot() != EntityEquipmentSlot.HEAD) {
             float f2 = 0.625F;
             GlStateManager.translatef(0.0F, -0.25F, 0.0F);

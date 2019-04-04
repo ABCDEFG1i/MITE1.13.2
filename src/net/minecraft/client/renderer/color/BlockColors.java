@@ -69,7 +69,7 @@ public class BlockColors {
    public int getColor(IBlockState p_189991_1_, World p_189991_2_, BlockPos p_189991_3_) {
       IBlockColor iblockcolor = this.colors.getByValue(IRegistry.field_212618_g.func_148757_b(p_189991_1_.getBlock()));
       if (iblockcolor != null) {
-         return iblockcolor.getColor(p_189991_1_, (IWorldReaderBase)null, (BlockPos)null, 0);
+         return iblockcolor.getColor(p_189991_1_, null, null, 0);
       } else {
          MaterialColor materialcolor = p_189991_1_.func_185909_g(p_189991_2_, p_189991_3_);
          return materialcolor != null ? materialcolor.colorValue : -1;

@@ -79,11 +79,7 @@ public class ItemPredicate {
          }
 
          PotionType potiontype = PotionUtils.getPotionFromItem(p_192493_1_);
-         if (this.potion != null && this.potion != potiontype) {
-            return false;
-         } else {
-            return true;
-         }
+          return this.potion == null || this.potion == potiontype;
       }
    }
 

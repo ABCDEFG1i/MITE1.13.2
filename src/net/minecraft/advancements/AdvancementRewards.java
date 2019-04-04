@@ -40,14 +40,14 @@ public class AdvancementRewards {
    }
 
    public void apply(EntityPlayerMP p_192113_1_) {
-      p_192113_1_.func_195068_e(this.experience);
+      p_192113_1_.addXpValue(this.experience);
       LootContext lootcontext = (new LootContext.Builder(p_192113_1_.getServerWorld())).withLootedEntity(p_192113_1_).withPosition(new BlockPos(p_192113_1_)).build();
       boolean flag = false;
 
       for(ResourceLocation resourcelocation : this.loot) {
          for(ItemStack itemstack : p_192113_1_.server.getLootTableManager().getLootTableFromLocation(resourcelocation).generateLootForPools(p_192113_1_.getRNG(), lootcontext)) {
             if (p_192113_1_.addItemStackToInventory(itemstack)) {
-               p_192113_1_.world.playSound((EntityPlayer)null, p_192113_1_.posX, p_192113_1_.posY, p_192113_1_.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((p_192113_1_.getRNG().nextFloat() - p_192113_1_.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+               p_192113_1_.world.playSound(null, p_192113_1_.posX, p_192113_1_.posY, p_192113_1_.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((p_192113_1_.getRNG().nextFloat() - p_192113_1_.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
                flag = true;
             } else {
                EntityItem entityitem = p_192113_1_.dropItem(itemstack, false);
@@ -76,7 +76,8 @@ public class AdvancementRewards {
    }
 
    public String toString() {
-      return "AdvancementRewards{experience=" + this.experience + ", loot=" + Arrays.toString((Object[])this.loot) + ", recipes=" + Arrays.toString((Object[])this.recipes) + ", function=" + this.function + '}';
+      return "AdvancementRewards{experience=" + this.experience + ", loot=" + Arrays.toString(this.loot) + ", recipes=" + Arrays.toString(
+              this.recipes) + ", function=" + this.function + '}';
    }
 
    public JsonElement serialize() {

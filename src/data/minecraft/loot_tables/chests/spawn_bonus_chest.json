@@ -1,16 +1,6 @@
 {
     "pools": [
         {
-            "rolls": 1,
-            "entries": [
-                {
-                    "type": "item",
-                    "name": "minecraft:wooden_pickaxe",
-                    "weight": 3
-                }
-            ]
-        },
-        {
             "rolls": 3,
             "entries": [
                 {

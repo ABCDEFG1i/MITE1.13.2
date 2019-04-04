@@ -562,9 +562,9 @@ public class GuiContainerCreative extends InventoryEffectRenderer {
 
          for(int i = 0; i < list1.size(); ++i) {
             if (i == 0) {
-               list1.set(i, p_146285_1_.getRarity().color + (String)list1.get(i));
+               list1.set(i, p_146285_1_.getRarity().color + list1.get(i));
             } else {
-               list1.set(i, TextFormatting.GRAY + (String)list1.get(i));
+               list1.set(i, TextFormatting.GRAY + list1.get(i));
             }
          }
 

@@ -33,7 +33,7 @@ public class BlockRail extends BlockRailBase {
    public IBlockState rotate(IBlockState p_185499_1_, Rotation p_185499_2_) {
       switch(p_185499_2_) {
       case CLOCKWISE_180:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_WEST);
          case ASCENDING_WEST:
@@ -52,7 +52,7 @@ public class BlockRail extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.SOUTH_WEST);
          }
       case COUNTERCLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_NORTH);
          case ASCENDING_WEST:
@@ -75,7 +75,7 @@ public class BlockRail extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.NORTH_SOUTH);
          }
       case CLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_SOUTH);
          case ASCENDING_WEST:

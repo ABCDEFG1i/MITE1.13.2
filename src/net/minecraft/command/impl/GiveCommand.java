@@ -44,7 +44,7 @@ public class GiveCommand {
                   entityitem1.makeFakeItem();
                }
 
-               entityplayermp.world.playSound((EntityPlayer)null, entityplayermp.posX, entityplayermp.posY, entityplayermp.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((entityplayermp.getRNG().nextFloat() - entityplayermp.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
+               entityplayermp.world.playSound(null, entityplayermp.posX, entityplayermp.posY, entityplayermp.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((entityplayermp.getRNG().nextFloat() - entityplayermp.getRNG().nextFloat()) * 0.7F + 1.0F) * 2.0F);
                entityplayermp.inventoryContainer.detectAndSendChanges();
             } else {
                EntityItem entityitem = entityplayermp.dropItem(itemstack, false);

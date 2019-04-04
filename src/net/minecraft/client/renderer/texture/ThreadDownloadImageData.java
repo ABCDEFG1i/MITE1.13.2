@@ -66,7 +66,7 @@ public class ThreadDownloadImageData extends SimpleTexture {
 
       if (this.imageThread == null) {
          if (this.cacheFile != null && this.cacheFile.isFile()) {
-            LOGGER.debug("Loading http texture from local cache ({})", (Object)this.cacheFile);
+            LOGGER.debug("Loading http texture from local cache ({})", this.cacheFile);
             NativeImage nativeimage = null;
 
             try {
@@ -126,7 +126,7 @@ public class ThreadDownloadImageData extends SimpleTexture {
                            ThreadDownloadImageData.this.func_195417_a(nativeimage_f);
                         });
                      } catch (IOException ioexception) {
-                        ThreadDownloadImageData.LOGGER.warn("Error while loading the skin texture", (Throwable)ioexception);
+                        ThreadDownloadImageData.LOGGER.warn("Error while loading the skin texture", ioexception);
                      } finally {
                         if (nativeimage != null) {
                            nativeimage.close();
@@ -139,7 +139,7 @@ public class ThreadDownloadImageData extends SimpleTexture {
                   return;
                }
             } catch (Exception exception) {
-               ThreadDownloadImageData.LOGGER.error("Couldn't download http texture", (Throwable)exception);
+               ThreadDownloadImageData.LOGGER.error("Couldn't download http texture", exception);
                return;
             } finally {
                if (httpurlconnection != null) {

@@ -321,9 +321,9 @@ public abstract class EntityLivingBase extends Entity {
 
       if (this.revengeTarget != null) {
          if (!this.revengeTarget.isEntityAlive()) {
-            this.setRevengeTarget((EntityLivingBase)null);
+            this.setRevengeTarget(null);
          } else if (this.ticksExisted - this.revengeTimer > 100) {
-            this.setRevengeTarget((EntityLivingBase)null);
+            this.setRevengeTarget(null);
          }
       }
 
@@ -479,7 +479,7 @@ public abstract class EntityLivingBase extends Entity {
          NBTTagList nbttaglist = new NBTTagList();
 
          for(PotionEffect potioneffect : this.activePotionsMap.values()) {
-            nbttaglist.add((INBTBase)potioneffect.write(new NBTTagCompound()));
+            nbttaglist.add(potioneffect.write(new NBTTagCompound()));
          }
 
          p_70014_1_.setTag("ActiveEffects", nbttaglist);
@@ -518,7 +518,7 @@ public abstract class EntityLivingBase extends Entity {
          ScorePlayerTeam scoreplayerteam = this.world.getScoreboard().getTeam(s);
          boolean flag = scoreplayerteam != null && this.world.getScoreboard().func_197901_a(this.getCachedUniqueIdString(), scoreplayerteam);
          if (!flag) {
-            LOGGER.warn("Unable to add mob to team \"{}\" (that team probably doesn't exist)", (Object)s);
+            LOGGER.warn("Unable to add mob to team \"{}\" (that team probably doesn't exist)", s);
          }
       }
 
@@ -545,7 +545,6 @@ public abstract class EntityLivingBase extends Entity {
             }
          }
       } catch (ConcurrentModificationException var11) {
-         ;
       }
 
       if (this.potionsNeedUpdate) {
@@ -662,9 +661,7 @@ public abstract class EntityLivingBase extends Entity {
    public boolean isPotionApplicable(PotionEffect p_70687_1_) {
       if (this.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
          Potion potion = p_70687_1_.getPotion();
-         if (potion == MobEffects.REGENERATION || potion == MobEffects.POISON) {
-            return false;
-         }
+          return potion != MobEffects.REGENERATION && potion != MobEffects.POISON;
       }
 
       return true;
@@ -932,9 +929,7 @@ public abstract class EntityLivingBase extends Entity {
             Vec3d vec3d1 = this.getLook(1.0F);
             Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(this.posX, this.posY, this.posZ)).normalize();
             vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
-            if (vec3d2.dotProduct(vec3d1) < 0.0D) {
-               return true;
-            }
+             return vec3d2.dotProduct(vec3d1) < 0.0D;
          }
       }
 
@@ -1041,9 +1036,8 @@ public abstract class EntityLivingBase extends Entity {
    private boolean canGoThroughtTrapDoorOnLadder(BlockPos p_184604_1_, IBlockState p_184604_2_) {
       if (p_184604_2_.get(BlockTrapDoor.OPEN)) {
          IBlockState iblockstate = this.world.getBlockState(p_184604_1_.down());
-         if (iblockstate.getBlock() == Blocks.LADDER && iblockstate.get(BlockLadder.FACING) == p_184604_2_.get(BlockTrapDoor.HORIZONTAL_FACING)) {
-            return true;
-         }
+          return iblockstate.getBlock() == Blocks.LADDER && iblockstate.get(BlockLadder.FACING) == p_184604_2_.get(
+                  BlockTrapDoor.HORIZONTAL_FACING);
       }
 
       return false;
@@ -1165,7 +1159,7 @@ public abstract class EntityLivingBase extends Entity {
       } else if (this.attackingPlayer != null) {
          return this.attackingPlayer;
       } else {
-         return this.revengeTarget != null ? this.revengeTarget : null;
+         return this.revengeTarget;
       }
    }
 

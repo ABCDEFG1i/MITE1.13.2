@@ -35,11 +35,11 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate {
    }
 
    protected void playClickOnSound(IWorld p_185507_1_, BlockPos p_185507_2_) {
-      p_185507_1_.playSound((EntityPlayer)null, p_185507_2_, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.90000004F);
+      p_185507_1_.playSound(null, p_185507_2_, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.90000004F);
    }
 
    protected void playClickOffSound(IWorld p_185508_1_, BlockPos p_185508_2_) {
-      p_185508_1_.playSound((EntityPlayer)null, p_185508_2_, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.75F);
+      p_185508_1_.playSound(null, p_185508_2_, SoundEvents.BLOCK_METAL_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.75F);
    }
 
    protected int getRedstoneStrength(IBlockState p_176576_1_) {

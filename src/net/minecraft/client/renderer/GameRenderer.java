@@ -325,7 +325,7 @@ public class GameRenderer implements AutoCloseable, IResourceManagerReloadListen
 
             if (this.field_78528_u != null && flag && vec3d.distanceTo(vec3d3) > 3.0D) {
                this.field_78528_u = null;
-               this.field_78531_r.objectMouseOver = new RayTraceResult(RayTraceResult.Type.MISS, vec3d3, (EnumFacing)null, new BlockPos(vec3d3));
+               this.field_78531_r.objectMouseOver = new RayTraceResult(RayTraceResult.Type.MISS, vec3d3, null, new BlockPos(vec3d3));
             }
 
             if (this.field_78528_u != null && (d2 < d1 || this.field_78531_r.objectMouseOver == null)) {
@@ -676,7 +676,7 @@ public class GameRenderer implements AutoCloseable, IResourceManagerReloadListen
                nativeimage.resizeSubRectTo(k, l, i, j, nativeimage1);
                nativeimage1.write(this.field_78531_r.getIntegratedServer().getWorldIconFile());
             } catch (IOException ioexception) {
-               field_147710_q.warn("Couldn't save auto screenshot", (Throwable)ioexception);
+               field_147710_q.warn("Couldn't save auto screenshot", ioexception);
             } finally {
                nativeimage.close();
             }

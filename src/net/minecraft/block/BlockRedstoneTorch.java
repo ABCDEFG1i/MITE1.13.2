@@ -74,7 +74,7 @@ public class BlockRedstoneTorch extends BlockTorch {
          if (p_196527_4_) {
             p_196527_1_.setBlockState(p_196527_2_, p_196527_0_.with(LIT, Boolean.valueOf(false)), 3);
             if (isBurnedOut(p_196527_1_, p_196527_2_, true)) {
-               p_196527_1_.playSound((EntityPlayer)null, p_196527_2_, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_196527_1_.rand.nextFloat() - p_196527_1_.rand.nextFloat()) * 0.8F);
+               p_196527_1_.playSound(null, p_196527_2_, SoundEvents.BLOCK_REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_196527_1_.rand.nextFloat() - p_196527_1_.rand.nextFloat()) * 0.8F);
 
                for(int i = 0; i < 5; ++i) {
                   double d0 = (double)p_196527_2_.getX() + p_196527_3_.nextDouble() * 0.6D + 0.2D;

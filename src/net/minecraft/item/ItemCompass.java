@@ -29,7 +29,7 @@ public class ItemCompass extends Item {
                return 0.0F;
             } else {
                boolean flag = p_call_3_ != null;
-               Entity entity = (Entity)(flag ? p_call_3_ : p_call_1_.getItemFrame());
+               Entity entity = flag ? p_call_3_ : p_call_1_.getItemFrame();
                if (p_call_2_ == null) {
                   p_call_2_ = entity.world;
                }

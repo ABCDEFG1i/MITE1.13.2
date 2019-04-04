@@ -61,7 +61,7 @@ public abstract class UserListEntryBan<T> extends UserListEntry<T> {
    public abstract ITextComponent func_199041_e();
 
    boolean hasBanExpired() {
-      return this.banEndDate == null ? false : this.banEndDate.before(new Date());
+      return this.banEndDate != null && this.banEndDate.before(new Date());
    }
 
    protected void onSerialization(JsonObject p_152641_1_) {
