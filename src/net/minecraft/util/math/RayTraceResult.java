@@ -39,9 +39,9 @@ public class RayTraceResult {
       return "HitResult{type=" + this.type + ", blockpos=" + this.blockPos + ", f=" + this.sideHit + ", pos=" + this.hitVec + ", entity=" + this.entity + '}';
    }
 
-   public static enum Type {
+   public enum Type {
       MISS,
       BLOCK,
-      ENTITY;
+      ENTITY
    }
 }

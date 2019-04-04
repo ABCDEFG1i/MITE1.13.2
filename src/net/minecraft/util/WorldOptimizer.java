@@ -45,7 +45,7 @@ public class WorldOptimizer {
 
    public WorldOptimizer(String p_i49804_1_, ISaveFormat p_i49804_2_, WorldInfo p_i49804_3_) {
       this.worldName = p_i49804_3_.getWorldName();
-      this.worldStorage = p_i49804_2_.getSaveLoader(p_i49804_1_, (MinecraftServer)null);
+      this.worldStorage = p_i49804_2_.getSaveLoader(p_i49804_1_, null);
       this.worldStorage.saveWorldInfo(p_i49804_3_);
       this.field_212222_d = new WorldSavedDataStorage(this.worldStorage);
       this.thread = field_212220_b.newThread(this::optimize);
@@ -65,7 +65,6 @@ public class WorldOptimizer {
       try {
          this.thread.join();
       } catch (InterruptedException var2) {
-         ;
       }
 
    }
@@ -128,7 +127,7 @@ public class WorldOptimizer {
 
       this.statusText = new TextComponentTranslation("optimizeWorld.stage.finished");
       i = Util.milliTime() - i;
-      LOGGER.info("World optimizaton finished after {} ms", (long)i);
+      LOGGER.info("World optimizaton finished after {} ms", i);
       map.values().forEach(AnvilChunkLoader::flush);
       this.field_212222_d.saveAllData();
       this.worldStorage.flush();

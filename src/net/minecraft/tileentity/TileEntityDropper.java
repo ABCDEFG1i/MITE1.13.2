@@ -10,7 +10,7 @@ public class TileEntityDropper extends TileEntityDispenser {
 
    public ITextComponent getName() {
       ITextComponent itextcomponent = this.getCustomName();
-      return (ITextComponent)(itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.dropper"));
+      return itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.dropper");
    }
 
    public String getGuiID() {

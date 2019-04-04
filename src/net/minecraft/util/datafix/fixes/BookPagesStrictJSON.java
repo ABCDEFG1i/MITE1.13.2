@@ -37,14 +37,12 @@ public class BookPagesStrictJSON extends DataFix {
                               itextcomponent = new TextComponentString("");
                            }
                         } catch (JsonParseException var6) {
-                           ;
                         }
 
                         if (itextcomponent == null) {
                            try {
                               itextcomponent = ITextComponent.Serializer.fromJson(s);
                            } catch (JsonParseException var5) {
-                              ;
                            }
                         }
 
@@ -52,7 +50,6 @@ public class BookPagesStrictJSON extends DataFix {
                            try {
                               itextcomponent = ITextComponent.Serializer.fromJsonLenient(s);
                            } catch (JsonParseException var4) {
-                              ;
                            }
                         }
 

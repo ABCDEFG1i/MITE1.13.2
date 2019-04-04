@@ -52,7 +52,7 @@ public class OverworldBiomeProvider extends BiomeProvider {
       int i1 = k - i + 1;
       int j1 = l - j + 1;
       Set<Biome> set = Sets.newHashSet();
-      Collections.addAll(set, this.genBiomes.generateBiomes(i, j, i1, j1, (Biome)null));
+      Collections.addAll(set, this.genBiomes.generateBiomes(i, j, i1, j1, null));
       return set;
    }
 
@@ -64,7 +64,7 @@ public class OverworldBiomeProvider extends BiomeProvider {
       int l = p_180630_2_ + p_180630_3_ >> 2;
       int i1 = k - i + 1;
       int j1 = l - j + 1;
-      Biome[] abiome = this.genBiomes.generateBiomes(i, j, i1, j1, (Biome)null);
+      Biome[] abiome = this.genBiomes.generateBiomes(i, j, i1, j1, null);
       BlockPos blockpos = null;
       int k1 = 0;
 

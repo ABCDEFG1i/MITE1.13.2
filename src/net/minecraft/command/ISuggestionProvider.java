@@ -193,7 +193,7 @@ public interface ISuggestionProvider {
       return p_197008_1_.buildFuture();
    }
 
-   public static class Coordinates {
+   class Coordinates {
       public static final ISuggestionProvider.Coordinates field_209004_a = new ISuggestionProvider.Coordinates("^", "^", "^");
       public static final ISuggestionProvider.Coordinates field_209005_b = new ISuggestionProvider.Coordinates("~", "~", "~");
       public final String x;

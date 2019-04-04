@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mite1.13.2" default="all">
+  
+  
+  <property file="mite1.13.2.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.lzma"/>
+    <include name="*.ear"/>
+    <include name="*.klib"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.authlib-1.5.25.classpath">
+    <pathelement location="${basedir}/libs/authlib-1.5.25.jar"/>
+    <pathelement location="${basedir}/libs/brigadier-1.0.14.jar"/>
+    <pathelement location="${basedir}/libs/codecjorbis-20101023.jar"/>
+    <pathelement location="${basedir}/libs/codecwav-20101023.jar"/>
+    <pathelement location="${basedir}/libs/commons-codec-1.10.jar"/>
+    <pathelement location="${basedir}/libs/commons-compress-1.8.1.jar"/>
+    <pathelement location="${basedir}/libs/commons-io-2.5.jar"/>
+    <pathelement location="${basedir}/libs/commons-lang3-3.5.jar"/>
+    <pathelement location="${basedir}/libs/commons-logging-1.1.3.jar"/>
+    <pathelement location="${basedir}/libs/datafixerupper-1.0.19.jar"/>
+    <pathelement location="${basedir}/libs/fastutil-8.2.1.jar"/>
+    <pathelement location="${basedir}/libs/gson-2.8.0.jar"/>
+    <pathelement location="${basedir}/libs/guava-21.0.jar"/>
+    <pathelement location="G:/JDK/jre/lib/rt.jar"/>
+    <pathelement location="${basedir}/libs/httpclient-4.3.3.jar"/>
+    <pathelement location="${basedir}/libs/httpcore-4.3.2.jar"/>
+    <pathelement location="${basedir}/libs/icu4j-core-mojang-51.2.jar"/>
+    <pathelement location="${basedir}/libs/jinput-2.0.5.jar"/>
+    <pathelement location="${basedir}/libs/jna-4.4.0.jar"/>
+    <pathelement location="${basedir}/libs/jopt-simple-5.0.3.jar"/>
+    <pathelement location="${basedir}/libs/jsr305-3.0.1.jar"/>
+    <pathelement location="${basedir}/libs/jutils-1.0.0.jar"/>
+    <pathelement location="${basedir}/libs/libraryjavasound-20101123.jar"/>
+    <pathelement location="${basedir}/libs/log4j-api-2.8.1.jar"/>
+    <pathelement location="${basedir}/libs/log4j-core-2.8.1.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-glfw-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-glfw-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-jemalloc-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-jemalloc-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-openal-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-openal-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-opengl-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-opengl-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-stb-3.1.6-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/lwjgl-stb-3.1.6.jar"/>
+    <pathelement location="${basedir}/libs/netty-all-4.1.25.Final.jar"/>
+    <pathelement location="${basedir}/libs/oshi-core-1.1.jar"/>
+    <pathelement location="${basedir}/libs/patchy-1.1.jar"/>
+    <pathelement location="${basedir}/libs/platform-3.4.0.jar"/>
+    <pathelement location="${basedir}/libs/realms-1.13.9.jar"/>
+    <pathelement location="${basedir}/libs/soundsystem-20120107.jar"/>
+    <pathelement location="${basedir}/libs/text2speech-1.10.3-natives-windows.jar"/>
+    <pathelement location="${basedir}/libs/text2speech-1.10.3.jar"/>
+  </path>
+  
+  <path id="library.natives.classpath"/>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module MITE1.13.2 -->
+  
+  <dirname property="module.mite1.13.2.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.mite1.13.2" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mite1.13.2" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mite1.13.2" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mite1.13.2" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="mite1.13.2.output.dir" value="${module.mite1.13.2.basedir}/out/production/MITE1.13.2"/>
+  <property name="mite1.13.2.testoutput.dir" value="${module.mite1.13.2.basedir}/out/test/MITE1.13.2"/>
+  
+  <path id="mite1.13.2.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mite1.13.2.module.production.classpath">
+    <path refid="${module.jdk.classpath.mite1.13.2}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.runtime.production.module.classpath">
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.module.classpath">
+    <path refid="${module.jdk.classpath.mite1.13.2}"/>
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  <path id="mite1.13.2.runtime.module.classpath">
+    <pathelement location="${mite1.13.2.testoutput.dir}"/>
+    <pathelement location="${mite1.13.2.output.dir}"/>
+    <path refid="library.authlib-1.5.25.classpath"/>
+    <path refid="library.natives.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mite1.13.2">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mite1.13.2">
+    <patternset refid="excluded.from.module.mite1.13.2"/>
+  </patternset>
+  
+  <path id="mite1.13.2.module.sourcepath">
+    <dirset dir="${module.mite1.13.2.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <target name="refreshMinecraftDataFiles" description="Rebuild data files from vanilla providers">
+    <exec command="java -cp H:\IDEAProjects\MITE1.13.2\out\production\MITE1.13.2\;H:\IDEAProjects\MITE1.13.2\libs\jopt-simple-5.0.3.jar;H:\IDEAProjects\MITE1.13.2\libs\log4j-api-2.8.1.jar;H:\IDEAProjects\MITE1.13.2\libs\log4j-core-2.8.1.jar;H:\IDEAProjects\MITE1.13.2\libs\gson-2.8.0.jar;H:\IDEAProjects\MITE1.13.2\libs\brigadier-1.0.14.jar;H:\IDEAProjects\MITE1.13.2\libs\guava-21.0.jar;H:\IDEAProjects\MITE1.13.2\libs\fastutil-8.2.1.jar;H:\IDEAProjects\MITE1.13.2\libs\commons-lang3-3.5.jar;H:\IDEAProjects\MITE1.13.2\libs\commons-io-2.5.jar;H:\IDEAProjects\MITE1.13.2\libs\netty-all-4.1.25.Final.jar;H:\IDEAProjects\MITE1.13.2\libs\datafixerupper-1.0.19.jar net.minecraft.data.Main --server --client --output H:\IDEAProjects\MITE1.13.2\src"/>
+    <delete dir="out/production/MITE1.13.2/data/minecraft/advancements"/>
+    <delete dir="out/production/MITE1.13.2/data/minecraft/recipes" />
+    <delete dir="out/production/MITE1.13.2/data/minecraft/tags" />
+    <copydir src="src/data" dest="out/production/MITE1.13.2/data"/>
+  </target>
+
+
+  <target name="compile.module.mite1.13.2.production" description="Compile module MITE1.13.2; production classes">
+    <mkdir dir="${mite1.13.2.output.dir}"/>
+    <javac destdir="${mite1.13.2.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mite1.13.2}/javac">
+      <compilerarg line="${compiler.args.mite1.13.2}"/>
+      <bootclasspath refid="mite1.13.2.module.bootclasspath"/>
+      <classpath refid="mite1.13.2.module.production.classpath"/>
+      <src refid="mite1.13.2.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mite1.13.2"/>
+    </javac>
+    
+    <copy todir="${mite1.13.2.output.dir}">
+      <fileset dir="${module.mite1.13.2.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="compile.module.mite1.13.2" depends="compile.module.mite1.13.2.production" description="Compile module MITE1.13.2">
+
+  </target>
+
+  <target name="clean.module.mite1.13.2" description="cleanup module">
+    <delete dir="${mite1.13.2.output.dir}"/>
+    <delete dir="${mite1.13.2.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.mite1.13.2" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.mite1.13.2" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.mite1.13.2:jar" value="E:/MC/Install/.minecraft/versions/MITE1.13.2"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.MITE1.13.2.jar" value="${artifacts.temp.dir}/MITE1.13.2.jar"/>
+  </target>
+  
+  <target name="artifact.mite1.13.2:jar" depends="init.artifacts" description="Build &#39;MITE1.13.2:jar&#39; artifact">
+    <property name="artifact.temp.output.mite1.13.2:jar" value="${artifacts.temp.dir}/MITE1_13_2_jar"/>
+    <mkdir dir="${artifact.temp.output.mite1.13.2:jar}"/>
+    <jar destfile="${temp.jar.path.MITE1.13.2.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset file="${basedir}/src/assets/.mcassetsroot" prefix="assets"/>
+      <zipfileset dir="${basedir}/src/assets" prefix="assets"/>
+      <zipfileset dir="${basedir}/src/data" prefix="data"/>
+      <zipfileset file="${basedir}/src/data/.mcassetsroot" prefix="data"/>
+      <zipfileset dir="${basedir}/out/production/MITE1.13.2/mcp" prefix="mcp"/>
+      <zipfileset dir="${basedir}/out/production/MITE1.13.2/net" prefix="net"/>
+      <zipfileset file="${basedir}/src/META-INF/MANIFEST.MF" prefix="META-INF"/>
+      <zipfileset file="${basedir}/src/Log4j-config.xsd"/>
+      <zipfileset file="${basedir}/src/Log4j-events.dtd"/>
+      <zipfileset file="${basedir}/src/Log4j-events.xsd"/>
+      <zipfileset file="${basedir}/src/Log4j-levels.xsd"/>
+      <zipfileset file="${basedir}/src/log4j2.xml"/>
+      <zipfileset file="${basedir}/src/log4j2_server.xml"/>
+      <zipfileset file="${basedir}/src/pack.mcmeta"/>
+      <zipfileset file="${basedir}/src/pack.png"/>
+    </jar>
+    <copy file="${temp.jar.path.MITE1.13.2.jar}" tofile="${artifact.temp.output.mite1.13.2:jar}/MITE1.13.2.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.mite1.13.2:jar" description="Build all artifacts">
+    <mkdir dir="${artifact.output.mite1.13.2:jar}"/>
+    <copy todir="${artifact.output.mite1.13.2:jar}">
+      <fileset dir="${artifact.temp.output.mite1.13.2:jar}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

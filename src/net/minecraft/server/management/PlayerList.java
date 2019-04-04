@@ -8,10 +8,7 @@ import io.netty.buffer.Unpooled;
 import java.io.File;
 import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import javax.annotation.Nullable;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.PlayerAdvancements;
@@ -117,7 +114,7 @@ public abstract class PlayerList {
       LOGGER.info("{}[{}] logged in with entity id {} at ({}, {}, {})", p_72355_2_.getName().getString(), s1, p_72355_2_.getEntityId(), p_72355_2_.posX, p_72355_2_.posY, p_72355_2_.posZ);
       WorldServer worldserver = this.server.func_71218_a(p_72355_2_.dimension);
       WorldInfo worldinfo = worldserver.getWorldInfo();
-      this.setPlayerGameTypeBasedOnOther(p_72355_2_, (EntityPlayerMP)null, worldserver);
+      this.setPlayerGameTypeBasedOnOther(p_72355_2_, null, worldserver);
       NetHandlerPlayServer nethandlerplayserver = new NetHandlerPlayServer(this.server, p_72355_1_, p_72355_2_);
       nethandlerplayserver.sendPacket(new SPacketJoinGame(p_72355_2_.getEntityId(), p_72355_2_.interactionManager.getGameType(), worldinfo.isHardcoreModeEnabled(), worldserver.dimension.getType(), worldserver.getDifficulty(), this.getMaxPlayers(), worldinfo.getTerrainType(), worldserver.getGameRules().getBoolean("reducedDebugInfo")));
       nethandlerplayserver.sendPacket(new SPacketCustomPayload(SPacketCustomPayload.BRAND, (new PacketBuffer(Unpooled.buffer())).writeString(this.getServerInstance().getServerModName())));
@@ -292,7 +289,7 @@ public abstract class PlayerList {
       }
 
       worldserver.spawnEntity(p_72377_1_);
-      this.preparePlayer(p_72377_1_, (WorldServer)null);
+      this.preparePlayer(p_72377_1_, null);
       this.server.getCustomBossEvents().onPlayerLogin(p_72377_1_);
    }
 
@@ -390,7 +387,7 @@ public abstract class PlayerList {
       return new EntityPlayerMP(this.server, this.server.func_71218_a(DimensionType.OVERWORLD), p_148545_1_, playerinteractionmanager);
    }
 
-   public EntityPlayerMP func_72368_a(EntityPlayerMP p_72368_1_, DimensionType p_72368_2_, boolean p_72368_3_) {
+   public EntityPlayerMP respawnPlayerForUser(EntityPlayerMP p_72368_1_, DimensionType p_72368_2_, boolean p_72368_3_) {
       p_72368_1_.getServerWorld().getEntityTracker().removePlayerFromTrackers(p_72368_1_);
       p_72368_1_.getServerWorld().getEntityTracker().untrack(p_72368_1_);
       p_72368_1_.getServerWorld().getPlayerChunkMap().removePlayer(p_72368_1_);
@@ -399,20 +396,22 @@ public abstract class PlayerList {
       BlockPos blockpos = p_72368_1_.getBedLocation();
       boolean flag = p_72368_1_.isSpawnForced();
       p_72368_1_.dimension = p_72368_2_;
-      PlayerInteractionManager playerinteractionmanager;
+      Object playerinteractionmanager;
       if (this.server.isDemo()) {
          playerinteractionmanager = new DemoPlayerInteractionManager(this.server.func_71218_a(p_72368_1_.dimension));
       } else {
          playerinteractionmanager = new PlayerInteractionManager(this.server.func_71218_a(p_72368_1_.dimension));
       }
 
-      EntityPlayerMP entityplayermp = new EntityPlayerMP(this.server, this.server.func_71218_a(p_72368_1_.dimension), p_72368_1_.getGameProfile(), playerinteractionmanager);
+      EntityPlayerMP entityplayermp = new EntityPlayerMP(this.server, this.server.func_71218_a(p_72368_1_.dimension), p_72368_1_.getGameProfile(), (PlayerInteractionManager)playerinteractionmanager);
       entityplayermp.connection = p_72368_1_.connection;
       entityplayermp.copyFrom(p_72368_1_, p_72368_3_);
+      entityplayermp.respawnXpLevel = p_72368_1_.respawnXpLevel;
+      entityplayermp.addExperienceLevel(entityplayermp.respawnXpLevel);
       entityplayermp.setEntityId(p_72368_1_.getEntityId());
       entityplayermp.setPrimaryHand(p_72368_1_.getPrimaryHand());
 
-      for(String s : p_72368_1_.getTags()) {
+      for (String s : p_72368_1_.getTags()) {
          entityplayermp.addTag(s);
       }
 

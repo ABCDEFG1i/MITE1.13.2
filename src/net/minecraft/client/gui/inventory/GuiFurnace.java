@@ -91,7 +91,8 @@ public class GuiFurnace extends GuiContainer implements IRecipeShownListener {
       if (this.recipeBook.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_)) {
          return true;
       } else {
-         return this.canRenderRecipeBook && this.recipeBook.isVisible() ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+         return this.canRenderRecipeBook && this.recipeBook.isVisible() || super.mouseClicked(p_mouseClicked_1_,
+                 p_mouseClicked_3_, p_mouseClicked_5_);
       }
    }
 
@@ -101,7 +102,8 @@ public class GuiFurnace extends GuiContainer implements IRecipeShownListener {
    }
 
    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
-      return this.recipeBook.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) ? false : super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+      return !this.recipeBook.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) && super.keyPressed(
+              p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
    }
 
    protected boolean func_195361_a(double p_195361_1_, double p_195361_3_, int p_195361_5_, int p_195361_6_, int p_195361_7_) {
@@ -110,7 +112,8 @@ public class GuiFurnace extends GuiContainer implements IRecipeShownListener {
    }
 
    public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {
-      return this.recipeBook.charTyped(p_charTyped_1_, p_charTyped_2_) ? true : super.charTyped(p_charTyped_1_, p_charTyped_2_);
+      return this.recipeBook.charTyped(p_charTyped_1_, p_charTyped_2_) || super.charTyped(p_charTyped_1_,
+              p_charTyped_2_);
    }
 
    public void recipesUpdated() {

@@ -308,7 +308,7 @@ public enum EnumConnectionState {
    private final int id;
    private final Map<EnumPacketDirection, BiMap<Integer, Class<? extends Packet<?>>>> directionMaps = Maps.newEnumMap(EnumPacketDirection.class);
 
-   private EnumConnectionState(int p_i45152_3_) {
+   EnumConnectionState(int p_i45152_3_) {
       this.id = p_i45152_3_;
    }
 
@@ -355,7 +355,7 @@ public enum EnumConnectionState {
       for(EnumConnectionState enumconnectionstate : values()) {
          int i = enumconnectionstate.getId();
          if (i < -1 || i > 2) {
-            throw new Error("Invalid protocol ID " + Integer.toString(i));
+            throw new Error("Invalid protocol ID " + i);
          }
 
          STATES_BY_ID[i - -1] = enumconnectionstate;

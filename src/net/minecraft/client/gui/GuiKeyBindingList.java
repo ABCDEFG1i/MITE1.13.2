@@ -20,7 +20,7 @@ public class GuiKeyBindingList extends GuiListExtended<GuiKeyBindingList.Entry> 
       this.controlsScreen = p_i45031_1_;
       this.mc = p_i45031_2_;
       KeyBinding[] akeybinding = ArrayUtils.clone(p_i45031_2_.gameSettings.keyBindings);
-      Arrays.sort((Object[])akeybinding);
+      Arrays.sort(akeybinding);
       String s = null;
 
       for(KeyBinding keybinding : akeybinding) {

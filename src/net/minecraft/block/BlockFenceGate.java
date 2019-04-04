@@ -127,7 +127,7 @@ public class BlockFenceGate extends BlockHorizontal {
          if (p_189540_1_.get(POWERED) != flag) {
             p_189540_2_.setBlockState(p_189540_3_, p_189540_1_.with(POWERED, Boolean.valueOf(flag)).with(OPEN, Boolean.valueOf(flag)), 2);
             if (p_189540_1_.get(OPEN) != flag) {
-               p_189540_2_.playEvent((EntityPlayer)null, flag ? 1008 : 1014, p_189540_3_, 0);
+               p_189540_2_.playEvent(null, flag ? 1008 : 1014, p_189540_3_, 0);
             }
          }
 

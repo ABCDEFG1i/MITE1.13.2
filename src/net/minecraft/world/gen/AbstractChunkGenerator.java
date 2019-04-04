@@ -50,7 +50,8 @@ public abstract class AbstractChunkGenerator<C extends IChunkGenSettings> implem
 
       for(int l = j - 8; l <= j + 8; ++l) {
          for(int i1 = k - 8; i1 <= k + 8; ++i1) {
-            List<WorldCarverWrapper<?>> list = p_202091_1_.getChunkProvider().getChunkGenerator().getBiomeProvider().getBiome(new BlockPos(l * 16, 0, i1 * 16), (Biome)null).getCarvers(p_202091_2_);
+            List<WorldCarverWrapper<?>> list = p_202091_1_.getChunkProvider().getChunkGenerator().getBiomeProvider().getBiome(new BlockPos(l * 16, 0, i1 * 16),
+                    null).getCarvers(p_202091_2_);
             ListIterator<WorldCarverWrapper<?>> listiterator = list.listIterator();
 
             while(listiterator.hasNext()) {

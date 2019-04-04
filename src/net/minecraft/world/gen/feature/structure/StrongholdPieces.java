@@ -1297,11 +1297,11 @@ public class StrongholdPieces {
          return p_74991_0_ != null && p_74991_0_.minY > 10;
       }
 
-      public static enum Door {
+      public enum Door {
          OPENING,
          WOOD_DOOR,
          GRATES,
-         IRON_DOOR;
+         IRON_DOOR
       }
    }
 }

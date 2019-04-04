@@ -18,7 +18,6 @@ public class DesertWellsFeature extends Feature<NoFeatureConfig> {
 
    public boolean func_212245_a(IWorld p_212245_1_, IChunkGenerator<? extends IChunkGenSettings> p_212245_2_, Random p_212245_3_, BlockPos p_212245_4_, NoFeatureConfig p_212245_5_) {
       for(p_212245_4_ = p_212245_4_.up(); p_212245_1_.isAirBlock(p_212245_4_) && p_212245_4_.getY() > 2; p_212245_4_ = p_212245_4_.down()) {
-         ;
       }
 
       if (!IS_SAND.test(p_212245_1_.getBlockState(p_212245_4_))) {

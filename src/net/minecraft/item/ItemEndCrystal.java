@@ -33,7 +33,7 @@ public class ItemEndCrystal extends Item {
             double d0 = (double)blockpos1.getX();
             double d1 = (double)blockpos1.getY();
             double d2 = (double)blockpos1.getZ();
-            List<Entity> list = world.func_72839_b((Entity)null, new AxisAlignedBB(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
+            List<Entity> list = world.func_72839_b(null, new AxisAlignedBB(d0, d1, d2, d0 + 1.0D, d1 + 2.0D, d2 + 1.0D));
             if (!list.isEmpty()) {
                return EnumActionResult.FAIL;
             } else {

@@ -21,9 +21,9 @@ public class Rotations {
 
    public NBTTagList writeToNBT() {
       NBTTagList nbttaglist = new NBTTagList();
-      nbttaglist.add((INBTBase)(new NBTTagFloat(this.x)));
-      nbttaglist.add((INBTBase)(new NBTTagFloat(this.y)));
-      nbttaglist.add((INBTBase)(new NBTTagFloat(this.z)));
+      nbttaglist.add(new NBTTagFloat(this.x));
+      nbttaglist.add(new NBTTagFloat(this.y));
+      nbttaglist.add(new NBTTagFloat(this.z));
       return nbttaglist;
    }
 

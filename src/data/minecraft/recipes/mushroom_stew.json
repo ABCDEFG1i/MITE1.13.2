@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:brown_mushroom"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:mushroom_stew"
+  }
+}

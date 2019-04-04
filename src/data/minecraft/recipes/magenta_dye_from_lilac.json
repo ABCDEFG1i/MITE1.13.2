@@ -1,0 +1,14 @@
+{
+  "type": "crafting_shapeless",
+  "group": "magenta_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:lilac"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:magenta_dye",
+    "count": 2
+  }
+}

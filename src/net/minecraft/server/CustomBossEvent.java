@@ -143,7 +143,7 @@ public class CustomBossEvent extends BossInfoServer {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(UUID uuid : this.players) {
-         nbttaglist.add((INBTBase)NBTUtil.createUUIDTag(uuid));
+         nbttaglist.add(NBTUtil.createUUIDTag(uuid));
       }
 
       nbttagcompound.setTag("Players", nbttaglist);

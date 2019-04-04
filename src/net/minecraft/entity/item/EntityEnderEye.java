@@ -93,7 +93,6 @@ public class EntityEnderEye extends Entity {
       this.rotationYaw = (float)(MathHelper.atan2(this.motionX, this.motionZ) * (double)(180F / (float)Math.PI));
 
       for(this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f) * (double)(180F / (float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-         ;
       }
 
       while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {

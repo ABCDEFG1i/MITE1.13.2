@@ -82,7 +82,8 @@ public class Village {
       for(int i = 0; i < 10; ++i) {
          BlockPos blockpos = p_208059_1_.add(this.world.rand.nextInt(16) - 8, this.world.rand.nextInt(6) - 3, this.world.rand.nextInt(16) - 8);
          if (this.isBlockPosWithinSqVillageRadius(blockpos)) {
-            EntityIronGolem entityirongolem = EntityType.IRON_GOLEM.makeEntity(this.world, (NBTTagCompound)null, (ITextComponent)null, (EntityPlayer)null, blockpos, false, false);
+            EntityIronGolem entityirongolem = EntityType.IRON_GOLEM.makeEntity(this.world, null, null,
+                    null, blockpos, false, false);
             if (entityirongolem != null) {
                if (entityirongolem.func_205020_a(this.world, false) && entityirongolem.isNotColliding(this.world)) {
                   this.world.spawnEntity(entityirongolem);
@@ -390,7 +391,7 @@ public class Village {
          nbttagcompound.setInteger("IDX", villagedoorinfo.getInsideOffsetX());
          nbttagcompound.setInteger("IDZ", villagedoorinfo.getInsideOffsetZ());
          nbttagcompound.setInteger("TS", villagedoorinfo.getLastActivityTimestamp());
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       p_82689_1_.setTag("Doors", nbttaglist);
@@ -405,10 +406,9 @@ public class Village {
             if (gameprofile != null) {
                nbttagcompound1.setString("UUID", gameprofile.getId().toString());
                nbttagcompound1.setInteger("S", this.playerReputation.get(s));
-               nbttaglist1.add((INBTBase)nbttagcompound1);
+               nbttaglist1.add(nbttagcompound1);
             }
          } catch (RuntimeException var9) {
-            ;
          }
       }
 

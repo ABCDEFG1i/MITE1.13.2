@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    " B ",
+    "###"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "#": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:brewing_stand"
+  }
+}

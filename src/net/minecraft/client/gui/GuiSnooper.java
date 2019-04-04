@@ -58,13 +58,13 @@ public class GuiSnooper extends GuiScreen {
       boolean flag = this.mc.getIntegratedServer() != null && this.mc.getIntegratedServer().getSnooper() != null;
 
       for(Entry<String, String> entry : (new TreeMap<>(this.mc.getSnooper().getCurrentStats())).entrySet()) {
-         this.keys.add((flag ? "C " : "") + (String)entry.getKey());
+         this.keys.add((flag ? "C " : "") + entry.getKey());
          this.values.add(this.fontRenderer.trimStringToWidth(entry.getValue(), this.width - 220));
       }
 
       if (flag) {
          for(Entry<String, String> entry1 : (new TreeMap<>(this.mc.getIntegratedServer().getSnooper().getCurrentStats())).entrySet()) {
-            this.keys.add("S " + (String)entry1.getKey());
+            this.keys.add("S " + entry1.getKey());
             this.values.add(this.fontRenderer.trimStringToWidth(entry1.getValue(), this.width - 220));
          }
       }

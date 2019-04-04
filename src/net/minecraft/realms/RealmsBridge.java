@@ -31,7 +31,7 @@ public class RealmsBridge extends RealmsScreen {
          LOGGER.error("Realms module missing");
          this.showMissingRealmsErrorScreen();
       } catch (Exception exception) {
-         LOGGER.error("Failed to load Realms module", (Throwable)exception);
+         LOGGER.error("Failed to load Realms module", exception);
          this.showMissingRealmsErrorScreen();
       }
 
@@ -48,7 +48,7 @@ public class RealmsBridge extends RealmsScreen {
       } catch (ClassNotFoundException var5) {
          LOGGER.error("Realms module missing");
       } catch (Exception exception) {
-         LOGGER.error("Failed to load Realms module", (Throwable)exception);
+         LOGGER.error("Failed to load Realms module", exception);
       }
 
       return null;

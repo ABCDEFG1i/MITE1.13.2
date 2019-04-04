@@ -27,7 +27,7 @@ public class EnchantmentThorns extends Enchantment {
    }
 
    public boolean canApply(ItemStack p_92089_1_) {
-      return p_92089_1_.getItem() instanceof ItemArmor ? true : super.canApply(p_92089_1_);
+      return p_92089_1_.getItem() instanceof ItemArmor || super.canApply(p_92089_1_);
    }
 
    public void onUserHurt(EntityLivingBase p_151367_1_, Entity p_151367_2_, int p_151367_3_) {

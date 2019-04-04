@@ -57,7 +57,7 @@ public class TileEntityType<T extends TileEntity> {
             throw illegalstateexception;
          }
 
-         LOGGER.warn("No data fixer registered for block entity {}", (Object)p_200966_0_);
+         LOGGER.warn("No data fixer registered for block entity {}", p_200966_0_);
       }
 
       TileEntityType<T> tileentitytype = p_200966_1_.build(type);
@@ -75,7 +75,7 @@ public class TileEntityType<T extends TileEntity> {
 
    @Nullable
    public T create() {
-      return (T)(this.factory.get());
+      return this.factory.get();
    }
 
    @Nullable

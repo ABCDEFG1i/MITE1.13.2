@@ -10,7 +10,7 @@ public enum AdvancementState {
 
    private final int id;
 
-   private AdvancementState(int p_i47384_3_) {
+   AdvancementState(int p_i47384_3_) {
       this.id = p_i47384_3_;
    }
 

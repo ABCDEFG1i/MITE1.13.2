@@ -136,7 +136,7 @@ public class ItemCameraTransforms {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum TransformType {
+   public enum TransformType {
       NONE,
       THIRD_PERSON_LEFT_HAND,
       THIRD_PERSON_RIGHT_HAND,
@@ -145,6 +145,6 @@ public class ItemCameraTransforms {
       HEAD,
       GUI,
       GROUND,
-      FIXED;
+      FIXED
    }
 }

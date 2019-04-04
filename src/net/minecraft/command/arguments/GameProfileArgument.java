@@ -68,7 +68,6 @@ public class GameProfileArgument implements ArgumentType<GameProfileArgument.IPr
          try {
             entityselectorparser.parse();
          } catch (CommandSyntaxException var6) {
-            ;
          }
 
          return entityselectorparser.func_201993_a(p_listSuggestions_2_, (p_201943_1_) -> {

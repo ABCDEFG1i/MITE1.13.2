@@ -60,9 +60,9 @@ public class SystemToast implements IToast {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Type {
+   public enum Type {
       TUTORIAL_HINT,
       NARRATOR_TOGGLE,
-      WORLD_BACKUP;
+      WORLD_BACKUP
    }
 }

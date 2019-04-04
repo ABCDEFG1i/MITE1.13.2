@@ -31,7 +31,7 @@ public class ItemGlassBottle extends Item {
       if (!list.isEmpty()) {
          EntityAreaEffectCloud entityareaeffectcloud = list.get(0);
          entityareaeffectcloud.setRadius(entityareaeffectcloud.getRadius() - 0.5F);
-         p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+         p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ITEM_BOTTLE_FILL_DRAGONBREATH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
          return new ActionResult<>(EnumActionResult.SUCCESS, this.turnBottleIntoItem(itemstack, p_77659_2_, new ItemStack(Items.DRAGON_BREATH)));
       } else {
          RayTraceResult raytraceresult = this.rayTrace(p_77659_1_, p_77659_2_, true);

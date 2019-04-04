@@ -29,7 +29,8 @@ public class RConConsoleSource implements ICommandSource {
 
    public CommandSource func_195540_f() {
       WorldServer worldserver = this.server.func_71218_a(DimensionType.OVERWORLD);
-      return new CommandSource(this, new Vec3d(worldserver.getSpawnPoint()), Vec2f.ZERO, worldserver, 4, "Recon", new TextComponentString("Rcon"), this.server, (Entity)null);
+      return new CommandSource(this, new Vec3d(worldserver.getSpawnPoint()), Vec2f.ZERO, worldserver, 4, "Recon", new TextComponentString("Rcon"), this.server,
+              null);
    }
 
    public void sendMessage(ITextComponent p_145747_1_) {

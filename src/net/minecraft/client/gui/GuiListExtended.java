@@ -44,7 +44,7 @@ public abstract class GuiListExtended<E extends GuiListExtended.IGuiListEntry<E>
    }
 
    private E getListEntry(int p_148180_1_) {
-      return (E)(this.getChildren().get(p_148180_1_));
+      return this.getChildren().get(p_148180_1_);
    }
 
    protected final void addEntry(E p_195085_1_) {
@@ -95,7 +95,7 @@ public abstract class GuiListExtended<E extends GuiListExtended.IGuiListEntry<E>
       }
 
       public E get(int p_get_1_) {
-         return (E)(this.innerList.get(p_get_1_));
+         return this.innerList.get(p_get_1_);
       }
 
       public int size() {
@@ -115,7 +115,6 @@ public abstract class GuiListExtended<E extends GuiListExtended.IGuiListEntry<E>
          p_add_2_.index = p_add_1_;
 
          for(int i = p_add_1_ + 1; i < this.size(); this.get(i).index = i++) {
-            ;
          }
 
       }
@@ -124,7 +123,6 @@ public abstract class GuiListExtended<E extends GuiListExtended.IGuiListEntry<E>
          E e = this.innerList.remove(p_remove_1_);
 
          for(int i = p_remove_1_; i < this.size(); this.get(i).index = i++) {
-            ;
          }
 
          return e;

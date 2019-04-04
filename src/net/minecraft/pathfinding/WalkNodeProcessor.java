@@ -55,7 +55,6 @@ public class WalkNodeProcessor extends NodeProcessor {
       } else {
          BlockPos blockpos;
          for(blockpos = new BlockPos(this.entity); (this.blockaccess.getBlockState(blockpos).isAir() || this.blockaccess.getBlockState(blockpos).allowsMovement(this.blockaccess, blockpos, PathType.LAND)) && blockpos.getY() > 0; blockpos = blockpos.down()) {
-            ;
          }
 
          i = blockpos.up().getY();
@@ -175,7 +174,7 @@ public class WalkNodeProcessor extends NodeProcessor {
                   double d2 = (double)(p_186332_1_ - p_186332_7_.getXOffset()) + 0.5D;
                   double d3 = (double)(p_186332_3_ - p_186332_7_.getZOffset()) + 0.5D;
                   AxisAlignedBB axisalignedbb = new AxisAlignedBB(d2 - d1, (double)p_186332_2_ + 0.001D, d3 - d1, d2 + d1, (double)this.entity.height + func_197682_a(this.blockaccess, blockpos.up()) - 0.002D, d3 + d1);
-                  if (!this.entity.world.isCollisionBoxesEmpty((Entity)null, axisalignedbb)) {
+                  if (!this.entity.world.isCollisionBoxesEmpty(null, axisalignedbb)) {
                      pathpoint = null;
                   }
                }
@@ -201,7 +200,7 @@ public class WalkNodeProcessor extends NodeProcessor {
 
             if (pathnodetype == PathNodeType.OPEN) {
                AxisAlignedBB axisalignedbb1 = new AxisAlignedBB((double)p_186332_1_ - d1 + 0.5D, (double)p_186332_2_ + 0.001D, (double)p_186332_3_ - d1 + 0.5D, (double)p_186332_1_ + d1 + 0.5D, (double)((float)p_186332_2_ + this.entity.height), (double)p_186332_3_ + d1 + 0.5D);
-               if (!this.entity.world.isCollisionBoxesEmpty((Entity)null, axisalignedbb1)) {
+               if (!this.entity.world.isCollisionBoxesEmpty(null, axisalignedbb1)) {
                   return null;
                }
 

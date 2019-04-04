@@ -210,7 +210,7 @@ public class EntityBlaze extends EntityMob {
 
                if (this.attackStep > 1) {
                   float f = MathHelper.sqrt(MathHelper.sqrt(d0)) * 0.5F;
-                  this.blaze.world.playEvent((EntityPlayer)null, 1018, new BlockPos((int)this.blaze.posX, (int)this.blaze.posY, (int)this.blaze.posZ), 0);
+                  this.blaze.world.playEvent(null, 1018, new BlockPos((int)this.blaze.posX, (int)this.blaze.posY, (int)this.blaze.posZ), 0);
 
                   for(int i = 0; i < 1; ++i) {
                      EntitySmallFireball entitysmallfireball = new EntitySmallFireball(this.blaze.world, this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double)f, d2, d3 + this.blaze.getRNG().nextGaussian() * (double)f);

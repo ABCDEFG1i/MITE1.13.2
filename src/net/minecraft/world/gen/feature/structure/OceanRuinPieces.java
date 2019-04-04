@@ -173,7 +173,8 @@ public class OceanRuinPieces {
             EntityDrowned entitydrowned = new EntityDrowned(p_186175_3_.getWorld());
             entitydrowned.enablePersistence();
             entitydrowned.moveToBlockPosAndAngles(p_186175_2_, 0.0F, 0.0F);
-            entitydrowned.onInitialSpawn(p_186175_3_.getDifficultyForLocation(p_186175_2_), (IEntityLivingData)null, (NBTTagCompound)null);
+            entitydrowned.onInitialSpawn(p_186175_3_.getDifficultyForLocation(p_186175_2_), null,
+                    null);
             p_186175_3_.spawnEntity(entitydrowned);
             if (p_186175_2_.getY() > p_186175_3_.getSeaLevel()) {
                p_186175_3_.setBlockState(p_186175_2_, Blocks.AIR.getDefaultState(), 2);

@@ -41,12 +41,14 @@ public class EndCityPieces {
             } else if (i == 1) {
                endcitypieces$citytemplate = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, new BlockPos(-1, 0, -1), "second_floor_2", rotation, false));
                endcitypieces$citytemplate = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, new BlockPos(-1, 8, -1), "second_roof", rotation, false));
-               EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate, (BlockPos)null, p_191086_5_, p_191086_6_);
+               EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate,
+                       null, p_191086_5_, p_191086_6_);
             } else if (i == 2) {
                endcitypieces$citytemplate = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, new BlockPos(-1, 0, -1), "second_floor_2", rotation, false));
                endcitypieces$citytemplate = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, new BlockPos(-1, 4, -1), "third_floor_2", rotation, false));
                endcitypieces$citytemplate = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, new BlockPos(-1, 8, -1), "third_roof", rotation, true));
-               EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate, (BlockPos)null, p_191086_5_, p_191086_6_);
+               EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate,
+                       null, p_191086_5_, p_191086_6_);
             }
 
             return true;
@@ -76,14 +78,16 @@ public class EndCityPieces {
             for(Tuple<Rotation, BlockPos> tuple : EndCityPieces.TOWER_BRIDGES) {
                if (p_191086_6_.nextBoolean()) {
                   EndCityPieces.CityTemplate endcitypieces$citytemplate2 = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate1, tuple.getB(), "bridge_end", rotation.add(tuple.getA()), true));
-                  EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_BRIDGE_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate2, (BlockPos)null, p_191086_5_, p_191086_6_);
+                  EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_BRIDGE_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate2,
+                          null, p_191086_5_, p_191086_6_);
                }
             }
 
             EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, lvt_8_1_, new BlockPos(-1, 4, -1), "tower_top", rotation, true));
          } else {
             if (p_191086_2_ != 7) {
-               return EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.FAT_TOWER_GENERATOR, p_191086_2_ + 1, lvt_8_1_, (BlockPos)null, p_191086_5_, p_191086_6_);
+               return EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.FAT_TOWER_GENERATOR, p_191086_2_ + 1, lvt_8_1_,
+                       null, p_191086_5_, p_191086_6_);
             }
 
             EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, lvt_8_1_, new BlockPos(-1, 4, -1), "tower_top", rotation, true));
@@ -149,7 +153,8 @@ public class EndCityPieces {
             for(Tuple<Rotation, BlockPos> tuple : EndCityPieces.FAT_TOWER_BRIDGES) {
                if (p_191086_6_.nextBoolean()) {
                   EndCityPieces.CityTemplate endcitypieces$citytemplate1 = EndCityPieces.addHelper(p_191086_5_, EndCityPieces.addPiece(p_191086_1_, endcitypieces$citytemplate, tuple.getB(), "bridge_end", rotation.add(tuple.getA()), true));
-                  EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_BRIDGE_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate1, (BlockPos)null, p_191086_5_, p_191086_6_);
+                  EndCityPieces.recursiveChildren(p_191086_1_, EndCityPieces.TOWER_BRIDGE_GENERATOR, p_191086_2_ + 1, endcitypieces$citytemplate1,
+                          null, p_191086_5_, p_191086_6_);
                }
             }
          }
@@ -179,7 +184,7 @@ public class EndCityPieces {
       endcitypieces$citytemplate = addHelper(p_191087_3_, addPiece(p_191087_0_, endcitypieces$citytemplate, new BlockPos(-1, 0, -1), "second_floor_1", p_191087_2_, false));
       endcitypieces$citytemplate = addHelper(p_191087_3_, addPiece(p_191087_0_, endcitypieces$citytemplate, new BlockPos(-1, 4, -1), "third_floor_1", p_191087_2_, false));
       endcitypieces$citytemplate = addHelper(p_191087_3_, addPiece(p_191087_0_, endcitypieces$citytemplate, new BlockPos(-1, 8, -1), "third_roof", p_191087_2_, true));
-      recursiveChildren(p_191087_0_, TOWER_GENERATOR, 1, endcitypieces$citytemplate, (BlockPos)null, p_191087_3_, p_191087_4_);
+      recursiveChildren(p_191087_0_, TOWER_GENERATOR, 1, endcitypieces$citytemplate, null, p_191087_3_, p_191087_4_);
    }
 
    private static EndCityPieces.CityTemplate addHelper(List<StructurePiece> p_189935_0_, EndCityPieces.CityTemplate p_189935_1_) {

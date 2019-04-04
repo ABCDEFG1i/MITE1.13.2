@@ -116,12 +116,11 @@ public class EntityArgument implements ArgumentType<EntitySelector> {
          try {
             entityselectorparser.parse();
          } catch (CommandSyntaxException var7) {
-            ;
          }
 
          return entityselectorparser.func_201993_a(p_listSuggestions_2_, (p_201942_2_) -> {
             Collection<String> collection = isuggestionprovider.getPlayerNames();
-            Iterable<String> iterable = (Iterable<String>)(this.playersOnly ? collection : Iterables.concat(collection, isuggestionprovider.getTargetedEntity()));
+            Iterable<String> iterable = this.playersOnly ? collection : Iterables.concat(collection, isuggestionprovider.getTargetedEntity());
             ISuggestionProvider.suggest(iterable, p_201942_2_);
          });
       } else {

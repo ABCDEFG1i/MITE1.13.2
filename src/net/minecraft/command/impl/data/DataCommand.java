@@ -88,7 +88,7 @@ public class DataCommand {
             throw GET_UNKNOWN_EXCEPTION.create(p_201228_2_.toString());
          }
 
-         i = ((NBTTagString)inbtbase).getString().length();
+         i = inbtbase.getString().length();
       }
 
       p_201228_0_.sendFeedback(p_201228_1_.getQueryMessage(inbtbase), false);

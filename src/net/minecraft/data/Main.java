@@ -1,5 +1,6 @@
 package net.minecraft.data;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,15 +30,40 @@ public class Main {
          boolean flag1 = optionset.has(optionspecbuilder) || optionset.has(optionspecbuilder4);
          boolean flag2 = optionset.has(optionspecbuilder2) || optionset.has(optionspecbuilder4);
          boolean flag3 = optionset.has(optionspecbuilder3) || optionset.has(optionspecbuilder4);
-         DataGenerator datagenerator = makeGenerator(path, optionset.valuesOf(argumentacceptingoptionspec1).stream().map((p_200263_0_) -> {
-            return Paths.get(p_200263_0_);
-         }).collect(Collectors.toList()), flag, flag1, flag2, flag3);
+         deleteDir(path.toString()+"\\data");
+         DataGenerator datagenerator = makeGenerator(path, optionset.valuesOf(argumentacceptingoptionspec1).stream().map((p_200263_0_) -> Paths.get(p_200263_0_)).collect(Collectors.toList()), flag, flag1, flag2, flag3);
          datagenerator.run();
       } else {
          optionparser.printHelpOn(System.out);
       }
    }
 
+   private static void deleteDir(String dirPath)
+   {
+      System.out.println(dirPath);
+      File file = new File(dirPath);
+      if(file.isFile())
+      {
+         file.delete();
+      }else
+      {
+         File[] files = file.listFiles();
+         if(files == null)
+         {
+            file.delete();
+         }else
+         {
+            for (File value : files) {
+               String path =value.getAbsolutePath();
+               if (path.contains("loot_tables")||path.contains("structures")||path.contains(".mcassetsroot")){
+                  continue;
+               }
+               deleteDir(value.getAbsolutePath());
+            }
+            file.delete();
+         }
+      }
+   }
    public static DataGenerator makeGenerator(Path p_200264_0_, Collection<Path> p_200264_1_, boolean p_200264_2_, boolean p_200264_3_, boolean p_200264_4_, boolean p_200264_5_) {
       DataGenerator datagenerator = new DataGenerator(p_200264_0_, p_200264_1_);
       if (p_200264_2_ || p_200264_3_) {

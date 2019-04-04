@@ -49,7 +49,7 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
    }
 
    public TileEntityShulkerBox() {
-      this((EnumDyeColor)null);
+      this(null);
       this.needsColorFromWorld = true;
    }
 
@@ -110,7 +110,7 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
       if (iblockstate.getBlock() instanceof BlockShulkerBox) {
          EnumFacing enumfacing = iblockstate.get(BlockShulkerBox.FACING);
          AxisAlignedBB axisalignedbb = this.getTopBoundingBox(enumfacing).offset(this.pos);
-         List<Entity> list = this.world.func_72839_b((Entity)null, axisalignedbb);
+         List<Entity> list = this.world.func_72839_b(null, axisalignedbb);
          if (!list.isEmpty()) {
             for(int i = 0; i < list.size(); ++i) {
                Entity entity = list.get(i);
@@ -190,7 +190,7 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
          ++this.openCount;
          this.world.addBlockEvent(this.pos, this.getBlockState().getBlock(), 1, this.openCount);
          if (this.openCount == 1) {
-            this.world.playSound((EntityPlayer)null, this.pos, SoundEvents.BLOCK_SHULKER_BOX_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+            this.world.playSound(null, this.pos, SoundEvents.BLOCK_SHULKER_BOX_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
          }
       }
 
@@ -201,7 +201,7 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
          --this.openCount;
          this.world.addBlockEvent(this.pos, this.getBlockState().getBlock(), 1, this.openCount);
          if (this.openCount <= 0) {
-            this.world.playSound((EntityPlayer)null, this.pos, SoundEvents.BLOCK_SHULKER_BOX_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+            this.world.playSound(null, this.pos, SoundEvents.BLOCK_SHULKER_BOX_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
          }
       }
 
@@ -217,7 +217,7 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
 
    public ITextComponent getName() {
       ITextComponent itextcomponent = this.getCustomName();
-      return (ITextComponent)(itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.shulkerBox"));
+      return itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.shulkerBox");
    }
 
    public void readFromNBT(NBTTagCompound p_145839_1_) {
@@ -329,10 +329,10 @@ public class TileEntityShulkerBox extends TileEntityLockableLoot implements ISid
       return !this.isDestroyedByCreativePlayer() || !this.isEmpty() || this.hasCustomName() || this.lootTable != null;
    }
 
-   public static enum AnimationStatus {
+   public enum AnimationStatus {
       CLOSED,
       OPENING,
       OPENED,
-      CLOSING;
+      CLOSING
    }
 }

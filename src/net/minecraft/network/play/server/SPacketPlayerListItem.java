@@ -73,21 +73,21 @@ public class SPacketPlayerListItem implements Packet<INetHandlerPlayClient> {
             }
             break;
          case UPDATE_GAME_MODE:
-            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), (String)null);
+            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), null);
             gametype = GameType.getByID(p_148837_1_.readVarInt());
             break;
          case UPDATE_LATENCY:
-            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), (String)null);
+            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), null);
             k = p_148837_1_.readVarInt();
             break;
          case UPDATE_DISPLAY_NAME:
-            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), (String)null);
+            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), null);
             if (p_148837_1_.readBoolean()) {
                itextcomponent = p_148837_1_.readTextComponent();
             }
             break;
          case REMOVE_PLAYER:
-            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), (String)null);
+            gameprofile = new GameProfile(p_148837_1_.readUniqueId(), null);
          }
 
          this.players.add(new SPacketPlayerListItem.AddPlayerData(gameprofile, k, gametype, itextcomponent));
@@ -168,12 +168,12 @@ public class SPacketPlayerListItem implements Packet<INetHandlerPlayClient> {
       return MoreObjects.toStringHelper(this).add("action", this.action).add("entries", this.players).toString();
    }
 
-   public static enum Action {
+   public enum Action {
       ADD_PLAYER,
       UPDATE_GAME_MODE,
       UPDATE_LATENCY,
       UPDATE_DISPLAY_NAME,
-      REMOVE_PLAYER;
+      REMOVE_PLAYER
    }
 
    public class AddPlayerData {

@@ -104,7 +104,7 @@ public class TileEntitySkullRenderer extends TileEntityRenderer<TileEntitySkull>
          GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
       }
 
-      modelbase.render((Entity)null, p_199355_9_, 0.0F, 0.0F, p_199355_5_, 0.0F, 0.0625F);
+      modelbase.render(null, p_199355_9_, 0.0F, 0.0F, p_199355_5_, 0.0F, 0.0625F);
       GlStateManager.popMatrix();
       if (p_199355_8_ >= 0) {
          GlStateManager.matrixMode(5890);

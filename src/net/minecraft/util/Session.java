@@ -47,12 +47,12 @@ public class Session {
          UUID uuid = UUIDTypeAdapter.fromString(this.getPlayerID());
          return new GameProfile(uuid, this.getUsername());
       } catch (IllegalArgumentException var2) {
-         return new GameProfile((UUID)null, this.getUsername());
+         return new GameProfile(null, this.getUsername());
       }
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Type {
+   public enum Type {
       LEGACY("legacy"),
       MOJANG("mojang");
 
@@ -61,7 +61,7 @@ public class Session {
       }, Function.identity()));
       private final String sessionType;
 
-      private Type(String p_i1096_3_) {
+      Type(String p_i1096_3_) {
          this.sessionType = p_i1096_3_;
       }
 

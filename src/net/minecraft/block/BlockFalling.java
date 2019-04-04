@@ -54,7 +54,6 @@ public class BlockFalling extends Block {
 
             BlockPos blockpos;
             for(blockpos = p_176503_2_.down(); canFallThrough(p_176503_1_.getBlockState(blockpos)) && blockpos.getY() > 0; blockpos = blockpos.down()) {
-               ;
             }
 
             if (blockpos.getY() > 0) {

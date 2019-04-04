@@ -115,7 +115,6 @@ public class JsonToNBT {
             return new NBTTagByte((byte)0);
          }
       } catch (NumberFormatException var3) {
-         ;
       }
 
       return new NBTTagString(p_193596_1_);

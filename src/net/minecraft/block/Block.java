@@ -1,13 +1,24 @@
 package net.minecraft.block;
 
+import com.google.common.collect.UnmodifiableIterator;
 import it.unimi.dsi.fastutil.objects.Object2ByteLinkedOpenHashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.trees.*;
+import net.minecraft.block.trees.AcaciaTree;
+import net.minecraft.block.trees.BirchTree;
+import net.minecraft.block.trees.DarkOakTree;
+import net.minecraft.block.trees.JungleTree;
+import net.minecraft.block.trees.OakTree;
+import net.minecraft.block.trees.SpruceTree;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -20,7 +31,12 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Fluids;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.StateContainer;
 import net.minecraft.stats.StatList;
@@ -28,7 +44,17 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ObjectIntIdentityMap;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -39,17 +65,16 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.*;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
+import net.minecraft.world.IWorldReaderBase;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
-import java.util.stream.Stream;
 
 public class Block implements IItemProvider {
     public static final ObjectIntIdentityMap<IBlockState> BLOCK_STATE_IDS = new ObjectIntIdentityMap<>();
@@ -101,14 +126,10 @@ public class Block implements IItemProvider {
 
     @Nullable
     public static RayTraceResult collisionRayTrace(IBlockState p_180636_0_, World p_180636_1_, BlockPos p_180636_2_, Vec3d p_180636_3_, Vec3d p_180636_4_) {
-        RayTraceResult raytraceresult = p_180636_0_.getShape(p_180636_1_, p_180636_2_).func_212433_a(p_180636_3_,
-                                                                                                     p_180636_4_,
-                                                                                                     p_180636_2_);
+        RayTraceResult raytraceresult = p_180636_0_.getShape(p_180636_1_, p_180636_2_).func_212433_a(p_180636_3_, p_180636_4_, p_180636_2_);
         if (raytraceresult != null) {
-            RayTraceResult raytraceresult1 = p_180636_0_.getRaytraceShape(p_180636_1_, p_180636_2_).func_212433_a(
-                    p_180636_3_, p_180636_4_, p_180636_2_);
-            if (raytraceresult1 != null && raytraceresult1.hitVec.subtract(p_180636_3_).lengthSquared() <
-                                           raytraceresult.hitVec.subtract(p_180636_3_).lengthSquared()) {
+            RayTraceResult raytraceresult1 = p_180636_0_.getRaytraceShape(p_180636_1_, p_180636_2_).func_212433_a(p_180636_3_, p_180636_4_, p_180636_2_);
+            if (raytraceresult1 != null && raytraceresult1.hitVec.subtract(p_180636_3_).lengthSquared() < raytraceresult.hitVec.subtract(p_180636_3_).lengthSquared()) {
                 raytraceresult.sideHit = raytraceresult1.sideHit;
             }
         }
@@ -122,15 +143,10 @@ public class Block implements IItemProvider {
     }
 
     public static IBlockState func_199601_a(IBlockState p_199601_0_, IBlockState p_199601_1_, World p_199601_2_, BlockPos p_199601_3_) {
-        VoxelShape voxelshape = VoxelShapes.func_197882_b(p_199601_0_.getCollisionShape(p_199601_2_, p_199601_3_),
-                                                          p_199601_1_.getCollisionShape(p_199601_2_, p_199601_3_),
-                                                          IBooleanFunction.ONLY_SECOND).withOffset(
-                (double) p_199601_3_.getX(), (double) p_199601_3_.getY(), (double) p_199601_3_.getZ());
+        VoxelShape voxelshape = VoxelShapes.func_197882_b(p_199601_0_.getCollisionShape(p_199601_2_, p_199601_3_), p_199601_1_.getCollisionShape(p_199601_2_, p_199601_3_), IBooleanFunction.ONLY_SECOND).withOffset((double)p_199601_3_.getX(), (double)p_199601_3_.getY(), (double)p_199601_3_.getZ());
 
-        for (Entity entity : p_199601_2_.func_72839_b(null, voxelshape.getBoundingBox())) {
-            double d0 = VoxelShapes.func_212437_a(EnumFacing.Axis.Y,
-                                                  entity.getEntityBoundingBox().offset(0.0D, 1.0D, 0.0D),
-                                                  Stream.of(voxelshape), -1.0D);
+        for(Entity entity : p_199601_2_.func_72839_b(null, voxelshape.getBoundingBox())) {
+            double d0 = VoxelShapes.func_212437_a(EnumFacing.Axis.Y, entity.getEntityBoundingBox().offset(0.0D, 1.0D, 0.0D), Stream.of(voxelshape), -1.0D);
             entity.setPositionAndUpdate(entity.posX, entity.posY + 1.0D + d0, entity.posZ);
         }
 
@@ -138,7 +154,7 @@ public class Block implements IItemProvider {
     }
 
     public static Block getBlockFromItem(@Nullable Item p_149634_0_) {
-        return p_149634_0_ instanceof ItemBlock ? ((ItemBlock) p_149634_0_).getBlock() : Blocks.AIR;
+        return p_149634_0_ instanceof ItemBlock ? ((ItemBlock)p_149634_0_).getBlock() : Blocks.AIR;
     }
 
     public static IBlockState getStateById(int p_196257_0_) {
@@ -159,11 +175,9 @@ public class Block implements IItemProvider {
         IBlockState iblockstate = p_199770_0_;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
-        for (EnumFacing enumfacing : field_212556_a) {
+        for(EnumFacing enumfacing : field_212556_a) {
             blockpos$mutableblockpos.setPos(p_199770_2_).move(enumfacing);
-            iblockstate = iblockstate.updatePostPlacement(enumfacing,
-                                                          p_199770_1_.getBlockState(blockpos$mutableblockpos),
-                                                          p_199770_1_, p_199770_2_, blockpos$mutableblockpos);
+            iblockstate = iblockstate.updatePostPlacement(enumfacing, p_199770_1_.getBlockState(blockpos$mutableblockpos), p_199770_1_, p_199770_2_, blockpos$mutableblockpos);
         }
 
         return iblockstate;
@@ -174,15 +188,11 @@ public class Block implements IItemProvider {
     }
 
     public static boolean isExceptBlockForAttachWithPiston(Block p_193382_0_) {
-        return isExceptionBlockForAttaching(p_193382_0_) || p_193382_0_ == Blocks.PISTON ||
-               p_193382_0_ == Blocks.STICKY_PISTON || p_193382_0_ == Blocks.PISTON_HEAD;
+        return isExceptionBlockForAttaching(p_193382_0_) || p_193382_0_ == Blocks.PISTON || p_193382_0_ == Blocks.STICKY_PISTON || p_193382_0_ == Blocks.PISTON_HEAD;
     }
 
     protected static boolean isExceptionBlockForAttaching(Block p_193384_0_) {
-        return p_193384_0_ instanceof BlockShulkerBox || p_193384_0_ instanceof BlockLeaves || p_193384_0_.isIn(
-                BlockTags.TRAPDOORS) || p_193384_0_ instanceof BlockStainedGlass || p_193384_0_ == Blocks.BEACON ||
-               p_193384_0_ == Blocks.CAULDRON || p_193384_0_ == Blocks.GLASS || p_193384_0_ == Blocks.GLOWSTONE ||
-               p_193384_0_ == Blocks.ICE || p_193384_0_ == Blocks.SEA_LANTERN || p_193384_0_ == Blocks.CONDUIT;
+        return p_193384_0_ instanceof BlockShulkerBox || p_193384_0_ instanceof BlockLeaves || p_193384_0_.isIn(BlockTags.TRAPDOORS) || p_193384_0_ instanceof BlockStainedGlass || p_193384_0_ == Blocks.BEACON || p_193384_0_ == Blocks.CAULDRON || p_193384_0_ == Blocks.GLASS || p_193384_0_ == Blocks.GLOWSTONE || p_193384_0_ == Blocks.ICE || p_193384_0_ == Blocks.SEA_LANTERN || p_193384_0_ == Blocks.CONDUIT;
     }
 
     public static boolean isOpaque(VoxelShape p_208062_0_) {
@@ -190,13 +200,11 @@ public class Block implements IItemProvider {
     }
 
     public static boolean isRock(Block p_196252_0_) {
-        return p_196252_0_ == Blocks.STONE || p_196252_0_ == Blocks.GRANITE || p_196252_0_ == Blocks.DIORITE ||
-               p_196252_0_ == Blocks.ANDESITE;
+        return p_196252_0_ == Blocks.STONE || p_196252_0_ == Blocks.GRANITE || p_196252_0_ == Blocks.DIORITE || p_196252_0_ == Blocks.ANDESITE;
     }
 
     public static VoxelShape makeCuboidShape(double p_208617_0_, double p_208617_2_, double p_208617_4_, double p_208617_6_, double p_208617_8_, double p_208617_10_) {
-        return VoxelShapes.func_197873_a(p_208617_0_ / 16.0D, p_208617_2_ / 16.0D, p_208617_4_ / 16.0D,
-                                         p_208617_6_ / 16.0D, p_208617_8_ / 16.0D, p_208617_10_ / 16.0D);
+        return VoxelShapes.func_197873_a(p_208617_0_ / 16.0D, p_208617_2_ / 16.0D, p_208617_4_ / 16.0D, p_208617_6_ / 16.0D, p_208617_8_ / 16.0D, p_208617_10_ / 16.0D);
     }
 
     private static void register(ResourceLocation p_196249_0_, Block p_196249_1_) {
@@ -210,378 +218,152 @@ public class Block implements IItemProvider {
     public static void registerBlocks() {
         Block air = new BlockAir(Block.Properties.createBlockProperties(Material.AIR).setNonSolid());
         register(IRegistry.field_212618_g.func_212609_b(), air);
-        Block stone = new BlockStone(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                                     .setHardnessAndResistance(1.5F, 6.0F));
+        Block stone = new BlockStone(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(1.5F, 6.0F));
         register("stone", stone);
-        register("granite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIRT)
-                                                      .setHardnessAndResistance(1.5F, 6.0F)));
-        register("polished_granite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIRT)
-                                                               .setHardnessAndResistance(1.5F, 6.0F)));
-        register("diorite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                                      .setHardnessAndResistance(1.5F, 6.0F)));
-        register("polished_diorite", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("andesite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                                       .setHardnessAndResistance(1.5F, 6.0F)));
-        register("polished_andesite", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("grass_block", new BlockGrass(Block.Properties.createBlockProperties(Material.GRASS).needsRandomTick()
-                                                               .setHardnessAndResistance(0.6F)
-                                                               .setSoundType(SoundType.PLANT)));
-        register("dirt", new BlockFalling(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT)
-                                                   .setHardnessAndResistance(0.5F).setSoundType(SoundType.GROUND)));
-        register("coarse_dirt", new Block(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT)
-                                                          .setHardnessAndResistance(0.5F)
-                                                          .setSoundType(SoundType.GROUND)));
-        register("podzol", new BlockDirtSnowy(Block.Properties.createBlockProperties(Material.GROUND,
-                                                                                     MaterialColor.OBSIDIAN)
-                                                              .setHardnessAndResistance(0.5F)
-                                                              .setSoundType(SoundType.GROUND)));
-        Block cobblestone = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.0F, 6.0F));
+        register("granite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIRT).setHardnessAndResistance(1.5F, 6.0F)));
+        register("polished_granite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIRT).setHardnessAndResistance(1.5F, 6.0F)));
+        register("diorite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(1.5F, 6.0F)));
+        register("polished_diorite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(1.5F, 6.0F)));
+        register("andesite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(1.5F, 6.0F)));
+        register("polished_andesite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(1.5F, 6.0F)));
+        register("grass_block", new BlockGrass(Block.Properties.createBlockProperties(Material.GRASS).needsRandomTick().setHardnessAndResistance(2.1F).setSoundType(SoundType.PLANT)));
+        register("dirt", new BlockFalling(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT).setHardnessAndResistance(1.9F).setSoundType(SoundType.GROUND)));
+        register("coarse_dirt", new Block(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.DIRT).setHardnessAndResistance(2.1F).setSoundType(SoundType.GROUND)));
+        register("podzol", new BlockDirtSnowy(Block.Properties.createBlockProperties(Material.GROUND, MaterialColor.OBSIDIAN).setHardnessAndResistance(1.9F).setSoundType(SoundType.GROUND)));
+        Block cobblestone = new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.0F, 6.0F));
         register("cobblestone", cobblestone);
-        Block oakPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD)
-                                                    .setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
-        Block sprucePlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN)
-                                                       .setHardnessAndResistance(2.0F, 3.0F)
-                                                       .setSoundType(SoundType.WOOD));
-        Block birchPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND)
-                                                      .setHardnessAndResistance(2.0F, 3.0F)
-                                                      .setSoundType(SoundType.WOOD));
-        Block junglePlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT)
-                                                       .setHardnessAndResistance(2.0F, 3.0F)
-                                                       .setSoundType(SoundType.WOOD));
-        Block acaciaPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE)
-                                                       .setHardnessAndResistance(2.0F, 3.0F)
-                                                       .setSoundType(SoundType.WOOD));
-        Block darkOakPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN)
-                                                        .setHardnessAndResistance(2.0F, 3.0F)
-                                                        .setSoundType(SoundType.WOOD));
+        Block oakPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
+        Block sprucePlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
+        Block birchPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
+        Block junglePlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
+        Block acaciaPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
+        Block darkOakPlanks = new Block(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD));
         register("oak_planks", oakPlanks);
         register("spruce_planks", sprucePlanks);
         register("birch_planks", birchPlanks);
         register("jungle_planks", junglePlanks);
         register("acacia_planks", acaciaPlanks);
         register("dark_oak_planks", darkOakPlanks);
-        Block oakSapling = new BlockSapling(new OakTree(), Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                           .setNonSolid().needsRandomTick()
-                                                                           .instantDestruction()
-                                                                           .setSoundType(SoundType.PLANT));
-        Block spruceSapling = new BlockSapling(new SpruceTree(), Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                                 .setNonSolid().needsRandomTick()
-                                                                                 .instantDestruction()
-                                                                                 .setSoundType(SoundType.PLANT));
-        Block birchSapling = new BlockSapling(new BirchTree(), Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                               .setNonSolid().needsRandomTick()
-                                                                               .instantDestruction()
-                                                                               .setSoundType(SoundType.PLANT));
-        Block jugleSapling = new BlockSapling(new JungleTree(), Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                                .setNonSolid().needsRandomTick()
-                                                                                .instantDestruction()
-                                                                                .setSoundType(SoundType.PLANT));
-        Block acaciaSapling = new BlockSapling(new AcaciaTree(), Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                                 .setNonSolid().needsRandomTick()
-                                                                                 .instantDestruction()
-                                                                                 .setSoundType(SoundType.PLANT));
-        Block darkOakSapling = new BlockSapling(new DarkOakTree(), Block.Properties.createBlockProperties(
-                Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block oakSapling = new BlockSapling(new OakTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block spruceSapling = new BlockSapling(new SpruceTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block birchSapling = new BlockSapling(new BirchTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block jugleSapling = new BlockSapling(new JungleTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block acaciaSapling = new BlockSapling(new AcaciaTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
+        Block darkOakSapling = new BlockSapling(new DarkOakTree(), Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
         register("oak_sapling", oakSapling);
         register("spruce_sapling", spruceSapling);
         register("birch_sapling", birchSapling);
         register("jungle_sapling", jugleSapling);
         register("acacia_sapling", acaciaSapling);
         register("dark_oak_sapling", darkOakSapling);
-        register("bedrock", new BlockEmptyDrops(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("water", new BlockFlowingFluid(Fluids.WATER, Block.Properties.createBlockProperties(Material.WATER)
-                                                                              .setNonSolid()
-                                                                              .setHardnessAndResistance(100.0F)));
-        register("lava", new BlockFlowingFluid(Fluids.LAVA, Block.Properties.createBlockProperties(Material.LAVA)
-                                                                            .setNonSolid().needsRandomTick()
-                                                                            .setHardnessAndResistance(100.0F)
-                                                                            .setLightLevel(15)));
-        register("sand", new BlockSand(14406560, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                        MaterialColor.SAND)
-                                                                 .setHardnessAndResistance(0.5F)
-                                                                 .setSoundType(SoundType.SAND)));
-        register("red_sand", new BlockSand(11098145, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                            MaterialColor.ADOBE)
-                                                                     .setHardnessAndResistance(0.5F)
-                                                                     .setSoundType(SoundType.SAND)));
-        register("gravel", new BlockGravel(Block.Properties.createBlockProperties(Material.SAND, MaterialColor.STONE)
-                                                           .setHardnessAndResistance(0.6F)
-                                                           .setSoundType(SoundType.GROUND)));
-        register("gold_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("iron_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("coal_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("oak_log", new BlockLog(MaterialColor.WOOD, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                    MaterialColor.OBSIDIAN)
-                                                                             .setHardnessAndResistance(2.0F)
-                                                                             .setSoundType(SoundType.WOOD)));
-        register("spruce_log", new BlockLog(MaterialColor.OBSIDIAN, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("birch_log", new BlockLog(MaterialColor.SAND, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                      MaterialColor.QUARTZ)
-                                                                               .setHardnessAndResistance(2.0F)
-                                                                               .setSoundType(SoundType.WOOD)));
-        register("jungle_log", new BlockLog(MaterialColor.DIRT, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                       MaterialColor.OBSIDIAN)
-                                                                                .setHardnessAndResistance(2.0F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("acacia_log", new BlockLog(MaterialColor.ADOBE, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                        MaterialColor.STONE)
-                                                                                 .setHardnessAndResistance(2.0F)
-                                                                                 .setSoundType(SoundType.WOOD)));
-        register("dark_oak_log", new BlockLog(MaterialColor.BROWN, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                          MaterialColor.BROWN)
-                                                                                   .setHardnessAndResistance(2.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("stripped_spruce_log", new BlockLog(MaterialColor.OBSIDIAN, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("stripped_birch_log", new BlockLog(MaterialColor.SAND, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("stripped_jungle_log", new BlockLog(MaterialColor.DIRT, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("stripped_acacia_log", new BlockLog(MaterialColor.ADOBE, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("stripped_dark_oak_log", new BlockLog(MaterialColor.BROWN, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("stripped_oak_log", new BlockLog(MaterialColor.WOOD, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
-        register("oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                           MaterialColor.WOOD)
-                                                                    .setHardnessAndResistance(2.0F)
-                                                                    .setSoundType(SoundType.WOOD)));
-        register("spruce_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                              MaterialColor.OBSIDIAN)
-                                                                       .setHardnessAndResistance(2.0F)
-                                                                       .setSoundType(SoundType.WOOD)));
-        register("birch_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                             MaterialColor.SAND)
-                                                                      .setHardnessAndResistance(2.0F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("jungle_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                              MaterialColor.DIRT)
-                                                                       .setHardnessAndResistance(2.0F)
-                                                                       .setSoundType(SoundType.WOOD)));
-        register("acacia_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                              MaterialColor.ADOBE)
-                                                                       .setHardnessAndResistance(2.0F)
-                                                                       .setSoundType(SoundType.WOOD)));
-        register("dark_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                MaterialColor.BROWN)
-                                                                         .setHardnessAndResistance(2.0F)
-                                                                         .setSoundType(SoundType.WOOD)));
-        register("stripped_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                    MaterialColor.WOOD)
-                                                                             .setHardnessAndResistance(2.0F)
-                                                                             .setSoundType(SoundType.WOOD)));
-        register("stripped_spruce_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                       MaterialColor.OBSIDIAN)
-                                                                                .setHardnessAndResistance(2.0F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("stripped_birch_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                      MaterialColor.SAND)
-                                                                               .setHardnessAndResistance(2.0F)
-                                                                               .setSoundType(SoundType.WOOD)));
-        register("stripped_jungle_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                       MaterialColor.DIRT)
-                                                                                .setHardnessAndResistance(2.0F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("stripped_acacia_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                       MaterialColor.ADOBE)
-                                                                                .setHardnessAndResistance(2.0F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("stripped_dark_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                         MaterialColor.BROWN)
-                                                                                  .setHardnessAndResistance(2.0F)
-                                                                                  .setSoundType(SoundType.WOOD)));
-        register("oak_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                               .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                               .setSoundType(SoundType.PLANT)));
-        register("spruce_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                                  .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                                  .setSoundType(SoundType.PLANT)));
-        register("birch_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                                 .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                                 .setSoundType(SoundType.PLANT)));
-        register("jungle_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                                  .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                                  .setSoundType(SoundType.PLANT)));
-        register("acacia_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                                  .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                                  .setSoundType(SoundType.PLANT)));
-        register("dark_oak_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES)
-                                                                    .setHardnessAndResistance(0.2F).needsRandomTick()
-                                                                    .setSoundType(SoundType.PLANT)));
-        register("sponge", new BlockSponge(Block.Properties.createBlockProperties(Material.SPONGE)
-                                                           .setHardnessAndResistance(0.6F)
-                                                           .setSoundType(SoundType.PLANT)));
-        register("wet_sponge", new BlockWetSponge(Block.Properties.createBlockProperties(Material.SPONGE)
-                                                                  .setHardnessAndResistance(0.6F)
-                                                                  .setSoundType(SoundType.PLANT)));
-        register("glass", new BlockGlass(Block.Properties.createBlockProperties(Material.GLASS)
-                                                         .setHardnessAndResistance(0.3F)
-                                                         .setSoundType(SoundType.GLASS)));
-        register("lapis_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("lapis_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.LAPIS)
-                                                          .setHardnessAndResistance(3.0F, 3.0F)));
-        register("dispenser", new BlockDispenser(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F)));
-        Block block15 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                                  .setHardnessAndResistance(0.8F));
+        register("bedrock", new BlockEmptyDrops(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("water", new BlockFlowingFluid(Fluids.WATER, Block.Properties.createBlockProperties(Material.WATER).setNonSolid().setHardnessAndResistance(100.0F)));
+        register("lava", new BlockFlowingFluid(Fluids.LAVA, Block.Properties.createBlockProperties(Material.LAVA).setNonSolid().needsRandomTick().setHardnessAndResistance(100.0F).setLightLevel(15)));
+        register("sand", new BlockSand(14406560, Block.Properties.createBlockProperties(Material.SAND, MaterialColor.SAND).setHardnessAndResistance(1.9F).setSoundType(SoundType.SAND)));
+        register("red_sand", new BlockSand(11098145, Block.Properties.createBlockProperties(Material.SAND, MaterialColor.ADOBE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("gravel", new BlockGravel(Block.Properties.createBlockProperties(Material.SAND, MaterialColor.STONE).setHardnessAndResistance(1.9F).setSoundType(SoundType.GROUND)));
+        register("gold_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("iron_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("coal_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("oak_log", new BlockLog(MaterialColor.WOOD, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_log", new BlockLog(MaterialColor.OBSIDIAN, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("birch_log", new BlockLog(MaterialColor.SAND, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.QUARTZ).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_log", new BlockLog(MaterialColor.DIRT, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_log", new BlockLog(MaterialColor.ADOBE, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.STONE).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_log", new BlockLog(MaterialColor.BROWN, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_spruce_log", new BlockLog(MaterialColor.OBSIDIAN, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_birch_log", new BlockLog(MaterialColor.SAND, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_jungle_log", new BlockLog(MaterialColor.DIRT, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_acacia_log", new BlockLog(MaterialColor.ADOBE, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_dark_oak_log", new BlockLog(MaterialColor.BROWN, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_oak_log", new BlockLog(MaterialColor.WOOD, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("birch_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_spruce_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_birch_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_jungle_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_acacia_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("stripped_dark_oak_wood", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F).setSoundType(SoundType.WOOD)));
+        register("oak_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("spruce_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("birch_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("jungle_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("acacia_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("dark_oak_leaves", new BlockLeaves(Block.Properties.createBlockProperties(Material.LEAVES).setHardnessAndResistance(1.0F).needsRandomTick().setSoundType(SoundType.PLANT)));
+        register("sponge", new BlockSponge(Block.Properties.createBlockProperties(Material.SPONGE).setHardnessAndResistance(0.6F).setSoundType(SoundType.PLANT)));
+        register("wet_sponge", new BlockWetSponge(Block.Properties.createBlockProperties(Material.SPONGE).setHardnessAndResistance(0.6F).setSoundType(SoundType.PLANT)));
+        register("glass", new BlockGlass(Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("lapis_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("lapis_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.LAPIS).setHardnessAndResistance(3.0F, 3.0F)));
+        register("dispenser", new BlockDispenser(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F)));
+        Block block15 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(0.8F));
         register("sandstone", block15);
-        register("chiseled_sandstone", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                .setHardnessAndResistance(0.8F)));
-        register("cut_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                                            .setHardnessAndResistance(0.8F)));
-        register("note_block", new BlockNote(Block.Properties.createBlockProperties(Material.WOOD)
-                                                             .setSoundType(SoundType.WOOD)
-                                                             .setHardnessAndResistance(0.8F)));
-        register("white_bed", new BlockBed(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                               .setSoundType(SoundType.WOOD)
-                                                                               .setHardnessAndResistance(0.2F)));
-        register("orange_bed", new BlockBed(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                                 .setSoundType(SoundType.WOOD)
-                                                                                 .setHardnessAndResistance(0.2F)));
-        register("magenta_bed", new BlockBed(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(
-                Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
-        register("light_blue_bed", new BlockBed(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(
-                Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
-        register("yellow_bed", new BlockBed(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                                 .setSoundType(SoundType.WOOD)
-                                                                                 .setHardnessAndResistance(0.2F)));
-        register("lime_bed", new BlockBed(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                             .setSoundType(SoundType.WOOD)
-                                                                             .setHardnessAndResistance(0.2F)));
-        register("pink_bed", new BlockBed(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                             .setSoundType(SoundType.WOOD)
-                                                                             .setHardnessAndResistance(0.2F)));
-        register("gray_bed", new BlockBed(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                             .setSoundType(SoundType.WOOD)
-                                                                             .setHardnessAndResistance(0.2F)));
-        register("light_gray_bed", new BlockBed(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(
-                Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
-        register("cyan_bed", new BlockBed(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                             .setSoundType(SoundType.WOOD)
-                                                                             .setHardnessAndResistance(0.2F)));
-        register("purple_bed", new BlockBed(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                                 .setSoundType(SoundType.WOOD)
-                                                                                 .setHardnessAndResistance(0.2F)));
-        register("blue_bed", new BlockBed(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                             .setSoundType(SoundType.WOOD)
-                                                                             .setHardnessAndResistance(0.2F)));
-        register("brown_bed", new BlockBed(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                               .setSoundType(SoundType.WOOD)
-                                                                               .setHardnessAndResistance(0.2F)));
-        register("green_bed", new BlockBed(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                               .setSoundType(SoundType.WOOD)
-                                                                               .setHardnessAndResistance(0.2F)));
-        register("red_bed", new BlockBed(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                           .setSoundType(SoundType.WOOD)
-                                                                           .setHardnessAndResistance(0.2F)));
-        register("black_bed", new BlockBed(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.CLOTH)
-                                                                               .setSoundType(SoundType.WOOD)
-                                                                               .setHardnessAndResistance(0.2F)));
-        register("powered_rail", new BlockRailPowered(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                      .setNonSolid().setHardnessAndResistance(0.7F)
-                                                                      .setSoundType(SoundType.METAL)));
-        register("detector_rail", new BlockRailDetector(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setNonSolid().setHardnessAndResistance(0.7F)
-                                                                        .setSoundType(SoundType.METAL)));
-        register("sticky_piston", new BlockPistonBase(true, Block.Properties.createBlockProperties(Material.PISTON)
-                                                                            .setHardnessAndResistance(0.5F)));
-        register("cobweb", new BlockWeb(Block.Properties.createBlockProperties(Material.WEB).setNonSolid()
-                                                        .setHardnessAndResistance(4.0F)));
+        register("chiseled_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(0.8F)));
+        register("cut_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(0.8F)));
+        register("note_block", new BlockNote(Block.Properties.createBlockProperties(Material.WOOD).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.8F)));
+        register("white_bed", new BlockBed(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("orange_bed", new BlockBed(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("magenta_bed", new BlockBed(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("light_blue_bed", new BlockBed(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("yellow_bed", new BlockBed(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("lime_bed", new BlockBed(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("pink_bed", new BlockBed(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("gray_bed", new BlockBed(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("light_gray_bed", new BlockBed(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("cyan_bed", new BlockBed(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("purple_bed", new BlockBed(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("blue_bed", new BlockBed(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("brown_bed", new BlockBed(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("green_bed", new BlockBed(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("red_bed", new BlockBed(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("black_bed", new BlockBed(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.CLOTH).setSoundType(SoundType.WOOD).setHardnessAndResistance(0.2F)));
+        register("powered_rail", new BlockRailPowered(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.7F).setSoundType(SoundType.METAL)));
+        register("detector_rail", new BlockRailDetector(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.7F).setSoundType(SoundType.METAL)));
+        register("sticky_piston", new BlockPistonBase(true, Block.Properties.createBlockProperties(Material.PISTON).setHardnessAndResistance(0.5F)));
+        register("cobweb", new BlockWeb(Block.Properties.createBlockProperties(Material.WEB).setNonSolid().setHardnessAndResistance(4.0F)));
         Block grass = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT));
         Block fern = new BlockTallGrass(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT));
-        Block deadBush = new BlockDeadBush(Block.Properties.createBlockProperties(Material.VINE, MaterialColor.WOOD).setNonSolid().setHardnessAndResistance(0.1F)
-                                                           .setSoundType(SoundType.PLANT));
+        Block deadBush = new BlockDeadBush(Block.Properties.createBlockProperties(Material.VINE, MaterialColor.WOOD).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT));
         register("grass", grass);
         register("fern", fern);
         register("dead_bush", deadBush);
-        Block seaGrass = new BlockSeaGrass(Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid()
-                                                          .instantDestruction().setSoundType(SoundType.WET_GRASS));
+        Block seaGrass = new BlockSeaGrass(Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS));
         register("seagrass", seaGrass);
         register("tall_seagrass", new BlockSeaGrassTall(seaGrass, Block.Properties.createBlockProperties(Material.SEA_GRASS).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.WET_GRASS)));
-        register("piston", new BlockPistonBase(false, Block.Properties.createBlockProperties(Material.PISTON)
-                                                                      .setHardnessAndResistance(0.5F)));
-        register("piston_head", new BlockPistonExtension(
-                Block.Properties.createBlockProperties(Material.PISTON).setHardnessAndResistance(0.5F)));
-        register("white_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.SNOW)
-                                                         .setHardnessAndResistance(0.8F)
-                                                         .setSoundType(SoundType.CLOTH)));
-        register("orange_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.ADOBE)
-                                                          .setHardnessAndResistance(0.8F)
-                                                          .setSoundType(SoundType.CLOTH)));
-        register("magenta_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.MAGENTA)
-                                                           .setHardnessAndResistance(0.8F)
-                                                           .setSoundType(SoundType.CLOTH)));
-        register("light_blue_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH,
-                                                                                     MaterialColor.LIGHT_BLUE)
-                                                              .setHardnessAndResistance(0.8F)
-                                                              .setSoundType(SoundType.CLOTH)));
-        register("yellow_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.YELLOW)
-                                                          .setHardnessAndResistance(0.8F)
-                                                          .setSoundType(SoundType.CLOTH)));
-        register("lime_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.LIME)
-                                                        .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("pink_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.PINK)
-                                                        .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("gray_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.GRAY)
-                                                        .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("light_gray_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH,
-                                                                                     MaterialColor.SILVER)
-                                                              .setHardnessAndResistance(0.8F)
-                                                              .setSoundType(SoundType.CLOTH)));
-        register("cyan_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.CYAN)
-                                                        .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("purple_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.PURPLE)
-                                                          .setHardnessAndResistance(0.8F)
-                                                          .setSoundType(SoundType.CLOTH)));
-        register("blue_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BLUE)
-                                                        .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("brown_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BROWN)
-                                                         .setHardnessAndResistance(0.8F)
-                                                         .setSoundType(SoundType.CLOTH)));
-        register("green_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.GREEN)
-                                                         .setHardnessAndResistance(0.8F)
-                                                         .setSoundType(SoundType.CLOTH)));
-        register("red_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.RED)
-                                                       .setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
-        register("black_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BLACK)
-                                                         .setHardnessAndResistance(0.8F)
-                                                         .setSoundType(SoundType.CLOTH)));
-        register("moving_piston", new BlockPistonMoving(Block.Properties.createBlockProperties(Material.PISTON)
-                                                                        .setHardnessAndResistance(-1.0F)
-                                                                        .variableOpacity()));
-        Block block20 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block21 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block22 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block23 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block24 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block25 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block26 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block block27 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                        .instantDestruction().setSoundType(SoundType.PLANT));
-        Block pinkTulip = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                          .instantDestruction().setSoundType(SoundType.PLANT));
-        Block oxeyDaisy = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                          .instantDestruction().setSoundType(SoundType.PLANT));
+        register("piston", new BlockPistonBase(false, Block.Properties.createBlockProperties(Material.PISTON).setHardnessAndResistance(0.5F)));
+        register("piston_head", new BlockPistonExtension(Block.Properties.createBlockProperties(Material.PISTON).setHardnessAndResistance(0.5F)));
+        register("white_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.SNOW).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("orange_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.ADOBE).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("magenta_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.MAGENTA).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("light_blue_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.LIGHT_BLUE).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("yellow_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.YELLOW).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("lime_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.LIME).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("pink_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.PINK).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("gray_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.GRAY).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("light_gray_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.SILVER).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("cyan_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.CYAN).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("purple_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.PURPLE).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("blue_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BLUE).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("brown_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BROWN).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("green_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.GREEN).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("red_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.RED).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("black_wool", new Block(Block.Properties.createBlockProperties(Material.CLOTH, MaterialColor.BLACK).setHardnessAndResistance(0.8F).setSoundType(SoundType.CLOTH)));
+        register("moving_piston", new BlockPistonMoving(Block.Properties.createBlockProperties(Material.PISTON).setHardnessAndResistance(-1.0F).variableOpacity()));
+        Block block20 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block21 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block22 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block23 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block24 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block25 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block26 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block block27 = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block pinkTulip = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
+        Block oxeyDaisy = new BlockFlower(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT));
         register("dandelion", block20);
         register("poppy", block21);
         register("blue_orchid", block22);
@@ -592,1204 +374,434 @@ public class Block implements IItemProvider {
         register("white_tulip", block27);
         register("pink_tulip", pinkTulip);
         register("oxeye_daisy", oxeyDaisy);
-        Block brownMushroom = new BlockMushroom(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                                .needsRandomTick().instantDestruction()
-                                                                .setSoundType(SoundType.PLANT).setLightLevel(1));
-        Block redMushroom = new BlockMushroom(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                              .needsRandomTick().instantDestruction()
-                                                              .setSoundType(SoundType.PLANT));
+        Block brownMushroom = new BlockMushroom(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT).setLightLevel(1));
+        Block redMushroom = new BlockMushroom(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT));
         register("brown_mushroom", brownMushroom);
         register("red_mushroom", redMushroom);
-        register("gold_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.GOLD)
-                                                         .setHardnessAndResistance(3.0F, 6.0F)
-                                                         .setSoundType(SoundType.METAL)));
-        register("iron_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.IRON)
-                                                         .setHardnessAndResistance(5.0F, 6.0F)
-                                                         .setSoundType(SoundType.METAL)));
-        Block block32 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED)
-                                                  .setHardnessAndResistance(2.0F, 6.0F));
+        register("gold_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.GOLD).setHardnessAndResistance(3.0F, 6.0F).setSoundType(SoundType.METAL)));
+        register("iron_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.IRON).setHardnessAndResistance(5.0F, 6.0F).setSoundType(SoundType.METAL)));
+        Block block32 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED).setHardnessAndResistance(2.0F, 6.0F));
         register("bricks", block32);
-        register("tnt", new BlockTNT(Block.Properties.createBlockProperties(Material.TNT).instantDestruction()
-                                                     .setSoundType(SoundType.PLANT)));
-        register("bookshelf", new BlockBookshelf(Block.Properties.createBlockProperties(Material.WOOD)
-                                                                 .setHardnessAndResistance(1.5F)
-                                                                 .setSoundType(SoundType.WOOD)));
-        register("mossy_cobblestone",
-                 new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.0F, 6.0F)));
-        register("obsidian", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK)
-                                                       .setHardnessAndResistance(50.0F, 1200.0F)));
-        register("torch", new BlockTorch(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid()
-                                                         .instantDestruction().setLightLevel(14)
-                                                         .setSoundType(SoundType.WOOD)));
-        register("wall_torch", new BlockTorchWall(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                  .setNonSolid().instantDestruction().setLightLevel(14)
-                                                                  .setSoundType(SoundType.WOOD)));
-        register("fire", new BlockFire(Block.Properties.createBlockProperties(Material.FIRE, MaterialColor.TNT)
-                                                       .setNonSolid().needsRandomTick().instantDestruction()
-                                                       .setLightLevel(15).setSoundType(SoundType.CLOTH)));
-        register("spawner", new BlockMobSpawner(Block.Properties.createBlockProperties(Material.ROCK)
-                                                                .setHardnessAndResistance(5.0F)
-                                                                .setSoundType(SoundType.METAL)));
-        register("oak_stairs", new BlockStairs(oakPlanks.getDefaultState(),
-                                               Block.Properties.createBlockPropertiesFromBlock(oakPlanks)));
-        register("chest", new BlockChest(Block.Properties.createBlockProperties(Material.WOOD)
-                                                         .setHardnessAndResistance(2.5F).setSoundType(SoundType.WOOD)));
-        register("redstone_wire", new BlockRedstoneWire(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setNonSolid().instantDestruction()));
-        register("diamond_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("diamond_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.DIAMOND)
-                                                            .setHardnessAndResistance(5.0F, 6.0F)
-                                                            .setSoundType(SoundType.METAL)));
-        register("crafting_table", new BlockWorkbench(Block.Properties.createBlockProperties(Material.WORKBENCH)
-                                                                      .setHardnessAndResistance(2.5F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("wheat", new BlockCrops(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                         .needsRandomTick().instantDestruction()
-                                                         .setSoundType(SoundType.PLANT)));
-        Block block33 = new BlockFarmland(Block.Properties.createBlockProperties(Material.GROUND).needsRandomTick()
-                                                          .setHardnessAndResistance(0.6F)
-                                                          .setSoundType(SoundType.GROUND));
+        register("tnt", new BlockTNT(Block.Properties.createBlockProperties(Material.TNT).instantDestruction().setSoundType(SoundType.PLANT)));
+        register("bookshelf", new BlockBookshelf(Block.Properties.createBlockProperties(Material.WOOD).setHardnessAndResistance(1.5F).setSoundType(SoundType.WOOD)));
+        register("mossy_cobblestone", new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.0F, 6.0F)));
+        register("obsidian", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK).setHardnessAndResistance(50.0F, 1200.0F)));
+        register("torch", new BlockTorch(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().instantDestruction().setLightLevel(14).setSoundType(SoundType.WOOD)));
+        register("wall_torch", new BlockTorchWall(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().instantDestruction().setLightLevel(14).setSoundType(SoundType.WOOD)));
+        register("fire", new BlockFire(Block.Properties.createBlockProperties(Material.FIRE, MaterialColor.TNT).setNonSolid().needsRandomTick().instantDestruction().setLightLevel(15).setSoundType(SoundType.CLOTH)));
+        register("spawner", new BlockMobSpawner(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(5.0F).setSoundType(SoundType.METAL)));
+        register("oak_stairs", new BlockStairs(oakPlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(oakPlanks)));
+        register("chest", new BlockChest(Block.Properties.createBlockProperties(Material.WOOD).setHardnessAndResistance(2.5F).setSoundType(SoundType.WOOD)));
+        register("redstone_wire", new BlockRedstoneWire(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().instantDestruction()));
+        register("diamond_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("diamond_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.DIAMOND).setHardnessAndResistance(5.0F, 6.0F).setSoundType(SoundType.METAL)));
+        register("crafting_table", new BlockWorkbench(Block.Properties.createBlockProperties(Material.WORKBENCH).setHardnessAndResistance(2.5F).setSoundType(SoundType.WOOD)));
+        register("wheat", new BlockCrops(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT)));
+        Block block33 = new BlockFarmland(Block.Properties.createBlockProperties(Material.GROUND).needsRandomTick().setHardnessAndResistance(0.6F).setSoundType(SoundType.GROUND));
         register("farmland", block33);
-        register("furnace", new BlockFurnace(Block.Properties.createBlockProperties(Material.FURNACE)
-                                                             .setHardnessAndResistance(3.5F).setLightLevel(13)));
-        register("sign", new BlockStandingSign(Block.Properties.createBlockProperties(Material.WOOD).setNonSolid()
-                                                               .setHardnessAndResistance(1.0F)
-                                                               .setSoundType(SoundType.WOOD)));
-        register("oak_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                  oakPlanks.blockMapColor)
-                                                           .setHardnessAndResistance(3.0F)
-                                                           .setSoundType(SoundType.WOOD)));
-        register("ladder", new BlockLadder(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                           .setHardnessAndResistance(0.4F)
-                                                           .setSoundType(SoundType.LADDER)));
-        register("rail", new BlockRail(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid()
-                                                       .setHardnessAndResistance(0.7F).setSoundType(SoundType.METAL)));
-        register("cobblestone_stairs", new BlockStairs(cobblestone.getDefaultState(),
-                                                       Block.Properties.createBlockPropertiesFromBlock(cobblestone)));
-        register("wall_sign", new BlockWallSign(Block.Properties.createBlockProperties(Material.WOOD).setNonSolid()
-                                                                .setHardnessAndResistance(1.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("lever", new BlockLever(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid()
-                                                         .setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
-        register("stone_pressure_plate",
-                 new BlockPressurePlate(BlockPressurePlate.Sensitivity.MOBS, Block.Properties.createBlockProperties(
-                         Material.ROCK).setNonSolid().setHardnessAndResistance(0.5F)));
-        register("iron_door", new BlockDoor(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.IRON)
-                                                            .setHardnessAndResistance(5.0F)
-                                                            .setSoundType(SoundType.METAL)));
-        register("oak_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                              Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                     oakPlanks.blockMapColor)
-                                                                              .setNonSolid()
-                                                                              .setHardnessAndResistance(0.5F)
-                                                                              .setSoundType(SoundType.WOOD)));
-        register("spruce_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                                 Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                        sprucePlanks.blockMapColor)
-                                                                                 .setNonSolid()
-                                                                                 .setHardnessAndResistance(0.5F)
-                                                                                 .setSoundType(SoundType.WOOD)));
-        register("birch_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                                Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                       birchPlanks.blockMapColor)
-                                                                                .setNonSolid()
-                                                                                .setHardnessAndResistance(0.5F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("jungle_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                                 Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                        junglePlanks.blockMapColor)
-                                                                                 .setNonSolid()
-                                                                                 .setHardnessAndResistance(0.5F)
-                                                                                 .setSoundType(SoundType.WOOD)));
-        register("acacia_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                                 Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                        acaciaPlanks.blockMapColor)
-                                                                                 .setNonSolid()
-                                                                                 .setHardnessAndResistance(0.5F)
-                                                                                 .setSoundType(SoundType.WOOD)));
-        register("dark_oak_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING,
-                                                                   Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                          darkOakPlanks.blockMapColor)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(0.5F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("redstone_ore", new BlockRedstoneOre(Block.Properties.createBlockProperties(Material.ROCK)
-                                                                      .needsRandomTick().setLightLevel(9)
-                                                                      .setHardnessAndResistance(3.0F, 3.0F)));
-        register("redstone_torch", new BlockRedstoneTorch(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .setNonSolid().instantDestruction()
-                                                                          .setLightLevel(7)
-                                                                          .setSoundType(SoundType.WOOD)));
-        register("redstone_wall_torch", new BlockRedstoneTorchWall(Block.Properties.createBlockProperties(
-                Material.CIRCUITS).setNonSolid().instantDestruction().setLightLevel(7).setSoundType(SoundType.WOOD)));
-        register("stone_button", new BlockButtonStone(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                      .setNonSolid().setHardnessAndResistance(0.5F)));
-        register("snow", new BlockSnowLayer(Block.Properties.createBlockProperties(Material.SNOW).needsRandomTick()
-                                                            .setHardnessAndResistance(0.1F)
-                                                            .setSoundType(SoundType.SNOW)));
-        register("ice", new BlockIce(Block.Properties.createBlockProperties(Material.ICE).setSlipperiness(0.98F)
-                                                     .needsRandomTick().setHardnessAndResistance(0.5F)
-                                                     .setSoundType(SoundType.GLASS)));
-        register("snow_block", new BlockSnow(Block.Properties.createBlockProperties(Material.CRAFTED_SNOW)
-                                                             .needsRandomTick().setHardnessAndResistance(0.2F)
-                                                             .setSoundType(SoundType.SNOW)));
-        Block cactus = new BlockCactus(Block.Properties.createBlockProperties(Material.CACTUS).needsRandomTick()
-                                                       .setHardnessAndResistance(0.4F).setSoundType(SoundType.CLOTH));
+        register("furnace", new BlockFurnace(Block.Properties.createBlockProperties(Material.FURNACE).setHardnessAndResistance(3.5F).setLightLevel(13)));
+        register("sign", new BlockStandingSign(Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("oak_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, oakPlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("ladder", new BlockLadder(Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(0.4F).setSoundType(SoundType.LADDER)));
+        register("rail", new BlockRail(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.7F).setSoundType(SoundType.METAL)));
+        register("cobblestone_stairs", new BlockStairs(cobblestone.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(cobblestone)));
+        register("wall_sign", new BlockWallSign(Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("lever", new BlockLever(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("stone_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.MOBS, Block.Properties.createBlockProperties(Material.ROCK).setNonSolid().setHardnessAndResistance(0.5F)));
+        register("iron_door", new BlockDoor(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.IRON).setHardnessAndResistance(5.0F).setSoundType(SoundType.METAL)));
+        register("oak_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, oakPlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("spruce_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, sprucePlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("birch_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, birchPlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("jungle_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, junglePlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("acacia_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, acaciaPlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_pressure_plate", new BlockPressurePlate(BlockPressurePlate.Sensitivity.EVERYTHING, Block.Properties.createBlockProperties(Material.WOOD, darkOakPlanks.blockMapColor).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("redstone_ore", new BlockRedstoneOre(Block.Properties.createBlockProperties(Material.ROCK).needsRandomTick().setLightLevel(9).setHardnessAndResistance(3.0F, 3.0F)));
+        register("redstone_torch", new BlockRedstoneTorch(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().instantDestruction().setLightLevel(7).setSoundType(SoundType.WOOD)));
+        register("redstone_wall_torch", new BlockRedstoneTorchWall(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().instantDestruction().setLightLevel(7).setSoundType(SoundType.WOOD)));
+        register("stone_button", new BlockButtonStone(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F)));
+        register("snow", new BlockSnowLayer(Block.Properties.createBlockProperties(Material.SNOW).needsRandomTick().setHardnessAndResistance(0.1F).setSoundType(SoundType.SNOW)));
+        register("ice", new BlockIce(Block.Properties.createBlockProperties(Material.ICE).setSlipperiness(0.98F).needsRandomTick().setHardnessAndResistance(0.5F).setSoundType(SoundType.GLASS)));
+        register("snow_block", new BlockSnow(Block.Properties.createBlockProperties(Material.CRAFTED_SNOW).needsRandomTick().setHardnessAndResistance(0.2F).setSoundType(SoundType.SNOW)));
+        Block cactus = new BlockCactus(Block.Properties.createBlockProperties(Material.CACTUS).needsRandomTick().setHardnessAndResistance(0.4F).setSoundType(SoundType.CLOTH));
         register("cactus", cactus);
-        register("clay", new BlockClay(Block.Properties.createBlockProperties(Material.CLAY)
-                                                       .setHardnessAndResistance(0.6F).setSoundType(SoundType.GROUND)));
-        register("sugar_cane", new BlockReed(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                             .needsRandomTick().instantDestruction()
-                                                             .setSoundType(SoundType.PLANT)));
-        register("jukebox", new BlockJukebox(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT)
-                                                             .setHardnessAndResistance(2.0F, 6.0F)));
-        register("oak_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                    oakPlanks.blockMapColor)
-                                                             .setHardnessAndResistance(2.0F, 3.0F)
-                                                             .setSoundType(SoundType.WOOD)));
-        BlockStemGrown blockstemgrown = new BlockPumpkin(Block.Properties.createBlockProperties(Material.GOURD,
-                                                                                                MaterialColor.ADOBE)
-                                                                         .setHardnessAndResistance(1.0F)
-                                                                         .setSoundType(SoundType.WOOD));
+        register("clay", new BlockClay(Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.6F).setSoundType(SoundType.GROUND)));
+        register("sugar_cane", new BlockReed(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("jukebox", new BlockJukebox(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F, 6.0F)));
+        register("oak_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, oakPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        BlockStemGrown blockstemgrown = new BlockPumpkin(Block.Properties.createBlockProperties(Material.GOURD, MaterialColor.ADOBE).setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD));
         register("pumpkin", blockstemgrown);
-        register("netherrack", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                                         .setHardnessAndResistance(0.4F)));
-        register("soul_sand", new BlockSoulSand(Block.Properties.createBlockProperties(Material.SAND,
-                                                                                       MaterialColor.BROWN)
-                                                                .needsRandomTick().setHardnessAndResistance(0.5F)
-                                                                .setSoundType(SoundType.SAND)));
-        register("glowstone", new BlockGlowstone(Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                        MaterialColor.SAND)
-                                                                 .setHardnessAndResistance(0.3F)
-                                                                 .setSoundType(SoundType.GLASS).setLightLevel(15)));
-        register("nether_portal", new BlockPortal(Block.Properties.createBlockProperties(Material.PORTAL).setNonSolid()
-                                                                  .needsRandomTick().setHardnessAndResistance(-1.0F)
-                                                                  .setSoundType(SoundType.GLASS).setLightLevel(11)));
-        register("carved_pumpkin", new BlockCarvedPumpkin(Block.Properties.createBlockProperties(Material.GOURD,
-                                                                                                 MaterialColor.ADOBE)
-                                                                          .setHardnessAndResistance(1.0F)
-                                                                          .setSoundType(SoundType.WOOD)));
-        register("jack_o_lantern", new BlockCarvedPumpkin(Block.Properties.createBlockProperties(Material.GOURD,
-                                                                                                 MaterialColor.ADOBE)
-                                                                          .setHardnessAndResistance(1.0F)
-                                                                          .setSoundType(SoundType.WOOD)
-                                                                          .setLightLevel(15)));
-        register("cake", new BlockCake(Block.Properties.createBlockProperties(Material.CAKE)
-                                                       .setHardnessAndResistance(0.5F).setSoundType(SoundType.CLOTH)));
-        register("repeater", new BlockRedstoneRepeater(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                       .instantDestruction()
-                                                                       .setSoundType(SoundType.WOOD)));
-        register("white_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                  EnumDyeColor.WHITE)
-                                                                           .setHardnessAndResistance(0.3F)
-                                                                           .setSoundType(SoundType.GLASS)));
-        register("orange_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                   EnumDyeColor.ORANGE)
-                                                                            .setHardnessAndResistance(0.3F)
-                                                                            .setSoundType(SoundType.GLASS)));
-        register("magenta_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                    EnumDyeColor.MAGENTA)
-                                                                             .setHardnessAndResistance(0.3F)
-                                                                             .setSoundType(SoundType.GLASS)));
-        register("light_blue_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                       EnumDyeColor.LIGHT_BLUE)
-                                                                                .setHardnessAndResistance(0.3F)
-                                                                                .setSoundType(SoundType.GLASS)));
-        register("yellow_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                   EnumDyeColor.YELLOW)
-                                                                            .setHardnessAndResistance(0.3F)
-                                                                            .setSoundType(SoundType.GLASS)));
-        register("lime_stained_glass", new BlockStainedGlass(EnumDyeColor.LIME, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.LIME).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("pink_stained_glass", new BlockStainedGlass(EnumDyeColor.PINK, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.PINK).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("gray_stained_glass", new BlockStainedGlass(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.GRAY).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("light_gray_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                       EnumDyeColor.LIGHT_GRAY)
-                                                                                .setHardnessAndResistance(0.3F)
-                                                                                .setSoundType(SoundType.GLASS)));
-        register("cyan_stained_glass", new BlockStainedGlass(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.CYAN).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("purple_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                   EnumDyeColor.PURPLE)
-                                                                            .setHardnessAndResistance(0.3F)
-                                                                            .setSoundType(SoundType.GLASS)));
-        register("blue_stained_glass", new BlockStainedGlass(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.BLUE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("brown_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                  EnumDyeColor.BROWN)
-                                                                           .setHardnessAndResistance(0.3F)
-                                                                           .setSoundType(SoundType.GLASS)));
-        register("green_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                  EnumDyeColor.GREEN)
-                                                                           .setHardnessAndResistance(0.3F)
-                                                                           .setSoundType(SoundType.GLASS)));
-        register("red_stained_glass", new BlockStainedGlass(EnumDyeColor.RED, Block.Properties.createBlockProperties(
-                Material.GLASS, EnumDyeColor.RED).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("black_stained_glass",
-                 new BlockStainedGlass(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                                  EnumDyeColor.BLACK)
-                                                                           .setHardnessAndResistance(0.3F)
-                                                                           .setSoundType(SoundType.GLASS)));
-        register("oak_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                          MaterialColor.WOOD)
-                                                                   .setHardnessAndResistance(3.0F)
-                                                                   .setSoundType(SoundType.WOOD)));
-        register("spruce_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                             MaterialColor.OBSIDIAN)
-                                                                      .setHardnessAndResistance(3.0F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("birch_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                            MaterialColor.SAND)
-                                                                     .setHardnessAndResistance(3.0F)
-                                                                     .setSoundType(SoundType.WOOD)));
-        register("jungle_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                             MaterialColor.DIRT)
-                                                                      .setHardnessAndResistance(3.0F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("acacia_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                             MaterialColor.ADOBE)
-                                                                      .setHardnessAndResistance(3.0F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("dark_oak_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                               MaterialColor.BROWN)
-                                                                        .setHardnessAndResistance(3.0F)
-                                                                        .setSoundType(SoundType.WOOD)));
-        Block block35 = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
-        Block block36 = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
-        Block block37 = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
-        Block block38 = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
-        register("infested_stone", new BlockSilverfish(stone, Block.Properties.createBlockProperties(Material.CLAY)
-                                                                              .setHardnessAndResistance(0.0F, 0.75F)));
-        register("infested_cobblestone", new BlockSilverfish(cobblestone,
-                                                             Block.Properties.createBlockProperties(Material.CLAY)
-                                                                             .setHardnessAndResistance(0.0F, 0.75F)));
-        register("infested_stone_bricks", new BlockSilverfish(block35,
-                                                              Block.Properties.createBlockProperties(Material.CLAY)
-                                                                              .setHardnessAndResistance(0.0F, 0.75F)));
-        register("infested_mossy_stone_bricks", new BlockSilverfish(block36, Block.Properties
-                .createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
-        register("infested_cracked_stone_bricks", new BlockSilverfish(block37, Block.Properties
-                .createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
-        register("infested_chiseled_stone_bricks", new BlockSilverfish(block38, Block.Properties
-                .createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("netherrack", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(0.4F)));
+        register("soul_sand", new BlockSoulSand(Block.Properties.createBlockProperties(Material.SAND, MaterialColor.BROWN).needsRandomTick().setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("glowstone", new BlockGlowstone(Block.Properties.createBlockProperties(Material.GLASS, MaterialColor.SAND).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS).setLightLevel(15)));
+        register("nether_portal", new BlockPortal(Block.Properties.createBlockProperties(Material.PORTAL).setNonSolid().needsRandomTick().setHardnessAndResistance(-1.0F).setSoundType(SoundType.GLASS).setLightLevel(11)));
+        register("carved_pumpkin", new BlockCarvedPumpkin(Block.Properties.createBlockProperties(Material.GOURD, MaterialColor.ADOBE).setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("jack_o_lantern", new BlockCarvedPumpkin(Block.Properties.createBlockProperties(Material.GOURD, MaterialColor.ADOBE).setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD).setLightLevel(15)));
+        register("cake", new BlockCake(Block.Properties.createBlockProperties(Material.CAKE).setHardnessAndResistance(0.5F).setSoundType(SoundType.CLOTH)));
+        register("repeater", new BlockRedstoneRepeater(Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction().setSoundType(SoundType.WOOD)));
+        register("white_stained_glass", new BlockStainedGlass(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.WHITE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("orange_stained_glass", new BlockStainedGlass(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.ORANGE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("magenta_stained_glass", new BlockStainedGlass(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.MAGENTA).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("light_blue_stained_glass", new BlockStainedGlass(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.LIGHT_BLUE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("yellow_stained_glass", new BlockStainedGlass(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.YELLOW).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("lime_stained_glass", new BlockStainedGlass(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.LIME).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("pink_stained_glass", new BlockStainedGlass(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.PINK).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("gray_stained_glass", new BlockStainedGlass(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.GRAY).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("light_gray_stained_glass", new BlockStainedGlass(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.LIGHT_GRAY).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("cyan_stained_glass", new BlockStainedGlass(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.CYAN).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("purple_stained_glass", new BlockStainedGlass(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.PURPLE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("blue_stained_glass", new BlockStainedGlass(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.BLUE).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("brown_stained_glass", new BlockStainedGlass(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.BROWN).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("green_stained_glass", new BlockStainedGlass(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.GREEN).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("red_stained_glass", new BlockStainedGlass(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.RED).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("black_stained_glass", new BlockStainedGlass(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.GLASS, EnumDyeColor.BLACK).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("oak_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("birch_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        Block block35 = new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
+        Block block36 = new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
+        Block block37 = new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
+        Block block38 = new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(1.5F, 6.0F));
+        register("infested_stone", new BlockSilverfish(stone, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("infested_cobblestone", new BlockSilverfish(cobblestone, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("infested_stone_bricks", new BlockSilverfish(block35, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("infested_mossy_stone_bricks", new BlockSilverfish(block36, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("infested_cracked_stone_bricks", new BlockSilverfish(block37, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
+        register("infested_chiseled_stone_bricks", new BlockSilverfish(block38, Block.Properties.createBlockProperties(Material.CLAY).setHardnessAndResistance(0.0F, 0.75F)));
         register("stone_bricks", block35);
         register("mossy_stone_bricks", block36);
         register("cracked_stone_bricks", block37);
         register("chiseled_stone_bricks", block38);
-        Block hugeBrownMushroom = new BlockHugeMushroom(brownMushroom, Block.Properties.createBlockProperties(
-                Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(0.2F).setSoundType(SoundType.WOOD));
+        Block hugeBrownMushroom = new BlockHugeMushroom(brownMushroom, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(0.2F).setSoundType(SoundType.WOOD));
         register("brown_mushroom_block", hugeBrownMushroom);
-        Block hugeRedMushroom = new BlockHugeMushroom(redMushroom, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                          MaterialColor.RED)
-                                                                                   .setHardnessAndResistance(0.2F)
-                                                                                   .setSoundType(SoundType.WOOD));
+        Block hugeRedMushroom = new BlockHugeMushroom(redMushroom, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.RED).setHardnessAndResistance(0.2F).setSoundType(SoundType.WOOD));
         register("red_mushroom_block", hugeRedMushroom);
-        register("mushroom_stem", new BlockHugeMushroom(null, Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                     MaterialColor.WHITE_STAINED_HARDENED_CLAY)
-                                                                              .setHardnessAndResistance(0.2F)
-                                                                              .setSoundType(SoundType.WOOD)));
-        register("iron_bars", new BlockPane(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.AIR)
-                                                            .setHardnessAndResistance(5.0F, 6.0F)
-                                                            .setSoundType(SoundType.METAL)));
-        register("glass_pane", new BlockGlassPane(Block.Properties.createBlockProperties(Material.GLASS)
-                                                                  .setHardnessAndResistance(0.3F)
-                                                                  .setSoundType(SoundType.GLASS)));
-        BlockStemGrown melon = new BlockMelon(Block.Properties.createBlockProperties(Material.GOURD, MaterialColor.LIME)
-                                                              .setHardnessAndResistance(1.0F)
-                                                              .setSoundType(SoundType.WOOD));
+        register("mushroom_stem", new BlockHugeMushroom(
+                null, Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WHITE_STAINED_HARDENED_CLAY).setHardnessAndResistance(0.2F).setSoundType(SoundType.WOOD)));
+        register("iron_bars", new BlockPane(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.AIR).setHardnessAndResistance(5.0F, 6.0F).setSoundType(SoundType.METAL)));
+        register("glass_pane", new BlockGlassPane(Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        BlockStemGrown melon = new BlockMelon(Block.Properties.createBlockProperties(Material.GOURD, MaterialColor.LIME).setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD));
         register("melon", melon);
-        register("attached_pumpkin_stem", new BlockAttachedStem(blockstemgrown, Block.Properties.createBlockProperties(
-                Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.WOOD)));
-        register("attached_melon_stem", new BlockAttachedStem(melon, Block.Properties.createBlockProperties(
-                Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.WOOD)));
-        register("pumpkin_stem", new BlockStem(blockstemgrown, Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                               .setNonSolid().needsRandomTick()
-                                                                               .instantDestruction()
-                                                                               .setSoundType(SoundType.WOOD)));
-        register("melon_stem", new BlockStem(melon, Block.Properties.createBlockProperties(Material.PLANTS)
-                                                                    .setNonSolid().needsRandomTick()
-                                                                    .instantDestruction()
-                                                                    .setSoundType(SoundType.WOOD)));
-        register("vine", new BlockVine(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                       .needsRandomTick().setHardnessAndResistance(0.2F)
-                                                       .setSoundType(SoundType.PLANT)));
-        register("oak_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                             oakPlanks.blockMapColor)
-                                                                      .setHardnessAndResistance(2.0F, 3.0F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("brick_stairs",
-                 new BlockStairs(block32.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block32)));
-        register("stone_brick_stairs",
-                 new BlockStairs(block35.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block35)));
-        register("mycelium", new BlockMycelium(Block.Properties.createBlockProperties(Material.GRASS,
-                                                                                      MaterialColor.PURPLE)
-                                                               .needsRandomTick().setHardnessAndResistance(0.6F)
-                                                               .setSoundType(SoundType.PLANT)));
-        register("lily_pad", new BlockLilyPad(Block.Properties.createBlockProperties(Material.PLANTS)
-                                                              .instantDestruction().setSoundType(SoundType.PLANT)));
-        Block netherBricks = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                                       .setHardnessAndResistance(2.0F, 6.0F));
+        register("attached_pumpkin_stem", new BlockAttachedStem(blockstemgrown, Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.WOOD)));
+        register("attached_melon_stem", new BlockAttachedStem(melon, Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().instantDestruction().setSoundType(SoundType.WOOD)));
+        register("pumpkin_stem", new BlockStem(blockstemgrown, Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.WOOD)));
+        register("melon_stem", new BlockStem(melon, Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.WOOD)));
+        register("vine", new BlockVine(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().needsRandomTick().setHardnessAndResistance(0.2F).setSoundType(SoundType.PLANT)));
+        register("oak_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, oakPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("brick_stairs", new BlockStairs(block32.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block32)));
+        register("stone_brick_stairs", new BlockStairs(block35.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block35)));
+        register("mycelium", new BlockMycelium(Block.Properties.createBlockProperties(Material.GRASS, MaterialColor.PURPLE).needsRandomTick().setHardnessAndResistance(0.6F).setSoundType(SoundType.PLANT)));
+        register("lily_pad", new BlockLilyPad(Block.Properties.createBlockProperties(Material.PLANTS).instantDestruction().setSoundType(SoundType.PLANT)));
+        Block netherBricks = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(2.0F, 6.0F));
         register("nether_bricks", netherBricks);
-        register("nether_brick_fence", new BlockFence(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("nether_brick_stairs", new BlockStairs(netherBricks.getDefaultState(),
-                                                        Block.Properties.createBlockPropertiesFromBlock(netherBricks)));
-        register("nether_wart", new BlockNetherWart(Block.Properties.createBlockProperties(Material.PLANTS,
-                                                                                           MaterialColor.RED)
-                                                                    .setNonSolid().needsRandomTick()));
-        register("enchanting_table", new BlockEnchantmentTable(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED)
-                                .setHardnessAndResistance(5.0F, 1200.0F)));
-        register("brewing_stand", new BlockBrewingStand(Block.Properties.createBlockProperties(Material.IRON)
-                                                                        .setHardnessAndResistance(0.5F)
-                                                                        .setLightLevel(1)));
-        register("cauldron", new BlockCauldron(
-                Block.Properties.createBlockProperties(Material.IRON, MaterialColor.STONE)
-                                .setHardnessAndResistance(2.0F)));
-        register("end_portal", new BlockEndPortal(Block.Properties.createBlockProperties(Material.PORTAL,
-                                                                                         MaterialColor.BLACK)
-                                                                  .setNonSolid().setLightLevel(15)
-                                                                  .setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("end_portal_frame", new BlockEndPortalFrame(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                    MaterialColor.GREEN)
-                                                                             .setSoundType(SoundType.GLASS)
-                                                                             .setLightLevel(1)
-                                                                             .setHardnessAndResistance(-1.0F,
-                                                                                                       3600000.0F)));
-        register("end_stone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                                        .setHardnessAndResistance(3.0F, 9.0F)));
-        register("dragon_egg", new BlockDragonEgg(Block.Properties.createBlockProperties(Material.DRAGON_EGG,
-                                                                                         MaterialColor.BLACK)
-                                                                  .setHardnessAndResistance(3.0F, 9.0F)
-                                                                  .setLightLevel(1)));
-        register("redstone_lamp", new BlockRedstoneLamp(Block.Properties.createBlockProperties(Material.REDSTONE_LIGHT)
-                                                                        .setLightLevel(15)
-                                                                        .setHardnessAndResistance(0.3F)
-                                                                        .setSoundType(SoundType.GLASS)));
-        register("cocoa", new BlockCocoa(Block.Properties.createBlockProperties(Material.PLANTS).needsRandomTick()
-                                                         .setHardnessAndResistance(0.2F, 3.0F)
-                                                         .setSoundType(SoundType.WOOD)));
-        register("sandstone_stairs",
-                 new BlockStairs(block15.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block15)));
-        register("emerald_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
-        register("ender_chest", new BlockEnderChest(Block.Properties.createBlockProperties(Material.ROCK)
-                                                                    .setHardnessAndResistance(22.5F, 600.0F)
-                                                                    .setLightLevel(7)));
-        BlockTripWireHook blocktripwirehook = new BlockTripWireHook(
-                Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid());
+        register("nether_brick_fence", new BlockFence(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(2.0F, 6.0F)));
+        register("nether_brick_stairs", new BlockStairs(netherBricks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(netherBricks)));
+        register("nether_wart", new BlockNetherWart(Block.Properties.createBlockProperties(Material.PLANTS, MaterialColor.RED).setNonSolid().needsRandomTick()));
+        register("enchanting_table", new BlockEnchantmentTable(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED).setHardnessAndResistance(5.0F, 1200.0F)));
+        register("brewing_stand", new BlockBrewingStand(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(0.5F).setLightLevel(1)));
+        register("cauldron", new BlockCauldron(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.STONE).setHardnessAndResistance(2.0F)));
+        register("end_portal", new BlockEndPortal(Block.Properties.createBlockProperties(Material.PORTAL, MaterialColor.BLACK).setNonSolid().setLightLevel(15).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("end_portal_frame", new BlockEndPortalFrame(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GREEN).setSoundType(SoundType.GLASS).setLightLevel(1).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("end_stone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(3.0F, 9.0F)));
+        register("dragon_egg", new BlockDragonEgg(Block.Properties.createBlockProperties(Material.DRAGON_EGG, MaterialColor.BLACK).setHardnessAndResistance(3.0F, 9.0F).setLightLevel(1)));
+        register("redstone_lamp", new BlockRedstoneLamp(Block.Properties.createBlockProperties(Material.REDSTONE_LIGHT).setLightLevel(15).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("cocoa", new BlockCocoa(Block.Properties.createBlockProperties(Material.PLANTS).needsRandomTick().setHardnessAndResistance(0.2F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("sandstone_stairs", new BlockStairs(block15.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block15)));
+        register("emerald_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("ender_chest", new BlockEnderChest(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(22.5F, 600.0F).setLightLevel(7)));
+        BlockTripWireHook blocktripwirehook = new BlockTripWireHook(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid());
         register("tripwire_hook", blocktripwirehook);
-        register("tripwire", new BlockTripWire(blocktripwirehook,
-                                               Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                               .setNonSolid()));
-        register("emerald_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.EMERALD)
-                                                            .setHardnessAndResistance(5.0F, 6.0F)
-                                                            .setSoundType(SoundType.METAL)));
-        register("spruce_stairs", new BlockStairs(sprucePlanks.getDefaultState(),
-                                                  Block.Properties.createBlockPropertiesFromBlock(sprucePlanks)));
-        register("birch_stairs", new BlockStairs(birchPlanks.getDefaultState(),
-                                                 Block.Properties.createBlockPropertiesFromBlock(birchPlanks)));
-        register("jungle_stairs", new BlockStairs(junglePlanks.getDefaultState(),
-                                                  Block.Properties.createBlockPropertiesFromBlock(junglePlanks)));
-        register("command_block", new BlockCommandBlock(
-                Block.Properties.createBlockProperties(Material.IRON, MaterialColor.BROWN)
-                                .setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("beacon", new BlockBeacon(Block.Properties.createBlockProperties(Material.GLASS, MaterialColor.DIAMOND)
-                                                           .setHardnessAndResistance(3.0F).setLightLevel(15)));
+        register("tripwire", new BlockTripWire(blocktripwirehook, Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid()));
+        register("emerald_block", new Block(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.EMERALD).setHardnessAndResistance(5.0F, 6.0F).setSoundType(SoundType.METAL)));
+        register("spruce_stairs", new BlockStairs(sprucePlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(sprucePlanks)));
+        register("birch_stairs", new BlockStairs(birchPlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(birchPlanks)));
+        register("jungle_stairs", new BlockStairs(junglePlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(junglePlanks)));
+        register("command_block", new BlockCommandBlock(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.BROWN).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("beacon", new BlockBeacon(Block.Properties.createBlockProperties(Material.GLASS, MaterialColor.DIAMOND).setHardnessAndResistance(3.0F).setLightLevel(15)));
         register("cobblestone_wall", new BlockWall(Block.Properties.createBlockPropertiesFromBlock(cobblestone)));
         register("mossy_cobblestone_wall", new BlockWall(Block.Properties.createBlockPropertiesFromBlock(cobblestone)));
-        register("flower_pot", new BlockFlowerPot(air, Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                       .instantDestruction()));
-        register("potted_oak_sapling", new BlockFlowerPot(oakSapling,
-                                                          Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .instantDestruction()));
-        register("potted_spruce_sapling", new BlockFlowerPot(spruceSapling,
-                                                             Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("potted_birch_sapling", new BlockFlowerPot(birchSapling,
-                                                            Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                            .instantDestruction()));
-        register("potted_jungle_sapling", new BlockFlowerPot(jugleSapling,
-                                                             Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("potted_acacia_sapling", new BlockFlowerPot(acaciaSapling,
-                                                             Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("potted_dark_oak_sapling", new BlockFlowerPot(darkOakSapling,
-                                                               Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                               .instantDestruction()));
-        register("potted_fern", new BlockFlowerPot(fern, Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                            .instantDestruction()));
-        register("potted_dandelion", new BlockFlowerPot(block20,
-                                                        Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .instantDestruction()));
-        register("potted_poppy", new BlockFlowerPot(block21, Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("potted_blue_orchid", new BlockFlowerPot(block22,
-                                                          Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .instantDestruction()));
-        register("potted_allium", new BlockFlowerPot(block23, Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                              .instantDestruction()));
-        register("potted_azure_bluet", new BlockFlowerPot(block24,
-                                                          Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .instantDestruction()));
-        register("potted_red_tulip", new BlockFlowerPot(block25,
-                                                        Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .instantDestruction()));
-        register("potted_orange_tulip", new BlockFlowerPot(block26,
-                                                           Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                           .instantDestruction()));
-        register("potted_white_tulip", new BlockFlowerPot(block27,
-                                                          Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .instantDestruction()));
-        register("potted_pink_tulip", new BlockFlowerPot(pinkTulip,
-                                                         Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                         .instantDestruction()));
-        register("potted_oxeye_daisy", new BlockFlowerPot(oxeyDaisy,
-                                                          Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                          .instantDestruction()));
-        register("potted_red_mushroom", new BlockFlowerPot(redMushroom,
-                                                           Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                           .instantDestruction()));
-        register("potted_brown_mushroom", new BlockFlowerPot(brownMushroom,
-                                                             Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("potted_dead_bush", new BlockFlowerPot(deadBush,
-                                                        Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .instantDestruction()));
-        register("potted_cactus", new BlockFlowerPot(cactus, Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                             .instantDestruction()));
-        register("carrots", new BlockCarrot(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                            .needsRandomTick().instantDestruction()
-                                                            .setSoundType(SoundType.PLANT)));
-        register("potatoes", new BlockPotato(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                             .needsRandomTick().instantDestruction()
-                                                             .setSoundType(SoundType.PLANT)));
-        register("oak_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                   .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                   .setSoundType(SoundType.WOOD)));
-        register("spruce_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                      .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("birch_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                     .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                     .setSoundType(SoundType.WOOD)));
-        register("jungle_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                      .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("acacia_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                      .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                      .setSoundType(SoundType.WOOD)));
-        register("dark_oak_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                        .setSoundType(SoundType.WOOD)));
-        register("skeleton_wall_skull", new BlockSkullWall(BlockSkull.Types.SKELETON,
-                                                           Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                           .setHardnessAndResistance(1.0F)));
-        register("skeleton_skull", new BlockSkull(BlockSkull.Types.SKELETON,
-                                                  Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                  .setHardnessAndResistance(1.0F)));
-        register("wither_skeleton_wall_skull", new BlockSkullWitherWall(
-                Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
-        register("wither_skeleton_skull", new BlockSkullWither(
-                Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
-        register("zombie_wall_head", new BlockSkullWall(BlockSkull.Types.ZOMBIE,
-                                                        Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setHardnessAndResistance(1.0F)));
-        register("zombie_head", new BlockSkull(BlockSkull.Types.ZOMBIE,
-                                               Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                               .setHardnessAndResistance(1.0F)));
-        register("player_wall_head", new BlockSkullWallPlayer(
-                Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
-        register("player_head", new BlockSkullPlayer(
-                Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
-        register("creeper_wall_head", new BlockSkullWall(BlockSkull.Types.CREEPER,
-                                                         Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                         .setHardnessAndResistance(1.0F)));
-        register("creeper_head", new BlockSkull(BlockSkull.Types.CREEPER,
-                                                Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                .setHardnessAndResistance(1.0F)));
-        register("dragon_wall_head", new BlockSkullWall(BlockSkull.Types.DRAGON,
-                                                        Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setHardnessAndResistance(1.0F)));
-        register("dragon_head", new BlockSkull(BlockSkull.Types.DRAGON,
-                                               Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                               .setHardnessAndResistance(1.0F)));
-        register("anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
-                                                         .setHardnessAndResistance(5.0F, 1200.0F)
-                                                         .setSoundType(SoundType.ANVIL)));
-        register("chipped_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL,
-                                                                                        MaterialColor.IRON)
-                                                                 .setHardnessAndResistance(5.0F, 1200.0F)
-                                                                 .setSoundType(SoundType.ANVIL)));
-        register("damaged_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL,
-                                                                                        MaterialColor.IRON)
-                                                                 .setHardnessAndResistance(5.0F, 1200.0F)
-                                                                 .setSoundType(SoundType.ANVIL)));
-        register("trapped_chest", new BlockTrappedChest(Block.Properties.createBlockProperties(Material.WOOD)
-                                                                        .setHardnessAndResistance(2.5F)
-                                                                        .setSoundType(SoundType.WOOD)));
-        register("light_weighted_pressure_plate",
-                 new BlockPressurePlateWeighted(15, Block.Properties.createBlockProperties(Material.IRON,
-                                                                                           MaterialColor.GOLD)
-                                                                    .setNonSolid().setHardnessAndResistance(0.5F)
-                                                                    .setSoundType(SoundType.WOOD)));
-        register("heavy_weighted_pressure_plate",
-                 new BlockPressurePlateWeighted(150, Block.Properties.createBlockProperties(Material.IRON).setNonSolid()
-                                                                     .setHardnessAndResistance(0.5F)
-                                                                     .setSoundType(SoundType.WOOD)));
-        register("comparator", new BlockRedstoneComparator(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                           .instantDestruction()
-                                                                           .setSoundType(SoundType.WOOD)));
-        register("daylight_detector", new BlockDaylightDetector(Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                .setHardnessAndResistance(0.2F)
-                                                                                .setSoundType(SoundType.WOOD)));
-        register("redstone_block", new BlockRedstone(Block.Properties.createBlockProperties(Material.IRON,
-                                                                                            MaterialColor.TNT)
-                                                                     .setHardnessAndResistance(5.0F, 6.0F)
-                                                                     .setSoundType(SoundType.METAL)));
-        register("nether_quartz_ore", new BlockOre(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                .setHardnessAndResistance(3.0F, 3.0F)));
-        register("hopper", new BlockHopper(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.STONE)
-                                                           .setHardnessAndResistance(3.0F, 4.8F)
-                                                           .setSoundType(SoundType.METAL)));
-        Block block42 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                                  .setHardnessAndResistance(0.8F));
+        register("flower_pot", new BlockFlowerPot(air, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_oak_sapling", new BlockFlowerPot(oakSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_spruce_sapling", new BlockFlowerPot(spruceSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_birch_sapling", new BlockFlowerPot(birchSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_jungle_sapling", new BlockFlowerPot(jugleSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_acacia_sapling", new BlockFlowerPot(acaciaSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_dark_oak_sapling", new BlockFlowerPot(darkOakSapling, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_fern", new BlockFlowerPot(fern, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_dandelion", new BlockFlowerPot(block20, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_poppy", new BlockFlowerPot(block21, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_blue_orchid", new BlockFlowerPot(block22, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_allium", new BlockFlowerPot(block23, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_azure_bluet", new BlockFlowerPot(block24, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_red_tulip", new BlockFlowerPot(block25, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_orange_tulip", new BlockFlowerPot(block26, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_white_tulip", new BlockFlowerPot(block27, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_pink_tulip", new BlockFlowerPot(pinkTulip, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_oxeye_daisy", new BlockFlowerPot(oxeyDaisy, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_red_mushroom", new BlockFlowerPot(redMushroom, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_brown_mushroom", new BlockFlowerPot(brownMushroom, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_dead_bush", new BlockFlowerPot(deadBush, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("potted_cactus", new BlockFlowerPot(cactus, Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction()));
+        register("carrots", new BlockCarrot(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("potatoes", new BlockPotato(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("oak_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("spruce_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("birch_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("jungle_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("acacia_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_button", new BlockButtonWood(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("skeleton_wall_skull", new BlockSkullWall(BlockSkull.Types.SKELETON, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("skeleton_skull", new BlockSkull(BlockSkull.Types.SKELETON, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("wither_skeleton_wall_skull", new BlockSkullWitherWall(Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("wither_skeleton_skull", new BlockSkullWither(Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("zombie_wall_head", new BlockSkullWall(BlockSkull.Types.ZOMBIE, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("zombie_head", new BlockSkull(BlockSkull.Types.ZOMBIE, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("player_wall_head", new BlockSkullWallPlayer(Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("player_head", new BlockSkullPlayer(Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("creeper_wall_head", new BlockSkullWall(BlockSkull.Types.CREEPER, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("creeper_head", new BlockSkull(BlockSkull.Types.CREEPER, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("dragon_wall_head", new BlockSkullWall(BlockSkull.Types.DRAGON, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("dragon_head", new BlockSkull(BlockSkull.Types.DRAGON, Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
+        register("anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON).setHardnessAndResistance(5.0F, 1200.0F).setSoundType(SoundType.ANVIL)));
+        register("chipped_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON).setHardnessAndResistance(5.0F, 1200.0F).setSoundType(SoundType.ANVIL)));
+        register("damaged_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON).setHardnessAndResistance(5.0F, 1200.0F).setSoundType(SoundType.ANVIL)));
+        register("trapped_chest", new BlockTrappedChest(Block.Properties.createBlockProperties(Material.WOOD).setHardnessAndResistance(2.5F).setSoundType(SoundType.WOOD)));
+        register("light_weighted_pressure_plate", new BlockPressurePlateWeighted(15, Block.Properties.createBlockProperties(Material.IRON, MaterialColor.GOLD).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("heavy_weighted_pressure_plate", new BlockPressurePlateWeighted(150, Block.Properties.createBlockProperties(Material.IRON).setNonSolid().setHardnessAndResistance(0.5F).setSoundType(SoundType.WOOD)));
+        register("comparator", new BlockRedstoneComparator(Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction().setSoundType(SoundType.WOOD)));
+        register("daylight_detector", new BlockDaylightDetector(Block.Properties.createBlockProperties(Material.WOOD).setHardnessAndResistance(0.2F).setSoundType(SoundType.WOOD)));
+        register("redstone_block", new BlockRedstone(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.TNT).setHardnessAndResistance(5.0F, 6.0F).setSoundType(SoundType.METAL)));
+        register("nether_quartz_ore", new BlockOre(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(3.0F, 3.0F)));
+        register("hopper", new BlockHopper(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.STONE).setHardnessAndResistance(3.0F, 4.8F).setSoundType(SoundType.METAL)));
+        Block block42 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(0.8F));
         register("quartz_block", block42);
-        register("chiseled_quartz_block", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                .setHardnessAndResistance(0.8F)));
-        register("quartz_pillar", new BlockRotatedPillar(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                .setHardnessAndResistance(0.8F)));
-        register("quartz_stairs",
-                 new BlockStairs(block42.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block42)));
-        register("activator_rail", new BlockRailPowered(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                                        .setNonSolid().setHardnessAndResistance(0.7F)
-                                                                        .setSoundType(SoundType.METAL)));
-        register("dropper", new BlockDropper(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F)));
-        register("white_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.WHITE_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("orange_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ORANGE_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("magenta_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("light_blue_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIGHT_BLUE_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("yellow_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.YELLOW_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("lime_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIME_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("pink_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PINK_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("gray_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("light_gray_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SILVER_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("cyan_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("purple_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PURPLE_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("blue_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLUE_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("brown_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BROWN_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("green_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GREEN_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("red_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("black_terracotta", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK_STAINED_HARDENED_CLAY)
-                                .setHardnessAndResistance(1.25F, 4.2F)));
-        register("white_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                               .setHardnessAndResistance(0.3F)
-                                                                               .setSoundType(SoundType.GLASS)));
-        register("orange_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                                .setHardnessAndResistance(0.3F)
-                                                                                .setSoundType(SoundType.GLASS)));
-        register("magenta_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                                 .setHardnessAndResistance(0.3F)
-                                                                                 .setSoundType(SoundType.GLASS)));
-        register("light_blue_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(
-                         Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("yellow_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                                .setHardnessAndResistance(0.3F)
-                                                                                .setSoundType(SoundType.GLASS)));
-        register("lime_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                              .setHardnessAndResistance(0.3F)
-                                                                              .setSoundType(SoundType.GLASS)));
-        register("pink_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                              .setHardnessAndResistance(0.3F)
-                                                                              .setSoundType(SoundType.GLASS)));
-        register("gray_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                              .setHardnessAndResistance(0.3F)
-                                                                              .setSoundType(SoundType.GLASS)));
-        register("light_gray_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(
-                         Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
-        register("cyan_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                              .setHardnessAndResistance(0.3F)
-                                                                              .setSoundType(SoundType.GLASS)));
-        register("purple_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                                .setHardnessAndResistance(0.3F)
-                                                                                .setSoundType(SoundType.GLASS)));
-        register("blue_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                              .setHardnessAndResistance(0.3F)
-                                                                              .setSoundType(SoundType.GLASS)));
-        register("brown_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                               .setHardnessAndResistance(0.3F)
-                                                                               .setSoundType(SoundType.GLASS)));
-        register("green_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                               .setHardnessAndResistance(0.3F)
-                                                                               .setSoundType(SoundType.GLASS)));
-        register("red_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                             .setHardnessAndResistance(0.3F)
-                                                                             .setSoundType(SoundType.GLASS)));
-        register("black_stained_glass_pane",
-                 new BlockStainedGlassPane(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.GLASS)
-                                                                               .setHardnessAndResistance(0.3F)
-                                                                               .setSoundType(SoundType.GLASS)));
-        register("acacia_stairs", new BlockStairs(acaciaPlanks.getDefaultState(),
-                                                  Block.Properties.createBlockPropertiesFromBlock(acaciaPlanks)));
-        register("dark_oak_stairs", new BlockStairs(darkOakPlanks.getDefaultState(),
-                                                    Block.Properties.createBlockPropertiesFromBlock(darkOakPlanks)));
-        register("slime_block", new BlockSlime(Block.Properties.createBlockProperties(Material.CLAY,
-                                                                                      MaterialColor.GRASS)
-                                                               .setSlipperiness(0.8F).setSoundType(SoundType.SLIME)));
-        register("barrier", new BlockBarrier(
-                Block.Properties.createBlockProperties(Material.BARRIER).setHardnessAndResistance(-1.0F, 3600000.8F)));
-        register("iron_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.IRON)
-                                                                    .setHardnessAndResistance(5.0F)
-                                                                    .setSoundType(SoundType.METAL)));
-        Block prismarine = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN)
-                                                     .setHardnessAndResistance(1.5F, 6.0F));
+        register("chiseled_quartz_block", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(0.8F)));
+        register("quartz_pillar", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(0.8F)));
+        register("quartz_stairs", new BlockStairs(block42.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block42)));
+        register("activator_rail", new BlockRailPowered(Block.Properties.createBlockProperties(Material.CIRCUITS).setNonSolid().setHardnessAndResistance(0.7F).setSoundType(SoundType.METAL)));
+        register("dropper", new BlockDropper(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F)));
+        register("white_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.WHITE_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("orange_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ORANGE_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("magenta_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("light_blue_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIGHT_BLUE_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("yellow_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.YELLOW_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("lime_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIME_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("pink_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PINK_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("gray_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("light_gray_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SILVER_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("cyan_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("purple_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PURPLE_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("blue_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLUE_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("brown_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BROWN_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("green_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GREEN_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("red_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("black_terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK_STAINED_HARDENED_CLAY).setHardnessAndResistance(1.25F, 4.2F)));
+        register("white_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("orange_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("magenta_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("light_blue_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("yellow_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("lime_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("pink_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("gray_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("light_gray_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("cyan_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("purple_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("blue_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("brown_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("green_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("red_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("black_stained_glass_pane", new BlockStainedGlassPane(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.GLASS).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS)));
+        register("acacia_stairs", new BlockStairs(acaciaPlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(acaciaPlanks)));
+        register("dark_oak_stairs", new BlockStairs(darkOakPlanks.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(darkOakPlanks)));
+        register("slime_block", new BlockSlime(Block.Properties.createBlockProperties(Material.CLAY, MaterialColor.GRASS).setSlipperiness(0.8F).setSoundType(SoundType.SLIME)));
+        register("barrier", new BlockBarrier(Block.Properties.createBlockProperties(Material.BARRIER).setHardnessAndResistance(-1.0F, 3600000.8F)));
+        register("iron_trapdoor", new BlockTrapDoor(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(5.0F).setSoundType(SoundType.METAL)));
+        Block prismarine = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN).setHardnessAndResistance(1.5F, 6.0F));
         register("prismarine", prismarine);
-        Block block44 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND)
-                                                  .setHardnessAndResistance(1.5F, 6.0F));
+        Block block44 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND).setHardnessAndResistance(1.5F, 6.0F));
         register("prismarine_bricks", block44);
-        Block darkPrismarine = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND)
-                                                         .setHardnessAndResistance(1.5F, 6.0F));
+        Block darkPrismarine = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND).setHardnessAndResistance(1.5F, 6.0F));
         register("dark_prismarine", darkPrismarine);
-        register("prismarine_stairs", new BlockStairs(prismarine.getDefaultState(),
-                                                      Block.Properties.createBlockPropertiesFromBlock(prismarine)));
-        register("prismarine_brick_stairs",
-                 new BlockStairs(block44.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block44)));
-        register("dark_prismarine_stairs", new BlockStairs(darkPrismarine.getDefaultState(), Block.Properties
-                .createBlockPropertiesFromBlock(darkPrismarine)));
-        register("prismarine_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("prismarine_brick_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("dark_prismarine_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("sea_lantern", new BlockSeaLantern(Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                           MaterialColor.QUARTZ)
-                                                                    .setHardnessAndResistance(0.3F)
-                                                                    .setSoundType(SoundType.GLASS).setLightLevel(15)));
-        register("hay_block", new BlockHay(Block.Properties.createBlockProperties(Material.GRASS, MaterialColor.YELLOW)
-                                                           .setHardnessAndResistance(0.5F)
-                                                           .setSoundType(SoundType.PLANT)));
-        register("white_carpet", new BlockCarpet(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.SNOW).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("orange_carpet", new BlockCarpet(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.ADOBE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("magenta_carpet", new BlockCarpet(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.MAGENTA).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("light_blue_carpet", new BlockCarpet(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.LIGHT_BLUE).setHardnessAndResistance(0.1F).setSoundType(
-                SoundType.CLOTH)));
-        register("yellow_carpet", new BlockCarpet(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.YELLOW).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("lime_carpet", new BlockCarpet(EnumDyeColor.LIME, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.LIME).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("pink_carpet", new BlockCarpet(EnumDyeColor.PINK, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.PINK).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("gray_carpet", new BlockCarpet(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.GRAY).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("light_gray_carpet", new BlockCarpet(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.SILVER).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("cyan_carpet", new BlockCarpet(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.CYAN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("purple_carpet", new BlockCarpet(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.PURPLE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("blue_carpet", new BlockCarpet(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.BLUE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("brown_carpet", new BlockCarpet(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.BROWN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("green_carpet", new BlockCarpet(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.GREEN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("red_carpet", new BlockCarpet(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.CARPET,
-                                                                                                        MaterialColor.RED)
-                                                                                 .setHardnessAndResistance(0.1F)
-                                                                                 .setSoundType(SoundType.CLOTH)));
-        register("black_carpet", new BlockCarpet(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(
-                Material.CARPET, MaterialColor.BLACK).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
-        register("terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                                         .setHardnessAndResistance(1.25F, 4.2F)));
-        register("coal_block", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK)
-                                                         .setHardnessAndResistance(5.0F, 6.0F)));
-        register("packed_ice", new BlockPackedIce(Block.Properties.createBlockProperties(Material.PACKED_ICE)
-                                                                  .setSlipperiness(0.98F).setHardnessAndResistance(0.5F)
-                                                                  .setSoundType(SoundType.GLASS)));
-        register("sunflower", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                                  .instantDestruction().setSoundType(SoundType.PLANT)));
-        register("lilac", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                              .instantDestruction().setSoundType(SoundType.PLANT)));
-        register("rose_bush", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                                  .instantDestruction().setSoundType(SoundType.PLANT)));
-        register("peony", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid()
-                                                              .instantDestruction().setSoundType(SoundType.PLANT)));
+        register("prismarine_stairs", new BlockStairs(prismarine.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(prismarine)));
+        register("prismarine_brick_stairs", new BlockStairs(block44.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block44)));
+        register("dark_prismarine_stairs", new BlockStairs(darkPrismarine.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(darkPrismarine)));
+        register("prismarine_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN).setHardnessAndResistance(1.5F, 6.0F)));
+        register("prismarine_brick_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND).setHardnessAndResistance(1.5F, 6.0F)));
+        register("dark_prismarine_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIAMOND).setHardnessAndResistance(1.5F, 6.0F)));
+        register("sea_lantern", new BlockSeaLantern(Block.Properties.createBlockProperties(Material.GLASS, MaterialColor.QUARTZ).setHardnessAndResistance(0.3F).setSoundType(SoundType.GLASS).setLightLevel(15)));
+        register("hay_block", new BlockHay(Block.Properties.createBlockProperties(Material.GRASS, MaterialColor.YELLOW).setHardnessAndResistance(0.5F).setSoundType(SoundType.PLANT)));
+        register("white_carpet", new BlockCarpet(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.SNOW).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("orange_carpet", new BlockCarpet(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.ADOBE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("magenta_carpet", new BlockCarpet(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.MAGENTA).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("light_blue_carpet", new BlockCarpet(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.LIGHT_BLUE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("yellow_carpet", new BlockCarpet(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.YELLOW).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("lime_carpet", new BlockCarpet(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.LIME).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("pink_carpet", new BlockCarpet(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.PINK).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("gray_carpet", new BlockCarpet(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.GRAY).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("light_gray_carpet", new BlockCarpet(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.SILVER).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("cyan_carpet", new BlockCarpet(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.CYAN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("purple_carpet", new BlockCarpet(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.PURPLE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("blue_carpet", new BlockCarpet(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.BLUE).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("brown_carpet", new BlockCarpet(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.BROWN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("green_carpet", new BlockCarpet(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.GREEN).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("red_carpet", new BlockCarpet(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.RED).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("black_carpet", new BlockCarpet(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.CARPET, MaterialColor.BLACK).setHardnessAndResistance(0.1F).setSoundType(SoundType.CLOTH)));
+        register("terracotta", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(1.25F, 4.2F)));
+        register("coal_block", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK).setHardnessAndResistance(5.0F, 6.0F)));
+        register("packed_ice", new BlockPackedIce(Block.Properties.createBlockProperties(Material.PACKED_ICE).setSlipperiness(0.98F).setHardnessAndResistance(0.5F).setSoundType(SoundType.GLASS)));
+        register("sunflower", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("lilac", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("rose_bush", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
+        register("peony", new BlockTallFlower(Block.Properties.createBlockProperties(Material.VINE).setNonSolid().instantDestruction().setSoundType(SoundType.PLANT)));
         register("tall_grass", new BlockShearableDoublePlant(grass, Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT)));
         register("large_fern", new BlockShearableDoublePlant(fern, Block.Properties.createBlockProperties(Material.VINE).setNonSolid().setHardnessAndResistance(0.1F).setSoundType(SoundType.PLANT)));
-        register("white_banner", new BlockBanner(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("orange_banner", new BlockBanner(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("magenta_banner", new BlockBanner(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("light_blue_banner", new BlockBanner(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("yellow_banner", new BlockBanner(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("lime_banner", new BlockBanner(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(1.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("pink_banner", new BlockBanner(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(1.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("gray_banner", new BlockBanner(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(1.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("light_gray_banner", new BlockBanner(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("cyan_banner", new BlockBanner(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(1.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("purple_banner", new BlockBanner(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("blue_banner", new BlockBanner(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                   .setNonSolid()
-                                                                                   .setHardnessAndResistance(1.0F)
-                                                                                   .setSoundType(SoundType.WOOD)));
-        register("brown_banner", new BlockBanner(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("green_banner", new BlockBanner(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("red_banner", new BlockBanner(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                                 .setNonSolid()
-                                                                                 .setHardnessAndResistance(1.0F)
-                                                                                 .setSoundType(SoundType.WOOD)));
-        register("black_banner", new BlockBanner(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("white_wall_banner", new BlockBannerWall(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("orange_wall_banner", new BlockBannerWall(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("magenta_wall_banner",
-                 new BlockBannerWall(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                           .setNonSolid().setHardnessAndResistance(1.0F)
-                                                                           .setSoundType(SoundType.WOOD)));
-        register("light_blue_wall_banner",
-                 new BlockBannerWall(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                              .setNonSolid()
-                                                                              .setHardnessAndResistance(1.0F)
-                                                                              .setSoundType(SoundType.WOOD)));
-        register("yellow_wall_banner", new BlockBannerWall(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("lime_wall_banner", new BlockBannerWall(EnumDyeColor.LIME, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("pink_wall_banner", new BlockBannerWall(EnumDyeColor.PINK, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("gray_wall_banner", new BlockBannerWall(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("light_gray_wall_banner",
-                 new BlockBannerWall(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.WOOD)
-                                                                              .setNonSolid()
-                                                                              .setHardnessAndResistance(1.0F)
-                                                                              .setSoundType(SoundType.WOOD)));
-        register("cyan_wall_banner", new BlockBannerWall(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("purple_wall_banner", new BlockBannerWall(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("blue_wall_banner", new BlockBannerWall(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("brown_wall_banner", new BlockBannerWall(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("green_wall_banner", new BlockBannerWall(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("red_wall_banner", new BlockBannerWall(EnumDyeColor.RED, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        register("black_wall_banner", new BlockBannerWall(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(
-                Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
-        Block block46 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                                  .setHardnessAndResistance(0.8F));
+        register("white_banner", new BlockBanner(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("orange_banner", new BlockBanner(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("magenta_banner", new BlockBanner(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("light_blue_banner", new BlockBanner(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("yellow_banner", new BlockBanner(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("lime_banner", new BlockBanner(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("pink_banner", new BlockBanner(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("gray_banner", new BlockBanner(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("light_gray_banner", new BlockBanner(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("cyan_banner", new BlockBanner(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("purple_banner", new BlockBanner(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("blue_banner", new BlockBanner(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("brown_banner", new BlockBanner(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("green_banner", new BlockBanner(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("red_banner", new BlockBanner(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("black_banner", new BlockBanner(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("white_wall_banner", new BlockBannerWall(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("orange_wall_banner", new BlockBannerWall(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("magenta_wall_banner", new BlockBannerWall(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("light_blue_wall_banner", new BlockBannerWall(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("yellow_wall_banner", new BlockBannerWall(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("lime_wall_banner", new BlockBannerWall(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("pink_wall_banner", new BlockBannerWall(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("gray_wall_banner", new BlockBannerWall(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("light_gray_wall_banner", new BlockBannerWall(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("cyan_wall_banner", new BlockBannerWall(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("purple_wall_banner", new BlockBannerWall(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("blue_wall_banner", new BlockBannerWall(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("brown_wall_banner", new BlockBannerWall(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("green_wall_banner", new BlockBannerWall(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("red_wall_banner", new BlockBannerWall(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("black_wall_banner", new BlockBannerWall(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.WOOD).setNonSolid().setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        Block block46 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(0.8F));
         register("red_sandstone", block46);
-        register("chiseled_red_sandstone", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                .setHardnessAndResistance(0.8F)));
-        register("cut_red_sandstone", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                .setHardnessAndResistance(0.8F)));
-        register("red_sandstone_stairs",
-                 new BlockStairs(block46.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block46)));
-        register("oak_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD)
-                                                           .setHardnessAndResistance(2.0F, 3.0F)
-                                                           .setSoundType(SoundType.WOOD)));
-        register("spruce_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                     MaterialColor.OBSIDIAN)
-                                                              .setHardnessAndResistance(2.0F, 3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("birch_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND)
-                                                             .setHardnessAndResistance(2.0F, 3.0F)
-                                                             .setSoundType(SoundType.WOOD)));
-        register("jungle_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT)
-                                                              .setHardnessAndResistance(2.0F, 3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("acacia_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE)
-                                                              .setHardnessAndResistance(2.0F, 3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("dark_oak_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                       MaterialColor.BROWN)
-                                                                .setHardnessAndResistance(2.0F, 3.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("stone_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                                             .setHardnessAndResistance(2.0F, 6.0F)));
-        register("sandstone_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("petrified_oak_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.WOOD)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("cobblestone_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("brick_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED)
-                                                             .setHardnessAndResistance(2.0F, 6.0F)));
-        register("stone_brick_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("nether_brick_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("quartz_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("red_sandstone_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("purpur_slab", new BlockSlab(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("smooth_stone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                                                           .setHardnessAndResistance(2.0F, 6.0F)));
-        register("smooth_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                                               .setHardnessAndResistance(2.0F, 6.0F)));
-        register("smooth_quartz", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ)
-                                                            .setHardnessAndResistance(2.0F, 6.0F)));
-        register("smooth_red_sandstone", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("spruce_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                sprucePlanks.blockMapColor)
-                                                                         .setHardnessAndResistance(2.0F, 3.0F)
-                                                                         .setSoundType(SoundType.WOOD)));
-        register("birch_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                               birchPlanks.blockMapColor)
-                                                                        .setHardnessAndResistance(2.0F, 3.0F)
-                                                                        .setSoundType(SoundType.WOOD)));
-        register("jungle_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                junglePlanks.blockMapColor)
-                                                                         .setHardnessAndResistance(2.0F, 3.0F)
-                                                                         .setSoundType(SoundType.WOOD)));
-        register("acacia_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                acaciaPlanks.blockMapColor)
-                                                                         .setHardnessAndResistance(2.0F, 3.0F)
-                                                                         .setSoundType(SoundType.WOOD)));
-        register("dark_oak_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                                  darkOakPlanks.blockMapColor)
-                                                                           .setHardnessAndResistance(2.0F, 3.0F)
-                                                                           .setSoundType(SoundType.WOOD)));
-        register("spruce_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                       sprucePlanks.blockMapColor)
-                                                                .setHardnessAndResistance(2.0F, 3.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("birch_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                      birchPlanks.blockMapColor)
-                                                               .setHardnessAndResistance(2.0F, 3.0F)
-                                                               .setSoundType(SoundType.WOOD)));
-        register("jungle_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                       junglePlanks.blockMapColor)
-                                                                .setHardnessAndResistance(2.0F, 3.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("acacia_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                       acaciaPlanks.blockMapColor)
-                                                                .setHardnessAndResistance(2.0F, 3.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("dark_oak_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                         darkOakPlanks.blockMapColor)
-                                                                  .setHardnessAndResistance(2.0F, 3.0F)
-                                                                  .setSoundType(SoundType.WOOD)));
-        register("spruce_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                     sprucePlanks.blockMapColor)
-                                                              .setHardnessAndResistance(3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("birch_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                    birchPlanks.blockMapColor)
-                                                             .setHardnessAndResistance(3.0F)
-                                                             .setSoundType(SoundType.WOOD)));
-        register("jungle_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                     junglePlanks.blockMapColor)
-                                                              .setHardnessAndResistance(3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("acacia_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                     acaciaPlanks.blockMapColor)
-                                                              .setHardnessAndResistance(3.0F)
-                                                              .setSoundType(SoundType.WOOD)));
-        register("dark_oak_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD,
-                                                                                       darkOakPlanks.blockMapColor)
-                                                                .setHardnessAndResistance(3.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("end_rod", new BlockEndRod(Block.Properties.createBlockProperties(Material.CIRCUITS)
-                                                            .instantDestruction().setLightLevel(14)
-                                                            .setSoundType(SoundType.WOOD)));
-        BlockChorusPlant blockchorusplant = new BlockChorusPlant(Block.Properties.createBlockProperties(Material.PLANTS,
-                                                                                                        MaterialColor.PURPLE)
-                                                                                 .setHardnessAndResistance(0.4F)
-                                                                                 .setSoundType(SoundType.WOOD));
+        register("chiseled_red_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(0.8F)));
+        register("cut_red_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(0.8F)));
+        register("red_sandstone_stairs", new BlockStairs(block46.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block46)));
+        register("oak_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.WOOD).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.OBSIDIAN).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("birch_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.SAND).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.ADOBE).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.BROWN).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("stone_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("sandstone_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(2.0F, 6.0F)));
+        register("petrified_oak_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.WOOD).setHardnessAndResistance(2.0F, 6.0F)));
+        register("cobblestone_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("brick_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED).setHardnessAndResistance(2.0F, 6.0F)));
+        register("stone_brick_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("nether_brick_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(2.0F, 6.0F)));
+        register("quartz_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(2.0F, 6.0F)));
+        register("red_sandstone_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("purpur_slab", new BlockSlab(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA).setHardnessAndResistance(2.0F, 6.0F)));
+        register("smooth_stone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("smooth_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(2.0F, 6.0F)));
+        register("smooth_quartz", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.QUARTZ).setHardnessAndResistance(2.0F, 6.0F)));
+        register("smooth_red_sandstone", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(2.0F, 6.0F)));
+        register("spruce_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, sprucePlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("birch_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, birchPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, junglePlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, acaciaPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_fence_gate", new BlockFenceGate(Block.Properties.createBlockProperties(Material.WOOD, darkOakPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, sprucePlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("birch_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, birchPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, junglePlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, acaciaPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_fence", new BlockFence(Block.Properties.createBlockProperties(Material.WOOD, darkOakPlanks.blockMapColor).setHardnessAndResistance(2.0F, 3.0F).setSoundType(SoundType.WOOD)));
+        register("spruce_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, sprucePlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("birch_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, birchPlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("jungle_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, junglePlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("acacia_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, acaciaPlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("dark_oak_door", new BlockDoor(Block.Properties.createBlockProperties(Material.WOOD, darkOakPlanks.blockMapColor).setHardnessAndResistance(3.0F).setSoundType(SoundType.WOOD)));
+        register("end_rod", new BlockEndRod(Block.Properties.createBlockProperties(Material.CIRCUITS).instantDestruction().setLightLevel(14).setSoundType(SoundType.WOOD)));
+        BlockChorusPlant blockchorusplant = new BlockChorusPlant(Block.Properties.createBlockProperties(Material.PLANTS, MaterialColor.PURPLE).setHardnessAndResistance(0.4F).setSoundType(SoundType.WOOD));
         register("chorus_plant", blockchorusplant);
-        register("chorus_flower", new BlockChorusFlower(blockchorusplant, Block.Properties.createBlockProperties(
-                Material.PLANTS, MaterialColor.PURPLE).needsRandomTick().setHardnessAndResistance(0.4F).setSoundType(
-                SoundType.WOOD)));
-        Block block47 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA)
-                                                  .setHardnessAndResistance(1.5F, 6.0F));
+        register("chorus_flower", new BlockChorusFlower(blockchorusplant, Block.Properties.createBlockProperties(Material.PLANTS, MaterialColor.PURPLE).needsRandomTick().setHardnessAndResistance(0.4F).setSoundType(SoundType.WOOD)));
+        Block block47 = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA).setHardnessAndResistance(1.5F, 6.0F));
         register("purpur_block", block47);
-        register("purpur_pillar", new BlockRotatedPillar(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA)
-                                .setHardnessAndResistance(1.5F, 6.0F)));
-        register("purpur_stairs",
-                 new BlockStairs(block47.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block47)));
-        register("end_stone_bricks", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                                               .setHardnessAndResistance(0.8F)));
-        register("beetroots", new BlockBeetroot(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid()
-                                                                .needsRandomTick().instantDestruction()
-                                                                .setSoundType(SoundType.PLANT)));
-        Block block48 = new BlockGrassPath(Block.Properties.createBlockProperties(Material.GROUND)
-                                                           .setHardnessAndResistance(0.65F)
-                                                           .setSoundType(SoundType.PLANT));
+        register("purpur_pillar", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA).setHardnessAndResistance(1.5F, 6.0F)));
+        register("purpur_stairs", new BlockStairs(block47.getDefaultState(), Block.Properties.createBlockPropertiesFromBlock(block47)));
+        register("end_stone_bricks", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(0.8F)));
+        register("beetroots", new BlockBeetroot(Block.Properties.createBlockProperties(Material.PLANTS).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.PLANT)));
+        Block block48 = new BlockGrassPath(Block.Properties.createBlockProperties(Material.GROUND).setHardnessAndResistance(0.65F).setSoundType(SoundType.PLANT));
         register("grass_path", block48);
-        register("end_gateway", new BlockEndGateway(Block.Properties.createBlockProperties(Material.PORTAL,
-                                                                                           MaterialColor.BLACK)
-                                                                    .setNonSolid().setLightLevel(15)
-                                                                    .setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("repeating_command_block", new BlockCommandBlock(
-                Block.Properties.createBlockProperties(Material.IRON, MaterialColor.PURPLE)
-                                .setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("chain_command_block", new BlockCommandBlock(
-                Block.Properties.createBlockProperties(Material.IRON, MaterialColor.GREEN)
-                                .setHardnessAndResistance(-1.0F, 3600000.0F)));
-        register("frosted_ice", new BlockFrostedIce(Block.Properties.createBlockProperties(Material.ICE)
-                                                                    .setSlipperiness(0.98F).needsRandomTick()
-                                                                    .setHardnessAndResistance(0.5F)
-                                                                    .setSoundType(SoundType.GLASS)));
-        register("magma_block", new BlockMagma(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                      MaterialColor.NETHERRACK)
-                                                               .setLightLevel(3).needsRandomTick()
-                                                               .setHardnessAndResistance(0.5F)));
-        register("nether_wart_block", new Block(Block.Properties.createBlockProperties(Material.GRASS,
-                                                                                       MaterialColor.RED)
-                                                                .setHardnessAndResistance(1.0F)
-                                                                .setSoundType(SoundType.WOOD)));
-        register("red_nether_bricks", new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK)
-                                .setHardnessAndResistance(2.0F, 6.0F)));
-        register("bone_block", new BlockRotatedPillar(
-                Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND)
-                                .setHardnessAndResistance(2.0F)));
-        register("structure_void",
-                 new BlockStructureVoid(Block.Properties.createBlockProperties(Material.STRUCTURE_VOID).setNonSolid()));
-        register("observer", new BlockObserver(
-                Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F)));
-        register("shulker_box", new BlockShulkerBox(null, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.PURPLE).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("white_shulker_box", new BlockShulkerBox(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.SNOW).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("orange_shulker_box", new BlockShulkerBox(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("magenta_shulker_box",
-                 new BlockShulkerBox(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                  MaterialColor.MAGENTA)
-                                                                           .setHardnessAndResistance(2.0F)
-                                                                           .variableOpacity()));
-        register("light_blue_shulker_box",
-                 new BlockShulkerBox(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                     MaterialColor.LIGHT_BLUE)
-                                                                              .setHardnessAndResistance(2.0F)
-                                                                              .variableOpacity()));
-        register("yellow_shulker_box", new BlockShulkerBox(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.YELLOW).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("lime_shulker_box", new BlockShulkerBox(EnumDyeColor.LIME, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.LIME).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("pink_shulker_box", new BlockShulkerBox(EnumDyeColor.PINK, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.PINK).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("gray_shulker_box", new BlockShulkerBox(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("light_gray_shulker_box",
-                 new BlockShulkerBox(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                     MaterialColor.SILVER)
-                                                                              .setHardnessAndResistance(2.0F)
-                                                                              .variableOpacity()));
-        register("cyan_shulker_box", new BlockShulkerBox(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.CYAN).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("purple_shulker_box", new BlockShulkerBox(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.PURPLE_STAINED_HARDENED_CLAY).setHardnessAndResistance(2.0F)
-                                                                                                .variableOpacity()));
-        register("blue_shulker_box", new BlockShulkerBox(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.BLUE).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("brown_shulker_box", new BlockShulkerBox(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.BROWN).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("green_shulker_box", new BlockShulkerBox(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.GREEN).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("red_shulker_box", new BlockShulkerBox(EnumDyeColor.RED, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.RED).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("black_shulker_box", new BlockShulkerBox(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.BLACK).setHardnessAndResistance(2.0F).variableOpacity()));
-        register("white_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.WHITE)
-                                .setHardnessAndResistance(1.4F)));
-        register("orange_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.ORANGE)
-                                .setHardnessAndResistance(1.4F)));
-        register("magenta_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.MAGENTA)
-                                .setHardnessAndResistance(1.4F)));
-        register("light_blue_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_BLUE)
-                                .setHardnessAndResistance(1.4F)));
-        register("yellow_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.YELLOW)
-                                .setHardnessAndResistance(1.4F)));
-        register("lime_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIME)
-                                .setHardnessAndResistance(1.4F)));
-        register("pink_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PINK)
-                                .setHardnessAndResistance(1.4F)));
-        register("gray_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GRAY)
-                                .setHardnessAndResistance(1.4F)));
-        register("light_gray_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_GRAY)
-                                .setHardnessAndResistance(1.4F)));
-        register("cyan_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.CYAN)
-                                .setHardnessAndResistance(1.4F)));
-        register("purple_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PURPLE)
-                                .setHardnessAndResistance(1.4F)));
-        register("blue_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLUE)
-                                .setHardnessAndResistance(1.4F)));
-        register("brown_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BROWN)
-                                .setHardnessAndResistance(1.4F)));
-        register("green_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GREEN)
-                                .setHardnessAndResistance(1.4F)));
-        register("red_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.RED)
-                                .setHardnessAndResistance(1.4F)));
-        register("black_glazed_terracotta", new BlockGlazedTerracotta(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLACK)
-                                .setHardnessAndResistance(1.4F)));
-        Block whiteConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.WHITE)
-                                                        .setHardnessAndResistance(1.8F));
-        Block orangeConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.ORANGE)
-                                                         .setHardnessAndResistance(1.8F));
-        Block magentaConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.MAGENTA)
-                                                          .setHardnessAndResistance(1.8F));
-        Block lightBlueConcrete = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_BLUE)
-                                .setHardnessAndResistance(1.8F));
-        Block yellowConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.YELLOW)
-                                                         .setHardnessAndResistance(1.8F));
-        Block limeConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIME)
-                                                       .setHardnessAndResistance(1.8F));
-        Block pinkConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PINK)
-                                                       .setHardnessAndResistance(1.8F));
-        Block grayConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GRAY)
-                                                       .setHardnessAndResistance(1.8F));
-        Block lightGrayConcrete = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_GRAY)
-                                .setHardnessAndResistance(1.8F));
-        Block cyanConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.CYAN)
-                                                       .setHardnessAndResistance(1.8F));
-        Block purpleConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PURPLE)
-                                                         .setHardnessAndResistance(1.8F));
-        Block blueConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLUE)
-                                                       .setHardnessAndResistance(1.8F));
-        Block brownConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BROWN)
-                                                        .setHardnessAndResistance(1.8F));
-        Block greenConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GREEN)
-                                                        .setHardnessAndResistance(1.8F));
-        Block redConcrete = new Block(
-                Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.RED).setHardnessAndResistance(1.8F));
-        Block blackConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLACK)
-                                                        .setHardnessAndResistance(1.8F));
+        register("end_gateway", new BlockEndGateway(Block.Properties.createBlockProperties(Material.PORTAL, MaterialColor.BLACK).setNonSolid().setLightLevel(15).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("repeating_command_block", new BlockCommandBlock(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.PURPLE).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("chain_command_block", new BlockCommandBlock(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.GREEN).setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("frosted_ice", new BlockFrostedIce(Block.Properties.createBlockProperties(Material.ICE).setSlipperiness(0.98F).needsRandomTick().setHardnessAndResistance(0.5F).setSoundType(SoundType.GLASS)));
+        register("magma_block", new BlockMagma(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setLightLevel(3).needsRandomTick().setHardnessAndResistance(0.5F)));
+        register("nether_wart_block", new Block(Block.Properties.createBlockProperties(Material.GRASS, MaterialColor.RED).setHardnessAndResistance(1.0F).setSoundType(SoundType.WOOD)));
+        register("red_nether_bricks", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.NETHERRACK).setHardnessAndResistance(2.0F, 6.0F)));
+        register("bone_block", new BlockRotatedPillar(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SAND).setHardnessAndResistance(2.0F)));
+        register("structure_void", new BlockStructureVoid(Block.Properties.createBlockProperties(Material.STRUCTURE_VOID).setNonSolid()));
+        register("observer", new BlockObserver(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.0F)));
+        register("shulker_box", new BlockShulkerBox(
+                null, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PURPLE).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("white_shulker_box", new BlockShulkerBox(EnumDyeColor.WHITE, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SNOW).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("orange_shulker_box", new BlockShulkerBox(EnumDyeColor.ORANGE, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.ADOBE).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("magenta_shulker_box", new BlockShulkerBox(EnumDyeColor.MAGENTA, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.MAGENTA).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("light_blue_shulker_box", new BlockShulkerBox(EnumDyeColor.LIGHT_BLUE, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIGHT_BLUE).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("yellow_shulker_box", new BlockShulkerBox(EnumDyeColor.YELLOW, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.YELLOW).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("lime_shulker_box", new BlockShulkerBox(EnumDyeColor.LIME, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.LIME).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("pink_shulker_box", new BlockShulkerBox(EnumDyeColor.PINK, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PINK).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("gray_shulker_box", new BlockShulkerBox(EnumDyeColor.GRAY, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("light_gray_shulker_box", new BlockShulkerBox(EnumDyeColor.LIGHT_GRAY, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.SILVER).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("cyan_shulker_box", new BlockShulkerBox(EnumDyeColor.CYAN, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.CYAN).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("purple_shulker_box", new BlockShulkerBox(EnumDyeColor.PURPLE, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PURPLE_STAINED_HARDENED_CLAY).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("blue_shulker_box", new BlockShulkerBox(EnumDyeColor.BLUE, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLUE).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("brown_shulker_box", new BlockShulkerBox(EnumDyeColor.BROWN, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BROWN).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("green_shulker_box", new BlockShulkerBox(EnumDyeColor.GREEN, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GREEN).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("red_shulker_box", new BlockShulkerBox(EnumDyeColor.RED, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("black_shulker_box", new BlockShulkerBox(EnumDyeColor.BLACK, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK).setHardnessAndResistance(2.0F).variableOpacity()));
+        register("white_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.WHITE).setHardnessAndResistance(1.4F)));
+        register("orange_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.ORANGE).setHardnessAndResistance(1.4F)));
+        register("magenta_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.MAGENTA).setHardnessAndResistance(1.4F)));
+        register("light_blue_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_BLUE).setHardnessAndResistance(1.4F)));
+        register("yellow_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.YELLOW).setHardnessAndResistance(1.4F)));
+        register("lime_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIME).setHardnessAndResistance(1.4F)));
+        register("pink_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PINK).setHardnessAndResistance(1.4F)));
+        register("gray_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GRAY).setHardnessAndResistance(1.4F)));
+        register("light_gray_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_GRAY).setHardnessAndResistance(1.4F)));
+        register("cyan_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.CYAN).setHardnessAndResistance(1.4F)));
+        register("purple_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PURPLE).setHardnessAndResistance(1.4F)));
+        register("blue_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLUE).setHardnessAndResistance(1.4F)));
+        register("brown_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BROWN).setHardnessAndResistance(1.4F)));
+        register("green_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GREEN).setHardnessAndResistance(1.4F)));
+        register("red_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.RED).setHardnessAndResistance(1.4F)));
+        register("black_glazed_terracotta", new BlockGlazedTerracotta(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLACK).setHardnessAndResistance(1.4F)));
+        Block whiteConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.WHITE).setHardnessAndResistance(1.8F));
+        Block orangeConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.ORANGE).setHardnessAndResistance(1.8F));
+        Block magentaConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.MAGENTA).setHardnessAndResistance(1.8F));
+        Block lightBlueConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_BLUE).setHardnessAndResistance(1.8F));
+        Block yellowConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.YELLOW).setHardnessAndResistance(1.8F));
+        Block limeConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIME).setHardnessAndResistance(1.8F));
+        Block pinkConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PINK).setHardnessAndResistance(1.8F));
+        Block grayConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GRAY).setHardnessAndResistance(1.8F));
+        Block lightGrayConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.LIGHT_GRAY).setHardnessAndResistance(1.8F));
+        Block cyanConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.CYAN).setHardnessAndResistance(1.8F));
+        Block purpleConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.PURPLE).setHardnessAndResistance(1.8F));
+        Block blueConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLUE).setHardnessAndResistance(1.8F));
+        Block brownConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BROWN).setHardnessAndResistance(1.8F));
+        Block greenConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.GREEN).setHardnessAndResistance(1.8F));
+        Block redConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.RED).setHardnessAndResistance(1.8F));
+        Block blackConcrete = new Block(Block.Properties.createBlockProperties(Material.ROCK, EnumDyeColor.BLACK).setHardnessAndResistance(1.8F));
         register("white_concrete", whiteConcrete);
         register("orange_concrete", orangeConcrete);
         register("magenta_concrete", magentaConcrete);
@@ -1806,220 +818,94 @@ public class Block implements IItemProvider {
         register("green_concrete", greenConcrete);
         register("red_concrete", redConcrete);
         register("black_concrete", blackConcrete);
-        register("white_concrete_powder", new BlockConcretePowder(whiteConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.WHITE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("orange_concrete_powder",
-                 new BlockConcretePowder(orangeConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                EnumDyeColor.ORANGE)
-                                                                         .setHardnessAndResistance(0.5F)
-                                                                         .setSoundType(SoundType.SAND)));
-        register("magenta_concrete_powder",
-                 new BlockConcretePowder(magentaConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                 EnumDyeColor.MAGENTA)
-                                                                          .setHardnessAndResistance(0.5F)
-                                                                          .setSoundType(SoundType.SAND)));
-        register("light_blue_concrete_powder",
-                 new BlockConcretePowder(lightBlueConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                   EnumDyeColor.LIGHT_BLUE)
-                                                                            .setHardnessAndResistance(0.5F)
-                                                                            .setSoundType(SoundType.SAND)));
-        register("yellow_concrete_powder",
-                 new BlockConcretePowder(yellowConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                EnumDyeColor.YELLOW)
-                                                                         .setHardnessAndResistance(0.5F)
-                                                                         .setSoundType(SoundType.SAND)));
-        register("lime_concrete_powder", new BlockConcretePowder(limeConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.LIME).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("pink_concrete_powder", new BlockConcretePowder(pinkConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.PINK).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("gray_concrete_powder", new BlockConcretePowder(grayConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.GRAY).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("light_gray_concrete_powder",
-                 new BlockConcretePowder(lightGrayConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                   EnumDyeColor.LIGHT_GRAY)
-                                                                            .setHardnessAndResistance(0.5F)
-                                                                            .setSoundType(SoundType.SAND)));
-        register("cyan_concrete_powder", new BlockConcretePowder(cyanConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.CYAN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("purple_concrete_powder",
-                 new BlockConcretePowder(purpleConcrete, Block.Properties.createBlockProperties(Material.SAND,
-                                                                                                EnumDyeColor.PURPLE)
-                                                                         .setHardnessAndResistance(0.5F)
-                                                                         .setSoundType(SoundType.SAND)));
-        register("blue_concrete_powder", new BlockConcretePowder(blueConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.BLUE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("brown_concrete_powder", new BlockConcretePowder(brownConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.BROWN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("green_concrete_powder", new BlockConcretePowder(greenConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.GREEN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("red_concrete_powder", new BlockConcretePowder(redConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.RED).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        register("black_concrete_powder", new BlockConcretePowder(blackConcrete, Block.Properties.createBlockProperties(
-                Material.SAND, EnumDyeColor.BLACK).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
-        BlockKelpTop blockkelptop = new BlockKelpTop(Block.Properties.createBlockProperties(Material.OCEAN_PLANT)
-                                                                     .setNonSolid().needsRandomTick()
-                                                                     .instantDestruction()
-                                                                     .setSoundType(SoundType.WET_GRASS));
+        register("white_concrete_powder", new BlockConcretePowder(whiteConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.WHITE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("orange_concrete_powder", new BlockConcretePowder(orangeConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.ORANGE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("magenta_concrete_powder", new BlockConcretePowder(magentaConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.MAGENTA).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("light_blue_concrete_powder", new BlockConcretePowder(lightBlueConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.LIGHT_BLUE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("yellow_concrete_powder", new BlockConcretePowder(yellowConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.YELLOW).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("lime_concrete_powder", new BlockConcretePowder(limeConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.LIME).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("pink_concrete_powder", new BlockConcretePowder(pinkConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.PINK).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("gray_concrete_powder", new BlockConcretePowder(grayConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.GRAY).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("light_gray_concrete_powder", new BlockConcretePowder(lightGrayConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.LIGHT_GRAY).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("cyan_concrete_powder", new BlockConcretePowder(cyanConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.CYAN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("purple_concrete_powder", new BlockConcretePowder(purpleConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.PURPLE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("blue_concrete_powder", new BlockConcretePowder(blueConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.BLUE).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("brown_concrete_powder", new BlockConcretePowder(brownConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.BROWN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("green_concrete_powder", new BlockConcretePowder(greenConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.GREEN).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("red_concrete_powder", new BlockConcretePowder(redConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.RED).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        register("black_concrete_powder", new BlockConcretePowder(blackConcrete, Block.Properties.createBlockProperties(Material.SAND, EnumDyeColor.BLACK).setHardnessAndResistance(0.5F).setSoundType(SoundType.SAND)));
+        BlockKelpTop blockkelptop = new BlockKelpTop(Block.Properties.createBlockProperties(Material.OCEAN_PLANT).setNonSolid().needsRandomTick().instantDestruction().setSoundType(SoundType.WET_GRASS));
         register("kelp", blockkelptop);
-        register("kelp_plant", new BlockKelp(blockkelptop, Block.Properties.createBlockProperties(Material.OCEAN_PLANT)
-                                                                           .setNonSolid().instantDestruction()
-                                                                           .setSoundType(SoundType.WET_GRASS)));
-        register("dried_kelp_block", new Block(Block.Properties.createBlockProperties(Material.GRASS,
-                                                                                      MaterialColor.BROWN)
-                                                               .setHardnessAndResistance(0.5F, 2.5F)
-                                                               .setSoundType(SoundType.PLANT)));
-        register("turtle_egg", new BlockTurtleEgg(Block.Properties.createBlockProperties(Material.DRAGON_EGG,
-                                                                                         MaterialColor.SILVER)
-                                                                  .setHardnessAndResistance(0.5F)
-                                                                  .setSoundType(SoundType.METAL).needsRandomTick()));
-        Block deadTubeCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                             .setHardnessAndResistance(1.5F, 6.0F));
-        Block deadBrainCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                              .setHardnessAndResistance(1.5F, 6.0F));
-        Block deadBubbleCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                               .setHardnessAndResistance(1.5F, 6.0F));
-        Block deadFireCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                             .setHardnessAndResistance(1.5F, 6.0F));
-        Block deadHornCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                             .setHardnessAndResistance(1.5F, 6.0F));
+        register("kelp_plant", new BlockKelp(blockkelptop, Block.Properties.createBlockProperties(Material.OCEAN_PLANT).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("dried_kelp_block", new Block(Block.Properties.createBlockProperties(Material.GRASS, MaterialColor.BROWN).setHardnessAndResistance(0.5F, 2.5F).setSoundType(SoundType.PLANT)));
+        register("turtle_egg", new BlockTurtleEgg(Block.Properties.createBlockProperties(Material.DRAGON_EGG, MaterialColor.SILVER).setHardnessAndResistance(0.5F).setSoundType(SoundType.METAL).needsRandomTick()));
+        Block deadTubeCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(1.5F, 6.0F));
+        Block deadBrainCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(1.5F, 6.0F));
+        Block deadBubbleCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(1.5F, 6.0F));
+        Block deadFireCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(1.5F, 6.0F));
+        Block deadHornCoralBlock = new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setHardnessAndResistance(1.5F, 6.0F));
         register("dead_tube_coral_block", deadTubeCoralBlock);
         register("dead_brain_coral_block", deadBrainCoralBlock);
         register("dead_bubble_coral_block", deadBubbleCoralBlock);
         register("dead_fire_coral_block", deadFireCoralBlock);
         register("dead_horn_coral_block", deadHornCoralBlock);
-        register("tube_coral_block", new BlockCoral(deadTubeCoralBlock, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.BLUE).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
-        register("brain_coral_block", new BlockCoral(deadBrainCoralBlock, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.PINK).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
-        register("bubble_coral_block", new BlockCoral(deadBubbleCoralBlock, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.PURPLE).setHardnessAndResistance(1.5F, 6.0F).setSoundType(
-                SoundType.CORAL)));
-        register("fire_coral_block", new BlockCoral(deadFireCoralBlock, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.RED).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
-        register("horn_coral_block", new BlockCoral(deadHornCoralBlock, Block.Properties.createBlockProperties(
-                Material.ROCK, MaterialColor.YELLOW).setHardnessAndResistance(1.5F, 6.0F).setSoundType(
-                SoundType.CORAL)));
-        Block deadTubeCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                             MaterialColor.GRAY)
-                                                                      .setNonSolid().instantDestruction());
-        Block deadBrainCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                              MaterialColor.GRAY)
-                                                                       .setNonSolid().instantDestruction());
-        Block deadBubbleCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                               MaterialColor.GRAY)
-                                                                        .setNonSolid().instantDestruction());
-        Block deadFireCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                             MaterialColor.GRAY)
-                                                                      .setNonSolid().instantDestruction());
-        Block deadHornCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                             MaterialColor.GRAY)
-                                                                      .setNonSolid().instantDestruction());
+        register("tube_coral_block", new BlockCoral(deadTubeCoralBlock, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLUE).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
+        register("brain_coral_block", new BlockCoral(deadBrainCoralBlock, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PINK).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
+        register("bubble_coral_block", new BlockCoral(deadBubbleCoralBlock, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.PURPLE).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
+        register("fire_coral_block", new BlockCoral(deadFireCoralBlock, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.RED).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
+        register("horn_coral_block", new BlockCoral(deadHornCoralBlock, Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.YELLOW).setHardnessAndResistance(1.5F, 6.0F).setSoundType(SoundType.CORAL)));
+        Block deadTubeCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadBrainCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadBubbleCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadFireCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadHornCoral = new BlockCoralPlantDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
         register("dead_tube_coral", deadTubeCoral);
         register("dead_brain_coral", deadBrainCoral);
         register("dead_bubble_coral", deadBubbleCoral);
         register("dead_fire_coral", deadFireCoral);
         register("dead_horn_coral", deadHornCoral);
-        register("tube_coral", new BlockCoralPlant(deadTubeCoral, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction()
-                                                                                  .setSoundType(SoundType.WET_GRASS)));
-        register("brain_coral", new BlockCoralPlant(deadBrainCoral, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction().setSoundType(
-                SoundType.WET_GRASS)));
-        register("bubble_coral", new BlockCoralPlant(deadBubbleCoral, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction().setSoundType(
-                SoundType.WET_GRASS)));
-        register("fire_coral", new BlockCoralPlant(deadFireCoral, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction()
-                                                                                  .setSoundType(SoundType.WET_GRASS)));
-        register("horn_coral", new BlockCoralPlant(deadHornCoral, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction()
-                                                                                  .setSoundType(SoundType.WET_GRASS)));
-        Block deadTubeCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                      MaterialColor.GRAY)
-                                                                               .setNonSolid().instantDestruction());
-        Block deadBrainCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                       MaterialColor.GRAY)
-                                                                                .setNonSolid().instantDestruction());
-        Block deadBubbleCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                        MaterialColor.GRAY)
-                                                                                 .setNonSolid().instantDestruction());
-        Block deadFireCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                      MaterialColor.GRAY)
-                                                                               .setNonSolid().instantDestruction());
-        Block deadHornCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK,
-                                                                                                      MaterialColor.GRAY)
-                                                                               .setNonSolid().instantDestruction());
+        register("tube_coral", new BlockCoralPlant(deadTubeCoral, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("brain_coral", new BlockCoralPlant(deadBrainCoral, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("bubble_coral", new BlockCoralPlant(deadBubbleCoral, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("fire_coral", new BlockCoralPlant(deadFireCoral, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("horn_coral", new BlockCoralPlant(deadHornCoral, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        Block deadTubeCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadBrainCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadBubbleCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadFireCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block deadHornCoralWallFan = new BlockCoralWallFanDead(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
         register("dead_tube_coral_wall_fan", deadTubeCoralWallFan);
         register("dead_brain_coral_wall_fan", deadBrainCoralWallFan);
         register("dead_bubble_coral_wall_fan", deadBubbleCoralWallFan);
         register("dead_fire_coral_wall_fan", deadFireCoralWallFan);
         register("dead_horn_coral_wall_fan", deadHornCoralWallFan);
-        register("tube_coral_wall_fan",
-                 new BlockCoralWallFan(deadTubeCoralWallFan, Block.Properties.createBlockProperties(
-                         Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction()
-                                                                             .setSoundType(SoundType.WET_GRASS)));
-        register("brain_coral_wall_fan",
-                 new BlockCoralWallFan(deadBrainCoralWallFan, Block.Properties.createBlockProperties(
-                         Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction()
-                                                                              .setSoundType(SoundType.WET_GRASS)));
-        register("bubble_coral_wall_fan",
-                 new BlockCoralWallFan(deadBubbleCoralWallFan, Block.Properties.createBlockProperties(
-                         Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction()
-                                                                               .setSoundType(SoundType.WET_GRASS)));
-        register("fire_coral_wall_fan",
-                 new BlockCoralWallFan(deadFireCoralWallFan, Block.Properties.createBlockProperties(
-                         Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction()
-                                                                             .setSoundType(SoundType.WET_GRASS)));
-        register("horn_coral_wall_fan",
-                 new BlockCoralWallFan(deadHornCoralWallFan, Block.Properties.createBlockProperties(
-                         Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction()
-                                                                             .setSoundType(SoundType.WET_GRASS)));
-        Block block80 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                          .setNonSolid().instantDestruction());
-        Block block81 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                          .setNonSolid().instantDestruction());
-        Block block82 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                          .setNonSolid().instantDestruction());
-        Block block83 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                          .setNonSolid().instantDestruction());
-        Block block84 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY)
-                                                          .setNonSolid().instantDestruction());
+        register("tube_coral_wall_fan", new BlockCoralWallFan(deadTubeCoralWallFan, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("brain_coral_wall_fan", new BlockCoralWallFan(deadBrainCoralWallFan, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("bubble_coral_wall_fan", new BlockCoralWallFan(deadBubbleCoralWallFan, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("fire_coral_wall_fan", new BlockCoralWallFan(deadFireCoralWallFan, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("horn_coral_wall_fan", new BlockCoralWallFan(deadHornCoralWallFan, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        Block block80 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block block81 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block block82 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block block83 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
+        Block block84 = new BlockCoralFan(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.GRAY).setNonSolid().instantDestruction());
         register("dead_tube_coral_fan", block80);
         register("dead_brain_coral_fan", block81);
         register("dead_bubble_coral_fan", block82);
         register("dead_fire_coral_fan", block83);
         register("dead_horn_coral_fan", block84);
-        register("tube_coral_fan", new BlockCoralFin(block80, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction()
-                                                                              .setSoundType(SoundType.WET_GRASS)));
-        register("brain_coral_fan", new BlockCoralFin(block81, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction()
-                                                                               .setSoundType(SoundType.WET_GRASS)));
-        register("bubble_coral_fan", new BlockCoralFin(block82, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction()
-                                                                                .setSoundType(SoundType.WET_GRASS)));
-        register("fire_coral_fan", new BlockCoralFin(block83, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction()
-                                                                              .setSoundType(SoundType.WET_GRASS)));
-        register("horn_coral_fan", new BlockCoralFin(block84, Block.Properties.createBlockProperties(
-                Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction()
-                                                                              .setSoundType(SoundType.WET_GRASS)));
-        register("sea_pickle", new BlockSeaPickle(Block.Properties.createBlockProperties(Material.OCEAN_PLANT,
-                                                                                         MaterialColor.GREEN)
-                                                                  .setLightLevel(3).setSoundType(SoundType.SLIME)));
-        register("blue_ice", new BlockBlueIce(Block.Properties.createBlockProperties(Material.PACKED_ICE)
-                                                              .setHardnessAndResistance(2.8F).setSlipperiness(0.989F)
-                                                              .setSoundType(SoundType.GLASS)));
-        register("conduit", new BlockConduit(Block.Properties.createBlockProperties(Material.GLASS,
-                                                                                    MaterialColor.DIAMOND)
-                                                             .setHardnessAndResistance(3.0F).setLightLevel(15)));
+        register("tube_coral_fan", new BlockCoralFin(block80, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.BLUE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("brain_coral_fan", new BlockCoralFin(block81, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PINK).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("bubble_coral_fan", new BlockCoralFin(block82, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.PURPLE).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("fire_coral_fan", new BlockCoralFin(block83, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.RED).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("horn_coral_fan", new BlockCoralFin(block84, Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.YELLOW).setNonSolid().instantDestruction().setSoundType(SoundType.WET_GRASS)));
+        register("sea_pickle", new BlockSeaPickle(Block.Properties.createBlockProperties(Material.OCEAN_PLANT, MaterialColor.GREEN).setLightLevel(3).setSoundType(SoundType.SLIME)));
+        register("blue_ice", new BlockBlueIce(Block.Properties.createBlockProperties(Material.PACKED_ICE).setHardnessAndResistance(2.8F).setSlipperiness(0.989F).setSoundType(SoundType.GLASS)));
+        register("conduit", new BlockConduit(Block.Properties.createBlockProperties(Material.GLASS, MaterialColor.DIAMOND).setHardnessAndResistance(3.0F).setLightLevel(15)));
         register("void_air", new BlockAir(Block.Properties.createBlockProperties(Material.AIR).setNonSolid()));
         register("cave_air", new BlockAir(Block.Properties.createBlockProperties(Material.AIR).setNonSolid()));
-        register("bubble_column",
-                 new BlockBubbleColumn(Block.Properties.createBlockProperties(Material.BUBBLE_COLUMN).setNonSolid()));
-        register("structure_block", new BlockStructure(
-                Block.Properties.createBlockProperties(Material.IRON, MaterialColor.SILVER)
-                                .setHardnessAndResistance(-1.0F, 3600000.0F)));
+        register("bubble_column", new BlockBubbleColumn(Block.Properties.createBlockProperties(Material.BUBBLE_COLUMN).setNonSolid()));
+        register("structure_block", new BlockStructure(Block.Properties.createBlockProperties(Material.IRON, MaterialColor.SILVER).setHardnessAndResistance(-1.0F, 3600000.0F)));
 
         for (Block block85 : IRegistry.field_212618_g) {
             for (IBlockState iblockstate : block85.getStateContainer().getValidStates()) {
@@ -2064,7 +950,7 @@ public class Block implements IItemProvider {
                     object2bytelinkedopenhashmap.removeLastByte();
                 }
 
-                object2bytelinkedopenhashmap.putAndMoveToFirst(block$rendersidecachekey, (byte) (flag ? 1 : 0));
+                object2bytelinkedopenhashmap.putAndMoveToFirst(block$rendersidecachekey, (byte)(flag ? 1 : 0));
                 return flag;
             }
         } else {
@@ -2084,15 +970,17 @@ public class Block implements IItemProvider {
             entityitem.setDefaultPickupDelay();
             p_180635_0_.spawnEntity(entityitem);
         }
+
     }
 
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack p_190948_1_, @Nullable IBlockReader p_190948_2_, List<ITextComponent> p_190948_3_, ITooltipFlag p_190948_4_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean allowsMovement(IBlockState p_196266_1_, IBlockReader p_196266_2_, BlockPos p_196266_3_, PathType p_196266_4_) {
-        switch (p_196266_4_) {
+        switch(p_196266_4_) {
             case LAND:
                 return !isOpaque(this.getCollisionShape(p_196266_1_, p_196266_2_, p_196266_3_));
             case WATER:
@@ -2116,11 +1004,13 @@ public class Block implements IItemProvider {
         return true;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean canEntitySpawn(IBlockState p_189872_1_, Entity p_189872_2_) {
         return true;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean canProvidePower(IBlockState p_149744_1_) {
         return false;
@@ -2134,11 +1024,13 @@ public class Block implements IItemProvider {
         return !this.material.isSolid() && !this.material.isLiquid();
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean causesSuffocation(IBlockState p_176214_1_) {
         return this.material.blocksMovement() && p_176214_1_.isFullCube();
     }
 
+    /** @deprecated */
     @Deprecated
     public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
         if (!worldIn.isRemote) {
@@ -2152,13 +1044,12 @@ public class Block implements IItemProvider {
                     }
                 }
             }
-
         }
     }
 
     public void dropXpOnBlockBreak(World p_180637_1_, BlockPos p_180637_2_, int p_180637_3_) {
         if (!p_180637_1_.isRemote && p_180637_1_.getGameRules().getBoolean("doTileDrops")) {
-            while (p_180637_3_ > 0) {
+            while(p_180637_3_ > 0) {
                 int i = EntityXPOrb.getXPSplit(p_180637_3_);
                 p_180637_3_ -= i;
                 p_180637_1_.spawnEntity(new EntityXPOrb(p_180637_1_, (double) p_180637_2_.getX() + 0.5D,
@@ -2184,6 +1075,7 @@ public class Block implements IItemProvider {
     public void fillWithRain(World p_176224_1_, BlockPos p_176224_2_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public MaterialColor func_180659_g(IBlockState p_180659_1_, IBlockReader p_180659_2_, BlockPos p_180659_3_) {
         return this.blockMapColor;
@@ -2231,6 +1123,7 @@ public class Block implements IItemProvider {
         return this.blockResistance;
     }
 
+    /** @deprecated */
     @Deprecated
     public IFluidState getFluidState(IBlockState p_204507_1_) {
         return Fluids.EMPTY.getDefaultState();
@@ -2387,6 +1280,7 @@ public class Block implements IItemProvider {
         return this.translationKey;
     }
 
+    /** @deprecated */
     @Deprecated
     public int getWeakPower(IBlockState p_180656_1_, IBlockReader p_180656_2_, BlockPos p_180656_3_, EnumFacing p_180656_4_) {
         return 0;
@@ -2405,11 +1299,13 @@ public class Block implements IItemProvider {
 
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean hasComparatorInputOverride(IBlockState p_149740_1_) {
         return false;
     }
 
+    /** @deprecated */
     @Deprecated
     @OnlyIn(Dist.CLIENT)
     public boolean hasCustomBreakingProgress(IBlockState p_190946_1_) {
@@ -2420,11 +1316,13 @@ public class Block implements IItemProvider {
         return this instanceof ITileEntityProvider;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isAir(IBlockState p_196261_1_) {
         return false;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isBlockNormalCube(IBlockState p_149637_1_) {
         return p_149637_1_.getMaterial().blocksMovement() && p_149637_1_.isFullCube();
@@ -2438,6 +1336,7 @@ public class Block implements IItemProvider {
         return true;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isFullCube(IBlockState p_149686_1_) {
         return true;
@@ -2447,11 +1346,13 @@ public class Block implements IItemProvider {
         return p_203417_1_.contains(this);
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isNormalCube(IBlockState p_149721_1_) {
         return p_149721_1_.getMaterial().isOpaque() && p_149721_1_.isFullCube() && !p_149721_1_.canProvidePower();
     }
 
+    /** @deprecated */
     @Deprecated
     public final boolean isOpaqueCube(IBlockState p_200012_1_, IBlockReader p_200012_2_, BlockPos p_200012_3_) {
         boolean flag = p_200012_1_.isSolid();
@@ -2460,27 +1361,32 @@ public class Block implements IItemProvider {
         return isOpaque(voxelshape);
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isReplaceable(IBlockState p_196253_1_, BlockItemUseContext p_196253_2_) {
         return this.material.isReplaceable() && p_196253_2_.getItem().getItem() != this.asItem();
     }
 
+    /** @deprecated */
     @Deprecated
     @OnlyIn(Dist.CLIENT)
     public boolean isSideInvisible(IBlockState p_200122_1_, IBlockState p_200122_2_, EnumFacing p_200122_3_) {
         return false;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isSolid(IBlockState p_200124_1_) {
         return this.isSolid && p_200124_1_.getBlock().getRenderLayer() == BlockRenderLayer.SOLID;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isTopSolid(IBlockState p_185481_1_) {
         return p_185481_1_.getMaterial().isOpaque() && p_185481_1_.isFullCube();
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean isValidPosition(IBlockState p_196260_1_, IWorldReaderBase p_196260_2_, BlockPos p_196260_3_) {
         return true;
@@ -2490,29 +1396,35 @@ public class Block implements IItemProvider {
         return this.variableOpacity;
     }
 
+    /** @deprecated */
     @Deprecated
     public IBlockState mirror(IBlockState p_185471_1_, Mirror p_185471_2_) {
         return p_185471_1_;
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean needsPostProcessing(IBlockState p_201783_1_, IBlockReader p_201783_2_, BlockPos p_201783_3_) {
         return false;
     }
 
+    /** @deprecated */
     @Deprecated
     public void neighborChanged(IBlockState p_189540_1_, World p_189540_2_, BlockPos p_189540_3_, Block p_189540_4_, BlockPos p_189540_5_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public boolean onBlockActivated(IBlockState p_196250_1_, World p_196250_2_, BlockPos p_196250_3_, EntityPlayer p_196250_4_, EnumHand p_196250_5_, EnumFacing p_196250_6_, float p_196250_7_, float p_196250_8_, float p_196250_9_) {
         return false;
     }
 
+    /** @deprecated */
     @Deprecated
     public void onBlockAdded(IBlockState p_196259_1_, World p_196259_2_, BlockPos p_196259_3_, IBlockState p_196259_4_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public void onBlockClicked(IBlockState p_196270_1_, World p_196270_2_, BlockPos p_196270_3_, EntityPlayer p_196270_4_) {
     }
@@ -2524,6 +1436,7 @@ public class Block implements IItemProvider {
     public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, IBlockState p_180633_3_, @Nullable EntityLivingBase p_180633_4_, ItemStack p_180633_5_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public void onEntityCollision(IBlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity p_196262_4_) {
     }
@@ -2545,6 +1458,7 @@ public class Block implements IItemProvider {
     public void onPlayerDestroy(IWorld p_176206_1_, BlockPos p_176206_2_, IBlockState p_176206_3_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public void onReplaced(IBlockState p_196243_1_, World p_196243_2_, BlockPos p_196243_3_, IBlockState p_196243_4_, boolean p_196243_5_) {
     }
@@ -2553,16 +1467,19 @@ public class Block implements IItemProvider {
         return 1;
     }
 
+    /** @deprecated */
     @Deprecated
     public void randomTick(IBlockState p_196265_1_, World p_196265_2_, BlockPos p_196265_3_, Random p_196265_4_) {
         this.tick(p_196265_1_, p_196265_2_, p_196265_3_, p_196265_4_);
     }
 
+    /** @deprecated */
     @Deprecated
     public IBlockState rotate(IBlockState p_185499_1_, Rotation p_185499_2_) {
         return p_185499_1_;
     }
 
+    /** @deprecated */
     @Deprecated
     public void tick(IBlockState p_196267_1_, World p_196267_2_, BlockPos p_196267_3_, Random p_196267_4_) {
     }
@@ -2575,14 +1492,16 @@ public class Block implements IItemProvider {
         return "Block{" + IRegistry.field_212618_g.func_177774_c(this) + "}";
     }
 
+    /** @deprecated */
     @Deprecated
     public void updateDiagonalNeighbors(IBlockState p_196248_1_, IWorld p_196248_2_, BlockPos p_196248_3_, int p_196248_4_) {
     }
 
+    /** @deprecated */
     @Deprecated
     public void updateNeighbors(IBlockState p_196242_1_, IWorld p_196242_2_, BlockPos p_196242_3_, int p_196242_4_) {
         try (BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain()) {
-            for (EnumFacing enumfacing : field_212556_a) {
+            for(EnumFacing enumfacing : field_212556_a) {
                 blockpos$pooledmutableblockpos.setPos(p_196242_3_).move(enumfacing);
                 IBlockState iblockstate = p_196242_2_.getBlockState(blockpos$pooledmutableblockpos);
                 IBlockState iblockstate1 = iblockstate.updatePostPlacement(enumfacing.getOpposite(), p_196242_1_,
@@ -2594,11 +1513,13 @@ public class Block implements IItemProvider {
 
     }
 
+    /** @deprecated */
     @Deprecated
     public IBlockState updatePostPlacement(IBlockState p_196271_1_, EnumFacing p_196271_2_, IBlockState p_196271_3_, IWorld p_196271_4_, BlockPos p_196271_5_, BlockPos p_196271_6_) {
         return p_196271_1_;
     }
 
+    /** @deprecated */
     @Deprecated
     public final boolean useNeighborBrightness(IBlockState p_200125_1_, IBlockReader p_200125_2_, BlockPos p_200125_3_) {
         return !p_200125_1_.isOpaqueCube(p_200125_2_, p_200125_3_) && p_200125_1_.getOpacity(p_200125_2_,

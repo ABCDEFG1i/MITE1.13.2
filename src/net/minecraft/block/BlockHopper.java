@@ -55,7 +55,7 @@ public class BlockHopper extends BlockContainer {
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
-      switch((EnumFacing)p_196244_1_.get(FACING)) {
+      switch(p_196244_1_.get(FACING)) {
       case DOWN:
          return DOWN_SHAPE;
       case NORTH:
@@ -72,7 +72,7 @@ public class BlockHopper extends BlockContainer {
    }
 
    public VoxelShape getRaytraceShape(IBlockState p_199600_1_, IBlockReader p_199600_2_, BlockPos p_199600_3_) {
-      switch((EnumFacing)p_199600_1_.get(FACING)) {
+      switch(p_199600_1_.get(FACING)) {
       case DOWN:
          return DOWN_RAYTRACE_SHAPE;
       case NORTH:

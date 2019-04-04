@@ -22,7 +22,7 @@ public class LWJGLMemoryUntracker {
          method.setAccessible(true);
          Field field = Class.forName("org.lwjgl.system.MemoryUtil$LazyInit").getDeclaredField("ALLOCATOR");
          field.setAccessible(true);
-         Object object = field.get((Object)null);
+         Object object = field.get(null);
          return oclass.isInstance(object) ? lookup.unreflect(method) : null;
       } catch (NoSuchMethodException | NoSuchFieldException | IllegalAccessException | ClassNotFoundException classnotfoundexception) {
          throw new RuntimeException(classnotfoundexception);

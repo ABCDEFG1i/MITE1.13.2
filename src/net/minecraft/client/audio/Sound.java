@@ -67,13 +67,13 @@ public class Sound implements ISoundEventAccessor<Sound> {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Type {
+   public enum Type {
       FILE("file"),
       SOUND_EVENT("event");
 
       private final String name;
 
-      private Type(String p_i46631_3_) {
+      Type(String p_i46631_3_) {
          this.name = p_i46631_3_;
       }
 

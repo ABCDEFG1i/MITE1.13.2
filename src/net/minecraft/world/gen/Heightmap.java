@@ -53,7 +53,7 @@ public class Heightmap {
                return true;
             }
          } else if (i - 1 == p_202270_2_) {
-            this.set(p_202270_1_, p_202270_3_, this.generateColumn((BlockPos.MutableBlockPos)null, p_202270_1_, p_202270_3_, this.blockMatcher, p_202270_2_));
+            this.set(p_202270_1_, p_202270_3_, this.generateColumn(null, p_202270_1_, p_202270_3_, this.blockMatcher, p_202270_2_));
             return true;
          }
 
@@ -101,7 +101,7 @@ public class Heightmap {
       return p_202267_0_ + p_202267_1_ * 16;
    }
 
-   public static enum Type {
+   public enum Type {
       WORLD_SURFACE_WG("WORLD_SURFACE_WG", Heightmap.Usage.WORLDGEN, BlockMatcherReaderAware.forBlock(Blocks.AIR)),
       OCEAN_FLOOR_WG("OCEAN_FLOOR_WG", Heightmap.Usage.WORLDGEN, BlockMatcherReaderAware.forBlock(Blocks.AIR), LiquidBlockMatcher.getInstance()),
       LIGHT_BLOCKING("LIGHT_BLOCKING", Heightmap.Usage.LIVE_WORLD, BlockMatcherReaderAware.forBlock(Blocks.AIR), LightEmittingMatcher.getInstance()),
@@ -120,7 +120,7 @@ public class Heightmap {
 
       });
 
-      private Type(String p_i49318_3_, Heightmap.Usage p_i49318_4_, IBlockMatcherReaderAware<IBlockState>... p_i49318_5_) {
+      Type(String p_i49318_3_, Heightmap.Usage p_i49318_4_, IBlockMatcherReaderAware<IBlockState>... p_i49318_5_) {
          this.id = p_i49318_3_;
          this.field_202265_e = p_i49318_5_;
          this.usage = p_i49318_4_;
@@ -143,8 +143,8 @@ public class Heightmap {
       }
    }
 
-   public static enum Usage {
+   public enum Usage {
       WORLDGEN,
-      LIVE_WORLD;
+      LIVE_WORLD
    }
 }

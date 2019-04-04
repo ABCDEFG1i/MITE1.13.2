@@ -354,7 +354,7 @@ public class BlockRedstoneWire extends Block {
    }
 
    protected static boolean canConnectUpwardsTo(IBlockState p_176346_0_) {
-      return canConnectTo(p_176346_0_, (EnumFacing)null);
+      return canConnectTo(p_176346_0_, null);
    }
 
    protected static boolean canConnectTo(IBlockState p_176343_0_, @Nullable EnumFacing p_176343_1_) {

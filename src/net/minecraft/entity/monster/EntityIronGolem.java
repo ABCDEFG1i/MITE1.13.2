@@ -134,7 +134,7 @@ public class EntityIronGolem extends EntityGolem {
       if (this.isPlayerCreated() && EntityPlayer.class.isAssignableFrom(p_70686_1_)) {
          return false;
       } else {
-         return p_70686_1_ == EntityCreeper.class ? false : super.canAttackClass(p_70686_1_);
+         return p_70686_1_ != EntityCreeper.class && super.canAttackClass(p_70686_1_);
       }
    }
 

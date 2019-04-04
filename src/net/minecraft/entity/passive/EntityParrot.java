@@ -196,7 +196,7 @@ public class EntityParrot extends EntityShoulderRiding implements IFlyingAnimal 
             EntityLiving entityliving = list.get(p_192006_0_.rand.nextInt(list.size()));
             if (!entityliving.isSilent()) {
                SoundEvent soundevent = func_200610_a(entityliving.getType());
-               p_192006_0_.playSound((EntityPlayer)null, p_192006_1_.posX, p_192006_1_.posY, p_192006_1_.posZ, soundevent, p_192006_1_.getSoundCategory(), 0.7F, getPitch(p_192006_0_.rand));
+               p_192006_0_.playSound(null, p_192006_1_.posX, p_192006_1_.posY, p_192006_1_.posZ, soundevent, p_192006_1_.getSoundCategory(), 0.7F, getPitch(p_192006_0_.rand));
                return true;
             }
          }
@@ -215,7 +215,7 @@ public class EntityParrot extends EntityShoulderRiding implements IFlyingAnimal 
          }
 
          if (!this.isSilent()) {
-            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_PARROT_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
          }
 
          if (!this.world.isRemote) {
@@ -280,7 +280,7 @@ public class EntityParrot extends EntityShoulderRiding implements IFlyingAnimal 
 
    public static void playAmbientSound(World p_192005_0_, Entity p_192005_1_) {
       if (!p_192005_1_.isSilent() && !playMimicSound(p_192005_0_, p_192005_1_) && p_192005_0_.rand.nextInt(200) == 0) {
-         p_192005_0_.playSound((EntityPlayer)null, p_192005_1_.posX, p_192005_1_.posY, p_192005_1_.posZ, getAmbientSound(p_192005_0_.rand), p_192005_1_.getSoundCategory(), 1.0F, getPitch(p_192005_0_.rand));
+         p_192005_0_.playSound(null, p_192005_1_.posX, p_192005_1_.posY, p_192005_1_.posZ, getAmbientSound(p_192005_0_.rand), p_192005_1_.getSoundCategory(), 1.0F, getPitch(p_192005_0_.rand));
       }
 
    }

@@ -28,7 +28,7 @@ public class SetDamage extends LootFunction {
          float f = 1.0F - this.damageRange.generateFloat(p_186553_2_);
          p_186553_1_.setDamage(MathHelper.floor(f * (float)p_186553_1_.getMaxDamage()));
       } else {
-         LOGGER.warn("Couldn't set damage of loot item {}", (Object)p_186553_1_);
+         LOGGER.warn("Couldn't set damage of loot item {}", p_186553_1_);
       }
 
       return p_186553_1_;

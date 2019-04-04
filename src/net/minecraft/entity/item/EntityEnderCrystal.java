@@ -92,7 +92,7 @@ public class EntityEnderCrystal extends Entity {
             this.setDead();
             if (!this.world.isRemote) {
                if (!p_70097_1_.isExplosion()) {
-                  this.world.createExplosion((Entity)null, this.posX, this.posY, this.posZ, 6.0F, true);
+                  this.world.createExplosion(null, this.posX, this.posY, this.posZ, 6.0F, true);
                }
 
                this.onCrystalDestroyed(p_70097_1_);
@@ -125,7 +125,7 @@ public class EntityEnderCrystal extends Entity {
 
    @Nullable
    public BlockPos getBeamTarget() {
-      return this.getDataManager().get(BEAM_TARGET).orElse((BlockPos)null);
+      return this.getDataManager().get(BEAM_TARGET).orElse(null);
    }
 
    public void setShowBottom(boolean p_184517_1_) {

@@ -22,7 +22,7 @@ public enum RecipeBookCategories {
 
    private final List<ItemStack> icons;
 
-   private RecipeBookCategories(ItemStack... p_i48836_3_) {
+   RecipeBookCategories(ItemStack... p_i48836_3_) {
       this.icons = ImmutableList.copyOf(p_i48836_3_);
    }
 

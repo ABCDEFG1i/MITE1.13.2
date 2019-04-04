@@ -33,9 +33,8 @@ public class RenderGuardian extends RenderLiving<EntityGuardian> {
             if (entitylivingbase != null) {
                Vec3d vec3d = this.getPosition(entitylivingbase, (double)entitylivingbase.height * 0.5D, 1.0F);
                Vec3d vec3d1 = this.getPosition(p_177071_1_, (double)p_177071_1_.getEyeHeight(), 1.0F);
-               if (p_177071_2_.isBoundingBoxInFrustum(new AxisAlignedBB(vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y, vec3d.z))) {
-                  return true;
-               }
+                return p_177071_2_.isBoundingBoxInFrustum(
+                        new AxisAlignedBB(vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y, vec3d.z));
             }
          }
 

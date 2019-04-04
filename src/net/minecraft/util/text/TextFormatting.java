@@ -34,7 +34,7 @@ public enum TextFormatting {
    STRIKETHROUGH("STRIKETHROUGH", 'm', true),
    UNDERLINE("UNDERLINE", 'n', true),
    ITALIC("ITALIC", 'o', true),
-   RESET("RESET", 'r', -1, (Integer)null);
+   RESET("RESET", 'r', -1, null);
 
    private static final Map<String, TextFormatting> NAME_MAPPING = Arrays.stream(values()).collect(Collectors.toMap((p_199746_0_) -> {
       return lowercaseAlpha(p_199746_0_.name);
@@ -54,15 +54,15 @@ public enum TextFormatting {
       return p_175745_0_.toLowerCase(Locale.ROOT).replaceAll("[^a-z]", "");
    }
 
-   private TextFormatting(String p_i49745_3_, char p_i49745_4_, int p_i49745_5_, @Nullable Integer p_i49745_6_) {
+   TextFormatting(String p_i49745_3_, char p_i49745_4_, int p_i49745_5_, @Nullable Integer p_i49745_6_) {
       this(p_i49745_3_, p_i49745_4_, false, p_i49745_5_, p_i49745_6_);
    }
 
-   private TextFormatting(String p_i46292_3_, char p_i46292_4_, boolean p_i46292_5_) {
-      this(p_i46292_3_, p_i46292_4_, p_i46292_5_, -1, (Integer)null);
+   TextFormatting(String p_i46292_3_, char p_i46292_4_, boolean p_i46292_5_) {
+      this(p_i46292_3_, p_i46292_4_, p_i46292_5_, -1, null);
    }
 
-   private TextFormatting(String p_i49746_3_, char p_i49746_4_, boolean p_i49746_5_, int p_i49746_6_, @Nullable Integer p_i49746_7_) {
+   TextFormatting(String p_i49746_3_, char p_i49746_4_, boolean p_i49746_5_, int p_i49746_6_, @Nullable Integer p_i49746_7_) {
       this.name = p_i49746_3_;
       this.formattingCode = p_i49746_4_;
       this.fancyStyling = p_i49746_5_;
@@ -86,7 +86,7 @@ public enum TextFormatting {
                }
 
                if (textformatting != RESET) {
-                  stringbuilder.append((Object)textformatting);
+                  stringbuilder.append(textformatting);
                }
             }
          }

@@ -46,7 +46,7 @@ public class CreativeSettings {
             this.hotbarSnapshots[i].fromTag(nbttagcompound.getTagList(String.valueOf(i), 10));
          }
       } catch (Exception exception) {
-         LOGGER.error("Failed to load creative mode options", (Throwable)exception);
+         LOGGER.error("Failed to load creative mode options", exception);
       }
 
    }
@@ -62,7 +62,7 @@ public class CreativeSettings {
 
          CompressedStreamTools.write(nbttagcompound, this.dataFile);
       } catch (Exception exception) {
-         LOGGER.error("Failed to save creative mode options", (Throwable)exception);
+         LOGGER.error("Failed to save creative mode options", exception);
       }
 
    }

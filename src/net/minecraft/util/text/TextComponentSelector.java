@@ -34,7 +34,7 @@ public class TextComponentSelector extends TextComponentBase {
    }
 
    public ITextComponent func_197668_a(CommandSource p_197668_1_) throws CommandSyntaxException {
-      return (ITextComponent)(this.field_197670_d == null ? new TextComponentString("") : EntitySelector.func_197350_a(this.field_197670_d.select(p_197668_1_)));
+      return this.field_197670_d == null ? new TextComponentString("") : EntitySelector.func_197350_a(this.field_197670_d.select(p_197668_1_));
    }
 
    public String getUnformattedComponentText() {

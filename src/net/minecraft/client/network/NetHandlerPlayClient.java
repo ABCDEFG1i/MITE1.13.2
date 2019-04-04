@@ -386,7 +386,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
       } else if (p_147235_1_.getType() == 62) {
          entity = new EntityEgg(this.world, d0, d1, d2);
       } else if (p_147235_1_.getType() == 79) {
-         entity = new EntityEvokerFangs(this.world, d0, d1, d2, 0.0F, 0, (EntityLivingBase)null);
+         entity = new EntityEvokerFangs(this.world, d0, d1, d2, 0.0F, 0, null);
       } else if (p_147235_1_.getType() == 73) {
          entity = new EntityPotion(this.world, d0, d1, d2, ItemStack.EMPTY);
          p_147235_1_.setData(0);
@@ -396,7 +396,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
       } else if (p_147235_1_.getType() == 1) {
          entity = new EntityBoat(this.world, d0, d1, d2);
       } else if (p_147235_1_.getType() == 50) {
-         entity = new EntityTNTPrimed(this.world, d0, d1, d2, (EntityLivingBase)null);
+         entity = new EntityTNTPrimed(this.world, d0, d1, d2, null);
       } else if (p_147235_1_.getType() == 78) {
          entity = new EntityArmorStand(this.world, d0, d1, d2);
       } else if (p_147235_1_.getType() == 51) {
@@ -639,7 +639,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
          this.client.player.prevPosY = this.client.player.posY;
          this.client.player.prevPosZ = this.client.player.posZ;
          this.doneLoadingTerrain = true;
-         this.client.displayGuiScreen((GuiScreen)null);
+         this.client.displayGuiScreen(null);
       }
 
    }
@@ -691,7 +691,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
    }
 
    public void onDisconnect(ITextComponent p_147231_1_) {
-      this.client.loadWorld((WorldClient)null);
+      this.client.loadWorld(null);
       if (this.guiScreenServer != null) {
          if (this.guiScreenServer instanceof GuiScreenRealmsProxy) {
             this.client.displayGuiScreen((new DisconnectedRealmsScreen(((GuiScreenRealmsProxy)this.guiScreenServer).getProxy(), "disconnect.lost", p_147231_1_)).getProxy());
@@ -800,7 +800,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
             entitylivingbase.getDataManager().setEntryValues(list);
          }
       } else {
-         LOGGER.warn("Skipping Entity with id {}", (int)p_147281_1_.getEntityType());
+         LOGGER.warn("Skipping Entity with id {}", p_147281_1_.getEntityType());
       }
 
    }
@@ -905,7 +905,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
 
    public void handleExplosion(SPacketExplosion p_147283_1_) {
       PacketThreadUtil.checkThreadAndEnqueue(p_147283_1_, this, this.client);
-      Explosion explosion = new Explosion(this.client.world, (Entity)null, p_147283_1_.getX(), p_147283_1_.getY(), p_147283_1_.getZ(), p_147283_1_.getStrength(), p_147283_1_.getAffectedBlockPositions());
+      Explosion explosion = new Explosion(this.client.world, null, p_147283_1_.getX(), p_147283_1_.getY(), p_147283_1_.getZ(), p_147283_1_.getStrength(), p_147283_1_.getAffectedBlockPositions());
       explosion.doExplosionB(true);
       this.client.player.motionX += (double)p_147283_1_.getMotionX();
       this.client.player.motionY += (double)p_147283_1_.getMotionY();
@@ -1155,7 +1155,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
       PacketThreadUtil.checkThreadAndEnqueue(p_194022_1_, this, this.client);
       ResourceLocation resourcelocation = p_194022_1_.getTab();
       if (resourcelocation == null) {
-         this.advancementManager.setSelectedTab((Advancement)null, false);
+         this.advancementManager.setSelectedTab(null, false);
       } else {
          Advancement advancement = this.advancementManager.getAdvancementList().getAdvancement(resourcelocation);
          this.advancementManager.setSelectedTab(advancement, false);
@@ -1186,7 +1186,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
          this.recipeManager.addRecipe(irecipe);
       }
 
-      SearchTree<RecipeList> searchtree = (SearchTree)this.client.<RecipeList>getSearchTree(SearchTreeManager.RECIPES);
+      SearchTree<RecipeList> searchtree = (SearchTree)this.client.getSearchTree(SearchTreeManager.RECIPES);
       searchtree.func_199550_b();
       RecipeBookClient recipebookclient = this.client.player.getRecipeBook();
       recipebookclient.rebuildTable();
@@ -1206,7 +1206,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
    public void handleNBTQueryResponse(SPacketNBTQueryResponse p_211522_1_) {
       PacketThreadUtil.checkThreadAndEnqueue(p_211522_1_, this, this.client);
       if (!this.nbtQueryManager.handleResponse(p_211522_1_.func_211713_b(), p_211522_1_.getTag())) {
-         LOGGER.debug("Got unhandled response to tag query {}", (int)p_211522_1_.func_211713_b());
+         LOGGER.debug("Got unhandled response to tag query {}", p_211522_1_.func_211713_b());
       }
 
    }
@@ -1447,7 +1447,6 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
                   return;
                }
             } catch (UnsupportedEncodingException var7) {
-               ;
             }
 
             this.netManager.sendPacket(new CPacketResourcePackStatus(CPacketResourcePackStatus.Action.FAILED_DOWNLOAD));
@@ -1479,7 +1478,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
                      }
 
                      ServerList.saveSingleServer(serverdata1);
-                     this.client.displayGuiScreen((GuiScreen)null);
+                     this.client.displayGuiScreen(null);
                   }, I18n.format("multiplayer.texturePrompt.line1"), I18n.format("multiplayer.texturePrompt.line2"), 0));
                });
             }
@@ -1560,7 +1559,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
                   imerchant.setRecipes(merchantrecipelist);
                }
             } catch (IOException ioexception) {
-               LOGGER.error("Couldn't load trade info", (Throwable)ioexception);
+               LOGGER.error("Couldn't load trade info", ioexception);
             }
          } else if (SPacketCustomPayload.BRAND.equals(resourcelocation)) {
             this.client.player.setServerBrand(packetbuffer.readString(32767));
@@ -1606,9 +1605,9 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
             this.client.debugRenderer.structure.addStructure(mutableboundingbox, list2, list3, j1);
          } else if (SPacketCustomPayload.DEBUG_WORLDGEN_ATTEMPT.equals(resourcelocation)) {
             ((DebugRendererWorldGenAttempts)this.client.debugRenderer.worldGenAttempts).addAttempt(packetbuffer.readBlockPos(), packetbuffer.readFloat(), packetbuffer.readFloat(), packetbuffer.readFloat(), packetbuffer.readFloat(), packetbuffer.readFloat());
-            LOGGER.warn("Unknown custom packed identifier: {}", (Object)resourcelocation);
+            LOGGER.warn("Unknown custom packed identifier: {}", resourcelocation);
          } else {
-            LOGGER.warn("Unknown custom packed identifier: {}", (Object)resourcelocation);
+            LOGGER.warn("Unknown custom packed identifier: {}", resourcelocation);
          }
       } finally {
          if (packetbuffer != null) {
@@ -1717,7 +1716,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
          try {
             this.world.addParticle(p_147289_1_.func_197699_j(), p_147289_1_.isLongDistance(), p_147289_1_.getXCoordinate(), p_147289_1_.getYCoordinate(), p_147289_1_.getZCoordinate(), d0, d2, d4);
          } catch (Throwable var17) {
-            LOGGER.warn("Could not spawn particle effect {}", (Object)p_147289_1_.func_197699_j());
+            LOGGER.warn("Could not spawn particle effect {}", p_147289_1_.func_197699_j());
          }
       } else {
          for(int i = 0; i < p_147289_1_.getParticleCount(); ++i) {
@@ -1731,7 +1730,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
             try {
                this.world.addParticle(p_147289_1_.func_197699_j(), p_147289_1_.isLongDistance(), p_147289_1_.getXCoordinate() + d1, p_147289_1_.getYCoordinate() + d3, p_147289_1_.getZCoordinate() + d5, d6, d7, d8);
             } catch (Throwable var16) {
-               LOGGER.warn("Could not spawn particle effect {}", (Object)p_147289_1_.func_197699_j());
+               LOGGER.warn("Could not spawn particle effect {}", p_147289_1_.func_197699_j());
                return;
             }
          }
@@ -1751,7 +1750,7 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient {
             for(SPacketEntityProperties.Snapshot spacketentityproperties$snapshot : p_147290_1_.getSnapshots()) {
                IAttributeInstance iattributeinstance = abstractattributemap.getAttributeInstanceByName(spacketentityproperties$snapshot.getName());
                if (iattributeinstance == null) {
-                  iattributeinstance = abstractattributemap.registerAttribute(new RangedAttribute((IAttribute)null, spacketentityproperties$snapshot.getName(), 0.0D, Double.MIN_NORMAL, Double.MAX_VALUE));
+                  iattributeinstance = abstractattributemap.registerAttribute(new RangedAttribute(null, spacketentityproperties$snapshot.getName(), 0.0D, Double.MIN_NORMAL, Double.MAX_VALUE));
                }
 
                iattributeinstance.setBaseValue(spacketentityproperties$snapshot.getBaseValue());

@@ -23,7 +23,7 @@ public class BlockPumpkin extends BlockStemGrown {
       if (itemstack.getItem() == Items.SHEARS) {
          if (!p_196250_2_.isRemote) {
             EnumFacing enumfacing = p_196250_6_.getAxis() == EnumFacing.Axis.Y ? p_196250_4_.getHorizontalFacing().getOpposite() : p_196250_6_;
-            p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            p_196250_2_.playSound(null, p_196250_3_, SoundEvents.BLOCK_PUMPKIN_CARVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
             p_196250_2_.setBlockState(p_196250_3_, Blocks.CARVED_PUMPKIN.getDefaultState().with(BlockCarvedPumpkin.FACING, enumfacing), 11);
             EntityItem entityitem = new EntityItem(p_196250_2_, (double)p_196250_3_.getX() + 0.5D + (double)enumfacing.getXOffset() * 0.65D, (double)p_196250_3_.getY() + 0.1D, (double)p_196250_3_.getZ() + 0.5D + (double)enumfacing.getZOffset() * 0.65D, new ItemStack(Items.PUMPKIN_SEEDS, 4));
             entityitem.motionX = 0.05D * (double)enumfacing.getXOffset() + p_196250_2_.rand.nextDouble() * 0.02D;

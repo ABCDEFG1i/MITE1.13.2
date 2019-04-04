@@ -332,7 +332,7 @@ public class EntityWolf extends EntityTameable {
             this.aiSit.setSitting(!this.isSitting());
             this.isJumping = false;
             this.navigator.clearPath();
-            this.setAttackTarget((EntityLivingBase)null);
+            this.setAttackTarget(null);
          }
       } else if (item == Items.BONE && !this.isAngry()) {
          if (!p_184645_1_.capabilities.isCreativeMode) {
@@ -343,7 +343,7 @@ public class EntityWolf extends EntityTameable {
             if (this.rand.nextInt(3) == 0) {
                this.setTamedBy(p_184645_1_);
                this.navigator.clearPath();
-               this.setAttackTarget((EntityLivingBase)null);
+               this.setAttackTarget(null);
                this.aiSit.setSitting(true);
                this.setHealth(20.0F);
                this.playTameEffect(true);
@@ -494,12 +494,12 @@ public class EntityWolf extends EntityTameable {
       }
 
       public void startExecuting() {
-         EntityWolf.this.setAttackTarget((EntityLivingBase)null);
+         EntityWolf.this.setAttackTarget(null);
          super.startExecuting();
       }
 
       public void updateTask() {
-         EntityWolf.this.setAttackTarget((EntityLivingBase)null);
+         EntityWolf.this.setAttackTarget(null);
          super.updateTask();
       }
    }

@@ -21,7 +21,7 @@ public class ItemEnderPearl extends Item {
          itemstack.shrink(1);
       }
 
-      p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+      p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
       p_77659_2_.getCooldownTracker().setCooldown(this, 20);
       if (!p_77659_1_.isRemote) {
          EntityEnderPearl entityenderpearl = new EntityEnderPearl(p_77659_1_, p_77659_2_);

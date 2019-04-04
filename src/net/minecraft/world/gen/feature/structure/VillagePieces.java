@@ -1293,7 +1293,7 @@ public class VillagePieces {
       }
 
       public Start(int p_i48769_1_, Random p_i48769_2_, int p_i48769_3_, int p_i48769_4_, List<VillagePieces.PieceWeight> p_i48769_5_, VillageConfig p_i48769_6_) {
-         super((VillagePieces.Start)null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
+         super(null, 0, p_i48769_2_, p_i48769_3_, p_i48769_4_);
          this.structureVillageWeightedPieceList = p_i48769_5_;
          this.terrainType = p_i48769_6_.field_202461_a;
          this.structureType = p_i48769_6_.type;
@@ -1341,7 +1341,7 @@ public class VillagePieces {
       }
    }
 
-   public static enum Type {
+   public enum Type {
       OAK(0),
       SANDSTONE(1),
       ACACIA(2),
@@ -1349,7 +1349,7 @@ public class VillagePieces {
 
       private final int field_202605_e;
 
-      private Type(int p_i48768_3_) {
+      Type(int p_i48768_3_) {
          this.field_202605_e = p_i48768_3_;
       }
 
@@ -1479,7 +1479,9 @@ public class VillagePieces {
                if (this.isZombieInfested) {
                   EntityZombieVillager entityzombievillager = new EntityZombieVillager(p_74893_1_.getWorld());
                   entityzombievillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
-                  entityzombievillager.onInitialSpawn(p_74893_1_.getDifficultyForLocation(new BlockPos(entityzombievillager)), (IEntityLivingData)null, (NBTTagCompound)null);
+                  entityzombievillager.onInitialSpawn(p_74893_1_.getDifficultyForLocation(new BlockPos(entityzombievillager)),
+                          null,
+                          null);
                   entityzombievillager.setProfession(this.chooseProfession(i, 0));
                   entityzombievillager.enablePersistence();
                   p_74893_1_.spawnEntity(entityzombievillager);
@@ -1487,7 +1489,9 @@ public class VillagePieces {
                   EntityVillager entityvillager = new EntityVillager(p_74893_1_.getWorld());
                   entityvillager.setLocationAndAngles((double)j + 0.5D, (double)k, (double)l + 0.5D, 0.0F, 0.0F);
                   entityvillager.setProfession(this.chooseProfession(i, p_74893_1_.getRandom().nextInt(6)));
-                  entityvillager.finalizeMobSpawn(p_74893_1_.getDifficultyForLocation(new BlockPos(entityvillager)), (IEntityLivingData)null, (NBTTagCompound)null, false);
+                  entityvillager.finalizeMobSpawn(p_74893_1_.getDifficultyForLocation(new BlockPos(entityvillager)),
+                          null,
+                          null, false);
                   p_74893_1_.spawnEntity(entityvillager);
                }
             }

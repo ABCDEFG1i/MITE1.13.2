@@ -40,14 +40,13 @@ public class ThreadLanServerPing extends Thread {
             DatagramPacket datagrampacket = new DatagramPacket(abyte, abyte.length, inetaddress, 4445);
             this.socket.send(datagrampacket);
          } catch (IOException ioexception) {
-            LOGGER.warn("LanServerPinger: {}", (Object)ioexception.getMessage());
+            LOGGER.warn("LanServerPinger: {}", ioexception.getMessage());
             break;
          }
 
          try {
             sleep(1500L);
          } catch (InterruptedException var5) {
-            ;
          }
       }
 

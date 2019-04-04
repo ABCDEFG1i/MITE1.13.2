@@ -80,7 +80,7 @@ public class WorldSummary implements Comparable<WorldSummary> {
    }
 
    public ITextComponent func_200538_i() {
-      return (ITextComponent)(StringUtils.isNullOrEmpty(this.versionName) ? new TextComponentTranslation("selectWorld.versionUnknown") : new TextComponentString(this.versionName));
+      return StringUtils.isNullOrEmpty(this.versionName) ? new TextComponentTranslation("selectWorld.versionUnknown") : new TextComponentString(this.versionName);
    }
 
    public boolean markVersionInList() {
@@ -88,7 +88,7 @@ public class WorldSummary implements Comparable<WorldSummary> {
    }
 
    public boolean askToOpenWorld() {
-      return this.versionId > 1631;
+      return this.versionId > 413495445;
    }
 
    public boolean func_202842_n() {
@@ -96,6 +96,6 @@ public class WorldSummary implements Comparable<WorldSummary> {
    }
 
    public boolean func_197731_n() {
-      return this.versionId < 1631;
+      return this.versionId < 413495445;
    }
 }

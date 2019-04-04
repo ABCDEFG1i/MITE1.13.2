@@ -113,7 +113,7 @@ public class GuiNewChat extends Gui {
 
    public void printChatMessageWithOptionalDeletion(ITextComponent p_146234_1_, int p_146234_2_) {
       this.setChatLine(p_146234_1_, p_146234_2_, this.mc.ingameGUI.getTicks(), false);
-      LOGGER.info("[CHAT] {}", (Object)p_146234_1_.getString().replaceAll("\r", "\\\\r").replaceAll("\n", "\\\\n"));
+      LOGGER.info("[CHAT] {}", p_146234_1_.getString().replaceAll("\r", "\\\\r").replaceAll("\n", "\\\\n"));
    }
 
    private void setChatLine(ITextComponent p_146237_1_, int p_146237_2_, int p_146237_3_, boolean p_146237_4_) {

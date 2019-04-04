@@ -36,7 +36,7 @@ public class RecipeBook {
    }
 
    public boolean isUnlocked(@Nullable IRecipe p_193830_1_) {
-      return p_193830_1_ == null ? false : this.recipes.contains(p_193830_1_.getId());
+      return p_193830_1_ != null && this.recipes.contains(p_193830_1_.getId());
    }
 
    @OnlyIn(Dist.CLIENT)

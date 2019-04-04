@@ -9,8 +9,7 @@ import net.minecraft.util.datafix.NamespacedSchema;
 
 public class SharedConstants {
    public static final Level NETTY_LEAK_DETECTION = Level.DISABLED;
-   //FIXME Make it false when release
-   public static boolean developmentMode = true;
+   public static boolean developmentMode = false;
    public static final char[] ILLEGAL_FILE_CHARACTERS = new char[]{'/', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*', '\\', '<', '>', '|', '"', ':'};
 
    public static boolean isAllowedCharacter(char p_71566_0_) {

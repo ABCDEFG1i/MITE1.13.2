@@ -124,7 +124,7 @@ public class IntegratedServer extends MinecraftServer {
                LOGGER.info("Changing difficulty to {}, from {}", worldinfo1.getDifficulty(), worldinfo.getDifficulty());
                this.setDifficultyForAllWorlds(worldinfo1.getDifficulty());
             } else if (worldinfo1.isDifficultyLocked() && !worldinfo.isDifficultyLocked()) {
-               LOGGER.info("Locking difficulty to {}", (Object)worldinfo1.getDifficulty());
+               LOGGER.info("Locking difficulty to {}", worldinfo1.getDifficulty());
 
                for(WorldServer worldserver : this.func_212370_w()) {
                   if (worldserver != null) {
@@ -215,8 +215,8 @@ public class IntegratedServer extends MinecraftServer {
 
    public boolean func_195565_a(GameType p_195565_1_, boolean p_195565_2_, int p_195565_3_) {
       try {
-         this.getNetworkSystem().addEndpoint((InetAddress)null, p_195565_3_);
-         LOGGER.info("Started serving on {}", (int)p_195565_3_);
+         this.getNetworkSystem().addEndpoint(null, p_195565_3_);
+         LOGGER.info("Started serving on {}", p_195565_3_);
          this.field_195580_l = p_195565_3_;
          this.lanServerPing = new ThreadLanServerPing(this.getMOTD(), p_195565_3_ + "");
          this.lanServerPing.start();

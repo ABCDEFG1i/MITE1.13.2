@@ -149,7 +149,7 @@ public class PacketBuffer extends ByteBuf {
    }
 
    public <T extends Enum<T>> T readEnumValue(Class<T> p_179257_1_) {
-      return (T)(p_179257_1_.getEnumConstants())[this.readVarInt()];
+      return (p_179257_1_.getEnumConstants())[this.readVarInt()];
    }
 
    public PacketBuffer writeEnumValue(Enum<?> p_179249_1_) {

@@ -108,10 +108,10 @@ public class CloneCommand {
                               list1.add(new CloneCommand.BlockInfo(blockpos2, iblockstate, nbttagcompound));
                               deque.addLast(blockpos1);
                            } else if (!iblockstate.isOpaqueCube(worldserver, blockpos1) && !iblockstate.isFullCube()) {
-                              list2.add(new CloneCommand.BlockInfo(blockpos2, iblockstate, (NBTTagCompound)null));
+                              list2.add(new CloneCommand.BlockInfo(blockpos2, iblockstate, null));
                               deque.addFirst(blockpos1);
                            } else {
-                              list.add(new CloneCommand.BlockInfo(blockpos2, iblockstate, (NBTTagCompound)null));
+                              list.add(new CloneCommand.BlockInfo(blockpos2, iblockstate, null));
                               deque.addLast(blockpos1);
                            }
                         }
@@ -201,14 +201,14 @@ public class CloneCommand {
       }
    }
 
-   static enum Mode {
+   enum Mode {
       FORCE(true),
       MOVE(true),
       NORMAL(false);
 
       private final boolean allowOverlap;
 
-      private Mode(boolean p_i47707_3_) {
+      Mode(boolean p_i47707_3_) {
          this.allowOverlap = p_i47707_3_;
       }
 

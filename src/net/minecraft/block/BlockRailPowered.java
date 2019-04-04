@@ -107,7 +107,8 @@ public class BlockRailPowered extends BlockRailBase {
          if (p_208071_5_ != RailShape.EAST_WEST || railshape != RailShape.NORTH_SOUTH && railshape != RailShape.ASCENDING_NORTH && railshape != RailShape.ASCENDING_SOUTH) {
             if (p_208071_5_ != RailShape.NORTH_SOUTH || railshape != RailShape.EAST_WEST && railshape != RailShape.ASCENDING_EAST && railshape != RailShape.ASCENDING_WEST) {
                if (iblockstate.get(POWERED)) {
-                  return p_208071_1_.isBlockPowered(p_208071_2_) ? true : this.findPoweredRailSignal(p_208071_1_, p_208071_2_, iblockstate, p_208071_3_, p_208071_4_ + 1);
+                  return p_208071_1_.isBlockPowered(p_208071_2_) || this.findPoweredRailSignal(p_208071_1_, p_208071_2_,
+                          iblockstate, p_208071_3_, p_208071_4_ + 1);
                } else {
                   return false;
                }
@@ -140,7 +141,7 @@ public class BlockRailPowered extends BlockRailBase {
    public IBlockState rotate(IBlockState p_185499_1_, Rotation p_185499_2_) {
       switch(p_185499_2_) {
       case CLOCKWISE_180:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_WEST);
          case ASCENDING_WEST:
@@ -159,7 +160,7 @@ public class BlockRailPowered extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.SOUTH_WEST);
          }
       case COUNTERCLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case NORTH_SOUTH:
             return p_185499_1_.with(SHAPE, RailShape.EAST_WEST);
          case EAST_WEST:
@@ -182,7 +183,7 @@ public class BlockRailPowered extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.NORTH_WEST);
          }
       case CLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case NORTH_SOUTH:
             return p_185499_1_.with(SHAPE, RailShape.EAST_WEST);
          case EAST_WEST:

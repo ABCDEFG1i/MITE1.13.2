@@ -51,7 +51,7 @@ public class BlockPistonExtension extends BlockDirectional {
    }
 
    private VoxelShape func_196424_i(IBlockState p_196424_1_) {
-      switch((EnumFacing)p_196424_1_.get(FACING)) {
+      switch(p_196424_1_.get(FACING)) {
       case DOWN:
       default:
          return PISTON_EXTENSION_DOWN_AABB;
@@ -74,7 +74,7 @@ public class BlockPistonExtension extends BlockDirectional {
 
    private VoxelShape func_196425_x(IBlockState p_196425_1_) {
       boolean flag = p_196425_1_.get(SHORT);
-      switch((EnumFacing)p_196425_1_.get(FACING)) {
+      switch(p_196425_1_.get(FACING)) {
       case DOWN:
       default:
          return flag ? SHORT_DOWN_ARM_AABB : DOWN_ARM_AABB;

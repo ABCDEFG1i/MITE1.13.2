@@ -29,7 +29,7 @@ public class EnchantmentNameParts {
       }
 
       List<String> list = p_148334_1_.listFormattedStringToWidth(s, p_148334_2_);
-      return org.apache.commons.lang3.StringUtils.join((Iterable<?>)(list.size() >= 2 ? list.subList(0, 2) : list), " ");
+      return org.apache.commons.lang3.StringUtils.join(list.size() >= 2 ? list.subList(0, 2) : list, " ");
    }
 
    public void reseedRandomGenerator(long p_148335_1_) {

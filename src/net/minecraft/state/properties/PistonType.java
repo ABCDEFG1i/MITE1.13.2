@@ -8,7 +8,7 @@ public enum PistonType implements IStringSerializable {
 
    private final String name;
 
-   private PistonType(String p_i49335_3_) {
+   PistonType(String p_i49335_3_) {
       this.name = p_i49335_3_;
    }
 

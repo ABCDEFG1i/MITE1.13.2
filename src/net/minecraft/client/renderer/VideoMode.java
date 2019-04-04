@@ -115,7 +115,6 @@ public final class VideoMode {
             return Optional.of(new VideoMode(i, j, i1, i1, i1, k));
          }
       } catch (Exception var9) {
-         ;
       }
 
       return Optional.empty();

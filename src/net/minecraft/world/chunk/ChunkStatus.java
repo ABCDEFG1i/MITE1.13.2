@@ -20,7 +20,7 @@ import net.minecraft.world.gen.tasks.LiquidCarveChunkTask;
 import net.minecraft.world.gen.tasks.SpawnMobsTask;
 
 public enum ChunkStatus implements ITaskType<ChunkPos, ChunkStatus> {
-   EMPTY("empty", (ChunkTask)null, -1, false, ChunkStatus.Type.PROTOCHUNK),
+   EMPTY("empty", null, -1, false, ChunkStatus.Type.PROTOCHUNK),
    BASE("base", new BaseChunkTask(), 0, false, ChunkStatus.Type.PROTOCHUNK),
    CARVED("carved", new CarveChunkTask(), 0, false, ChunkStatus.Type.PROTOCHUNK),
    LIQUID_CARVED("liquid_carved", new LiquidCarveChunkTask(), 1, false, ChunkStatus.Type.PROTOCHUNK),
@@ -70,7 +70,7 @@ public enum ChunkStatus implements ITaskType<ChunkPos, ChunkStatus> {
    private final ChunkStatus.Type type;
    private final boolean updateHeightmaps;
 
-   private ChunkStatus(String p_i49319_3_, @Nullable ChunkTask p_i49319_4_, int p_i49319_5_, boolean p_i49319_6_, ChunkStatus.Type p_i49319_7_) {
+   ChunkStatus(String p_i49319_3_, @Nullable ChunkTask p_i49319_4_, int p_i49319_5_, boolean p_i49319_6_, ChunkStatus.Type p_i49319_7_) {
       this.name = p_i49319_3_;
       this.task = p_i49319_4_;
       this.taskRange = p_i49319_5_;
@@ -125,8 +125,8 @@ public enum ChunkStatus implements ITaskType<ChunkPos, ChunkStatus> {
       return this.ordinal() >= p_209003_1_.ordinal();
    }
 
-   public static enum Type {
+   public enum Type {
       PROTOCHUNK,
-      LEVELCHUNK;
+      LEVELCHUNK
    }
 }

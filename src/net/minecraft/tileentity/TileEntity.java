@@ -82,7 +82,7 @@ public abstract class TileEntity {
             tileentity = null;
          }
       } else {
-         LOGGER.warn("Skipping BlockEntity with id {}", (Object)s);
+         LOGGER.warn("Skipping BlockEntity with id {}", s);
       }
 
       return tileentity;

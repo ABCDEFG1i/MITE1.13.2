@@ -59,7 +59,7 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
    private static final Predicate<Entity> IS_HORSE_BREEDING = (p_200613_0_) -> {
       return p_200613_0_ instanceof AbstractHorse && ((AbstractHorse)p_200613_0_).isBreeding();
    };
-   protected static final IAttribute JUMP_STRENGTH = (new RangedAttribute((IAttribute)null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).setDescription("Jump Strength").setShouldWatch(true);
+   protected static final IAttribute JUMP_STRENGTH = (new RangedAttribute(null, "horse.jumpStrength", 0.7D, 0.0D, 2.0D)).setDescription("Jump Strength").setShouldWatch(true);
    private static final DataParameter<Byte> STATUS = EntityDataManager.createKey(AbstractHorse.class, DataSerializers.BYTE);
    private static final DataParameter<Optional<UUID>> OWNER_UNIQUE_ID = EntityDataManager.createKey(AbstractHorse.class, DataSerializers.OPTIONAL_UNIQUE_ID);
    private int eatingCounter;
@@ -129,7 +129,7 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
 
    @Nullable
    public UUID getOwnerUniqueId() {
-      return this.dataManager.get(OWNER_UNIQUE_ID).orElse((UUID)null);
+      return this.dataManager.get(OWNER_UNIQUE_ID).orElse(null);
    }
 
    public void setOwnerUniqueId(@Nullable UUID p_184779_1_) {
@@ -203,7 +203,8 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
 
    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
       Entity entity = p_70097_1_.getTrueSource();
-      return this.isBeingRidden() && entity != null && this.isRidingOrBeingRiddenBy(entity) ? false : super.attackEntityFrom(p_70097_1_, p_70097_2_);
+      return (!this.isBeingRidden() || entity == null || !this.isRidingOrBeingRiddenBy(
+              entity)) && super.attackEntityFrom(p_70097_1_, p_70097_2_);
    }
 
    public boolean canBePushed() {
@@ -213,7 +214,7 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
    private void eatingHorse() {
       this.openHorseMouth();
       if (!this.isSilent()) {
-         this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_HORSE_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+         this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_HORSE_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
       }
 
    }
@@ -236,7 +237,7 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
          Block block = iblockstate.getBlock();
          if (!iblockstate.isAir() && !this.isSilent()) {
             SoundType soundtype = block.getSoundType();
-            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
          }
 
       }

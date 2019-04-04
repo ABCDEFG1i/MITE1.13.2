@@ -49,7 +49,7 @@ public class SNBTToNBTConverter implements IDataProvider {
          Path path = p_208314_4_.resolve(p_208314_3_ + ".nbt");
 
          try (BufferedReader bufferedreader = Files.newBufferedReader(p_208314_2_)) {
-            String s = IOUtils.toString((Reader)bufferedreader);
+            String s = IOUtils.toString(bufferedreader);
             String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
             if (!Objects.equals(p_208314_1_.getPreviousHash(path), s1) || !Files.exists(path)) {
                Files.createDirectories(path.getParent());

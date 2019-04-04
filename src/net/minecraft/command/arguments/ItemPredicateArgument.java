@@ -41,7 +41,7 @@ public class ItemPredicateArgument implements ArgumentType<ItemPredicateArgument
       } else {
          ResourceLocation resourcelocation = itemparser.getTag();
          return (p_199845_2_) -> {
-            Tag<Item> tag = ((CommandSource)p_199845_2_.getSource()).getServer().getNetworkTagManager().getItems().get(resourcelocation);
+            Tag<Item> tag = p_199845_2_.getSource().getServer().getNetworkTagManager().getItems().get(resourcelocation);
             if (tag == null) {
                throw field_199849_a.create(resourcelocation.toString());
             } else {
@@ -63,7 +63,6 @@ public class ItemPredicateArgument implements ArgumentType<ItemPredicateArgument
       try {
          itemparser.parse();
       } catch (CommandSyntaxException var6) {
-         ;
       }
 
       return itemparser.func_197329_a(p_listSuggestions_2_);

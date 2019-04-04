@@ -72,7 +72,7 @@ public class BlockRailDetector extends BlockRailBase {
    private void updatePoweredState(World p_176570_1_, BlockPos p_176570_2_, IBlockState p_176570_3_) {
       boolean flag = p_176570_3_.get(POWERED);
       boolean flag1 = false;
-      List<EntityMinecart> list = this.func_200878_a(p_176570_1_, p_176570_2_, EntityMinecart.class, (Predicate<Entity>)null);
+      List<EntityMinecart> list = this.func_200878_a(p_176570_1_, p_176570_2_, EntityMinecart.class, null);
       if (!list.isEmpty()) {
          flag1 = true;
       }
@@ -127,7 +127,8 @@ public class BlockRailDetector extends BlockRailBase {
 
    public int getComparatorInputOverride(IBlockState p_180641_1_, World p_180641_2_, BlockPos p_180641_3_) {
       if (p_180641_1_.get(POWERED)) {
-         List<EntityMinecartCommandBlock> list = this.func_200878_a(p_180641_2_, p_180641_3_, EntityMinecartCommandBlock.class, (Predicate<Entity>)null);
+         List<EntityMinecartCommandBlock> list = this.func_200878_a(p_180641_2_, p_180641_3_, EntityMinecartCommandBlock.class,
+                 null);
          if (!list.isEmpty()) {
             return list.get(0).getCommandBlockLogic().getSuccessCount();
          }
@@ -153,7 +154,7 @@ public class BlockRailDetector extends BlockRailBase {
    public IBlockState rotate(IBlockState p_185499_1_, Rotation p_185499_2_) {
       switch(p_185499_2_) {
       case CLOCKWISE_180:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_WEST);
          case ASCENDING_WEST:
@@ -172,7 +173,7 @@ public class BlockRailDetector extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.SOUTH_WEST);
          }
       case COUNTERCLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_NORTH);
          case ASCENDING_WEST:
@@ -195,7 +196,7 @@ public class BlockRailDetector extends BlockRailBase {
             return p_185499_1_.with(SHAPE, RailShape.NORTH_SOUTH);
          }
       case CLOCKWISE_90:
-         switch((RailShape)p_185499_1_.get(SHAPE)) {
+         switch(p_185499_1_.get(SHAPE)) {
          case ASCENDING_EAST:
             return p_185499_1_.with(SHAPE, RailShape.ASCENDING_SOUTH);
          case ASCENDING_WEST:

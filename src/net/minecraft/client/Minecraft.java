@@ -308,7 +308,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          Supplier<IResourcePack> supplier;
          if (p_211818_4_.getPackFormat() < 4) {
             supplier = () -> {
-               return new LegacyResourcePackWrapper((IResourcePack)p_211818_2_.get(), LegacyResourcePackWrapper.NEW_TO_LEGACY_MAP);
+               return new LegacyResourcePackWrapper(p_211818_2_.get(), LegacyResourcePackWrapper.NEW_TO_LEGACY_MAP);
             };
          } else {
             supplier = p_211818_2_;
@@ -321,8 +321,8 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       this.proxy = p_i45547_1_.userInfo.proxy == null ? Proxy.NO_PROXY : p_i45547_1_.userInfo.proxy;
       this.sessionService = (new YggdrasilAuthenticationService(this.proxy, UUID.randomUUID().toString())).createMinecraftSessionService();
       this.session = p_i45547_1_.userInfo.session;
-      LOGGER.info("Setting user: {}", (Object)this.session.getUsername());
-      LOGGER.debug("(Session ID is {})", (Object)this.session.getSessionID());
+      LOGGER.info("Setting user: {}", this.session.getUsername());
+      LOGGER.debug("(Session ID is {})", this.session.getSessionID());
       this.isDemo = p_i45547_1_.gameInfo.isDemo;
       this.jvm64bit = isJvm64bit();
       this.integratedServer = null;
@@ -370,7 +370,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          } catch (ReportedException reportedexception) {
             this.addGraphicsAndWorldToCrashReport(reportedexception.getCrashReport());
             this.freeMemory();
-            LOGGER.fatal("Reported exception thrown!", (Throwable)reportedexception);
+            LOGGER.fatal("Reported exception thrown!", reportedexception);
             this.displayCrashReport(reportedexception.getCrashReport());
             break;
          } catch (Throwable throwable1) {
@@ -392,7 +392,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       this.gameSettings = new GameSettings(this, this.gameDir);
       this.creativeSettings = new CreativeSettings(this.gameDir, this.dataFixer);
       this.startTimerHackThread();
-      LOGGER.info("LWJGL Version: {}", (Object)Version.getVersion());
+      LOGGER.info("LWJGL Version: {}", Version.getVersion());
       GameConfiguration.DisplayInformation gameconfiguration$displayinformation = this.displayInfo;
       if (this.gameSettings.overrideHeight > 0 && this.gameSettings.overrideWidth > 0) {
          gameconfiguration$displayinformation = new GameConfiguration.DisplayInformation(this.gameSettings.overrideWidth, this.gameSettings.overrideHeight, gameconfiguration$displayinformation.fullscreenWidth, gameconfiguration$displayinformation.fullscreenHeight, gameconfiguration$displayinformation.fullscreen);
@@ -499,7 +499,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          };
 
          for(String s : list) {
-            LOGGER.error("GLFW error collected during initialization: {}", (Object)s);
+            LOGGER.error("GLFW error collected during initialization: {}", s);
          }
 
          GLFW.glfwSetErrorCallback(glfwerrorcallback).free();
@@ -508,7 +508,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
 
    public void populateSearchTreeManager() {
       SearchTree<ItemStack> searchtree = new SearchTree<>((p_193988_0_) -> {
-         return p_193988_0_.getTooltip((EntityPlayer)null, ITooltipFlag.TooltipFlags.NORMAL).stream().map((p_211817_0_) -> {
+         return p_193988_0_.getTooltip(null, ITooltipFlag.TooltipFlags.NORMAL).stream().map((p_211817_0_) -> {
             return TextFormatting.getTextWithoutFormattingCodes(p_211817_0_.getString()).trim();
          }).filter((p_200241_0_) -> {
             return !p_200241_0_.isEmpty();
@@ -525,7 +525,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       nonnulllist.forEach(searchtree::add);
       SearchTree<RecipeList> searchtree1 = new SearchTree<>((p_193990_0_) -> {
          return p_193990_0_.getRecipes().stream().flatMap((p_200240_0_) -> {
-            return p_200240_0_.getRecipeOutput().getTooltip((EntityPlayer)null, ITooltipFlag.TooltipFlags.NORMAL).stream();
+            return p_200240_0_.getRecipeOutput().getTooltip(null, ITooltipFlag.TooltipFlags.NORMAL).stream();
          }).map((p_200235_0_) -> {
             return TextFormatting.getTextWithoutFormattingCodes(p_200235_0_.getString()).trim();
          }).filter((p_200234_0_) -> {
@@ -577,7 +577,6 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
                try {
                   Thread.sleep(2147483647L);
                } catch (InterruptedException var2) {
-                  ;
                }
             }
 
@@ -624,7 +623,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       try {
          this.resourceManager.reload(list);
       } catch (RuntimeException runtimeexception) {
-         LOGGER.info("Caught error stitching, removing all assigned resourcepacks", (Throwable)runtimeexception);
+         LOGGER.info("Caught error stitching, removing all assigned resourcepacks", runtimeexception);
          this.resourcePackRepository.func_198985_a(Collections.emptyList());
          List<IResourcePack> list1 = this.resourcePackRepository.getPackInfos().stream().map(ResourcePackInfo::getResourcePack).collect(Collectors.toList());
          this.resourceManager.reload(list1);
@@ -675,7 +674,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       if (p_147108_1_ == null && this.world == null) {
          p_147108_1_ = new GuiMainMenu();
       } else if (p_147108_1_ == null && this.player.getHealth() <= 0.0F) {
-         p_147108_1_ = new GuiGameOver((ITextComponent)null);
+         p_147108_1_ = new GuiGameOver(null);
       }
 
       if (p_147108_1_ instanceof GuiMainMenu || p_147108_1_ instanceof GuiMultiplayer) {
@@ -701,9 +700,8 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          LOGGER.info("Stopping!");
 
          try {
-            this.loadWorld((WorldClient)null);
+            this.loadWorld(null);
          } catch (Throwable var5) {
-            ;
          }
 
          if (this.currentScreen != null) {
@@ -834,14 +832,12 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          memoryReserve = new byte[0];
          this.renderGlobal.func_72728_f();
       } catch (Throwable var3) {
-         ;
       }
 
       try {
          System.gc();
-         this.loadWorld((WorldClient)null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
+         this.loadWorld(null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
       } catch (Throwable var2) {
-         ;
       }
 
       System.gc();
@@ -1118,12 +1114,12 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
 
       if (this.currentScreen == null && this.player != null) {
          if (this.player.getHealth() <= 0.0F && !(this.currentScreen instanceof GuiGameOver)) {
-            this.displayGuiScreen((GuiScreen)null);
+            this.displayGuiScreen(null);
          } else if (this.player.isPlayerSleeping() && this.world != null) {
             this.displayGuiScreen(new GuiSleepMP());
          }
       } else if (this.currentScreen != null && this.currentScreen instanceof GuiSleepMP && !this.player.isPlayerSleeping()) {
-         this.displayGuiScreen((GuiScreen)null);
+         this.displayGuiScreen(null);
       }
 
       if (this.currentScreen != null) {
@@ -1232,7 +1228,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          if (this.gameSettings.thirdPersonView == 0) {
             this.entityRenderer.func_175066_a(this.getRenderViewEntity());
          } else if (this.gameSettings.thirdPersonView == 1) {
-            this.entityRenderer.func_175066_a((Entity)null);
+            this.entityRenderer.func_175066_a(null);
          }
       }
 
@@ -1296,15 +1292,12 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          }
 
          while(this.gameSettings.keyBindAttack.isPressed()) {
-            ;
          }
 
          while(this.gameSettings.keyBindUseItem.isPressed()) {
-            ;
          }
 
          while(this.gameSettings.keyBindPickBlock.isPressed()) {
-            ;
          }
       } else {
          while(this.gameSettings.keyBindAttack.isPressed()) {
@@ -1328,9 +1321,9 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
    }
 
    public void launchIntegratedServer(String p_71371_1_, String p_71371_2_, @Nullable WorldSettings p_71371_3_) {
-      this.loadWorld((WorldClient)null);
+      this.loadWorld(null);
       System.gc();
-      ISaveHandler isavehandler = this.saveLoader.getSaveLoader(p_71371_1_, (MinecraftServer)null);
+      ISaveHandler isavehandler = this.saveLoader.getSaveLoader(p_71371_1_, null);
       WorldInfo worldinfo = isavehandler.loadWorldInfo();
       if (worldinfo == null && p_71371_3_ != null) {
          worldinfo = new WorldInfo(p_71371_3_, p_71371_1_);
@@ -1383,7 +1376,6 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          try {
             Thread.sleep(200L);
          } catch (InterruptedException var10) {
-            ;
          }
 
          if (this.hasCrashed && this.crashReporter != null) {
@@ -1394,7 +1386,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
 
       SocketAddress socketaddress = this.integratedServer.getNetworkSystem().addLocalEndpoint();
       NetworkManager networkmanager = NetworkManager.provideLocalClient(socketaddress);
-      networkmanager.setNetHandler(new NetHandlerLoginClient(networkmanager, this, (GuiScreen)null, (p_209507_0_) -> {
+      networkmanager.setNetHandler(new NetHandlerLoginClient(networkmanager, this, null, (p_209507_0_) -> {
       }));
       networkmanager.sendPacket(new CPacketHandshake(socketaddress.toString(), 0, EnumConnectionState.LOGIN));
       networkmanager.sendPacket(new CPacketLoginStart(this.getSession().getProfile()));
@@ -1433,7 +1425,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       if (p_205055_1_ == null && this.world != null) {
          this.packFinder.clearResourcePack();
          this.ingameGUI.resetPlayersOverlayFooterHeader();
-         this.setServerData((ServerData)null);
+         this.setServerData(null);
          this.integratedServerIsRunning = false;
       }
 
@@ -1504,7 +1496,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
       this.playerController.setPlayerCapabilities(this.player);
       this.player.setReducedDebug(entityplayersp.hasReducedDebug());
       if (this.currentScreen instanceof GuiGameOver) {
-         this.displayGuiScreen((GuiScreen)null);
+         this.displayGuiScreen(null);
       }
 
    }
@@ -1649,7 +1641,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
          p_184119_1_.setTagInfo("BlockEntityTag", nbttagcompound);
          NBTTagCompound nbttagcompound1 = new NBTTagCompound();
          NBTTagList nbttaglist = new NBTTagList();
-         nbttaglist.add((INBTBase)(new NBTTagString("(+NBT)")));
+         nbttaglist.add(new NBTTagString("(+NBT)"));
          nbttagcompound1.setTag("Lore", nbttaglist);
          p_184119_1_.setTagInfo("display", nbttagcompound1);
          return p_184119_1_;
@@ -1761,7 +1753,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo, IGuiEventListen
    public static int getGLMaximumTextureSize() {
       if (cachedMaximumTextureSize == -1) {
          for(int i = 16384; i > 0; i >>= 1) {
-            GlStateManager.texImage2D(32868, 0, 6408, i, i, 0, 6408, 5121, (IntBuffer)null);
+            GlStateManager.texImage2D(32868, 0, 6408, i, i, 0, 6408, 5121, null);
             int j = GlStateManager.glGetTexLevelParameteri(32868, 0, 4096);
             if (j != 0) {
                cachedMaximumTextureSize = i;

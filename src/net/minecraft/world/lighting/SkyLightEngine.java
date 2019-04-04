@@ -20,8 +20,7 @@ public class SkyLightEngine extends BaseLightEngine {
 
       try (
          BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain();
-         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain();
-      ) {
+         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain()) {
          for(int k = 0; k < 16; ++k) {
             for(int l = 0; l < 16; ++l) {
                int i1 = p_202675_2_.getTopBlockY(Heightmap.Type.LIGHT_BLOCKING, k, l) + 1;

@@ -98,7 +98,6 @@ public class WoodlandMansionPieces {
          this.recursiveCorridor(this.baseGrid, this.entranceX - 2, this.entranceY + 2, EnumFacing.WEST, 3);
 
          while(this.cleanEdges(this.baseGrid)) {
-            ;
          }
 
          this.floorRooms = new WoodlandMansionPieces.SimpleGrid[3];
@@ -248,7 +247,6 @@ public class WoodlandMansionPieces {
                this.recursiveCorridor(this.thirdFloorGrid, i2 + enumfacing2.getXOffset(), i1 + enumfacing2.getZOffset(), enumfacing2, 4);
 
                while(this.cleanEdges(this.thirdFloorGrid)) {
-                  ;
                }
 
             }
@@ -408,7 +406,8 @@ public class WoodlandMansionPieces {
             EntityVindicator entityvindicator = new EntityVindicator(p_186175_3_.getWorld());
             entityvindicator.enablePersistence();
             entityvindicator.moveToBlockPosAndAngles(p_186175_2_, 0.0F, 0.0F);
-            entityvindicator.onInitialSpawn(p_186175_3_.getDifficultyForLocation(new BlockPos(entityvindicator)), (IEntityLivingData)null, (NBTTagCompound)null);
+            entityvindicator.onInitialSpawn(p_186175_3_.getDifficultyForLocation(new BlockPos(entityvindicator)), null,
+                    null);
             p_186175_3_.spawnEntity(entityvindicator);
             p_186175_3_.setBlockState(p_186175_2_, Blocks.AIR.getDefaultState(), 2);
          }
@@ -447,7 +446,6 @@ public class WoodlandMansionPieces {
          woodlandmansionpieces$placementdata1.rotation = woodlandmansionpieces$placementdata.rotation;
          woodlandmansionpieces$placementdata1.wallType = "wall_window";
          if (!p_191125_3_.isEmpty()) {
-            ;
          }
 
          WoodlandMansionPieces.SimpleGrid woodlandmansionpieces$simplegrid = p_191125_4_.baseGrid;
@@ -477,9 +475,8 @@ public class WoodlandMansionPieces {
          }
 
          this.createRoof(p_191125_3_, p_191125_1_.up(16), p_191125_2_, woodlandmansionpieces$simplegrid, woodlandmansionpieces$simplegrid1);
-         this.createRoof(p_191125_3_, p_191125_1_.up(27), p_191125_2_, woodlandmansionpieces$simplegrid1, (WoodlandMansionPieces.SimpleGrid)null);
+         this.createRoof(p_191125_3_, p_191125_1_.up(27), p_191125_2_, woodlandmansionpieces$simplegrid1, null);
          if (!p_191125_3_.isEmpty()) {
-            ;
          }
 
          WoodlandMansionPieces.RoomCollection[] awoodlandmansionpieces$roomcollection = new WoodlandMansionPieces.RoomCollection[3];

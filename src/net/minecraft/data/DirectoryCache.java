@@ -41,7 +41,6 @@ public class DirectoryCache {
    }
 
    public void writeCache() throws IOException {
-      this.func_209400_b();
 
       Writer writer;
       try {
@@ -52,7 +51,7 @@ public class DirectoryCache {
       }
 
       IOUtils.writeLines(this.createdFiles.entrySet().stream().map((p_208319_1_) -> {
-         return (String)p_208319_1_.getValue() + ' ' + this.outputFolder.relativize(p_208319_1_.getKey());
+         return p_208319_1_.getValue() + ' ' + this.outputFolder.relativize(p_208319_1_.getKey());
       }).collect(Collectors.toList()), System.lineSeparator(), writer);
       writer.close();
       LOGGER.debug("Caching: cache hits: {}, created: {} removed: {}", this.hits, this.createdFiles.size() - this.hits, this.staleFiles.size());

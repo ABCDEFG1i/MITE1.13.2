@@ -792,14 +792,14 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum CullFace {
+   public enum CullFace {
       FRONT(1028),
       BACK(1029),
       FRONT_AND_BACK(1032);
 
       public final int mode;
 
-      private CullFace(int p_i46520_3_) {
+      CullFace(int p_i46520_3_) {
          this.mode = p_i46520_3_;
       }
    }
@@ -824,7 +824,7 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum DestFactor {
+   public enum DestFactor {
       CONSTANT_ALPHA(32771),
       CONSTANT_COLOR(32769),
       DST_ALPHA(772),
@@ -842,20 +842,20 @@ public class GlStateManager {
 
       public final int factor;
 
-      private DestFactor(int p_i46519_3_) {
+      DestFactor(int p_i46519_3_) {
          this.factor = p_i46519_3_;
       }
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum FogMode {
+   public enum FogMode {
       LINEAR(9729),
       EXP(2048),
       EXP2(2049);
 
       public final int capabilityId;
 
-      private FogMode(int p_i46518_3_) {
+      FogMode(int p_i46518_3_) {
          this.capabilityId = p_i46518_3_;
       }
    }
@@ -873,7 +873,7 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum LogicOp {
+   public enum LogicOp {
       AND(5377),
       AND_INVERTED(5380),
       AND_REVERSE(5378),
@@ -893,7 +893,7 @@ public class GlStateManager {
 
       public final int opcode;
 
-      private LogicOp(int p_i46517_3_) {
+      LogicOp(int p_i46517_3_) {
          this.opcode = p_i46517_3_;
       }
    }
@@ -910,7 +910,7 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Profile {
+   public enum Profile {
       DEFAULT {
          public void apply() {
             GlStateManager.disableAlphaTest();
@@ -1036,7 +1036,7 @@ public class GlStateManager {
          }
       };
 
-      private Profile() {
+      Profile() {
       }
 
       public abstract void apply();
@@ -1045,7 +1045,7 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum SourceFactor {
+   public enum SourceFactor {
       CONSTANT_ALPHA(32771),
       CONSTANT_COLOR(32769),
       DST_ALPHA(772),
@@ -1064,7 +1064,7 @@ public class GlStateManager {
 
       public final int factor;
 
-      private SourceFactor(int p_i46514_3_) {
+      SourceFactor(int p_i46514_3_) {
          this.factor = p_i46514_3_;
       }
    }
@@ -1091,11 +1091,11 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum TexGen {
+   public enum TexGen {
       S,
       T,
       R,
-      Q;
+      Q
    }
 
    @OnlyIn(Dist.CLIENT)
@@ -1131,7 +1131,7 @@ public class GlStateManager {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Viewport {
+   public enum Viewport {
       INSTANCE;
 
       protected int x;

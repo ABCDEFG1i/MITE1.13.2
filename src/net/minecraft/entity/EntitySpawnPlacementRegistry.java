@@ -13,7 +13,7 @@ public class EntitySpawnPlacementRegistry {
    private static final Map<EntityType<?>, EntitySpawnPlacementRegistry.Entry> REGISTRY = Maps.newHashMap();
 
    private static void register(EntityType<?> p_209343_0_, EntitySpawnPlacementRegistry.SpawnPlacementType p_209343_1_, Heightmap.Type p_209343_2_) {
-      register(p_209343_0_, p_209343_1_, p_209343_2_, (Tag<Block>)null);
+      register(p_209343_0_, p_209343_1_, p_209343_2_, null);
    }
 
    public static void register(EntityType<?> p_209346_0_, EntitySpawnPlacementRegistry.SpawnPlacementType p_209346_1_, Heightmap.Type p_209346_2_, @Nullable Tag<Block> p_209346_3_) {
@@ -106,8 +106,8 @@ public class EntitySpawnPlacementRegistry {
       }
    }
 
-   public static enum SpawnPlacementType {
+   public enum SpawnPlacementType {
       ON_GROUND,
-      IN_WATER;
+      IN_WATER
    }
 }

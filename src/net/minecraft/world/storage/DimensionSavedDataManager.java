@@ -42,7 +42,7 @@ public class DimensionSavedDataManager {
          try {
             File file1 = this.field_212780_e.func_212423_a(this.field_212777_b, p_201067_2_);
             if (file1 != null && file1.exists()) {
-               worldsaveddata = (WorldSavedData)p_201067_1_.apply(p_201067_2_);
+               worldsaveddata = p_201067_1_.apply(p_201067_2_);
                worldsaveddata.readFromNBT(func_212774_a(this.field_212780_e, this.field_212777_b, p_201067_2_, 1631).getCompoundTag("data"));
                this.field_212778_c.put(p_201067_2_, worldsaveddata);
             }
@@ -78,7 +78,7 @@ public class DimensionSavedDataManager {
             }
          }
       } catch (Exception exception) {
-         field_212776_a.error("Could not load aux values", (Throwable)exception);
+         field_212776_a.error("Could not load aux values", exception);
       }
 
    }

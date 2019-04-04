@@ -27,7 +27,8 @@ public class OceanRuinStructure extends ScatteredStructure<OceanRuinConfig> {
    }
 
    protected StructureStart makeStart(IWorld p_202369_1_, IChunkGenerator<?> p_202369_2_, SharedSeedRandom p_202369_3_, int p_202369_4_, int p_202369_5_) {
-      Biome biome = p_202369_2_.getBiomeProvider().getBiome(new BlockPos((p_202369_4_ << 4) + 9, 0, (p_202369_5_ << 4) + 9), (Biome)null);
+      Biome biome = p_202369_2_.getBiomeProvider().getBiome(new BlockPos((p_202369_4_ << 4) + 9, 0, (p_202369_5_ << 4) + 9),
+              null);
       return new OceanRuinStructure.Start(p_202369_1_, p_202369_2_, p_202369_3_, p_202369_4_, p_202369_5_, biome);
    }
 
@@ -52,8 +53,8 @@ public class OceanRuinStructure extends ScatteredStructure<OceanRuinConfig> {
       }
    }
 
-   public static enum Type {
+   public enum Type {
       WARM,
-      COLD;
+      COLD
    }
 }

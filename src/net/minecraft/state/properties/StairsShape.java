@@ -11,7 +11,7 @@ public enum StairsShape implements IStringSerializable {
 
    private final String field_212251_f;
 
-   private StairsShape(String p_i49331_3_) {
+   StairsShape(String p_i49331_3_) {
       this.field_212251_f = p_i49331_3_;
    }
 

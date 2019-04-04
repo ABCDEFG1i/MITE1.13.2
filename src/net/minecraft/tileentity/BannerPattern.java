@@ -53,17 +53,17 @@ public enum BannerPattern {
    private final String[] patterns = new String[3];
    private ItemStack patternItem = ItemStack.EMPTY;
 
-   private BannerPattern(String p_i47245_3_, String p_i47245_4_) {
+   BannerPattern(String p_i47245_3_, String p_i47245_4_) {
       this.fileName = p_i47245_3_;
       this.hashname = p_i47245_4_;
    }
 
-   private BannerPattern(String p_i47246_3_, String p_i47246_4_, ItemStack p_i47246_5_) {
+   BannerPattern(String p_i47246_3_, String p_i47246_4_, ItemStack p_i47246_5_) {
       this(p_i47246_3_, p_i47246_4_);
       this.patternItem = p_i47246_5_;
    }
 
-   private BannerPattern(String p_i47247_3_, String p_i47247_4_, String p_i47247_5_, String p_i47247_6_, String p_i47247_7_) {
+   BannerPattern(String p_i47247_3_, String p_i47247_4_, String p_i47247_5_, String p_i47247_6_, String p_i47247_7_) {
       this(p_i47247_3_, p_i47247_4_);
       this.patterns[0] = p_i47247_5_;
       this.patterns[1] = p_i47247_6_;

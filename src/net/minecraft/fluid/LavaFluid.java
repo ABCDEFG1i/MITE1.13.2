@@ -110,7 +110,8 @@ public abstract class LavaFluid extends FlowingFluid {
    }
 
    private boolean getCanBlockBurn(IWorldReaderBase p_176368_1_, BlockPos p_176368_2_) {
-      return p_176368_2_.getY() >= 0 && p_176368_2_.getY() < 256 && !p_176368_1_.isBlockLoaded(p_176368_2_) ? false : p_176368_1_.getBlockState(p_176368_2_).getMaterial().isFlammable();
+      return (p_176368_2_.getY() < 0 || p_176368_2_.getY() >= 256 || p_176368_1_.isBlockLoaded(
+              p_176368_2_)) && p_176368_1_.getBlockState(p_176368_2_).getMaterial().isFlammable();
    }
 
    @Nullable
@@ -160,7 +161,7 @@ public abstract class LavaFluid extends FlowingFluid {
       double d0 = (double)p_205581_2_.getX();
       double d1 = (double)p_205581_2_.getY();
       double d2 = (double)p_205581_2_.getZ();
-      p_205581_1_.playSound((EntityPlayer)null, p_205581_2_, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_205581_1_.getRandom().nextFloat() - p_205581_1_.getRandom().nextFloat()) * 0.8F);
+      p_205581_1_.playSound(null, p_205581_2_, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (p_205581_1_.getRandom().nextFloat() - p_205581_1_.getRandom().nextFloat()) * 0.8F);
 
       for(int i = 0; i < 8; ++i) {
          p_205581_1_.spawnParticle(Particles.LARGE_SMOKE, d0 + Math.random(), d1 + 1.2D, d2 + Math.random(), 0.0D, 0.0D, 0.0D);

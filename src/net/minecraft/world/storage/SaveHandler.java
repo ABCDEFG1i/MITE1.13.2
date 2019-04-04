@@ -134,7 +134,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
    }
 
    public void saveWorldInfo(WorldInfo p_75761_1_) {
-      this.saveWorldInfoWithPlayer(p_75761_1_, (NBTTagCompound)null);
+      this.saveWorldInfoWithPlayer(p_75761_1_, null);
    }
 
    public void writePlayerData(EntityPlayer p_75753_1_) {
@@ -149,7 +149,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
 
          file1.renameTo(file2);
       } catch (Exception var5) {
-         LOGGER.warn("Failed to save player data for {}", (Object)p_75753_1_.getName().getString());
+         LOGGER.warn("Failed to save player data for {}", p_75753_1_.getName().getString());
       }
 
    }
@@ -164,7 +164,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData {
             nbttagcompound = CompressedStreamTools.readCompressed(new FileInputStream(file1));
          }
       } catch (Exception var4) {
-         LOGGER.warn("Failed to load player data for {}", (Object)p_75752_1_.getName().getString());
+         LOGGER.warn("Failed to load player data for {}", p_75752_1_.getName().getString());
       }
 
       if (nbttagcompound != null) {

@@ -99,7 +99,7 @@ public class ChunkProviderServer implements IChunkProvider {
                   this.loadedChunks.put(ChunkPos.asLong(p_186025_1_, p_186025_2_), p_212471_3_);
                });
             } catch (Exception exception) {
-               LOGGER.error("Couldn't load chunk", (Throwable)exception);
+               LOGGER.error("Couldn't load chunk", exception);
             }
          }
       }
@@ -185,9 +185,9 @@ public class ChunkProviderServer implements IChunkProvider {
          p_73242_1_.setLastSaveTime(this.world.getTotalWorldTime());
          this.chunkLoader.saveChunk(this.world, p_73242_1_);
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't save chunk", (Throwable)ioexception);
+         LOGGER.error("Couldn't save chunk", ioexception);
       } catch (SessionLockException sessionlockexception) {
-         LOGGER.error("Couldn't save chunk; already in use by another instance of Minecraft?", (Throwable)sessionlockexception);
+         LOGGER.error("Couldn't save chunk; already in use by another instance of Minecraft?", sessionlockexception);
       }
 
    }
@@ -217,7 +217,7 @@ public class ChunkProviderServer implements IChunkProvider {
       try {
          this.taskManager.shutdown();
       } catch (InterruptedException interruptedexception) {
-         LOGGER.error("Couldn't stop taskManager", (Throwable)interruptedexception);
+         LOGGER.error("Couldn't stop taskManager", interruptedexception);
       }
 
    }

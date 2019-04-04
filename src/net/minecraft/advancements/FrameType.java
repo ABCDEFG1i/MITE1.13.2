@@ -13,7 +13,7 @@ public enum FrameType {
    private final int icon;
    private final TextFormatting format;
 
-   private FrameType(String p_i47585_3_, int p_i47585_4_, TextFormatting p_i47585_5_) {
+   FrameType(String p_i47585_3_, int p_i47585_4_, TextFormatting p_i47585_5_) {
       this.name = p_i47585_3_;
       this.icon = p_i47585_4_;
       this.format = p_i47585_5_;

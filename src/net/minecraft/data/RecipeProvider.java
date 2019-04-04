@@ -3159,14 +3159,6 @@ public class RecipeProvider implements IDataProvider {
                 .setGroup("stained_terracotta")
                 .addCriterion("has_terracotta", this.hasItem(Blocks.TERRACOTTA))
                 .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Items.WOODEN_AXE)
-                .key('#', Items.STICK)
-                .key('X', ItemTags.PLANKS)
-                .patternLine("XX")
-                .patternLine("X#")
-                .patternLine(" #")
-                .addCriterion("has_stick", this.hasItem(Items.STICK))
-                .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.OAK_DOOR, 3)
                 .key('#', Blocks.OAK_PLANKS)
                 .patternLine("##")
@@ -3174,22 +3166,6 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("##")
                 .setGroup("wooden_door")
                 .addCriterion("has_planks", this.hasItem(Blocks.OAK_PLANKS))
-                .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Items.WOODEN_HOE)
-                .key('#', Items.STICK)
-                .key('X', ItemTags.PLANKS)
-                .patternLine("XX")
-                .patternLine(" #")
-                .patternLine(" #")
-                .addCriterion("has_stick", this.hasItem(Items.STICK))
-                .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Items.WOODEN_PICKAXE)
-                .key('#', Items.STICK)
-                .key('X', ItemTags.PLANKS)
-                .patternLine("XXX")
-                .patternLine(" # ")
-                .patternLine(" # ")
-                .addCriterion("has_stick", this.hasItem(Items.STICK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.WOODEN_SHOVEL)
                 .key('#', Items.STICK)

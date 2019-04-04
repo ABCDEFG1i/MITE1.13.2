@@ -119,7 +119,7 @@ public class SimpleReloadableResourceManager implements IReloadableResourceManag
    }
 
    private void reloadAllResourcesDebug() {
-      LOGGER.info("Reloading all resources! {} listeners to update.", (int)this.reloadListeners.size());
+      LOGGER.info("Reloading all resources! {} listeners to update.", this.reloadListeners.size());
       List<String> list = Lists.newArrayList();
       Stopwatch stopwatch = Stopwatch.createStarted();
 
@@ -129,7 +129,7 @@ public class SimpleReloadableResourceManager implements IReloadableResourceManag
 
       stopwatch.stop();
       LOGGER.info("----");
-      LOGGER.info("Complete resource reload took {} ms", (long)stopwatch.elapsed(TimeUnit.MILLISECONDS));
+      LOGGER.info("Complete resource reload took {} ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
 
       for(String s : list) {
          LOGGER.info(s);

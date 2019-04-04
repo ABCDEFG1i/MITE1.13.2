@@ -42,7 +42,7 @@ public class BlockLever extends BlockHorizontalFace {
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
-      switch((AttachFace)p_196244_1_.get(FACE)) {
+      switch(p_196244_1_.get(FACE)) {
       case FLOOR:
          switch(p_196244_1_.get(HORIZONTAL_FACING).getAxis()) {
          case X:
@@ -52,7 +52,7 @@ public class BlockLever extends BlockHorizontalFace {
             return field_209348_r;
          }
       case WALL:
-         switch((EnumFacing)p_196244_1_.get(HORIZONTAL_FACING)) {
+         switch(p_196244_1_.get(HORIZONTAL_FACING)) {
          case EAST:
             return LEVER_EAST_AABB;
          case WEST:
@@ -87,7 +87,7 @@ public class BlockLever extends BlockHorizontalFace {
       } else {
          p_196250_2_.setBlockState(p_196250_3_, p_196250_1_, 3);
          float f = flag ? 0.6F : 0.5F;
-         p_196250_2_.playSound((EntityPlayer)null, p_196250_3_, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, f);
+         p_196250_2_.playSound(null, p_196250_3_, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, f);
          this.func_196378_d(p_196250_1_, p_196250_2_, p_196250_3_);
          return true;
       }

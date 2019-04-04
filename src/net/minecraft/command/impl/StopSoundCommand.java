@@ -19,14 +19,16 @@ import net.minecraft.util.text.TextComponentTranslation;
 public class StopSoundCommand {
    public static void register(CommandDispatcher<CommandSource> p_198730_0_) {
       RequiredArgumentBuilder<CommandSource, EntitySelector> requiredargumentbuilder = Commands.argument("targets", EntityArgument.multiplePlayers()).executes((p_198729_0_) -> {
-         return func_198733_a(p_198729_0_.getSource(), EntityArgument.getPlayers(p_198729_0_, "targets"), (SoundCategory)null, (ResourceLocation)null);
+         return func_198733_a(p_198729_0_.getSource(), EntityArgument.getPlayers(p_198729_0_, "targets"), null,
+                 null);
       }).then(Commands.literal("*").then(Commands.argument("sound", ResourceLocationArgument.resourceLocation()).suggests(SuggestionProviders.AVAILABLE_SOUNDS).executes((p_198732_0_) -> {
-         return func_198733_a(p_198732_0_.getSource(), EntityArgument.getPlayers(p_198732_0_, "targets"), (SoundCategory)null, ResourceLocationArgument.getResourceLocation(p_198732_0_, "sound"));
+         return func_198733_a(p_198732_0_.getSource(), EntityArgument.getPlayers(p_198732_0_, "targets"), null, ResourceLocationArgument.getResourceLocation(p_198732_0_, "sound"));
       })));
 
       for(SoundCategory soundcategory : SoundCategory.values()) {
          requiredargumentbuilder.then(Commands.literal(soundcategory.getName()).executes((p_198731_1_) -> {
-            return func_198733_a(p_198731_1_.getSource(), EntityArgument.getPlayers(p_198731_1_, "targets"), soundcategory, (ResourceLocation)null);
+            return func_198733_a(p_198731_1_.getSource(), EntityArgument.getPlayers(p_198731_1_, "targets"), soundcategory,
+                    null);
          }).then(Commands.argument("sound", ResourceLocationArgument.resourceLocation()).suggests(SuggestionProviders.AVAILABLE_SOUNDS).executes((p_198728_1_) -> {
             return func_198733_a(p_198728_1_.getSource(), EntityArgument.getPlayers(p_198728_1_, "targets"), soundcategory, ResourceLocationArgument.getResourceLocation(p_198728_1_, "sound"));
          })));

@@ -22,6 +22,6 @@ public class EnchantmentDigging extends Enchantment {
    }
 
    public boolean canApply(ItemStack p_92089_1_) {
-      return p_92089_1_.getItem() == Items.SHEARS ? true : super.canApply(p_92089_1_);
+      return p_92089_1_.getItem() == Items.SHEARS || super.canApply(p_92089_1_);
    }
 }

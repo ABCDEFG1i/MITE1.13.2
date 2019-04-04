@@ -11,7 +11,7 @@ public enum ChestType implements IStringSerializable {
    private final String name;
    private final int opposite;
 
-   private ChestType(String p_i49341_3_, int p_i49341_4_) {
+   ChestType(String p_i49341_3_, int p_i49341_4_) {
       this.name = p_i49341_3_;
       this.opposite = p_i49341_4_;
    }

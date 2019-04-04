@@ -451,7 +451,7 @@ public final class NativeImage implements AutoCloseable {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum PixelFormat {
+   public enum PixelFormat {
       RGBA(4, 6408, true, true, true, false, true, 0, 8, 16, 255, 24, true),
       RGB(3, 6407, true, true, true, false, false, 0, 8, 16, 255, 255, true),
       LUMINANCE_ALPHA(2, 6410, false, false, false, true, true, 255, 255, 255, 0, 8, true),
@@ -471,7 +471,7 @@ public final class NativeImage implements AutoCloseable {
       private final int field_211670_p;
       private final boolean serializable;
 
-      private PixelFormat(int p_i49762_3_, int p_i49762_4_, boolean p_i49762_5_, boolean p_i49762_6_, boolean p_i49762_7_, boolean p_i49762_8_, boolean p_i49762_9_, int p_i49762_10_, int p_i49762_11_, int p_i49762_12_, int p_i49762_13_, int p_i49762_14_, boolean p_i49762_15_) {
+      PixelFormat(int p_i49762_3_, int p_i49762_4_, boolean p_i49762_5_, boolean p_i49762_6_, boolean p_i49762_7_, boolean p_i49762_8_, boolean p_i49762_9_, int p_i49762_10_, int p_i49762_11_, int p_i49762_12_, int p_i49762_13_, int p_i49762_14_, boolean p_i49762_15_) {
          this.pixelSize = p_i49762_3_;
          this.glFormat = p_i49762_4_;
          this.field_211661_g = p_i49762_5_;
@@ -539,7 +539,7 @@ public final class NativeImage implements AutoCloseable {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum PixelFormatGLCode {
+   public enum PixelFormatGLCode {
       RGBA(6408),
       RGB(6407),
       LUMINANCE_ALPHA(6410),
@@ -548,7 +548,7 @@ public final class NativeImage implements AutoCloseable {
 
       private final int glConstant;
 
-      private PixelFormatGLCode(int p_i49761_3_) {
+      PixelFormatGLCode(int p_i49761_3_) {
          this.glConstant = p_i49761_3_;
       }
 

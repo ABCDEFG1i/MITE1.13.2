@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import com.google.gson.JsonElement;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
 import java.util.Random;
@@ -84,16 +85,18 @@ public class GuiCreateWorld extends GuiScreen {
                GuiCreateWorld.this.btnBonusItems.enabled = false;
                GuiCreateWorld.this.updateDisplayState();
             } else if ("hardcore".equals(GuiCreateWorld.this.gameMode)) {
-               if (!GuiCreateWorld.this.allowCheatsWasSetByUser) {
-                  GuiCreateWorld.this.allowCheats = true;
+               if (SharedConstants.developmentMode) {
+                  GuiCreateWorld.this.hardCoreMode = false;
+                  GuiCreateWorld.this.gameMode = "creative";
+                  GuiCreateWorld.this.updateDisplayState();
+                  GuiCreateWorld.this.hardCoreMode = false;
+                  GuiCreateWorld.this.btnAllowCommands.enabled = true;
+                  GuiCreateWorld.this.btnBonusItems.enabled = true;
+               } else {
+                  GuiCreateWorld.this.gameMode = "survival";
+                  GuiCreateWorld.this.updateDisplayState();
+                  GuiCreateWorld.this.hardCoreMode = false;
                }
-
-               GuiCreateWorld.this.hardCoreMode = false;
-               GuiCreateWorld.this.gameMode = "creative";
-               GuiCreateWorld.this.updateDisplayState();
-               GuiCreateWorld.this.hardCoreMode = false;
-               GuiCreateWorld.this.btnAllowCommands.enabled = true;
-               GuiCreateWorld.this.btnBonusItems.enabled = true;
             } else {
                if (!GuiCreateWorld.this.allowCheatsWasSetByUser) {
                   GuiCreateWorld.this.allowCheats = false;
@@ -101,8 +104,6 @@ public class GuiCreateWorld extends GuiScreen {
 
                GuiCreateWorld.this.gameMode = "survival";
                GuiCreateWorld.this.updateDisplayState();
-               GuiCreateWorld.this.btnAllowCommands.enabled = true;
-               GuiCreateWorld.this.btnBonusItems.enabled = true;
                GuiCreateWorld.this.hardCoreMode = false;
             }
 
@@ -127,19 +128,16 @@ public class GuiCreateWorld extends GuiScreen {
             GuiCreateWorld.this.updateDisplayState();
          }
       });
+      this.btnBonusItems.enabled = false;
       this.btnBonusItems.visible = false;
       this.btnMapType = this.addButton(new GuiButton(5, this.width / 2 + 5, 100, 150, 20, I18n.format("selectWorld.mapType")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiCreateWorld.this.selectedIndex++;
-            if (GuiCreateWorld.this.selectedIndex >= WorldType.WORLD_TYPES.length) {
-               GuiCreateWorld.this.selectedIndex = 0;
+            if (WorldType.WORLD_TYPES[GuiCreateWorld.this.selectedIndex] == WorldType.DEBUG_ALL_BLOCK_STATES) {
+               GuiCreateWorld.this.selectedIndex = WorldType.LARGE_BIOMES.getId();
             }
 
-            while(!GuiCreateWorld.this.canSelectCurWorldType()) {
-               GuiCreateWorld.this.selectedIndex++;
-               if (GuiCreateWorld.this.selectedIndex >= WorldType.WORLD_TYPES.length) {
-                  GuiCreateWorld.this.selectedIndex = 0;
-               }
+            if (WorldType.WORLD_TYPES[GuiCreateWorld.this.selectedIndex] == WorldType.LARGE_BIOMES & GuiScreen.isShiftKeyDown()) {
+               GuiCreateWorld.this.selectedIndex = WorldType.DEBUG_ALL_BLOCK_STATES.getId();
             }
 
             GuiCreateWorld.this.chunkProviderSettingsJson = new NBTTagCompound();
@@ -147,6 +145,7 @@ public class GuiCreateWorld extends GuiScreen {
             GuiCreateWorld.this.showMoreWorldOptions(GuiCreateWorld.this.inMoreWorldOptionsDisplay);
          }
       });
+      this.selectedIndex = WorldType.LARGE_BIOMES.getId();
       this.btnMapType.visible = false;
       this.btnAllowCommands = this.addButton(new GuiButton(6, this.width / 2 - 155, 151, 150, 20, I18n.format("selectWorld.allowCommands")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
@@ -155,6 +154,10 @@ public class GuiCreateWorld extends GuiScreen {
             GuiCreateWorld.this.updateDisplayState();
          }
       });
+      if (!SharedConstants.developmentMode) {
+         this.btnAllowCommands.enabled = false;
+      }
+
       this.btnAllowCommands.visible = false;
       this.btnCustomizeType = this.addButton(new GuiButton(8, this.width / 2 + 5, 120, 150, 20, I18n.format("selectWorld.customizeType")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
@@ -205,12 +208,7 @@ public class GuiCreateWorld extends GuiScreen {
       }
 
       this.btnBonusItems.displayString = I18n.format("selectWorld.bonusItems") + " ";
-      if (this.bonusChestEnabled && !this.hardCoreMode) {
-         this.btnBonusItems.displayString = this.btnBonusItems.displayString + I18n.format("options.on");
-      } else {
-         this.btnBonusItems.displayString = this.btnBonusItems.displayString + I18n.format("options.off");
-      }
-
+      this.btnBonusItems.displayString = this.btnBonusItems.displayString + I18n.format("options.off");
       this.btnMapType.displayString = I18n.format("selectWorld.mapType") + " " + I18n.format(WorldType.WORLD_TYPES[this.selectedIndex].getTranslationKey());
       this.btnAllowCommands.displayString = I18n.format("selectWorld.allowCommands") + " ";
       if (this.allowCheats && !this.hardCoreMode) {
@@ -242,7 +240,7 @@ public class GuiCreateWorld extends GuiScreen {
    }
 
    private void func_195352_j() {
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
       if (!this.alreadyGenerated) {
          this.alreadyGenerated = true;
          long i = (new Random()).nextLong();
@@ -270,15 +268,7 @@ public class GuiCreateWorld extends GuiScreen {
 
          this.mc.launchIntegratedServer(this.saveDirName, this.worldNameField.getText().trim(), worldsettings);
       }
-   }
 
-   private boolean canSelectCurWorldType() {
-      WorldType worldtype = WorldType.WORLD_TYPES[this.selectedIndex];
-      if (worldtype != null && worldtype.canBeCreated()) {
-         return worldtype == WorldType.DEBUG_ALL_BLOCK_STATES ? isShiftKeyDown() : true;
-      } else {
-         return false;
-      }
    }
 
    private void toggleMoreWorldOptions() {

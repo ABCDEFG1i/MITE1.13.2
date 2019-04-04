@@ -77,7 +77,7 @@ public abstract class GuiScreen extends GuiEventHandler implements GuiYesNoCallb
    }
 
    public void close() {
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    protected <T extends GuiButton> T addButton(T p_189646_1_) {
@@ -181,7 +181,6 @@ public abstract class GuiScreen extends GuiEventHandler implements GuiYesNoCallb
                   itemstack = ItemStack.loadFromNBT((NBTTagCompound)inbtbase);
                }
             } catch (CommandSyntaxException var10) {
-               ;
             }
 
             if (itemstack.isEmpty()) {
@@ -264,7 +263,7 @@ public abstract class GuiScreen extends GuiEventHandler implements GuiYesNoCallb
             } else if (clickevent.getAction() == ClickEvent.Action.RUN_COMMAND) {
                this.sendChatMessage(clickevent.getValue(), false);
             } else {
-               LOGGER.error("Don't know how to handle {}", (Object)clickevent);
+               LOGGER.error("Don't know how to handle {}", clickevent);
             }
 
             return true;

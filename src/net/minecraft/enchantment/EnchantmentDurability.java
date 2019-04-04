@@ -23,7 +23,7 @@ public class EnchantmentDurability extends Enchantment {
    }
 
    public boolean canApply(ItemStack p_92089_1_) {
-      return p_92089_1_.isDamageable() ? true : super.canApply(p_92089_1_);
+      return p_92089_1_.isDamageable() || super.canApply(p_92089_1_);
    }
 
    public static boolean negateDamage(ItemStack p_92097_0_, int p_92097_1_, Random p_92097_2_) {

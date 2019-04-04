@@ -126,7 +126,7 @@ public class OceanMonumentStructure extends Structure<OceanMonumentConfig> {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setInteger("X", chunkpos.x);
             nbttagcompound.setInteger("Z", chunkpos.z);
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          }
 
          p_143022_1_.setTag("Processed", nbttaglist);

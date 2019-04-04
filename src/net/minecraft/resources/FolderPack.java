@@ -60,7 +60,6 @@ public class FolderPack extends AbstractResourcePack {
             return file1;
          }
       } catch (IOException var3) {
-         ;
       }
 
       return null;

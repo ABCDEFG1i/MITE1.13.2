@@ -50,7 +50,7 @@ public class ItemEnderEye extends Item {
                world.spawnParticle(Particles.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
 
-            world.playSound((EntityPlayer)null, blockpos, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, blockpos, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
             BlockPattern.PatternHelper blockpattern$patternhelper = BlockEndPortalFrame.getOrCreatePortalShape().match(world, blockpos);
             if (blockpattern$patternhelper != null) {
                BlockPos blockpos1 = blockpattern$patternhelper.getFrontTopLeft().add(-3, 0, -3);
@@ -88,8 +88,8 @@ public class ItemEnderEye extends Item {
                   CriteriaTriggers.USED_ENDER_EYE.trigger((EntityPlayerMP)p_77659_2_, blockpos);
                }
 
-               p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-               p_77659_1_.playEvent((EntityPlayer)null, 1003, new BlockPos(p_77659_2_), 0);
+               p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_ENDER_EYE_LAUNCH, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+               p_77659_1_.playEvent(null, 1003, new BlockPos(p_77659_2_), 0);
                if (!p_77659_2_.capabilities.isCreativeMode) {
                   itemstack.shrink(1);
                }

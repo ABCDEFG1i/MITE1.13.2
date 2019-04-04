@@ -141,10 +141,10 @@ public class SaveFormatOld implements ISaveFormat {
       if (!file1.exists()) {
          return true;
       } else {
-         LOGGER.info("Deleting level {}", (Object)p_75802_1_);
+         LOGGER.info("Deleting level {}", p_75802_1_);
 
          for(int i = 1; i <= 5; ++i) {
-            LOGGER.info("Attempt {}...", (int)i);
+            LOGGER.info("Attempt {}...", i);
             if (deleteFiles(file1.listFiles())) {
                break;
             }
@@ -154,7 +154,6 @@ public class SaveFormatOld implements ISaveFormat {
                try {
                   Thread.sleep(500L);
                } catch (InterruptedException var5) {
-                  ;
                }
             }
          }
@@ -166,14 +165,14 @@ public class SaveFormatOld implements ISaveFormat {
    @OnlyIn(Dist.CLIENT)
    protected static boolean deleteFiles(File[] p_75807_0_) {
       for(File file1 : p_75807_0_) {
-         LOGGER.debug("Deleting {}", (Object)file1);
+         LOGGER.debug("Deleting {}", file1);
          if (file1.isDirectory() && !deleteFiles(file1.listFiles())) {
-            LOGGER.warn("Couldn't delete directory {}", (Object)file1);
+            LOGGER.warn("Couldn't delete directory {}", file1);
             return false;
          }
 
          if (!file1.delete()) {
-            LOGGER.warn("Couldn't delete file {}", (Object)file1);
+            LOGGER.warn("Couldn't delete file {}", file1);
             return false;
          }
       }

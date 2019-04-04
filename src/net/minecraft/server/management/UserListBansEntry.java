@@ -11,7 +11,7 @@ import net.minecraft.util.text.TextComponentString;
 
 public class UserListBansEntry extends UserListEntryBan<GameProfile> {
    public UserListBansEntry(GameProfile p_i1134_1_) {
-      this(p_i1134_1_, (Date)null, (String)null, (Date)null, (String)null);
+      this(p_i1134_1_, null, null, null, null);
    }
 
    public UserListBansEntry(GameProfile p_i1135_1_, @Nullable Date p_i1135_2_, @Nullable String p_i1135_3_, @Nullable Date p_i1135_4_, @Nullable String p_i1135_5_) {

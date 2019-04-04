@@ -42,7 +42,8 @@ public class TileEntityCommandBlock extends TileEntity {
       }
 
       public CommandSource getCommandSource() {
-         return new CommandSource(this, new Vec3d((double)TileEntityCommandBlock.this.pos.getX() + 0.5D, (double)TileEntityCommandBlock.this.pos.getY() + 0.5D, (double)TileEntityCommandBlock.this.pos.getZ() + 0.5D), Vec2f.ZERO, this.getWorld(), 2, this.getName().getString(), this.getName(), this.getWorld().getServer(), (Entity)null);
+         return new CommandSource(this, new Vec3d((double)TileEntityCommandBlock.this.pos.getX() + 0.5D, (double)TileEntityCommandBlock.this.pos.getY() + 0.5D, (double)TileEntityCommandBlock.this.pos.getZ() + 0.5D), Vec2f.ZERO, this.getWorld(), 2, this.getName().getString(), this.getName(), this.getWorld().getServer(),
+                 null);
       }
    };
 
@@ -159,9 +160,9 @@ public class TileEntityCommandBlock extends TileEntity {
       super.validate();
    }
 
-   public static enum Mode {
+   public enum Mode {
       SEQUENCE,
       AUTO,
-      REDSTONE;
+      REDSTONE
    }
 }

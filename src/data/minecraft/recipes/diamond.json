@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond_block"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 9
+  }
+}

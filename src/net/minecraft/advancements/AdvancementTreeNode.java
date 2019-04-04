@@ -215,7 +215,7 @@ public class AdvancementTreeNode {
       if (p_192323_0_.getDisplay() == null) {
          throw new IllegalArgumentException("Can't position children of an invisible root!");
       } else {
-         AdvancementTreeNode advancementtreenode = new AdvancementTreeNode(p_192323_0_, (AdvancementTreeNode)null, (AdvancementTreeNode)null, 1, 0);
+         AdvancementTreeNode advancementtreenode = new AdvancementTreeNode(p_192323_0_, null, null, 1, 0);
          advancementtreenode.firstWalk();
          float f = advancementtreenode.secondWalk(0.0F, 0, advancementtreenode.y);
          if (f < 0.0F) {

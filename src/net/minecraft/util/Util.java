@@ -123,12 +123,12 @@ public class Util {
          p_181617_0_.run();
          return p_181617_0_.get();
       } catch (ExecutionException executionexception) {
-         p_181617_1_.fatal("Error executing task", (Throwable)executionexception);
+         p_181617_1_.fatal("Error executing task", executionexception);
       } catch (InterruptedException interruptedexception) {
-         p_181617_1_.fatal("Error executing task", (Throwable)interruptedexception);
+         p_181617_1_.fatal("Error executing task", interruptedexception);
       }
 
-      return (V)null;
+      return null;
    }
 
    public static <T> T getLastElement(List<T> p_184878_0_) {
@@ -164,7 +164,7 @@ public class Util {
          t1 = iterator.next();
          if (t1 == p_195648_1_) {
             if (t == null) {
-               t = (T)(iterator.hasNext() ? Iterators.getLast(iterator) : p_195648_1_);
+               t = iterator.hasNext() ? Iterators.getLast(iterator) : p_195648_1_;
             }
             break;
          }
@@ -186,7 +186,7 @@ public class Util {
       return (Strategy<K>)Util.IdentityStrategy.INSTANCE;
    }
 
-   public static enum EnumOS {
+   public enum EnumOS {
       LINUX,
       SOLARIS,
       WINDOWS {
@@ -203,7 +203,7 @@ public class Util {
       },
       UNKNOWN;
 
-      private EnumOS() {
+      EnumOS() {
       }
 
       @OnlyIn(Dist.CLIENT)
@@ -267,7 +267,7 @@ public class Util {
       }
    }
 
-   static enum IdentityStrategy implements Strategy<Object> {
+   enum IdentityStrategy implements Strategy<Object> {
       INSTANCE;
 
       public int hashCode(Object p_hashCode_1_) {

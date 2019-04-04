@@ -77,7 +77,7 @@ public class ChangeDimensionTrigger implements ICriterionTrigger<ChangeDimension
       }
 
       public static ChangeDimensionTrigger.Instance func_203911_a(DimensionType p_203911_0_) {
-         return new ChangeDimensionTrigger.Instance((DimensionType)null, p_203911_0_);
+         return new ChangeDimensionTrigger.Instance(null, p_203911_0_);
       }
 
       public boolean test(DimensionType p_193190_1_, DimensionType p_193190_2_) {

@@ -23,7 +23,8 @@ public abstract class VoxelShapePart {
 
    public boolean contains(int p_197818_1_, int p_197818_2_, int p_197818_3_) {
       if (p_197818_1_ >= 0 && p_197818_2_ >= 0 && p_197818_3_ >= 0) {
-         return p_197818_1_ < this.xSize && p_197818_2_ < this.ySize && p_197818_3_ < this.zSize ? this.isFilled(p_197818_1_, p_197818_2_, p_197818_3_) : false;
+         return (p_197818_1_ < this.xSize && p_197818_2_ < this.ySize && p_197818_3_ < this.zSize) && this.isFilled(
+                 p_197818_1_, p_197818_2_, p_197818_3_);
       } else {
          return false;
       }

@@ -77,7 +77,7 @@ public class GuiCreateBuffetWorld extends GuiScreen {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(ResourceLocation resourcelocation : this.biomes) {
-         nbttaglist.add((INBTBase)(new NBTTagString(resourcelocation.toString())));
+         nbttaglist.add(new NBTTagString(resourcelocation.toString()));
       }
 
       nbttagcompound2.setTag("biomes", nbttaglist);

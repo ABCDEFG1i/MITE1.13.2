@@ -30,8 +30,7 @@ public class LayeredTexture extends AbstractTexture {
 
       try (
          IResource iresource = p_195413_1_.getResource(new ResourceLocation(s));
-         NativeImage nativeimage = NativeImage.read(iresource.getInputStream());
-      ) {
+         NativeImage nativeimage = NativeImage.read(iresource.getInputStream())) {
          while(true) {
             if (!iterator.hasNext()) {
                TextureUtil.allocateTexture(this.getGlTextureId(), nativeimage.getWidth(), nativeimage.getHeight());
@@ -43,8 +42,7 @@ public class LayeredTexture extends AbstractTexture {
             if (s1 != null) {
                try (
                   IResource iresource1 = p_195413_1_.getResource(new ResourceLocation(s1));
-                  NativeImage nativeimage1 = NativeImage.read(iresource1.getInputStream());
-               ) {
+                  NativeImage nativeimage1 = NativeImage.read(iresource1.getInputStream())) {
                   for(int i = 0; i < nativeimage1.getHeight(); ++i) {
                      for(int j = 0; j < nativeimage1.getWidth(); ++j) {
                         nativeimage.blendPixel(j, i, nativeimage1.getPixelRGBA(j, i));
@@ -54,7 +52,7 @@ public class LayeredTexture extends AbstractTexture {
             }
          }
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't load layered image", (Throwable)ioexception);
+         LOGGER.error("Couldn't load layered image", ioexception);
       }
 
    }

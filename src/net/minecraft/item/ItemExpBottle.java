@@ -28,7 +28,7 @@ public class ItemExpBottle extends Item {
          itemstack.shrink(1);
       }
 
-      p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_EXPERIENCE_BOTTLE_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+      p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_EXPERIENCE_BOTTLE_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
       if (!p_77659_1_.isRemote) {
          EntityExpBottle entityexpbottle = new EntityExpBottle(p_77659_1_, p_77659_2_);
          entityexpbottle.shoot(p_77659_2_, p_77659_2_.rotationPitch, p_77659_2_.rotationYaw, -20.0F, 0.7F, 1.0F);

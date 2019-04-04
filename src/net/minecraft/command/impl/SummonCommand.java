@@ -51,7 +51,9 @@ public class SummonCommand {
          } else {
             entity.setLocationAndAngles(p_198737_2_.x, p_198737_2_.y, p_198737_2_.z, entity.rotationYaw, entity.rotationPitch);
             if (p_198737_4_ && entity instanceof EntityLiving) {
-               ((EntityLiving)entity).onInitialSpawn(p_198737_0_.getWorld().getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData)null, (NBTTagCompound)null);
+               ((EntityLiving)entity).onInitialSpawn(p_198737_0_.getWorld().getDifficultyForLocation(new BlockPos(entity)),
+                       null,
+                       null);
             }
 
             p_198737_0_.sendFeedback(new TextComponentTranslation("commands.summon.success", entity.getDisplayName()), true);

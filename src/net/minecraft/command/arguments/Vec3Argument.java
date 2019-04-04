@@ -44,7 +44,7 @@ public class Vec3Argument implements ArgumentType<ILocationArgument> {
    }
 
    public ILocationArgument parse(StringReader p_parse_1_) throws CommandSyntaxException {
-      return (ILocationArgument)(p_parse_1_.canRead() && p_parse_1_.peek() == '^' ? LocalLocationArgument.func_200142_a(p_parse_1_) : LocationInput.func_200147_a(p_parse_1_, this.field_197305_b));
+      return p_parse_1_.canRead() && p_parse_1_.peek() == '^' ? LocalLocationArgument.func_200142_a(p_parse_1_) : LocationInput.func_200147_a(p_parse_1_, this.field_197305_b);
    }
 
    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> p_listSuggestions_1_, SuggestionsBuilder p_listSuggestions_2_) {

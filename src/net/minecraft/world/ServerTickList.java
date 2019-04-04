@@ -77,7 +77,7 @@ public class ServerTickList<T> implements ITickList<T> {
                } catch (Throwable throwable) {
                   CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Exception while ticking");
                   CrashReportCategory crashreportcategory = crashreport.makeCategory("Block being ticked");
-                  CrashReportCategory.addBlockInfo(crashreportcategory, nextticklistentry1.position, (IBlockState)null);
+                  CrashReportCategory.addBlockInfo(crashreportcategory, nextticklistentry1.position, null);
                   throw new ReportedException(crashreport);
                }
             } else {
@@ -161,7 +161,7 @@ public class ServerTickList<T> implements ITickList<T> {
          nbttagcompound.setInteger("z", nextticklistentry.position.getZ());
          nbttagcompound.setInteger("t", (int)(nextticklistentry.scheduledTime - i));
          nbttagcompound.setInteger("p", nextticklistentry.priority.getPriority());
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       return nbttaglist;

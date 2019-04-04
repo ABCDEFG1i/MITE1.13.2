@@ -80,7 +80,7 @@ public class DemoPlayerInteractionManager extends PlayerInteractionManager {
    }
 
    public boolean tryHarvestBlock(BlockPos p_180237_1_) {
-      return this.demoTimeExpired ? false : super.tryHarvestBlock(p_180237_1_);
+      return !this.demoTimeExpired && super.tryHarvestBlock(p_180237_1_);
    }
 
    public EnumActionResult processRightClick(EntityPlayer p_187250_1_, World p_187250_2_, ItemStack p_187250_3_, EnumHand p_187250_4_) {

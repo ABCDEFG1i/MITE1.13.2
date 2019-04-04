@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "minecraft:birch_planks"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:birch_button"
+  }
+}

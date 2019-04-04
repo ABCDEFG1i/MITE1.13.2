@@ -227,7 +227,7 @@ public class VillageCollection extends WorldSavedData {
       for(Village village : this.villageList) {
          NBTTagCompound nbttagcompound = new NBTTagCompound();
          village.writeVillageDataToNBT(nbttagcompound);
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       p_189551_1_.setTag("Villages", nbttaglist);

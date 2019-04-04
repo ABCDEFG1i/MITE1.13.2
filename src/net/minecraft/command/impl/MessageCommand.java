@@ -23,8 +23,10 @@ public class MessageCommand {
 
    private static int sendPrivateMessage(CommandSource p_198538_0_, Collection<EntityPlayerMP> p_198538_1_, ITextComponent p_198538_2_) {
       for(EntityPlayerMP entityplayermp : p_198538_1_) {
-         entityplayermp.sendMessage((new TextComponentTranslation("commands.message.display.incoming", p_198538_0_.getDisplayName(), p_198538_2_.func_212638_h())).applyTextStyles(new TextFormatting[]{TextFormatting.GRAY, TextFormatting.ITALIC}));
-         p_198538_0_.sendFeedback((new TextComponentTranslation("commands.message.display.outgoing", entityplayermp.getDisplayName(), p_198538_2_.func_212638_h())).applyTextStyles(new TextFormatting[]{TextFormatting.GRAY, TextFormatting.ITALIC}), false);
+         entityplayermp.sendMessage((new TextComponentTranslation("commands.message.display.incoming", p_198538_0_.getDisplayName(), p_198538_2_.func_212638_h())).applyTextStyles(
+                 TextFormatting.GRAY, TextFormatting.ITALIC));
+         p_198538_0_.sendFeedback((new TextComponentTranslation("commands.message.display.outgoing", entityplayermp.getDisplayName(), p_198538_2_.func_212638_h())).applyTextStyles(
+                 TextFormatting.GRAY, TextFormatting.ITALIC), false);
       }
 
       return p_198538_1_.size();

@@ -109,7 +109,7 @@ public class WorldBorder {
    }
 
    public void setTransition(double p_177738_1_, double p_177738_3_, long p_177738_5_) {
-      this.field_212674_i = (WorldBorder.IBorderInfo)(p_177738_1_ != p_177738_3_ ? new WorldBorder.MovingBorderInfo(p_177738_1_, p_177738_3_, p_177738_5_) : new WorldBorder.StationaryBorderInfo(p_177738_3_));
+      this.field_212674_i = p_177738_1_ != p_177738_3_ ? new MovingBorderInfo(p_177738_1_, p_177738_3_, p_177738_5_) : new StationaryBorderInfo(p_177738_3_);
 
       for(IBorderListener iborderlistener : this.getListeners()) {
          iborderlistener.onTransitionStarted(this, p_177738_1_, p_177738_3_, p_177738_5_);
@@ -284,7 +284,7 @@ public class WorldBorder {
       }
 
       public WorldBorder.IBorderInfo func_212651_l() {
-         return (WorldBorder.IBorderInfo)(this.func_212657_g() <= 0L ? WorldBorder.this.new StationaryBorderInfo(this.field_212661_c) : this);
+         return this.func_212657_g() <= 0L ? WorldBorder.this.new StationaryBorderInfo(this.field_212661_c) : this;
       }
    }
 

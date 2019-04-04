@@ -78,7 +78,6 @@ public class SoundHandler implements ITickable, IResourceManagerReloadListener {
                }
             }
          } catch (IOException var11) {
-            ;
          }
       }
 
@@ -94,7 +93,7 @@ public class SoundHandler implements ITickable, IResourceManagerReloadListener {
 
       for(ResourceLocation resourcelocation1 : this.soundRegistry.keySet()) {
          if (IRegistry.field_212633_v.func_212608_b(resourcelocation1) == null) {
-            LOGGER.debug("Not having sound event for: {}", (Object)resourcelocation1);
+            LOGGER.debug("Not having sound event for: {}", resourcelocation1);
          }
       }
 
@@ -118,7 +117,7 @@ public class SoundHandler implements ITickable, IResourceManagerReloadListener {
       boolean flag = soundeventaccessor == null;
       if (flag || p_147693_2_.canReplaceExisting()) {
          if (!flag) {
-            LOGGER.debug("Replaced sound event location {}", (Object)p_147693_1_);
+            LOGGER.debug("Replaced sound event location {}", p_147693_1_);
          }
 
          soundeventaccessor = new SoundEventAccessor(p_147693_1_, p_147693_2_.getSubtitle());
@@ -184,7 +183,7 @@ public class SoundHandler implements ITickable, IResourceManagerReloadListener {
          flag = false;
          return flag;
       } finally {
-         IOUtils.closeQuietly((Closeable)iresource);
+         IOUtils.closeQuietly(iresource);
       }
 
       return flag;

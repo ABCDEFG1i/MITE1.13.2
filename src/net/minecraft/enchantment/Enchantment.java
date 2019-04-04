@@ -174,7 +174,7 @@ public abstract class Enchantment {
       IRegistry.field_212628_q.func_82595_a(new ResourceLocation(p_210770_0_), p_210770_1_);
    }
 
-   public static enum Rarity {
+   public enum Rarity {
       COMMON(10),
       UNCOMMON(5),
       RARE(2),
@@ -182,7 +182,7 @@ public abstract class Enchantment {
 
       private final int weight;
 
-      private Rarity(int p_i47026_3_) {
+      Rarity(int p_i47026_3_) {
          this.weight = p_i47026_3_;
       }
 

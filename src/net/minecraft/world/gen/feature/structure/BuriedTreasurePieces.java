@@ -57,7 +57,8 @@ public class BuriedTreasurePieces {
                   }
                }
 
-               return this.generateChest(p_74875_1_, p_74875_3_, p_74875_2_, new BlockPos(this.boundingBox.minX, blockpos$mutableblockpos.getY(), this.boundingBox.minZ), LootTableList.CHESTS_BURIED_TREASURE, (IBlockState)null);
+               return this.generateChest(p_74875_1_, p_74875_3_, p_74875_2_, new BlockPos(this.boundingBox.minX, blockpos$mutableblockpos.getY(), this.boundingBox.minZ), LootTableList.CHESTS_BURIED_TREASURE,
+                       null);
             }
 
             blockpos$mutableblockpos.move(0, -1, 0);

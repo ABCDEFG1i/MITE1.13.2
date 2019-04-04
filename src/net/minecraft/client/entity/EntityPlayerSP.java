@@ -300,7 +300,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
    public void closeScreenAndDropStack() {
       this.inventory.setItemStack(ItemStack.EMPTY);
       super.closeScreen();
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    public void setPlayerSPHealth(float p_71150_1_) {
@@ -637,7 +637,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
                this.closeScreen();
             }
 
-            this.mc.displayGuiScreen((GuiScreen)null);
+            this.mc.displayGuiScreen(null);
          }
 
          if (this.timeInPortal == 0.0F) {

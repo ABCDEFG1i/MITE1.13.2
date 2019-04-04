@@ -24,7 +24,7 @@ public class SPacketTitle implements Packet<INetHandlerPlayClient> {
    }
 
    public SPacketTitle(int p_i46900_1_, int p_i46900_2_, int p_i46900_3_) {
-      this(SPacketTitle.Type.TIMES, (ITextComponent)null, p_i46900_1_, p_i46900_2_, p_i46900_3_);
+      this(SPacketTitle.Type.TIMES, null, p_i46900_1_, p_i46900_2_, p_i46900_3_);
    }
 
    public SPacketTitle(SPacketTitle.Type p_i46901_1_, @Nullable ITextComponent p_i46901_2_, int p_i46901_3_, int p_i46901_4_, int p_i46901_5_) {
@@ -92,12 +92,12 @@ public class SPacketTitle implements Packet<INetHandlerPlayClient> {
       return this.fadeOutTime;
    }
 
-   public static enum Type {
+   public enum Type {
       TITLE,
       SUBTITLE,
       ACTIONBAR,
       TIMES,
       CLEAR,
-      RESET;
+      RESET
    }
 }

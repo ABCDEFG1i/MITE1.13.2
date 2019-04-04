@@ -85,7 +85,7 @@ public abstract class BossInfo {
       return this.createFog;
    }
 
-   public static enum Color {
+   public enum Color {
       PINK("pink", TextFormatting.RED),
       BLUE("blue", TextFormatting.BLUE),
       RED("red", TextFormatting.DARK_RED),
@@ -97,7 +97,7 @@ public abstract class BossInfo {
       private final String name;
       private final TextFormatting field_201484_i;
 
-      private Color(String p_i48622_3_, TextFormatting p_i48622_4_) {
+      Color(String p_i48622_3_, TextFormatting p_i48622_4_) {
          this.name = p_i48622_3_;
          this.field_201484_i = p_i48622_4_;
       }
@@ -121,7 +121,7 @@ public abstract class BossInfo {
       }
    }
 
-   public static enum Overlay {
+   public enum Overlay {
       PROGRESS("progress"),
       NOTCHED_6("notched_6"),
       NOTCHED_10("notched_10"),
@@ -130,7 +130,7 @@ public abstract class BossInfo {
 
       private final String name;
 
-      private Overlay(String p_i48621_3_) {
+      Overlay(String p_i48621_3_) {
          this.name = p_i48621_3_;
       }
 

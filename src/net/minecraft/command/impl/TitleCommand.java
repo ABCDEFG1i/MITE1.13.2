@@ -35,7 +35,7 @@ public class TitleCommand {
    }
 
    private static int func_198840_a(CommandSource p_198840_0_, Collection<EntityPlayerMP> p_198840_1_) {
-      SPacketTitle spackettitle = new SPacketTitle(SPacketTitle.Type.CLEAR, (ITextComponent)null);
+      SPacketTitle spackettitle = new SPacketTitle(SPacketTitle.Type.CLEAR, null);
 
       for(EntityPlayerMP entityplayermp : p_198840_1_) {
          entityplayermp.connection.sendPacket(spackettitle);
@@ -51,7 +51,7 @@ public class TitleCommand {
    }
 
    private static int func_198844_b(CommandSource p_198844_0_, Collection<EntityPlayerMP> p_198844_1_) {
-      SPacketTitle spackettitle = new SPacketTitle(SPacketTitle.Type.RESET, (ITextComponent)null);
+      SPacketTitle spackettitle = new SPacketTitle(SPacketTitle.Type.RESET, null);
 
       for(EntityPlayerMP entityplayermp : p_198844_1_) {
          entityplayermp.connection.sendPacket(spackettitle);

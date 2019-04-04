@@ -34,7 +34,6 @@ public class ItemArgument implements ArgumentType<ItemInput> {
       try {
          itemparser.parse();
       } catch (CommandSyntaxException var6) {
-         ;
       }
 
       return itemparser.func_197329_a(p_listSuggestions_2_);

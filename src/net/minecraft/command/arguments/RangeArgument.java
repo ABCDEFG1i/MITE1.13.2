@@ -16,7 +16,7 @@ public interface RangeArgument<T extends MinMaxBounds<?>> extends ArgumentType<T
       return new RangeArgument.IntRange();
    }
 
-   public static class FloatRange implements RangeArgument<MinMaxBounds.FloatBound> {
+   class FloatRange implements RangeArgument<MinMaxBounds.FloatBound> {
       private static final Collection<String> field_211374_a = Arrays.asList("0..5.2", "0", "-5.4", "-100.76..", "..100");
 
       public MinMaxBounds.FloatBound parse(StringReader p_parse_1_) throws CommandSyntaxException {
@@ -34,7 +34,7 @@ public interface RangeArgument<T extends MinMaxBounds<?>> extends ArgumentType<T
       }
    }
 
-   public static class IntRange implements RangeArgument<MinMaxBounds.IntBound> {
+   class IntRange implements RangeArgument<MinMaxBounds.IntBound> {
       private static final Collection<String> field_201321_a = Arrays.asList("0..5", "0", "-5", "-100..", "..100");
 
       public static MinMaxBounds.IntBound getIntRange(CommandContext<CommandSource> p_211372_0_, String p_211372_1_) {
@@ -56,7 +56,7 @@ public interface RangeArgument<T extends MinMaxBounds<?>> extends ArgumentType<T
       }
    }
 
-   public abstract static class Serializer<T extends RangeArgument<?>> implements IArgumentSerializer<T> {
+   abstract class Serializer<T extends RangeArgument<?>> implements IArgumentSerializer<T> {
       public void write(T p_197072_1_, PacketBuffer p_197072_2_) {
       }
 

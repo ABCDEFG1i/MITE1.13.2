@@ -92,14 +92,14 @@ public class ServerData {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum ServerResourceMode {
+   public enum ServerResourceMode {
       ENABLED("enabled"),
       DISABLED("disabled"),
       PROMPT("prompt");
 
       private final ITextComponent motd;
 
-      private ServerResourceMode(String p_i1053_3_) {
+      ServerResourceMode(String p_i1053_3_) {
          this.motd = new TextComponentTranslation("addServer.resourcePack." + p_i1053_3_);
       }
 

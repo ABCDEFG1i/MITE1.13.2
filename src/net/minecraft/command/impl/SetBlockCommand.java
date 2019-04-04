@@ -25,15 +25,18 @@ public class SetBlockCommand {
       p_198684_0_.register(Commands.literal("setblock").requires((p_198688_0_) -> {
          return p_198688_0_.hasPermissionLevel(2);
       }).then(Commands.argument("pos", BlockPosArgument.blockPos()).then(Commands.argument("block", BlockStateArgument.blockState()).executes((p_198682_0_) -> {
-         return setBlock(p_198682_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198682_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198682_0_, "block"), SetBlockCommand.Mode.REPLACE, (Predicate<BlockWorldState>)null);
+         return setBlock(p_198682_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198682_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198682_0_, "block"), SetBlockCommand.Mode.REPLACE,
+                 null);
       }).then(Commands.literal("destroy").executes((p_198685_0_) -> {
-         return setBlock(p_198685_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198685_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198685_0_, "block"), SetBlockCommand.Mode.DESTROY, (Predicate<BlockWorldState>)null);
+         return setBlock(p_198685_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198685_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198685_0_, "block"), SetBlockCommand.Mode.DESTROY,
+                 null);
       })).then(Commands.literal("keep").executes((p_198681_0_) -> {
          return setBlock(p_198681_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198681_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198681_0_, "block"), SetBlockCommand.Mode.REPLACE, (p_198687_0_) -> {
             return p_198687_0_.getWorld().isAirBlock(p_198687_0_.getPos());
          });
       })).then(Commands.literal("replace").executes((p_198686_0_) -> {
-         return setBlock(p_198686_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198686_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198686_0_, "block"), SetBlockCommand.Mode.REPLACE, (Predicate<BlockWorldState>)null);
+         return setBlock(p_198686_0_.getSource(), BlockPosArgument.getLoadedBlockPos(p_198686_0_, "pos"), BlockStateArgument.getBlockStateInput(p_198686_0_, "block"), SetBlockCommand.Mode.REPLACE,
+                 null);
       })))));
    }
 
@@ -70,10 +73,10 @@ public class SetBlockCommand {
       BlockStateInput filter(MutableBoundingBox p_filter_1_, BlockPos p_filter_2_, BlockStateInput p_filter_3_, WorldServer p_filter_4_);
    }
 
-   public static enum Mode {
+   public enum Mode {
       REPLACE,
       OUTLINE,
       HOLLOW,
-      DESTROY;
+      DESTROY
    }
 }

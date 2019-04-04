@@ -48,10 +48,10 @@ public abstract class AbstractIllager extends EntityMob {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum IllagerArmPose {
+   public enum IllagerArmPose {
       CROSSED,
       ATTACKING,
       SPELLCASTING,
-      BOW_AND_ARROW;
+      BOW_AND_ARROW
    }
 }

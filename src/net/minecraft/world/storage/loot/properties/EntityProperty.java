@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public interface EntityProperty {
    boolean testProperty(Random p_186657_1_, Entity p_186657_2_);
 
-   public abstract static class Serializer<T extends EntityProperty> {
+   abstract class Serializer<T extends EntityProperty> {
       private final ResourceLocation name;
       private final Class<T> propertyClass;
 

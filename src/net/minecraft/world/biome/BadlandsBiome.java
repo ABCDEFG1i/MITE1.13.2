@@ -32,7 +32,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public final class BadlandsBiome extends Biome {
    public BadlandsBiome() {
-      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(MESA_SURFACE_BUILDER, RED_SAND_WHITE_TERRACOTTA_GRAVEL_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.MESA).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(MESA_SURFACE_BUILDER, RED_SAND_WHITE_TERRACOTTA_GRAVEL_SURFACE)).precipitation(Biome.RainType.NONE).category(Biome.Category.MESA).depth(0.1F).scale(0.2F).temperature(2.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent(
+              null));
       this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.MESA));
       this.addStructure(Feature.STRONGHOLD, new StrongholdConfig());
       this.addCarver(GenerationStage.Carving.AIR, createWorldCarverWrapper(CAVE_WORLD_CARVER, new ProbabilityConfig(0.14285715F)));

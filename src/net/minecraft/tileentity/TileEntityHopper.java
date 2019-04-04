@@ -74,12 +74,12 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
    }
 
    public ItemStack decrStackSize(int p_70298_1_, int p_70298_2_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       return ItemStackHelper.getAndSplit(this.getItems(), p_70298_1_, p_70298_2_);
    }
 
    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_) {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       this.getItems().set(p_70299_1_, p_70299_2_);
       if (p_70299_2_.getCount() > this.getInventoryStackLimit()) {
          p_70299_2_.setCount(this.getInventoryStackLimit());
@@ -88,7 +88,7 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.customName != null ? this.customName : new TextComponentTranslation("container.hopper"));
+      return this.customName != null ? this.customName : new TextComponentTranslation("container.hopper");
    }
 
    public int getInventoryStackLimit() {
@@ -274,7 +274,8 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
       ItemStack itemstack = p_174915_1_.getStackInSlot(p_174915_2_);
       if (!itemstack.isEmpty() && canExtractItemFromSlot(p_174915_1_, itemstack, p_174915_2_, p_174915_3_)) {
          ItemStack itemstack1 = itemstack.copy();
-         ItemStack itemstack2 = putStackInInventoryAllSlots(p_174915_1_, p_174915_0_, p_174915_1_.decrStackSize(p_174915_2_, 1), (EnumFacing)null);
+         ItemStack itemstack2 = putStackInInventoryAllSlots(p_174915_1_, p_174915_0_, p_174915_1_.decrStackSize(p_174915_2_, 1),
+                 null);
          if (itemstack2.isEmpty()) {
             p_174915_1_.markDirty();
             return true;
@@ -289,7 +290,7 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
    public static boolean captureItem(IInventory p_200114_0_, EntityItem p_200114_1_) {
       boolean flag = false;
       ItemStack itemstack = p_200114_1_.getItem().copy();
-      ItemStack itemstack1 = putStackInInventoryAllSlots((IInventory)null, p_200114_0_, itemstack, (EnumFacing)null);
+      ItemStack itemstack1 = putStackInInventoryAllSlots(null, p_200114_0_, itemstack, null);
       if (itemstack1.isEmpty()) {
          flag = true;
          p_200114_1_.setDead();
@@ -410,7 +411,8 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
       }
 
       if (iinventory == null) {
-         List<Entity> list = p_145893_0_.func_175674_a((Entity)null, new AxisAlignedBB(p_145893_1_ - 0.5D, p_145893_3_ - 0.5D, p_145893_5_ - 0.5D, p_145893_1_ + 0.5D, p_145893_3_ + 0.5D, p_145893_5_ + 0.5D), EntitySelectors.HAS_INVENTORY);
+         List<Entity> list = p_145893_0_.func_175674_a(
+                 null, new AxisAlignedBB(p_145893_1_ - 0.5D, p_145893_3_ - 0.5D, p_145893_5_ - 0.5D, p_145893_1_ + 0.5D, p_145893_3_ + 0.5D, p_145893_5_ + 0.5D), EntitySelectors.HAS_INVENTORY);
          if (!list.isEmpty()) {
             iinventory = (IInventory)list.get(p_145893_0_.rand.nextInt(list.size()));
          }

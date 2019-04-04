@@ -25,29 +25,29 @@ public class JsonUtils {
    private static final Gson field_212747_a = (new GsonBuilder()).create();
 
    public static boolean isString(JsonObject p_151205_0_, String p_151205_1_) {
-      return !isJsonPrimitive(p_151205_0_, p_151205_1_) ? false : p_151205_0_.getAsJsonPrimitive(p_151205_1_).isString();
+      return isJsonPrimitive(p_151205_0_, p_151205_1_) && p_151205_0_.getAsJsonPrimitive(p_151205_1_).isString();
    }
 
    @OnlyIn(Dist.CLIENT)
    public static boolean isString(JsonElement p_151211_0_) {
-      return !p_151211_0_.isJsonPrimitive() ? false : p_151211_0_.getAsJsonPrimitive().isString();
+      return p_151211_0_.isJsonPrimitive() && p_151211_0_.getAsJsonPrimitive().isString();
    }
 
    public static boolean isNumber(JsonElement p_188175_0_) {
-      return !p_188175_0_.isJsonPrimitive() ? false : p_188175_0_.getAsJsonPrimitive().isNumber();
+      return p_188175_0_.isJsonPrimitive() && p_188175_0_.getAsJsonPrimitive().isNumber();
    }
 
    @OnlyIn(Dist.CLIENT)
    public static boolean isBoolean(JsonObject p_180199_0_, String p_180199_1_) {
-      return !isJsonPrimitive(p_180199_0_, p_180199_1_) ? false : p_180199_0_.getAsJsonPrimitive(p_180199_1_).isBoolean();
+      return isJsonPrimitive(p_180199_0_, p_180199_1_) && p_180199_0_.getAsJsonPrimitive(p_180199_1_).isBoolean();
    }
 
    public static boolean isJsonArray(JsonObject p_151202_0_, String p_151202_1_) {
-      return !hasField(p_151202_0_, p_151202_1_) ? false : p_151202_0_.get(p_151202_1_).isJsonArray();
+      return hasField(p_151202_0_, p_151202_1_) && p_151202_0_.get(p_151202_1_).isJsonArray();
    }
 
    public static boolean isJsonPrimitive(JsonObject p_151201_0_, String p_151201_1_) {
-      return !hasField(p_151201_0_, p_151201_1_) ? false : p_151201_0_.get(p_151201_1_).isJsonPrimitive();
+      return hasField(p_151201_0_, p_151201_1_) && p_151201_0_.get(p_151201_1_).isJsonPrimitive();
    }
 
    public static boolean hasField(JsonObject p_151204_0_, String p_151204_1_) {
@@ -233,11 +233,11 @@ public class JsonUtils {
    }
 
    public static <T> T deserializeClass(JsonObject p_188177_0_, String p_188177_1_, T p_188177_2_, JsonDeserializationContext p_188177_3_, Class<? extends T> p_188177_4_) {
-      return (T)(p_188177_0_.has(p_188177_1_) ? deserializeClass(p_188177_0_.get(p_188177_1_), p_188177_1_, p_188177_3_, p_188177_4_) : p_188177_2_);
+      return p_188177_0_.has(p_188177_1_) ? deserializeClass(p_188177_0_.get(p_188177_1_), p_188177_1_, p_188177_3_, p_188177_4_) : p_188177_2_;
    }
 
    public static String toString(JsonElement p_151222_0_) {
-      String s = org.apache.commons.lang3.StringUtils.abbreviateMiddle(String.valueOf((Object)p_151222_0_), "...", 10);
+      String s = org.apache.commons.lang3.StringUtils.abbreviateMiddle(String.valueOf(p_151222_0_), "...", 10);
       if (p_151222_0_ == null) {
          return "null (missing)";
       } else if (p_151222_0_.isJsonNull()) {

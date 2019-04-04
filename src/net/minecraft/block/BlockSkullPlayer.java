@@ -30,7 +30,7 @@ public class BlockSkullPlayer extends BlockSkull {
             if (nbttagcompound.hasKey("SkullOwner", 10)) {
                gameprofile = NBTUtil.readGameProfileFromNBT(nbttagcompound.getCompoundTag("SkullOwner"));
             } else if (nbttagcompound.hasKey("SkullOwner", 8) && !StringUtils.isBlank(nbttagcompound.getString("SkullOwner"))) {
-               gameprofile = new GameProfile((UUID)null, nbttagcompound.getString("SkullOwner"));
+               gameprofile = new GameProfile(null, nbttagcompound.getString("SkullOwner"));
             }
          }
 

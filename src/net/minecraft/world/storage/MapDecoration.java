@@ -83,7 +83,7 @@ public class MapDecoration {
       return i;
    }
 
-   public static enum Type {
+   public enum Type {
       PLAYER(false),
       FRAME(true),
       RED_MARKER(false),
@@ -116,11 +116,11 @@ public class MapDecoration {
       private final boolean renderedOnFrame;
       private final int mapColor;
 
-      private Type(boolean p_i47343_3_) {
+      Type(boolean p_i47343_3_) {
          this(p_i47343_3_, -1);
       }
 
-      private Type(boolean p_i47344_3_, int p_i47344_4_) {
+      Type(boolean p_i47344_3_, int p_i47344_4_) {
          this.renderedOnFrame = p_i47344_3_;
          this.mapColor = p_i47344_4_;
       }

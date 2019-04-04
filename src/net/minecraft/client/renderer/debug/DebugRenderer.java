@@ -22,11 +22,11 @@ public class DebugRenderer {
    public final DebugRenderer.IDebugRenderer worldGenAttempts;
    public final DebugRenderer.IDebugRenderer solidFace;
    private boolean chunkBorderEnabled;
-   private boolean pathfindingEnabled;
+   private boolean pathfindingEnabled = true;
    private boolean waterEnabled;
    private boolean heightMapEnabled;
    private boolean collisionBoxEnabled;
-   private boolean neighborsUpdateEnabled;
+   private boolean neighborsUpdateEnabled = true;
    private boolean caveEnabled;
    private boolean structureEnabled;
    private boolean lightEnabled;

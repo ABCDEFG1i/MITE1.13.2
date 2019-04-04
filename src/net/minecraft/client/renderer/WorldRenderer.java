@@ -738,7 +738,8 @@ public class WorldRenderer implements IWorldEventListener, AutoCloseable, IResou
          boolean flag1 = this.field_72777_q.renderChunksMany;
          if (renderchunk != null) {
             boolean flag2 = false;
-            WorldRenderer.ContainerLocalRenderInformation worldrenderer$containerlocalrenderinformation3 = new WorldRenderer.ContainerLocalRenderInformation(renderchunk, (EnumFacing)null, 0);
+            WorldRenderer.ContainerLocalRenderInformation worldrenderer$containerlocalrenderinformation3 = new WorldRenderer.ContainerLocalRenderInformation(renderchunk,
+                    null, 0);
             Set<EnumFacing> set1 = this.func_174978_c(blockpos1);
             if (set1.size() == 1) {
                Vector3f vector3f = this.func_195474_a(p_195473_1_, (double)p_195473_2_);
@@ -768,7 +769,7 @@ public class WorldRenderer implements IWorldEventListener, AutoCloseable, IResou
                   RenderChunk renderchunk1 = this.field_175008_n.getRenderChunk(new BlockPos((j << 4) + 8, i, (k << 4) + 8));
                   if (renderchunk1 != null && p_195473_3_.isBoundingBoxInFrustum(renderchunk1.boundingBox)) {
                      renderchunk1.setFrameIndex(p_195473_4_);
-                     queue.add(new WorldRenderer.ContainerLocalRenderInformation(renderchunk1, (EnumFacing)null, 0));
+                     queue.add(new WorldRenderer.ContainerLocalRenderInformation(renderchunk1, null, 0));
                   }
                }
             }
@@ -1897,7 +1898,7 @@ public class WorldRenderer implements IWorldEventListener, AutoCloseable, IResou
          if (Item.getItemById(p_180439_4_) instanceof ItemRecord) {
             this.field_72769_h.playRecord(p_180439_3_, ((ItemRecord)Item.getItemById(p_180439_4_)).getSound());
          } else {
-            this.field_72769_h.playRecord(p_180439_3_, (SoundEvent)null);
+            this.field_72769_h.playRecord(p_180439_3_, null);
          }
          break;
       case 1011:

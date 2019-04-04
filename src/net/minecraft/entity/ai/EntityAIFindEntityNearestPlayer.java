@@ -48,7 +48,8 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase {
                d0 *= (double)(0.7F * f);
             }
 
-            return (double)p_210293_1_.getDistance(this.entityLiving) > d0 ? false : EntityAITarget.isSuitableTarget(this.entityLiving, (EntityLivingBase)p_210293_1_, false, true);
+            return !((double) p_210293_1_.getDistance(this.entityLiving) > d0) && EntityAITarget.isSuitableTarget(
+                    this.entityLiving, (EntityLivingBase) p_210293_1_, false, true);
          }
       };
       this.sorter = new EntityAINearestAttackableTarget.Sorter(p_i45882_1_);
@@ -96,7 +97,7 @@ public class EntityAIFindEntityNearestPlayer extends EntityAIBase {
    }
 
    public void resetTask() {
-      this.entityLiving.setAttackTarget((EntityLivingBase)null);
+      this.entityLiving.setAttackTarget(null);
       super.startExecuting();
    }
 

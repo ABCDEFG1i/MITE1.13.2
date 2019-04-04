@@ -17,7 +17,6 @@ public class FoliageColorReloadListener implements IResourceManagerReloadListene
       try {
          FoliageColors.func_77467_a(TextureUtil.makePixelArray(p_195410_1_, FOLIAGE_LOCATION));
       } catch (IOException var3) {
-         ;
       }
 
    }

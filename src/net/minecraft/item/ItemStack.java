@@ -321,7 +321,7 @@ public final class ItemStack {
       if (p_77989_0_.isEmpty() && p_77989_1_.isEmpty()) {
          return true;
       } else {
-         return !p_77989_0_.isEmpty() && !p_77989_1_.isEmpty() ? p_77989_0_.isItemStackEqual(p_77989_1_) : false;
+         return (!p_77989_0_.isEmpty() && !p_77989_1_.isEmpty()) && p_77989_0_.isItemStackEqual(p_77989_1_);
       }
    }
 
@@ -341,7 +341,7 @@ public final class ItemStack {
       if (p_179545_0_ == p_179545_1_) {
          return true;
       } else {
-         return !p_179545_0_.isEmpty() && !p_179545_1_.isEmpty() ? p_179545_0_.isItemEqual(p_179545_1_) : false;
+         return (!p_179545_0_.isEmpty() && !p_179545_1_.isEmpty()) && p_179545_0_.isItemEqual(p_179545_1_);
       }
    }
 
@@ -349,7 +349,8 @@ public final class ItemStack {
       if (p_185132_0_ == p_185132_1_) {
          return true;
       } else {
-         return !p_185132_0_.isEmpty() && !p_185132_1_.isEmpty() ? p_185132_0_.isItemEqualIgnoreDurability(p_185132_1_) : false;
+         return (!p_185132_0_.isEmpty() && !p_185132_1_.isEmpty()) && p_185132_0_.isItemEqualIgnoreDurability(
+                 p_185132_1_);
       }
    }
 
@@ -541,7 +542,8 @@ public final class ItemStack {
                if (p_82840_2_.isAdvanced()) {
                   list.add((new TextComponentTranslation("item.color", String.format("#%06X", nbttagcompound1.getInteger("color")))).applyTextStyle(TextFormatting.GRAY));
                } else {
-                  list.add((new TextComponentTranslation("item.dyed")).applyTextStyles(new TextFormatting[]{TextFormatting.GRAY, TextFormatting.ITALIC}));
+                  list.add((new TextComponentTranslation("item.dyed")).applyTextStyles(TextFormatting.GRAY,
+                          TextFormatting.ITALIC));
                }
             }
 
@@ -549,7 +551,8 @@ public final class ItemStack {
                NBTTagList nbttaglist3 = nbttagcompound1.getTagList("Lore", 8);
 
                for(int i1 = 0; i1 < nbttaglist3.size(); ++i1) {
-                  list.add((new TextComponentString(nbttaglist3.getStringTagAt(i1))).applyTextStyles(new TextFormatting[]{TextFormatting.DARK_PURPLE, TextFormatting.ITALIC}));
+                  list.add((new TextComponentString(nbttaglist3.getStringTagAt(i1))).applyTextStyles(TextFormatting.DARK_PURPLE,
+                          TextFormatting.ITALIC));
                }
             }
          }
@@ -584,12 +587,12 @@ public final class ItemStack {
                }
 
                if (flag) {
-                  list.add((new TextComponentString(" ")).appendSibling(new TextComponentTranslation("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + (String)entry.getKey()))).applyTextStyle(TextFormatting.DARK_GREEN));
+                  list.add((new TextComponentString(" ")).appendSibling(new TextComponentTranslation("attribute.modifier.equals." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + entry.getKey()))).applyTextStyle(TextFormatting.DARK_GREEN));
                } else if (d0 > 0.0D) {
-                  list.add((new TextComponentTranslation("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + (String)entry.getKey()))).applyTextStyle(TextFormatting.BLUE));
+                  list.add((new TextComponentTranslation("attribute.modifier.plus." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + entry.getKey()))).applyTextStyle(TextFormatting.BLUE));
                } else if (d0 < 0.0D) {
                   d1 = d1 * -1.0D;
-                  list.add((new TextComponentTranslation("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + (String)entry.getKey()))).applyTextStyle(TextFormatting.RED));
+                  list.add((new TextComponentTranslation("attribute.modifier.take." + attributemodifier.getOperation(), DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + entry.getKey()))).applyTextStyle(TextFormatting.RED));
                }
             }
          }
@@ -661,7 +664,6 @@ public final class ItemStack {
             }
          }
       } catch (CommandSyntaxException var8) {
-         ;
       }
 
       return Lists.newArrayList((new TextComponentString("missingno")).applyTextStyle(TextFormatting.DARK_GRAY));
@@ -692,9 +694,9 @@ public final class ItemStack {
 
       NBTTagList nbttaglist = this.tag.getTagList("Enchantments", 10);
       NBTTagCompound nbttagcompound = new NBTTagCompound();
-      nbttagcompound.setString("id", String.valueOf((Object)IRegistry.field_212628_q.func_177774_c(p_77966_1_)));
+      nbttagcompound.setString("id", String.valueOf(IRegistry.field_212628_q.func_177774_c(p_77966_1_)));
       nbttagcompound.setShort("lvl", (short)((byte)p_77966_2_));
-      nbttaglist.add((INBTBase)nbttagcompound);
+      nbttaglist.add(nbttagcompound);
    }
 
    public boolean isEnchanted() {
@@ -763,7 +765,7 @@ public final class ItemStack {
          nbttagcompound.setString("Slot", p_185129_3_.getName());
       }
 
-      nbttaglist.add((INBTBase)nbttagcompound);
+      nbttaglist.add(nbttagcompound);
    }
 
    public ITextComponent getTextComponent() {
@@ -788,7 +790,9 @@ public final class ItemStack {
          if (p_206846_0_.getTileEntity() == null && p_206846_1_.getTileEntity() == null) {
             return true;
          } else {
-            return p_206846_0_.getTileEntity() != null && p_206846_1_.getTileEntity() != null ? Objects.equals(p_206846_0_.getTileEntity().writeToNBT(new NBTTagCompound()), p_206846_1_.getTileEntity().writeToNBT(new NBTTagCompound())) : false;
+            return (p_206846_0_.getTileEntity() != null && p_206846_1_.getTileEntity() != null) && Objects.equals(
+                    p_206846_0_.getTileEntity().writeToNBT(new NBTTagCompound()),
+                    p_206846_1_.getTileEntity().writeToNBT(new NBTTagCompound()));
          }
       } else {
          return false;
@@ -813,7 +817,6 @@ public final class ItemStack {
                      return true;
                   }
                } catch (CommandSyntaxException var7) {
-                  ;
                }
             }
          }
@@ -841,7 +844,6 @@ public final class ItemStack {
                      return true;
                   }
                } catch (CommandSyntaxException var7) {
-                  ;
                }
             }
          }

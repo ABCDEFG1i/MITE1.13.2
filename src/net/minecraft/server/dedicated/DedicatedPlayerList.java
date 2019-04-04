@@ -56,7 +56,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getBannedIPs().writeChanges();
       } catch (IOException ioexception) {
-         LOGGER.warn("Failed to save ip banlist: ", (Throwable)ioexception);
+         LOGGER.warn("Failed to save ip banlist: ", ioexception);
       }
 
    }
@@ -65,7 +65,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getBannedPlayers().writeChanges();
       } catch (IOException ioexception) {
-         LOGGER.warn("Failed to save user banlist: ", (Throwable)ioexception);
+         LOGGER.warn("Failed to save user banlist: ", ioexception);
       }
 
    }
@@ -74,7 +74,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getBannedIPs().readSavedFile();
       } catch (IOException ioexception) {
-         LOGGER.warn("Failed to load ip banlist: ", (Throwable)ioexception);
+         LOGGER.warn("Failed to load ip banlist: ", ioexception);
       }
 
    }
@@ -83,7 +83,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getBannedPlayers().readSavedFile();
       } catch (IOException ioexception) {
-         LOGGER.warn("Failed to load user banlist: ", (Throwable)ioexception);
+         LOGGER.warn("Failed to load user banlist: ", ioexception);
       }
 
    }
@@ -92,7 +92,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getOppedPlayers().readSavedFile();
       } catch (Exception exception) {
-         LOGGER.warn("Failed to load operators list: ", (Throwable)exception);
+         LOGGER.warn("Failed to load operators list: ", exception);
       }
 
    }
@@ -101,7 +101,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getOppedPlayers().writeChanges();
       } catch (Exception exception) {
-         LOGGER.warn("Failed to save operators list: ", (Throwable)exception);
+         LOGGER.warn("Failed to save operators list: ", exception);
       }
 
    }
@@ -110,7 +110,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getWhitelistedPlayers().readSavedFile();
       } catch (Exception exception) {
-         LOGGER.warn("Failed to load white-list: ", (Throwable)exception);
+         LOGGER.warn("Failed to load white-list: ", exception);
       }
 
    }
@@ -119,7 +119,7 @@ public class DedicatedPlayerList extends PlayerList {
       try {
          this.getWhitelistedPlayers().writeChanges();
       } catch (Exception exception) {
-         LOGGER.warn("Failed to save white-list: ", (Throwable)exception);
+         LOGGER.warn("Failed to save white-list: ", exception);
       }
 
    }

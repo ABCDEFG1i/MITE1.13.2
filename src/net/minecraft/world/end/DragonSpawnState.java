@@ -55,7 +55,7 @@ public enum DragonSpawnState {
                      p_186079_1_.removeBlock(blockpos$mutableblockpos);
                   }
 
-                  p_186079_1_.createExplosion((Entity)null, (double)((float)endcrystaltowerfeature$endspike.getCenterX() + 0.5F), (double)endcrystaltowerfeature$endspike.getHeight(), (double)((float)endcrystaltowerfeature$endspike.getCenterZ() + 0.5F), 5.0F, true);
+                  p_186079_1_.createExplosion(null, (double)((float)endcrystaltowerfeature$endspike.getCenterX() + 0.5F), (double)endcrystaltowerfeature$endspike.getHeight(), (double)((float)endcrystaltowerfeature$endspike.getCenterZ() + 0.5F), 5.0F, true);
                   EndCrystalTowerFeature endcrystaltowerfeature = new EndCrystalTowerFeature();
                   endcrystaltowerfeature.setSpike(endcrystaltowerfeature$endspike);
                   endcrystaltowerfeature.setCrystalInvulnerable(true);
@@ -76,7 +76,7 @@ public enum DragonSpawnState {
             p_186079_2_.resetSpikeCrystals();
 
             for(EntityEnderCrystal entityendercrystal : p_186079_3_) {
-               entityendercrystal.setBeamTarget((BlockPos)null);
+               entityendercrystal.setBeamTarget(null);
                p_186079_1_.createExplosion(entityendercrystal, entityendercrystal.posX, entityendercrystal.posY, entityendercrystal.posZ, 6.0F, false);
                entityendercrystal.setDead();
             }
@@ -97,7 +97,7 @@ public enum DragonSpawnState {
       }
    };
 
-   private DragonSpawnState() {
+   DragonSpawnState() {
    }
 
    public abstract void process(WorldServer p_186079_1_, DragonFightManager p_186079_2_, List<EntityEnderCrystal> p_186079_3_, int p_186079_4_, BlockPos p_186079_5_);

@@ -30,7 +30,8 @@ public class EffectCommand {
       }).then(Commands.argument("effect", PotionArgument.mobEffect()).executes((p_198356_0_) -> {
          return clearEffect(p_198356_0_.getSource(), EntityArgument.getEntities(p_198356_0_, "targets"), PotionArgument.getMobEffect(p_198356_0_, "effect"));
       })))).then(Commands.literal("give").then(Commands.argument("targets", EntityArgument.multipleEntities()).then(Commands.argument("effect", PotionArgument.mobEffect()).executes((p_198351_0_) -> {
-         return addEffect(p_198351_0_.getSource(), EntityArgument.getEntities(p_198351_0_, "targets"), PotionArgument.getMobEffect(p_198351_0_, "effect"), (Integer)null, 0, true);
+         return addEffect(p_198351_0_.getSource(), EntityArgument.getEntities(p_198351_0_, "targets"), PotionArgument.getMobEffect(p_198351_0_, "effect"),
+                 null, 0, true);
       }).then(Commands.argument("seconds", IntegerArgumentType.integer(1, 1000000)).executes((p_198357_0_) -> {
          return addEffect(p_198357_0_.getSource(), EntityArgument.getEntities(p_198357_0_, "targets"), PotionArgument.getMobEffect(p_198357_0_, "effect"), IntegerArgumentType.getInteger(p_198357_0_, "seconds"), 0, true);
       }).then(Commands.argument("amplifier", IntegerArgumentType.integer(0, 255)).executes((p_198350_0_) -> {

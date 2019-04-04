@@ -190,7 +190,7 @@ public class GuiBeacon extends GuiContainer {
 
       public void onClick(double p_194829_1_, double p_194829_3_) {
          GuiBeacon.this.mc.player.connection.sendPacket(new CPacketCloseWindow(GuiBeacon.this.mc.player.openContainer.windowId));
-         GuiBeacon.this.mc.displayGuiScreen((GuiScreen)null);
+         GuiBeacon.this.mc.displayGuiScreen(null);
       }
 
       public void drawButtonForegroundLayer(int p_146111_1_, int p_146111_2_) {
@@ -207,7 +207,7 @@ public class GuiBeacon extends GuiContainer {
       public void onClick(double p_194829_1_, double p_194829_3_) {
          GuiBeacon.this.mc.getConnection().sendPacket(new CPacketUpdateBeacon(GuiBeacon.this.tileBeacon.getField(1), GuiBeacon.this.tileBeacon.getField(2)));
          GuiBeacon.this.mc.player.connection.sendPacket(new CPacketCloseWindow(GuiBeacon.this.mc.player.openContainer.windowId));
-         GuiBeacon.this.mc.displayGuiScreen((GuiScreen)null);
+         GuiBeacon.this.mc.displayGuiScreen(null);
       }
 
       public void drawButtonForegroundLayer(int p_146111_1_, int p_146111_2_) {

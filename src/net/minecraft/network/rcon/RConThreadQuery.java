@@ -182,7 +182,8 @@ public class RConThreadQuery extends RConThreadBase {
          return false;
       } else {
          byte[] abyte = p_72627_1_.getData();
-         return this.queryClients.get(socketaddress).getRandomChallenge() != RConUtils.getBytesAsBEint(abyte, 7, p_72627_1_.getLength()) ? false : true;
+         return this.queryClients.get(socketaddress).getRandomChallenge() == RConUtils.getBytesAsBEint(abyte, 7,
+                 p_72627_1_.getLength());
       }
    }
 
@@ -224,7 +225,6 @@ public class RConThreadQuery extends RConThreadBase {
             } catch (SocketTimeoutException var7) {
                this.cleanQueryClientsMap();
             } catch (PortUnreachableException var8) {
-               ;
             } catch (IOException ioexception) {
                this.stopWithException(ioexception);
             }

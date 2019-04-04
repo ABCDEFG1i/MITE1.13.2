@@ -88,7 +88,7 @@ public class SimpleBakedModel implements IBakedModel {
 
          p_i48189_4_.setSeed(p_i48189_5_);
 
-         for(BakedQuad bakedquad1 : p_i48189_2_.func_200117_a(p_i48189_1_, (EnumFacing)null, p_i48189_4_)) {
+         for(BakedQuad bakedquad1 : p_i48189_2_.func_200117_a(p_i48189_1_, null, p_i48189_4_)) {
             this.func_177648_a(new BakedQuadRetextured(bakedquad1, p_i48189_3_));
          }
 

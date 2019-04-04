@@ -16,7 +16,7 @@ public class PotionType {
    }
 
    public PotionType(PotionEffect... p_i46739_1_) {
-      this((String)null, p_i46739_1_);
+      this(null, p_i46739_1_);
    }
 
    public PotionType(@Nullable String p_i46740_1_, PotionEffect... p_i46740_2_) {

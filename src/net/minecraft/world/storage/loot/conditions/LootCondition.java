@@ -10,7 +10,7 @@ import net.minecraft.world.storage.loot.LootContext;
 public interface LootCondition {
    boolean testCondition(Random p_186618_1_, LootContext p_186618_2_);
 
-   public abstract static class Serializer<T extends LootCondition> {
+   abstract class Serializer<T extends LootCondition> {
       private final ResourceLocation lootTableLocation;
       private final Class<T> conditionClass;
 

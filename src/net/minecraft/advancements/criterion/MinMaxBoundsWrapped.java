@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class MinMaxBoundsWrapped {
-   public static final MinMaxBoundsWrapped UNBOUNDED = new MinMaxBoundsWrapped((Float)null, (Float)null);
+   public static final MinMaxBoundsWrapped UNBOUNDED = new MinMaxBoundsWrapped(null, null);
    public static final SimpleCommandExceptionType field_211362_b = new SimpleCommandExceptionType(new TextComponentTranslation("argument.range.ints"));
    private final Float min;
    private final Float max;

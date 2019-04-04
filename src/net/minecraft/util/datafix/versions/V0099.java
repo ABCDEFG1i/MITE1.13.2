@@ -273,7 +273,7 @@ public class V0099 extends Schema {
             String s = p_209869_0_.getString("id");
             String s1 = p_209869_1_.get(NamespacedSchema.ensureNamespaced(s));
             if (s1 == null) {
-               LOGGER.warn("Unable to resolve BlockEntity for ItemStack: {}", (Object)s);
+               LOGGER.warn("Unable to resolve BlockEntity for ItemStack: {}", s);
                return p_209870_2_;
             } else {
                return p_209870_2_.set("id", p_209869_0_.createString(s1));

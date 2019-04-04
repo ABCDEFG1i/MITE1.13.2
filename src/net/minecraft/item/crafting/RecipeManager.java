@@ -44,7 +44,7 @@ public class RecipeManager implements IResourceManagerReloadListener {
          try (IResource iresource = p_195410_1_.getResource(resourcelocation)) {
             JsonObject jsonobject = JsonUtils.fromJson(gson, IOUtils.toString(iresource.getInputStream(), StandardCharsets.UTF_8), JsonObject.class);
             if (jsonobject == null) {
-               LOGGER.error("Couldn't load recipe {} as it's null or empty", (Object)resourcelocation1);
+               LOGGER.error("Couldn't load recipe {} as it's null or empty", resourcelocation1);
             } else {
                this.addRecipe(RecipeSerializers.deserialize(resourcelocation1, jsonobject));
             }
@@ -57,7 +57,7 @@ public class RecipeManager implements IResourceManagerReloadListener {
          }
       }
 
-      LOGGER.info("Loaded {} recipes", (int)this.recipes.size());
+      LOGGER.info("Loaded {} recipes", this.recipes.size());
    }
 
    public void addRecipe(IRecipe p_199509_1_) {

@@ -55,7 +55,7 @@ public class EntityAnchorArgument implements ArgumentType<EntityAnchorArgument.T
       return EXMAPLES;
    }
 
-   public static enum Type {
+   public enum Type {
       FEET("feet", (p_201019_0_, p_201019_1_) -> {
          return p_201019_0_;
       }),
@@ -72,7 +72,7 @@ public class EntityAnchorArgument implements ArgumentType<EntityAnchorArgument.T
       private final String field_201021_d;
       private final BiFunction<Vec3d, Entity, Vec3d> field_201022_e;
 
-      private Type(String p_i48597_3_, BiFunction<Vec3d, Entity, Vec3d> p_i48597_4_) {
+      Type(String p_i48597_3_, BiFunction<Vec3d, Entity, Vec3d> p_i48597_4_) {
          this.field_201021_d = p_i48597_3_;
          this.field_201022_e = p_i48597_4_;
       }

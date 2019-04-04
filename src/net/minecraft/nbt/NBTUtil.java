@@ -94,7 +94,7 @@ public final class NBTUtil {
                   nbttagcompound1.setString("Signature", property.getSignature());
                }
 
-               nbttaglist.add((INBTBase)nbttagcompound1);
+               nbttaglist.add(nbttagcompound1);
             }
 
             nbttagcompound.setTag(s, nbttaglist);
@@ -205,7 +205,7 @@ public final class NBTUtil {
    private static <S extends IStateHolder<S>, T extends Comparable<T>> S setValueHelper(S p_193590_0_, IProperty<T> p_193590_1_, String p_193590_2_, NBTTagCompound p_193590_3_, NBTTagCompound p_193590_4_) {
       Optional<T> optional = p_193590_1_.parseValue(p_193590_3_.getString(p_193590_2_));
       if (optional.isPresent()) {
-         return (S)(p_193590_0_.with(p_193590_1_, (T)(optional.get())));
+         return p_193590_0_.with(p_193590_1_, optional.get());
       } else {
          LOGGER.warn("Unable to read property: {} with value: {} for blockstate: {}", p_193590_2_, p_193590_3_.getString(p_193590_2_), p_193590_4_.toString());
          return p_193590_0_;

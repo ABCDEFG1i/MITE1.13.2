@@ -184,9 +184,7 @@ public class WorldClient extends World {
 
    public void onEntityAdded(Entity p_72923_1_) {
       super.onEntityAdded(p_72923_1_);
-      if (this.entitySpawnQueue.contains(p_72923_1_)) {
-         this.entitySpawnQueue.remove(p_72923_1_);
-      }
+       this.entitySpawnQueue.remove(p_72923_1_);
 
    }
 
@@ -219,7 +217,7 @@ public class WorldClient extends World {
 
    @Nullable
    public Entity getEntityByID(int p_73045_1_) {
-      return (Entity)(p_73045_1_ == this.mc.player.getEntityId() ? this.mc.player : super.getEntityByID(p_73045_1_));
+      return p_73045_1_ == this.mc.player.getEntityId() ? this.mc.player : super.getEntityByID(p_73045_1_);
    }
 
    public Entity removeEntityFromWorld(int p_73028_1_) {
@@ -440,9 +438,9 @@ public class WorldClient extends World {
    public void setWorldTime(long p_72877_1_) {
       if (p_72877_1_ < 0L) {
          p_72877_1_ = -p_72877_1_;
-         this.getGameRules().setOrCreateGameRule("doDaylightCycle", "false", (MinecraftServer)null);
+         this.getGameRules().setOrCreateGameRule("doDaylightCycle", "false", null);
       } else {
-         this.getGameRules().setOrCreateGameRule("doDaylightCycle", "true", (MinecraftServer)null);
+         this.getGameRules().setOrCreateGameRule("doDaylightCycle", "true", null);
       }
 
       super.setWorldTime(p_72877_1_);

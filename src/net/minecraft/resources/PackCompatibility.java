@@ -13,7 +13,7 @@ public enum PackCompatibility {
    private final ITextComponent field_198975_d;
    private final ITextComponent field_198976_e;
 
-   private PackCompatibility(String p_i47910_3_) {
+   PackCompatibility(String p_i47910_3_) {
       this.field_198975_d = new TextComponentTranslation("resourcePack.incompatible." + p_i47910_3_);
       this.field_198976_e = new TextComponentTranslation("resourcePack.incompatible.confirm." + p_i47910_3_);
    }

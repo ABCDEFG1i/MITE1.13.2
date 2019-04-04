@@ -31,8 +31,7 @@ public class PngSizeInfo {
          PngSizeInfo.Reader pngsizeinfo$reader = func_195695_a(p_i48120_1_.getInputStream());
          STBIReadCallback stbireadcallback = STBIReadCallback.create(pngsizeinfo$reader::func_195682_a);
          STBISkipCallback stbiskipcallback = STBISkipCallback.create(pngsizeinfo$reader::func_195686_a);
-         STBIEOFCallback stbieofcallback = STBIEOFCallback.create(pngsizeinfo$reader::func_195685_a);
-      ) {
+         STBIEOFCallback stbieofcallback = STBIEOFCallback.create(pngsizeinfo$reader::func_195685_a)) {
          STBIIOCallbacks stbiiocallbacks = STBIIOCallbacks.mallocStack(memorystack);
          stbiiocallbacks.read(stbireadcallback);
          stbiiocallbacks.skip(stbiskipcallback);
@@ -51,7 +50,7 @@ public class PngSizeInfo {
    }
 
    private static PngSizeInfo.Reader func_195695_a(InputStream p_195695_0_) {
-      return (PngSizeInfo.Reader)(p_195695_0_ instanceof FileInputStream ? new PngSizeInfo.ReaderSeekable(((FileInputStream)p_195695_0_).getChannel()) : new PngSizeInfo.ReaderBuffer(Channels.newChannel(p_195695_0_)));
+      return p_195695_0_ instanceof FileInputStream ? new ReaderSeekable(((FileInputStream)p_195695_0_).getChannel()) : new ReaderBuffer(Channels.newChannel(p_195695_0_));
    }
 
    @OnlyIn(Dist.CLIENT)

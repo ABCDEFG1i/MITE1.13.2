@@ -13,7 +13,7 @@ public interface ISaveDataAccess {
    @Nullable
    default <T extends WorldSavedData> T func_212411_a(DimensionType p_212411_1_, Function<String, T> p_212411_2_, String p_212411_3_) {
       WorldSavedDataStorage worldsaveddatastorage = this.func_175693_T();
-      return (T)(worldsaveddatastorage == null ? null : worldsaveddatastorage.func_212426_a(p_212411_1_, p_212411_2_, p_212411_3_));
+      return worldsaveddatastorage == null ? null : worldsaveddatastorage.func_212426_a(p_212411_1_, p_212411_2_, p_212411_3_);
    }
 
    default void func_212409_a(DimensionType p_212409_1_, String p_212409_2_, WorldSavedData p_212409_3_) {

@@ -146,7 +146,7 @@ public class AdvancementCommand {
 
    }
 
-   static enum Action {
+   enum Action {
       GRANT("grant") {
          protected boolean func_198179_a(EntityPlayerMP p_198179_1_, Advancement p_198179_2_) {
             AdvancementProgress advancementprogress = p_198179_1_.getAdvancements().getProgress(p_198179_2_);
@@ -186,7 +186,7 @@ public class AdvancementCommand {
 
       private final String field_198186_c;
 
-      private Action(String p_i48092_3_) {
+      Action(String p_i48092_3_) {
          this.field_198186_c = "commands.advancement." + p_i48092_3_;
       }
 
@@ -211,7 +211,7 @@ public class AdvancementCommand {
       }
    }
 
-   static enum Mode {
+   enum Mode {
       ONLY(false, false),
       THROUGH(true, true),
       FROM(false, true),
@@ -221,7 +221,7 @@ public class AdvancementCommand {
       private final boolean field_198194_f;
       private final boolean field_198195_g;
 
-      private Mode(boolean p_i48091_3_, boolean p_i48091_4_) {
+      Mode(boolean p_i48091_3_, boolean p_i48091_4_) {
          this.field_198194_f = p_i48091_3_;
          this.field_198195_g = p_i48091_4_;
       }

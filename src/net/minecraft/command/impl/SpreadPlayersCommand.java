@@ -64,7 +64,7 @@ public class SpreadPlayersCommand {
          if (entity instanceof EntityPlayer) {
             set.add(entity.getTeam());
          } else {
-            set.add((Team)null);
+            set.add(null);
          }
       }
 

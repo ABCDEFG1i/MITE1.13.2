@@ -17,7 +17,7 @@ public enum RailShape implements IStringSerializable {
    private final int meta;
    private final String name;
 
-   private RailShape(int p_i49334_3_, String p_i49334_4_) {
+   RailShape(int p_i49334_3_, String p_i49334_4_) {
       this.meta = p_i49334_3_;
       this.name = p_i49334_4_;
    }

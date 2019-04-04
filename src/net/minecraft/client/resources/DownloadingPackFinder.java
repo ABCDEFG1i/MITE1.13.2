@@ -76,7 +76,7 @@ public class DownloadingPackFinder implements IPackFinder {
       map.put("X-Minecraft-Username", Minecraft.getInstance().getSession().getUsername());
       map.put("X-Minecraft-UUID", Minecraft.getInstance().getSession().getPlayerID());
       map.put("X-Minecraft-Version", "1.13.2");
-      map.put("X-Minecraft-Pack-Format", String.valueOf((int)4));
+      map.put("X-Minecraft-Pack-Format", String.valueOf(4));
       map.put("User-Agent", "Minecraft Java/1.13.2");
       return map;
    }
@@ -95,7 +95,7 @@ public class DownloadingPackFinder implements IPackFinder {
                return listenablefuture1;
             }
 
-            LOGGER.warn("Deleting file {}", (Object)file1);
+            LOGGER.warn("Deleting file {}", file1);
             FileUtils.deleteQuietly(file1);
          }
 
@@ -112,9 +112,9 @@ public class DownloadingPackFinder implements IPackFinder {
             public void onSuccess(@Nullable Object p_onSuccess_1_) {
                if (DownloadingPackFinder.this.func_195745_a(s1, file1)) {
                   DownloadingPackFinder.this.func_195741_a(file1);
-                  settablefuture.set((Object)null);
+                  settablefuture.set(null);
                } else {
-                  DownloadingPackFinder.LOGGER.warn("Deleting file {}", (Object)file1);
+                  DownloadingPackFinder.LOGGER.warn("Deleting file {}", file1);
                   FileUtils.deleteQuietly(file1);
                }
 
@@ -153,9 +153,9 @@ public class DownloadingPackFinder implements IPackFinder {
 
    private boolean func_195745_a(String p_195745_1_, File p_195745_2_) {
       try {
-         String s = DigestUtils.sha1Hex((InputStream)(new FileInputStream(p_195745_2_)));
+         String s = DigestUtils.sha1Hex(new FileInputStream(p_195745_2_));
          if (p_195745_1_.isEmpty()) {
-            LOGGER.info("Found file {} without verification hash", (Object)p_195745_2_);
+            LOGGER.info("Found file {} without verification hash", p_195745_2_);
             return true;
          }
 
@@ -174,18 +174,18 @@ public class DownloadingPackFinder implements IPackFinder {
 
    private void func_195747_e() {
       try {
-         List<File> list = Lists.newArrayList(FileUtils.listFiles(this.field_195754_d, TrueFileFilter.TRUE, (IOFileFilter)null));
+         List<File> list = Lists.newArrayList(FileUtils.listFiles(this.field_195754_d, TrueFileFilter.TRUE, null));
          list.sort(LastModifiedFileComparator.LASTMODIFIED_REVERSE);
          int i = 0;
 
          for(File file1 : list) {
             if (i++ >= 10) {
-               LOGGER.info("Deleting old server resource pack {}", (Object)file1.getName());
+               LOGGER.info("Deleting old server resource pack {}", file1.getName());
                FileUtils.deleteQuietly(file1);
             }
          }
       } catch (IllegalArgumentException illegalargumentexception) {
-         LOGGER.error("Error while deleting old server resource pack : {}", (Object)illegalargumentexception.getMessage());
+         LOGGER.error("Error while deleting old server resource pack : {}", illegalargumentexception.getMessage());
       }
 
    }
@@ -200,10 +200,8 @@ public class DownloadingPackFinder implements IPackFinder {
          try (InputStream inputstream = filepack.getRootResourceStream("pack.png")) {
             nativeimage = NativeImage.read(inputstream);
          } catch (IllegalArgumentException | IOException var36) {
-            ;
          }
       } catch (IOException var39) {
-         ;
       }
 
       if (packmetadatasection == null) {

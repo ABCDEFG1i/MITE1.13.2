@@ -30,7 +30,6 @@ public class ResourcePackInfoClient extends ResourcePackInfo {
       try (InputStream inputstream = p_i48113_4_.getRootResourceStream("pack.png")) {
          nativeimage = NativeImage.read(inputstream);
       } catch (IllegalArgumentException | IOException var21) {
-         ;
       }
 
       this.field_195809_a = nativeimage;

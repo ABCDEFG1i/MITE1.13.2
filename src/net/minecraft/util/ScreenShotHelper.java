@@ -27,7 +27,7 @@ public class ScreenShotHelper {
    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
 
    public static void func_148260_a(File p_148260_0_, int p_148260_1_, int p_148260_2_, Framebuffer p_148260_3_, Consumer<ITextComponent> p_148260_4_) {
-      func_148259_a(p_148260_0_, (String)null, p_148260_1_, p_148260_2_, p_148260_3_, p_148260_4_);
+      func_148259_a(p_148260_0_, null, p_148260_1_, p_148260_2_, p_148260_3_, p_148260_4_);
    }
 
    public static void func_148259_a(File p_148259_0_, @Nullable String p_148259_1_, int p_148259_2_, int p_148259_3_, Framebuffer p_148259_4_, Consumer<ITextComponent> p_148259_5_) {
@@ -49,7 +49,7 @@ public class ScreenShotHelper {
             });
             p_148259_5_.accept(new TextComponentTranslation("screenshot.success", itextcomponent));
          } catch (Exception exception) {
-            LOGGER.warn("Couldn't save screenshot", (Throwable)exception);
+            LOGGER.warn("Couldn't save screenshot", exception);
             p_148259_5_.accept(new TextComponentTranslation("screenshot.failure", exception.getMessage()));
          } finally {
             nativeimage.close();

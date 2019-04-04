@@ -17,7 +17,7 @@ public enum EnumDifficulty {
    private final int id;
    private final String translationKey;
 
-   private EnumDifficulty(int p_i45312_3_, String p_i45312_4_) {
+   EnumDifficulty(int p_i45312_3_, String p_i45312_4_) {
       this.id = p_i45312_3_;
       this.translationKey = p_i45312_4_;
    }

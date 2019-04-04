@@ -43,7 +43,7 @@ public class InventoryEnderChest extends InventoryBasic {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setByte("Slot", (byte)i);
             itemstack.write(nbttagcompound);
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          }
       }
 
@@ -51,7 +51,8 @@ public class InventoryEnderChest extends InventoryBasic {
    }
 
    public boolean isUsableByPlayer(EntityPlayer p_70300_1_) {
-      return this.associatedChest != null && !this.associatedChest.canBeUsed(p_70300_1_) ? false : super.isUsableByPlayer(p_70300_1_);
+      return (this.associatedChest == null || this.associatedChest.canBeUsed(p_70300_1_)) && super.isUsableByPlayer(
+              p_70300_1_);
    }
 
    public void openInventory(EntityPlayer p_174889_1_) {

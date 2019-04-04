@@ -58,7 +58,7 @@ public class TileEntityChest extends TileEntityLockableLoot implements IChestLid
 
    public ITextComponent getName() {
       ITextComponent itextcomponent = this.getCustomName();
-      return (ITextComponent)(itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.chest"));
+      return itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.chest");
    }
 
    public void readFromNBT(NBTTagCompound p_145839_1_) {
@@ -153,7 +153,7 @@ public class TileEntityChest extends TileEntityLockableLoot implements IChestLid
             d2 += (double)enumfacing.getZOffset() * 0.5D;
          }
 
-         this.world.playSound((EntityPlayer)null, d0, d1, d2, p_195483_1_, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+         this.world.playSound(null, d0, d1, d2, p_195483_1_, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
       }
    }
 

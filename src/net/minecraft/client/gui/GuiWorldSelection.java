@@ -14,6 +14,7 @@ public class GuiWorldSelection extends GuiScreen {
    private static final Logger LOGGER = LogManager.getLogger();
    protected GuiScreen prevScreen;
    protected String title = "Select world";
+   private String notification = "(Only show supported worlds)";
    private String worldVersTooltip;
    private GuiButton deleteButton;
    private GuiButton selectButton;
@@ -37,6 +38,7 @@ public class GuiWorldSelection extends GuiScreen {
    protected void initGui() {
       this.mc.keyboardListener.enableRepeatEvents(true);
       this.title = I18n.format("selectWorld.title");
+      this.notification = I18n.format("selectWorld.notification");
       this.field_212352_g = new GuiTextField(0, this.fontRenderer, this.width / 2 - 100, 22, 200, 20, this.field_212352_g) {
          public void setFocused(boolean p_146195_1_) {
             super.setFocused(true);
@@ -107,7 +109,8 @@ public class GuiWorldSelection extends GuiScreen {
    }
 
    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
-      return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) ? true : this.field_212352_g.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+      return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_) || this.field_212352_g.keyPressed(
+              p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
    }
 
    public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {
@@ -118,7 +121,8 @@ public class GuiWorldSelection extends GuiScreen {
       this.worldVersTooltip = null;
       this.selectionList.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
       this.field_212352_g.drawTextField(p_73863_1_, p_73863_2_, p_73863_3_);
-      this.drawCenteredString(this.fontRenderer, this.title, this.width / 2, 8, 16777215);
+      this.drawCenteredString(this.fontRenderer, this.title, this.width / 2, 0, 16777215);
+      this.drawCenteredString(this.fontRenderer, this.notification, this.width / 2, 10, 16777215);
       super.render(p_73863_1_, p_73863_2_, p_73863_3_);
       if (this.worldVersTooltip != null) {
          this.drawHoveringText(Lists.newArrayList(Splitter.on("\n").split(this.worldVersTooltip)), p_73863_1_, p_73863_2_);

@@ -8,7 +8,7 @@ public enum BlockRenderLayer {
 
    private final String layerName;
 
-   private BlockRenderLayer(String p_i45755_3_) {
+   BlockRenderLayer(String p_i45755_3_) {
       this.layerName = p_i45755_3_;
    }
 

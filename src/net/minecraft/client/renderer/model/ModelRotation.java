@@ -46,7 +46,7 @@ public enum ModelRotation {
       return p_177521_0_ * 360 + p_177521_1_;
    }
 
-   private ModelRotation(int p_i46087_3_, int p_i46087_4_) {
+   ModelRotation(int p_i46087_3_, int p_i46087_4_) {
       this.field_177545_r = func_177521_b(p_i46087_3_, p_i46087_4_);
       Quaternion quaternion = new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), (float)(-p_i46087_4_), true);
       quaternion.multiply(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), (float)(-p_i46087_3_), true));

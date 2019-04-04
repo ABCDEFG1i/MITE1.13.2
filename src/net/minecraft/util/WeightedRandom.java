@@ -36,7 +36,7 @@ public class WeightedRandom {
          }
       }
 
-      return (T)null;
+      return null;
    }
 
    public static <T extends WeightedRandom.Item> T getRandomItem(Random p_76271_0_, List<T> p_76271_1_) {
@@ -46,8 +46,8 @@ public class WeightedRandom {
    public static class Item {
       public int itemWeight;
 
-      public Item(int p_i1556_1_) {
-         this.itemWeight = p_i1556_1_;
+      public Item(int itemWeight) {
+         this.itemWeight = itemWeight;
       }
    }
 }

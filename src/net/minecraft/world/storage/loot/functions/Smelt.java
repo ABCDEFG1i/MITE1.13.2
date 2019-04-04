@@ -35,7 +35,7 @@ public class Smelt extends LootFunction {
             }
          }
 
-         LOGGER.warn("Couldn't smelt {} because there is no smelting recipe", (Object)p_186553_1_);
+         LOGGER.warn("Couldn't smelt {} because there is no smelting recipe", p_186553_1_);
          return p_186553_1_;
       }
    }

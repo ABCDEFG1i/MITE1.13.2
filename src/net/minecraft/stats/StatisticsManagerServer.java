@@ -57,7 +57,7 @@ public class StatisticsManagerServer extends StatisticsManager {
       try {
          FileUtils.writeStringToFile(this.statsFile, this.func_199061_b());
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't save stats", (Throwable)ioexception);
+         LOGGER.error("Couldn't save stats", ioexception);
       }
 
    }
@@ -112,7 +112,7 @@ public class StatisticsManagerServer extends StatisticsManager {
                }
             }
          } else {
-            LOGGER.error("Unable to parse Stat data from {}", (Object)this.statsFile);
+            LOGGER.error("Unable to parse Stat data from {}", this.statsFile);
          }
       } catch (IOException | JsonParseException jsonparseexception) {
          LOGGER.error("Unable to parse Stat data from {}", this.statsFile, jsonparseexception);

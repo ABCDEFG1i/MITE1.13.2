@@ -75,7 +75,6 @@ public class WorldChunkEnumerator {
             try {
                regionfile.close();
             } catch (IOException var17) {
-               ;
             }
          }
 

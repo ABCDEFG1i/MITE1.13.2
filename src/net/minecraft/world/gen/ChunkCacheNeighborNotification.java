@@ -39,7 +39,7 @@ public class ChunkCacheNeighborNotification extends Long2ObjectOpenHashMap<Chunk
    }
 
    public Chunk remove(long p_remove_1_) {
-      Chunk chunk = (Chunk)super.remove(p_remove_1_);
+      Chunk chunk = super.remove(p_remove_1_);
       ChunkPos chunkpos = new ChunkPos(p_remove_1_);
 
       for(int i = chunkpos.x - 1; i <= chunkpos.x + 1; ++i) {

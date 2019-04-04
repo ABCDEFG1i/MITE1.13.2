@@ -42,7 +42,7 @@ public class CriterionProgress {
    }
 
    public JsonElement serialize() {
-      return (JsonElement)(this.obtained != null ? new JsonPrimitive(DATE_TIME_FORMATTER.format(this.obtained)) : JsonNull.INSTANCE);
+      return this.obtained != null ? new JsonPrimitive(DATE_TIME_FORMATTER.format(this.obtained)) : JsonNull.INSTANCE;
    }
 
    public static CriterionProgress read(PacketBuffer p_192149_0_) {

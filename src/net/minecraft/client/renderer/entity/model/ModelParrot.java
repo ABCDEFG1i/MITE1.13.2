@@ -175,11 +175,11 @@ public class ModelParrot extends ModelBase {
    }
 
    @OnlyIn(Dist.CLIENT)
-   static enum State {
+   enum State {
       FLYING,
       STANDING,
       SITTING,
       PARTY,
-      ON_SHOULDER;
+      ON_SHOULDER
    }
 }

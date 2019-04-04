@@ -782,7 +782,7 @@ public abstract class EntityMinecart extends Entity implements INameable {
       this.getDataManager().set(SHOW_BLOCK, p_94096_1_);
    }
 
-   public static enum Type {
+   public enum Type {
       RIDEABLE(0),
       CHEST(1),
       FURNACE(2),
@@ -796,7 +796,7 @@ public abstract class EntityMinecart extends Entity implements INameable {
       });
       private final int id;
 
-      private Type(int p_i48595_3_) {
+      Type(int p_i48595_3_) {
          this.id = p_i48595_3_;
       }
 

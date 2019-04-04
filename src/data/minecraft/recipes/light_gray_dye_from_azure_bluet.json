@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "light_gray_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:azure_bluet"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:light_gray_dye"
+  }
+}

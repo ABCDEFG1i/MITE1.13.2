@@ -58,7 +58,7 @@ public class StateContainer<O, S extends IStateHolder<S>> {
    }
 
    public S getBaseState() {
-      return (S)(this.validStates.get(0));
+      return this.validStates.get(0);
    }
 
    public O getOwner() {

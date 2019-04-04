@@ -29,7 +29,7 @@ public class AdvancementList {
          this.remove(advancement);
       }
 
-      LOGGER.info("Forgot about advancement {}", (Object)p_192090_1_.getId());
+      LOGGER.info("Forgot about advancement {}", p_192090_1_.getId());
       this.advancements.remove(p_192090_1_.getId());
       if (p_192090_1_.getParent() == null) {
          this.roots.remove(p_192090_1_);
@@ -50,7 +50,7 @@ public class AdvancementList {
       for(ResourceLocation resourcelocation : p_192085_1_) {
          Advancement advancement = this.advancements.get(resourcelocation);
          if (advancement == null) {
-            LOGGER.warn("Told to remove advancement {} but I don't know what that is", (Object)resourcelocation);
+            LOGGER.warn("Told to remove advancement {} but I don't know what that is", resourcelocation);
          } else {
             this.remove(advancement);
          }
@@ -59,7 +59,7 @@ public class AdvancementList {
    }
 
    public void loadAdvancements(Map<ResourceLocation, Advancement.Builder> p_192083_1_) {
-      Function<ResourceLocation, Advancement> function = Functions.forMap(this.advancements, (Advancement)null);
+      Function<ResourceLocation, Advancement> function = Functions.forMap(this.advancements, null);
 
       while(!p_192083_1_.isEmpty()) {
          boolean flag = false;
@@ -96,7 +96,7 @@ public class AdvancementList {
          }
       }
 
-      LOGGER.info("Loaded {} advancements", (int)this.advancements.size());
+      LOGGER.info("Loaded {} advancements", this.advancements.size());
    }
 
    public void clear() {

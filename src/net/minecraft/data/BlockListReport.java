@@ -77,7 +77,7 @@ public class BlockListReport implements IDataProvider {
       Files.createDirectories(path.getParent());
 
       try (BufferedWriter bufferedwriter = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
-         String s = (new GsonBuilder()).setPrettyPrinting().create().toJson((JsonElement)jsonobject);
+         String s = (new GsonBuilder()).setPrettyPrinting().create().toJson(jsonobject);
          bufferedwriter.write(s);
       }
 

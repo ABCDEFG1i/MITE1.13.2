@@ -49,12 +49,12 @@ public class BlockSkull extends BlockAbstractSkull {
    public interface ISkullType {
    }
 
-   public static enum Types implements BlockSkull.ISkullType {
+   public enum Types implements BlockSkull.ISkullType {
       SKELETON,
       WITHER_SKELETON,
       PLAYER,
       ZOMBIE,
       CREEPER,
-      DRAGON;
+      DRAGON
    }
 }

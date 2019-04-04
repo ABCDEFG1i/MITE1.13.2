@@ -34,7 +34,7 @@ public class BlockParticleData implements IParticleData {
    }
 
    public String getParameters() {
-      return this.getType().getId() + " " + BlockStateParser.toString(this.blockState, (NBTTagCompound)null);
+      return this.getType().getId() + " " + BlockStateParser.toString(this.blockState, null);
    }
 
    public ParticleType<BlockParticleData> getType() {

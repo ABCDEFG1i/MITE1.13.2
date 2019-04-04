@@ -37,7 +37,7 @@ public class ItemWrittenBook extends Item {
          return false;
       } else {
          String s = p_77828_0_.getString("title");
-         return s.length() > 32 ? false : p_77828_0_.hasKey("author", 8);
+         return s.length() <= 32 && p_77828_0_.hasKey("author", 8);
       }
    }
 
@@ -100,7 +100,7 @@ public class ItemWrittenBook extends Item {
                   itextcomponent = new TextComponentString(s);
                }
 
-               nbttaglist.set(i, (INBTBase)(new NBTTagString(ITextComponent.Serializer.toJson(itextcomponent))));
+               nbttaglist.set(i, new NBTTagString(ITextComponent.Serializer.toJson(itextcomponent)));
             }
 
             nbttagcompound.setTag("pages", nbttaglist);

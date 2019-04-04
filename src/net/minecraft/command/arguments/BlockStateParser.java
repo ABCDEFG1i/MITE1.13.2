@@ -463,7 +463,7 @@ public class BlockStateParser {
    private <T extends Comparable<T>> void parseValue(IProperty<T> p_197253_1_, String p_197253_2_, int p_197253_3_) throws CommandSyntaxException {
       Optional<T> optional = p_197253_1_.parseValue(p_197253_2_);
       if (optional.isPresent()) {
-         this.blockState = this.blockState.with(p_197253_1_, (T)(optional.get()));
+         this.blockState = this.blockState.with(p_197253_1_, optional.get());
          this.properties.put(p_197253_1_, optional.get());
       } else {
          this.reader.setCursor(p_197253_3_);
@@ -490,7 +490,7 @@ public class BlockStateParser {
       }
 
       if (p_197247_1_ != null) {
-         stringbuilder.append((Object)p_197247_1_);
+         stringbuilder.append(p_197247_1_);
       }
 
       return stringbuilder.toString();

@@ -30,16 +30,19 @@ public class FillCommand {
    private static final Dynamic2CommandExceptionType TOO_BIG_EXCEPTION = new Dynamic2CommandExceptionType((p_208897_0_, p_208897_1_) -> {
       return new TextComponentTranslation("commands.fill.toobig", p_208897_0_, p_208897_1_);
    });
-   private static final BlockStateInput AIR = new BlockStateInput(Blocks.AIR.getDefaultState(), Collections.emptySet(), (NBTTagCompound)null);
+   private static final BlockStateInput AIR = new BlockStateInput(Blocks.AIR.getDefaultState(), Collections.emptySet(),
+           null);
    private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TextComponentTranslation("commands.fill.failed"));
 
    public static void register(CommandDispatcher<CommandSource> p_198465_0_) {
       p_198465_0_.register(Commands.literal("fill").requires((p_198471_0_) -> {
          return p_198471_0_.hasPermissionLevel(2);
       }).then(Commands.argument("from", BlockPosArgument.blockPos()).then(Commands.argument("to", BlockPosArgument.blockPos()).then(Commands.argument("block", BlockStateArgument.blockState()).executes((p_198472_0_) -> {
-         return doFill(p_198472_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198472_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198472_0_, "to")), BlockStateArgument.getBlockStateInput(p_198472_0_, "block"), FillCommand.Mode.REPLACE, (Predicate<BlockWorldState>)null);
+         return doFill(p_198472_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198472_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198472_0_, "to")), BlockStateArgument.getBlockStateInput(p_198472_0_, "block"), FillCommand.Mode.REPLACE,
+                 null);
       }).then(Commands.literal("replace").executes((p_198464_0_) -> {
-         return doFill(p_198464_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198464_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198464_0_, "to")), BlockStateArgument.getBlockStateInput(p_198464_0_, "block"), FillCommand.Mode.REPLACE, (Predicate<BlockWorldState>)null);
+         return doFill(p_198464_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198464_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198464_0_, "to")), BlockStateArgument.getBlockStateInput(p_198464_0_, "block"), FillCommand.Mode.REPLACE,
+                 null);
       }).then(Commands.argument("filter", BlockPredicateArgument.blockPredicateArgument()).executes((p_198466_0_) -> {
          return doFill(p_198466_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198466_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198466_0_, "to")), BlockStateArgument.getBlockStateInput(p_198466_0_, "block"), FillCommand.Mode.REPLACE, BlockPredicateArgument.getBlockPredicate(p_198466_0_, "filter"));
       }))).then(Commands.literal("keep").executes((p_198462_0_) -> {
@@ -47,11 +50,14 @@ public class FillCommand {
             return p_198469_0_.getWorld().isAirBlock(p_198469_0_.getPos());
          });
       })).then(Commands.literal("outline").executes((p_198467_0_) -> {
-         return doFill(p_198467_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198467_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198467_0_, "to")), BlockStateArgument.getBlockStateInput(p_198467_0_, "block"), FillCommand.Mode.OUTLINE, (Predicate<BlockWorldState>)null);
+         return doFill(p_198467_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198467_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198467_0_, "to")), BlockStateArgument.getBlockStateInput(p_198467_0_, "block"), FillCommand.Mode.OUTLINE,
+                 null);
       })).then(Commands.literal("hollow").executes((p_198461_0_) -> {
-         return doFill(p_198461_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198461_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198461_0_, "to")), BlockStateArgument.getBlockStateInput(p_198461_0_, "block"), FillCommand.Mode.HOLLOW, (Predicate<BlockWorldState>)null);
+         return doFill(p_198461_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198461_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198461_0_, "to")), BlockStateArgument.getBlockStateInput(p_198461_0_, "block"), FillCommand.Mode.HOLLOW,
+                 null);
       })).then(Commands.literal("destroy").executes((p_198468_0_) -> {
-         return doFill(p_198468_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198468_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198468_0_, "to")), BlockStateArgument.getBlockStateInput(p_198468_0_, "block"), FillCommand.Mode.DESTROY, (Predicate<BlockWorldState>)null);
+         return doFill(p_198468_0_.getSource(), new MutableBoundingBox(BlockPosArgument.getLoadedBlockPos(p_198468_0_, "from"), BlockPosArgument.getLoadedBlockPos(p_198468_0_, "to")), BlockStateArgument.getBlockStateInput(p_198468_0_, "block"), FillCommand.Mode.DESTROY,
+                 null);
       }))))));
    }
 
@@ -95,7 +101,7 @@ public class FillCommand {
       }
    }
 
-   static enum Mode {
+   enum Mode {
       REPLACE((p_198450_0_, p_198450_1_, p_198450_2_, p_198450_3_) -> {
          return p_198450_2_;
       }),
@@ -112,7 +118,7 @@ public class FillCommand {
 
       public final SetBlockCommand.IFilter filter;
 
-      private Mode(SetBlockCommand.IFilter p_i47985_3_) {
+      Mode(SetBlockCommand.IFilter p_i47985_3_) {
          this.filter = p_i47985_3_;
       }
    }

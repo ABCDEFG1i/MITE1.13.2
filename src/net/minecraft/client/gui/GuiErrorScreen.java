@@ -18,7 +18,7 @@ public class GuiErrorScreen extends GuiScreen {
       super.initGui();
       this.addButton(new GuiButton(0, this.width / 2 - 100, 140, I18n.format("gui.cancel")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiErrorScreen.this.mc.displayGuiScreen((GuiScreen)null);
+            GuiErrorScreen.this.mc.displayGuiScreen(null);
          }
       });
    }

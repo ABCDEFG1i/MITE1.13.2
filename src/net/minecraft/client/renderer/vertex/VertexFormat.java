@@ -144,7 +144,7 @@ public class VertexFormat {
          if (this.vertexSize != vertexformat.vertexSize) {
             return false;
          } else {
-            return !this.elements.equals(vertexformat.elements) ? false : this.offsets.equals(vertexformat.offsets);
+            return this.elements.equals(vertexformat.elements) && this.offsets.equals(vertexformat.offsets);
          }
       } else {
          return false;

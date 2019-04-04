@@ -189,7 +189,7 @@ public class ScoreboardCommand {
       Scoreboard scoreboard = p_198654_0_.getServer().getWorldScoreboard();
 
       for(String s : p_198654_1_) {
-         scoreboard.removeObjectiveFromEntity(s, (ScoreObjective)null);
+         scoreboard.removeObjectiveFromEntity(s, null);
       }
 
       if (p_198654_1_.size() == 1) {
@@ -303,7 +303,7 @@ public class ScoreboardCommand {
       if (scoreboard.getObjectiveInDisplaySlot(p_198632_1_) == null) {
          throw DISPLAY_ALREADY_CLEAR_EXCEPTION.create();
       } else {
-         scoreboard.setObjectiveInDisplaySlot(p_198632_1_, (ScoreObjective)null);
+         scoreboard.setObjectiveInDisplaySlot(p_198632_1_, null);
          p_198632_0_.sendFeedback(new TextComponentTranslation("commands.scoreboard.objectives.display.cleared", Scoreboard.getDisplaySlotStrings()[p_198632_1_]), true);
          return 0;
       }

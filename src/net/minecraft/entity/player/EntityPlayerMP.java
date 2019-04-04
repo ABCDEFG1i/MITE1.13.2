@@ -422,6 +422,11 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
    }
 
    public void onDeath(DamageSource p_70645_1_) {
+      if (this.experienceLevel <= 0) {
+         this.respawnXpLevel = this.experienceLevel - 1;
+      } else {
+         this.respawnXpLevel = 0;
+      }
       boolean flag = this.world.getGameRules().getBoolean("showDeathMessages");
       if (flag) {
          ITextComponent itextcomponent = this.getCombatTracker().getDeathMessage();
@@ -532,7 +537,7 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
    }
 
    public boolean canAttackPlayer(EntityPlayer p_96122_1_) {
-      return !this.canPlayersAttack() ? false : super.canAttackPlayer(p_96122_1_);
+      return this.canPlayersAttack() && super.canAttackPlayer(p_96122_1_);
    }
 
    private boolean canPlayersAttack() {
@@ -575,7 +580,7 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
       if (p_174827_1_.isSpectator()) {
          return this.getSpectatingEntity() == this;
       } else {
-         return this.isSpectator() ? false : super.isSpectatedByPlayer(p_174827_1_);
+         return !this.isSpectator() && super.isSpectatedByPlayer(p_174827_1_);
       }
    }
 
@@ -871,8 +876,8 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
       return this.recipeBook.remove(p_195069_1_, this);
    }
 
-   public void func_195068_e(int p_195068_1_) {
-      super.func_195068_e(p_195068_1_);
+   public void addXpValue(int p_195068_1_) {
+      super.addXpValue(p_195068_1_);
       this.lastExperience = -1;
    }
 
@@ -1102,12 +1107,12 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
    }
 
    public Entity getSpectatingEntity() {
-      return (Entity)(this.spectatingEntity == null ? this : this.spectatingEntity);
+      return this.spectatingEntity == null ? this : this.spectatingEntity;
    }
 
    public void setSpectatingEntity(Entity p_175399_1_) {
       Entity entity = this.getSpectatingEntity();
-      this.spectatingEntity = (Entity)(p_175399_1_ == null ? this : p_175399_1_);
+      this.spectatingEntity = p_175399_1_ == null ? this : p_175399_1_;
       if (entity != this.spectatingEntity) {
          this.connection.sendPacket(new SPacketCamera(this.spectatingEntity));
          this.setPositionAndUpdate(this.spectatingEntity.posX, this.spectatingEntity.posY, this.spectatingEntity.posZ);

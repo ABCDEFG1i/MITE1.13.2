@@ -53,7 +53,7 @@ public class AdvancementProvider implements IDataProvider {
 
    private void saveAdvancement(DirectoryCache p_208309_1_, JsonObject p_208309_2_, Path p_208309_3_) {
       try {
-         String s = GSON.toJson((JsonElement)p_208309_2_);
+         String s = GSON.toJson(p_208309_2_);
          String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
          if (!Objects.equals(p_208309_1_.getPreviousHash(p_208309_3_), s1) || !Files.exists(p_208309_3_)) {
             Files.createDirectories(p_208309_3_.getParent());

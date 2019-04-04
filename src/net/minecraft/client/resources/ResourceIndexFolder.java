@@ -43,7 +43,6 @@ public class ResourceIndexFolder extends ResourceIndex {
          }).filter(p_211685_3_).collect(Collectors.toList());
          return collection;
       } catch (NoSuchFileException var20) {
-         ;
       } catch (IOException ioexception) {
          LOGGER.warn("Unable to getFiles on {}", p_211685_1_, ioexception);
       }

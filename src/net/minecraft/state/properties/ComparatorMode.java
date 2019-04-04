@@ -8,7 +8,7 @@ public enum ComparatorMode implements IStringSerializable {
 
    private final String name;
 
-   private ComparatorMode(String p_i49340_3_) {
+   ComparatorMode(String p_i49340_3_) {
       this.name = p_i49340_3_;
    }
 

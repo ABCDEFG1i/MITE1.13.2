@@ -39,14 +39,13 @@ public class MinecraftServerGui extends JComponent {
       try {
          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
       } catch (Exception var3) {
-         ;
       }
 
       MinecraftServerGui minecraftservergui = new MinecraftServerGui(p_120016_0_);
       JFrame jframe = new JFrame("Minecraft server");
       jframe.add(minecraftservergui);
       jframe.pack();
-      jframe.setLocationRelativeTo((Component)null);
+      jframe.setLocationRelativeTo(null);
       jframe.setVisible(true);
       jframe.addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent p_windowClosing_1_) {
@@ -75,7 +74,7 @@ public class MinecraftServerGui extends JComponent {
          this.add(this.getLogComponent(), "Center");
          this.add(this.getStatsComponent(), "West");
       } catch (Exception exception) {
-         LOGGER.error("Couldn't build server GUI", (Throwable)exception);
+         LOGGER.error("Couldn't build server GUI", exception);
       }
 
    }
@@ -147,9 +146,8 @@ public class MinecraftServerGui extends JComponent {
          }
 
          try {
-            document.insertString(document.getLength(), p_164247_3_, (AttributeSet)null);
+            document.insertString(document.getLength(), p_164247_3_, null);
          } catch (BadLocationException var8) {
-            ;
          }
 
          if (flag) {

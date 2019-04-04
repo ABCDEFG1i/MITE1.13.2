@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "red_dye",
+  "ingredients": [
+    {
+      "item": "minecraft:poppy"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:rose_red"
+  }
+}

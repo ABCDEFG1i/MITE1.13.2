@@ -205,7 +205,7 @@ public class NBTTagList extends NBTTagCollection<INBTBase> {
    }
 
    public INBTBase get(int p_get_1_) {
-      return (INBTBase)(p_get_1_ >= 0 && p_get_1_ < this.tagList.size() ? this.tagList.get(p_get_1_) : new NBTTagEnd());
+      return p_get_1_ >= 0 && p_get_1_ < this.tagList.size() ? this.tagList.get(p_get_1_) : new NBTTagEnd();
    }
 
    public int size() {

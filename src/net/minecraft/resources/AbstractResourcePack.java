@@ -70,17 +70,17 @@ public abstract class AbstractResourcePack implements IResourcePack {
          jsonobject = JsonUtils.func_212743_a(bufferedreader);
       } catch (JsonParseException | IOException ioexception) {
          LOGGER.error("Couldn't load {} metadata", p_195770_0_.getSectionName(), ioexception);
-         return (T)null;
+         return null;
       }
 
       if (!jsonobject.has(p_195770_0_.getSectionName())) {
-         return (T)null;
+         return null;
       } else {
          try {
             return p_195770_0_.deserialize(JsonUtils.getJsonObject(jsonobject, p_195770_0_.getSectionName()));
          } catch (JsonParseException jsonparseexception) {
             LOGGER.error("Couldn't load {} metadata", p_195770_0_.getSectionName(), jsonparseexception);
-            return (T)null;
+            return null;
          }
       }
    }

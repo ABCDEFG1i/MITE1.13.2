@@ -40,13 +40,13 @@ public interface ISound {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum AttenuationType {
+   enum AttenuationType {
       NONE(0),
       LINEAR(2);
 
       private final int type;
 
-      private AttenuationType(int p_i45110_3_) {
+      AttenuationType(int p_i45110_3_) {
          this.type = p_i45110_3_;
       }
 

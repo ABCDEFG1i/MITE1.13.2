@@ -48,7 +48,7 @@ public class ItemInput implements Predicate<ItemStack> {
    public String func_197321_c() {
       StringBuilder stringbuilder = new StringBuilder(IRegistry.field_212630_s.func_148757_b(this.item));
       if (this.tag != null) {
-         stringbuilder.append((Object)this.tag);
+         stringbuilder.append(this.tag);
       }
 
       return stringbuilder.toString();

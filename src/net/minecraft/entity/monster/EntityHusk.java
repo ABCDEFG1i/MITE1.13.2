@@ -67,7 +67,7 @@ public class EntityHusk extends EntityZombie {
 
    protected void onDrowned() {
       this.convertInto(new EntityZombie(this.world));
-      this.world.playEvent((EntityPlayer)null, 1041, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
+      this.world.playEvent(null, 1041, new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ), 0);
    }
 
    protected ItemStack getSkullDrop() {

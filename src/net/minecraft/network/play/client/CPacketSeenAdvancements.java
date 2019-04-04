@@ -30,7 +30,7 @@ public class CPacketSeenAdvancements implements Packet<INetHandlerPlayServer> {
 
    @OnlyIn(Dist.CLIENT)
    public static CPacketSeenAdvancements closedScreen() {
-      return new CPacketSeenAdvancements(CPacketSeenAdvancements.Action.CLOSED_SCREEN, (ResourceLocation)null);
+      return new CPacketSeenAdvancements(CPacketSeenAdvancements.Action.CLOSED_SCREEN, null);
    }
 
    public void readPacketData(PacketBuffer p_148837_1_) throws IOException {
@@ -61,8 +61,8 @@ public class CPacketSeenAdvancements implements Packet<INetHandlerPlayServer> {
       return this.tab;
    }
 
-   public static enum Action {
+   public enum Action {
       OPENED_TAB,
-      CLOSED_SCREEN;
+      CLOSED_SCREEN
    }
 }

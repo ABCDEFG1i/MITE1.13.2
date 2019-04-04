@@ -57,7 +57,7 @@ public class PreYggdrasilConverter {
          p_152717_0_.getGameProfileRepository().findProfilesByNames(astring, Agent.MINECRAFT, p_152717_2_);
       } else {
          for(String s : astring) {
-            UUID uuid = EntityPlayer.getUUID(new GameProfile((UUID)null, s));
+            UUID uuid = EntityPlayer.getUUID(new GameProfile(null, s));
             GameProfile gameprofile = new GameProfile(uuid, s);
             p_152717_2_.onProfileLookupSucceeded(gameprofile);
          }
@@ -84,12 +84,13 @@ public class PreYggdrasilConverter {
                   p_152724_0_.getPlayerProfileCache().addEntry(p_onProfileLookupSucceeded_1_);
                   String[] astring = map.get(p_onProfileLookupSucceeded_1_.getName().toLowerCase(Locale.ROOT));
                   if (astring == null) {
-                     PreYggdrasilConverter.LOGGER.warn("Could not convert user banlist entry for {}", (Object)p_onProfileLookupSucceeded_1_.getName());
+                     PreYggdrasilConverter.LOGGER.warn("Could not convert user banlist entry for {}",
+                             p_onProfileLookupSucceeded_1_.getName());
                      throw new PreYggdrasilConverter.ConversionError("Profile not in the conversionlist");
                   } else {
-                     Date date = astring.length > 1 ? PreYggdrasilConverter.parseDate(astring[1], (Date)null) : null;
+                     Date date = astring.length > 1 ? PreYggdrasilConverter.parseDate(astring[1], null) : null;
                      String s = astring.length > 2 ? astring[2] : null;
-                     Date date1 = astring.length > 3 ? PreYggdrasilConverter.parseDate(astring[3], (Date)null) : null;
+                     Date date1 = astring.length > 3 ? PreYggdrasilConverter.parseDate(astring[3], null) : null;
                      String s1 = astring.length > 4 ? astring[4] : null;
                      userlistbans.addEntry(new UserListBansEntry(p_onProfileLookupSucceeded_1_, date, s, date1, s1));
                   }
@@ -107,10 +108,10 @@ public class PreYggdrasilConverter {
             backupConverted(OLD_PLAYERBAN_FILE);
             return true;
          } catch (IOException ioexception) {
-            LOGGER.warn("Could not read old user banlist to convert it!", (Throwable)ioexception);
+            LOGGER.warn("Could not read old user banlist to convert it!", ioexception);
             return false;
          } catch (PreYggdrasilConverter.ConversionError preyggdrasilconverter$conversionerror) {
-            LOGGER.error("Conversion failed, please try again later", (Throwable)preyggdrasilconverter$conversionerror);
+            LOGGER.error("Conversion failed, please try again later", preyggdrasilconverter$conversionerror);
             return false;
          }
       } else {
@@ -135,9 +136,9 @@ public class PreYggdrasilConverter {
 
             for(String s : map.keySet()) {
                String[] astring = map.get(s);
-               Date date = astring.length > 1 ? parseDate(astring[1], (Date)null) : null;
+               Date date = astring.length > 1 ? parseDate(astring[1], null) : null;
                String s1 = astring.length > 2 ? astring[2] : null;
-               Date date1 = astring.length > 3 ? parseDate(astring[3], (Date)null) : null;
+               Date date1 = astring.length > 3 ? parseDate(astring[3], null) : null;
                String s2 = astring.length > 4 ? astring[4] : null;
                userlistipbans.addEntry(new UserListIPBansEntry(s, date, s1, date1, s2));
             }
@@ -146,7 +147,7 @@ public class PreYggdrasilConverter {
             backupConverted(OLD_IPBAN_FILE);
             return true;
          } catch (IOException ioexception) {
-            LOGGER.warn("Could not parse old ip banlist to convert it!", (Throwable)ioexception);
+            LOGGER.warn("Could not parse old ip banlist to convert it!", ioexception);
             return false;
          }
       } else {
@@ -185,10 +186,10 @@ public class PreYggdrasilConverter {
             backupConverted(OLD_OPS_FILE);
             return true;
          } catch (IOException ioexception) {
-            LOGGER.warn("Could not read old oplist to convert it!", (Throwable)ioexception);
+            LOGGER.warn("Could not read old oplist to convert it!", ioexception);
             return false;
          } catch (PreYggdrasilConverter.ConversionError preyggdrasilconverter$conversionerror) {
-            LOGGER.error("Conversion failed, please try again later", (Throwable)preyggdrasilconverter$conversionerror);
+            LOGGER.error("Conversion failed, please try again later", preyggdrasilconverter$conversionerror);
             return false;
          }
       } else {
@@ -227,10 +228,10 @@ public class PreYggdrasilConverter {
             backupConverted(OLD_WHITELIST_FILE);
             return true;
          } catch (IOException ioexception) {
-            LOGGER.warn("Could not read old whitelist to convert it!", (Throwable)ioexception);
+            LOGGER.warn("Could not read old whitelist to convert it!", ioexception);
             return false;
          } catch (PreYggdrasilConverter.ConversionError preyggdrasilconverter$conversionerror) {
-            LOGGER.error("Conversion failed, please try again later", (Throwable)preyggdrasilconverter$conversionerror);
+            LOGGER.error("Conversion failed, please try again later", preyggdrasilconverter$conversionerror);
             return false;
          }
       } else {
@@ -258,7 +259,7 @@ public class PreYggdrasilConverter {
             lookupNames(p_187473_0_, Lists.newArrayList(p_187473_1_), profilelookupcallback);
             return !list.isEmpty() && list.get(0).getId() != null ? list.get(0).getId().toString() : "";
          } else {
-            return EntityPlayer.getUUID(new GameProfile((UUID)null, p_187473_1_)).toString();
+            return EntityPlayer.getUUID(new GameProfile(null, p_187473_1_)).toString();
          }
       } else {
          return p_187473_1_;
@@ -335,7 +336,7 @@ public class PreYggdrasilConverter {
             lookupNames(p_152723_0_, Lists.newArrayList(astring), profilelookupcallback);
             return true;
          } catch (PreYggdrasilConverter.ConversionError preyggdrasilconverter$conversionerror) {
-            LOGGER.error("Conversion failed, please try again later", (Throwable)preyggdrasilconverter$conversionerror);
+            LOGGER.error("Conversion failed, please try again later", preyggdrasilconverter$conversionerror);
             return false;
          }
       } else {
@@ -386,19 +387,19 @@ public class PreYggdrasilConverter {
          LOGGER.warn("**** FAILED TO START THE SERVER AFTER ACCOUNT CONVERSION!");
          LOGGER.warn("** please remove the following files and restart the server:");
          if (flag) {
-            LOGGER.warn("* {}", (Object)OLD_PLAYERBAN_FILE.getName());
+            LOGGER.warn("* {}", OLD_PLAYERBAN_FILE.getName());
          }
 
          if (flag1) {
-            LOGGER.warn("* {}", (Object)OLD_IPBAN_FILE.getName());
+            LOGGER.warn("* {}", OLD_IPBAN_FILE.getName());
          }
 
          if (flag2) {
-            LOGGER.warn("* {}", (Object)OLD_OPS_FILE.getName());
+            LOGGER.warn("* {}", OLD_OPS_FILE.getName());
          }
 
          if (flag3) {
-            LOGGER.warn("* {}", (Object)OLD_WHITELIST_FILE.getName());
+            LOGGER.warn("* {}", OLD_WHITELIST_FILE.getName());
          }
 
          return false;
@@ -412,7 +413,8 @@ public class PreYggdrasilConverter {
       } else {
          LOGGER.warn("**** DETECTED OLD PLAYER DIRECTORY IN THE WORLD SAVE");
          LOGGER.warn("**** THIS USUALLY HAPPENS WHEN THE AUTOMATIC CONVERSION FAILED IN SOME WAY");
-         LOGGER.warn("** please restart the server and if the problem persists, remove the directory '{}'", (Object)file1.getPath());
+         LOGGER.warn("** please restart the server and if the problem persists, remove the directory '{}'",
+                 file1.getPath());
          return false;
       }
    }

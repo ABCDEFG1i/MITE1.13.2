@@ -176,9 +176,10 @@ public class Commands {
 
    public void writeCommandTreeAsGson(File p_200378_1_) {
       try {
-         Files.write((new GsonBuilder()).setPrettyPrinting().create().toJson((JsonElement)ArgumentTypes.serialize(this.dispatcher, this.dispatcher.getRoot())), p_200378_1_, StandardCharsets.UTF_8);
+         Files.write((new GsonBuilder()).setPrettyPrinting().create().toJson(
+                 ArgumentTypes.serialize(this.dispatcher, this.dispatcher.getRoot())), p_200378_1_, StandardCharsets.UTF_8);
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't write out command tree!", (Throwable)ioexception);
+         LOGGER.error("Couldn't write out command tree!", ioexception);
       }
 
    }
@@ -212,11 +213,13 @@ public class Commands {
 
                itextcomponent1.appendText(commandsyntaxexception.getInput().substring(Math.max(0, k - 10), k));
                if (k < commandsyntaxexception.getInput().length()) {
-                  ITextComponent itextcomponent2 = (new TextComponentString(commandsyntaxexception.getInput().substring(k))).applyTextStyles(new TextFormatting[]{TextFormatting.RED, TextFormatting.UNDERLINE});
+                  ITextComponent itextcomponent2 = (new TextComponentString(commandsyntaxexception.getInput().substring(k))).applyTextStyles(
+                          TextFormatting.RED, TextFormatting.UNDERLINE);
                   itextcomponent1.appendSibling(itextcomponent2);
                }
 
-               itextcomponent1.appendSibling((new TextComponentTranslation("command.context.here")).applyTextStyles(new TextFormatting[]{TextFormatting.RED, TextFormatting.ITALIC}));
+               itextcomponent1.appendSibling((new TextComponentTranslation("command.context.here")).applyTextStyles(
+                       TextFormatting.RED, TextFormatting.ITALIC));
                p_197059_1_.sendErrorMessage(itextcomponent1);
             }
          } catch (Exception exception) {

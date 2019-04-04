@@ -20,7 +20,8 @@ import org.apache.logging.log4j.Logger;
 
 public class ResourcePackInfo {
    private static final Logger LOGGER = LogManager.getLogger();
-   private static final PackMetadataSection field_212500_b = new PackMetadataSection((new TextComponentTranslation("resourcePack.broken_assets")).applyTextStyles(new TextFormatting[]{TextFormatting.RED, TextFormatting.ITALIC}), 4);
+   private static final PackMetadataSection field_212500_b = new PackMetadataSection((new TextComponentTranslation("resourcePack.broken_assets")).applyTextStyles(
+           TextFormatting.RED, TextFormatting.ITALIC), 4);
    private final String name;
    private final Supplier<IResourcePack> resourcePackSupplier;
    private final ITextComponent field_195802_d;
@@ -44,12 +45,12 @@ public class ResourcePackInfo {
             return (T)resourcepackinfo;
          }
 
-         LOGGER.warn("Couldn't find pack meta for pack {}", (Object)p_195793_0_);
+         LOGGER.warn("Couldn't find pack meta for pack {}", p_195793_0_);
       } catch (IOException ioexception) {
-         LOGGER.warn("Couldn't get pack info for: {}", (Object)ioexception.toString());
+         LOGGER.warn("Couldn't get pack info for: {}", ioexception.toString());
       }
 
-      return (T)null;
+      return null;
    }
 
    public ResourcePackInfo(String p_i47907_1_, boolean p_i47907_2_, Supplier<IResourcePack> p_i47907_3_, ITextComponent p_i47907_4_, ITextComponent p_i47907_5_, PackCompatibility p_i47907_6_, ResourcePackInfo.Priority p_i47907_7_, boolean p_i47907_8_) {
@@ -128,7 +129,7 @@ public class ResourcePackInfo {
       T create(String p_create_1_, boolean p_create_2_, Supplier<IResourcePack> p_create_3_, IResourcePack p_create_4_, PackMetadataSection p_create_5_, ResourcePackInfo.Priority p_create_6_);
    }
 
-   public static enum Priority {
+   public enum Priority {
       TOP,
       BOTTOM;
 

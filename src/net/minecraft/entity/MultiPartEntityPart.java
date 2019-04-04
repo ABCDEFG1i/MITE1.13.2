@@ -28,7 +28,7 @@ public class MultiPartEntityPart extends Entity {
    }
 
    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
-      return this.isInvulnerableTo(p_70097_1_) ? false : this.parent.attackEntityFromPart(this, p_70097_1_, p_70097_2_);
+      return !this.isInvulnerableTo(p_70097_1_) && this.parent.attackEntityFromPart(this, p_70097_1_, p_70097_2_);
    }
 
    public boolean isEntityEqual(Entity p_70028_1_) {

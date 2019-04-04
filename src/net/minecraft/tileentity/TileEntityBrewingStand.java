@@ -39,7 +39,7 @@ public class TileEntityBrewingStand extends TileEntityLockable implements ISided
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.customName != null ? this.customName : new TextComponentTranslation("container.brewing"));
+      return this.customName != null ? this.customName : new TextComponentTranslation("container.brewing");
    }
 
    public boolean hasCustomName() {

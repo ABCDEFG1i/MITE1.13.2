@@ -79,7 +79,7 @@ public class GuiEditStructure extends GuiScreen {
 
    private void func_195275_h() {
       if (this.func_210143_a(TileEntityStructure.UpdateCommand.UPDATE_DATA)) {
-         this.mc.displayGuiScreen((GuiScreen)null);
+         this.mc.displayGuiScreen(null);
       }
 
    }
@@ -91,7 +91,7 @@ public class GuiEditStructure extends GuiScreen {
       this.tileStructure.setIgnoresEntities(this.ignoreEntities);
       this.tileStructure.setShowAir(this.showAir);
       this.tileStructure.setShowBoundingBox(this.showBoundingBox);
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    protected void initGui() {
@@ -110,7 +110,7 @@ public class GuiEditStructure extends GuiScreen {
          public void onClick(double p_194829_1_, double p_194829_3_) {
             if (GuiEditStructure.this.tileStructure.getMode() == StructureMode.SAVE) {
                GuiEditStructure.this.func_210143_a(TileEntityStructure.UpdateCommand.SAVE_AREA);
-               GuiEditStructure.this.mc.displayGuiScreen((GuiScreen)null);
+               GuiEditStructure.this.mc.displayGuiScreen(null);
             }
 
          }
@@ -119,7 +119,7 @@ public class GuiEditStructure extends GuiScreen {
          public void onClick(double p_194829_1_, double p_194829_3_) {
             if (GuiEditStructure.this.tileStructure.getMode() == StructureMode.LOAD) {
                GuiEditStructure.this.func_210143_a(TileEntityStructure.UpdateCommand.LOAD_AREA);
-               GuiEditStructure.this.mc.displayGuiScreen((GuiScreen)null);
+               GuiEditStructure.this.mc.displayGuiScreen(null);
             }
 
          }
@@ -134,7 +134,7 @@ public class GuiEditStructure extends GuiScreen {
          public void onClick(double p_194829_1_, double p_194829_3_) {
             if (GuiEditStructure.this.tileStructure.getMode() == StructureMode.SAVE) {
                GuiEditStructure.this.func_210143_a(TileEntityStructure.UpdateCommand.SCAN_AREA);
-               GuiEditStructure.this.mc.displayGuiScreen((GuiScreen)null);
+               GuiEditStructure.this.mc.displayGuiScreen(null);
             }
 
          }
@@ -200,7 +200,8 @@ public class GuiEditStructure extends GuiScreen {
       this.tabOrder.clear();
       this.nameEdit = new GuiTextField(2, this.fontRenderer, this.width / 2 - 152, 40, 300, 20) {
          public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {
-            return !GuiEditStructure.func_208402_b(this.getText(), p_charTyped_1_, this.getCursorPosition()) ? false : super.charTyped(p_charTyped_1_, p_charTyped_2_);
+            return GuiEditStructure.func_208402_b(this.getText(), p_charTyped_1_,
+                    this.getCursorPosition()) && super.charTyped(p_charTyped_1_, p_charTyped_2_);
          }
       };
       this.nameEdit.setMaxStringLength(64);

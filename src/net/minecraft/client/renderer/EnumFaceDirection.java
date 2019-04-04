@@ -28,7 +28,7 @@ public enum EnumFaceDirection {
       return FACINGS[p_179027_0_.getIndex()];
    }
 
-   private EnumFaceDirection(EnumFaceDirection.VertexInformation... p_i46272_3_) {
+   EnumFaceDirection(EnumFaceDirection.VertexInformation... p_i46272_3_) {
       this.vertexInfos = p_i46272_3_;
    }
 

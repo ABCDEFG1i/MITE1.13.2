@@ -81,7 +81,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
                try {
                   Thread.sleep(2147483647L);
                } catch (InterruptedException var2) {
-                  ;
                }
             }
          }
@@ -99,7 +98,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
                   DedicatedServer.this.func_195581_a(s4, DedicatedServer.this.getCommandSource());
                }
             } catch (IOException ioexception1) {
-               DedicatedServer.LOGGER.error("Exception handling console input", (Throwable)ioexception1);
+               DedicatedServer.LOGGER.error("Exception handling console input", ioexception1);
             }
 
          }
@@ -146,7 +145,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
          this.canSpawnStructures = this.settings.getBooleanProperty("generate-structures", true);
          int i = this.settings.getIntProperty("gamemode", GameType.SURVIVAL.getID());
          this.gameType = WorldSettings.getGameTypeById(i);
-         LOGGER.info("Default game type: {}", (Object)this.gameType);
+         LOGGER.info("Default game type: {}", this.gameType);
          InetAddress inetaddress = null;
          if (!this.getServerHostname().isEmpty()) {
             inetaddress = InetAddress.getByName(this.getServerHostname());
@@ -164,7 +163,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.getNetworkSystem().addEndpoint(inetaddress, this.getServerPort());
          } catch (IOException ioexception) {
             LOGGER.warn("**** FAILED TO BIND TO PORT!");
-            LOGGER.warn("The exception was: {}", (Object)ioexception.toString());
+            LOGGER.warn("The exception was: {}", ioexception.toString());
             LOGGER.warn("Perhaps a server is already running on that port?");
             return false;
          }
@@ -220,7 +219,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             TileEntitySkull.setProfileCache(this.getPlayerProfileCache());
             TileEntitySkull.setSessionService(this.getMinecraftSessionService());
             PlayerProfileCache.setOnlineMode(this.isServerInOnlineMode());
-            LOGGER.info("Preparing level \"{}\"", (Object)this.getFolderName());
+            LOGGER.info("Preparing level \"{}\"", this.getFolderName());
             JsonObject jsonobject = new JsonObject();
             if (worldtype == WorldType.FLAT) {
                jsonobject.addProperty("flat_world_options", s2);
@@ -231,7 +230,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.loadAllWorlds(this.getFolderName(), this.getFolderName(), k, worldtype, jsonobject);
             long i1 = Util.nanoTime() - j;
             String s3 = String.format(Locale.ROOT, "%.3fs", (double)i1 / 1.0E9D);
-            LOGGER.info("Done ({})! For help, type \"help\"", (Object)s3);
+            LOGGER.info("Done ({})! For help, type \"help\"", s3);
             if (this.settings.hasProperty("announce-player-achievements")) {
                this.getGameRules().setOrCreateGameRule("announceAdvancements", this.settings.getBooleanProperty("announce-player-achievements", true) ? "true" : "false", this);
                this.settings.removeProperty("announce-player-achievements");
@@ -345,7 +344,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
    public boolean isSnooperEnabled() {
       if (this.settings.getBooleanProperty("snooper-enabled", true)) {
-         ;
       }
 
       return false;
@@ -551,7 +549,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
       try {
          Thread.sleep(5000L);
       } catch (InterruptedException var2) {
-         ;
       }
    }
 

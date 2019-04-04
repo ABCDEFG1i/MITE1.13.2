@@ -144,7 +144,7 @@ public class TextureMap extends AbstractTexture implements ITickableTextureObjec
             flag = false;
             return flag;
          } finally {
-            IOUtils.closeQuietly((Closeable)iresource);
+            IOUtils.closeQuietly(iresource);
          }
 
          return flag;

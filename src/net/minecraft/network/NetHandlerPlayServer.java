@@ -181,7 +181,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
       this.lastMovePacketCounter = this.movePacketCounter;
       if (this.floating) {
          if (++this.floatingTickCount > 80) {
-            LOGGER.warn("{} was kicked for floating too long!", (Object)this.player.getName().getString());
+            LOGGER.warn("{} was kicked for floating too long!", this.player.getName().getString());
             this.disconnect(new TextComponentTranslation("multiplayer.disconnect.flying"));
             return;
          }
@@ -200,7 +200,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
          this.lowestRiddenZ1 = this.lowestRiddenEnt.posZ;
          if (this.vehicleFloating && this.player.getLowestRidingEntity().getControllingPassenger() == this.player) {
             if (++this.vehicleFloatingTickCount > 80) {
-               LOGGER.warn("{} was kicked for floating a vehicle too long!", (Object)this.player.getName().getString());
+               LOGGER.warn("{} was kicked for floating a vehicle too long!", this.player.getName().getString());
                this.disconnect(new TextComponentTranslation("multiplayer.disconnect.flying"));
                return;
             }
@@ -324,7 +324,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
             boolean flag1 = false;
             if (d10 > 0.0625D) {
                flag1 = true;
-               LOGGER.warn("{} moved wrongly!", (Object)entity.getName().getString());
+               LOGGER.warn("{} moved wrongly!", entity.getName().getString());
             }
 
             entity.setPositionAndRotation(d3, d4, d5, f, f1);
@@ -443,7 +443,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
             commandblockbaselogic.setCommand(s);
             commandblockbaselogic.setTrackOutput(flag);
             if (!flag) {
-               commandblockbaselogic.setLastOutput((ITextComponent)null);
+               commandblockbaselogic.setLastOutput(null);
             }
 
             tileentitycommandblock.setAuto(p_210153_1_.func_210362_e());
@@ -468,7 +468,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
             commandblockbaselogic.setCommand(p_210158_1_.getCommand());
             commandblockbaselogic.setTrackOutput(p_210158_1_.func_210373_b());
             if (!p_210158_1_.func_210373_b()) {
-               commandblockbaselogic.setLastOutput((ITextComponent)null);
+               commandblockbaselogic.setLastOutput(null);
             }
 
             commandblockbaselogic.updateCommand();
@@ -595,7 +595,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
                         String s = nbttaglist.getStringTagAt(i);
                         ITextComponent itextcomponent = new TextComponentString(s);
                         s = ITextComponent.Serializer.toJson(itextcomponent);
-                        nbttaglist.set(i, (INBTBase)(new NBTTagString(s)));
+                        nbttaglist.set(i, new NBTTagString(s));
                      }
 
                      itemstack2.setTagInfo("pages", nbttaglist);
@@ -713,7 +713,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
                      boolean flag = false;
                      if (!this.player.isInvulnerableDimensionChange() && d11 > 0.0625D && !this.player.isPlayerSleeping() && !this.player.interactionManager.isCreative() && this.player.interactionManager.getGameType() != GameType.SPECTATOR) {
                         flag = true;
-                        LOGGER.warn("{} moved wrongly!", (Object)this.player.getName().getString());
+                        LOGGER.warn("{} moved wrongly!", this.player.getName().getString());
                      }
 
                      this.player.setPositionAndRotation(d4, d5, d6, f, f1);
@@ -939,7 +939,7 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
          this.player.inventory.currentItem = p_147355_1_.getSlotId();
          this.player.markPlayerActive();
       } else {
-         LOGGER.warn("{} tried to set an invalid carried item", (Object)this.player.getName().getString());
+         LOGGER.warn("{} tried to set an invalid carried item", this.player.getName().getString());
       }
    }
 
@@ -1083,14 +1083,14 @@ public class NetHandlerPlayServer implements INetHandlerPlayServer, ITickable {
       case PERFORM_RESPAWN:
          if (this.player.queuedEndExit) {
             this.player.queuedEndExit = false;
-            this.player = this.server.getPlayerList().func_72368_a(this.player, DimensionType.OVERWORLD, true);
+            this.player = this.server.getPlayerList().respawnPlayerForUser(this.player, DimensionType.OVERWORLD, true);
             CriteriaTriggers.CHANGED_DIMENSION.trigger(this.player, DimensionType.THE_END, DimensionType.OVERWORLD);
          } else {
             if (this.player.getHealth() > 0.0F) {
                return;
             }
 
-            this.player = this.server.getPlayerList().func_72368_a(this.player, DimensionType.OVERWORLD, false);
+            this.player = this.server.getPlayerList().respawnPlayerForUser(this.player, DimensionType.OVERWORLD, false);
             if (this.server.isHardcore()) {
                this.player.setGameType(GameType.SPECTATOR);
                this.player.getServerWorld().getGameRules().setOrCreateGameRule("spectatorsGenerateChunks", "false", this.server);

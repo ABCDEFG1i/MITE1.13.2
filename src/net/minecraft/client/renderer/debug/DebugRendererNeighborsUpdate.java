@@ -79,7 +79,7 @@ public class DebugRendererNeighborsUpdate implements DebugRenderer.IDebugRendere
       for(Entry<BlockPos, Integer> entry2 : map.entrySet()) {
          BlockPos blockpos1 = entry2.getKey();
          Integer integer1 = entry2.getValue();
-         DebugRenderer.renderDebugText(String.valueOf((Object)integer1), blockpos1.getX(), blockpos1.getY(), blockpos1.getZ(), p_190060_1_, -1);
+         DebugRenderer.renderDebugText(String.valueOf(integer1), blockpos1.getX(), blockpos1.getY(), blockpos1.getZ(), p_190060_1_, -1);
       }
 
       GlStateManager.depthMask(true);

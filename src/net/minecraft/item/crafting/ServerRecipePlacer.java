@@ -31,7 +31,7 @@ public class ServerRecipePlacer implements IRecipePlacer<Integer> {
             this.recipeItemHelper.clear();
             p_194327_1_.inventory.func_201571_a(this.recipeItemHelper);
             this.recipeBookContainer.func_201771_a(this.recipeItemHelper);
-            if (this.recipeItemHelper.canCraft(p_194327_2_, (IntList)null)) {
+            if (this.recipeItemHelper.canCraft(p_194327_2_, null)) {
                this.tryPlaceRecipe(p_194327_2_, p_194327_3_);
             } else {
                this.clear();
@@ -74,7 +74,7 @@ public class ServerRecipePlacer implements IRecipePlacer<Integer> {
 
    protected void tryPlaceRecipe(IRecipe p_201508_1_, boolean p_201508_2_) {
       boolean flag = this.recipeBookContainer.matches(p_201508_1_);
-      int i = this.recipeItemHelper.getBiggestCraftableStack(p_201508_1_, (IntList)null);
+      int i = this.recipeItemHelper.getBiggestCraftableStack(p_201508_1_, null);
       if (flag) {
          for(int j = 0; j < this.recipeBookContainer.getHeight() * this.recipeBookContainer.getWidth() + 1; ++j) {
             if (j != this.recipeBookContainer.getOutputSlot()) {

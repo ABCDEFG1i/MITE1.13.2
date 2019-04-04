@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone_bricks"
+    },
+    {
+      "item": "minecraft:vine"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:mossy_stone_bricks"
+  }
+}

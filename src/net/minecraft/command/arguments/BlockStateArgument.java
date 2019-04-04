@@ -35,7 +35,6 @@ public class BlockStateArgument implements ArgumentType<BlockStateInput> {
       try {
          blockstateparser.parse(true);
       } catch (CommandSyntaxException var6) {
-         ;
       }
 
       return blockstateparser.getSuggestions(p_listSuggestions_2_);

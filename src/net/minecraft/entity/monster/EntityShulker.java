@@ -164,7 +164,7 @@ public class EntityShulker extends EntityGolem implements IMob {
 
    public void tick() {
       super.tick();
-      BlockPos blockpos = this.dataManager.get(ATTACHED_BLOCK_POS).orElse((BlockPos)null);
+      BlockPos blockpos = this.dataManager.get(ATTACHED_BLOCK_POS).orElse(null);
       if (blockpos == null && !this.world.isRemote) {
          blockpos = new BlockPos(this);
          this.dataManager.set(ATTACHED_BLOCK_POS, Optional.of(blockpos));
@@ -342,7 +342,7 @@ public class EntityShulker extends EntityGolem implements IMob {
                   this.playSound(SoundEvents.ENTITY_SHULKER_TELEPORT, 1.0F, 1.0F);
                   this.dataManager.set(ATTACHED_BLOCK_POS, Optional.of(blockpos1));
                   this.dataManager.set(PEEK_TICK, (byte)0);
-                  this.setAttackTarget((EntityLivingBase)null);
+                  this.setAttackTarget(null);
                   return true;
                }
             }
@@ -428,7 +428,7 @@ public class EntityShulker extends EntityGolem implements IMob {
 
    @Nullable
    public BlockPos getAttachmentPos() {
-      return this.dataManager.get(ATTACHED_BLOCK_POS).orElse((BlockPos)null);
+      return this.dataManager.get(ATTACHED_BLOCK_POS).orElse(null);
    }
 
    public void setAttachmentPos(@Nullable BlockPos p_184694_1_) {
@@ -542,7 +542,7 @@ public class EntityShulker extends EntityGolem implements IMob {
                   EntityShulker.this.playSound(SoundEvents.ENTITY_SHULKER_SHOOT, 2.0F, (EntityShulker.this.rand.nextFloat() - EntityShulker.this.rand.nextFloat()) * 0.2F + 1.0F);
                }
             } else {
-               EntityShulker.this.setAttackTarget((EntityLivingBase)null);
+               EntityShulker.this.setAttackTarget(null);
             }
 
             super.updateTask();
@@ -556,7 +556,7 @@ public class EntityShulker extends EntityGolem implements IMob {
       }
 
       public boolean shouldExecute() {
-         return EntityShulker.this.world.getDifficulty() == EnumDifficulty.PEACEFUL ? false : super.shouldExecute();
+         return EntityShulker.this.world.getDifficulty() != EnumDifficulty.PEACEFUL && super.shouldExecute();
       }
 
       protected AxisAlignedBB getTargetableArea(double p_188511_1_) {
@@ -577,7 +577,7 @@ public class EntityShulker extends EntityGolem implements IMob {
       }
 
       public boolean shouldExecute() {
-         return this.taskOwner.getTeam() == null ? false : super.shouldExecute();
+         return this.taskOwner.getTeam() != null && super.shouldExecute();
       }
 
       protected AxisAlignedBB getTargetableArea(double p_188511_1_) {

@@ -77,7 +77,7 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable 
          this.field_147333_a.sendPacket(new SPacketDisconnectLogin(p_194026_1_));
          this.field_147333_a.closeChannel(p_194026_1_);
       } catch (Exception exception) {
-         field_147332_c.error("Error whilst disconnecting player", (Throwable)exception);
+         field_147332_c.error("Error whilst disconnecting player", exception);
       }
 
    }
@@ -115,7 +115,8 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable 
    }
 
    public String func_147317_d() {
-      return this.field_147337_i != null ? this.field_147337_i + " (" + this.field_147333_a.getRemoteAddress() + ")" : String.valueOf((Object)this.field_147333_a.getRemoteAddress());
+      return this.field_147337_i != null ? this.field_147337_i + " (" + this.field_147333_a.getRemoteAddress() + ")" : String.valueOf(
+              this.field_147333_a.getRemoteAddress());
    }
 
    public void processLoginStart(CPacketLoginStart p_147316_1_) {
@@ -145,7 +146,8 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable 
 
                try {
                   String s = (new BigInteger(CryptManager.getServerIdHash("", NetHandlerLoginServer.this.field_147327_f.getKeyPair().getPublic(), NetHandlerLoginServer.this.field_147335_k))).toString(16);
-                  NetHandlerLoginServer.this.field_147337_i = NetHandlerLoginServer.this.field_147327_f.getMinecraftSessionService().hasJoinedServer(new GameProfile((UUID)null, gameprofile.getName()), s, this.func_191235_a());
+                  NetHandlerLoginServer.this.field_147337_i = NetHandlerLoginServer.this.field_147327_f.getMinecraftSessionService().hasJoinedServer(new GameProfile(
+                          null, gameprofile.getName()), s, this.func_191235_a());
                   if (NetHandlerLoginServer.this.field_147337_i != null) {
                      NetHandlerLoginServer.field_147332_c.info("UUID of player {} is {}", NetHandlerLoginServer.this.field_147337_i.getName(), NetHandlerLoginServer.this.field_147337_i.getId());
                      NetHandlerLoginServer.this.field_147328_g = NetHandlerLoginServer.LoginState.READY_TO_ACCEPT;
@@ -155,7 +157,8 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable 
                      NetHandlerLoginServer.this.field_147328_g = NetHandlerLoginServer.LoginState.READY_TO_ACCEPT;
                   } else {
                      NetHandlerLoginServer.this.func_194026_b(new TextComponentTranslation("multiplayer.disconnect.unverified_username"));
-                     NetHandlerLoginServer.field_147332_c.error("Username '{}' tried to join with an invalid session", (Object)gameprofile.getName());
+                     NetHandlerLoginServer.field_147332_c.error("Username '{}' tried to join with an invalid session",
+                             gameprofile.getName());
                   }
                } catch (AuthenticationUnavailableException var3) {
                   if (NetHandlerLoginServer.this.field_147327_f.isSinglePlayer()) {
@@ -190,13 +193,13 @@ public class NetHandlerLoginServer implements INetHandlerLoginServer, ITickable 
       return new GameProfile(uuid, p_152506_1_.getName());
    }
 
-   static enum LoginState {
+   enum LoginState {
       HELLO,
       KEY,
       AUTHENTICATING,
       NEGOTIATING,
       READY_TO_ACCEPT,
       DELAY_ACCEPT,
-      ACCEPTED;
+      ACCEPTED
    }
 }

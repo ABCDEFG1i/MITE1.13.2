@@ -102,7 +102,9 @@ public class EntityItemFrame extends EntityHanging {
          return false;
       } else {
          IBlockState iblockstate = this.world.getBlockState(this.hangingPosition.offset(this.facingDirection.getOpposite()));
-         return iblockstate.getMaterial().isSolid() || this.facingDirection.getAxis().isHorizontal() && BlockRedstoneDiode.isDiode(iblockstate) ? this.world.func_175674_a(this, this.getEntityBoundingBox(), IS_HANGING_ENTITY).isEmpty() : false;
+         return (iblockstate.getMaterial().isSolid() || this.facingDirection.getAxis().isHorizontal() && BlockRedstoneDiode.isDiode(
+                 iblockstate)) && this.world.func_175674_a(this, this.getEntityBoundingBox(),
+                 IS_HANGING_ENTITY).isEmpty();
       }
    }
 
@@ -180,7 +182,7 @@ public class EntityItemFrame extends EntityHanging {
          mapdata.func_212441_a(this.hangingPosition, this.getEntityId());
       }
 
-      p_110131_1_.setItemFrame((EntityItemFrame)null);
+      p_110131_1_.setItemFrame(null);
    }
 
    public ItemStack getDisplayedItem() {
@@ -252,7 +254,7 @@ public class EntityItemFrame extends EntityHanging {
       if (nbttagcompound != null && !nbttagcompound.isEmpty()) {
          ItemStack itemstack = ItemStack.loadFromNBT(nbttagcompound);
          if (itemstack.isEmpty()) {
-            PRIVATE_LOGGER.warn("Unable to load item from: {}", (Object)nbttagcompound);
+            PRIVATE_LOGGER.warn("Unable to load item from: {}", nbttagcompound);
          }
 
          this.setDisplayedItemWithUpdate(itemstack, false);

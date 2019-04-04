@@ -56,7 +56,6 @@ public class StrongholdStructure extends Structure<StrongholdConfig> {
 
       StrongholdStructure.Start strongholdstructure$start;
       for(strongholdstructure$start = new StrongholdStructure.Start(p_202369_1_, p_202369_3_, p_202369_4_, p_202369_5_, biome, i++); strongholdstructure$start.getComponents().isEmpty() || ((StrongholdPieces.Stairs2)strongholdstructure$start.getComponents().get(0)).strongholdPortalRoom == null; strongholdstructure$start = new StrongholdStructure.Start(p_202369_1_, p_202369_3_, p_202369_4_, p_202369_5_, biome, i++)) {
-         ;
       }
 
       return strongholdstructure$start;

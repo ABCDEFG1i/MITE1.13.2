@@ -61,7 +61,7 @@ public class RandomValueRange {
 
       public JsonElement serialize(RandomValueRange p_serialize_1_, Type p_serialize_2_, JsonSerializationContext p_serialize_3_) {
          if (p_serialize_1_.min == p_serialize_1_.max) {
-            return new JsonPrimitive((float)p_serialize_1_.min);
+            return new JsonPrimitive(p_serialize_1_.min);
          } else {
             JsonObject jsonobject = new JsonObject();
             jsonobject.addProperty("min", p_serialize_1_.min);

@@ -39,7 +39,7 @@ public class TileEntityDispenser extends TileEntityLockableLoot {
    }
 
    public int getDispenseSlot() {
-      this.fillWithLoot((EntityPlayer)null);
+      this.fillWithLoot(null);
       int i = -1;
       int j = 1;
 
@@ -65,7 +65,7 @@ public class TileEntityDispenser extends TileEntityLockableLoot {
 
    public ITextComponent getName() {
       ITextComponent itextcomponent = this.getCustomName();
-      return (ITextComponent)(itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.dispenser"));
+      return itextcomponent != null ? itextcomponent : new TextComponentTranslation("container.dispenser");
    }
 
    public void readFromNBT(NBTTagCompound p_145839_1_) {
