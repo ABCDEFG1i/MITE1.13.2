@@ -1,3 +1,4 @@
+[English Version](https://github.com/XiaoYuOvO/MITE1.13.2/blob/B0.3.X/ChangeLogEN.md)
 # B0.3.0更新日志
 ## 游戏机制:
 * 1、升级需要更高经验值:

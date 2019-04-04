@@ -1,3 +1,4 @@
+[中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/B0.3.X/ChangeLogCN.md)
 # B0.3.0 ChangeLog
 ## Game mechanics:
 * 1, Upgrade requires a higher experience value:\
