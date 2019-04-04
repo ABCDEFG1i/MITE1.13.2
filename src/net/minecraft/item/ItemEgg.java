@@ -21,7 +21,7 @@ public class ItemEgg extends Item {
          itemstack.shrink(1);
       }
 
-      p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+      p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
       if (!p_77659_1_.isRemote) {
          EntityEgg entityegg = new EntityEgg(p_77659_1_, p_77659_2_);
          entityegg.shoot(p_77659_2_, p_77659_2_.rotationPitch, p_77659_2_.rotationYaw, 0.0F, 1.5F, 1.0F);

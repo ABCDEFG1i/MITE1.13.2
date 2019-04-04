@@ -170,7 +170,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74771_1_)).getByte();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0;
@@ -182,7 +181,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74765_1_)).getShort();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0;
@@ -194,7 +192,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74762_1_)).getInt();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0;
@@ -206,7 +203,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74763_1_)).getLong();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0L;
@@ -218,7 +214,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74760_1_)).getFloat();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0.0F;
@@ -230,7 +225,6 @@ public class NBTTagCompound implements INBTBase {
             return ((NBTPrimitive)this.tagMap.get(p_74769_1_)).getDouble();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return 0.0D;
@@ -242,7 +236,6 @@ public class NBTTagCompound implements INBTBase {
             return this.tagMap.get(p_74779_1_).getString();
          }
       } catch (ClassCastException var3) {
-         ;
       }
 
       return "";

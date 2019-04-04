@@ -58,7 +58,7 @@ public class SimpleResource implements IResource {
    @OnlyIn(Dist.CLIENT)
    public <T> T getMetadata(IMetadataSectionSerializer<T> p_199028_1_) {
       if (!this.hasMetadata()) {
-         return (T)null;
+         return null;
       } else {
          if (this.metadataJson == null && !this.wasMetadataRead) {
             this.wasMetadataRead = true;
@@ -68,15 +68,15 @@ public class SimpleResource implements IResource {
                bufferedreader = new BufferedReader(new InputStreamReader(this.metadataInputStream, StandardCharsets.UTF_8));
                this.metadataJson = JsonUtils.func_212743_a(bufferedreader);
             } finally {
-               IOUtils.closeQuietly((Reader)bufferedreader);
+               IOUtils.closeQuietly(bufferedreader);
             }
          }
 
          if (this.metadataJson == null) {
-            return (T)null;
+            return null;
          } else {
             String s = p_199028_1_.getSectionName();
-            return (T)(this.metadataJson.has(s) ? p_199028_1_.deserialize(JsonUtils.getJsonObject(this.metadataJson, s)) : null);
+            return this.metadataJson.has(s) ? p_199028_1_.deserialize(JsonUtils.getJsonObject(this.metadataJson, s)) : null;
          }
       }
    }
@@ -101,14 +101,10 @@ public class SimpleResource implements IResource {
          }
 
          if (this.packName != null) {
-            if (!this.packName.equals(simpleresource.packName)) {
-               return false;
-            }
-         } else if (simpleresource.packName != null) {
-            return false;
-         }
+             return this.packName.equals(simpleresource.packName);
+         } else
+             return simpleresource.packName == null;
 
-         return true;
       }
    }
 

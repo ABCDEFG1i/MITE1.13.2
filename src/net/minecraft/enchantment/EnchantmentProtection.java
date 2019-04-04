@@ -77,7 +77,7 @@ public class EnchantmentProtection extends Enchantment {
       return p_92092_1_;
    }
 
-   public static enum Type {
+   public enum Type {
       ALL("all", 1, 11),
       FIRE("fire", 10, 8),
       FALL("fall", 5, 6),
@@ -88,7 +88,7 @@ public class EnchantmentProtection extends Enchantment {
       private final int minEnchantability;
       private final int levelCost;
 
-      private Type(String p_i48839_3_, int p_i48839_4_, int p_i48839_5_) {
+      Type(String p_i48839_3_, int p_i48839_4_, int p_i48839_5_) {
          this.typeName = p_i48839_3_;
          this.minEnchantability = p_i48839_4_;
          this.levelCost = p_i48839_5_;

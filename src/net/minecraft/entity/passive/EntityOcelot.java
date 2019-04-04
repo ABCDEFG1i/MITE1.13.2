@@ -71,7 +71,7 @@ public class EntityOcelot extends EntityTameable {
       this.tasks.addTask(9, new EntityAIMate(this, 0.8D));
       this.tasks.addTask(10, new EntityAIWanderAvoidWater(this, 0.8D, 1.0000001E-5F));
       this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
-      this.targetTasks.addTask(1, new EntityAITargetNonTamed<>(this, EntityChicken.class, false, (Predicate<EntityChicken>)null));
+      this.targetTasks.addTask(1, new EntityAITargetNonTamed<>(this, EntityChicken.class, false, null));
       this.targetTasks.addTask(1, new EntityAITargetNonTamed<>(this, EntityTurtle.class, false, EntityTurtle.TARGET_DRY_BABY));
    }
 
@@ -252,9 +252,7 @@ public class EntityOcelot extends EntityTameable {
 
          IBlockState iblockstate = p_205019_1_.getBlockState(blockpos.down());
          Block block = iblockstate.getBlock();
-         if (block == Blocks.GRASS_BLOCK || iblockstate.isIn(BlockTags.LEAVES)) {
-            return true;
-         }
+          return block == Blocks.GRASS_BLOCK || iblockstate.isIn(BlockTags.LEAVES);
       }
 
       return false;
@@ -265,7 +263,7 @@ public class EntityOcelot extends EntityTameable {
       if (itextcomponent != null) {
          return itextcomponent;
       } else {
-         return (ITextComponent)(this.isTamed() ? new TextComponentTranslation(Util.makeTranslationKey("entity", field_200608_bC)) : super.getName());
+         return this.isTamed() ? new TextComponentTranslation(Util.makeTranslationKey("entity", field_200608_bC)) : super.getName();
       }
    }
 

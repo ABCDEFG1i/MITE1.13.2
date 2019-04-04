@@ -22,7 +22,7 @@ public class ExpiringMap<T> extends Long2ObjectOpenHashMap<T> {
 
       while(objectiterator.hasNext()) {
          Long2LongMap.Entry entry = objectiterator.next();
-         T t = (T)super.get(entry.getLongKey());
+         T t = super.get(entry.getLongKey());
          if (i - entry.getLongValue() <= (long)this.lifespan) {
             break;
          }
@@ -51,7 +51,7 @@ public class ExpiringMap<T> extends Long2ObjectOpenHashMap<T> {
 
    public T get(long p_get_1_) {
       this.refreshTimes(p_get_1_);
-      return (T)super.get(p_get_1_);
+      return super.get(p_get_1_);
    }
 
    public void putAll(Map<? extends Long, ? extends T> p_putAll_1_) {

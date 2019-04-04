@@ -121,7 +121,7 @@ public class DragonFightManager {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(int i : this.gateways) {
-         nbttaglist.add((INBTBase)(new NBTTagInt(i)));
+         nbttaglist.add(new NBTTagInt(i));
       }
 
       nbttagcompound.setTag("Gateways", nbttaglist);
@@ -184,7 +184,7 @@ public class DragonFightManager {
       } else {
          EntityDragon entitydragon = list.get(0);
          this.dragonUniqueId = entitydragon.getUniqueID();
-         LOGGER.info("Found that there's a dragon still alive ({})", (Object)entitydragon);
+         LOGGER.info("Found that there's a dragon still alive ({})", entitydragon);
          this.dragonKilled = false;
          if (!flag) {
             LOGGER.info("But we didn't have a portal, let's remove it.");
@@ -345,7 +345,7 @@ public class DragonFightManager {
          this.aliveCrystals += this.world.getEntitiesWithinAABB(EntityEnderCrystal.class, endcrystaltowerfeature$endspike.getTopBoundingBox()).size();
       }
 
-      LOGGER.debug("Found {} end crystals still alive", (int)this.aliveCrystals);
+      LOGGER.debug("Found {} end crystals still alive", this.aliveCrystals);
    }
 
    public void processDragonDeath(EntityDragon p_186096_1_) {
@@ -382,7 +382,6 @@ public class DragonFightManager {
       EndPodiumFeature endpodiumfeature = new EndPodiumFeature(p_186094_1_);
       if (this.exitPortalLocation == null) {
          for(this.exitPortalLocation = this.world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EndPodiumFeature.END_PODIUM_LOCATION).down(); this.world.getBlockState(this.exitPortalLocation).getBlock() == Blocks.BEDROCK && this.exitPortalLocation.getY() > this.world.getSeaLevel(); this.exitPortalLocation = this.exitPortalLocation.down()) {
-            ;
          }
       }
 
@@ -496,7 +495,7 @@ public class DragonFightManager {
       for(EndCrystalTowerFeature.EndSpike endcrystaltowerfeature$endspike : EndSpikes.getSpikes(this.world)) {
          for(EntityEnderCrystal entityendercrystal : this.world.getEntitiesWithinAABB(EntityEnderCrystal.class, endcrystaltowerfeature$endspike.getTopBoundingBox())) {
             entityendercrystal.setInvulnerable(false);
-            entityendercrystal.setBeamTarget((BlockPos)null);
+            entityendercrystal.setBeamTarget(null);
          }
       }
 
@@ -517,9 +516,9 @@ public class DragonFightManager {
       }
    }
 
-   static enum LoadState {
+   enum LoadState {
       UNKNOWN,
       NOT_LOADED,
-      LOADED;
+      LOADED
    }
 }

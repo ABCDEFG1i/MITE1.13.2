@@ -48,7 +48,7 @@ public enum EnumFacing implements IStringSerializable {
       return new EnumFacing[p_199791_0_];
    });
 
-   private EnumFacing(int p_i46016_3_, int p_i46016_4_, int p_i46016_5_, String p_i46016_6_, EnumFacing.AxisDirection p_i46016_7_, EnumFacing.Axis p_i46016_8_, Vec3i p_i46016_9_) {
+   EnumFacing(int p_i46016_3_, int p_i46016_4_, int p_i46016_5_, String p_i46016_6_, EnumFacing.AxisDirection p_i46016_7_, EnumFacing.Axis p_i46016_8_, Vec3i p_i46016_9_) {
       this.index = p_i46016_3_;
       this.horizontalIndex = p_i46016_5_;
       this.opposite = p_i46016_4_;
@@ -300,7 +300,7 @@ public enum EnumFacing implements IStringSerializable {
       return this.directionVec;
    }
 
-   public static enum Axis implements Predicate<EnumFacing>, IStringSerializable {
+   public enum Axis implements Predicate<EnumFacing>, IStringSerializable {
       X("x") {
          public int getCoordinate(int p_196052_1_, int p_196052_2_, int p_196052_3_) {
             return p_196052_1_;
@@ -334,7 +334,7 @@ public enum EnumFacing implements IStringSerializable {
       }));
       private final String name;
 
-      private Axis(String p_i49394_3_) {
+      Axis(String p_i49394_3_) {
          this.name = p_i49394_3_;
       }
 
@@ -385,14 +385,14 @@ public enum EnumFacing implements IStringSerializable {
       public abstract double getCoordinate(double p_196051_1_, double p_196051_3_, double p_196051_5_);
    }
 
-   public static enum AxisDirection {
+   public enum AxisDirection {
       POSITIVE(1, "Towards positive"),
       NEGATIVE(-1, "Towards negative");
 
       private final int offset;
       private final String description;
 
-      private AxisDirection(int p_i46014_3_, String p_i46014_4_) {
+      AxisDirection(int p_i46014_3_, String p_i46014_4_) {
          this.offset = p_i46014_3_;
          this.description = p_i46014_4_;
       }
@@ -406,14 +406,14 @@ public enum EnumFacing implements IStringSerializable {
       }
    }
 
-   public static enum Plane implements Iterable<EnumFacing>, Predicate<EnumFacing> {
+   public enum Plane implements Iterable<EnumFacing>, Predicate<EnumFacing> {
       HORIZONTAL(new EnumFacing[]{EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.SOUTH, EnumFacing.WEST}, new EnumFacing.Axis[]{EnumFacing.Axis.X, EnumFacing.Axis.Z}),
       VERTICAL(new EnumFacing[]{EnumFacing.UP, EnumFacing.DOWN}, new EnumFacing.Axis[]{EnumFacing.Axis.Y});
 
       private final EnumFacing[] facingValues;
       private final EnumFacing.Axis[] axisValues;
 
-      private Plane(EnumFacing[] p_i49393_3_, EnumFacing.Axis[] p_i49393_4_) {
+      Plane(EnumFacing[] p_i49393_3_, EnumFacing.Axis[] p_i49393_4_) {
          this.facingValues = p_i49393_3_;
          this.axisValues = p_i49393_4_;
       }

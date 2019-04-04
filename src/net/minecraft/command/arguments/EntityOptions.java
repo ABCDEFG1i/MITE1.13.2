@@ -274,7 +274,7 @@ public class EntityOptions {
                         return false;
                      } else {
                         GameType gametype1 = ((EntityPlayerMP)p_202055_2_).interactionManager.getGameType();
-                        return flag ? gametype1 != gametype : gametype1 == gametype;
+                        return flag == (gametype1 != gametype);
                      }
                   });
                   if (flag) {
@@ -538,7 +538,7 @@ public class EntityOptions {
 
       for(Entry<String, EntityOptions.IOptionHandler> entry : REGISTRY.entrySet()) {
          if ((entry.getValue()).canHandle.test(p_202049_0_) && entry.getKey().toLowerCase(Locale.ROOT).startsWith(s)) {
-            p_202049_1_.suggest((String)entry.getKey() + '=', (entry.getValue()).tooltip);
+            p_202049_1_.suggest(entry.getKey() + '=', (entry.getValue()).tooltip);
          }
       }
 

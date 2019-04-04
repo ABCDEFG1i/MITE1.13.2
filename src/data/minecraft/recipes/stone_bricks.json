@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stone"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:stone_bricks",
+    "count": 4
+  }
+}

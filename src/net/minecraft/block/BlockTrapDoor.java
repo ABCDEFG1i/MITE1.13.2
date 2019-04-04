@@ -45,7 +45,7 @@ public class BlockTrapDoor extends BlockHorizontal implements IBucketPickupHandl
       if (!p_196244_1_.get(OPEN)) {
          return p_196244_1_.get(HALF) == Half.TOP ? TOP_AABB : BOTTOM_AABB;
       } else {
-         switch((EnumFacing)p_196244_1_.get(HORIZONTAL_FACING)) {
+         switch(p_196244_1_.get(HORIZONTAL_FACING)) {
          case NORTH:
          default:
             return NORTH_OPEN_AABB;
@@ -108,7 +108,7 @@ public class BlockTrapDoor extends BlockHorizontal implements IBucketPickupHandl
          if (flag != p_189540_1_.get(POWERED)) {
             if (p_189540_1_.get(OPEN) != flag) {
                p_189540_1_ = p_189540_1_.with(OPEN, Boolean.valueOf(flag));
-               this.playSound((EntityPlayer)null, p_189540_2_, p_189540_3_, flag);
+               this.playSound(null, p_189540_2_, p_189540_3_, flag);
             }
 
             p_189540_2_.setBlockState(p_189540_3_, p_189540_1_.with(POWERED, Boolean.valueOf(flag)), 2);

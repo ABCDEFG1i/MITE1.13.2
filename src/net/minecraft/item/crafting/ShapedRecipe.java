@@ -194,7 +194,6 @@ public class ShapedRecipe implements IRecipe,ITimedRecipe {
    private static int firstNonSpace(String p_194135_0_) {
       int i;
       for(i = 0; i < p_194135_0_.length() && p_194135_0_.charAt(i) == ' '; ++i) {
-         ;
       }
 
       return i;
@@ -203,7 +202,6 @@ public class ShapedRecipe implements IRecipe,ITimedRecipe {
    private static int lastNonSpace(String p_194136_0_) {
       int i;
       for(i = p_194136_0_.length() - 1; i >= 0 && p_194136_0_.charAt(i) == ' '; --i) {
-         ;
       }
 
       return i;
@@ -238,7 +236,7 @@ public class ShapedRecipe implements IRecipe,ITimedRecipe {
 
       for(Entry<String, JsonElement> entry : p_192408_0_.entrySet()) {
          if (entry.getKey().length() != 1) {
-            throw new JsonSyntaxException("Invalid key entry: '" + (String)entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+            throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
          }
 
          if (" ".equals(entry.getKey())) {

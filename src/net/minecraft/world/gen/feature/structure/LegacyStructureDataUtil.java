@@ -161,7 +161,6 @@ public abstract class LegacyStructureDataUtil {
                   continue;
                }
             } catch (IOException var15) {
-               ;
             }
 
             for(String s1 : nbttagcompound.getKeySet()) {

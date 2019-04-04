@@ -59,7 +59,7 @@ public class ShaderManager implements AutoCloseable {
          JsonObject jsonobject = JsonUtils.func_212743_a(new InputStreamReader(iresource.getInputStream(), StandardCharsets.UTF_8));
          String s = JsonUtils.getString(jsonobject, "vertex");
          String s1 = JsonUtils.getString(jsonobject, "fragment");
-         JsonArray jsonarray = JsonUtils.getJsonArray(jsonobject, "samplers", (JsonArray)null);
+         JsonArray jsonarray = JsonUtils.getJsonArray(jsonobject, "samplers", null);
          if (jsonarray != null) {
             int i = 0;
 
@@ -76,7 +76,7 @@ public class ShaderManager implements AutoCloseable {
             }
          }
 
-         JsonArray jsonarray1 = JsonUtils.getJsonArray(jsonobject, "attributes", (JsonArray)null);
+         JsonArray jsonarray1 = JsonUtils.getJsonArray(jsonobject, "attributes", null);
          if (jsonarray1 != null) {
             int j = 0;
             this.attribLocations = Lists.newArrayListWithCapacity(jsonarray1.size());
@@ -98,7 +98,7 @@ public class ShaderManager implements AutoCloseable {
             this.attributes = null;
          }
 
-         JsonArray jsonarray2 = JsonUtils.getJsonArray(jsonobject, "uniforms", (JsonArray)null);
+         JsonArray jsonarray2 = JsonUtils.getJsonArray(jsonobject, "uniforms", null);
          if (jsonarray2 != null) {
             int k = 0;
 
@@ -115,7 +115,7 @@ public class ShaderManager implements AutoCloseable {
             }
          }
 
-         this.blendingMode = JsonBlendingMode.parseBlendNode(JsonUtils.getJsonObject(jsonobject, "blend", (JsonObject)null));
+         this.blendingMode = JsonBlendingMode.parseBlendNode(JsonUtils.getJsonObject(jsonobject, "blend", null));
          this.useFaceCulling = JsonUtils.getBoolean(jsonobject, "cull", true);
          this.vertexShaderLoader = ShaderLoader.loadShader(p_i45087_1_, ShaderLoader.ShaderType.VERTEX, s);
          this.fragmentShaderLoader = ShaderLoader.loadShader(p_i45087_1_, ShaderLoader.ShaderType.FRAGMENT, s1);
@@ -133,7 +133,7 @@ public class ShaderManager implements AutoCloseable {
          jsonexception.setFilenameAndFlush(resourcelocation.getPath());
          throw jsonexception;
       } finally {
-         IOUtils.closeQuietly((Closeable)iresource);
+         IOUtils.closeQuietly(iresource);
       }
 
       this.markDirty();
@@ -214,7 +214,7 @@ public class ShaderManager implements AutoCloseable {
 
    public ShaderDefault getShaderUniformOrDefault(String p_195653_1_) {
       ShaderUniform shaderuniform = this.getShaderUniform(p_195653_1_);
-      return (ShaderDefault)(shaderuniform == null ? DEFAULT_SHADER_UNIFORM : shaderuniform);
+      return shaderuniform == null ? DEFAULT_SHADER_UNIFORM : shaderuniform;
    }
 
    private void setupUniforms() {
@@ -239,7 +239,7 @@ public class ShaderManager implements AutoCloseable {
          String s1 = shaderuniform.getShaderName();
          int l = OpenGlHelper.glGetUniformLocation(this.program, s1);
          if (l == -1) {
-            LOGGER.warn("Could not find uniform named {} in the specified shader program.", (Object)s1);
+            LOGGER.warn("Could not find uniform named {} in the specified shader program.", s1);
          } else {
             this.shaderUniformLocations.add(l);
             shaderuniform.setUniformLocation(l);
@@ -253,7 +253,7 @@ public class ShaderManager implements AutoCloseable {
       JsonObject jsonobject = JsonUtils.getJsonObject(p_147996_1_, "sampler");
       String s = JsonUtils.getString(jsonobject, "name");
       if (!JsonUtils.isString(jsonobject, "file")) {
-         this.shaderSamplers.put(s, (Object)null);
+         this.shaderSamplers.put(s, null);
          this.samplerNames.add(s);
       } else {
          this.samplerNames.add(s);
@@ -261,9 +261,7 @@ public class ShaderManager implements AutoCloseable {
    }
 
    public void addSamplerTexture(String p_147992_1_, Object p_147992_2_) {
-      if (this.shaderSamplers.containsKey(p_147992_1_)) {
-         this.shaderSamplers.remove(p_147992_1_);
-      }
+       this.shaderSamplers.remove(p_147992_1_);
 
       this.shaderSamplers.put(p_147992_1_, p_147992_2_);
       this.markDirty();

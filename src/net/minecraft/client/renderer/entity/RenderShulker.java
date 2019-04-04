@@ -54,9 +54,8 @@ public class RenderShulker extends RenderLiving<EntityShulker> {
             BlockPos blockpos1 = p_177071_1_.getAttachmentPos();
             Vec3d vec3d = new Vec3d((double)blockpos1.getX(), (double)blockpos1.getY(), (double)blockpos1.getZ());
             Vec3d vec3d1 = new Vec3d((double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ());
-            if (p_177071_2_.isBoundingBoxInFrustum(new AxisAlignedBB(vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y, vec3d.z))) {
-               return true;
-            }
+             return p_177071_2_.isBoundingBoxInFrustum(
+                     new AxisAlignedBB(vec3d1.x, vec3d1.y, vec3d1.z, vec3d.x, vec3d.y, vec3d.z));
          }
 
          return false;

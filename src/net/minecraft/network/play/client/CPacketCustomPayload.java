@@ -35,7 +35,7 @@ public class CPacketCustomPayload implements Packet<INetHandlerPlayServer> {
 
    public void writePacketData(PacketBuffer p_148840_1_) throws IOException {
       p_148840_1_.writeResourceLocation(this.channel);
-      p_148840_1_.writeBytes((ByteBuf)this.data);
+      p_148840_1_.writeBytes(this.data);
    }
 
    public void processPacket(INetHandlerPlayServer p_148833_1_) {

@@ -10,7 +10,7 @@ public enum StructureMode implements IStringSerializable {
 
    private final String name;
 
-   private StructureMode(String p_i49330_3_) {
+   StructureMode(String p_i49330_3_) {
       this.name = p_i49330_3_;
    }
 

@@ -131,7 +131,7 @@ public class ModelBakery {
 
    @Nullable
    static <T extends Comparable<T>> T func_209592_a(IProperty<T> p_209592_0_, String p_209592_1_) {
-      return (T)(p_209592_0_.parseValue(p_209592_1_).orElse((T)null));
+      return p_209592_0_.parseValue(p_209592_1_).orElse(null);
    }
 
    public IUnbakedModel func_209597_a(ResourceLocation p_209597_1_) {
@@ -228,7 +228,7 @@ public class ModelBakery {
                                  IUnbakedModel iunbakedmodel1 = map2.put(p_209590_5_, p_209589_9_);
                                  if (iunbakedmodel1 != null && iunbakedmodel1 != iunbakedmodel) {
                                     map2.put(p_209590_5_, this.field_209608_D.get(field_177604_a));
-                                    throw new RuntimeException("Overlapping definition with: " + (String)modelblockdefinition.func_209578_a().entrySet().stream().filter((p_209604_1_) -> {
+                                    throw new RuntimeException("Overlapping definition with: " + modelblockdefinition.func_209578_a().entrySet().stream().filter((p_209604_1_) -> {
                                        return p_209604_1_.getValue() == iunbakedmodel1;
                                     }).findFirst().get().getKey());
                                  }
@@ -288,7 +288,7 @@ public class ModelBakery {
          this.field_209608_D.put(field_177604_a, this.func_177594_c(field_177604_a));
          this.func_209594_a(map, field_177604_a);
       } catch (IOException ioexception) {
-         field_177603_c.error("Error loading missing model, should never happen :(", (Throwable)ioexception);
+         field_177603_c.error("Error loading missing model, should never happen :(", ioexception);
          throw new RuntimeException(ioexception);
       }
 
@@ -315,7 +315,7 @@ public class ModelBakery {
       }).collect(Collectors.toSet());
       set1.addAll(field_177602_b);
       set.forEach((p_209588_0_) -> {
-         field_177603_c.warn("Unable to resolve texture reference: {}", (Object)p_209588_0_);
+         field_177603_c.warn("Unable to resolve texture reference: {}", p_209588_0_);
       });
       this.field_177609_j.stitch(this.field_177598_f, set1);
       map.forEach((p_209599_1_, p_209599_2_) -> {
@@ -370,7 +370,7 @@ public class ModelBakery {
          lvt_5_2_ = field_177606_o;
       } finally {
          IOUtils.closeQuietly(reader);
-         IOUtils.closeQuietly((Closeable)iresource);
+         IOUtils.closeQuietly(iresource);
       }
 
       return lvt_5_2_;

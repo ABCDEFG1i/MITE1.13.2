@@ -24,7 +24,7 @@ public enum EnumDirection8 {
    private static final int field_208507_p = 1 << NORTH.ordinal();
    private final Set<EnumFacing> directions;
 
-   private EnumDirection8(EnumFacing... p_i47954_3_) {
+   EnumDirection8(EnumFacing... p_i47954_3_) {
       this.directions = Sets.immutableEnumSet(Arrays.asList(p_i47954_3_));
    }
 

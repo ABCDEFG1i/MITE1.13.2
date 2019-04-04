@@ -28,7 +28,6 @@ public class TextComponentScore extends TextComponentBase {
          EntitySelectorParser entityselectorparser = new EntitySelectorParser(new StringReader(p_i45997_1_));
          entityselector = entityselectorparser.parse();
       } catch (CommandSyntaxException var5) {
-         ;
       }
 
       this.field_197667_c = entityselector;

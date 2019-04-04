@@ -11,7 +11,7 @@ public enum TickPriority {
 
    private final int priority;
 
-   private TickPriority(int p_i48976_3_) {
+   TickPriority(int p_i48976_3_) {
       this.priority = p_i48976_3_;
    }
 

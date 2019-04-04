@@ -103,7 +103,8 @@ public interface IWorldReaderBase extends IBlockReader {
 
    default boolean checkNoEntityCollision(IBlockState p_195584_1_, BlockPos p_195584_2_) {
       VoxelShape voxelshape = p_195584_1_.getCollisionShape(this, p_195584_2_);
-      return voxelshape.isEmpty() || this.checkNoEntityCollision((Entity)null, voxelshape.withOffset((double)p_195584_2_.getX(), (double)p_195584_2_.getY(), (double)p_195584_2_.getZ()));
+      return voxelshape.isEmpty() || this.checkNoEntityCollision(
+              null, voxelshape.withOffset((double)p_195584_2_.getX(), (double)p_195584_2_.getY(), (double)p_195584_2_.getZ()));
    }
 
    default boolean checkNoEntityCollision(@Nullable Entity p_195587_1_, AxisAlignedBB p_195587_2_) {

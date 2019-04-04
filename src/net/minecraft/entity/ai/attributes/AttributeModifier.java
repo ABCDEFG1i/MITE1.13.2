@@ -64,14 +64,10 @@ public class AttributeModifier {
       } else if (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) {
          AttributeModifier attributemodifier = (AttributeModifier)p_equals_1_;
          if (this.id != null) {
-            if (!this.id.equals(attributemodifier.id)) {
-               return false;
-            }
-         } else if (attributemodifier.id != null) {
-            return false;
-         }
+             return this.id.equals(attributemodifier.id);
+         } else
+             return attributemodifier.id == null;
 
-         return true;
       } else {
          return false;
       }
@@ -82,6 +78,6 @@ public class AttributeModifier {
    }
 
    public String toString() {
-      return "AttributeModifier{amount=" + this.amount + ", operation=" + this.operation + ", name='" + (String)this.name.get() + '\'' + ", id=" + this.id + ", serialize=" + this.isSaved + '}';
+      return "AttributeModifier{amount=" + this.amount + ", operation=" + this.operation + ", name='" + this.name.get() + '\'' + ", id=" + this.id + ", serialize=" + this.isSaved + '}';
    }
 }

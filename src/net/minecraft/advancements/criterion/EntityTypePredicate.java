@@ -45,6 +45,6 @@ public class EntityTypePredicate {
    }
 
    public JsonElement func_209369_a() {
-      return (JsonElement)(this.field_209373_c == null ? JsonNull.INSTANCE : new JsonPrimitive(IRegistry.field_212629_r.func_177774_c(this.field_209373_c).toString()));
+      return this.field_209373_c == null ? JsonNull.INSTANCE : new JsonPrimitive(IRegistry.field_212629_r.func_177774_c(this.field_209373_c).toString());
    }
 }

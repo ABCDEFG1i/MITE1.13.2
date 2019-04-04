@@ -117,10 +117,10 @@ public abstract class MinMaxBounds<T extends Number> {
 
       String s = p_196975_0_.getString().substring(i, p_196975_0_.getCursor());
       if (s.isEmpty()) {
-         return (T)null;
+         return null;
       } else {
          try {
-            return (T)(p_196975_1_.apply(s));
+            return p_196975_1_.apply(s);
          } catch (NumberFormatException var6) {
             throw p_196975_2_.get().createWithContext(p_196975_0_, s);
          }
@@ -142,11 +142,11 @@ public abstract class MinMaxBounds<T extends Number> {
 
    @Nullable
    private static <T> T func_196972_a(@Nullable T p_196972_0_, Function<T, T> p_196972_1_) {
-      return (T)(p_196972_0_ == null ? null : p_196972_1_.apply(p_196972_0_));
+      return p_196972_0_ == null ? null : p_196972_1_.apply(p_196972_0_);
    }
 
    public static class FloatBound extends MinMaxBounds<Float> {
-      public static final MinMaxBounds.FloatBound UNBOUNDED = new MinMaxBounds.FloatBound((Float)null, (Float)null);
+      public static final MinMaxBounds.FloatBound UNBOUNDED = new MinMaxBounds.FloatBound(null, null);
       private final Double minSquared;
       private final Double maxSquared;
 
@@ -170,7 +170,7 @@ public abstract class MinMaxBounds<T extends Number> {
       }
 
       public static MinMaxBounds.FloatBound func_211355_b(float p_211355_0_) {
-         return new MinMaxBounds.FloatBound(p_211355_0_, (Float)null);
+         return new MinMaxBounds.FloatBound(p_211355_0_, null);
       }
 
       public boolean test(float p_211354_1_) {
@@ -215,7 +215,7 @@ public abstract class MinMaxBounds<T extends Number> {
    }
 
    public static class IntBound extends MinMaxBounds<Integer> {
-      public static final MinMaxBounds.IntBound UNBOUNDED = new MinMaxBounds.IntBound((Integer)null, (Integer)null);
+      public static final MinMaxBounds.IntBound UNBOUNDED = new MinMaxBounds.IntBound(null, null);
       private final Long minSquared;
       private final Long maxSquared;
 
@@ -243,7 +243,7 @@ public abstract class MinMaxBounds<T extends Number> {
       }
 
       public static MinMaxBounds.IntBound func_211340_b(int p_211340_0_) {
-         return new MinMaxBounds.IntBound(p_211340_0_, (Integer)null);
+         return new MinMaxBounds.IntBound(p_211340_0_, null);
       }
 
       public boolean test(int p_211339_1_) {

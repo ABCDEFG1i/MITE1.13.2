@@ -265,7 +265,7 @@ public class RecipeItemHelper {
 
          while(true) {
             int k = (i + j) / 2;
-            if (this.tryPick(k, (IntList)null)) {
+            if (this.tryPick(k, null)) {
                if (j - i <= 1) {
                   if (k > 0) {
                      this.tryPick(k, p_194102_2_);

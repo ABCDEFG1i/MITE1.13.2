@@ -227,7 +227,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
 
          this.addChunkToPending(chunkpos, nbttagcompound);
       } catch (Exception exception) {
-         LOGGER.error("Failed to save chunk", (Throwable)exception);
+         LOGGER.error("Failed to save chunk", exception);
       }
 
    }
@@ -241,7 +241,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
       Iterator<Entry<ChunkPos, NBTTagCompound>> iterator = this.chunksToSave.entrySet().iterator();
       if (!iterator.hasNext()) {
          if (this.flushing) {
-            LOGGER.info("ThreadedAnvilChunkStorage ({}): All chunks are saved", (Object)this.chunkSaveLocation.getName());
+            LOGGER.info("ThreadedAnvilChunkStorage ({}): All chunks are saved", this.chunkSaveLocation.getName());
          }
 
          return false;
@@ -261,7 +261,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
                   this.field_208031_e.func_208216_a(chunkpos.asLong());
                }
             } catch (Exception exception) {
-               LOGGER.error("Failed to save chunk", (Throwable)exception);
+               LOGGER.error("Failed to save chunk", exception);
             }
 
             return true;
@@ -285,7 +285,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
          this.flushing = true;
 
          while(this.writeNextIO()) {
-            ;
          }
       } finally {
          this.flushing = false;
@@ -321,7 +320,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
       NBTTagList nbttaglist1 = new NBTTagList();
 
       for(NBTTagCompound nbttagcompound : p_202156_1_.getEntities()) {
-         nbttaglist1.add((INBTBase)nbttagcompound);
+         nbttaglist1.add(nbttagcompound);
       }
 
       p_202156_3_.setTag("Entities", nbttaglist1);
@@ -332,9 +331,9 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
          if (tileentity != null) {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
             tileentity.writeToNBT(nbttagcompound1);
-            nbttaglist2.add((INBTBase)nbttagcompound1);
+            nbttaglist2.add(nbttagcompound1);
          } else {
-            nbttaglist2.add((INBTBase)p_202156_1_.getDeferredTileEntity(blockpos));
+            nbttaglist2.add(p_202156_1_.getDeferredTileEntity(blockpos));
          }
       }
 
@@ -390,7 +389,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             if (entity.writeToNBTOptional(nbttagcompound)) {
                p_75820_1_.setHasEntities(true);
-               nbttaglist1.add((INBTBase)nbttagcompound);
+               nbttaglist1.add(nbttagcompound);
             }
          }
       }
@@ -404,12 +403,12 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
             tileentity.writeToNBT(nbttagcompound1);
             nbttagcompound1.setBoolean("keepPacked", false);
-            nbttaglist2.add((INBTBase)nbttagcompound1);
+            nbttaglist2.add(nbttagcompound1);
          } else {
             NBTTagCompound nbttagcompound3 = p_75820_1_.getDeferredTileEntity(blockpos);
             if (nbttagcompound3 != null) {
                nbttagcompound3.setBoolean("keepPacked", true);
-               nbttaglist2.add((INBTBase)nbttagcompound3);
+               nbttaglist2.add(nbttagcompound3);
             }
          }
       }
@@ -643,7 +642,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
                nbttagcompound.setByteArray("SkyLight", new byte[chunksection.getBlockLight().getData().length]);
             }
 
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          }
       }
 
@@ -720,11 +719,11 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
          NBTTagList nbttaglist1 = new NBTTagList();
          if (shortlist != null) {
             for(Short oshort : shortlist) {
-               nbttaglist1.add((INBTBase)(new NBTTagShort(oshort)));
+               nbttaglist1.add(new NBTTagShort(oshort));
             }
          }
 
-         nbttaglist.add((INBTBase)nbttaglist1);
+         nbttaglist.add(nbttaglist1);
       }
 
       return nbttaglist;
@@ -780,7 +779,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
       try {
          return EntityType.create(p_186053_0_, p_186053_1_);
       } catch (RuntimeException runtimeexception) {
-         LOGGER.warn("Exception loading entity: ", (Throwable)runtimeexception);
+         LOGGER.warn("Exception loading entity: ", runtimeexception);
          return null;
       }
    }
@@ -804,7 +803,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
             flag = true;
          }
       } catch (IOException var6) {
-         ;
       }
 
       return flag;

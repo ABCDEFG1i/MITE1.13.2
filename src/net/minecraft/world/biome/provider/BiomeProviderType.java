@@ -31,11 +31,11 @@ public class BiomeProviderType<C extends IBiomeProviderSettings, T extends Biome
    }
 
    public T create(C p_205457_1_) {
-      return (T)(this.factory.apply(p_205457_1_));
+      return this.factory.apply(p_205457_1_);
    }
 
    public C createSettings() {
-      return (C)(this.settingsFactory.get());
+      return this.settingsFactory.get();
    }
 
    public ResourceLocation getKey() {

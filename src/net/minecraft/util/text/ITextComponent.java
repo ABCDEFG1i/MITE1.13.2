@@ -77,7 +77,7 @@ public interface ITextComponent extends Message, Iterable<ITextComponent> {
             String s2 = itextcomponent.getStyle().getFormattingCode();
             if (!s2.equals(s)) {
                if (!s.isEmpty()) {
-                  stringbuilder.append((Object)TextFormatting.RESET);
+                  stringbuilder.append(TextFormatting.RESET);
                }
 
                stringbuilder.append(s2);
@@ -89,7 +89,7 @@ public interface ITextComponent extends Message, Iterable<ITextComponent> {
       }
 
       if (!s.isEmpty()) {
-         stringbuilder.append((Object)TextFormatting.RESET);
+         stringbuilder.append(TextFormatting.RESET);
       }
 
       return stringbuilder.toString();
@@ -167,7 +167,7 @@ public interface ITextComponent extends Message, Iterable<ITextComponent> {
       return itextcomponent;
    }
 
-   public static class Serializer implements JsonDeserializer<ITextComponent>, JsonSerializer<ITextComponent> {
+   class Serializer implements JsonDeserializer<ITextComponent>, JsonSerializer<ITextComponent> {
       private static final Gson GSON = Util.make(() -> {
          GsonBuilder gsonbuilder = new GsonBuilder();
          gsonbuilder.registerTypeHierarchyAdapter(ITextComponent.class, new ITextComponent.Serializer());

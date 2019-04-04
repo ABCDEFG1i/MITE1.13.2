@@ -18,10 +18,7 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DefaultUncaughtExceptionHandler;
-import net.minecraft.util.JsonUtils;
-import net.minecraft.util.Session;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +34,7 @@ public class Main {
       optionparser.accepts("demo");
       optionparser.accepts("fullscreen");
       optionparser.accepts("checkGlErrors");
+      optionparser.accepts("devMode");
       OptionSpec<String> optionspec = optionparser.accepts("server").withRequiredArg();
       OptionSpec<Integer> optionspec1 = optionparser.accepts("port").withRequiredArg().ofType(Integer.class).defaultsTo(25565);
       OptionSpec<File> optionspec2 = optionparser.accepts("gameDir").withRequiredArg().ofType(File.class).defaultsTo(new File("."));
@@ -72,7 +70,6 @@ public class Main {
          try {
             proxy = new Proxy(Type.SOCKS, new InetSocketAddress(s, func_206236_a(optionset, optionspec6)));
          } catch (Exception var52) {
-            ;
          }
       }
 
@@ -86,6 +83,10 @@ public class Main {
          });
       }
 
+      SharedConstants.developmentMode = optionset.has("devMode");
+      if (SharedConstants.developmentMode) {
+         LOGGER.info("Running in development mode");
+      }
       int i = func_206236_a(optionset, optionspec13);
       int j = func_206236_a(optionset, optionspec14);
       Optional<Integer> optional = Optional.ofNullable(func_206236_a(optionset, optionspec15));

@@ -20,7 +20,6 @@ public class CoralMushroomFeature extends CoralFeature {
                blockpos$mutableblockpos.setPos(i1 + p_204623_3_.getX(), j1 + p_204623_3_.getY(), k1 + p_204623_3_.getZ());
                blockpos$mutableblockpos.move(EnumFacing.DOWN, l);
                if ((i1 != 0 && i1 != j || j1 != 0 && j1 != i) && (k1 != 0 && k1 != k || j1 != 0 && j1 != i) && (i1 != 0 && i1 != j || k1 != 0 && k1 != k) && (i1 == 0 || i1 == j || j1 == 0 || j1 == i || k1 == 0 || k1 == k) && !(p_204623_2_.nextFloat() < 0.1F) && !this.func_204624_b(p_204623_1_, p_204623_2_, blockpos$mutableblockpos, p_204623_4_)) {
-                  ;
                }
             }
          }

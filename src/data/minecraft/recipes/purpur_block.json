@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "FF",
+    "FF"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:purpur_block",
+    "count": 4
+  }
+}

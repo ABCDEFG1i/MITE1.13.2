@@ -30,10 +30,9 @@ public abstract class ScatteredStructure<C extends IFeatureConfig> extends Struc
    protected boolean hasStartAt(IChunkGenerator<?> p_202372_1_, Random p_202372_2_, int p_202372_3_, int p_202372_4_) {
       ChunkPos chunkpos = this.getStartPositionForPosition(p_202372_1_, p_202372_2_, p_202372_3_, p_202372_4_, 0, 0);
       if (p_202372_3_ == chunkpos.x && p_202372_4_ == chunkpos.z) {
-         Biome biome = p_202372_1_.getBiomeProvider().getBiome(new BlockPos(p_202372_3_ * 16 + 9, 0, p_202372_4_ * 16 + 9), (Biome)null);
-         if (p_202372_1_.hasStructure(biome, this)) {
-            return true;
-         }
+         Biome biome = p_202372_1_.getBiomeProvider().getBiome(new BlockPos(p_202372_3_ * 16 + 9, 0, p_202372_4_ * 16 + 9),
+                 null);
+          return p_202372_1_.hasStructure(biome, this);
       }
 
       return false;

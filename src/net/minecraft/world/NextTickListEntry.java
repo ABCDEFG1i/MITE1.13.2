@@ -15,7 +15,7 @@ public class NextTickListEntry<T> implements Comparable<NextTickListEntry<T>> {
    }
 
    public NextTickListEntry(BlockPos p_i48978_1_, T p_i48978_2_, long p_i48978_3_, TickPriority p_i48978_5_) {
-      this.tickEntryID = (long)(nextTickEntryID++);
+      this.tickEntryID = nextTickEntryID++;
       this.position = p_i48978_1_.toImmutable();
       this.target = p_i48978_2_;
       this.scheduledTime = p_i48978_3_;

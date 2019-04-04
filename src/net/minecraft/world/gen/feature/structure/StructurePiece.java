@@ -349,7 +349,7 @@ public abstract class StructurePiece {
 
    protected boolean generateChest(IWorld p_186167_1_, MutableBoundingBox p_186167_2_, Random p_186167_3_, int p_186167_4_, int p_186167_5_, int p_186167_6_, ResourceLocation p_186167_7_) {
       BlockPos blockpos = new BlockPos(this.getXWithOffset(p_186167_4_, p_186167_6_), this.getYWithOffset(p_186167_5_), this.getZWithOffset(p_186167_4_, p_186167_6_));
-      return this.generateChest(p_186167_1_, p_186167_2_, p_186167_3_, blockpos, p_186167_7_, (IBlockState)null);
+      return this.generateChest(p_186167_1_, p_186167_2_, p_186167_3_, blockpos, p_186167_7_, null);
    }
 
    public static IBlockState func_197528_a(IBlockReader p_197528_0_, BlockPos p_197528_1_, IBlockState p_197528_2_) {

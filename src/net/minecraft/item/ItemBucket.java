@@ -143,7 +143,8 @@ public class ItemBucket extends Item {
 
             return true;
          } else {
-            return p_180616_4_ == null ? false : this.tryPlaceContainedLiquid(p_180616_1_, p_180616_2_, p_180616_4_.getBlockPos().offset(p_180616_4_.sideHit), (RayTraceResult)null);
+            return p_180616_4_ != null && this.tryPlaceContainedLiquid(p_180616_1_, p_180616_2_,
+                    p_180616_4_.getBlockPos().offset(p_180616_4_.sideHit), null);
          }
       }
    }

@@ -22,7 +22,7 @@ public class GuiScreenDemo extends GuiScreen {
       });
       this.addButton(new GuiButton(2, this.width / 2 + 2, this.height / 2 + 62 + -16, 114, 20, I18n.format("demo.help.later")) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
-            GuiScreenDemo.this.mc.displayGuiScreen((GuiScreen)null);
+            GuiScreenDemo.this.mc.displayGuiScreen(null);
             GuiScreenDemo.this.mc.mouseHelper.grabMouse();
          }
       });

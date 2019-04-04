@@ -185,7 +185,7 @@ public class WorldGenRegion implements IWorld {
          }
 
          if (ichunk.getBlockState(p_175625_1_).getBlock() instanceof ITileEntityProvider) {
-            LOGGER.warn("Tried to access a block entity before it was created. {}", (Object)p_175625_1_);
+            LOGGER.warn("Tried to access a block entity before it was created. {}", p_175625_1_);
          }
 
          return null;

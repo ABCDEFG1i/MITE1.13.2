@@ -89,7 +89,8 @@ public class DebugCommand {
       stringbuilder.append("\n\n");
       stringbuilder.append("Time span: ").append(p_198328_0_).append(" ms\n");
       stringbuilder.append("Tick span: ").append(p_198328_2_).append(" ticks\n");
-      stringbuilder.append("// This is approximately ").append(String.format(Locale.ROOT, "%.2f", (float)p_198328_2_ / ((float)p_198328_0_ / 1.0E9F))).append(" ticks per second. It should be ").append((int)20).append(" ticks per second\n\n");
+      stringbuilder.append("// This is approximately ").append(String.format(Locale.ROOT, "%.2f", (float)p_198328_2_ / ((float)p_198328_0_ / 1.0E9F))).append(" ticks per second. It should be ").append(
+              20).append(" ticks per second\n\n");
       stringbuilder.append("--- BEGIN PROFILE DUMP ---\n\n");
       makeDebugGraphRecursive(0, "root", stringbuilder, p_198328_3_);
       stringbuilder.append("--- END PROFILE DUMP ---\n\n");
@@ -112,7 +113,7 @@ public class DebugCommand {
                try {
                   makeDebugGraphRecursive(p_198334_0_ + 1, p_198334_1_ + "." + profiler$result.profilerName, p_198334_2_, p_198334_3_);
                } catch (Exception exception) {
-                  p_198334_2_.append("[[ EXCEPTION ").append((Object)exception).append(" ]]");
+                  p_198334_2_.append("[[ EXCEPTION ").append(exception).append(" ]]");
                }
             }
          }

@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "minecraft:dark_oak_planks"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:dark_oak_button"
+  }
+}

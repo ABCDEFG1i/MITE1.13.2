@@ -116,16 +116,16 @@ public class ChunkRenderTask implements Comparable<ChunkRenderTask> {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Status {
+   public enum Status {
       PENDING,
       COMPILING,
       UPLOADING,
-      DONE;
+      DONE
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum Type {
+   public enum Type {
       REBUILD_CHUNK,
-      RESORT_TRANSPARENCY;
+      RESORT_TRANSPARENCY
    }
 }

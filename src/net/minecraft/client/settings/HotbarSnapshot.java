@@ -23,7 +23,7 @@ public class HotbarSnapshot extends ForwardingList<ItemStack> {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(ItemStack itemstack : this.delegate()) {
-         nbttaglist.add((INBTBase)itemstack.write(new NBTTagCompound()));
+         nbttaglist.add(itemstack.write(new NBTTagCompound()));
       }
 
       return nbttaglist;

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:coal"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:coal_block"
+  }
+}

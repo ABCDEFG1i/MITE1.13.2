@@ -114,6 +114,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
     private int lastXPSound;
     private int naturalHealSpeed = 1280;
     private int sleepTimer;
+    public int respawnXpLevel;
 
     public EntityPlayer(World p_i45324_1_, GameProfile p_i45324_2_) {
         super(EntityType.PLAYER, p_i45324_1_);
@@ -170,18 +171,13 @@ public abstract class EntityPlayer extends EntityLivingBase {
 
     public void addExperienceLevel(int p_82242_1_) {
         this.experienceLevel += p_82242_1_;
-        if (this.experienceLevel < 0) {
-            this.experienceLevel = 0;
-            this.experience = 0.0F;
-            this.experienceTotal = 0;
-        }
         this.onLevelUpdate(this.experienceLevel);
 
 
         if (p_82242_1_ > 0 && this.experienceLevel % 5 == 0 &&
             (float) this.lastXPSound < (float) this.ticksExisted - 100.0F) {
             float f = this.experienceLevel > 30 ? 1.0F : (float) this.experienceLevel / 30.0F;
-            this.world.playSound((EntityPlayer) null,
+            this.world.playSound(null,
                                  this.posX,
                                  this.posY,
                                  this.posZ,
@@ -325,7 +321,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                     int i = 0;
                     i = i + EnchantmentHelper.getKnockbackModifier(this);
                     if (this.isSprinting() && flag) {
-                        this.world.playSound((EntityPlayer) null,
+                        this.world.playSound(null,
                                              this.posX,
                                              this.posY,
                                              this.posZ,
@@ -415,7 +411,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                                 }
                             }
 
-                            this.world.playSound((EntityPlayer) null,
+                            this.world.playSound(null,
                                                  this.posX,
                                                  this.posY,
                                                  this.posZ,
@@ -435,7 +431,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                         }
 
                         if (flag2) {
-                            this.world.playSound((EntityPlayer) null,
+                            this.world.playSound(null,
                                                  this.posX,
                                                  this.posY,
                                                  this.posZ,
@@ -448,7 +444,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
 
                         if (!flag2 && !flag3) {
                             if (flag) {
-                                this.world.playSound((EntityPlayer) null,
+                                this.world.playSound(null,
                                                      this.posX,
                                                      this.posY,
                                                      this.posZ,
@@ -457,7 +453,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                                                      1.0F,
                                                      1.0F);
                             } else {
-                                this.world.playSound((EntityPlayer) null,
+                                this.world.playSound(null,
                                                      this.posX,
                                                      this.posY,
                                                      this.posZ,
@@ -518,7 +514,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
 
                         this.addExhaustion(0.1F);
                     } else {
-                        this.world.playSound((EntityPlayer) null,
+                        this.world.playSound(null,
                                              this.posX,
                                              this.posY,
                                              this.posZ,
@@ -558,7 +554,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
         if (team == null) {
             return true;
         } else {
-            return !team.isSameTeam(team1) ? true : team.getAllowFriendlyFire();
+            return !team.isSameTeam(team1) || team.getAllowFriendlyFire();
         }
     }
 
@@ -575,8 +571,8 @@ public abstract class EntityPlayer extends EntityLivingBase {
             return true;
         } else {
             ItemStack itemstack = this.getHeldItemMainhand();
-            return !itemstack.isEmpty() && itemstack.hasDisplayName() ? itemstack.getDisplayName().getString().equals(
-                    p_175146_1_.getLock()) : false;
+            return (!itemstack.isEmpty() && itemstack.hasDisplayName()) && itemstack.getDisplayName().getString().equals(
+                    p_175146_1_.getLock());
         }
     }
 
@@ -716,9 +712,10 @@ public abstract class EntityPlayer extends EntityLivingBase {
         this.func_71064_a(StatList.CUSTOM.func_199076_b(p_195067_1_), p_195067_2_);
     }
 
-    public void func_195068_e(int p_195068_1_) {
+    public void addXpValue(int p_195068_1_) {
         this.addScore(p_195068_1_);
-        this.experience += (float) p_195068_1_ / (float) this.xpBarCap();
+        //MITEMODDED Support minus levels
+        this.experience +=  ((float) p_195068_1_ / (float) Math.abs(this.xpBarCap()));
         this.experienceTotal = MathHelper.clamp(this.experienceTotal + p_195068_1_, 0, Integer.MAX_VALUE);
 
         while (this.experience < 0.0F) {
@@ -1292,8 +1289,9 @@ public abstract class EntityPlayer extends EntityLivingBase {
 
     protected int getExperiencePoints(EntityPlayer p_70693_1_) {
         if (!this.world.getGameRules().getBoolean("keepInventory") && !this.isSpectator()) {
-            int i = this.experienceLevel * 7;
-            return i > 100 ? 100 : i;
+            int n = this.experienceLevel;
+            //MITEMODDED Drop fewer Xp
+            return (5 * n * n+ 15 * n) /3;
         } else {
             return 0;
         }
@@ -1364,11 +1362,6 @@ public abstract class EntityPlayer extends EntityLivingBase {
                                          p_70037_1_.getInteger("SpawnZ"));
             this.spawnForced = p_70037_1_.getBoolean("SpawnForced");
         }
-
-        if (this.bedLocation ==null){
-            this.bedLocation = new BlockPos(this.spawnPos);
-        }
-
         this.foodStats.readNBT(p_70037_1_);
         this.capabilities.readCapabilitiesFromNBT(p_70037_1_);
         if (p_70037_1_.hasKey("EnderItems", 9)) {
@@ -1415,7 +1408,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                     }
                 }
 
-                return p_70097_2_ == 0.0F ? false : super.attackEntityFrom(p_70097_1_, p_70097_2_);
+                return p_70097_2_ != 0.0F && super.attackEntityFrom(p_70097_1_, p_70097_2_);
             }
         }
     }
@@ -2121,7 +2114,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
                                               axisalignedbb.minX + (double) f,
                                               axisalignedbb.minY + (double) f1,
                                               axisalignedbb.minZ + (double) f);
-            if (this.world.isCollisionBoxesEmpty((Entity) null, axisalignedbb)) {
+            if (this.world.isCollisionBoxesEmpty(null, axisalignedbb)) {
                 this.setSize(f, f1);
             }
         }
@@ -2165,14 +2158,11 @@ public abstract class EntityPlayer extends EntityLivingBase {
     }
 
     public int xpBarCap() {
-        if (this.experienceLevel >= 30) {
-            return 112 + (this.experienceLevel - 30) * 9;
-        } else {
-            return this.experienceLevel >= 15 ? 37 + (this.experienceLevel - 15) * 5 : 7 + this.experienceLevel * 2;
-        }
+        //MITEMODDED harder to upgrade
+        return this.experienceLevel==-1 ? 10 : 10 * this.experienceLevel + 10;
     }
 
-    public static enum EnumChatVisibility {
+    public enum EnumChatVisibility {
         FULL(0, "options.chat.visibility.full"), SYSTEM(1, "options.chat.visibility.system"), HIDDEN(2,
                                                                                                      "options.chat.visibility.hidden");
 
@@ -2185,7 +2175,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
         private final int chatVisibility;
         private final String resourceKey;
 
-        private EnumChatVisibility(int p_i45323_3_, String p_i45323_4_) {
+        EnumChatVisibility(int p_i45323_3_, String p_i45323_4_) {
             this.chatVisibility = p_i45323_3_;
             this.resourceKey = p_i45323_4_;
         }
@@ -2205,8 +2195,8 @@ public abstract class EntityPlayer extends EntityLivingBase {
         }
     }
 
-    public static enum SleepResult {
-        OK, NOT_POSSIBLE_HERE, NOT_POSSIBLE_NOW, TOO_FAR_AWAY, OTHER_PROBLEM, NOT_SAFE;
+    public enum SleepResult {
+        OK, NOT_POSSIBLE_HERE, NOT_POSSIBLE_NOW, TOO_FAR_AWAY, OTHER_PROBLEM, NOT_SAFE
     }
 
     static class SleepEnemyPredicate implements Predicate<EntityMob> {

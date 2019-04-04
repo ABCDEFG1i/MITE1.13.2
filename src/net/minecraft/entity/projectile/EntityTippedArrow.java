@@ -141,7 +141,7 @@ public class EntityTippedArrow extends EntityArrow {
          NBTTagList nbttaglist = new NBTTagList();
 
          for(PotionEffect potioneffect : this.customPotionEffects) {
-            nbttaglist.add((INBTBase)potioneffect.write(new NBTTagCompound()));
+            nbttaglist.add(potioneffect.write(new NBTTagCompound()));
          }
 
          p_70014_1_.setTag("CustomPotionEffects", nbttaglist);

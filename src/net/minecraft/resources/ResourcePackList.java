@@ -48,7 +48,7 @@ public class ResourcePackList<T extends ResourcePackInfo> {
       List<Entry<String, T>> list = Lists.newArrayList(this.packNameToInfo.entrySet());
       this.packNameToInfo.clear();
       list.stream().sorted(Entry.comparingByKey()).forEachOrdered((p_198984_1_) -> {
-         ResourcePackInfo resourcepackinfo = (ResourcePackInfo)this.packNameToInfo.put(p_198984_1_.getKey(), p_198984_1_.getValue());
+         ResourcePackInfo resourcepackinfo = this.packNameToInfo.put(p_198984_1_.getKey(), p_198984_1_.getValue());
       });
    }
 
@@ -80,7 +80,7 @@ public class ResourcePackList<T extends ResourcePackInfo> {
 
    @Nullable
    public T getPackInfo(String p_198981_1_) {
-      return (T)(this.packNameToInfo.get(p_198981_1_));
+      return this.packNameToInfo.get(p_198981_1_);
    }
 
    public void addPackFinder(IPackFinder p_198982_1_) {

@@ -42,7 +42,7 @@ public class BlockPortal extends Block {
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
-      switch((EnumFacing.Axis)p_196244_1_.get(AXIS)) {
+      switch(p_196244_1_.get(AXIS)) {
       case Z:
          return Z_AABB;
       case X:
@@ -57,11 +57,11 @@ public class BlockPortal extends Block {
 
          BlockPos blockpos;
          for(blockpos = p_196267_3_; !p_196267_2_.getBlockState(blockpos).isTopSolid() && blockpos.getY() > 0; blockpos = blockpos.down()) {
-            ;
          }
 
          if (i > 0 && !p_196267_2_.getBlockState(blockpos.up()).isNormalCube()) {
-            Entity entity = EntityType.ZOMBIE_PIGMAN.spawnEntity(p_196267_2_, (NBTTagCompound)null, (ITextComponent)null, (EntityPlayer)null, blockpos.up(), false, false);
+            Entity entity = EntityType.ZOMBIE_PIGMAN.spawnEntity(p_196267_2_, null, null,
+                    null, blockpos.up(), false, false);
             if (entity != null) {
                entity.timeUntilPortal = entity.getPortalCooldown();
             }
@@ -152,7 +152,7 @@ public class BlockPortal extends Block {
       switch(p_185499_2_) {
       case COUNTERCLOCKWISE_90:
       case CLOCKWISE_90:
-         switch((EnumFacing.Axis)p_185499_1_.get(AXIS)) {
+         switch(p_185499_1_.get(AXIS)) {
          case Z:
             return p_185499_1_.with(AXIS, EnumFacing.Axis.X);
          case X:
@@ -236,7 +236,6 @@ public class BlockPortal extends Block {
          }
 
          for(BlockPos blockpos = p_i48740_2_; p_i48740_2_.getY() > blockpos.getY() - 21 && p_i48740_2_.getY() > 0 && this.func_196900_a(p_i48740_1_.getBlockState(p_i48740_2_.down())); p_i48740_2_ = p_i48740_2_.down()) {
-            ;
          }
 
          int i = this.getDistanceUntilEdge(p_i48740_2_, this.leftDir) - 1;

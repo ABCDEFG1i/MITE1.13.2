@@ -60,7 +60,7 @@ public class MessageArgument implements ArgumentType<MessageArgument.Message> {
             }
 
             if (i < this.field_197114_a.length()) {
-               itextcomponent.appendText(this.field_197114_a.substring(i, this.field_197114_a.length()));
+               itextcomponent.appendText(this.field_197114_a.substring(i));
             }
 
             return itextcomponent;

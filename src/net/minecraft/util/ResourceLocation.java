@@ -58,7 +58,7 @@ public class ResourceLocation implements Comparable<ResourceLocation> {
       String[] astring = new String[]{"minecraft", p_195823_0_};
       int i = p_195823_0_.indexOf(p_195823_1_);
       if (i >= 0) {
-         astring[1] = p_195823_0_.substring(i + 1, p_195823_0_.length());
+         astring[1] = p_195823_0_.substring(i + 1);
          if (i >= 1) {
             astring[0] = p_195823_0_.substring(0, i);
          }

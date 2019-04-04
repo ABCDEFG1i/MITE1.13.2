@@ -1386,7 +1386,9 @@ public class OceanMonumentPieces {
             EntityElderGuardian entityelderguardian = new EntityElderGuardian(p_175817_1_.getWorld());
             entityelderguardian.heal(entityelderguardian.getMaxHealth());
             entityelderguardian.setLocationAndAngles((double)i + 0.5D, (double)j, (double)k + 0.5D, 0.0F, 0.0F);
-            entityelderguardian.onInitialSpawn(p_175817_1_.getDifficultyForLocation(new BlockPos(entityelderguardian)), (IEntityLivingData)null, (NBTTagCompound)null);
+            entityelderguardian.onInitialSpawn(p_175817_1_.getDifficultyForLocation(new BlockPos(entityelderguardian)),
+                    null,
+                    null);
             p_175817_1_.spawnEntity(entityelderguardian);
             return true;
          } else {

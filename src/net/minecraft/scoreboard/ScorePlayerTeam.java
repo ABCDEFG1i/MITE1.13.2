@@ -62,7 +62,7 @@ public class ScorePlayerTeam extends Team {
    }
 
    public void setPrefix(@Nullable ITextComponent p_207408_1_) {
-      this.prefix = (ITextComponent)(p_207408_1_ == null ? new TextComponentString("") : p_207408_1_.func_212638_h());
+      this.prefix = p_207408_1_ == null ? new TextComponentString("") : p_207408_1_.func_212638_h();
       this.scoreboard.broadcastTeamInfoUpdate(this);
    }
 
@@ -71,7 +71,7 @@ public class ScorePlayerTeam extends Team {
    }
 
    public void setSuffix(@Nullable ITextComponent p_207409_1_) {
-      this.suffix = (ITextComponent)(p_207409_1_ == null ? new TextComponentString("") : p_207409_1_.func_212638_h());
+      this.suffix = p_207409_1_ == null ? new TextComponentString("") : p_207409_1_.func_212638_h();
       this.scoreboard.broadcastTeamInfoUpdate(this);
    }
 

@@ -103,7 +103,7 @@ public class TileEntityPiston extends TileEntity implements ITickable {
       if (!voxelshape.isEmpty()) {
          List<AxisAlignedBB> list = voxelshape.toBoundingBoxList();
          AxisAlignedBB axisalignedbb = this.moveByPositionAndProgress(this.getMinMaxPiecesAABB(list));
-         List<Entity> list1 = this.world.func_72839_b((Entity)null, this.getMovementArea(axisalignedbb, enumfacing, d0).union(axisalignedbb));
+         List<Entity> list1 = this.world.func_72839_b(null, this.getMovementArea(axisalignedbb, enumfacing, d0).union(axisalignedbb));
          if (!list1.isEmpty()) {
             boolean flag = this.pistonState.getBlock() == Blocks.SLIME_BLOCK;
 
@@ -140,7 +140,7 @@ public class TileEntityPiston extends TileEntity implements ITickable {
                      d1 = Math.min(d1, d0) + 0.01D;
                      MOVING_ENTITY.set(enumfacing);
                      entity.move(MoverType.PISTON, d1 * (double)enumfacing.getXOffset(), d1 * (double)enumfacing.getYOffset(), d1 * (double)enumfacing.getZOffset());
-                     MOVING_ENTITY.set((EnumFacing)null);
+                     MOVING_ENTITY.set(null);
                      if (!this.extending && this.shouldHeadBeRendered) {
                         this.fixEntityWithinPistonBase(entity, enumfacing, d0);
                      }
@@ -225,7 +225,7 @@ public class TileEntityPiston extends TileEntity implements ITickable {
             d0 = Math.min(d0, p_190605_3_) + 0.01D;
             MOVING_ENTITY.set(p_190605_2_);
             p_190605_1_.move(MoverType.PISTON, d0 * (double)enumfacing.getXOffset(), d0 * (double)enumfacing.getYOffset(), d0 * (double)enumfacing.getZOffset());
-            MOVING_ENTITY.set((EnumFacing)null);
+            MOVING_ENTITY.set(null);
          }
       }
 

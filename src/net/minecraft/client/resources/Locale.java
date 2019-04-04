@@ -41,7 +41,6 @@ public class Locale {
                ResourceLocation resourcelocation = new ResourceLocation(s2, s1);
                this.loadLocaleData(p_195811_1_.getAllResources(resourcelocation));
             } catch (FileNotFoundException var9) {
-               ;
             } catch (Exception exception) {
                LOGGER.warn("Skipped language file: {}:{} ({})", s2, s1, exception.toString());
             }

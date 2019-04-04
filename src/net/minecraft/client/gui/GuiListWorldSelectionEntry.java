@@ -154,7 +154,7 @@ public final class GuiListWorldSelectionEntry extends GuiListExtended.IGuiListEn
                   try {
                      this.loadWorld();
                   } catch (Exception exception) {
-                     LOGGER.error("Failure to open 'future world'", (Throwable)exception);
+                     LOGGER.error("Failure to open 'future world'", exception);
                      this.client.displayGuiScreen(new GuiScreenAlert(() -> {
                         this.client.displayGuiScreen(this.worldSelScreen);
                      }, new TextComponentTranslation("selectWorld.futureworld.error.title"), new TextComponentTranslation("selectWorld.futureworld.error.text")));
@@ -219,7 +219,7 @@ public final class GuiListWorldSelectionEntry extends GuiListExtended.IGuiListEn
       try {
          this.client.displayGuiScreen(new GuiScreenWorking());
          GuiCreateWorld guicreateworld = new GuiCreateWorld(this.worldSelScreen);
-         ISaveHandler isavehandler = this.client.getSaveLoader().getSaveLoader(this.worldSummary.getFileName(), (MinecraftServer)null);
+         ISaveHandler isavehandler = this.client.getSaveLoader().getSaveLoader(this.worldSummary.getFileName(), null);
          WorldInfo worldinfo = isavehandler.loadWorldInfo();
          isavehandler.flush();
          if (worldinfo != null) {
@@ -238,7 +238,7 @@ public final class GuiListWorldSelectionEntry extends GuiListExtended.IGuiListEn
             }
          }
       } catch (Exception exception) {
-         LOGGER.error("Unable to recreate world", (Throwable)exception);
+         LOGGER.error("Unable to recreate world", exception);
          this.client.displayGuiScreen(new GuiScreenAlert(() -> {
             this.client.displayGuiScreen(this.worldSelScreen);
          }, new TextComponentTranslation("selectWorld.recreate.error.title"), new TextComponentTranslation("selectWorld.recreate.error.text")));
@@ -249,7 +249,7 @@ public final class GuiListWorldSelectionEntry extends GuiListExtended.IGuiListEn
    private void loadWorld() {
       this.client.getSoundHandler().play(SimpleSound.func_184371_a(SoundEvents.UI_BUTTON_CLICK, 1.0F));
       if (this.client.getSaveLoader().canLoadWorld(this.worldSummary.getFileName())) {
-         this.client.launchIntegratedServer(this.worldSummary.getFileName(), this.worldSummary.getDisplayName(), (WorldSettings)null);
+         this.client.launchIntegratedServer(this.worldSummary.getFileName(), this.worldSummary.getDisplayName(), null);
       }
 
    }

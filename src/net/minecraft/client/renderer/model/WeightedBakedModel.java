@@ -68,7 +68,7 @@ public class WeightedBakedModel implements IBakedModel {
          if (this.field_177678_a.isEmpty()) {
             return null;
          } else {
-            return (IBakedModel)(this.field_177678_a.size() == 1 ? (this.field_177678_a.get(0)).field_185281_b : new WeightedBakedModel(this.field_177678_a));
+            return this.field_177678_a.size() == 1 ? (this.field_177678_a.get(0)).field_185281_b : new WeightedBakedModel(this.field_177678_a);
          }
       }
    }

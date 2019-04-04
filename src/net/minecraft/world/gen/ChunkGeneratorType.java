@@ -41,7 +41,7 @@ public class ChunkGeneratorType<C extends IChunkGenSettings, T extends IChunkGen
    }
 
    public C createChunkGenSettings() {
-      return (C)(this.settings.get());
+      return this.settings.get();
    }
 
    @OnlyIn(Dist.CLIENT)

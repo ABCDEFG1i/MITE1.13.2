@@ -95,7 +95,7 @@ public class GuiRecipeBook extends Gui implements IGuiEventListener, IRecipeUpda
       if (this.currentTab != null) {
          this.currentTab = this.recipeTabs.stream().filter((p_209505_1_) -> {
             return p_209505_1_.func_201503_d().equals(this.currentTab.func_201503_d());
-         }).findFirst().orElse((GuiButtonRecipeTab)null);
+         }).findFirst().orElse(null);
       }
 
       if (this.currentTab == null) {

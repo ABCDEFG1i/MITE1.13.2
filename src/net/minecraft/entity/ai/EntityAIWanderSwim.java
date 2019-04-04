@@ -16,7 +16,6 @@ public class EntityAIWanderSwim extends EntityAIWander {
       Vec3d vec3d = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
 
       for(int i = 0; vec3d != null && !this.entity.world.getBlockState(new BlockPos(vec3d)).allowsMovement(this.entity.world, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7)) {
-         ;
       }
 
       return vec3d;

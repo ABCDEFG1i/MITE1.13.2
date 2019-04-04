@@ -29,14 +29,12 @@ public class ChannelLWJGL3 extends Channel {
             AL10.alSourceStop(this.buffer.get(0));
             AL10.alGetError();
          } catch (Exception var3) {
-            ;
          }
 
          try {
             AL10.alDeleteSources(this.buffer);
             AL10.alGetError();
          } catch (Exception var2) {
-            ;
          }
 
          this.buffer.clear();
@@ -136,7 +134,7 @@ public class ChannelLWJGL3 extends Channel {
             return false;
          } else {
             for(int j = 0; j < p_preLoadBuffers_1_.size(); ++j) {
-               ByteBuffer bytebuffer = (ByteBuffer)BufferUtils.createByteBuffer(((byte[])p_preLoadBuffers_1_.get(j)).length).put(p_preLoadBuffers_1_.get(j)).flip();
+               ByteBuffer bytebuffer = (ByteBuffer)BufferUtils.createByteBuffer(p_preLoadBuffers_1_.get(j).length).put(p_preLoadBuffers_1_.get(j)).flip();
 
                try {
                   AL10.alBufferData(intbuffer1.get(j), this.bufferFormat, bytebuffer, this.sampleRate);
@@ -310,7 +308,6 @@ public class ChannelLWJGL3 extends Channel {
          AL10.alSourceStop(this.buffer.get(0));
          AL10.alGetError();
       } catch (Exception var2) {
-         ;
       }
 
       if (this.channelType == 1) {

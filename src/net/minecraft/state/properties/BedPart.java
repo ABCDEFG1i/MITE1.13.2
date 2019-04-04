@@ -8,7 +8,7 @@ public enum BedPart implements IStringSerializable {
 
    private final String name;
 
-   private BedPart(String p_i49342_3_) {
+   BedPart(String p_i49342_3_) {
       this.name = p_i49342_3_;
    }
 

@@ -81,7 +81,7 @@ public class RenderEntityItem extends Render<EntityItem> {
       RenderHelper.enableStandardItemLighting();
       GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
       GlStateManager.pushMatrix();
-      IBakedModel ibakedmodel = this.itemRenderer.func_184393_a(itemstack, p_76986_1_.world, (EntityLivingBase)null);
+      IBakedModel ibakedmodel = this.itemRenderer.func_184393_a(itemstack, p_76986_1_.world, null);
       int j = this.func_177077_a(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_9_, ibakedmodel);
       float f = ibakedmodel.func_177552_f().field_181699_o.field_178363_d.getX();
       float f1 = ibakedmodel.func_177552_f().field_181699_o.field_178363_d.getY();

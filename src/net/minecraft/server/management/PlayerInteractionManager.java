@@ -15,15 +15,15 @@ import net.minecraft.network.play.server.SPacketBlockChange;
 import net.minecraft.network.play.server.SPacketPlayerListItem;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameType;
 import net.minecraft.world.ILockableContainer;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import org.apache.commons.lang3.time.StopWatch;
+
+import java.util.concurrent.TimeUnit;
 
 public class PlayerInteractionManager {
    public World world;
@@ -37,6 +37,7 @@ public class PlayerInteractionManager {
    private BlockPos delayedDestroyPos = BlockPos.ORIGIN;
    private int initialBlockDamage;
    private int durabilityRemainingOnBlock = -1;
+   private final StopWatch blockHarvestTimer = new StopWatch();
 
    public PlayerInteractionManager(World p_i1524_1_) {
       this.world = p_i1524_1_;
@@ -110,8 +111,14 @@ public class PlayerInteractionManager {
    }
 
    public void startDestroyBlock(BlockPos p_180784_1_, EnumFacing p_180784_2_) {
+      synchronized(blockHarvestTimer) {
+         if (SharedConstants.developmentMode && !blockHarvestTimer.isStarted()) {
+            System.out.println("Start to mine block:" + this.world.getBlockState(p_180784_1_).getBlock() + ".");
+            blockHarvestTimer.start();
+         }
+      }
       if (this.isCreative()) {
-         if (!this.world.extinguishFire((EntityPlayer)null, p_180784_1_, p_180784_2_)) {
+         if (!this.world.extinguishFire(null, p_180784_1_, p_180784_2_)) {
             this.tryHarvestBlock(p_180784_1_);
          }
 
@@ -134,7 +141,7 @@ public class PlayerInteractionManager {
             }
          }
 
-         this.world.extinguishFire((EntityPlayer)null, p_180784_1_, p_180784_2_);
+         this.world.extinguishFire(null, p_180784_1_, p_180784_2_);
          this.initialDamage = this.ticks;
          float f = 1.0F;
          IBlockState iblockstate = this.world.getBlockState(p_180784_1_);
@@ -179,6 +186,11 @@ public class PlayerInteractionManager {
    }
 
    public void abortDestroyBlock() {
+      synchronized(blockHarvestTimer) {
+         if (SharedConstants.developmentMode && blockHarvestTimer.isStarted()) {
+            blockHarvestTimer.reset();
+         }
+      }
       this.isDestroyingBlock = false;
       this.world.sendBlockBreakProgress(this.player.getEntityId(), this.destroyPos, -1);
    }
@@ -230,6 +242,14 @@ public class PlayerInteractionManager {
                itemstack2.onBlockDestroyed(this.world, iblockstate, p_180237_1_, this.player);
                if (flag1 && flag) {
                   ItemStack itemstack1 = itemstack2.isEmpty() ? ItemStack.EMPTY : itemstack2.copy();
+                  synchronized(blockHarvestTimer) {
+                     if (SharedConstants.developmentMode & blockHarvestTimer.isStarted()) {
+                        System.out.println("Block  " + iblockstate.getBlock() + " mined used time:" + blockHarvestTimer.getTime(
+                                TimeUnit.MILLISECONDS));
+                        blockHarvestTimer.stop();
+                        blockHarvestTimer.reset();
+                     }
+                  }
                   iblockstate.getBlock().harvestBlock(this.world, this.player, p_180237_1_, iblockstate, tileentity, itemstack1);
                }
             }

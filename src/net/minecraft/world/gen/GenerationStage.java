@@ -1,12 +1,12 @@
 package net.minecraft.world.gen;
 
 public class GenerationStage {
-   public static enum Carving {
+   public enum Carving {
       AIR,
-      LIQUID;
+      LIQUID
    }
 
-   public static enum Decoration {
+   public enum Decoration {
       RAW_GENERATION,
       LOCAL_MODIFICATIONS,
       UNDERGROUND_STRUCTURES,
@@ -14,6 +14,6 @@ public class GenerationStage {
       UNDERGROUND_ORES,
       UNDERGROUND_DECORATION,
       VEGETAL_DECORATION,
-      TOP_LAYER_MODIFICATION;
+      TOP_LAYER_MODIFICATION
    }
 }

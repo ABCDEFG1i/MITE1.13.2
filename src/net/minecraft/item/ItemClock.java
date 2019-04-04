@@ -23,7 +23,7 @@ public class ItemClock extends Item {
          @OnlyIn(Dist.CLIENT)
          public float call(ItemStack p_call_1_, @Nullable World p_call_2_, @Nullable EntityLivingBase p_call_3_) {
             boolean flag = p_call_3_ != null;
-            Entity entity = (Entity)(flag ? p_call_3_ : p_call_1_.getItemFrame());
+            Entity entity = flag ? p_call_3_ : p_call_1_.getItemFrame();
             if (p_call_2_ == null && entity != null) {
                p_call_2_ = entity.world;
             }

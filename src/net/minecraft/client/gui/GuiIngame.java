@@ -279,7 +279,7 @@ public class GuiIngame extends Gui {
                 }
             }
 
-            if (gamesettings.showDebugInfo && !gamesettings.hideGUI && !this.mc.player.hasReducedDebug() &&
+            if (SharedConstants.developmentMode&&gamesettings.showDebugInfo && !gamesettings.hideGUI && !this.mc.player.hasReducedDebug() &&
                 !gamesettings.reducedDebugInfo) {
                 GlStateManager.pushMatrix();
                 GlStateManager.translatef((float) (this.scaledWidth / 2), (float) (this.scaledHeight / 2), this.zLevel);
@@ -351,31 +351,31 @@ public class GuiIngame extends Gui {
     public void renderExpBar(int p_194804_1_) {
         this.mc.profiler.startSection("expBar");
         this.mc.getTextureManager().bindTexture(Gui.ICONS);
-        int i = this.mc.player.xpBarCap();
-        if (i > 0) {
-            int j = 182;
-            int k = (int) (this.mc.player.experience * 183.0F);
-            int l = this.scaledHeight - 32 + 3;
-            this.drawTexturedModalRect(p_194804_1_, l, 0, 64, 182, 5);
-            if (k > 0) {
-                this.drawTexturedModalRect(p_194804_1_, l, 0, 69, k, 5);
-            }
+        //MITEMODDED Support minus levels
+        int k = (int)(Math.abs(this.mc.player.experience) * 183.0F);
+        int l = this.scaledHeight - 32 + 3;
+        this.drawTexturedModalRect(p_194804_1_, l, 0, 64, 182, 5);
+        if (k > 0) {
+            this.drawTexturedModalRect(p_194804_1_, l, 0, 69, k, 5);
         }
 
         this.mc.profiler.endSection();
-        if (this.mc.player.experienceLevel > 0) {
-            this.mc.profiler.startSection("expLevel");
-            String s = "" + this.mc.player.experienceLevel;
-            int i1 = (this.scaledWidth - this.getFontRenderer().getStringWidth(s)) / 2;
-            int j1 = this.scaledHeight - 31 - 4;
-            this.getFontRenderer().drawString(s, (float) (i1 + 1), (float) j1, 0);
-            this.getFontRenderer().drawString(s, (float) (i1 - 1), (float) j1, 0);
-            this.getFontRenderer().drawString(s, (float) i1, (float) (j1 + 1), 0);
-            this.getFontRenderer().drawString(s, (float) i1, (float) (j1 - 1), 0);
-            this.getFontRenderer().drawString(s, (float) i1, (float) j1, 8453920);
-            this.mc.profiler.endSection();
+        this.mc.profiler.startSection("expLevel");
+        String s = "" + this.mc.player.experienceLevel;
+        int i1 = (this.scaledWidth - this.getFontRenderer().getStringWidth(s)) / 2;
+        int j1 = this.scaledHeight - 31 - 4;
+        this.getFontRenderer().drawString(s, (float)(i1 + 1), (float)j1, 0);
+        this.getFontRenderer().drawString(s, (float)(i1 - 1), (float)j1, 0);
+        this.getFontRenderer().drawString(s, (float)i1, (float)(j1 + 1), 0);
+        this.getFontRenderer().drawString(s, (float)i1, (float)(j1 - 1), 0);
+        //MITEMODDED Support minus levels
+        if (this.mc.player.experienceLevel < 0) {
+            this.getFontRenderer().drawString(s, (float)i1, (float)j1, 11546150);
+        } else {
+            this.getFontRenderer().drawString(s, (float)i1, (float)j1, 8453920);
         }
 
+        this.mc.profiler.endSection();
     }
 
     public void renderGameOverlay(float p_175180_1_) {

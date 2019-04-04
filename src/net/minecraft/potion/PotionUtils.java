@@ -139,7 +139,7 @@ public class PotionUtils {
          NBTTagList nbttaglist = nbttagcompound.getTagList("CustomPotionEffects", 9);
 
          for(PotionEffect potioneffect : p_185184_1_) {
-            nbttaglist.add((INBTBase)potioneffect.write(new NBTTagCompound()));
+            nbttaglist.add(potioneffect.write(new NBTTagCompound()));
          }
 
          nbttagcompound.setTag("CustomPotionEffects", nbttaglist);
@@ -193,10 +193,10 @@ public class PotionUtils {
             }
 
             if (d0 > 0.0D) {
-               p_185182_1_.add((new TextComponentTranslation("attribute.modifier.plus." + attributemodifier2.getOperation(), ItemStack.DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + (String)tuple.getA()))).applyTextStyle(TextFormatting.BLUE));
+               p_185182_1_.add((new TextComponentTranslation("attribute.modifier.plus." + attributemodifier2.getOperation(), ItemStack.DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + tuple.getA()))).applyTextStyle(TextFormatting.BLUE));
             } else if (d0 < 0.0D) {
                d1 = d1 * -1.0D;
-               p_185182_1_.add((new TextComponentTranslation("attribute.modifier.take." + attributemodifier2.getOperation(), ItemStack.DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + (String)tuple.getA()))).applyTextStyle(TextFormatting.RED));
+               p_185182_1_.add((new TextComponentTranslation("attribute.modifier.take." + attributemodifier2.getOperation(), ItemStack.DECIMALFORMAT.format(d1), new TextComponentTranslation("attribute.name." + tuple.getA()))).applyTextStyle(TextFormatting.RED));
             }
          }
       }

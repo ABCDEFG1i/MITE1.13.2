@@ -29,7 +29,6 @@ public class ScoreHolderArgument implements ArgumentType<ScoreHolderArgument.INa
       try {
          entityselectorparser.parse();
       } catch (CommandSyntaxException var5) {
-         ;
       }
 
       return entityselectorparser.func_201993_a(p_201323_1_, (p_201949_1_) -> {
@@ -93,7 +92,7 @@ public class ScoreHolderArgument implements ArgumentType<ScoreHolderArgument.INa
          String s = p_parse_1_.getString().substring(i, p_parse_1_.getCursor());
          if (s.equals("*")) {
             return (p_197208_0_, p_197208_1_) -> {
-               Collection<String> collection1 = (Collection)p_197208_1_.get();
+               Collection<String> collection1 = p_197208_1_.get();
                if (collection1.isEmpty()) {
                   throw EMPTY_EXCEPTION.create();
                } else {

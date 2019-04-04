@@ -52,7 +52,8 @@ public class TileEntitySign extends TileEntity implements ICommandSource {
          ITextComponent itextcomponent = ITextComponent.Serializer.fromJson(s);
          if (this.world instanceof WorldServer) {
             try {
-               this.signText[i] = TextComponentUtils.func_197680_a(this.getCommandSource((EntityPlayerMP)null), itextcomponent, (Entity)null);
+               this.signText[i] = TextComponentUtils.func_197680_a(this.getCommandSource(null), itextcomponent,
+                       null);
             } catch (CommandSyntaxException var6) {
                this.signText[i] = itextcomponent;
             }
@@ -138,7 +139,7 @@ public class TileEntitySign extends TileEntity implements ICommandSource {
 
    public CommandSource getCommandSource(@Nullable EntityPlayerMP p_195539_1_) {
       String s = p_195539_1_ == null ? "Sign" : p_195539_1_.getName().getString();
-      ITextComponent itextcomponent = (ITextComponent)(p_195539_1_ == null ? new TextComponentString("Sign") : p_195539_1_.getDisplayName());
+      ITextComponent itextcomponent = p_195539_1_ == null ? new TextComponentString("Sign") : p_195539_1_.getDisplayName();
       return new CommandSource(this, new Vec3d((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D), Vec2f.ZERO, (WorldServer)this.world, 2, s, itextcomponent, this.world.getServer(), p_195539_1_);
    }
 

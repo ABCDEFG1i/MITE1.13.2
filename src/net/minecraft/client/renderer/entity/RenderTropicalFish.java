@@ -28,7 +28,7 @@ public class RenderTropicalFish extends RenderLiving<EntityTropicalFish> {
    }
 
    public void doRender(EntityTropicalFish p_76986_1_, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
-      this.mainModel = (ModelBase)(p_76986_1_.getSize() == 0 ? this.field_204246_a : this.field_204247_j);
+      this.mainModel = p_76986_1_.getSize() == 0 ? this.field_204246_a : this.field_204247_j;
       float[] afloat = p_76986_1_.func_204219_dC();
       GlStateManager.color3f(afloat[0], afloat[1], afloat[2]);
       super.doRender(p_76986_1_, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);

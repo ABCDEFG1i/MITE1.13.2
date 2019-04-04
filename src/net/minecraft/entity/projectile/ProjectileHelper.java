@@ -24,7 +24,8 @@ public final class ProjectileHelper {
       double d5 = p_188802_0_.motionZ;
       World world = p_188802_0_.world;
       Vec3d vec3d = new Vec3d(d0, d1, d2);
-      if (!world.isCollisionBoxesEmpty(p_188802_0_, p_188802_0_.getEntityBoundingBox(), (Set<Entity>)(!p_188802_2_ && p_188802_3_ != null ? func_211325_a(p_188802_3_) : ImmutableSet.of()))) {
+      if (!world.isCollisionBoxesEmpty(p_188802_0_, p_188802_0_.getEntityBoundingBox(),
+              !p_188802_2_ && p_188802_3_ != null ? func_211325_a(p_188802_3_) : ImmutableSet.of())) {
          return new RayTraceResult(RayTraceResult.Type.BLOCK, vec3d, EnumFacing.getFacingFromVector(d3, d4, d5), new BlockPos(p_188802_0_));
       } else {
          Vec3d vec3d1 = new Vec3d(d0 + d3, d1 + d4, d2 + d5);
@@ -75,7 +76,6 @@ public final class ProjectileHelper {
       p_188803_0_.rotationYaw = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) + 90.0F;
 
       for(p_188803_0_.rotationPitch = (float)(MathHelper.atan2((double)f, d1) * (double)(180F / (float)Math.PI)) - 90.0F; p_188803_0_.rotationPitch - p_188803_0_.prevRotationPitch < -180.0F; p_188803_0_.prevRotationPitch -= 360.0F) {
-         ;
       }
 
       while(p_188803_0_.rotationPitch - p_188803_0_.prevRotationPitch >= 180.0F) {

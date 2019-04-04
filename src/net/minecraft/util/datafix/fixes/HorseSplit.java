@@ -38,7 +38,7 @@ public class HorseSplit extends EntityRename {
          }
 
          dynamic.remove("Type");
-         Type<?> type = (Type)this.getOutputSchema().findChoiceType(TypeReferences.ENTITY).types().get(s);
+         Type<?> type = this.getOutputSchema().findChoiceType(TypeReferences.ENTITY).types().get(s);
          return Pair.of(s, type.readTyped(p_209149_2_.write()).getSecond().orElseThrow(() -> {
             return new IllegalStateException("Could not parse the new horse");
          }));

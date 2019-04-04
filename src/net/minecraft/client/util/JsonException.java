@@ -63,7 +63,7 @@ public class JsonException extends IOException {
       }
 
       public String getJsonKeys() {
-         return StringUtils.join((Iterable<?>)this.jsonKeys, "->");
+         return StringUtils.join(this.jsonKeys, "->");
       }
 
       public String toString() {

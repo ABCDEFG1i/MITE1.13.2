@@ -62,7 +62,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
             if (file1.isDirectory()) {
                String s = file1.getName();
                WorldInfo worldinfo = this.getWorldInfo(s);
-               if (worldinfo != null && (worldinfo.getSaveVersion() == 19132 || worldinfo.getSaveVersion() == 19133)) {
+               if (worldinfo != null && (worldinfo.getSaveVersion() == 413495445)) {
                   boolean flag = worldinfo.getSaveVersion() != this.getSaveVersion();
                   String s1 = worldinfo.getWorldName();
                   if (StringUtils.isEmpty(s1)) {
@@ -80,7 +80,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
    }
 
    protected int getSaveVersion() {
-      return 19133;
+      return 413495445;
    }
 
    @OnlyIn(Dist.CLIENT)
@@ -92,10 +92,10 @@ public class AnvilSaveConverter extends SaveFormatOld {
       return new AnvilSaveHandler(this.savesDirectory.toFile(), p_197715_1_, p_197715_2_, this.dataFixer);
    }
 
+   //MITEMODDED to make only can open MITE saves
    @OnlyIn(Dist.CLIENT)
    public boolean isConvertible(String p_207743_1_) {
-      WorldInfo worldinfo = this.getWorldInfo(p_207743_1_);
-      return worldinfo != null && worldinfo.getSaveVersion() == 19132;
+      return false;
    }
 
    public boolean isOldMapFormat(String p_75801_1_) {
@@ -122,7 +122,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
       }
 
       int i = list.size() + list1.size() + list2.size();
-      LOGGER.info("Total conversion count is {}", (int)i);
+      LOGGER.info("Total conversion count is {}", i);
       WorldInfo worldinfo = this.getWorldInfo(p_75805_1_);
       BiomeProviderType<SingleBiomeProviderSettings, SingleBiomeProvider> biomeprovidertype = BiomeProviderType.FIXED;
       BiomeProviderType<OverworldBiomeProviderSettings, OverworldBiomeProvider> biomeprovidertype1 = BiomeProviderType.VANILLA_LAYERED;
@@ -136,13 +136,13 @@ public class AnvilSaveConverter extends SaveFormatOld {
       this.convertFile(new File(file1, "region"), list, biomeprovider, 0, i, p_75805_2_);
       this.convertFile(new File(file2, "region"), list1, biomeprovidertype.create(biomeprovidertype.createSettings().setBiome(Biomes.NETHER)), list.size(), i, p_75805_2_);
       this.convertFile(new File(file3, "region"), list2, biomeprovidertype.create(biomeprovidertype.createSettings().setBiome(Biomes.THE_END)), list.size() + list1.size(), i, p_75805_2_);
-      worldinfo.setSaveVersion(19133);
+      worldinfo.setSaveVersion(413495445);
       if (worldinfo.getTerrainType() == WorldType.DEFAULT_1_1) {
          worldinfo.setTerrainType(WorldType.DEFAULT);
       }
 
       this.createFile(p_75805_1_);
-      ISaveHandler isavehandler = this.getSaveLoader(p_75805_1_, (MinecraftServer)null);
+      ISaveHandler isavehandler = this.getSaveLoader(p_75805_1_, null);
       isavehandler.saveWorldInfo(worldinfo);
       return true;
    }

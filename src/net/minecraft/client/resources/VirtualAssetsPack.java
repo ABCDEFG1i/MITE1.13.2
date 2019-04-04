@@ -31,7 +31,6 @@ public class VirtualAssetsPack extends VanillaPack {
             try {
                return new FileInputStream(file1);
             } catch (FileNotFoundException var5) {
-               ;
             }
          }
       }
@@ -46,7 +45,6 @@ public class VirtualAssetsPack extends VanillaPack {
          try {
             return new FileInputStream(file1);
          } catch (FileNotFoundException var4) {
-            ;
          }
       }
 

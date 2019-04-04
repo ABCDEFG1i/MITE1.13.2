@@ -356,7 +356,7 @@ public class ChunkPaletteFormat extends DataFix {
       field_199146_b.set(199);
    }
 
-   public static enum Direction {
+   public enum Direction {
       DOWN(ChunkPaletteFormat.Direction.Offset.NEGATIVE, ChunkPaletteFormat.Direction.Axis.Y),
       UP(ChunkPaletteFormat.Direction.Offset.POSITIVE, ChunkPaletteFormat.Direction.Axis.Y),
       NORTH(ChunkPaletteFormat.Direction.Offset.NEGATIVE, ChunkPaletteFormat.Direction.Axis.Z),
@@ -367,7 +367,7 @@ public class ChunkPaletteFormat extends DataFix {
       private final ChunkPaletteFormat.Direction.Axis field_210941_g;
       private final ChunkPaletteFormat.Direction.Offset field_210942_h;
 
-      private Direction(ChunkPaletteFormat.Direction.Offset p_i49576_3_, ChunkPaletteFormat.Direction.Axis p_i49576_4_) {
+      Direction(ChunkPaletteFormat.Direction.Offset p_i49576_3_, ChunkPaletteFormat.Direction.Axis p_i49576_4_) {
          this.field_210941_g = p_i49576_4_;
          this.field_210942_h = p_i49576_3_;
       }
@@ -380,19 +380,19 @@ public class ChunkPaletteFormat extends DataFix {
          return this.field_210941_g;
       }
 
-      public static enum Axis {
+      public enum Axis {
          X,
          Y,
-         Z;
+         Z
       }
 
-      public static enum Offset {
+      public enum Offset {
          POSITIVE(1),
          NEGATIVE(-1);
 
          private final int field_210938_c;
 
-         private Offset(int p_i49694_3_) {
+         Offset(int p_i49694_3_) {
             this.field_210938_c = p_i49694_3_;
          }
 
@@ -754,7 +754,7 @@ public class ChunkPaletteFormat extends DataFix {
                            if (!"up".equals(s14) && !"down".equals(s14)) {
                               s15 = s6 + s14;
                            } else {
-                              s15 = s6 + String.valueOf(dynamic3.getInt("Rot"));
+                              s15 = s6 + dynamic3.getInt("Rot");
                            }
 
                            dynamic3.remove("SkullType");

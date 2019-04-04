@@ -52,7 +52,7 @@ public class NBTToSNBTConverter implements IDataProvider {
             bufferedwriter.write(s);
          }
 
-         LOGGER.info("Converted {} from NBT to SNBT", (Object)p_200414_2_);
+         LOGGER.info("Converted {} from NBT to SNBT", p_200414_2_);
       } catch (IOException ioexception) {
          LOGGER.error("Couldn't convert {} from NBT to SNBT at {}", p_200414_2_, p_200414_1_, ioexception);
       }

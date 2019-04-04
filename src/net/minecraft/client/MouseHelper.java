@@ -252,7 +252,7 @@ public class MouseHelper {
             this.mouseY = (double)(this.minecraft.mainWindow.getHeight() / 2);
             GLFW.glfwSetCursorPos(this.minecraft.mainWindow.getHandle(), this.mouseX, this.mouseY);
             GLFW.glfwSetInputMode(this.minecraft.mainWindow.getHandle(), 208897, 212995);
-            this.minecraft.displayGuiScreen((GuiScreen)null);
+            this.minecraft.displayGuiScreen(null);
             this.minecraft.leftClickCounter = 10000;
          }
       }

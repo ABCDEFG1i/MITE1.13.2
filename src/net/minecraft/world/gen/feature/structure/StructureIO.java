@@ -46,14 +46,14 @@ public class StructureIO {
                structurestart = oclass.newInstance();
             }
          } catch (Exception exception) {
-            LOGGER.warn("Failed Start with id {}", (Object)s);
+            LOGGER.warn("Failed Start with id {}", s);
             exception.printStackTrace();
          }
 
          if (structurestart != null) {
             structurestart.readStructureComponentsFromNBT(p_202602_1_, p_202602_0_);
          } else {
-            LOGGER.warn("Skipping Structure with id {}", (Object)s);
+            LOGGER.warn("Skipping Structure with id {}", s);
          }
 
          return structurestart;
@@ -69,14 +69,14 @@ public class StructureIO {
             structurepiece = oclass.newInstance();
          }
       } catch (Exception exception) {
-         LOGGER.warn("Failed Piece with id {}", (Object)p_143032_0_.getString("id"));
+         LOGGER.warn("Failed Piece with id {}", p_143032_0_.getString("id"));
          exception.printStackTrace();
       }
 
       if (structurepiece != null) {
          structurepiece.readStructureBaseNBT(p_143032_1_, p_143032_0_);
       } else {
-         LOGGER.warn("Skipping Piece with id {}", (Object)p_143032_0_.getString("id"));
+         LOGGER.warn("Skipping Piece with id {}", p_143032_0_.getString("id"));
       }
 
       return structurepiece;

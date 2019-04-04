@@ -152,7 +152,8 @@ public class EntityAITasks {
          if (this == p_equals_1_) {
             return true;
          } else {
-            return p_equals_1_ != null && this.getClass() == p_equals_1_.getClass() ? this.action.equals(((EntityAITasks.EntityAITaskEntry)p_equals_1_).action) : false;
+            return (p_equals_1_ != null && this.getClass() == p_equals_1_.getClass()) && this.action.equals(
+                    ((EntityAITaskEntry) p_equals_1_).action);
          }
       }
 

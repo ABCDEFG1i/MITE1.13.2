@@ -44,7 +44,7 @@ public enum EnumDyeColor implements IStringSerializable {
    private final float[] colorComponentValues;
    private final int field_196067_y;
 
-   private EnumDyeColor(int p_i47810_3_, String p_i47810_4_, int p_i47810_5_, MaterialColor p_i47810_6_, int p_i47810_7_) {
+   EnumDyeColor(int p_i47810_3_, String p_i47810_4_, int p_i47810_5_, MaterialColor p_i47810_6_, int p_i47810_7_) {
       this.id = p_i47810_3_;
       this.translationKey = p_i47810_4_;
       this.colorValue = p_i47810_5_;

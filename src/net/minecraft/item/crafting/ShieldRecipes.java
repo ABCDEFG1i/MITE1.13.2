@@ -50,11 +50,7 @@ public class ShieldRecipes extends IRecipeHidden {
             }
          }
 
-         if (!itemstack.isEmpty() && !itemstack1.isEmpty()) {
-            return true;
-         } else {
-            return false;
-         }
+          return !itemstack.isEmpty() && !itemstack1.isEmpty();
       }
    }
 

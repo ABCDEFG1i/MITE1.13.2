@@ -59,7 +59,7 @@ public class GuiWinGame extends GuiScreen {
 
    private void sendRespawnPacket() {
       this.onFinished.run();
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    protected void initGui() {
@@ -111,9 +111,9 @@ public class GuiWinGame extends GuiScreen {
             inputstream1.close();
             this.totalScrollLength = this.lines.size() * 12;
          } catch (Exception exception) {
-            LOGGER.error("Couldn't load credits", (Throwable)exception);
+            LOGGER.error("Couldn't load credits", exception);
          } finally {
-            IOUtils.closeQuietly((Closeable)iresource);
+            IOUtils.closeQuietly(iresource);
          }
 
       }

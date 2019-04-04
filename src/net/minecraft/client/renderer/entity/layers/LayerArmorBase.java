@@ -77,7 +77,7 @@ public abstract class LayerArmorBase<T extends ModelBase> implements LayerRender
    }
 
    public T getModelFromSlot(EntityEquipmentSlot p_188360_1_) {
-      return (T)(this.isLegSlot(p_188360_1_) ? this.modelLeggings : this.modelArmor);
+      return this.isLegSlot(p_188360_1_) ? this.modelLeggings : this.modelArmor;
    }
 
    private boolean isLegSlot(EntityEquipmentSlot p_188363_1_) {
@@ -121,7 +121,7 @@ public abstract class LayerArmorBase<T extends ModelBase> implements LayerRender
    }
 
    private ResourceLocation getArmorResource(ItemArmor p_177181_1_, boolean p_177181_2_) {
-      return this.getArmorResource(p_177181_1_, p_177181_2_, (String)null);
+      return this.getArmorResource(p_177181_1_, p_177181_2_, null);
    }
 
    private ResourceLocation getArmorResource(ItemArmor p_177178_1_, boolean p_177178_2_, @Nullable String p_177178_3_) {

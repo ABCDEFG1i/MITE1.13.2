@@ -30,7 +30,8 @@ import net.minecraft.world.gen.surfacebuilders.CompositeSurfaceBuilder;
 
 public final class BeachBiome extends Biome {
    public BeachBiome() {
-      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEFAULT_SURFACE_BUILDER, SAND_SAND_GRAVEL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.BEACH).depth(0.0F).scale(0.025F).temperature(0.8F).downfall(0.4F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+      super((new Biome.BiomeBuilder()).surfaceBuilder(new CompositeSurfaceBuilder<>(DEFAULT_SURFACE_BUILDER, SAND_SAND_GRAVEL_SURFACE)).precipitation(Biome.RainType.RAIN).category(Biome.Category.BEACH).depth(0.0F).scale(0.025F).temperature(0.8F).downfall(0.4F).waterColor(4159204).waterFogColor(329011).parent(
+              null));
       this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
       this.addStructure(Feature.BURIED_TREASURE, new BuriedTreasureConfig(0.01F));
       this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(true));

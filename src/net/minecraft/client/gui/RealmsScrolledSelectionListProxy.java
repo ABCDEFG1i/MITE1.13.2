@@ -47,11 +47,12 @@ public class RealmsScrolledSelectionListProxy extends GuiSlot {
    }
 
    public boolean mouseScrolled(double p_mouseScrolled_1_) {
-      return this.scrolledSelectionList.mouseScrolled(p_mouseScrolled_1_) ? true : super.mouseScrolled(p_mouseScrolled_1_);
+      return this.scrolledSelectionList.mouseScrolled(p_mouseScrolled_1_) || super.mouseScrolled(p_mouseScrolled_1_);
    }
 
    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-      return this.scrolledSelectionList.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_) ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+      return this.scrolledSelectionList.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_,
+              p_mouseClicked_5_) || super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
    }
 
    public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_) {

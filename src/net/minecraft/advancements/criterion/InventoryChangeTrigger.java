@@ -95,7 +95,8 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
          ItemPredicate[] aitempredicate = new ItemPredicate[p_203922_0_.length];
 
          for(int i = 0; i < p_203922_0_.length; ++i) {
-            aitempredicate[i] = new ItemPredicate((Tag<Item>)null, p_203922_0_[i].asItem(), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new EnchantmentPredicate[0], (PotionType)null, NBTPredicate.ANY);
+            aitempredicate[i] = new ItemPredicate(null, p_203922_0_[i].asItem(), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new EnchantmentPredicate[0],
+                    null, NBTPredicate.ANY);
          }
 
          return func_203923_a(aitempredicate);
@@ -157,11 +158,8 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
             return false;
          } else if (!this.occupied.test(k)) {
             return false;
-         } else if (!list.isEmpty()) {
-            return false;
-         } else {
-            return true;
-         }
+         } else
+             return list.isEmpty();
       }
    }
 

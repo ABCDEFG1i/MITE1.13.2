@@ -35,7 +35,7 @@ public class DataGenerator {
       Stopwatch stopwatch = Stopwatch.createUnstarted();
 
       for(IDataProvider idataprovider : this.providers) {
-         LOGGER.info("Starting provider: {}", (Object)idataprovider.getName());
+         LOGGER.info("Starting provider: {}", idataprovider.getName());
          stopwatch.start();
          idataprovider.act(directorycache);
          stopwatch.stop();

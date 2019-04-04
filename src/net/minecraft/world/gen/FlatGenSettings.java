@@ -194,7 +194,7 @@ public class FlatGenSettings extends ChunkGenSettings {
       }
 
       stringbuilder.append(";");
-      stringbuilder.append((Object)IRegistry.field_212624_m.func_177774_c(this.biomeToUse));
+      stringbuilder.append(IRegistry.field_212624_m.func_177774_c(this.biomeToUse));
       stringbuilder.append(";");
       if (!this.worldFeatures.isEmpty()) {
          int k = 0;
@@ -237,7 +237,7 @@ public class FlatGenSettings extends ChunkGenSettings {
          try {
             i = MathHelper.clamp(Integer.parseInt(astring[0]), 0, 256 - p_197526_1_);
          } catch (NumberFormatException numberformatexception) {
-            LOGGER.error("Error while parsing flat world string => {}", (Object)numberformatexception.getMessage());
+            LOGGER.error("Error while parsing flat world string => {}", numberformatexception.getMessage());
             return null;
          }
       } else {
@@ -248,12 +248,12 @@ public class FlatGenSettings extends ChunkGenSettings {
       try {
          block = func_212683_a(astring[astring.length - 1]);
       } catch (Exception exception) {
-         LOGGER.error("Error while parsing flat world string => {}", (Object)exception.getMessage());
+         LOGGER.error("Error while parsing flat world string => {}", exception.getMessage());
          return null;
       }
 
       if (block == null) {
-         LOGGER.error("Error while parsing flat world string => Unknown block, {}", (Object)astring[astring.length - 1]);
+         LOGGER.error("Error while parsing flat world string => Unknown block, {}", astring[astring.length - 1]);
          return null;
       } else {
          FlatLayerInfo flatlayerinfo = new FlatLayerInfo(i, block);

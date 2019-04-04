@@ -99,7 +99,7 @@ public class ArgumentTypes {
       ResourceLocation resourcelocation = p_197486_0_.readResourceLocation();
       ArgumentTypes.Entry<?> entry = get(resourcelocation);
       if (entry == null) {
-         LOGGER.error("Could not deserialize {}", (Object)resourcelocation);
+         LOGGER.error("Could not deserialize {}", resourcelocation);
          return null;
       } else {
          return entry.serializer.read(p_197486_0_);

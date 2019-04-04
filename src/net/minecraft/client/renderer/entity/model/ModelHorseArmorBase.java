@@ -208,7 +208,6 @@ public class ModelHorseArmorBase extends ModelBase {
    private float func_199048_a(float p_199048_1_, float p_199048_2_, float p_199048_3_) {
       float f;
       for(f = p_199048_2_ - p_199048_1_; f < -180.0F; f += 360.0F) {
-         ;
       }
 
       while(f >= 180.0F) {

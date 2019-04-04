@@ -51,7 +51,10 @@ public abstract class VoxelShape {
    }
 
    public VoxelShape withOffset(double p_197751_1_, double p_197751_3_, double p_197751_5_) {
-      return (VoxelShape)(this.isEmpty() ? VoxelShapes.func_197880_a() : new VoxelShapeArray(this.field_197768_g, (DoubleList)(new OffsetDoubleList(this.getValues(EnumFacing.Axis.X), p_197751_1_)), (DoubleList)(new OffsetDoubleList(this.getValues(EnumFacing.Axis.Y), p_197751_3_)), (DoubleList)(new OffsetDoubleList(this.getValues(EnumFacing.Axis.Z), p_197751_5_))));
+      return this.isEmpty() ? VoxelShapes.func_197880_a() : new VoxelShapeArray(this.field_197768_g,
+              new OffsetDoubleList(this.getValues(EnumFacing.Axis.X), p_197751_1_),
+              new OffsetDoubleList(this.getValues(EnumFacing.Axis.Y), p_197751_3_),
+              new OffsetDoubleList(this.getValues(EnumFacing.Axis.Z), p_197751_5_));
    }
 
    public VoxelShape simplify() {

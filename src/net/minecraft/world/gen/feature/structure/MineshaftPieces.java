@@ -632,7 +632,7 @@ public class MineshaftPieces {
          NBTTagList nbttaglist = new NBTTagList();
 
          for(MutableBoundingBox mutableboundingbox : this.connectedRooms) {
-            nbttaglist.add((INBTBase)mutableboundingbox.toNBTTagIntArray());
+            nbttaglist.add(mutableboundingbox.toNBTTagIntArray());
          }
 
          p_143012_1_.setTag("Entrances", nbttaglist);

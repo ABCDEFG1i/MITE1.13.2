@@ -127,10 +127,10 @@ public abstract class GuiCommandBlockBase extends GuiScreen {
       CommandBlockBaseLogic commandblockbaselogic = this.func_195231_h();
       this.func_195235_a(commandblockbaselogic);
       if (!commandblockbaselogic.shouldTrackOutput()) {
-         commandblockbaselogic.setLastOutput((ITextComponent)null);
+         commandblockbaselogic.setLastOutput(null);
       }
 
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    public void onGuiClosed() {
@@ -141,7 +141,7 @@ public abstract class GuiCommandBlockBase extends GuiScreen {
 
    protected void func_195232_m() {
       this.func_195231_h().setTrackOutput(this.field_195238_s);
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    public void close() {
@@ -170,17 +170,20 @@ public abstract class GuiCommandBlockBase extends GuiScreen {
    }
 
    public boolean mouseScrolled(double p_mouseScrolled_1_) {
-      return this.field_209116_y != null && this.field_209116_y.func_209232_a(MathHelper.clamp(p_mouseScrolled_1_, -1.0D, 1.0D)) ? true : super.mouseScrolled(p_mouseScrolled_1_);
+      return this.field_209116_y != null && this.field_209116_y.func_209232_a(
+              MathHelper.clamp(p_mouseScrolled_1_, -1.0D, 1.0D)) || super.mouseScrolled(p_mouseScrolled_1_);
    }
 
    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
-      return this.field_209116_y != null && this.field_209116_y.func_209233_a((int)p_mouseClicked_1_, (int)p_mouseClicked_3_, p_mouseClicked_5_) ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+      return this.field_209116_y != null && this.field_209116_y.func_209233_a((int) p_mouseClicked_1_,
+              (int) p_mouseClicked_3_, p_mouseClicked_5_) || super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_,
+              p_mouseClicked_5_);
    }
 
    protected void func_209106_o() {
       this.field_209114_w = null;
       if (!this.field_212342_z) {
-         this.commandTextField.setSuggestion((String)null);
+         this.commandTextField.setSuggestion(null);
          this.field_209116_y = null;
       }
 
@@ -275,7 +278,7 @@ public abstract class GuiCommandBlockBase extends GuiScreen {
 
          for(Entry<CommandNode<ISuggestionProvider>, String> entry1 : map.entrySet()) {
             if (!(entry1.getKey() instanceof LiteralCommandNode)) {
-               list.add(p_209108_1_ + (String)entry1.getValue());
+               list.add(p_209108_1_ + entry1.getValue());
                j = Math.max(j, this.fontRenderer.getStringWidth(entry1.getValue()));
             }
          }

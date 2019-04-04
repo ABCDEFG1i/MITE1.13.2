@@ -60,7 +60,7 @@ public abstract class BlockButton extends BlockHorizontalFace {
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
       EnumFacing enumfacing = p_196244_1_.get(HORIZONTAL_FACING);
       boolean flag = p_196244_1_.get(POWERED);
-      switch((AttachFace)p_196244_1_.get(FACE)) {
+      switch(p_196244_1_.get(FACE)) {
       case FLOOR:
          if (enumfacing.getAxis() == EnumFacing.Axis.X) {
             return flag ? field_196374_G : field_196376_y;
@@ -136,7 +136,7 @@ public abstract class BlockButton extends BlockHorizontalFace {
          } else {
             p_196267_2_.setBlockState(p_196267_3_, p_196267_1_.with(POWERED, Boolean.valueOf(false)), 3);
             this.updateNeighbors(p_196267_1_, p_196267_2_, p_196267_3_);
-            this.playSound((EntityPlayer)null, p_196267_2_, p_196267_3_, false);
+            this.playSound(null, p_196267_2_, p_196267_3_, false);
          }
 
       }
@@ -155,7 +155,7 @@ public abstract class BlockButton extends BlockHorizontalFace {
       if (flag != flag1) {
          p_185616_2_.setBlockState(p_185616_3_, p_185616_1_.with(POWERED, Boolean.valueOf(flag)), 3);
          this.updateNeighbors(p_185616_1_, p_185616_2_, p_185616_3_);
-         this.playSound((EntityPlayer)null, p_185616_2_, p_185616_3_, flag);
+         this.playSound(null, p_185616_2_, p_185616_3_, flag);
       }
 
       if (flag) {

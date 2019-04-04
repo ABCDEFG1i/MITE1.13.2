@@ -28,7 +28,7 @@ public class BanIpCommand {
       p_198220_0_.register(Commands.literal("ban-ip").requires((p_198222_0_) -> {
          return p_198222_0_.getServer().getPlayerList().getBannedIPs().isLanServer() && p_198222_0_.hasPermissionLevel(3);
       }).then(Commands.argument("target", StringArgumentType.word()).executes((p_198219_0_) -> {
-         return banUsernameOrIp(p_198219_0_.getSource(), StringArgumentType.getString(p_198219_0_, "target"), (ITextComponent)null);
+         return banUsernameOrIp(p_198219_0_.getSource(), StringArgumentType.getString(p_198219_0_, "target"), null);
       }).then(Commands.argument("reason", MessageArgument.message()).executes((p_198221_0_) -> {
          return banUsernameOrIp(p_198221_0_.getSource(), StringArgumentType.getString(p_198221_0_, "target"), MessageArgument.getMessage(p_198221_0_, "reason"));
       }))));
@@ -54,7 +54,8 @@ public class BanIpCommand {
          throw FAILED_EXCEPTION.create();
       } else {
          List<EntityPlayerMP> list = p_198224_0_.getServer().getPlayerList().getPlayersMatchingAddress(p_198224_1_);
-         UserListIPBansEntry userlistipbansentry = new UserListIPBansEntry(p_198224_1_, (Date)null, p_198224_0_.getName(), (Date)null, p_198224_2_ == null ? null : p_198224_2_.getString());
+         UserListIPBansEntry userlistipbansentry = new UserListIPBansEntry(p_198224_1_, null, p_198224_0_.getName(),
+                 null, p_198224_2_ == null ? null : p_198224_2_.getString());
          userlistipbans.addEntry(userlistipbansentry);
          p_198224_0_.sendFeedback(new TextComponentTranslation("commands.banip.success", p_198224_1_, userlistipbansentry.getBanReason()), true);
          if (!list.isEmpty()) {

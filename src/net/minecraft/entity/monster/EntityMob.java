@@ -52,7 +52,7 @@ public abstract class EntityMob extends EntityCreature implements IMob {
    }
 
    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
-      return this.isInvulnerableTo(p_70097_1_) ? false : super.attackEntityFrom(p_70097_1_, p_70097_2_);
+      return !this.isInvulnerableTo(p_70097_1_) && super.attackEntityFrom(p_70097_1_, p_70097_2_);
    }
 
    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {

@@ -42,7 +42,7 @@ public class GuiScreenAdvancements extends GuiScreen implements ClientAdvancemen
    }
 
    public void onGuiClosed() {
-      this.clientAdvancementManager.setListener((ClientAdvancementManager.IListener)null);
+      this.clientAdvancementManager.setListener(null);
       NetHandlerPlayClient nethandlerplayclient = this.mc.getConnection();
       if (nethandlerplayclient != null) {
          nethandlerplayclient.sendPacket(CPacketSeenAdvancements.closedScreen());
@@ -68,7 +68,7 @@ public class GuiScreenAdvancements extends GuiScreen implements ClientAdvancemen
 
    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
       if (this.mc.gameSettings.keyBindAdvancements.matchesKey(p_keyPressed_1_, p_keyPressed_2_)) {
-         this.mc.displayGuiScreen((GuiScreen)null);
+         this.mc.displayGuiScreen(null);
          this.mc.mouseHelper.grabMouse();
          return true;
       } else {

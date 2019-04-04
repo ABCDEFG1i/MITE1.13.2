@@ -35,7 +35,6 @@ public class BlockReed extends Block {
       if (p_196267_1_.isValidPosition(p_196267_2_, p_196267_3_) && p_196267_2_.isAirBlock(p_196267_3_.up())) {
          int i;
          for(i = 1; p_196267_2_.getBlockState(p_196267_3_.down(i)).getBlock() == this; ++i) {
-            ;
          }
 
          if (i < 3) {

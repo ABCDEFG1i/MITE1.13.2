@@ -133,14 +133,14 @@ public class LootContext {
       }
    }
 
-   public static enum EntityTarget {
+   public enum EntityTarget {
       THIS("this"),
       KILLER("killer"),
       KILLER_PLAYER("killer_player");
 
       private final String targetType;
 
-      private EntityTarget(String p_i46992_3_) {
+      EntityTarget(String p_i46992_3_) {
          this.targetType = p_i46992_3_;
       }
 

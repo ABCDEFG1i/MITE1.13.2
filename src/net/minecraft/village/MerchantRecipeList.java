@@ -109,7 +109,7 @@ public class MerchantRecipeList extends ArrayList<MerchantRecipe> {
 
       for(int i = 0; i < this.size(); ++i) {
          MerchantRecipe merchantrecipe = this.get(i);
-         nbttaglist.add((INBTBase)merchantrecipe.writeToTags());
+         nbttaglist.add(merchantrecipe.writeToTags());
       }
 
       nbttagcompound.setTag("Recipes", nbttaglist);

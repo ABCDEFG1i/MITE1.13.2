@@ -253,7 +253,8 @@ public class EntityEvoker extends EntitySpellcasterIllager {
             BlockPos blockpos = (new BlockPos(EntityEvoker.this)).add(-2 + EntityEvoker.this.rand.nextInt(5), 1, -2 + EntityEvoker.this.rand.nextInt(5));
             EntityVex entityvex = new EntityVex(EntityEvoker.this.world);
             entityvex.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-            entityvex.onInitialSpawn(EntityEvoker.this.world.getDifficultyForLocation(blockpos), (IEntityLivingData)null, (NBTTagCompound)null);
+            entityvex.onInitialSpawn(EntityEvoker.this.world.getDifficultyForLocation(blockpos), null,
+                    null);
             entityvex.setOwner(EntityEvoker.this);
             entityvex.setBoundOrigin(blockpos);
             entityvex.setLimitedLife(20 * (30 + EntityEvoker.this.rand.nextInt(90)));
@@ -306,7 +307,7 @@ public class EntityEvoker extends EntitySpellcasterIllager {
 
       public void resetTask() {
          super.resetTask();
-         EntityEvoker.this.setWololoTarget((EntitySheep)null);
+         EntityEvoker.this.setWololoTarget(null);
       }
 
       protected void castSpell() {

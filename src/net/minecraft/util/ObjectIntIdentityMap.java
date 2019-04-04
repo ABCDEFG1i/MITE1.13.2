@@ -26,7 +26,7 @@ public class ObjectIntIdentityMap<T> implements IObjectIntIterable<T> {
       this.identityMap.put(p_148746_1_, p_148746_2_);
 
       while(this.objectList.size() <= p_148746_2_) {
-         this.objectList.add((T)null);
+         this.objectList.add(null);
       }
 
       this.objectList.set(p_148746_2_, p_148746_1_);
@@ -47,7 +47,7 @@ public class ObjectIntIdentityMap<T> implements IObjectIntIterable<T> {
 
    @Nullable
    public final T getByValue(int p_148745_1_) {
-      return (T)(p_148745_1_ >= 0 && p_148745_1_ < this.objectList.size() ? this.objectList.get(p_148745_1_) : null);
+      return p_148745_1_ >= 0 && p_148745_1_ < this.objectList.size() ? this.objectList.get(p_148745_1_) : null;
    }
 
    public Iterator<T> iterator() {

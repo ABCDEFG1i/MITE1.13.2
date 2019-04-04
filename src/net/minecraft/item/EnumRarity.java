@@ -10,7 +10,7 @@ public enum EnumRarity {
 
    public final TextFormatting color;
 
-   private EnumRarity(TextFormatting p_i48837_3_) {
+   EnumRarity(TextFormatting p_i48837_3_) {
       this.color = p_i48837_3_;
    }
 }

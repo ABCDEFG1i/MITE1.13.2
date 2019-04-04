@@ -31,7 +31,7 @@ public class ModelResourceLocation extends ResourceLocation {
       int i = p_177517_0_.indexOf(35);
       String s = p_177517_0_;
       if (i >= 0) {
-         astring[2] = p_177517_0_.substring(i + 1, p_177517_0_.length());
+         astring[2] = p_177517_0_.substring(i + 1);
          if (i > 1) {
             s = p_177517_0_.substring(0, i);
          }

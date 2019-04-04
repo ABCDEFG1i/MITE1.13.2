@@ -43,7 +43,6 @@ public class BlockItemUseContext extends ItemUseContext {
       } else {
          int i;
          for(i = 0; i < aenumfacing.length && aenumfacing[i] != this.face.getOpposite(); ++i) {
-            ;
          }
 
          if (i > 0) {

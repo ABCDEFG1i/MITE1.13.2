@@ -63,7 +63,7 @@ public class PhaseStrafePlayer extends PhaseBase {
                   double d9 = this.attackTarget.posX - d6;
                   double d10 = this.attackTarget.posY + (double)(this.attackTarget.height / 2.0F) - (d7 + (double)(this.dragon.dragonPartHead.height / 2.0F));
                   double d11 = this.attackTarget.posZ - d8;
-                  this.dragon.world.playEvent((EntityPlayer)null, 1017, new BlockPos(this.dragon), 0);
+                  this.dragon.world.playEvent(null, 1017, new BlockPos(this.dragon), 0);
                   EntityDragonFireball entitydragonfireball = new EntityDragonFireball(this.dragon.world, this.dragon, d9, d10, d11);
                   entitydragonfireball.setLocationAndAngles(d6, d7, d8, 0.0F, 0.0F);
                   this.dragon.world.spawnEntity(entitydragonfireball);
@@ -112,7 +112,7 @@ public class PhaseStrafePlayer extends PhaseBase {
             j = j + 12;
          }
 
-         this.currentPath = this.dragon.findPath(i, j, (PathPoint)null);
+         this.currentPath = this.dragon.findPath(i, j, null);
          if (this.currentPath != null) {
             this.currentPath.incrementPathIndex();
          }

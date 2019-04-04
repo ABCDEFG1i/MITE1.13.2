@@ -59,7 +59,6 @@ public abstract class RenderLivingBase<T extends EntityLivingBase> extends Rende
    protected float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
       float f;
       for(f = p_77034_2_ - p_77034_1_; f < -180.0F; f += 360.0F) {
-         ;
       }
 
       while(f >= 180.0F) {
@@ -155,7 +154,7 @@ public abstract class RenderLivingBase<T extends EntityLivingBase> extends Rende
 
          GlStateManager.disableRescaleNormal();
       } catch (Exception exception) {
-         LOGGER.error("Couldn't render entity", (Throwable)exception);
+         LOGGER.error("Couldn't render entity", exception);
       }
 
       GlStateManager.activeTexture(OpenGlHelper.GL_TEXTURE1);

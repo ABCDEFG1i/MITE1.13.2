@@ -9,7 +9,7 @@ public enum AttachFace implements IStringSerializable {
 
    private final String name;
 
-   private AttachFace(String p_i49343_3_) {
+   AttachFace(String p_i49343_3_) {
       this.name = p_i49343_3_;
    }
 

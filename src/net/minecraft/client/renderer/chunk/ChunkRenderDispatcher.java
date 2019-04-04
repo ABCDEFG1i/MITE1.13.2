@@ -135,7 +135,6 @@ public class ChunkRenderDispatcher {
          try {
             this.renderWorker.processTask(chunkrendertask);
          } catch (InterruptedException var7) {
-            ;
          }
 
          flag = true;
@@ -156,7 +155,6 @@ public class ChunkRenderDispatcher {
          try {
             list.add(this.allocateRenderBuilder());
          } catch (InterruptedException var3) {
-            ;
          }
       }
 
@@ -206,11 +204,11 @@ public class ChunkRenderDispatcher {
          }
 
          p_188245_2_.setTranslation(0.0D, 0.0D, 0.0D);
-         return Futures.immediateFuture((Object)null);
+         return Futures.immediateFuture(null);
       } else {
          ListenableFutureTask<Object> listenablefuturetask = ListenableFutureTask.create(() -> {
             this.uploadChunk(p_188245_1_, p_188245_2_, p_188245_3_, p_188245_4_, p_188245_5_);
-         }, (Object)null);
+         }, null);
          synchronized(this.queueChunkUploads) {
             this.queueChunkUploads.add(new ChunkRenderDispatcher.PendingUpload(listenablefuturetask, p_188245_5_));
             return listenablefuturetask;
@@ -258,7 +256,7 @@ public class ChunkRenderDispatcher {
             thread.interrupt();
             thread.join();
          } catch (InterruptedException interruptedexception) {
-            LOGGER.warn("Interrupted whilst waiting for worker to die", (Throwable)interruptedexception);
+            LOGGER.warn("Interrupted whilst waiting for worker to die", interruptedexception);
          }
       }
 

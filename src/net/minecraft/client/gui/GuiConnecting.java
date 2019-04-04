@@ -34,7 +34,7 @@ public class GuiConnecting extends GuiScreen {
       this.mc = p_i1181_2_;
       this.previousGuiScreen = p_i1181_1_;
       ServerAddress serveraddress = ServerAddress.fromString(p_i1181_3_.serverIP);
-      p_i1181_2_.loadWorld((WorldClient)null);
+      p_i1181_2_.loadWorld(null);
       p_i1181_2_.setServerData(p_i1181_3_);
       this.connect(serveraddress.getIP(), serveraddress.getPort());
    }
@@ -42,7 +42,7 @@ public class GuiConnecting extends GuiScreen {
    public GuiConnecting(GuiScreen p_i1182_1_, Minecraft p_i1182_2_, String p_i1182_3_, int p_i1182_4_) {
       this.mc = p_i1182_2_;
       this.previousGuiScreen = p_i1182_1_;
-      p_i1182_2_.loadWorld((WorldClient)null);
+      p_i1182_2_.loadWorld(null);
       this.connect(p_i1182_3_, p_i1182_4_);
    }
 
@@ -69,7 +69,7 @@ public class GuiConnecting extends GuiScreen {
                   return;
                }
 
-               GuiConnecting.LOGGER.error("Couldn't connect to server", (Throwable)unknownhostexception);
+               GuiConnecting.LOGGER.error("Couldn't connect to server", unknownhostexception);
                GuiConnecting.this.mc.addScheduledTask(() -> {
                   GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new TextComponentTranslation("disconnect.genericReason", "Unknown host")));
                });
@@ -78,7 +78,7 @@ public class GuiConnecting extends GuiScreen {
                   return;
                }
 
-               GuiConnecting.LOGGER.error("Couldn't connect to server", (Throwable)exception);
+               GuiConnecting.LOGGER.error("Couldn't connect to server", exception);
                String s = inetaddress == null ? exception.toString() : exception.toString().replaceAll(inetaddress + ":" + p_146367_2_, "");
                GuiConnecting.this.mc.addScheduledTask(() -> {
                   GuiConnecting.this.mc.displayGuiScreen(new GuiDisconnected(GuiConnecting.this.previousGuiScreen, "connect.failed", new TextComponentTranslation("disconnect.genericReason", s)));

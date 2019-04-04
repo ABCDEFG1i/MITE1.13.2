@@ -40,7 +40,7 @@ public class ItemSkull extends ItemWallOrFloor {
    public boolean updateItemStackNBT(NBTTagCompound p_179215_1_) {
       super.updateItemStackNBT(p_179215_1_);
       if (p_179215_1_.hasKey("SkullOwner", 8) && !StringUtils.isBlank(p_179215_1_.getString("SkullOwner"))) {
-         GameProfile gameprofile = new GameProfile((UUID)null, p_179215_1_.getString("SkullOwner"));
+         GameProfile gameprofile = new GameProfile(null, p_179215_1_.getString("SkullOwner"));
          gameprofile = TileEntitySkull.updateGameProfile(gameprofile);
          p_179215_1_.setTag("SkullOwner", NBTUtil.writeGameProfile(new NBTTagCompound(), gameprofile));
          return true;

@@ -218,7 +218,7 @@ public class BlockCommandBlock extends BlockContainer {
 
       if (i <= 0) {
          int j = Math.max(gamerules.getInt("maxCommandChainLength"), 0);
-         LOGGER.warn("Command Block chain tried to execute more than {} steps!", (int)j);
+         LOGGER.warn("Command Block chain tried to execute more than {} steps!", j);
       }
 
    }

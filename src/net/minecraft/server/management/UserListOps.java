@@ -26,7 +26,7 @@ public class UserListOps extends UserList<GameProfile, UserListOpsEntry> {
 
    public boolean bypassesPlayerLimit(GameProfile p_183026_1_) {
       UserListOpsEntry userlistopsentry = this.getEntry(p_183026_1_);
-      return userlistopsentry != null ? userlistopsentry.bypassesPlayerLimit() : false;
+      return userlistopsentry != null && userlistopsentry.bypassesPlayerLimit();
    }
 
    protected String getObjectKey(GameProfile p_152681_1_) {

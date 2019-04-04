@@ -71,9 +71,9 @@ public class ItemEnchantedBook extends Item {
 
       if (flag) {
          NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-         nbttagcompound1.setString("id", String.valueOf((Object)resourcelocation));
+         nbttagcompound1.setString("id", String.valueOf(resourcelocation));
          nbttagcompound1.setShort("lvl", (short)p_92115_1_.enchantmentLevel);
-         nbttaglist.add((INBTBase)nbttagcompound1);
+         nbttaglist.add(nbttagcompound1);
       }
 
       p_92115_0_.getOrCreateTag().setTag("StoredEnchantments", nbttaglist);

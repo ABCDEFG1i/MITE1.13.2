@@ -83,7 +83,7 @@ public class BrewedPotionTrigger implements ICriterionTrigger<BrewedPotionTrigge
       }
 
       public static BrewedPotionTrigger.Instance func_203910_c() {
-         return new BrewedPotionTrigger.Instance((PotionType)null);
+         return new BrewedPotionTrigger.Instance(null);
       }
 
       public boolean test(PotionType p_192250_1_) {

@@ -32,7 +32,7 @@ public class EntityAINearestAttackableTarget<T extends EntityLivingBase> extends
    }
 
    public EntityAINearestAttackableTarget(EntityCreature p_i45879_1_, Class<T> p_i45879_2_, boolean p_i45879_3_, boolean p_i45879_4_) {
-      this(p_i45879_1_, p_i45879_2_, 10, p_i45879_3_, p_i45879_4_, (Predicate<T>)null);
+      this(p_i45879_1_, p_i45879_2_, 10, p_i45879_3_, p_i45879_4_, null);
    }
 
    public EntityAINearestAttackableTarget(EntityCreature p_i48572_1_, Class<T> p_i48572_2_, int p_i48572_3_, boolean p_i48572_4_, boolean p_i48572_5_, @Nullable Predicate<? super T> p_i48572_6_) {
@@ -47,7 +47,7 @@ public class EntityAINearestAttackableTarget<T extends EntityLivingBase> extends
          } else if (p_i48572_6_ != null && !p_i48572_6_.test(p_210294_2_)) {
             return false;
          } else {
-            return !EntitySelectors.NOT_SPECTATING.test(p_210294_2_) ? false : this.isSuitableTarget(p_210294_2_, false);
+            return EntitySelectors.NOT_SPECTATING.test(p_210294_2_) && this.isSuitableTarget(p_210294_2_, false);
          }
       };
    }

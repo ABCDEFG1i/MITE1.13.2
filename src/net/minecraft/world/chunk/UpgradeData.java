@@ -117,8 +117,7 @@ public class UpgradeData {
    private void func_196989_a(Chunk p_196989_1_) {
       try (
          BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain();
-         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain();
-      ) {
+         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain()) {
          IWorld iworld = p_196989_1_.getWorld();
 
          for(int i = 0; i < 16; ++i) {
@@ -195,7 +194,7 @@ public class UpgradeData {
       return nbttagcompound;
    }
 
-   static enum BlockFixers implements UpgradeData.IBlockFixer {
+   enum BlockFixers implements UpgradeData.IBlockFixer {
       BLACKLIST(Blocks.OBSERVER, Blocks.NETHER_PORTAL, Blocks.WHITE_CONCRETE_POWDER, Blocks.ORANGE_CONCRETE_POWDER, Blocks.MAGENTA_CONCRETE_POWDER, Blocks.LIGHT_BLUE_CONCRETE_POWDER, Blocks.YELLOW_CONCRETE_POWDER, Blocks.LIME_CONCRETE_POWDER, Blocks.PINK_CONCRETE_POWDER, Blocks.GRAY_CONCRETE_POWDER, Blocks.LIGHT_GRAY_CONCRETE_POWDER, Blocks.CYAN_CONCRETE_POWDER, Blocks.PURPLE_CONCRETE_POWDER, Blocks.BLUE_CONCRETE_POWDER, Blocks.BROWN_CONCRETE_POWDER, Blocks.GREEN_CONCRETE_POWDER, Blocks.RED_CONCRETE_POWDER, Blocks.BLACK_CONCRETE_POWDER, Blocks.ANVIL, Blocks.CHIPPED_ANVIL, Blocks.DAMAGED_ANVIL, Blocks.DRAGON_EGG, Blocks.GRAVEL, Blocks.SAND, Blocks.RED_SAND, Blocks.SIGN, Blocks.WALL_SIGN) {
          public IBlockState func_196982_a(IBlockState p_196982_1_, EnumFacing p_196982_2_, IBlockState p_196982_3_, IWorld p_196982_4_, BlockPos p_196982_5_, BlockPos p_196982_6_) {
             return p_196982_1_;
@@ -294,11 +293,11 @@ public class UpgradeData {
 
       public static final EnumFacing[] field_208827_f = EnumFacing.values();
 
-      private BlockFixers(Block... p_i47847_3_) {
+      BlockFixers(Block... p_i47847_3_) {
          this(false, p_i47847_3_);
       }
 
-      private BlockFixers(boolean p_i49366_3_, Block... p_i49366_4_) {
+      BlockFixers(boolean p_i49366_3_, Block... p_i49366_4_) {
          for(Block block : p_i49366_4_) {
             UpgradeData.field_196997_d.put(block, this);
          }

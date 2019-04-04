@@ -36,7 +36,7 @@ public class BlockLadder extends Block implements IBucketPickupHandler, ILiquidC
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
-      switch((EnumFacing)p_196244_1_.get(FACING)) {
+      switch(p_196244_1_.get(FACING)) {
       case NORTH:
          return LADDER_NORTH_AABB;
       case SOUTH:

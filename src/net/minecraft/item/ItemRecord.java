@@ -48,7 +48,7 @@ public class ItemRecord extends Item {
          ItemStack itemstack = p_195939_1_.getItem();
          if (!world.isRemote) {
             ((BlockJukebox)Blocks.JUKEBOX).insertRecord(world, blockpos, iblockstate, itemstack);
-            world.playEvent((EntityPlayer)null, 1010, blockpos, Item.getIdFromItem(this));
+            world.playEvent(null, 1010, blockpos, Item.getIdFromItem(this));
             itemstack.shrink(1);
             EntityPlayer entityplayer = p_195939_1_.getPlayer();
             if (entityplayer != null) {

@@ -36,9 +36,9 @@ public class ItemFishingRod extends Item {
          int i = p_77659_2_.fishEntity.handleHookRetraction(itemstack);
          itemstack.damageItem(i, p_77659_2_);
          p_77659_2_.swingArm(p_77659_3_);
-         p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+         p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
       } else {
-         p_77659_1_.playSound((EntityPlayer)null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+         p_77659_1_.playSound(null, p_77659_2_.posX, p_77659_2_.posY, p_77659_2_.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
          if (!p_77659_1_.isRemote) {
             EntityFishHook entityfishhook = new EntityFishHook(p_77659_1_, p_77659_2_);
             int j = EnchantmentHelper.getFishingSpeedBonus(itemstack);

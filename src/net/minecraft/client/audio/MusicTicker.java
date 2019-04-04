@@ -63,11 +63,12 @@ public class MusicTicker implements ITickable {
    }
 
    public boolean isPlaying(MusicTicker.MusicType p_209100_1_) {
-      return this.currentMusic == null ? false : p_209100_1_.getMusicLocation().getSoundName().equals(this.currentMusic.getSoundLocation());
+      return this.currentMusic != null && p_209100_1_.getMusicLocation().getSoundName().equals(
+              this.currentMusic.getSoundLocation());
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum MusicType {
+   public enum MusicType {
       MENU(SoundEvents.MUSIC_MENU, 20, 600),
       GAME(SoundEvents.MUSIC_GAME, 12000, 24000),
       CREATIVE(SoundEvents.MUSIC_CREATIVE, 1200, 3600),
@@ -81,7 +82,7 @@ public class MusicTicker implements ITickable {
       private final int minDelay;
       private final int maxDelay;
 
-      private MusicType(SoundEvent p_i47050_3_, int p_i47050_4_, int p_i47050_5_) {
+      MusicType(SoundEvent p_i47050_3_, int p_i47050_4_, int p_i47050_5_) {
          this.musicLocation = p_i47050_3_;
          this.minDelay = p_i47050_4_;
          this.maxDelay = p_i47050_5_;

@@ -72,9 +72,9 @@ public class EnchantmentHelper {
          if (enchantment != null) {
             int i = entry.getValue();
             NBTTagCompound nbttagcompound = new NBTTagCompound();
-            nbttagcompound.setString("id", String.valueOf((Object)IRegistry.field_212628_q.func_177774_c(enchantment)));
+            nbttagcompound.setString("id", String.valueOf(IRegistry.field_212628_q.func_177774_c(enchantment)));
             nbttagcompound.setShort("lvl", (short)i);
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
             if (p_82782_1_.getItem() == Items.ENCHANTED_BOOK) {
                ItemEnchantedBook.addEnchantment(p_82782_1_, new EnchantmentData(enchantment, i));
             }

@@ -236,7 +236,7 @@ public class ContainerEnchantment extends Container {
                this.tableInventory.markDirty();
                this.xpSeed = p_75140_1_.getXPSeed();
                this.onCraftMatrixChanged(this.tableInventory);
-               this.world.playSound((EntityPlayer)null, this.position, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+               this.world.playSound(null, this.position, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, this.world.rand.nextFloat() * 0.1F + 0.9F);
             }
          }
 

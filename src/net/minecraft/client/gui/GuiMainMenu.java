@@ -86,9 +86,8 @@ public class GuiMainMenu extends GuiScreen {
             }
          }
       } catch (IOException var8) {
-         ;
       } finally {
-         IOUtils.closeQuietly((Closeable)iresource);
+         IOUtils.closeQuietly(iresource);
       }
 
       this.minceraftRoll = RANDOM.nextFloat();

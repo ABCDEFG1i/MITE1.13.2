@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:quartz_pillar",
+    "count": 2
+  }
+}

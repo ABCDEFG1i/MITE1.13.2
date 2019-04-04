@@ -56,7 +56,8 @@ public class Realms {
    }
 
    public static String uuidToName(String p_uuidToName_0_) {
-      return Minecraft.getInstance().getSessionService().fillProfileProperties(new GameProfile(UUIDTypeAdapter.fromString(p_uuidToName_0_), (String)null), false).getName();
+      return Minecraft.getInstance().getSessionService().fillProfileProperties(new GameProfile(UUIDTypeAdapter.fromString(p_uuidToName_0_),
+              null), false).getName();
    }
 
    public static <V> ListenableFuture<V> execute(Callable<V> p_execute_0_) {

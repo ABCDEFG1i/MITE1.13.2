@@ -116,7 +116,8 @@ public abstract class MobSpawnerBaseLogic {
                entity.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, world.rand.nextFloat() * 360.0F, 0.0F);
                if (entityliving == null || entityliving.func_205020_a(world, true) && entityliving.isNotColliding()) {
                   if (this.spawnData.getNbt().getSize() == 1 && this.spawnData.getNbt().hasKey("id", 8) && entity instanceof EntityLiving) {
-                     ((EntityLiving)entity).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), (IEntityLivingData)null, (NBTTagCompound)null);
+                     ((EntityLiving)entity).onInitialSpawn(world.getDifficultyForLocation(new BlockPos(entity)), null,
+                             null);
                   }
 
                   AnvilChunkLoader.spawnEntity(entity, world);
@@ -205,10 +206,10 @@ public abstract class MobSpawnerBaseLogic {
          p_189530_1_.setTag("SpawnData", this.spawnData.getNbt().copy());
          NBTTagList nbttaglist = new NBTTagList();
          if (this.potentialSpawns.isEmpty()) {
-            nbttaglist.add((INBTBase)this.spawnData.toCompoundTag());
+            nbttaglist.add(this.spawnData.toCompoundTag());
          } else {
             for(WeightedSpawnerEntity weightedspawnerentity : this.potentialSpawns) {
-               nbttaglist.add((INBTBase)weightedspawnerentity.toCompoundTag());
+               nbttaglist.add(weightedspawnerentity.toCompoundTag());
             }
          }
 
@@ -222,7 +223,9 @@ public abstract class MobSpawnerBaseLogic {
       if (this.cachedEntity == null) {
          this.cachedEntity = AnvilChunkLoader.readWorldEntity(this.spawnData.getNbt(), this.getWorld(), false);
          if (this.spawnData.getNbt().getSize() == 1 && this.spawnData.getNbt().hasKey("id", 8) && this.cachedEntity instanceof EntityLiving) {
-            ((EntityLiving)this.cachedEntity).onInitialSpawn(this.getWorld().getDifficultyForLocation(new BlockPos(this.cachedEntity)), (IEntityLivingData)null, (NBTTagCompound)null);
+            ((EntityLiving)this.cachedEntity).onInitialSpawn(this.getWorld().getDifficultyForLocation(new BlockPos(this.cachedEntity)),
+                    null,
+                    null);
          }
       }
 

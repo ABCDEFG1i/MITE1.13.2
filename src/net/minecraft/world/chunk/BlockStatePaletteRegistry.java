@@ -22,7 +22,7 @@ public class BlockStatePaletteRegistry<T> implements IBlockStatePalette<T> {
 
    public T getBlockState(int p_186039_1_) {
       T t = this.registry.getByValue(p_186039_1_);
-      return (T)(t == null ? this.defaultState : t);
+      return t == null ? this.defaultState : t;
    }
 
    @OnlyIn(Dist.CLIENT)

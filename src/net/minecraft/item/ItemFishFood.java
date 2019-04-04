@@ -35,7 +35,7 @@ public class ItemFishFood extends ItemFood {
       super.onFoodEaten(p_77849_1_, p_77849_2_, p_77849_3_);
    }
 
-   public static enum FishType {
+   public enum FishType {
       COD(2, 0.1F, 5, 0.6F),
       SALMON(2, 0.1F, 6, 0.8F),
       TROPICAL_FISH(1, 0.1F),
@@ -47,7 +47,7 @@ public class ItemFishFood extends ItemFood {
       private final float cookedSaturationModifier;
       private final boolean cookable;
 
-      private FishType(int p_i49622_3_, float p_i49622_4_, int p_i49622_5_, float p_i49622_6_) {
+      FishType(int p_i49622_3_, float p_i49622_4_, int p_i49622_5_, float p_i49622_6_) {
          this.uncookedHealAmount = p_i49622_3_;
          this.uncookedSaturationModifier = p_i49622_4_;
          this.cookedHealAmount = p_i49622_5_;
@@ -55,7 +55,7 @@ public class ItemFishFood extends ItemFood {
          this.cookable = p_i49622_5_ != 0;
       }
 
-      private FishType(int p_i49623_3_, float p_i49623_4_) {
+      FishType(int p_i49623_3_, float p_i49623_4_) {
          this(p_i49623_3_, p_i49623_4_, 0, 0.0F);
       }
 

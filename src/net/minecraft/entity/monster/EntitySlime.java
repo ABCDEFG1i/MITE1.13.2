@@ -382,7 +382,7 @@ public class EntitySlime extends EntityLiving implements IMob {
       public AISlimeFloat(EntitySlime p_i45823_1_) {
          this.slime = p_i45823_1_;
          this.setMutexBits(5);
-         ((PathNavigateGround)p_i45823_1_.getNavigator()).setCanSwim(true);
+         p_i45823_1_.getNavigator().setCanSwim(true);
       }
 
       public boolean shouldExecute() {

@@ -1,0 +1,16 @@
+{
+  "type": "crafting_shapeless",
+  "group": "dyed_bed",
+  "ingredients": [
+    {
+      "item": "minecraft:white_bed"
+    },
+    {
+      "item": "minecraft:magenta_dye"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:magenta_bed"
+  }
+}

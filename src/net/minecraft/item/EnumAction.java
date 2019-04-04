@@ -6,5 +6,5 @@ public enum EnumAction {
    DRINK,
    BLOCK,
    BOW,
-   SPEAR;
+   SPEAR
 }

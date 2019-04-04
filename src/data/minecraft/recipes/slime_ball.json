@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:slime_block"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:slime_ball",
+    "count": 9
+  }
+}

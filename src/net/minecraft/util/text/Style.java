@@ -219,27 +219,27 @@ public class Style {
       } else {
          StringBuilder stringbuilder = new StringBuilder();
          if (this.getColor() != null) {
-            stringbuilder.append((Object)this.getColor());
+            stringbuilder.append(this.getColor());
          }
 
          if (this.getBold()) {
-            stringbuilder.append((Object)TextFormatting.BOLD);
+            stringbuilder.append(TextFormatting.BOLD);
          }
 
          if (this.getItalic()) {
-            stringbuilder.append((Object)TextFormatting.ITALIC);
+            stringbuilder.append(TextFormatting.ITALIC);
          }
 
          if (this.getUnderlined()) {
-            stringbuilder.append((Object)TextFormatting.UNDERLINE);
+            stringbuilder.append(TextFormatting.UNDERLINE);
          }
 
          if (this.getObfuscated()) {
-            stringbuilder.append((Object)TextFormatting.OBFUSCATED);
+            stringbuilder.append(TextFormatting.OBFUSCATED);
          }
 
          if (this.getStrikethrough()) {
-            stringbuilder.append((Object)TextFormatting.STRIKETHROUGH);
+            stringbuilder.append(TextFormatting.STRIKETHROUGH);
          }
 
          return stringbuilder.toString();

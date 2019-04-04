@@ -159,7 +159,8 @@ public class EntityDrowned extends EntityZombie implements IRangedAttackMob {
             return false;
          }
       } else {
-         return p_208003_1_.getItem() == Items.TRIDENT ? true : super.shouldExchangeEquipment(p_208003_1_, p_208003_2_, p_208003_3_);
+         return p_208003_1_.getItem() == Items.TRIDENT || super.shouldExchangeEquipment(p_208003_1_, p_208003_2_,
+                 p_208003_3_);
       }
    }
 
@@ -224,9 +225,7 @@ public class EntityDrowned extends EntityZombie implements IRangedAttackMob {
          PathPoint pathpoint = path.getTarget();
          if (pathpoint != null) {
             double d0 = this.getDistanceSq((double)pathpoint.x, (double)pathpoint.y, (double)pathpoint.z);
-            if (d0 < 4.0D) {
-               return true;
-            }
+             return d0 < 4.0D;
          }
       }
 
@@ -283,7 +282,8 @@ public class EntityDrowned extends EntityZombie implements IRangedAttackMob {
 
       protected boolean shouldMoveTo(IWorldReaderBase p_179488_1_, BlockPos p_179488_2_) {
          BlockPos blockpos = p_179488_2_.up();
-         return p_179488_1_.isAirBlock(blockpos) && p_179488_1_.isAirBlock(blockpos.up()) ? p_179488_1_.getBlockState(p_179488_2_).isTopSolid() : false;
+         return (p_179488_1_.isAirBlock(blockpos) && p_179488_1_.isAirBlock(
+                 blockpos.up())) && p_179488_1_.getBlockState(p_179488_2_).isTopSolid();
       }
 
       public void startExecuting() {

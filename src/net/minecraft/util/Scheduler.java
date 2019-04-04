@@ -27,8 +27,8 @@ public abstract class Scheduler<K, T extends ITaskType<K, T>, R> {
    private final ExecutorService workerPool;
    private final AtomicInteger nextWorkerId = new AtomicInteger(1);
    private final List<CompletableFuture<R>> unbatchedFutures = Lists.newArrayList();
-   private CompletableFuture<R> field_202860_f = CompletableFuture.completedFuture((R)null);
-   private CompletableFuture<R> field_202861_g = CompletableFuture.completedFuture((R)null);
+   private CompletableFuture<R> field_202860_f = CompletableFuture.completedFuture(null);
+   private CompletableFuture<R> field_202861_g = CompletableFuture.completedFuture(null);
    private final Supplier<Map<T, CompletableFuture<R>>> field_202862_h;
    private final Supplier<Map<T, CompletableFuture<Void>>> field_202863_i;
    private final T targetTaskType;
@@ -102,7 +102,7 @@ public abstract class Scheduler<K, T extends ITaskType<K, T>, R> {
    @Nullable
    public R func_212537_b(K p_212537_1_, boolean p_212537_2_) {
       Scheduler<K, T, R>.FutureWrapper scheduler = this.func_212252_a_(p_212537_1_, p_212537_2_);
-      return (R)(scheduler != null ? scheduler.getResult() : null);
+      return scheduler != null ? scheduler.getResult() : null;
    }
 
    public CompletableFuture<R> func_202846_c() {

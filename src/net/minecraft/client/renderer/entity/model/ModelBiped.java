@@ -290,7 +290,6 @@ public class ModelBiped extends ModelBase {
    protected float func_205060_a(float p_205060_1_, float p_205060_2_, float p_205060_3_) {
       float f;
       for(f = p_205060_2_ - p_205060_1_; f < -(float)Math.PI; f += ((float)Math.PI * 2F)) {
-         ;
       }
 
       while(f >= (float)Math.PI) {
@@ -348,11 +347,11 @@ public class ModelBiped extends ModelBase {
    }
 
    @OnlyIn(Dist.CLIENT)
-   public static enum ArmPose {
+   public enum ArmPose {
       EMPTY,
       ITEM,
       BLOCK,
       BOW_AND_ARROW,
-      THROW_SPEAR;
+      THROW_SPEAR
    }
 }

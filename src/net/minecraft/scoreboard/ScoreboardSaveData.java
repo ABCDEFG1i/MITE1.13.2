@@ -184,11 +184,11 @@ public class ScoreboardSaveData extends WorldSavedData {
          NBTTagList nbttaglist1 = new NBTTagList();
 
          for(String s : scoreplayerteam.getMembershipCollection()) {
-            nbttaglist1.add((INBTBase)(new NBTTagString(s)));
+            nbttaglist1.add(new NBTTagString(s));
          }
 
          nbttagcompound.setTag("Players", nbttaglist1);
-         nbttaglist.add((INBTBase)nbttagcompound);
+         nbttaglist.add(nbttagcompound);
       }
 
       return nbttaglist;
@@ -222,7 +222,7 @@ public class ScoreboardSaveData extends WorldSavedData {
             nbttagcompound.setString("CriteriaName", scoreobjective.func_96680_c().func_96636_a());
             nbttagcompound.setString("DisplayName", ITextComponent.Serializer.toJson(scoreobjective.getDisplayName()));
             nbttagcompound.setString("RenderType", scoreobjective.func_199865_f().func_211838_a());
-            nbttaglist.add((INBTBase)nbttagcompound);
+            nbttaglist.add(nbttagcompound);
          }
       }
 

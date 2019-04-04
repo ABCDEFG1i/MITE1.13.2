@@ -77,7 +77,7 @@ public class BlockNote extends Block {
    public boolean eventReceived(IBlockState p_189539_1_, World p_189539_2_, BlockPos p_189539_3_, int p_189539_4_, int p_189539_5_) {
       int i = p_189539_1_.get(NOTE);
       float f = (float)Math.pow(2.0D, (double)(i - 12) / 12.0D);
-      p_189539_2_.playSound((EntityPlayer)null, p_189539_3_, p_189539_1_.get(INSTRUMENT).getSound(), SoundCategory.RECORDS, 3.0F, f);
+      p_189539_2_.playSound(null, p_189539_3_, p_189539_1_.get(INSTRUMENT).getSound(), SoundCategory.RECORDS, 3.0F, f);
       p_189539_2_.spawnParticle(Particles.NOTE, (double)p_189539_3_.getX() + 0.5D, (double)p_189539_3_.getY() + 1.2D, (double)p_189539_3_.getZ() + 0.5D, (double)i / 24.0D, 0.0D, 0.0D);
       return true;
    }

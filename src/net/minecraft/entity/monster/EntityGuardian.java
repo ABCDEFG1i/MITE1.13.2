@@ -366,7 +366,7 @@ public class EntityGuardian extends EntityMob {
 
       public void resetTask() {
          this.guardian.setTargetedEntity(0);
-         this.guardian.setAttackTarget((EntityLivingBase)null);
+         this.guardian.setAttackTarget(null);
          this.guardian.wander.makeUpdate();
       }
 
@@ -375,7 +375,7 @@ public class EntityGuardian extends EntityMob {
          this.guardian.getNavigator().clearPath();
          this.guardian.getLookHelper().setLookPositionWithEntity(entitylivingbase, 90.0F, 90.0F);
          if (!this.guardian.canEntityBeSeen(entitylivingbase)) {
-            this.guardian.setAttackTarget((EntityLivingBase)null);
+            this.guardian.setAttackTarget(null);
          } else {
             ++this.tickCounter;
             if (this.tickCounter == 0) {
@@ -393,7 +393,7 @@ public class EntityGuardian extends EntityMob {
 
                entitylivingbase.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this.guardian, this.guardian), f);
                entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this.guardian), (float)this.guardian.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-               this.guardian.setAttackTarget((EntityLivingBase)null);
+               this.guardian.setAttackTarget(null);
             }
 
             super.updateTask();

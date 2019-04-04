@@ -112,11 +112,11 @@ public class EntityBat extends EntityAmbientCreature {
 
             if (this.world.getNearestPlayerNotCreative(this, 4.0D) != null) {
                this.setIsBatHanging(false);
-               this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+               this.world.playEvent(null, 1025, blockpos, 0);
             }
          } else {
             this.setIsBatHanging(false);
-            this.world.playEvent((EntityPlayer)null, 1025, blockpos, 0);
+            this.world.playEvent(null, 1025, blockpos, 0);
          }
       } else {
          if (this.spawnPosition != null && (!this.world.isAirBlock(this.spawnPosition) || this.spawnPosition.getY() < 1)) {
@@ -193,7 +193,7 @@ public class EntityBat extends EntityAmbientCreature {
             return false;
          }
 
-         return i > this.rand.nextInt(j) ? false : super.func_205020_a(p_205020_1_, p_205020_2_);
+         return i <= this.rand.nextInt(j) && super.func_205020_a(p_205020_1_, p_205020_2_);
       }
    }
 

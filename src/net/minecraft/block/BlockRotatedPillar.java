@@ -20,7 +20,7 @@ public class BlockRotatedPillar extends Block {
       switch(p_185499_2_) {
       case COUNTERCLOCKWISE_90:
       case CLOCKWISE_90:
-         switch((EnumFacing.Axis)p_185499_1_.get(AXIS)) {
+         switch(p_185499_1_.get(AXIS)) {
          case X:
             return p_185499_1_.with(AXIS, EnumFacing.Axis.Z);
          case Z:

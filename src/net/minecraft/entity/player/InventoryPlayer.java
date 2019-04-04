@@ -152,7 +152,6 @@ public class InventoryPlayer implements IInventory {
       }
 
       for(this.currentItem = (int)((double)this.currentItem - p_195409_1_); this.currentItem < 0; this.currentItem += 9) {
-         ;
       }
 
       while(this.currentItem >= 9) {
@@ -426,7 +425,7 @@ public class InventoryPlayer implements IInventory {
             NBTTagCompound nbttagcompound = new NBTTagCompound();
             nbttagcompound.setByte("Slot", (byte)i);
             this.mainInventory.get(i).write(nbttagcompound);
-            p_70442_1_.add((INBTBase)nbttagcompound);
+            p_70442_1_.add(nbttagcompound);
          }
       }
 
@@ -435,7 +434,7 @@ public class InventoryPlayer implements IInventory {
             NBTTagCompound nbttagcompound1 = new NBTTagCompound();
             nbttagcompound1.setByte("Slot", (byte)(j + 100));
             this.armorInventory.get(j).write(nbttagcompound1);
-            p_70442_1_.add((INBTBase)nbttagcompound1);
+            p_70442_1_.add(nbttagcompound1);
          }
       }
 
@@ -444,7 +443,7 @@ public class InventoryPlayer implements IInventory {
             NBTTagCompound nbttagcompound2 = new NBTTagCompound();
             nbttagcompound2.setByte("Slot", (byte)(k + 150));
             this.offHandInventory.get(k).write(nbttagcompound2);
-            p_70442_1_.add((INBTBase)nbttagcompound2);
+            p_70442_1_.add(nbttagcompound2);
          }
       }
 

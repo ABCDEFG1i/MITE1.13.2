@@ -43,7 +43,7 @@ public class GuiScreenWorking extends GuiScreen implements IProgressUpdate {
    public void render(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
       if (this.doneWorking) {
          if (!this.mc.isConnectedToRealms()) {
-            this.mc.displayGuiScreen((GuiScreen)null);
+            this.mc.displayGuiScreen(null);
          }
 
       } else {

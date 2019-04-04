@@ -28,7 +28,7 @@ public class IntegratedPlayerList extends PlayerList {
    }
 
    public ITextComponent func_206258_a(SocketAddress p_206258_1_, GameProfile p_206258_2_) {
-      return (ITextComponent)(p_206258_2_.getName().equalsIgnoreCase(this.getServerInstance().getServerOwner()) && this.getPlayerByUsername(p_206258_2_.getName()) != null ? new TextComponentTranslation("multiplayer.disconnect.name_taken") : super.func_206258_a(p_206258_1_, p_206258_2_));
+      return p_206258_2_.getName().equalsIgnoreCase(this.getServerInstance().getServerOwner()) && this.getPlayerByUsername(p_206258_2_.getName()) != null ? new TextComponentTranslation("multiplayer.disconnect.name_taken") : super.func_206258_a(p_206258_1_, p_206258_2_);
    }
 
    public IntegratedServer getServerInstance() {

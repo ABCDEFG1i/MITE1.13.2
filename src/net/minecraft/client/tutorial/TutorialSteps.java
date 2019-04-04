@@ -16,7 +16,7 @@ public enum TutorialSteps {
    private final String name;
    private final Function<Tutorial, ? extends ITutorialStep> tutorial;
 
-   private <T extends ITutorialStep> TutorialSteps(String p_i47577_3_, Function<Tutorial, T> p_i47577_4_) {
+   <T extends ITutorialStep> TutorialSteps(String p_i47577_3_, Function<Tutorial, T> p_i47577_4_) {
       this.name = p_i47577_3_;
       this.tutorial = p_i47577_4_;
    }

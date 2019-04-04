@@ -90,7 +90,7 @@ public class SPacketPlayerPosLook implements Packet<INetHandlerPlayClient> {
       return this.flags;
    }
 
-   public static enum EnumFlags {
+   public enum EnumFlags {
       X(0),
       Y(1),
       Z(2),
@@ -99,7 +99,7 @@ public class SPacketPlayerPosLook implements Packet<INetHandlerPlayClient> {
 
       private final int bit;
 
-      private EnumFlags(int p_i46690_3_) {
+      EnumFlags(int p_i46690_3_) {
          this.bit = p_i46690_3_;
       }
 

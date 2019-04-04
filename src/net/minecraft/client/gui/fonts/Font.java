@@ -56,7 +56,7 @@ public class Font implements AutoCloseable {
 
       for(char c0 = 0; c0 < '\uffff'; ++c0) {
          for(IGlyphProvider iglyphprovider1 : p_211570_1_) {
-            IGlyph iglyph = (IGlyph)(c0 == ' ' ? field_212461_c : iglyphprovider1.func_212248_a(c0));
+            IGlyph iglyph = c0 == ' ' ? field_212461_c : iglyphprovider1.func_212248_a(c0);
             if (iglyph != null) {
                set.add(iglyphprovider1);
                if (iglyph != DefaultGlyph.INSTANCE) {
@@ -85,7 +85,7 @@ public class Font implements AutoCloseable {
 
    public IGlyph findGlyph(char p_211184_1_) {
       return this.glyphs.computeIfAbsent(p_211184_1_, (p_212457_1_) -> {
-         return (IGlyph)(p_212457_1_ == 32 ? field_212461_c : this.func_212455_c((char)p_212457_1_));
+         return p_212457_1_ == 32 ? field_212461_c : this.func_212455_c((char)p_212457_1_);
       });
    }
 
@@ -102,7 +102,7 @@ public class Font implements AutoCloseable {
 
    public TexturedGlyph func_211187_a(char p_211187_1_) {
       return this.field_212463_j.computeIfAbsent(p_211187_1_, (p_212458_1_) -> {
-         return (TexturedGlyph)(p_212458_1_ == 32 ? field_212460_b : this.createTexturedGlyph(this.func_212455_c((char)p_212458_1_)));
+         return p_212458_1_ == 32 ? field_212460_b : this.createTexturedGlyph(this.func_212455_c((char)p_212458_1_));
       });
    }
 

@@ -36,18 +36,18 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
 
    protected void playClickOnSound(IWorld p_185507_1_, BlockPos p_185507_2_) {
       if (this.material == Material.WOOD) {
-         p_185507_1_.playSound((EntityPlayer)null, p_185507_2_, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
+         p_185507_1_.playSound(null, p_185507_2_, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.8F);
       } else {
-         p_185507_1_.playSound((EntityPlayer)null, p_185507_2_, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
+         p_185507_1_.playSound(null, p_185507_2_, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_ON, SoundCategory.BLOCKS, 0.3F, 0.6F);
       }
 
    }
 
    protected void playClickOffSound(IWorld p_185508_1_, BlockPos p_185508_2_) {
       if (this.material == Material.WOOD) {
-         p_185508_1_.playSound((EntityPlayer)null, p_185508_2_, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
+         p_185508_1_.playSound(null, p_185508_2_, SoundEvents.BLOCK_WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.7F);
       } else {
-         p_185508_1_.playSound((EntityPlayer)null, p_185508_2_, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.5F);
+         p_185508_1_.playSound(null, p_185508_2_, SoundEvents.BLOCK_STONE_PRESSURE_PLATE_CLICK_OFF, SoundCategory.BLOCKS, 0.3F, 0.5F);
       }
 
    }
@@ -57,7 +57,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
       List<? extends Entity> list;
       switch(this.sensitivity) {
       case EVERYTHING:
-         list = p_180669_1_.func_72839_b((Entity)null, axisalignedbb);
+         list = p_180669_1_.func_72839_b(null, axisalignedbb);
          break;
       case MOBS:
          list = p_180669_1_.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
@@ -81,8 +81,8 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
       p_206840_1_.add(POWERED);
    }
 
-   public static enum Sensitivity {
+   public enum Sensitivity {
       EVERYTHING,
-      MOBS;
+      MOBS
    }
 }

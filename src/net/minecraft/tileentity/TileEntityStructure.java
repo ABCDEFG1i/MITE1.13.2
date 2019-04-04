@@ -429,7 +429,9 @@ public class TileEntityStructure extends TileEntity {
             if (p_189714_1_ && !flag) {
                return false;
             } else {
-               PlacementSettings placementsettings = (new PlacementSettings()).setMirror(this.mirror).setRotation(this.rotation).setIgnoreEntities(this.ignoreEntities).setChunk((ChunkPos)null).setReplacedBlock((Block)null).setIgnoreStructureBlock(false);
+               PlacementSettings placementsettings = (new PlacementSettings()).setMirror(this.mirror).setRotation(this.rotation).setIgnoreEntities(this.ignoreEntities).setChunk(
+                       null).setReplacedBlock(
+                       null).setIgnoreStructureBlock(false);
                if (this.integrity < 1.0F) {
                   placementsettings.setIntegrity(MathHelper.clamp(this.integrity, 0.0F, 1.0F)).setSeed(this.seed);
                }
@@ -492,10 +494,10 @@ public class TileEntityStructure extends TileEntity {
       this.showBoundingBox = p_189710_1_;
    }
 
-   public static enum UpdateCommand {
+   public enum UpdateCommand {
       UPDATE_DATA,
       SAVE_AREA,
       LOAD_AREA,
-      SCAN_AREA;
+      SCAN_AREA
    }
 }

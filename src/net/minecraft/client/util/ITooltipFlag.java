@@ -8,13 +8,13 @@ public interface ITooltipFlag {
    boolean isAdvanced();
 
    @OnlyIn(Dist.CLIENT)
-   public static enum TooltipFlags implements ITooltipFlag {
+   enum TooltipFlags implements ITooltipFlag {
       NORMAL(false),
       ADVANCED(true);
 
       private final boolean isAdvanced;
 
-      private TooltipFlags(boolean p_i47611_3_) {
+      TooltipFlags(boolean p_i47611_3_) {
          this.isAdvanced = p_i47611_3_;
       }
 

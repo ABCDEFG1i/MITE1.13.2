@@ -171,7 +171,8 @@ public class WorldServer extends World implements IThreadListener {
 
       this.profiler.startSection("spawner");
       if (this.getGameRules().getBoolean("doMobSpawning") && this.worldInfo.getTerrainType() != WorldType.DEBUG_ALL_BLOCK_STATES) {
-         this.entitySpawner.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTotalTime() % 400L == 0L);
+         //MITEMODDED spawn animals per 128 day
+         this.entitySpawner.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTime() / 24000L % 2147483647L % 128L == 0L);
          this.getChunkProvider().spawnMobs(this, this.spawnHostileMobs, this.spawnPeacefulMobs);
       }
 
@@ -215,7 +216,7 @@ public class WorldServer extends World implements IThreadListener {
 
    public boolean canCreatureTypeSpawnHere(EnumCreatureType p_175732_1_, Biome.SpawnListEntry p_175732_2_, BlockPos p_175732_3_) {
       List<Biome.SpawnListEntry> list = this.getChunkProvider().getPossibleCreatures(p_175732_1_, p_175732_3_);
-      return list != null && !list.isEmpty() ? list.contains(p_175732_2_) : false;
+      return (list != null && !list.isEmpty()) && list.contains(p_175732_2_);
    }
 
    public void updateAllPlayersSleepingFlag() {
@@ -562,7 +563,6 @@ public class WorldServer extends World implements IThreadListener {
             try {
                this.addWorldInfoToCrashReport(crashreport);
             } catch (Throwable var5) {
-               ;
             }
 
             throw new ReportedException(crashreport);
@@ -717,7 +717,7 @@ public class WorldServer extends World implements IThreadListener {
    }
 
    public boolean spawnEntity(Entity p_72838_1_) {
-      return this.canAddEntity(p_72838_1_) ? super.spawnEntity(p_72838_1_) : false;
+      return this.canAddEntity(p_72838_1_) && super.spawnEntity(p_72838_1_);
    }
 
    public void func_212420_a(Stream<Entity> p_212420_1_) {
@@ -732,7 +732,8 @@ public class WorldServer extends World implements IThreadListener {
 
    private boolean canAddEntity(Entity p_184165_1_) {
       if (p_184165_1_.isDead) {
-         LOGGER.warn("Tried to add entity {} but it was marked as removed already", (Object)EntityType.getId(p_184165_1_.getType()));
+         LOGGER.warn("Tried to add entity {} but it was marked as removed already",
+                 EntityType.getId(p_184165_1_.getType()));
          return false;
       } else {
          UUID uuid = p_184165_1_.getUniqueID();
@@ -746,7 +747,7 @@ public class WorldServer extends World implements IThreadListener {
                   return false;
                }
 
-               LOGGER.warn("Force-added player with duplicate UUID {}", (Object)uuid.toString());
+               LOGGER.warn("Force-added player with duplicate UUID {}", uuid.toString());
             }
 
             this.removeEntityDangerously(entity);
@@ -784,7 +785,7 @@ public class WorldServer extends World implements IThreadListener {
 
    public boolean addWeatherEffect(Entity p_72942_1_) {
       if (super.addWeatherEffect(p_72942_1_)) {
-         this.server.getPlayerList().func_148543_a((EntityPlayer)null, p_72942_1_.posX, p_72942_1_.posY, p_72942_1_.posZ, 512.0D, this.dimension.getType(), new SPacketSpawnGlobalEntity(p_72942_1_));
+         this.server.getPlayerList().func_148543_a(null, p_72942_1_.posX, p_72942_1_.posY, p_72942_1_.posZ, 512.0D, this.dimension.getType(), new SPacketSpawnGlobalEntity(p_72942_1_));
          return true;
       } else {
          return false;
@@ -828,7 +829,7 @@ public class WorldServer extends World implements IThreadListener {
       while(!this.blockEventQueue.isEmpty()) {
          BlockEventData blockeventdata = this.blockEventQueue.removeFirst();
          if (this.fireBlockEvent(blockeventdata)) {
-            this.server.getPlayerList().func_148543_a((EntityPlayer)null, (double)blockeventdata.getPosition().getX(), (double)blockeventdata.getPosition().getY(), (double)blockeventdata.getPosition().getZ(), 64.0D, this.dimension.getType(), new SPacketBlockAction(blockeventdata.getPosition(), blockeventdata.getBlock(), blockeventdata.getEventID(), blockeventdata.getEventParameter()));
+            this.server.getPlayerList().func_148543_a(null, (double)blockeventdata.getPosition().getX(), (double)blockeventdata.getPosition().getY(), (double)blockeventdata.getPosition().getZ(), 64.0D, this.dimension.getType(), new SPacketBlockAction(blockeventdata.getPosition(), blockeventdata.getBlock(), blockeventdata.getEventID(), blockeventdata.getEventParameter()));
          }
       }
 
@@ -836,7 +837,8 @@ public class WorldServer extends World implements IThreadListener {
 
    private boolean fireBlockEvent(BlockEventData p_147485_1_) {
       IBlockState iblockstate = this.getBlockState(p_147485_1_.getPosition());
-      return iblockstate.getBlock() == p_147485_1_.getBlock() ? iblockstate.onBlockEventReceived(this, p_147485_1_.getPosition(), p_147485_1_.getEventID(), p_147485_1_.getEventParameter()) : false;
+      return iblockstate.getBlock() == p_147485_1_.getBlock() && iblockstate.onBlockEventReceived(this,
+              p_147485_1_.getPosition(), p_147485_1_.getEventID(), p_147485_1_.getEventParameter());
    }
 
    public void close() {

@@ -95,7 +95,7 @@ public abstract class EntityHanging extends Entity {
          this.tickCounter1 = 0;
          if (!this.isDead && !this.onValidSurface()) {
             this.setDead();
-            this.onBroken((Entity)null);
+            this.onBroken(null);
          }
       }
 
@@ -132,7 +132,8 @@ public abstract class EntityHanging extends Entity {
    }
 
    public boolean hitByEntity(Entity p_85031_1_) {
-      return p_85031_1_ instanceof EntityPlayer ? this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)p_85031_1_), 0.0F) : false;
+      return p_85031_1_ instanceof EntityPlayer && this.attackEntityFrom(
+              DamageSource.causePlayerDamage((EntityPlayer) p_85031_1_), 0.0F);
    }
 
    public EnumFacing getHorizontalFacing() {
@@ -156,7 +157,7 @@ public abstract class EntityHanging extends Entity {
    public void move(MoverType p_70091_1_, double p_70091_2_, double p_70091_4_, double p_70091_6_) {
       if (!this.world.isRemote && !this.isDead && p_70091_2_ * p_70091_2_ + p_70091_4_ * p_70091_4_ + p_70091_6_ * p_70091_6_ > 0.0D) {
          this.setDead();
-         this.onBroken((Entity)null);
+         this.onBroken(null);
       }
 
    }
@@ -164,7 +165,7 @@ public abstract class EntityHanging extends Entity {
    public void addVelocity(double p_70024_1_, double p_70024_3_, double p_70024_5_) {
       if (!this.world.isRemote && !this.isDead && p_70024_1_ * p_70024_1_ + p_70024_3_ * p_70024_3_ + p_70024_5_ * p_70024_5_ > 0.0D) {
          this.setDead();
-         this.onBroken((Entity)null);
+         this.onBroken(null);
       }
 
    }

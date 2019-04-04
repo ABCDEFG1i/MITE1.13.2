@@ -44,7 +44,7 @@ public enum GenLayerHills implements IAreaTransformer2, IDimOffset1Transformer {
       int i = p_202709_3_.getValue(p_202709_5_ + 1, p_202709_6_ + 1);
       int j = p_202709_4_.getValue(p_202709_5_ + 1, p_202709_6_ + 1);
       if (i > 255) {
-         LOGGER.debug("old! {}", (int)i);
+         LOGGER.debug("old! {}", i);
       }
 
       int k = (j - 2) % 29;

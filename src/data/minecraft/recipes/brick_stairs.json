@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:brick_stairs",
+    "count": 4
+  }
+}

@@ -117,7 +117,7 @@ public class ServerPinger {
                      ServerPinger.LOGGER.error("Invalid server icon (unknown format)");
                   }
                } else {
-                  p_147224_1_.setBase64EncodedIconData((String)null);
+                  p_147224_1_.setBase64EncodedIconData(null);
                }
 
                this.pingSentAt = Util.milliTime();
@@ -160,7 +160,6 @@ public class ServerPinger {
             try {
                p_initChannel_1_.config().setOption(ChannelOption.TCP_NODELAY, true);
             } catch (ChannelException var3) {
-               ;
             }
 
             p_initChannel_1_.pipeline().addLast(new SimpleChannelInboundHandler<ByteBuf>() {

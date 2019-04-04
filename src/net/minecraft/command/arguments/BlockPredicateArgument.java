@@ -70,7 +70,6 @@ public class BlockPredicateArgument implements ArgumentType<BlockPredicateArgume
       try {
          blockstateparser.parse(true);
       } catch (CommandSyntaxException var6) {
-         ;
       }
 
       return blockstateparser.getSuggestions(p_listSuggestions_2_);
@@ -140,7 +139,7 @@ public class BlockPredicateArgument implements ArgumentType<BlockPredicateArgume
                   return false;
                }
 
-               Comparable<?> comparable = (Comparable)iproperty.parseValue(entry.getValue()).orElse(null);
+               Comparable<?> comparable = iproperty.parseValue(entry.getValue()).orElse(null);
                if (comparable == null) {
                   return false;
                }

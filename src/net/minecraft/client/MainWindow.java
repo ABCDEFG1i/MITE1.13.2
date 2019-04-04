@@ -83,7 +83,7 @@ public final class MainWindow implements AutoCloseable {
       this.prevWindowX = this.windowX = this.monitor.getVirtualPosX() + videomode.getWidth() / 2 - this.width / 2;
       this.prevWindowY = this.windowY = this.monitor.getVirtualPosY() + videomode.getHeight() / 2 - this.height / 2;
       GLFW.glfwDefaultWindowHints();
-      this.handle = GLFW.glfwCreateWindow(this.width, this.height, "Minecraft 1.13.2", this.fullscreen ? this.monitor.getMonitorPointer() : 0L, 0L);
+      this.handle = GLFW.glfwCreateWindow(this.width, this.height, "Minecraft 1.13.2-MITE", this.fullscreen ? this.monitor.getMonitorPointer() : 0L, 0L);
       p_i47667_1_.isWindowFocused = true;
       this.setMonitorFromVirtualScreen();
       GLFW.glfwMakeContextCurrent(this.handle);
@@ -128,8 +128,7 @@ public final class MainWindow implements AutoCloseable {
       try (
          MemoryStack memorystack = MemoryStack.stackPush();
          InputStream inputstream = this.mc.getPackFinder().func_195746_a().getResourceStream(ResourcePackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_16x16.png"));
-         InputStream inputstream1 = this.mc.getPackFinder().func_195746_a().getResourceStream(ResourcePackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_32x32.png"));
-      ) {
+         InputStream inputstream1 = this.mc.getPackFinder().func_195746_a().getResourceStream(ResourcePackType.CLIENT_RESOURCES, new ResourceLocation("icons/icon_32x32.png"))) {
          if (inputstream == null) {
             throw new FileNotFoundException("icons/icon_16x16.png");
          }
@@ -165,7 +164,7 @@ public final class MainWindow implements AutoCloseable {
          STBImage.stbi_image_free(bytebuffer);
          STBImage.stbi_image_free(bytebuffer1);
       } catch (IOException ioexception) {
-         LOGGER.error("Couldn't set icon", (Throwable)ioexception);
+         LOGGER.error("Couldn't set icon", ioexception);
       }
 
    }
@@ -204,7 +203,7 @@ public final class MainWindow implements AutoCloseable {
    void logGlError(int p_198084_1_, long p_198084_2_) {
       String s = MemoryUtil.memUTF8(p_198084_2_);
       LOGGER.error("########## GL ERROR ##########");
-      LOGGER.error("@ {}", (Object)this.renderPhase);
+      LOGGER.error("@ {}", this.renderPhase);
       LOGGER.error("{}: {}", p_198084_1_, s);
    }
 
@@ -381,7 +380,7 @@ public final class MainWindow implements AutoCloseable {
          this.updateVsyncFromGameSettings();
          this.update(false);
       } catch (Exception exception) {
-         LOGGER.error("Couldn't toggle fullscreen", (Throwable)exception);
+         LOGGER.error("Couldn't toggle fullscreen", exception);
       }
 
    }
@@ -412,7 +411,6 @@ public final class MainWindow implements AutoCloseable {
    public int getScaleFactor(int p_198078_1_) {
       int i;
       for(i = 1; i != p_198078_1_ && i < this.framebufferWidth && i < this.framebufferHeight && this.framebufferWidth / (i + 1) >= 320 && this.framebufferHeight / (i + 1) >= 240; ++i) {
-         ;
       }
 
       if (this.mc.getForceUnicodeFont() && i % 2 != 0) {

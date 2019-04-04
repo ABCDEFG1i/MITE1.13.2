@@ -42,7 +42,7 @@ public class BlockTripWireHook extends Block {
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
-      switch((EnumFacing)p_196244_1_.get(FACING)) {
+      switch(p_196244_1_.get(FACING)) {
       case EAST:
       default:
          return HOOK_EAST_AABB;
@@ -92,7 +92,7 @@ public class BlockTripWireHook extends Block {
    }
 
    public void onBlockPlacedBy(World p_180633_1_, BlockPos p_180633_2_, IBlockState p_180633_3_, EntityLivingBase p_180633_4_, ItemStack p_180633_5_) {
-      this.calculateState(p_180633_1_, p_180633_2_, p_180633_3_, false, false, -1, (IBlockState)null);
+      this.calculateState(p_180633_1_, p_180633_2_, p_180633_3_, false, false, -1, null);
    }
 
    public void calculateState(World p_176260_1_, BlockPos p_176260_2_, IBlockState p_176260_3_, boolean p_176260_4_, boolean p_176260_5_, int p_176260_6_, @Nullable IBlockState p_176260_7_) {
@@ -159,7 +159,6 @@ public class BlockTripWireHook extends Block {
             if (iblockstate2 != null) {
                p_176260_1_.setBlockState(blockpos2, iblockstate2.with(ATTACHED, Boolean.valueOf(flag2)), 3);
                if (!p_176260_1_.getBlockState(blockpos2).isAir()) {
-                  ;
                }
             }
          }
@@ -168,18 +167,18 @@ public class BlockTripWireHook extends Block {
    }
 
    public void tick(IBlockState p_196267_1_, World p_196267_2_, BlockPos p_196267_3_, Random p_196267_4_) {
-      this.calculateState(p_196267_2_, p_196267_3_, p_196267_1_, false, true, -1, (IBlockState)null);
+      this.calculateState(p_196267_2_, p_196267_3_, p_196267_1_, false, true, -1, null);
    }
 
    private void playSound(World p_180694_1_, BlockPos p_180694_2_, boolean p_180694_3_, boolean p_180694_4_, boolean p_180694_5_, boolean p_180694_6_) {
       if (p_180694_4_ && !p_180694_6_) {
-         p_180694_1_.playSound((EntityPlayer)null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 0.4F, 0.6F);
+         p_180694_1_.playSound(null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 0.4F, 0.6F);
       } else if (!p_180694_4_ && p_180694_6_) {
-         p_180694_1_.playSound((EntityPlayer)null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_CLICK_OFF, SoundCategory.BLOCKS, 0.4F, 0.5F);
+         p_180694_1_.playSound(null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_CLICK_OFF, SoundCategory.BLOCKS, 0.4F, 0.5F);
       } else if (p_180694_3_ && !p_180694_5_) {
-         p_180694_1_.playSound((EntityPlayer)null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_ATTACH, SoundCategory.BLOCKS, 0.4F, 0.7F);
+         p_180694_1_.playSound(null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_ATTACH, SoundCategory.BLOCKS, 0.4F, 0.7F);
       } else if (!p_180694_3_ && p_180694_5_) {
-         p_180694_1_.playSound((EntityPlayer)null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_DETACH, SoundCategory.BLOCKS, 0.4F, 1.2F / (p_180694_1_.rand.nextFloat() * 0.2F + 0.9F));
+         p_180694_1_.playSound(null, p_180694_2_, SoundEvents.BLOCK_TRIPWIRE_DETACH, SoundCategory.BLOCKS, 0.4F, 1.2F / (p_180694_1_.rand.nextFloat() * 0.2F + 0.9F));
       }
 
    }
@@ -194,7 +193,7 @@ public class BlockTripWireHook extends Block {
          boolean flag = p_196243_1_.get(ATTACHED);
          boolean flag1 = p_196243_1_.get(POWERED);
          if (flag || flag1) {
-            this.calculateState(p_196243_2_, p_196243_3_, p_196243_1_, true, false, -1, (IBlockState)null);
+            this.calculateState(p_196243_2_, p_196243_3_, p_196243_1_, true, false, -1, null);
          }
 
          if (flag1) {

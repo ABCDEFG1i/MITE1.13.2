@@ -198,7 +198,7 @@ public class EntityLlama extends AbstractChestHorse implements IRangedAttackMob 
       }
 
       if (flag && !this.isSilent()) {
-         this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+         this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_EAT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
       }
 
       return flag;
@@ -345,7 +345,7 @@ public class EntityLlama extends AbstractChestHorse implements IRangedAttackMob 
       double d2 = p_190713_1_.posZ - this.posZ;
       float f = MathHelper.sqrt(d0 * d0 + d2 * d2) * 0.2F;
       entityllamaspit.shoot(d0, d1 + (double)f, d2, 1.5F, 10.0F);
-      this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
+      this.world.playSound(null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_LLAMA_SPIT, this.getSoundCategory(), 1.0F, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
       this.world.spawnEntity(entityllamaspit);
       this.didSpit = true;
    }
@@ -370,7 +370,7 @@ public class EntityLlama extends AbstractChestHorse implements IRangedAttackMob 
          Block block = iblockstate.getBlock();
          if (!iblockstate.isAir() && !this.isSilent()) {
             SoundType soundtype = block.getSoundType();
-            this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
+            this.world.playSound(null, this.posX, this.posY, this.posZ, soundtype.getStepSound(), this.getSoundCategory(), soundtype.getVolume() * 0.5F, soundtype.getPitch() * 0.75F);
          }
 
       }
@@ -426,14 +426,14 @@ public class EntityLlama extends AbstractChestHorse implements IRangedAttackMob 
 
    static class AIDefendTarget extends EntityAINearestAttackableTarget<EntityWolf> {
       public AIDefendTarget(EntityLlama p_i47285_1_) {
-         super(p_i47285_1_, EntityWolf.class, 16, false, true, (Predicate<EntityWolf>)null);
+         super(p_i47285_1_, EntityWolf.class, 16, false, true, null);
       }
 
       public boolean shouldExecute() {
          if (super.shouldExecute() && this.targetEntity != null && !this.targetEntity.isTamed()) {
             return true;
          } else {
-            this.taskOwner.setAttackTarget((EntityLivingBase)null);
+            this.taskOwner.setAttackTarget(null);
             return false;
          }
       }

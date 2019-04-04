@@ -52,7 +52,8 @@ public class TextureUtil {
       }
 
       for(int i = 0; i <= p_211682_2_; ++i) {
-         GlStateManager.texImage2D(3553, i, p_211682_0_.func_211672_a(), p_211682_3_ >> i, p_211682_4_ >> i, 0, 6408, 5121, (IntBuffer)null);
+         GlStateManager.texImage2D(3553, i, p_211682_0_.func_211672_a(), p_211682_3_ >> i, p_211682_4_ >> i, 0, 6408, 5121,
+                 null);
       }
 
    }
@@ -66,8 +67,7 @@ public class TextureUtil {
       Object object;
       try (
          IResource iresource = p_195725_0_.getResource(p_195725_1_);
-         NativeImage nativeimage = NativeImage.read(iresource.getInputStream());
-      ) {
+         NativeImage nativeimage = NativeImage.read(iresource.getInputStream())) {
          object = nativeimage.makePixelArray();
       }
 
@@ -82,7 +82,6 @@ public class TextureUtil {
          bytebuffer = MemoryUtil.memAlloc((int)filechannel.size() + 1);
 
          while(filechannel.read(bytebuffer) != -1) {
-            ;
          }
       } else {
          bytebuffer = MemoryUtil.memAlloc(8192);

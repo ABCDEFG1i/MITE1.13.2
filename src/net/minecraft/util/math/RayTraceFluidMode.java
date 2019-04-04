@@ -14,7 +14,7 @@ public enum RayTraceFluidMode {
 
    public final Predicate<IFluidState> predicate;
 
-   private RayTraceFluidMode(Predicate<IFluidState> p_i49529_3_) {
+   RayTraceFluidMode(Predicate<IFluidState> p_i49529_3_) {
       this.predicate = p_i49529_3_;
    }
 }

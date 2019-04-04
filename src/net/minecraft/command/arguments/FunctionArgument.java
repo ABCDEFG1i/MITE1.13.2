@@ -32,7 +32,7 @@ public class FunctionArgument implements ArgumentType<FunctionArgument.IResult> 
          p_parse_1_.skip();
          ResourceLocation resourcelocation1 = ResourceLocation.read(p_parse_1_);
          return (p_200020_1_) -> {
-            Tag<FunctionObject> tag = ((CommandSource)p_200020_1_.getSource()).getServer().getFunctionManager().getTagCollection().get(resourcelocation1);
+            Tag<FunctionObject> tag = p_200020_1_.getSource().getServer().getFunctionManager().getTagCollection().get(resourcelocation1);
             if (tag == null) {
                throw field_200023_a.create(resourcelocation1.toString());
             } else {
@@ -42,7 +42,7 @@ public class FunctionArgument implements ArgumentType<FunctionArgument.IResult> 
       } else {
          ResourceLocation resourcelocation = ResourceLocation.read(p_parse_1_);
          return (p_200019_1_) -> {
-            FunctionObject functionobject = ((CommandSource)p_200019_1_.getSource()).getServer().getFunctionManager().getFunction(resourcelocation);
+            FunctionObject functionobject = p_200019_1_.getSource().getServer().getFunctionManager().getFunction(resourcelocation);
             if (functionobject == null) {
                throw field_200024_b.create(resourcelocation.toString());
             } else {

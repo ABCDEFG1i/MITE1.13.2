@@ -367,9 +367,7 @@ public abstract class Biome {
                }
 
                boolean flag = p_201854_1_.hasWater(p_201854_2_.west()) && p_201854_1_.hasWater(p_201854_2_.east()) && p_201854_1_.hasWater(p_201854_2_.north()) && p_201854_1_.hasWater(p_201854_2_.south());
-               if (!flag) {
-                  return true;
-               }
+                return !flag;
             }
          }
 
@@ -383,9 +381,7 @@ public abstract class Biome {
       } else {
          if (p_201850_2_.getY() >= 0 && p_201850_2_.getY() < 256 && p_201850_1_.getLightFor(EnumLightType.BLOCK, p_201850_2_) < 10) {
             IBlockState iblockstate = p_201850_1_.getBlockState(p_201850_2_);
-            if (iblockstate.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(p_201850_1_, p_201850_2_)) {
-               return true;
-            }
+             return iblockstate.isAir() && Blocks.SNOW.getDefaultState().isValidPosition(p_201850_1_, p_201850_2_);
          }
 
          return false;
@@ -694,7 +690,7 @@ public abstract class Biome {
       }
    }
 
-   public static enum Category {
+   public enum Category {
       NONE,
       TAIGA,
       EXTREME_HILLS,
@@ -711,13 +707,13 @@ public abstract class Biome {
       RIVER,
       SWAMP,
       MUSHROOM,
-      NETHER;
+      NETHER
    }
 
-   public static enum RainType {
+   public enum RainType {
       NONE,
       RAIN,
-      SNOW;
+      SNOW
    }
 
    public static class SpawnListEntry extends WeightedRandom.Item {
@@ -725,11 +721,11 @@ public abstract class Biome {
       public int minGroupCount;
       public int maxGroupCount;
 
-      public SpawnListEntry(EntityType<? extends EntityLiving> p_i48588_1_, int p_i48588_2_, int p_i48588_3_, int p_i48588_4_) {
-         super(p_i48588_2_);
-         this.entityType = p_i48588_1_;
-         this.minGroupCount = p_i48588_3_;
-         this.maxGroupCount = p_i48588_4_;
+      public SpawnListEntry(EntityType<? extends EntityLiving> entityType, int itemWeight, int minGroupCount, int maxGroupCount) {
+         super(itemWeight);
+         this.entityType = entityType;
+         this.minGroupCount = minGroupCount;
+         this.maxGroupCount = maxGroupCount;
       }
 
       public String toString() {
@@ -737,10 +733,10 @@ public abstract class Biome {
       }
    }
 
-   public static enum TempCategory {
+   public enum TempCategory {
       OCEAN,
       COLD,
       MEDIUM,
-      WARM;
+      WARM
    }
 }

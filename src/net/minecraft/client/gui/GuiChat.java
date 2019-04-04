@@ -104,7 +104,7 @@ public class GuiChat extends GuiScreen {
       if (this.field_195139_w != null && this.field_195139_w.func_198503_b(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_)) {
          return true;
       } else if (p_keyPressed_1_ == 256) {
-         this.mc.displayGuiScreen((GuiScreen)null);
+         this.mc.displayGuiScreen(null);
          return true;
       } else if (p_keyPressed_1_ != 257 && p_keyPressed_1_ != 335) {
          if (p_keyPressed_1_ == 265) {
@@ -133,7 +133,7 @@ public class GuiChat extends GuiScreen {
             this.sendChatMessage(s);
          }
 
-         this.mc.displayGuiScreen((GuiScreen)null);
+         this.mc.displayGuiScreen(null);
          return true;
       }
    }
@@ -161,7 +161,6 @@ public class GuiChat extends GuiScreen {
          int i = 0;
 
          for(Matcher matcher = field_208608_i.matcher(p_208603_0_); matcher.find(); i = matcher.end()) {
-            ;
          }
 
          return i;
@@ -171,7 +170,7 @@ public class GuiChat extends GuiScreen {
    private void updateSuggestion() {
       this.field_195135_u = null;
       if (!this.field_212338_z) {
-         this.inputField.setSuggestion((String)null);
+         this.inputField.setSuggestion(null);
          this.field_195139_w = null;
       }
 
@@ -259,9 +258,9 @@ public class GuiChat extends GuiScreen {
 
          int l = Math.min(parsedargument.getRange().getEnd() - p_212336_2_, p_212336_1_.length());
          if (l > 0) {
-            stringbuilder.append((CharSequence)p_212336_1_, i, k);
-            stringbuilder.append((Object)atextformatting[j]);
-            stringbuilder.append((CharSequence)p_212336_1_, k, l);
+            stringbuilder.append(p_212336_1_, i, k);
+            stringbuilder.append(atextformatting[j]);
+            stringbuilder.append(p_212336_1_, k, l);
             stringbuilder.append(s);
             i = l;
          }
@@ -271,14 +270,14 @@ public class GuiChat extends GuiScreen {
          int i1 = Math.max(p_212336_0_.getReader().getCursor() - p_212336_2_, 0);
          if (i1 < p_212336_1_.length()) {
             int j1 = Math.min(i1 + p_212336_0_.getReader().getRemainingLength(), p_212336_1_.length());
-            stringbuilder.append((CharSequence)p_212336_1_, i, i1);
-            stringbuilder.append((Object)TextFormatting.RED);
-            stringbuilder.append((CharSequence)p_212336_1_, i1, j1);
+            stringbuilder.append(p_212336_1_, i, i1);
+            stringbuilder.append(TextFormatting.RED);
+            stringbuilder.append(p_212336_1_, i1, j1);
             i = j1;
          }
       }
 
-      stringbuilder.append((CharSequence)p_212336_1_, i, p_212336_1_.length());
+      stringbuilder.append(p_212336_1_, i, p_212336_1_.length());
       return stringbuilder.toString();
    }
 
@@ -314,7 +313,8 @@ public class GuiChat extends GuiScreen {
             }
          }
 
-         return this.inputField.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_) ? true : super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+         return this.inputField.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_,
+                 p_mouseClicked_5_) || super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
       }
    }
 
@@ -405,7 +405,7 @@ public class GuiChat extends GuiScreen {
 
          for(Entry<CommandNode<ISuggestionProvider>, String> entry1 : map.entrySet()) {
             if (!(entry1.getKey() instanceof LiteralCommandNode)) {
-               list.add(p_195132_1_ + (String)entry1.getValue());
+               list.add(p_195132_1_ + entry1.getValue());
                j = Math.max(j, this.fontRenderer.getStringWidth(entry1.getValue()));
             }
          }

@@ -34,7 +34,6 @@ public class PathNavigateGround extends PathNavigate {
       if (this.world.getBlockState(p_179680_1_).isAir()) {
          BlockPos blockpos;
          for(blockpos = p_179680_1_.down(); blockpos.getY() > 0 && this.world.getBlockState(blockpos).isAir(); blockpos = blockpos.down()) {
-            ;
          }
 
          if (blockpos.getY() > 0) {
@@ -53,7 +52,6 @@ public class PathNavigateGround extends PathNavigate {
       } else {
          BlockPos blockpos1;
          for(blockpos1 = p_179680_1_.up(); blockpos1.getY() < this.world.getHeight() && this.world.getBlockState(blockpos1).getMaterial().isSolid(); blockpos1 = blockpos1.up()) {
-            ;
          }
 
          return super.getPathToPos(blockpos1);

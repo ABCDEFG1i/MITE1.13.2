@@ -80,12 +80,14 @@ public class ExplorationMap extends LootFunction {
          try {
             mapdecoration$type = MapDecoration.Type.valueOf(s1.toUpperCase(Locale.ROOT));
          } catch (IllegalArgumentException var10) {
-            ExplorationMap.LOGGER.error("Error while parsing loot table decoration entry. Found {}. Defaulting to MANSION", (Object)s1);
+            ExplorationMap.LOGGER.error("Error while parsing loot table decoration entry. Found {}. Defaulting to MANSION",
+                    s1);
          }
 
          byte b0 = p_186530_1_.has("zoom") ? JsonUtils.getByte(p_186530_1_, "zoom") : 2;
          int i = p_186530_1_.has("search_radius") ? JsonUtils.getInt(p_186530_1_, "search_radius") : 50;
-         boolean flag = p_186530_1_.has("skip_existing_chunks") ? JsonUtils.getBoolean(p_186530_1_, "skip_existing_chunks") : true;
+         boolean flag = !p_186530_1_.has("skip_existing_chunks") || JsonUtils.getBoolean(p_186530_1_,
+                 "skip_existing_chunks");
          return new ExplorationMap(p_186530_3_, s, mapdecoration$type, b0, i, flag);
       }
    }

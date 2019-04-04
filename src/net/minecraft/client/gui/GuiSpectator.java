@@ -89,7 +89,7 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient {
          GlStateManager.color4f(f, f, f, p_175266_4_);
          p_175266_5_.renderIcon(f, i);
          GlStateManager.popMatrix();
-         String s = String.valueOf((Object)this.mc.gameSettings.keyBindsHotbar[p_175266_1_].func_197978_k());
+         String s = String.valueOf(this.mc.gameSettings.keyBindsHotbar[p_175266_1_].func_197978_k());
          if (i > 3 && p_175266_5_.isEnabled()) {
             this.mc.fontRenderer.drawStringWithShadow(s, (float)(p_175266_2_ + 19 - 2 - this.mc.fontRenderer.getStringWidth(s)), p_175266_3_ + 6.0F + 3.0F, 16777215 + (i << 24));
          }
@@ -128,7 +128,6 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient {
    public void func_195621_a(double p_195621_1_) {
       int i;
       for(i = this.menu.getSelectedSlot() + (int)p_195621_1_; i >= 0 && i <= 8 && (this.menu.getItem(i) == SpectatorMenu.EMPTY_SLOT || !this.menu.getItem(i).isEnabled()); i = (int)((double)i + p_195621_1_)) {
-         ;
       }
 
       if (i >= 0 && i <= 8) {

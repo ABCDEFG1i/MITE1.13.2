@@ -92,7 +92,6 @@ public class EntityAIJump extends EntityAIBase {
    protected float func_205147_a(float p_205147_1_, float p_205147_2_, float p_205147_3_) {
       float f;
       for(f = p_205147_2_ - p_205147_1_; f < -180.0F; f += 360.0F) {
-         ;
       }
 
       while(f >= 180.0F) {

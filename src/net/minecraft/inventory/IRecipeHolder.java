@@ -17,7 +17,7 @@ public interface IRecipeHolder {
       IRecipe irecipe = this.getRecipeUsed();
       if (irecipe != null && !irecipe.isDynamic()) {
          p_201560_1_.unlockRecipes(Lists.newArrayList(irecipe));
-         this.setRecipeUsed((IRecipe)null);
+         this.setRecipeUsed(null);
       }
 
    }

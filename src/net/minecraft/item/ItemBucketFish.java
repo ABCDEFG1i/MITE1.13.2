@@ -41,7 +41,7 @@ public class ItemBucketFish extends ItemBucket {
    }
 
    private void placeFish(World p_205357_1_, ItemStack p_205357_2_, BlockPos p_205357_3_) {
-      Entity entity = this.fishType.spawnEntity(p_205357_1_, p_205357_2_, (EntityPlayer)null, p_205357_3_, true, false);
+      Entity entity = this.fishType.spawnEntity(p_205357_1_, p_205357_2_, null, p_205357_3_, true, false);
       if (entity != null) {
          ((AbstractFish)entity).setFromBucket(true);
       }

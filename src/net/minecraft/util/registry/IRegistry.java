@@ -59,7 +59,7 @@ public interface IRegistry<T> extends IObjectIntIterable<T> {
    static void func_212613_e() {
       field_212617_f.forEach((p_212606_0_) -> {
          if (p_212606_0_.isEmpty()) {
-            field_212616_e.error("Registry '{}' was empty after loading", (Object)field_212617_f.func_177774_c(p_212606_0_));
+            field_212616_e.error("Registry '{}' was empty after loading", field_212617_f.func_177774_c(p_212606_0_));
             if (SharedConstants.developmentMode) {
                throw new IllegalStateException("Registry: '" + field_212617_f.func_177774_c(p_212606_0_) + "' is empty, not allowed, fix me!");
             }

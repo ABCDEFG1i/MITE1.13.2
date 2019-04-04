@@ -23,7 +23,6 @@ public class SwampTreeFeature extends AbstractTreeFeature<NoFeatureConfig> {
    public boolean place(Set<BlockPos> p_208519_1_, IWorld p_208519_2_, Random p_208519_3_, BlockPos p_208519_4_) {
       int i;
       for(i = p_208519_3_.nextInt(4) + 5; p_208519_2_.getFluidState(p_208519_4_.down()).isTagged(FluidTags.WATER); p_208519_4_ = p_208519_4_.down()) {
-         ;
       }
 
       boolean flag = true;

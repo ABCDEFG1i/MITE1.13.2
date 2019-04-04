@@ -155,7 +155,7 @@ public class FunctionManager implements ITickable, IResourceManagerReloadListene
 
       CompletableFuture.allOf(list.toArray(new CompletableFuture[0])).join();
       if (!this.functions.isEmpty()) {
-         LOGGER.info("Loaded {} custom command functions", (int)this.functions.size());
+         LOGGER.info("Loaded {} custom command functions", this.functions.size());
       }
 
       this.tagCollection.reload(p_195410_1_);
@@ -208,7 +208,6 @@ public class FunctionManager implements ITickable, IResourceManagerReloadListene
          try {
             this.entry.execute(this.functionManager, this.sender, p_194222_1_, p_194222_2_);
          } catch (Throwable var4) {
-            ;
          }
 
       }

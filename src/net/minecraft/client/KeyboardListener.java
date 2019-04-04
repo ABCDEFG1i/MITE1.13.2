@@ -49,11 +49,13 @@ public class KeyboardListener {
    }
 
    private void printDebugMessage(String p_197964_1_, Object... p_197964_2_) {
-      this.mc.ingameGUI.getChatGUI().printChatMessage((new TextComponentString("")).appendSibling((new TextComponentTranslation("debug.prefix")).applyTextStyles(new TextFormatting[]{TextFormatting.YELLOW, TextFormatting.BOLD})).appendText(" ").appendSibling(new TextComponentTranslation(p_197964_1_, p_197964_2_)));
+      this.mc.ingameGUI.getChatGUI().printChatMessage((new TextComponentString("")).appendSibling((new TextComponentTranslation("debug.prefix")).applyTextStyles(
+              TextFormatting.YELLOW, TextFormatting.BOLD)).appendText(" ").appendSibling(new TextComponentTranslation(p_197964_1_, p_197964_2_)));
    }
 
    private void printDebugWarning(String p_204869_1_, Object... p_204869_2_) {
-      this.mc.ingameGUI.getChatGUI().printChatMessage((new TextComponentString("")).appendSibling((new TextComponentTranslation("debug.prefix")).applyTextStyles(new TextFormatting[]{TextFormatting.RED, TextFormatting.BOLD})).appendText(" ").appendSibling(new TextComponentTranslation(p_204869_1_, p_204869_2_)));
+      this.mc.ingameGUI.getChatGUI().printChatMessage((new TextComponentString("")).appendSibling((new TextComponentTranslation("debug.prefix")).applyTextStyles(
+              TextFormatting.RED, TextFormatting.BOLD)).appendText(" ").appendSibling(new TextComponentTranslation(p_204869_1_, p_204869_2_)));
    }
 
    private boolean processKeyF3(int p_197962_1_) {
@@ -171,7 +173,7 @@ public class KeyboardListener {
                   this.printDebugMessage("debug.inspect.client.block");
                }
             } else {
-               this.setBlockClipboardString(iblockstate, blockpos, (NBTTagCompound)null);
+               this.setBlockClipboardString(iblockstate, blockpos, null);
                this.printDebugMessage("debug.inspect.client.block");
             }
             break;
@@ -195,7 +197,7 @@ public class KeyboardListener {
                   this.printDebugMessage("debug.inspect.client.entity");
                }
             } else {
-               this.setEntityClipboardString(resourcelocation, vec3d, (NBTTagCompound)null);
+               this.setEntityClipboardString(resourcelocation, vec3d, null);
                this.printDebugMessage("debug.inspect.client.entity");
             }
          }
@@ -254,7 +256,6 @@ public class KeyboardListener {
 
             if (this.mc.gameSettings.keyBindScreenshot.matchesKey(p_197961_3_, p_197961_4_)) {
                if (GuiScreen.isCtrlKeyDown()) {
-                  ;
                }
 
                ScreenShotHelper.func_148260_a(this.mc.gameDir, this.mc.mainWindow.getFramebufferWidth(), this.mc.mainWindow.getFramebufferHeight(), this.mc.getFramebuffer(), (p_212449_1_) -> {

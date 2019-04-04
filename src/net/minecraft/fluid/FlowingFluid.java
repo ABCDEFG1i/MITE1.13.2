@@ -306,7 +306,8 @@ public abstract class FlowingFluid extends Fluid {
       if (!this.func_212751_a(EnumFacing.DOWN, p_211759_1_, p_211759_3_, p_211759_4_, p_211759_5_, p_211759_6_)) {
          return false;
       } else {
-         return p_211759_6_.getFluidState().getFluid().isEquivalentTo(this) ? true : this.func_211761_a(p_211759_1_, p_211759_5_, p_211759_6_, p_211759_2_);
+         return p_211759_6_.getFluidState().getFluid().isEquivalentTo(this) || this.func_211761_a(p_211759_1_,
+                 p_211759_5_, p_211759_6_, p_211759_2_);
       }
    }
 

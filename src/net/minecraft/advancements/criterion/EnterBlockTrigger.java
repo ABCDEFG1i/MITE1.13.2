@@ -80,13 +80,13 @@ public class EnterBlockTrigger implements ICriterionTrigger<EnterBlockTrigger.In
          for(Entry<String, JsonElement> entry : JsonUtils.getJsonObject(p_192166_1_, "state").entrySet()) {
             IProperty<?> iproperty = statecontainer.getProperty(entry.getKey());
             if (iproperty == null) {
-               throw new JsonSyntaxException("Unknown block state property '" + (String)entry.getKey() + "' for block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
+               throw new JsonSyntaxException("Unknown block state property '" + entry.getKey() + "' for block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
             }
 
             String s = JsonUtils.getString(entry.getValue(), entry.getKey());
             Optional<?> optional = iproperty.parseValue(s);
             if (!optional.isPresent()) {
-               throw new JsonSyntaxException("Invalid block state value '" + s + "' for property '" + (String)entry.getKey() + "' on block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
+               throw new JsonSyntaxException("Invalid block state value '" + s + "' for property '" + entry.getKey() + "' on block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
             }
 
             if (map == null) {
@@ -119,7 +119,7 @@ public class EnterBlockTrigger implements ICriterionTrigger<EnterBlockTrigger.In
       }
 
       public static EnterBlockTrigger.Instance func_203920_a(Block p_203920_0_) {
-         return new EnterBlockTrigger.Instance(p_203920_0_, (Map<IProperty<?>, Object>)null);
+         return new EnterBlockTrigger.Instance(p_203920_0_, null);
       }
 
       public JsonElement serialize() {

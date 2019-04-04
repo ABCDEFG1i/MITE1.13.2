@@ -31,7 +31,7 @@ public class EntityAIBreakBlock extends EntityAIMoveToBlock {
       if (!this.field_203118_g.world.getGameRules().getBoolean("mobGriefing")) {
          return false;
       } else {
-         return this.field_203118_g.getRNG().nextInt(20) != 0 ? false : super.shouldExecute();
+         return this.field_203118_g.getRNG().nextInt(20) == 0 && super.shouldExecute();
       }
    }
 

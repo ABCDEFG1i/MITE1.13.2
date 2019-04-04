@@ -274,7 +274,7 @@ public class EntityBoat extends Entity {
                   Vec3d vec3d = this.getLook(1.0F);
                   double d0 = i == 1 ? -vec3d.z : vec3d.z;
                   double d1 = i == 1 ? vec3d.x : -vec3d.x;
-                  this.world.playSound((EntityPlayer)null, this.posX + d0, this.posY, this.posZ + d1, soundevent, this.getSoundCategory(), 1.0F, 0.8F + 0.4F * this.rand.nextFloat());
+                  this.world.playSound(null, this.posX + d0, this.posY, this.posZ + d1, soundevent, this.getSoundCategory(), 1.0F, 0.8F + 0.4F * this.rand.nextFloat());
                }
             }
 
@@ -779,15 +779,15 @@ public class EntityBoat extends Entity {
       this.backInputDown = p_184442_4_;
    }
 
-   public static enum Status {
+   public enum Status {
       IN_WATER,
       UNDER_WATER,
       UNDER_FLOWING_WATER,
       ON_LAND,
-      IN_AIR;
+      IN_AIR
    }
 
-   public static enum Type {
+   public enum Type {
       OAK(Blocks.OAK_PLANKS, "oak"),
       SPRUCE(Blocks.SPRUCE_PLANKS, "spruce"),
       BIRCH(Blocks.BIRCH_PLANKS, "birch"),
@@ -798,7 +798,7 @@ public class EntityBoat extends Entity {
       private final String name;
       private final Block block;
 
-      private Type(Block p_i48146_3_, String p_i48146_4_) {
+      Type(Block p_i48146_3_, String p_i48146_4_) {
          this.name = p_i48146_4_;
          this.block = p_i48146_3_;
       }

@@ -136,7 +136,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
          try {
             func_197664_a(p_channelRead0_2_, this.packetListener);
          } catch (ThreadQuickExitException var4) {
-            ;
          }
 
          ++this.field_211394_q;
@@ -155,7 +154,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
    }
 
    public void sendPacket(Packet<?> p_179290_1_) {
-      this.sendPacket(p_179290_1_, (GenericFutureListener<? extends Future<? super Void>>)null);
+      this.sendPacket(p_179290_1_, null);
    }
 
    public void sendPacket(Packet<?> p_201058_1_, @Nullable GenericFutureListener<? extends Future<? super Void>> p_201058_2_) {
@@ -280,7 +279,6 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet<?>> {
             try {
                p_initChannel_1_.config().setOption(ChannelOption.TCP_NODELAY, true);
             } catch (ChannelException var3) {
-               ;
             }
 
             p_initChannel_1_.pipeline().addLast("timeout", new ReadTimeoutHandler(30)).addLast("splitter", new NettyVarint21FrameDecoder()).addLast("decoder", new NettyPacketDecoder(EnumPacketDirection.CLIENTBOUND)).addLast("prepender", new NettyVarint21FrameEncoder()).addLast("encoder", new NettyPacketEncoder(EnumPacketDirection.SERVERBOUND)).addLast("packet_handler", networkmanager);

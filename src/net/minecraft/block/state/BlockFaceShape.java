@@ -9,5 +9,5 @@ public enum BlockFaceShape {
    MIDDLE_POLE,
    CENTER_BIG,
    MIDDLE_POLE_THICK,
-   UNDEFINED;
+   UNDEFINED
 }

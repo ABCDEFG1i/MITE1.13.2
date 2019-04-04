@@ -15,7 +15,7 @@ public interface ICriterionTrigger<T extends ICriterionInstance> {
 
    T deserializeInstance(JsonObject p_192166_1_, JsonDeserializationContext p_192166_2_);
 
-   public static class Listener<T extends ICriterionInstance> {
+   class Listener<T extends ICriterionInstance> {
       private final T criterionInstance;
       private final Advancement advancement;
       private final String criterionName;
@@ -42,7 +42,8 @@ public interface ICriterionTrigger<T extends ICriterionInstance> {
             if (!this.criterionInstance.equals(listener.criterionInstance)) {
                return false;
             } else {
-               return !this.advancement.equals(listener.advancement) ? false : this.criterionName.equals(listener.criterionName);
+               return this.advancement.equals(listener.advancement) && this.criterionName.equals(
+                       listener.criterionName);
             }
          } else {
             return false;

@@ -7,5 +7,5 @@ public enum ClickType {
    CLONE,
    THROW,
    QUICK_CRAFT,
-   PICKUP_ALL;
+   PICKUP_ALL
 }

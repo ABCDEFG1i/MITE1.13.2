@@ -44,7 +44,7 @@ public class GuiTextField extends Gui implements IGuiEventListener {
    };
 
    public GuiTextField(int p_i45542_1_, FontRenderer p_i45542_2_, int p_i45542_3_, int p_i45542_4_, int p_i45542_5_, int p_i45542_6_) {
-      this(p_i45542_1_, p_i45542_2_, p_i45542_3_, p_i45542_4_, p_i45542_5_, p_i45542_6_, (GuiTextField)null);
+      this(p_i45542_1_, p_i45542_2_, p_i45542_3_, p_i45542_4_, p_i45542_5_, p_i45542_6_, null);
    }
 
    public GuiTextField(int p_i49853_1_, FontRenderer p_i49853_2_, int p_i49853_3_, int p_i49853_4_, int p_i49853_5_, int p_i49853_6_, @Nullable GuiTextField p_i49853_7_) {

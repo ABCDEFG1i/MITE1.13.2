@@ -142,7 +142,7 @@ public abstract class EntityTameable extends EntityAnimal implements IEntityOwna
 
    @Nullable
    public UUID getOwnerId() {
-      return this.dataManager.get(OWNER_UNIQUE_ID).orElse((UUID)null);
+      return this.dataManager.get(OWNER_UNIQUE_ID).orElse(null);
    }
 
    public void setOwnerId(@Nullable UUID p_184754_1_) {

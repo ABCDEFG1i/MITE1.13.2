@@ -54,7 +54,7 @@ public class GuiEditSign extends GuiScreen {
 
    private void func_195269_h() {
       this.tileSign.markDirty();
-      this.mc.displayGuiScreen((GuiScreen)null);
+      this.mc.displayGuiScreen(null);
    }
 
    public boolean charTyped(char p_charTyped_1_, int p_charTyped_2_) {

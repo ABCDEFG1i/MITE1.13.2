@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:flint_and_steel"
+  }
+}

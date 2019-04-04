@@ -77,7 +77,8 @@ public class BlockSeaPickle extends BlockBush implements IGrowable, IBucketPicku
    }
 
    public boolean isReplaceable(IBlockState p_196253_1_, BlockItemUseContext p_196253_2_) {
-      return p_196253_2_.getItem().getItem() == this.asItem() && p_196253_1_.get(PICKLES) < 4 ? true : super.isReplaceable(p_196253_1_, p_196253_2_);
+      return p_196253_2_.getItem().getItem() == this.asItem() && p_196253_1_.get(PICKLES) < 4 || super.isReplaceable(
+              p_196253_1_, p_196253_2_);
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {

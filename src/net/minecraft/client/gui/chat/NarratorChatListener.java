@@ -36,7 +36,8 @@ public class NarratorChatListener implements IChatListener {
       GuiToast guitoast = Minecraft.getInstance().getToastGui();
       if (this.narrator.active()) {
          if (p_193641_1_ == 0) {
-            SystemToast.addOrUpdate(guitoast, SystemToast.Type.NARRATOR_TOGGLE, new TextComponentTranslation("narrator.toast.disabled"), (ITextComponent)null);
+            SystemToast.addOrUpdate(guitoast, SystemToast.Type.NARRATOR_TOGGLE, new TextComponentTranslation("narrator.toast.disabled"),
+                    null);
          } else {
             SystemToast.addOrUpdate(guitoast, SystemToast.Type.NARRATOR_TOGGLE, new TextComponentTranslation("narrator.toast.enabled"), new TextComponentTranslation(GameSettings.NARRATOR_MODES[p_193641_1_]));
          }

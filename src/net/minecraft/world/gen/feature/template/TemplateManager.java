@@ -145,7 +145,7 @@ public class TemplateManager implements IResourceManagerReloadListener {
             try {
                Files.createDirectories(Files.exists(path1) ? path1.toRealPath() : path1);
             } catch (IOException var19) {
-               LOGGER.error("Failed to create parent directory: {}", (Object)path1);
+               LOGGER.error("Failed to create parent directory: {}", path1);
                return false;
             }
 

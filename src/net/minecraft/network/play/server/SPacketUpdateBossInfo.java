@@ -166,12 +166,12 @@ public class SPacketUpdateBossInfo implements Packet<INetHandlerPlayClient> {
       return this.createFog;
    }
 
-   public static enum Operation {
+   public enum Operation {
       ADD,
       REMOVE,
       UPDATE_PCT,
       UPDATE_NAME,
       UPDATE_STYLE,
-      UPDATE_PROPERTIES;
+      UPDATE_PROPERTIES
    }
 }

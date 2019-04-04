@@ -34,7 +34,7 @@ public class GuiGameOver extends GuiScreen {
       this.addButton(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 72, s) {
          public void onClick(double p_194829_1_, double p_194829_3_) {
             GuiGameOver.this.mc.player.respawnPlayer();
-            GuiGameOver.this.mc.displayGuiScreen((GuiScreen)null);
+            GuiGameOver.this.mc.displayGuiScreen(null);
          }
       });
       GuiButton guibutton = this.addButton(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 96, s1) {
@@ -70,11 +70,11 @@ public class GuiGameOver extends GuiScreen {
             this.mc.world.sendQuittingDisconnectingPacket();
          }
 
-         this.mc.loadWorld((WorldClient)null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
+         this.mc.loadWorld(null, new GuiDirtMessageScreen(I18n.format("menu.savingLevel")));
          this.mc.displayGuiScreen(new GuiMainMenu());
       } else {
          this.mc.player.respawnPlayer();
-         this.mc.displayGuiScreen((GuiScreen)null);
+         this.mc.displayGuiScreen(null);
       }
 
    }

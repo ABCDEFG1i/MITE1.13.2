@@ -49,7 +49,7 @@ public class LocationInput implements ILocationArgument {
          if (!this.x.equals(locationinput.x)) {
             return false;
          } else {
-            return !this.y.equals(locationinput.y) ? false : this.z.equals(locationinput.z);
+            return this.y.equals(locationinput.y) && this.z.equals(locationinput.z);
          }
       }
    }

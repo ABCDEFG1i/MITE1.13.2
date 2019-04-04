@@ -90,7 +90,6 @@ public class TileEntityEnchantmentTable extends TileEntity implements IInteracti
 
       float f2;
       for(f2 = this.field_195531_n - this.field_195529_l; f2 >= (float)Math.PI; f2 -= ((float)Math.PI * 2F)) {
-         ;
       }
 
       while(f2 < -(float)Math.PI) {
@@ -109,7 +108,7 @@ public class TileEntityEnchantmentTable extends TileEntity implements IInteracti
    }
 
    public ITextComponent getName() {
-      return (ITextComponent)(this.customname != null ? this.customname : new TextComponentTranslation("container.enchant"));
+      return this.customname != null ? this.customname : new TextComponentTranslation("container.enchant");
    }
 
    public boolean hasCustomName() {

@@ -123,13 +123,14 @@ public final class WorldEntitySpawner {
                                           try {
                                              entityliving = biome$spawnlistentry.entityType.create(p_77192_1_);
                                           } catch (Exception exception) {
-                                             LOGGER.warn("Failed to create mob", (Throwable)exception);
+                                             LOGGER.warn("Failed to create mob", exception);
                                              return k4;
                                           }
 
                                           entityliving.setLocationAndAngles((double)f, (double)i3, (double)f1, p_77192_1_.rand.nextFloat() * 360.0F, 0.0F);
                                           if ((d0 <= 16384.0D || !entityliving.canDespawn()) && entityliving.func_205020_a(p_77192_1_, false) && entityliving.isNotColliding(p_77192_1_)) {
-                                             ientitylivingdata = entityliving.onInitialSpawn(p_77192_1_.getDifficultyForLocation(new BlockPos(entityliving)), ientitylivingdata, (NBTTagCompound)null);
+                                             ientitylivingdata = entityliving.onInitialSpawn(p_77192_1_.getDifficultyForLocation(new BlockPos(entityliving)), ientitylivingdata,
+                                                     null);
                                              if (entityliving.isNotColliding(p_77192_1_)) {
                                                 ++j2;
                                                 ++i4;
@@ -233,7 +234,7 @@ public final class WorldEntitySpawner {
                      try {
                         entityliving = biome$spawnlistentry.entityType.create(p_77191_0_.getWorld());
                      } catch (Exception exception) {
-                        LOGGER.warn("Failed to create mob", (Throwable)exception);
+                        LOGGER.warn("Failed to create mob", exception);
                         continue;
                      }
 
@@ -241,7 +242,8 @@ public final class WorldEntitySpawner {
                      double d1 = MathHelper.clamp((double)i1, (double)j + (double)entityliving.width, (double)j + 16.0D - (double)entityliving.width);
                      entityliving.setLocationAndAngles(d0, (double)blockpos.getY(), d1, p_77191_4_.nextFloat() * 360.0F, 0.0F);
                      if (entityliving.func_205020_a(p_77191_0_, false) && entityliving.isNotColliding(p_77191_0_)) {
-                        ientitylivingdata = entityliving.onInitialSpawn(p_77191_0_.getDifficultyForLocation(new BlockPos(entityliving)), ientitylivingdata, (NBTTagCompound)null);
+                        ientitylivingdata = entityliving.onInitialSpawn(p_77191_0_.getDifficultyForLocation(new BlockPos(entityliving)), ientitylivingdata,
+                                null);
                         p_77191_0_.spawnEntity(entityliving);
                         flag = true;
                      }

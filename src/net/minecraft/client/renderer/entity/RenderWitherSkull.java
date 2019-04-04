@@ -20,7 +20,6 @@ public class RenderWitherSkull extends Render<EntityWitherSkull> {
    private float getRenderYaw(float p_82400_1_, float p_82400_2_, float p_82400_3_) {
       float f;
       for(f = p_82400_2_ - p_82400_1_; f < -180.0F; f += 360.0F) {
-         ;
       }
 
       while(f >= 180.0F) {

@@ -240,7 +240,7 @@ public abstract class Entity implements INameable, ICommandSource {
    }
 
    public boolean addTag(String p_184211_1_) {
-      return this.tags.size() >= 1024 ? false : this.tags.add(p_184211_1_);
+      return this.tags.size() < 1024 && this.tags.add(p_184211_1_);
    }
 
    public boolean removeTag(String p_184197_1_) {
@@ -815,8 +815,7 @@ public abstract class Entity implements INameable, ICommandSource {
       try (
          BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.minX + 0.001D, axisalignedbb.minY + 0.001D, axisalignedbb.minZ + 0.001D);
          BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos1 = BlockPos.PooledMutableBlockPos.retain(axisalignedbb.maxX - 0.001D, axisalignedbb.maxY - 0.001D, axisalignedbb.maxZ - 0.001D);
-         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain();
-      ) {
+         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos2 = BlockPos.PooledMutableBlockPos.retain()) {
          if (this.world.isAreaLoaded(blockpos$pooledmutableblockpos, blockpos$pooledmutableblockpos1)) {
             for(int i = blockpos$pooledmutableblockpos.getX(); i <= blockpos$pooledmutableblockpos1.getX(); ++i) {
                for(int j = blockpos$pooledmutableblockpos.getY(); j <= blockpos$pooledmutableblockpos1.getY(); ++j) {
@@ -865,7 +864,7 @@ public abstract class Entity implements INameable, ICommandSource {
 
    public void playSound(SoundEvent p_184185_1_, float p_184185_2_, float p_184185_3_) {
       if (!this.isSilent()) {
-         this.world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, p_184185_1_, this.getSoundCategory(), p_184185_2_, p_184185_3_);
+         this.world.playSound(null, this.posX, this.posY, this.posZ, p_184185_1_, this.getSoundCategory(), p_184185_2_, p_184185_3_);
       }
 
    }
@@ -1335,7 +1334,7 @@ public abstract class Entity implements INameable, ICommandSource {
    }
 
    public boolean writeToNBTOptional(NBTTagCompound p_70039_1_) {
-      return this.isRiding() ? false : this.writeToNBTAtomically(p_70039_1_);
+      return !this.isRiding() && this.writeToNBTAtomically(p_70039_1_);
    }
 
    public NBTTagCompound writeToNBT(NBTTagCompound p_189511_1_) {
@@ -1376,7 +1375,7 @@ public abstract class Entity implements INameable, ICommandSource {
             NBTTagList nbttaglist = new NBTTagList();
 
             for(String s : this.tags) {
-               nbttaglist.add((INBTBase)(new NBTTagString(s)));
+               nbttaglist.add(new NBTTagString(s));
             }
 
             p_189511_1_.setTag("Tags", nbttaglist);
@@ -1389,7 +1388,7 @@ public abstract class Entity implements INameable, ICommandSource {
             for(Entity entity : this.getPassengers()) {
                NBTTagCompound nbttagcompound = new NBTTagCompound();
                if (entity.writeToNBTAtomically(nbttagcompound)) {
-                  nbttaglist1.add((INBTBase)nbttagcompound);
+                  nbttaglist1.add(nbttagcompound);
                }
             }
 
@@ -1509,7 +1508,7 @@ public abstract class Entity implements INameable, ICommandSource {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(double d0 : p_70087_1_) {
-         nbttaglist.add((INBTBase)(new NBTTagDouble(d0)));
+         nbttaglist.add(new NBTTagDouble(d0));
       }
 
       return nbttaglist;
@@ -1519,7 +1518,7 @@ public abstract class Entity implements INameable, ICommandSource {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(float f : p_70049_1_) {
-         nbttaglist.add((INBTBase)(new NBTTagFloat(f)));
+         nbttaglist.add(new NBTTagFloat(f));
       }
 
       return nbttaglist;
@@ -1840,7 +1839,7 @@ public abstract class Entity implements INameable, ICommandSource {
          return false;
       } else {
          Team team = this.getTeam();
-         return team != null && p_98034_1_ != null && p_98034_1_.getTeam() == team && team.getSeeFriendlyInvisiblesEnabled() ? false : this.isInvisible();
+         return (team == null || p_98034_1_ == null || p_98034_1_.getTeam() != team || !team.getSeeFriendlyInvisiblesEnabled()) && this.isInvisible();
       }
    }
 
@@ -1854,7 +1853,7 @@ public abstract class Entity implements INameable, ICommandSource {
    }
 
    public boolean isOnScoreboardTeam(Team p_184194_1_) {
-      return this.getTeam() != null ? this.getTeam().isSameTeam(p_184194_1_) : false;
+      return this.getTeam() != null && this.getTeam().isSameTeam(p_184194_1_);
    }
 
    public void setInvisible(boolean p_82142_1_) {
@@ -1923,7 +1922,7 @@ public abstract class Entity implements INameable, ICommandSource {
       double d0 = p_145771_1_ - (double)blockpos.getX();
       double d1 = p_145771_3_ - (double)blockpos.getY();
       double d2 = p_145771_5_ - (double)blockpos.getZ();
-      if (this.world.isCollisionBoxesEmpty((Entity)null, this.getEntityBoundingBox())) {
+      if (this.world.isCollisionBoxesEmpty(null, this.getEntityBoundingBox())) {
          return false;
       } else {
          EnumFacing enumfacing = EnumFacing.UP;
@@ -1980,7 +1979,7 @@ public abstract class Entity implements INameable, ICommandSource {
 
    private static void func_207712_c(ITextComponent p_207712_0_) {
       p_207712_0_.applyTextStyle((p_211515_0_) -> {
-         p_211515_0_.setClickEvent((ClickEvent)null);
+         p_211515_0_.setClickEvent(null);
       }).getSiblings().forEach(Entity::func_207712_c);
    }
 
@@ -2218,7 +2217,7 @@ public abstract class Entity implements INameable, ICommandSource {
 
    @Nullable
    public ITextComponent getCustomName() {
-      return this.dataManager.get(CUSTOM_NAME).orElse((ITextComponent)null);
+      return this.dataManager.get(CUSTOM_NAME).orElse(null);
    }
 
    public boolean hasCustomName() {
@@ -2438,7 +2437,6 @@ public abstract class Entity implements INameable, ICommandSource {
    public Entity getLowestRidingEntity() {
       Entity entity;
       for(entity = this; entity.isRiding(); entity = entity.getRidingEntity()) {
-         ;
       }
 
       return entity;

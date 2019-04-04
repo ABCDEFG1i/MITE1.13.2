@@ -250,7 +250,7 @@ public class Particle {
    public void move(double p_187110_1_, double p_187110_3_, double p_187110_5_) {
       double d0 = p_187110_3_;
       if (this.canCollide && (p_187110_1_ != 0.0D || p_187110_3_ != 0.0D || p_187110_5_ != 0.0D)) {
-         ReuseableStream<VoxelShape> reuseablestream = new ReuseableStream<>(this.world.func_199406_a((Entity)null, this.getBoundingBox(), p_187110_1_, p_187110_3_, p_187110_5_));
+         ReuseableStream<VoxelShape> reuseablestream = new ReuseableStream<>(this.world.func_199406_a(null, this.getBoundingBox(), p_187110_1_, p_187110_3_, p_187110_5_));
          p_187110_3_ = VoxelShapes.func_212437_a(EnumFacing.Axis.Y, this.getBoundingBox(), reuseablestream.func_212761_a(), p_187110_3_);
          this.setBoundingBox(this.getBoundingBox().offset(0.0D, p_187110_3_, 0.0D));
          p_187110_1_ = VoxelShapes.func_212437_a(EnumFacing.Axis.X, this.getBoundingBox(), reuseablestream.func_212761_a(), p_187110_1_);

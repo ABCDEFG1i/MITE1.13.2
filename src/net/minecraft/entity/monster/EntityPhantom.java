@@ -370,7 +370,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
          } else if (!entitylivingbase.isEntityAlive()) {
             return false;
          } else {
-            return !(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer)entitylivingbase).isSpectator() && !((EntityPlayer)entitylivingbase).isCreative() ? this.shouldExecute() : false;
+            return (!(entitylivingbase instanceof EntityPlayer) || !((EntityPlayer) entitylivingbase).isSpectator() && !((EntityPlayer) entitylivingbase).isCreative()) && this.shouldExecute();
          }
       }
 
@@ -378,7 +378,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
       }
 
       public void resetTask() {
-         EntityPhantom.this.setAttackTarget((EntityLivingBase)null);
+         EntityPhantom.this.setAttackTarget(null);
          EntityPhantom.this.field_203038_bx = EntityPhantom.AttackPhase.CIRCLE;
       }
 
@@ -396,9 +396,9 @@ public class EntityPhantom extends EntityFlying implements IMob {
       }
    }
 
-   static enum AttackPhase {
+   enum AttackPhase {
       CIRCLE,
-      SWOOP;
+      SWOOP
    }
 
    class BodyHelper extends EntityBodyHelper {

@@ -47,7 +47,7 @@ public class EnchantRandomly extends LootFunction {
          }
 
          if (list.isEmpty()) {
-            LOGGER.warn("Couldn't find a compatible enchantment for {}", (Object)p_186553_1_);
+            LOGGER.warn("Couldn't find a compatible enchantment for {}", p_186553_1_);
             return p_186553_1_;
          }
 

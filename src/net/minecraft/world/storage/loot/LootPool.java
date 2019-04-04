@@ -89,7 +89,7 @@ public class LootPool {
             jsonobject.add("bonus_rolls", p_serialize_3_.serialize(p_serialize_1_.bonusRolls));
          }
 
-         if (!ArrayUtils.isEmpty((Object[])p_serialize_1_.poolConditions)) {
+         if (!ArrayUtils.isEmpty(p_serialize_1_.poolConditions)) {
             jsonobject.add("conditions", p_serialize_3_.serialize(p_serialize_1_.poolConditions));
          }
 

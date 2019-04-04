@@ -271,7 +271,7 @@ public class EntityType<T extends Entity> {
    public T makeEntity(World p_210761_1_, @Nullable NBTTagCompound p_210761_2_, @Nullable ITextComponent p_210761_3_, @Nullable EntityPlayer p_210761_4_, BlockPos p_210761_5_, boolean p_210761_6_, boolean p_210761_7_) {
       T t = this.create(p_210761_1_);
       if (t == null) {
-         return (T)null;
+         return null;
       } else {
          double d0;
          if (p_210761_6_) {
@@ -286,7 +286,7 @@ public class EntityType<T extends Entity> {
             EntityLiving entityliving = (EntityLiving)t;
             entityliving.rotationYawHead = entityliving.rotationYaw;
             entityliving.renderYawOffset = entityliving.rotationYaw;
-            entityliving.onInitialSpawn(p_210761_1_.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null, p_210761_2_);
+            entityliving.onInitialSpawn(p_210761_1_.getDifficultyForLocation(new BlockPos(entityliving)), null, p_210761_2_);
             entityliving.playAmbientSound();
          }
 
@@ -305,7 +305,7 @@ public class EntityType<T extends Entity> {
          axisalignedbb = axisalignedbb.expand(0.0D, -1.0D, 0.0D);
       }
 
-      Stream<VoxelShape> stream = p_208051_0_.func_212388_b((Entity)null, axisalignedbb);
+      Stream<VoxelShape> stream = p_208051_0_.func_212388_b(null, axisalignedbb);
       return 1.0D + VoxelShapes.func_212437_a(EnumFacing.Axis.Y, p_208051_3_, stream, p_208051_2_ ? -2.0D : -1.0D);
    }
 
@@ -354,7 +354,7 @@ public class EntityType<T extends Entity> {
 
    @Nullable
    public T create(World p_200721_1_) {
-      return (T)(this.factory.apply(p_200721_1_));
+      return this.factory.apply(p_200721_1_);
    }
 
    @Nullable
@@ -373,7 +373,7 @@ public class EntityType<T extends Entity> {
       ResourceLocation resourcelocation = new ResourceLocation(p_200716_0_.getString("id"));
       Entity entity = create(p_200716_1_, resourcelocation);
       if (entity == null) {
-         LOGGER.warn("Skipping Entity with id {}", (Object)resourcelocation);
+         LOGGER.warn("Skipping Entity with id {}", resourcelocation);
       } else {
          entity.readFromNBT(p_200716_0_);
       }
@@ -403,7 +403,7 @@ public class EntityType<T extends Entity> {
 
       public static <T extends Entity> EntityType.Builder<T> createNothing(Class<? extends T> p_201758_0_) {
          return new EntityType.Builder<>(p_201758_0_, (p_200708_0_) -> {
-            return (T)null;
+            return null;
          });
       }
 
@@ -427,7 +427,7 @@ public class EntityType<T extends Entity> {
                   throw illegalstateexception;
                }
 
-               EntityType.LOGGER.warn("No data fixer registered for entity {}", (Object)p_206830_1_);
+               EntityType.LOGGER.warn("No data fixer registered for entity {}", p_206830_1_);
             }
          }
 

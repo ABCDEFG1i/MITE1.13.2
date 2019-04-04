@@ -32,7 +32,7 @@ public class IntHashMap<V> {
          }
       }
 
-      return (V)null;
+      return null;
    }
 
    public boolean containsItem(int p_76037_1_) {
@@ -106,7 +106,7 @@ public class IntHashMap<V> {
    @Nullable
    public V removeObject(int p_76049_1_) {
       IntHashMap.Entry<V> entry = this.removeEntry(p_76049_1_);
-      return (V)(entry == null ? null : entry.valueEntry);
+      return entry == null ? null : entry.valueEntry;
    }
 
    @Nullable
@@ -184,9 +184,7 @@ public class IntHashMap<V> {
             if (this.hashEntry == entry.hashEntry) {
                Object object = this.getValue();
                Object object1 = entry.getValue();
-               if (object == object1 || object != null && object.equals(object1)) {
-                  return true;
-               }
+                return object == object1 || object != null && object.equals(object1);
             }
 
             return false;

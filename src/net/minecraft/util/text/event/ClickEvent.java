@@ -30,14 +30,10 @@ public class ClickEvent {
             return false;
          } else {
             if (this.value != null) {
-               if (!this.value.equals(clickevent.value)) {
-                  return false;
-               }
-            } else if (clickevent.value != null) {
-               return false;
-            }
+                return this.value.equals(clickevent.value);
+            } else
+                return clickevent.value == null;
 
-            return true;
          }
       } else {
          return false;
@@ -54,7 +50,7 @@ public class ClickEvent {
       return i;
    }
 
-   public static enum Action {
+   public enum Action {
       OPEN_URL("open_url", true),
       OPEN_FILE("open_file", false),
       RUN_COMMAND("run_command", true),
@@ -67,7 +63,7 @@ public class ClickEvent {
       private final boolean allowedInChat;
       private final String canonicalName;
 
-      private Action(String p_i45155_3_, boolean p_i45155_4_) {
+      Action(String p_i45155_3_, boolean p_i45155_4_) {
          this.canonicalName = p_i45155_3_;
          this.allowedInChat = p_i45155_4_;
       }

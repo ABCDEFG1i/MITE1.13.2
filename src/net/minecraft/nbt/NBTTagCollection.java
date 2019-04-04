@@ -6,7 +6,7 @@ public abstract class NBTTagCollection<T extends INBTBase> extends AbstractList<
    public abstract int size();
 
    public T get(int p_get_1_) {
-      return (T)this.func_197647_c(p_get_1_);
+      return this.func_197647_c(p_get_1_);
    }
 
    public T set(int p_set_1_, T p_set_2_) {

@@ -19,7 +19,7 @@ public class SoundListSerializer implements JsonDeserializer<SoundList> {
    public SoundList deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) throws JsonParseException {
       JsonObject jsonobject = JsonUtils.getJsonObject(p_deserialize_1_, "entry");
       boolean flag = JsonUtils.getBoolean(jsonobject, "replace", false);
-      String s = JsonUtils.getString(jsonobject, "subtitle", (String)null);
+      String s = JsonUtils.getString(jsonobject, "subtitle", null);
       List<Sound> list = this.deserializeSounds(jsonobject);
       return new SoundList(list, flag, s);
    }

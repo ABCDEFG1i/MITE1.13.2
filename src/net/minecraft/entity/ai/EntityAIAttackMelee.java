@@ -65,7 +65,7 @@ public class EntityAIAttackMelee extends EntityAIBase {
    public void resetTask() {
       EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
       if (entitylivingbase instanceof EntityPlayer && (((EntityPlayer)entitylivingbase).isSpectator() || ((EntityPlayer)entitylivingbase).isCreative())) {
-         this.attacker.setAttackTarget((EntityLivingBase)null);
+         this.attacker.setAttackTarget(null);
       }
 
       this.attacker.getNavigator().clearPath();

@@ -156,7 +156,7 @@ public class EntityEnderman extends EntityMob {
          double d0 = vec3d1.length();
          vec3d1 = vec3d1.normalize();
          double d1 = vec3d.dotProduct(vec3d1);
-         return d1 > 1.0D - 0.025D / d0 ? p_70821_1_.canEntityBeSeen(this) : false;
+         return d1 > 1.0D - 0.025D / d0 && p_70821_1_.canEntityBeSeen(this);
       }
    }
 
@@ -183,7 +183,7 @@ public class EntityEnderman extends EntityMob {
       if (this.world.isDaytime() && this.ticksExisted >= this.targetChangeTime + 600) {
          float f = this.getBrightness();
          if (f > 0.5F && this.world.canSeeSky(new BlockPos(this)) && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F) {
-            this.setAttackTarget((EntityLivingBase)null);
+            this.setAttackTarget(null);
             this.teleportRandomly();
          }
       }
@@ -211,7 +211,7 @@ public class EntityEnderman extends EntityMob {
    private boolean teleportTo(double p_70825_1_, double p_70825_3_, double p_70825_5_) {
       boolean flag = this.attemptTeleport(p_70825_1_, p_70825_3_, p_70825_5_);
       if (flag) {
-         this.world.playSound((EntityPlayer)null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
+         this.world.playSound(null, this.prevPosX, this.prevPosY, this.prevPosZ, SoundEvents.ENTITY_ENDERMAN_TELEPORT, this.getSoundCategory(), 1.0F, 1.0F);
          this.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
       }
 
@@ -250,7 +250,7 @@ public class EntityEnderman extends EntityMob {
 
    @Nullable
    public IBlockState func_195405_dq() {
-      return this.dataManager.get(CARRIED_BLOCK).orElse((IBlockState)null);
+      return this.dataManager.get(CARRIED_BLOCK).orElse(null);
    }
 
    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
@@ -291,7 +291,8 @@ public class EntityEnderman extends EntityMob {
 
       public boolean shouldExecute() {
          double d0 = this.getTargetDistance();
-         this.player = this.enderman.world.getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY, this.enderman.posZ, d0, d0, (Function<EntityPlayer, Double>)null, (p_210295_1_) -> {
+         this.player = this.enderman.world.getNearestAttackablePlayer(this.enderman.posX, this.enderman.posY, this.enderman.posZ, d0, d0,
+                 null, (p_210295_1_) -> {
             return p_210295_1_ != null && this.enderman.shouldAttackPlayer(p_210295_1_);
          });
          return this.player != null;
@@ -316,7 +317,7 @@ public class EntityEnderman extends EntityMob {
                return true;
             }
          } else {
-            return this.targetEntity != null && this.targetEntity.isEntityAlive() ? true : super.shouldContinueExecuting();
+            return this.targetEntity != null && this.targetEntity.isEntityAlive() || super.shouldContinueExecuting();
          }
       }
 
@@ -375,7 +376,7 @@ public class EntityEnderman extends EntityMob {
          IBlockState iblockstate2 = this.enderman.func_195405_dq();
          if (iblockstate2 != null && this.func_195924_a(iworld, blockpos, iblockstate2, iblockstate, iblockstate1)) {
             iworld.setBlockState(blockpos, iblockstate2, 3);
-            this.enderman.func_195406_b((IBlockState)null);
+            this.enderman.func_195406_b(null);
          }
 
       }

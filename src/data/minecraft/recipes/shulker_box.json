@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "-",
+    "#",
+    "-"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:chest"
+    },
+    "-": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:shulker_box"
+  }
+}

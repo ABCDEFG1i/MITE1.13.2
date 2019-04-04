@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "SF"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:flint_hatchet"
+  }
+}

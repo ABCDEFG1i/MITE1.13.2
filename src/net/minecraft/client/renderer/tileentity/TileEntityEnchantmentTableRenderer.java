@@ -22,7 +22,6 @@ public class TileEntityEnchantmentTableRenderer extends TileEntityRenderer<TileE
 
       float f1;
       for(f1 = p_199341_1_.field_195529_l - p_199341_1_.field_195530_m; f1 >= (float)Math.PI; f1 -= ((float)Math.PI * 2F)) {
-         ;
       }
 
       while(f1 < -(float)Math.PI) {
@@ -55,7 +54,7 @@ public class TileEntityEnchantmentTableRenderer extends TileEntityRenderer<TileE
 
       float f5 = p_199341_1_.field_195528_k + (p_199341_1_.field_195527_j - p_199341_1_.field_195528_k) * p_199341_8_;
       GlStateManager.enableCull();
-      this.modelBook.render((Entity)null, f, f3, f4, f5, 0.0F, 0.0625F);
+      this.modelBook.render(null, f, f3, f4, f5, 0.0F, 0.0625F);
       GlStateManager.popMatrix();
    }
 }

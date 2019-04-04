@@ -8,7 +8,7 @@ import net.minecraft.util.text.TextComponentString;
 
 public class UserListIPBansEntry extends UserListEntryBan<String> {
    public UserListIPBansEntry(String p_i46330_1_) {
-      this(p_i46330_1_, (Date)null, (String)null, (Date)null, (String)null);
+      this(p_i46330_1_, null, null, null, null);
    }
 
    public UserListIPBansEntry(String p_i1159_1_, @Nullable Date p_i1159_2_, @Nullable String p_i1159_3_, @Nullable Date p_i1159_4_, @Nullable String p_i1159_5_) {

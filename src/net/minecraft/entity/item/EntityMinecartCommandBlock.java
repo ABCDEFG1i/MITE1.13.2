@@ -82,7 +82,6 @@ public class EntityMinecartCommandBlock extends EntityMinecart {
          try {
             this.commandBlockLogic.setLastOutput(this.getDataManager().get(LAST_OUTPUT));
          } catch (Throwable var3) {
-            ;
          }
       } else if (COMMAND.equals(p_184206_1_)) {
          this.commandBlockLogic.setCommand(this.getDataManager().get(COMMAND));

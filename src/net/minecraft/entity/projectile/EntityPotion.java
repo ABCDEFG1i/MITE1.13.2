@@ -59,7 +59,7 @@ public class EntityPotion extends EntityThrowable {
       ItemStack itemstack = this.getDataManager().get(ITEM);
       if (itemstack.getItem() != Items.SPLASH_POTION && itemstack.getItem() != Items.LINGERING_POTION) {
          if (this.world != null) {
-            LOGGER.error("ThrownPotion entity {} has no item?!", (int)this.getEntityId());
+            LOGGER.error("ThrownPotion entity {} has no item?!", this.getEntityId());
          }
 
          return new ItemStack(Items.SPLASH_POTION);
@@ -179,7 +179,7 @@ public class EntityPotion extends EntityThrowable {
 
    private void extinguishFires(BlockPos p_184542_1_, EnumFacing p_184542_2_) {
       if (this.world.getBlockState(p_184542_1_).getBlock() == Blocks.FIRE) {
-         this.world.extinguishFire((EntityPlayer)null, p_184542_1_.offset(p_184542_2_), p_184542_2_.getOpposite());
+         this.world.extinguishFire(null, p_184542_1_.offset(p_184542_2_), p_184542_2_.getOpposite());
       }
 
    }

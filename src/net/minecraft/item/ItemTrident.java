@@ -102,7 +102,7 @@ public class ItemTrident extends Item {
                   }
                }
 
-               p_77615_2_.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
+               p_77615_2_.playSound(null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, soundevent, SoundCategory.PLAYERS, 1.0F, 1.0F);
             }
          }
       }

@@ -160,7 +160,7 @@ public class EntitySilverfish extends EntityMob {
       }
 
       public boolean shouldContinueExecuting() {
-         return this.doMerge ? false : super.shouldContinueExecuting();
+         return !this.doMerge && super.shouldContinueExecuting();
       }
 
       public void startExecuting() {

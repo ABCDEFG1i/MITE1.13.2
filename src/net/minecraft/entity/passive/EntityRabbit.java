@@ -282,7 +282,7 @@ public class EntityRabbit extends EntityAnimal {
    }
 
    public boolean attackEntityFrom(DamageSource p_70097_1_, float p_70097_2_) {
-      return this.isInvulnerableTo(p_70097_1_) ? false : super.attackEntityFrom(p_70097_1_, p_70097_2_);
+      return !this.isInvulnerableTo(p_70097_1_) && super.attackEntityFrom(p_70097_1_, p_70097_2_);
    }
 
    @Nullable
@@ -370,7 +370,8 @@ public class EntityRabbit extends EntityAnimal {
       int k = MathHelper.floor(this.posZ);
       BlockPos blockpos = new BlockPos(i, j, k);
       Block block = p_205020_1_.getBlockState(blockpos.down()).getBlock();
-      return block != Blocks.GRASS && block != Blocks.SNOW && block != Blocks.SAND ? super.func_205020_a(p_205020_1_, p_205020_2_) : true;
+      return block == Blocks.GRASS || block == Blocks.SNOW || block == Blocks.SAND || super.func_205020_a(p_205020_1_,
+              p_205020_2_);
    }
 
    private boolean isCarrotEaten() {

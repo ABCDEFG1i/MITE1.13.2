@@ -47,7 +47,7 @@ public class WorldInfo {
    private long sizeOnDisk;
    @Nullable
    private final DataFixer fixer;
-   private final int field_209227_p;
+   private final int dataVersion;
    private boolean field_209228_q;
    private NBTTagCompound playerTag;
    private int dimension;
@@ -82,11 +82,11 @@ public class WorldInfo {
 
    protected WorldInfo() {
       this.fixer = null;
-      this.field_209227_p = 1631;
+      this.dataVersion = 413495445;
       this.func_212242_b(new NBTTagCompound());
    }
 
-   public WorldInfo(NBTTagCompound p_i49564_1_, DataFixer p_i49564_2_, int p_i49564_3_, @Nullable NBTTagCompound p_i49564_4_) {
+   public WorldInfo(NBTTagCompound p_i49564_1_, DataFixer p_i49564_2_, int dataVersion, @Nullable NBTTagCompound p_i49564_4_) {
       this.fixer = p_i49564_2_;
       if (p_i49564_1_.hasKey("Version", 10)) {
          NBTTagCompound nbttagcompound = p_i49564_1_.getCompoundTag("Version");
@@ -158,7 +158,7 @@ public class WorldInfo {
          this.allowCommands = this.gameType == GameType.CREATIVE;
       }
 
-      this.field_209227_p = p_i49564_3_;
+      this.dataVersion = dataVersion;
       if (p_i49564_4_ != null) {
          this.playerTag = p_i49564_4_;
       }
@@ -242,7 +242,7 @@ public class WorldInfo {
 
    public WorldInfo(WorldSettings p_i2158_1_, String p_i2158_2_) {
       this.fixer = null;
-      this.field_209227_p = 1631;
+      this.dataVersion = 413495445;
       this.populateFromWorldSettings(p_i2158_1_);
       this.levelName = p_i2158_2_;
       this.difficulty = DEFAULT_DIFFICULTY;
@@ -272,11 +272,12 @@ public class WorldInfo {
 
    private void updateTagCompound(NBTTagCompound p_76064_1_, NBTTagCompound p_76064_2_) {
       NBTTagCompound nbttagcompound = new NBTTagCompound();
-      nbttagcompound.setString("Name", "1.13.2");
-      nbttagcompound.setInteger("Id", 1631);
+      nbttagcompound.setString("Name", "1.13.2-MITE");
+      //MITEMODDED MITE Version ID("MITE"'s unicode to int)
+      nbttagcompound.setInteger("Id", 413495445);
       nbttagcompound.setBoolean("Snapshot", false);
       p_76064_1_.setTag("Version", nbttagcompound);
-      p_76064_1_.setInteger("DataVersion", 1631);
+      p_76064_1_.setInteger("DataVersion", 413495445);
       p_76064_1_.setLong("RandomSeed", this.randomSeed);
       p_76064_1_.setString("generatorName", this.terrainType.func_211889_b());
       p_76064_1_.setInteger("generatorVersion", this.terrainType.getVersion());
@@ -337,14 +338,14 @@ public class WorldInfo {
       NBTTagList nbttaglist = new NBTTagList();
 
       for(String s : this.enabledDataPacks) {
-         nbttaglist.add((INBTBase)(new NBTTagString(s)));
+         nbttaglist.add(new NBTTagString(s));
       }
 
       nbttagcompound2.setTag("Enabled", nbttaglist);
       NBTTagList nbttaglist1 = new NBTTagList();
 
       for(String s1 : this.disabledDataPacks) {
-         nbttaglist1.add((INBTBase)(new NBTTagString(s1)));
+         nbttaglist1.add(new NBTTagString(s1));
       }
 
       nbttagcompound2.setTag("Disabled", nbttaglist1);
@@ -386,12 +387,12 @@ public class WorldInfo {
 
    private void func_209225_Q() {
       if (!this.field_209228_q && this.playerTag != null) {
-         if (this.field_209227_p < 1631) {
+         if (this.dataVersion < 1631) {
             if (this.fixer == null) {
                throw new NullPointerException("Fixer Upper not set inside LevelData, and the player tag is not upgraded.");
             }
 
-            this.playerTag = NBTUtil.func_210822_a(this.fixer, DataFixTypes.PLAYER, this.playerTag, this.field_209227_p);
+            this.playerTag = NBTUtil.func_210822_a(this.fixer, DataFixTypes.PLAYER, this.playerTag, this.dataVersion);
          }
 
          this.dimension = this.playerTag.getInteger("Dimension");
@@ -679,7 +680,6 @@ public class WorldInfo {
                s = "Anvil";
             }
          } catch (Throwable var3) {
-            ;
          }
 
          return String.format("0x%05X - %s", this.saveVersion, s);

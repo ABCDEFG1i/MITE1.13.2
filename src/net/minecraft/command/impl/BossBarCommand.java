@@ -192,7 +192,7 @@ public class BossBarCommand {
    }
 
    private static int setName(CommandSource p_201420_0_, CustomBossEvent p_201420_1_, ITextComponent p_201420_2_) throws CommandSyntaxException {
-      ITextComponent itextcomponent = TextComponentUtils.func_197680_a(p_201420_0_, p_201420_2_, (Entity)null);
+      ITextComponent itextcomponent = TextComponentUtils.func_197680_a(p_201420_0_, p_201420_2_, null);
       if (p_201420_1_.getName().equals(itextcomponent)) {
          throw ALREADY_NAME_OF_BOSSBAR.create();
       } else {
@@ -233,7 +233,8 @@ public class BossBarCommand {
       if (custombossevents.get(p_201400_1_) != null) {
          throw BOSS_BAR_ID_TAKEN.create(p_201400_1_.toString());
       } else {
-         CustomBossEvent custombossevent = custombossevents.add(p_201400_1_, TextComponentUtils.func_197680_a(p_201400_0_, p_201400_2_, (Entity)null));
+         CustomBossEvent custombossevent = custombossevents.add(p_201400_1_, TextComponentUtils.func_197680_a(p_201400_0_, p_201400_2_,
+                 null));
          p_201400_0_.sendFeedback(new TextComponentTranslation("commands.bossbar.create.success", custombossevent.getFormattedName()), true);
          return custombossevents.getBossbars().size();
       }

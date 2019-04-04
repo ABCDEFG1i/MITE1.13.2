@@ -212,7 +212,6 @@ public class ExecuteCommand {
             p_198397_2_.func_197142_a(nbttagcompound, p_198397_3_.apply(i));
             p_198397_1_.mergeData(nbttagcompound);
          } catch (CommandSyntaxException var9) {
-            ;
          }
 
       }, field_209957_b);
@@ -220,7 +219,8 @@ public class ExecuteCommand {
 
    private static ArgumentBuilder<CommandSource, ?> func_198394_a(CommandNode<CommandSource> p_198394_0_, LiteralArgumentBuilder<CommandSource> p_198394_1_, boolean p_198394_2_) {
       return p_198394_1_.then(Commands.literal("block").then(Commands.argument("pos", BlockPosArgument.blockPos()).then(func_210415_a(p_198394_0_, Commands.argument("block", BlockPredicateArgument.blockPredicateArgument()), p_198394_2_, (p_210434_0_) -> {
-         return BlockPredicateArgument.getBlockPredicate(p_210434_0_, "block").test(new BlockWorldState(((CommandSource)p_210434_0_.getSource()).getWorld(), BlockPosArgument.getLoadedBlockPos(p_210434_0_, "pos"), true));
+         return BlockPredicateArgument.getBlockPredicate(p_210434_0_, "block").test(new BlockWorldState(
+                 p_210434_0_.getSource().getWorld(), BlockPosArgument.getLoadedBlockPos(p_210434_0_, "pos"), true));
       })))).then(Commands.literal("score").then(Commands.argument("target", ScoreHolderArgument.singleScoreHolder()).suggests(ScoreHolderArgument.field_201326_a).then(Commands.argument("targetObjective", ObjectiveArgument.objective()).then(Commands.literal("=").then(Commands.argument("source", ScoreHolderArgument.singleScoreHolder()).suggests(ScoreHolderArgument.field_201326_a).then(func_210415_a(p_198394_0_, Commands.argument("sourceObjective", ObjectiveArgument.objective()), p_198394_2_, (p_210438_0_) -> {
          return func_198371_a(p_210438_0_, Integer::equals);
       })))).then(Commands.literal("<").then(Commands.argument("source", ScoreHolderArgument.singleScoreHolder()).suggests(ScoreHolderArgument.field_201326_a).then(func_210415_a(p_198394_0_, Commands.argument("sourceObjective", ObjectiveArgument.objective()), p_198394_2_, (p_210442_0_) -> {
@@ -281,7 +281,8 @@ public class ExecuteCommand {
       String s = ScoreHolderArgument.func_197211_a(p_201115_0_, "target");
       ScoreObjective scoreobjective = ObjectiveArgument.getObjective(p_201115_0_, "targetObjective");
       Scoreboard scoreboard = p_201115_0_.getSource().getServer().getWorldScoreboard();
-      return !scoreboard.entityHasObjective(s, scoreobjective) ? false : p_201115_1_.test(scoreboard.getOrCreateScore(s, scoreobjective).getScorePoints());
+      return scoreboard.entityHasObjective(s, scoreobjective) && p_201115_1_.test(
+              scoreboard.getOrCreateScore(s, scoreobjective).getScorePoints());
    }
 
    private static Collection<CommandSource> func_198411_a(CommandContext<CommandSource> p_198411_0_, boolean p_198411_1_, boolean p_198411_2_) {
@@ -293,7 +294,7 @@ public class ExecuteCommand {
          return func_198411_a(p_210448_2_, p_210415_2_, p_210415_3_.test(p_210448_2_));
       }).executes((p_210436_2_) -> {
          if (p_210415_2_ == p_210415_3_.test(p_210436_2_)) {
-            ((CommandSource)p_210436_2_.getSource()).sendFeedback(new TextComponentTranslation("commands.execute.conditional.pass"), false);
+            p_210436_2_.getSource().sendFeedback(new TextComponentTranslation("commands.execute.conditional.pass"), false);
             return 1;
          } else {
             throw field_210456_b.create();

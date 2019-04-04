@@ -83,13 +83,13 @@ public class PlacedBlockTrigger implements ICriterionTrigger<PlacedBlockTrigger.
          for(Entry<String, JsonElement> entry : JsonUtils.getJsonObject(p_192166_1_, "state").entrySet()) {
             IProperty<?> iproperty = statecontainer.getProperty(entry.getKey());
             if (iproperty == null) {
-               throw new JsonSyntaxException("Unknown block state property '" + (String)entry.getKey() + "' for block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
+               throw new JsonSyntaxException("Unknown block state property '" + entry.getKey() + "' for block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
             }
 
             String s = JsonUtils.getString(entry.getValue(), entry.getKey());
             Optional<?> optional = iproperty.parseValue(s);
             if (!optional.isPresent()) {
-               throw new JsonSyntaxException("Invalid block state value '" + s + "' for property '" + (String)entry.getKey() + "' on block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
+               throw new JsonSyntaxException("Invalid block state value '" + s + "' for property '" + entry.getKey() + "' on block '" + IRegistry.field_212618_g.func_177774_c(block) + "'");
             }
 
             if (map == null) {
@@ -129,7 +129,7 @@ public class PlacedBlockTrigger implements ICriterionTrigger<PlacedBlockTrigger.
       }
 
       public static PlacedBlockTrigger.Instance func_203934_a(Block p_203934_0_) {
-         return new PlacedBlockTrigger.Instance(p_203934_0_, (Map<IProperty<?>, Object>)null, LocationPredicate.ANY, ItemPredicate.ANY);
+         return new PlacedBlockTrigger.Instance(p_203934_0_, null, LocationPredicate.ANY, ItemPredicate.ANY);
       }
 
       public boolean test(IBlockState p_193210_1_, BlockPos p_193210_2_, WorldServer p_193210_3_, ItemStack p_193210_4_) {

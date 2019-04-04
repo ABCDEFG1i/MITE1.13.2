@@ -21,7 +21,7 @@ public class ItemFireCharge extends Item {
       } else {
          BlockPos blockpos = p_195939_1_.getPos().offset(p_195939_1_.getFace());
          if (world.getBlockState(blockpos).isAir()) {
-            world.playSound((EntityPlayer)null, blockpos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+            world.playSound(null, blockpos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
             world.setBlockState(blockpos, ((BlockFire)Blocks.FIRE).getStateForPlacement(world, blockpos));
          }
 
