@@ -1,4 +1,4 @@
-# B0.4.0 ChangeLog
+# B0.3.0 ChangeLog
 ## Game mechanics:
 * 1, Upgrade requires a higher experience value:\
    Set the level to n\
