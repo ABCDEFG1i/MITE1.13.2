@@ -4044,5 +4044,19 @@
   "item.minecraft.ancient_metal_sword": "Ancient Metal Sword",
   "item.minecraft.mithril_sword": "Mithril Sword",
   "item.minecraft.tungsten_sword": "Tungsten Sword",
-  "item.minecraft.adamantium_sword": "Adamantium Sword"
+  "item.minecraft.adamantium_sword": "Adamantium Sword",
+
+  "MITEBLOCKS": "--------------------------------------------";,
+  "block.minecraft.copper_ore": "Copper Ore",
+  "block.minecraft.silver_ore": "Silver Ore",
+  "block.minecraft.mithril_ore": "Mithril Ore",
+  "block.minecraft.tungsten_ore": "Tungsten Ore",
+  "block.minecraft.adamantium_ore": "Adamantium Ore",
+
+  "block.minecraft.adamantium_block": "Adamantium Block",
+  "block.minecraft.tungsten_block": "Tungsten Block",
+  "block.minecraft.mithril_block": "Mithril Block",
+  "block.minecraft.ancient_metal_block": "Ancient Metal Block",
+  "block.minecraft.silver_block": "Silver Block",
+  "block.minecraft.copper_block": "Copper Block"
 }

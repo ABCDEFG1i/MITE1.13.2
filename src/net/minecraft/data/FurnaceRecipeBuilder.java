@@ -25,15 +25,15 @@ public class FurnaceRecipeBuilder {
    private final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
    private String group;
 
-   public FurnaceRecipeBuilder(Ingredient p_i48737_1_, IItemProvider p_i48737_2_, float p_i48737_3_, int p_i48737_4_) {
+   public FurnaceRecipeBuilder(Ingredient p_i48737_1_, IItemProvider p_i48737_2_, float experience, int p_i48737_4_) {
       this.result = p_i48737_2_.asItem();
       this.ingredient = p_i48737_1_;
-      this.experience = p_i48737_3_;
+      this.experience = experience;
       this.cookingTime = p_i48737_4_;
    }
 
-   public static FurnaceRecipeBuilder furnaceRecipe(Ingredient p_202138_0_, IItemProvider p_202138_1_, float p_202138_2_, int p_202138_3_) {
-      return new FurnaceRecipeBuilder(p_202138_0_, p_202138_1_, p_202138_2_, p_202138_3_);
+   public static FurnaceRecipeBuilder furnaceRecipe(Ingredient p_202138_0_, IItemProvider p_202138_1_, float experience, int p_202138_3_) {
+      return new FurnaceRecipeBuilder(p_202138_0_, p_202138_1_, experience, p_202138_3_);
    }
 
    public FurnaceRecipeBuilder addCriterion(String p_202139_1_, ICriterionInstance p_202139_2_) {

@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:adamantium_nugget"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:adamantium_ingot"
+  }
+}

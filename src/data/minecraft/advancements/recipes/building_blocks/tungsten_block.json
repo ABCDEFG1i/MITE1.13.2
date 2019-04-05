@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:tungsten_block"
+    ]
+  },
+  "criteria": {
+    "has_martial": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:tungsten_ingot",
+            "count": {
+              "min": 9
+            }
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:tungsten_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_martial",
+      "has_the_recipe"
+    ]
+  ]
+}

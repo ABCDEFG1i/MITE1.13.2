@@ -98,7 +98,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:diamond_sword",
+                    "name": "minecraft:ancient_metal_sword",
                     "weight": 3,
                     "functions": [
                         {
@@ -173,7 +173,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:diamond_pickaxe",
+                    "name": "minecraft:ancient_metal_pickaxe",
                     "weight": 3,
                     "functions": [
                         {
@@ -188,7 +188,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:diamond_shovel",
+                    "name": "minecraft:mithril_shovel",
                     "weight": 3,
                     "functions": [
                         {

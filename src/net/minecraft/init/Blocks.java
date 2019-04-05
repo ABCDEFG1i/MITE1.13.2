@@ -606,6 +606,19 @@ public class Blocks {
    public static final Block DEAD_FIRE_CORAL_FAN;
    public static final Block DEAD_HORN_CORAL_FAN;
    public static final Block STRUCTURE_BLOCK;
+   //MITE Blocks Start
+   public static final Block COPPER_ORE;
+   public static final Block SILVER_ORE;
+   public static final Block MITHRIL_ORE;
+   public static final Block TUNGSTEN_ORE;
+   public static final Block ADAMANTIUM_ORE;
+
+   public static final Block ADAMANTIUM_BLOCK;
+   public static final Block ANCIENT_METAL_BLOCK;
+   public static final Block TUNGSTEN_BLOCK;
+   public static final Block MITHRIL_BLOCK;
+   public static final Block SILVER_BLOCK;
+   public static final Block COPPER_BLOCK;
 
    private static Block getRegisteredBlock(String p_180383_0_) {
       Block block = IRegistry.field_212618_g.func_82594_a(new ResourceLocation(p_180383_0_));
@@ -1219,6 +1232,25 @@ public class Blocks {
          DEAD_FIRE_CORAL_FAN = getRegisteredBlock("dead_fire_coral_fan");
          DEAD_HORN_CORAL_FAN = getRegisteredBlock("dead_horn_coral_fan");
          STRUCTURE_BLOCK = getRegisteredBlock("structure_block");
+
+
+         //MITE Blocks Start
+         {
+            COPPER_ORE = getRegisteredBlock("copper_ore");
+            SILVER_ORE = getRegisteredBlock("silver_ore");
+            MITHRIL_ORE = getRegisteredBlock("mithril_ore");
+            TUNGSTEN_ORE = getRegisteredBlock("tungsten_ore");
+            ADAMANTIUM_ORE = getRegisteredBlock("adamantium_ore");
+
+            COPPER_BLOCK = getRegisteredBlock("copper_block");
+            SILVER_BLOCK = getRegisteredBlock("silver_block");
+            ANCIENT_METAL_BLOCK = getRegisteredBlock("ancient_metal_block");
+            MITHRIL_BLOCK = getRegisteredBlock("mithril_block");
+            TUNGSTEN_BLOCK = getRegisteredBlock("tungsten_block");
+            ADAMANTIUM_BLOCK = getRegisteredBlock("adamantium_block");
+         }
+
+
          CACHE.clear();
       }
    }

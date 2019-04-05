@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:tungsten_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:tungsten_block"
+  }
+}

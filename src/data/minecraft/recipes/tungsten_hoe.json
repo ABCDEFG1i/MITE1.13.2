@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "MM",
+    " S",
+    " S"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:tungsten_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:tungsten_hoe"
+  }
+}

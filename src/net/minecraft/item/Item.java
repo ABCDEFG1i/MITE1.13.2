@@ -1161,6 +1161,28 @@ public class Item implements IItemProvider {
       {
          registerItem("bowl_salad", new ItemFood(1, 1F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
       }
+      //MITE Blocks
+      {
+         //Ores
+         {
+            register(Blocks.COPPER_ORE, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.SILVER_ORE, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.MITHRIL_ORE, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.TUNGSTEN_ORE, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.ADAMANTIUM_ORE, ItemGroup.BUILDING_BLOCKS);
+         }
+
+         //Martial Blocks
+         {
+            register(Blocks.COPPER_BLOCK, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.SILVER_BLOCK, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.ANCIENT_METAL_BLOCK, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.MITHRIL_BLOCK, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.TUNGSTEN_BLOCK, ItemGroup.BUILDING_BLOCKS);
+            register(Blocks.ADAMANTIUM_BLOCK, ItemGroup.BUILDING_BLOCKS);
+
+         }
+      }
    }
 
    private static void register(Block p_179216_0_) {

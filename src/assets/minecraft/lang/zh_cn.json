@@ -4049,5 +4049,19 @@
   "item.minecraft.ancient_metal_sword": "\u8fdc\u53e4\u91d1\u5c5e\u5251",
   "item.minecraft.mithril_sword": "\u79d8\u94f6\u5251",
   "item.minecraft.tungsten_sword": "\u94a8\u5251",
-  "item.minecraft.adamantium_sword": "\u827e\u5fb7\u66fc\u5251"
+  "item.minecraft.adamantium_sword": "\u827e\u5fb7\u66fc\u5251",
+
+  "MITEBLOCKS": "--------------------------------------------";,
+  "block.minecraft.copper_ore": "\u94dc\u77ff",
+  "block.minecraft.silver_ore": "\u94f6\u77ff",
+  "block.minecraft.mithril_ore": "\u79d8\u94f6\u77ff",
+  "block.minecraft.tungsten_ore": "\u94a8\u77ff",
+  "block.minecraft.adamantium_ore": "\u827e\u5fb7\u66fc\u77ff",
+
+  "block.minecraft.adamantium_block": "\u827e\u5fb7\u66fc\u5757",
+  "block.minecraft.tungsten_block": "\u94a8\u5757",
+  "block.minecraft.mithril_block": "\u79d8\u94f6\u5757",
+  "block.minecraft.ancient_metal_block": "\u8fdc\u53e4\u91d1\u5c5e\u5757",
+  "block.minecraft.silver_block": "\u94f6\u5757",
+  "block.minecraft.copper_block": "\u94dc\u5757"
 }

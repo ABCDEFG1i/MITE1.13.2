@@ -3767,7 +3767,7 @@ public class RecipeProvider implements IDataProvider {
                             .patternLine(" S")
                             .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
                             .build(p_200404_1_);
-                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_PICKAXE)
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_HOE)
                             .key('M',Items.ANCIENT_METAL_INGOT)
                             .key('S',Items.STICK)
                             .patternLine("MM")
@@ -3810,7 +3810,7 @@ public class RecipeProvider implements IDataProvider {
                         .addCriterion("has_bowl", this.hasItem(Items.BOWL))
                         .build(p_200404_1_);
             }
-            //MITE MARTIAL
+            //MITE Martial
             {
                 ShapedRecipeBuilder.shapedRecipe(Items.COPPER_INGOT)
                         .key('#', Items.COPPER_NUGGET)
@@ -3819,7 +3819,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_copper_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.COPPER_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"copper_ingot_from_nugget");
                 ShapedRecipeBuilder.shapedRecipe(Items.SILVER_INGOT)
                         .key('#', Items.SILVER_NUGGET)
                         .patternLine("###")
@@ -3827,7 +3827,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_silver_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SILVER_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"silver_ingot_from_nugget");
                 ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_INGOT)
                         .key('#', Items.ANCIENT_METAL_NUGGET)
                         .patternLine("###")
@@ -3835,7 +3835,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_ancient_metal_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ANCIENT_METAL_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"ancient_metal_ingot_from_nugget");
                 ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_INGOT)
                         .key('#', Items.MITHRIL_NUGGET)
                         .patternLine("###")
@@ -3843,7 +3843,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_mithril_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.MITHRIL_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"mithril_ingot_from_nugget");
                 ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_INGOT)
                         .key('#', Items.TUNGSTEN_NUGGET)
                         .patternLine("###")
@@ -3851,7 +3851,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_tungsten_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.TUNGSTEN_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"tungsten_ingot_from_nugget");
                 ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_INGOT)
                         .key('#', Items.ADAMANTIUM_NUGGET)
                         .patternLine("###")
@@ -3859,7 +3859,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .addCriterion("has_at_least_9_adamantium_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ADAMANTIUM_NUGGET))
-                        .build(p_200404_1_);
+                        .build(p_200404_1_,"adamantium_ingot_from_nugget");
 
                 ShapelessRecipeBuilder.shapelessRecipe(Items.COPPER_NUGGET, 9)
                         .addIngredient(Items.COPPER_INGOT)
@@ -3885,6 +3885,79 @@ public class RecipeProvider implements IDataProvider {
                         .addIngredient(Items.ADAMANTIUM_INGOT)
                         .addCriterion("has_adamantium_ingot", this.hasItem(Items.ADAMANTIUM_INGOT))
                         .build(p_200404_1_);
+
+                //Ore blocks
+                ShapedRecipeBuilder.shapedRecipe(Blocks.COPPER_BLOCK)
+                        .key('#', Items.COPPER_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.COPPER_INGOT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.SILVER_BLOCK)
+                        .key('#', Items.SILVER_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SILVER_INGOT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.ANCIENT_METAL_BLOCK)
+                        .key('#', Items.ANCIENT_METAL_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ANCIENT_METAL_INGOT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.MITHRIL_BLOCK)
+                        .key('#', Items.MITHRIL_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.MITHRIL_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.TUNGSTEN_BLOCK)
+                        .key('#', Items.TUNGSTEN_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.TUNGSTEN_INGOT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.ADAMANTIUM_BLOCK)
+                        .key('#', Items.ADAMANTIUM_INGOT)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_martial",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ADAMANTIUM_INGOT))
+                        .build(p_200404_1_);
+            }
+            //MITE Furnace Recipes
+            {
+                FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COPPER_ORE.asItem()),
+                        Items.COPPER_INGOT,
+                        10F,
+                        200).addCriterion("has_ore", this.hasItem(Blocks.COPPER_ORE)).build(p_200404_1_);
+                FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.SILVER_ORE),
+                        Items.SILVER_INGOT,
+                        10F,
+                        200).addCriterion("has_ore", this.hasItem(Blocks.SILVER_ORE)).build(p_200404_1_);
+                FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.MITHRIL_ORE),
+                        Items.MITHRIL_INGOT,
+                        40F,
+                        200).addCriterion("has_ore", this.hasItem(Blocks.MITHRIL_ORE)).build(p_200404_1_);
+                FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.TUNGSTEN_ORE),
+                        Items.TUNGSTEN_INGOT,
+                        60F,
+                        200).addCriterion("has_ore", this.hasItem(Blocks.TUNGSTEN_ORE)).build(p_200404_1_);
+                FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.ADAMANTIUM_ORE),
+                        Items.ADAMANTIUM_INGOT,
+                        100F,
+                        200).addCriterion("has_ore", this.hasItem(Blocks.ADAMANTIUM_ORE)).build(p_200404_1_);
             }
         }
     }

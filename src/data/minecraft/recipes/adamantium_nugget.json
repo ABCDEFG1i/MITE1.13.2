@@ -1,0 +1,13 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:adamantium_ingot"
+    }
+  ],
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:adamantium_nugget",
+    "count": 9
+  }
+}

@@ -26,7 +26,7 @@ public enum ItemTier implements IItemTier {
         return Ingredient.fromItems(Items.MITHRIL_NUGGET);
     }), TUNGSTEN(5, 9.0F, 5.0F, 20, () -> {
         return Ingredient.fromItems(Items.TUNGSTEN_NUGGET);
-    }), ADAMANTIUM(5, 10.0F, 5.0F, 18, () -> {
+    }), ADAMANTIUM(6, 10.0F, 5.0F, 18, () -> {
         return Ingredient.fromItems(Items.ADAMANTIUM_NUGGET);
     });
 

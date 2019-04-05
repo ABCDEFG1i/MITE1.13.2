@@ -1,0 +1,9 @@
+{
+  "type": "smelting",
+  "ingredient": {
+    "item": "minecraft:adamantium_ore"
+  },
+  "result": "minecraft:adamantium_ingot",
+  "experience": 100.0,
+  "cookingtime": 200
+}
