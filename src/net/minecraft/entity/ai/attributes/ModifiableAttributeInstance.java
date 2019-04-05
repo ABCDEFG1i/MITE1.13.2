@@ -41,10 +41,8 @@ public class ModifiableAttributeInstance implements IAttributeInstance {
    }
 
    public void setBaseValue(double p_111128_1_) {
-      if (p_111128_1_ != this.getBaseValue()) {
          this.baseValue = p_111128_1_;
          this.flagForUpdate();
-      }
    }
 
    public Collection<AttributeModifier> getModifiersByOperation(int p_111130_1_) {

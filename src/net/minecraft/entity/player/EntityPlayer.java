@@ -1066,7 +1066,6 @@ public abstract class EntityPlayer extends EntityLivingBase {
     public void preparePlayerToSpawn() {
         this.setSize(0.6F, 1.8F);
         super.preparePlayerToSpawn();
-        this.setMaxHealth(6f);
         this.setHealth(this.getMaxHealth());
         this.deathTime = 0;
     }
@@ -1281,6 +1280,7 @@ public abstract class EntityPlayer extends EntityLivingBase {
 
     protected void registerAttributes() {
         super.registerAttributes();
+        this.setMaxHealth(6f);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double) 0.1F);
         this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_SPEED);
