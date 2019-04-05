@@ -2,7 +2,7 @@
 # B0.4.0 ChangeLog
 ## Game mechanics:
 * Now the item is more easily damaged: \
-  The recived damage value of tools is 100 times the hardness of the digging block\
+  The recived damage value of tools is 100 times the hardness of the digging block(Axes are 45 times)\
  The received damage value of swords is twice as much as the damage
      
 ## Item

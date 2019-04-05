@@ -1,7 +1,7 @@
 [English Version](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogEN.md)
 # B0.4.0更新日志
 ## 游戏机制:
-* 现在物品掉耐久更快,工具的为挖掘的方块的硬度的100倍\
+* 现在物品掉耐久更快,工具的为挖掘的方块的硬度的100倍(斧子为45倍)\
   剑为打出的伤害的2倍
      
 ## 物品
