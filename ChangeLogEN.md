@@ -28,3 +28,22 @@
 * 1, coordinate deletion
 * 2, prohibiting the use of cheating
 * 3, update the saves file version, now only supports the opening of the MITE saves
+
+# B0.2.1 ChangeLog
+## Items
+* Add flint tools
+* Add salad
+* Make seeds eatable
+
+## Item drops
+* Make flint's drop chance lower
+* Make leaves drop sticks
+
+## Game mechanic
+* Changed the hunger mechanism to make the game harder
+
+## Block
+* Dirt will drop down like gravel and sand
+
+## Technical
+* Make the language files can include in the jar file
