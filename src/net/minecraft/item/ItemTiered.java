@@ -3,8 +3,8 @@ package net.minecraft.item;
 public class ItemTiered extends Item {
    private final IItemTier tier;
 
-   public ItemTiered(IItemTier p_i48459_1_, Item.Properties p_i48459_2_) {
-       super(p_i48459_2_.setDamageIfHavent(p_i48459_1_.getMaxUses()));
+   public ItemTiered(int maxUses,IItemTier p_i48459_1_, Item.Properties p_i48459_2_) {
+       super(p_i48459_2_.setDamageIfHavent(maxUses));
       this.tier = p_i48459_1_;
    }
 

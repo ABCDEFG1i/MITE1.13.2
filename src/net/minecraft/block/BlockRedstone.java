@@ -5,13 +5,18 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
-public class BlockRedstone extends Block {
+public class BlockRedstone extends Block implements IMineLevel {
    public BlockRedstone(Block.Properties p_i48350_1_) {
       super(p_i48350_1_);
    }
 
    public boolean canProvidePower(IBlockState p_149744_1_) {
       return true;
+   }
+
+   @Override
+   public int getMineLevel() {
+      return 3;
    }
 
    public int getWeakPower(IBlockState p_180656_1_, IBlockReader p_180656_2_, BlockPos p_180656_3_, EnumFacing p_180656_4_) {

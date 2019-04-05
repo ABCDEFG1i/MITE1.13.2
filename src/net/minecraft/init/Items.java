@@ -4,6 +4,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.IRegistry;
 
+@SuppressWarnings("WeakerAccess")
 public class Items {
    public static final Item AIR;
    public static final Item IRON_SHOVEL;
@@ -23,10 +24,6 @@ public class Items {
    public static final Item IRON_SWORD;
    public static final Item WOODEN_SWORD;
    public static final Item WOODEN_SHOVEL;
-   public static final Item DIAMOND_SWORD;
-   public static final Item DIAMOND_SHOVEL;
-   public static final Item DIAMOND_PICKAXE;
-   public static final Item DIAMOND_AXE;
    public static final Item STICK;
    public static final Item BOWL;
    public static final Item MUSHROOM_STEW;
@@ -38,7 +35,6 @@ public class Items {
    public static final Item FEATHER;
    public static final Item GUNPOWDER;
    public static final Item IRON_HOE;
-   public static final Item DIAMOND_HOE;
    public static final Item GOLDEN_HOE;
    public static final Item WHEAT_SEEDS;
    public static final Item WHEAT;
@@ -313,10 +309,63 @@ public class Items {
 
    //MITE Items Start
 
-   public static final Item FLINT_SHOVEL;
-   public static final Item SALAD;
-   public static final Item FLINT_AXE;
-   public static final Item FLINT_HATCHET;
+   //MITEFOODS
+      public static final Item SALAD;
+   //MITEMATERIALS
+      public static final Item FLINT_SHOVEL;
+      public static final Item FLINT_AXE;
+      public static final Item FLINT_HATCHET;
+
+      public static final Item ADAMANTIUM_INGOT;
+      public static final Item TUNGSTEN_INGOT;
+      public static final Item MITHRIL_INGOT;
+      public static final Item ANCIENT_METAL_INGOT;
+      public static final Item SILVER_INGOT;
+      public static final Item COPPER_INGOT;
+
+      public static final Item ADAMANTIUM_NUGGET;
+      public static final Item TUNGSTEN_NUGGET;
+      public static final Item MITHRIL_NUGGET;
+      public static final Item ANCIENT_METAL_NUGGET;
+      public static final Item SILVER_NUGGRET;
+      public static final Item COPPER_NUGGET;
+   //MITETOOLS
+      public static final Item SILVER_SHOVEL;
+      public static final Item SILVER_PICKAXE;
+      public static final Item SILVER_AXE;
+      public static final Item SILVER_SWORD;
+      public static final Item SILVER_HOE;
+
+      public static final Item COPPER_SHOVEL;
+      public static final Item COPPER_PICKAXE;
+      public static final Item COPPER_AXE;
+      public static final Item COPPER_SWORD;
+      public static final Item COPPER_HOE;
+
+      public static final Item ANCIENT_METAL_SHOVEL;
+      public static final Item ANCIENT_METAL_PICKAXE;
+      public static final Item ANCIENT_METAL_AXE;
+      public static final Item ANCIENT_METAL_SWORD;
+      public static final Item ANCIENT_METAL_HOE;
+
+      public static final Item MITHRIL_SHOVEL;
+      public static final Item MITHRIL_PICKAXE;
+      public static final Item MITHRIL_AXE;
+      public static final Item MITHRIL_SWORD;
+      public static final Item MITHRIL_HOE;
+
+      public static final Item TUNGSTEN_SHOVEL;
+      public static final Item TUNGSTEN_PICKAXE;
+      public static final Item TUNGSTEN_AXE;
+      public static final Item TUNGSTEN_SWORD;
+      public static final Item TUNGSTEN_HOE;
+
+      public static final Item ADAMANTIUM_SHOVEL;
+      public static final Item ADAMANTIUM_PICKAXE;
+      public static final Item ADAMANTIUM_AXE;
+      public static final Item ADAMANTIUM_SWORD;
+      public static final Item ADAMANTIUM_HOE;
+
 
    private static Item getRegisteredItem(String p_179554_0_) {
       Item item = IRegistry.field_212630_s.func_212608_b(new ResourceLocation(p_179554_0_));
@@ -349,10 +398,6 @@ public class Items {
          IRON_SWORD = getRegisteredItem("iron_sword");
          WOODEN_SWORD = getRegisteredItem("wooden_sword");
          WOODEN_SHOVEL = getRegisteredItem("wooden_shovel");
-         DIAMOND_SWORD = getRegisteredItem("diamond_sword");
-         DIAMOND_SHOVEL = getRegisteredItem("diamond_shovel");
-         DIAMOND_PICKAXE = getRegisteredItem("diamond_pickaxe");
-         DIAMOND_AXE = getRegisteredItem("diamond_axe");
          STICK = getRegisteredItem("stick");
          BOWL = getRegisteredItem("bowl");
          MUSHROOM_STEW = getRegisteredItem("mushroom_stew");
@@ -364,7 +409,6 @@ public class Items {
          FEATHER = getRegisteredItem("feather");
          GUNPOWDER = getRegisteredItem("gunpowder");
          IRON_HOE = getRegisteredItem("iron_hoe");
-         DIAMOND_HOE = getRegisteredItem("diamond_hoe");
          GOLDEN_HOE = getRegisteredItem("golden_hoe");
          WHEAT_SEEDS = getRegisteredItem("wheat_seeds");
          WHEAT = getRegisteredItem("wheat");
@@ -638,11 +682,73 @@ public class Items {
          HEART_OF_THE_SEA = getRegisteredItem("heart_of_the_sea");
 
          //MITE Items Start
+         //MITE MATERIALS
+         {
+            //INGOTS
+            ADAMANTIUM_INGOT = getRegisteredItem("adamantium_ingot");
+            TUNGSTEN_INGOT = getRegisteredItem("tungsten_ingot");
+            MITHRIL_INGOT = getRegisteredItem("mithril_ingot");
+            ANCIENT_METAL_INGOT = getRegisteredItem("ancient_metal_ingot");
+            SILVER_INGOT = getRegisteredItem("silver_ingot");
+            COPPER_INGOT = getRegisteredItem("copper_ingot");
 
-         FLINT_SHOVEL = getRegisteredItem("flint_shovel");
-         FLINT_AXE = getRegisteredItem("flint_axe");
-         SALAD = getRegisteredItem("bowl_salad");
-         FLINT_HATCHET = getRegisteredItem("flint_hatchet");
+            //NUGGETS
+            ADAMANTIUM_NUGGET = getRegisteredItem("adamantium_nugget");
+            TUNGSTEN_NUGGET = getRegisteredItem("tungsten_nugget");
+            MITHRIL_NUGGET = getRegisteredItem("mithril_nugget");
+            ANCIENT_METAL_NUGGET = getRegisteredItem("ancient_metal_nugget");
+            SILVER_NUGGRET = getRegisteredItem("silver_nugget");
+            COPPER_NUGGET = getRegisteredItem("copper_nugget");
+
+         }
+         //MITE FOOD
+         {
+            SALAD = getRegisteredItem("bowl_salad");
+         }
+
+         //MITETOOLS
+         {
+            //FLINT
+            FLINT_SHOVEL = getRegisteredItem("flint_shovel");
+            FLINT_AXE = getRegisteredItem("flint_axe");
+            FLINT_HATCHET = getRegisteredItem("flint_hatchet");
+
+            COPPER_AXE = getRegisteredItem("copper_axe");
+            COPPER_SHOVEL = getRegisteredItem("copper_shovel");
+            COPPER_SWORD = getRegisteredItem("copper_sword");
+            COPPER_PICKAXE = getRegisteredItem("copper_pickaxe");
+            COPPER_HOE = getRegisteredItem("copper_hoe");
+
+            SILVER_AXE = getRegisteredItem("silver_axe");
+            SILVER_SHOVEL = getRegisteredItem("silver_shovel");
+            SILVER_SWORD = getRegisteredItem("silver_sword");
+            SILVER_PICKAXE = getRegisteredItem("silver_pickaxe");
+            SILVER_HOE = getRegisteredItem("silver_hoe");
+
+            ANCIENT_METAL_AXE = getRegisteredItem("ancient_metal_axe");
+            ANCIENT_METAL_SHOVEL = getRegisteredItem("ancient_metal_shovel");
+            ANCIENT_METAL_SWORD = getRegisteredItem("ancient_metal_sword");
+            ANCIENT_METAL_PICKAXE = getRegisteredItem("ancient_metal_pickaxe");
+            ANCIENT_METAL_HOE = getRegisteredItem("ancient_metal_hoe");
+
+            MITHRIL_AXE = getRegisteredItem("mithril_axe");
+            MITHRIL_SHOVEL = getRegisteredItem("mithril_shovel");
+            MITHRIL_SWORD = getRegisteredItem("mithril_sword");
+            MITHRIL_PICKAXE = getRegisteredItem("mithril_pickaxe");
+            MITHRIL_HOE = getRegisteredItem("mithril_hoe");
+
+            TUNGSTEN_AXE = getRegisteredItem("tungsten_axe");
+            TUNGSTEN_SHOVEL = getRegisteredItem("tungsten_shovel");
+            TUNGSTEN_SWORD = getRegisteredItem("tungsten_sword");
+            TUNGSTEN_PICKAXE = getRegisteredItem("tungsten_pickaxe");
+            TUNGSTEN_HOE = getRegisteredItem("tungsten_hoe");
+
+            ADAMANTIUM_AXE = getRegisteredItem("adamantium_axe");
+            ADAMANTIUM_SHOVEL = getRegisteredItem("adamantium_shovel");
+            ADAMANTIUM_SWORD = getRegisteredItem("adamantium_sword");
+            ADAMANTIUM_PICKAXE = getRegisteredItem("adamantium_pickaxe");
+            ADAMANTIUM_HOE = getRegisteredItem("adamantium_hoe");
+         }
       }
    }
 }

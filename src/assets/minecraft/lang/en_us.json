@@ -3992,5 +3992,57 @@
   "item.minecraft.flint_axe": "Flint Axe",
   "item.minecraft.bowl_salad": "Salad",
   "item.minecraft.flint_hatchet": "Flint Hatchet",
-  "selectWorld.notification": "(Only show supported worlds)"
+  "selectWorld.notification": "(Only show supported worlds)",
+
+  "MITEITEMS": "--------------------------------------------",
+  "item.minecraft.adamantium_ingot": "Adamantium Ingot",
+  "item.minecraft.tungsten_ingot": "Tungsten Ingot",
+  "item.minecraft.mithril_ingot": "Mithril Ingot",
+  "item.minecraft.ancient_metal_ingot": "Ancient Metal Ingot",
+  "item.minecraft.silver_ingot": "Silver Ingot",
+  "item.minecraft.copper_ingot": "Copper Ingot",
+  "item.minecraft.adamantium_nugget": "Adamantium Nugget",
+  "item.minecraft.tungsten_nugget": "Tungsten Nugget",
+  "item.minecraft.mithril_nugget": "Mithril Nugget",
+  "item.minecraft.ancient_metal_nugget": "Ancient Metal Nugget",
+  "item.minecraft.silver_nugget": "Silver Nugget",
+  "item.minecraft.copper_nugget": "Copper Nugget",
+  "MITETOOLS": "---------------------------------------------",
+  "item.minecraft.copper_shovel":"Copper Shovel",
+  "item.minecraft.copper_pickaxe": "Copper Pickaxe",
+  "item.minecraft.copper_axe": "Copper Axe",
+  "item.minecraft.copper_hoe": "Copper Hoe",
+
+  "item.minecraft.silver_shovel": "Silver Shovel",
+  "item.minecraft.silver_pickaxe": "Silver Pickaxe",
+  "item.minecraft.silver_axe": "Silver Axe",
+  "item.minecraft.silver_hoe": "Silver Hoe",
+
+  "item.minecraft.ancient_metal_shovel": "Ancient Metal Shovel",
+  "item.minecraft.ancient_metal_pickaxe": "Ancient Metal Pickaxe",
+  "item.minecraft.ancient_metal_axe": "Ancient Metal Axe",
+  "item.minecraft.ancient_metal_hoe": "Ancient Metal Hoe",
+
+  "item.minecraft.mithril_shovel": "Mithril Shovel",
+  "item.minecraft.mithril_pickaxe": "Mithril Pickaxe",
+  "item.minecraft.mithril_axe": "Mithril Axe",
+  "item.minecraft.mithril_hoe": "Mithril Hoe",
+
+  "item.minecraft.tungsten_shovel": "Tungsten Shovel",
+  "item.minecraft.tungsten_pickaxe": "Tungsten Pickaxe",
+  "item.minecraft.tungsten_axe": "Tungsten Axe",
+  "item.minecraft.tungsten_hoe": "Tungsten Hoe",
+
+  "item.minecraft.adamantium_shovel": "Adamantium Shovel",
+  "item.minecraft.adamantium_pickaxe": "Adamantium Pickaxe",
+  "item.minecraft.adamantium_axe": "Adamantium Axe",
+  "item.minecraft.adamantium_hoe": "Adamantium Hoe",
+
+  "MITEWEAPONS": "-------------------------------------------",
+  "item.minecraft.copper_sword": "Copper Sword",
+  "item.minecraft.silver_sword": "Silver Sword",
+  "item.minecraft.ancient_metal_sword": "Ancient Metal Sword",
+  "item.minecraft.mithril_sword": "Mithril Sword",
+  "item.minecraft.tungsten_sword": "Tungsten Sword",
+  "item.minecraft.adamantium_sword": "Adamantium Sword"
 }

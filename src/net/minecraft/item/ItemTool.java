@@ -18,8 +18,8 @@ public class ItemTool extends ItemTiered {
    protected float attackDamage;
    protected float attackSpeed;
 
-   protected ItemTool(float attackDamage, float attackSpeed, IItemTier itemTier, Set<Block> effectiveBlocks, Item.Properties p_i48512_5_) {
-      super(itemTier, p_i48512_5_);
+   protected ItemTool(int maxUses,float attackDamage, float attackSpeed, IItemTier itemTier, Set<Block> effectiveBlocks, Item.Properties p_i48512_5_) {
+      super(maxUses,itemTier, p_i48512_5_);
       this.effectiveBlocks = effectiveBlocks;
       this.efficiency = itemTier.getEfficiency();
       this.attackDamage = attackDamage + itemTier.getAttackDamage();

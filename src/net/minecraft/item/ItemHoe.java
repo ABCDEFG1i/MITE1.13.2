@@ -23,9 +23,9 @@ public class ItemHoe extends ItemTiered {
    private final float speed;
    protected static final Map<Block, IBlockState> field_195973_b = Maps.newHashMap(ImmutableMap.of(Blocks.GRASS_BLOCK, Blocks.FARMLAND.getDefaultState(), Blocks.GRASS_PATH, Blocks.FARMLAND.getDefaultState(), Blocks.DIRT, Blocks.FARMLAND.getDefaultState(), Blocks.COARSE_DIRT, Blocks.DIRT.getDefaultState()));
 
-   public ItemHoe(IItemTier p_i48488_1_, float p_i48488_2_, Item.Properties p_i48488_3_) {
-      super(p_i48488_1_, p_i48488_3_);
-      this.speed = p_i48488_2_;
+   public ItemHoe(int maxUses,IItemTier itemTier, float speed, Item.Properties properties) {
+      super(maxUses,itemTier, properties);
+      this.speed = speed;
    }
 
    public EnumActionResult onItemUse(ItemUseContext p_195939_1_) {

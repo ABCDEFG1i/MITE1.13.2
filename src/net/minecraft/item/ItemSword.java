@@ -18,8 +18,8 @@ public class ItemSword extends ItemTiered {
    private final float attackDamage;
    private final float attackSpeed;
 
-   public ItemSword(IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Item.Properties p_i48460_4_) {
-      super(p_i48460_1_, p_i48460_4_);
+   public ItemSword(int maxUses,IItemTier p_i48460_1_, int p_i48460_2_, float p_i48460_3_, Item.Properties p_i48460_4_) {
+      super(maxUses,p_i48460_1_, p_i48460_4_);
       this.attackSpeed = p_i48460_3_;
       this.attackDamage = (float)p_i48460_2_ + p_i48460_1_.getAttackDamage();
    }

@@ -17,16 +17,21 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class BlockRedstoneOre extends Block {
+public class BlockRedstoneOre extends Block implements IMineLevel{
    public static final BooleanProperty LIT = BlockRedstoneTorch.LIT;
 
    public BlockRedstoneOre(Block.Properties p_i48345_1_) {
       super(p_i48345_1_);
-      this.setDefaultState(this.getDefaultState().with(LIT, Boolean.valueOf(false)));
+      this.setDefaultState(this.getDefaultState().with(LIT, Boolean.FALSE));
    }
 
    public int getLightValue(IBlockState p_149750_1_) {
       return p_149750_1_.get(LIT) ? super.getLightValue(p_149750_1_) : 0;
+   }
+
+   @Override
+   public int getMineLevel() {
+      return 2;
    }
 
    public void onBlockClicked(IBlockState p_196270_1_, World p_196270_2_, BlockPos p_196270_3_, EntityPlayer p_196270_4_) {
@@ -47,7 +52,7 @@ public class BlockRedstoneOre extends Block {
    private static void activate(IBlockState p_196500_0_, World p_196500_1_, BlockPos p_196500_2_) {
       spawnParticles(p_196500_1_, p_196500_2_);
       if (!p_196500_0_.get(LIT)) {
-         p_196500_1_.setBlockState(p_196500_2_, p_196500_0_.with(LIT, Boolean.valueOf(true)), 3);
+         p_196500_1_.setBlockState(p_196500_2_, p_196500_0_.with(LIT, Boolean.TRUE), 3);
       }
 
    }

@@ -3985,10 +3985,70 @@
   "tutorial.open_inventory.title": "\u6253\u5f00\u4f60\u7684\u7269\u54c1\u680f",
   "tutorial.punch_tree.description": "\u6309\u4f4f%s",
   "tutorial.punch_tree.title": "\u6467\u6bc1\u6811\u6728",
+
+
+
+
   "MITEStart": "-------------------------------------------------------",
-  "item.minecraft.flint_shovel": "\u71e7\u77f3\u94f2",
-  "item.minecraft.flint_axe": "\u71e7\u77f3\u65a7",
+  "MITEGUI": "----------------------------------------------",
+  "selectWorld.notification": "(\u53ea\u663e\u793a\u53d7\u652f\u6301\u7684\u4e16\u754c)",
+
+  "MITEFOODS": "--------------------------------------------",
   "item.minecraft.bowl_salad": "\u6c99\u62c9",
+  "MITEITEMS": "--------------------------------------------",
+  ""
+  "item.minecraft.adamantium_ingot": "\u827e\u5fb7\u66fc\u952d",
+  "item.minecraft.tungsten_ingot": "\u94a8\u952d",
+  "item.minecraft.mithril_ingot": "\u79d8\u94f6\u952d",
+  "item.minecraft.ancient_metal_ingot": "\u8fdc\u53e4\u91d1\u5c5e\u952d",
+  "item.minecraft.silver_ingot": "\u94f6\u952d",
+  "item.minecraft.copper_ingot": "\u94dc\u952d",
+  "item.minecraft.adamantium_nugget": "\u827e\u5fb7\u66fc\u7c92",
+  "item.minecraft.tungsten_nugget": "\u94a8\u7c92",
+  "item.minecraft.mithril_nugget": "\u79d8\u94f6\u7c92",
+  "item.minecraft.ancient_metal_nugget": "\u8fdc\u53e4\u91d1\u5c5e\u7c92",
+  "item.minecraft.silver_nugget": "\u94f6\u7c92",
+  "item.minecraft.copper_nugget": "\u94dc\u7c92",
+  "MITETOOLS": "---------------------------------------------",
+  "item.minecraft.flint_shovel": "\u71e7\u77f3\u9539",
+  "item.minecraft.flint_axe": "\u71e7\u77f3\u65a7",
   "item.minecraft.flint_hatchet": "\u71e7\u77f3\u77ed\u65a7",
-  "selectWorld.notification": "(\u53ea\u663e\u793a\u53d7\u652f\u6301\u7684\u4e16\u754c)"
+
+  "item.minecraft.copper_shovel":"\u94dc\u9539",
+  "item.minecraft.copper_pickaxe": "\u94dc\u9550",
+  "item.minecraft.copper_axe": "\u94dc\u65a7",
+  "item.minecraft.copper_hoe": "\u94dc\u9504",
+
+  "item.minecraft.silver_shovel": "\u94f6\u9539",
+  "item.minecraft.silver_pickaxe": "\u94f6\u9550",
+  "item.minecraft.silver_axe": "\u94f6\u65a7",
+  "item.minecraft.silver_hoe": "\u94f6\u9504",
+
+  "item.minecraft.ancient_metal_shovel": "\u8fdc\u53e4\u91d1\u5c5e\u9539",
+  "item.minecraft.ancient_metal_pickaxe": "\u8fdc\u53e4\u91d1\u5c5e\u9550",
+  "item.minecraft.ancient_metal_axe": "\u8fdc\u53e4\u91d1\u5c5e\u65a7",
+  "item.minecraft.ancient_metal_hoe": "\u8fdc\u53e4\u91d1\u5c5e\u9504",
+
+  "item.minecraft.mithril_shovel": "\u79d8\u94f6\u9539",
+  "item.minecraft.mithril_pickaxe": "\u79d8\u94f6\u9550",
+  "item.minecraft.mithril_axe": "\u79d8\u94f6\u65a7",
+  "item.minecraft.mithril_hoe": "\u79d8\u94f6\u9504",
+
+  "item.minecraft.tungsten_shovel": "\u94a8\u9539",
+  "item.minecraft.tungsten_pickaxe": "\u94a8\u9550",
+  "item.minecraft.tungsten_axe": "\u94a8\u65a7",
+  "item.minecraft.tungsten_hoe": "\u94a8\u9504",
+
+  "item.minecraft.adamantium_shovel": "\u827e\u5fb7\u66fc\u9539",
+  "item.minecraft.adamantium_pickaxe": "\u827e\u5fb7\u66fc\u9550",
+  "item.minecraft.adamantium_axe": "\u827e\u5fb7\u66fc\u65a7",
+  "item.minecraft.adamantium_hoe": "\u827e\u5fb7\u66fc\u9504",
+
+  "MITEWEAPONS": "-------------------------------------------",
+  "item.minecraft.copper_sword": "\u94dc\u5251",
+  "item.minecraft.silver_sword": "\u94f6\u5251",
+  "item.minecraft.ancient_metal_sword": "\u8fdc\u53e4\u91d1\u5c5e\u5251",
+  "item.minecraft.mithril_sword": "\u79d8\u94f6\u5251",
+  "item.minecraft.tungsten_sword": "\u94a8\u5251",
+  "item.minecraft.adamantium_sword": "\u827e\u5fb7\u66fc\u5251"
 }

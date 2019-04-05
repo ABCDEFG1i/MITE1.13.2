@@ -396,6 +396,7 @@ public class Bootstrap {
    }
 
    public static void register() {
+      
       if (!alreadyRegistered) {
          alreadyRegistered = true;
          SoundEvent.registerSounds();

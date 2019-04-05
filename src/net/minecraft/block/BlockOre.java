@@ -12,10 +12,16 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockOre extends Block {
-   public BlockOre(Block.Properties p_i48357_1_) {
+public class BlockOre extends Block implements IMineLevel{
+    private int mineLevel;
+   public BlockOre(Block.Properties p_i48357_1_,int mineLevel) {
       super(p_i48357_1_);
+      this.mineLevel = mineLevel;
    }
+
+    public int getMineLevel() {
+        return mineLevel;
+    }
 
     public IItemProvider getItemDropped(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, int fortuneLevel) {
       if (this == Blocks.COAL_ORE) {

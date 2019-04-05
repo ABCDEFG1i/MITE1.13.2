@@ -768,11 +768,30 @@ public class Item implements IItemProvider {
       register(Blocks.REPEATER, ItemGroup.REDSTONE);
       register(Blocks.COMPARATOR, ItemGroup.REDSTONE);
       register(new ItemGMOnly(Blocks.STRUCTURE_BLOCK, (new Item.Properties()).setRarity(EnumRarity.EPIC)));
+
+      //Vanilla Tools Start
+      registerItem("wooden_sword", new ItemSword(400,ItemTier.WOOD, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+      registerItem("wooden_shovel", new ItemSpade(200,ItemTier.WOOD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+
+      registerItem("golden_sword", new ItemSword(3200,ItemTier.GOLD, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+      registerItem("golden_shovel", new ItemSpade(1600,ItemTier.GOLD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("golden_pickaxe", new ItemPickaxe(4800,ItemTier.GOLD, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("golden_axe", new ItemAxe(4800,ItemTier.GOLD, 6.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+      registerItem("iron_shovel", new ItemSpade(3200,ItemTier.IRON, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_pickaxe", new ItemPickaxe(9600,ItemTier.IRON, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_axe", new ItemAxe(9600,ItemTier.IRON, 6.0F, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_sword", new ItemSword(6400,ItemTier.IRON, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+
+      registerItem("iron_hoe", new ItemHoe(6400,ItemTier.IRON, -1.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("golden_hoe", new ItemHoe(3200,ItemTier.GOLD, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+
+
       registerItem("turtle_helmet", new ItemArmor(ArmorMaterial.TURTLE, EntityEquipmentSlot.HEAD, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
       registerItem("scute", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
-      registerItem("iron_shovel", new ItemSpade(ItemTier.IRON, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("iron_pickaxe", new ItemPickaxe(ItemTier.IRON, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("iron_axe", new ItemAxe(ItemTier.IRON, 6.0F, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
       registerItem("flint_and_steel", new ItemFlintAndSteel((new Item.Properties()).setMaxDamage(64).setItemGroup(ItemGroup.TOOLS)));
       registerItem("apple", new ItemFood(4, 0.3F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
       registerItem("bow", new ItemBow((new Item.Properties()).setMaxDamage(384).setItemGroup(ItemGroup.COMBAT)));
@@ -782,25 +801,12 @@ public class Item implements IItemProvider {
       registerItem("diamond", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("iron_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("gold_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
-      registerItem("iron_sword", new ItemSword(ItemTier.IRON, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
-      registerItem("wooden_sword", new ItemSword(ItemTier.WOOD, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
-      registerItem("wooden_shovel", new ItemSpade(ItemTier.WOOD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));registerItem("diamond_sword", new ItemSword(ItemTier.DIAMOND, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
-      registerItem("diamond_shovel", new ItemSpade(ItemTier.DIAMOND, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("diamond_pickaxe", new ItemPickaxe(ItemTier.DIAMOND, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("diamond_axe", new ItemAxe(ItemTier.DIAMOND, 5.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("stick", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+     registerItem("stick", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("bowl", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("mushroom_stew", new ItemSoup(6, (new Item.Properties()).setMaxStackSize(1).setItemGroup(ItemGroup.FOOD)));
-      registerItem("golden_sword", new ItemSword(ItemTier.GOLD, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
-      registerItem("golden_shovel", new ItemSpade(ItemTier.GOLD, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("golden_pickaxe", new ItemPickaxe(ItemTier.GOLD, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("golden_axe", new ItemAxe(ItemTier.GOLD, 6.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("string", new ItemString((new Item.Properties()).setItemGroup(ItemGroup.MISC)));
+     registerItem("string", new ItemString((new Item.Properties()).setItemGroup(ItemGroup.MISC)));
       registerItem("feather", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("gunpowder", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
-      registerItem("iron_hoe", new ItemHoe(ItemTier.IRON, -1.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("diamond_hoe", new ItemHoe(ItemTier.DIAMOND, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("golden_hoe", new ItemHoe(ItemTier.GOLD, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("wheat_seeds", new ItemSeedFood(0, 0.4F, Blocks.WHEAT, (new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("wheat", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
       registerItem("bread", new ItemFood(5, 0.6F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
@@ -1083,10 +1089,78 @@ public class Item implements IItemProvider {
       registerItem("heart_of_the_sea", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS).setRarity(EnumRarity.UNCOMMON)));
 
       //MITEMODDED MITE Items start
-      registerItem("flint_shovel", new ItemSpade(ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("flint_axe", new ItemAxe(ItemTier.FLINT, 2.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("bowl_salad", new ItemFood(1, 1F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
-      registerItem("flint_hatchet", new ItemAxe(ItemTier.FLINT,1.5F,-3.0F,(new Item.Properties()).setItemGroup(ItemGroup.TOOLS).setMaxDamage(43)));
+      //MITE MATERIALS
+      {
+         //INGOTS
+         registerItem("adamantium_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("tungsten_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("mithril_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("ancient_metal_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("silver_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("copper_ingot", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+
+         //NUGGETS
+         registerItem("adamantium_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("tungsten_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("mithril_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("ancient_metal_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("silver_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         registerItem("copper_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+      }
+      //MITETOOLS
+      {
+         //FLINT
+         registerItem("flint_shovel", new ItemSpade(400, ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("flint_axe", new ItemAxe(1200, ItemTier.FLINT, 2.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("flint_hatchet", new ItemAxe(400, ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS).setMaxDamage(43)));
+
+         //COPPER
+         registerItem("copper_shovel", new ItemSpade(1600, ItemTier.COPPER, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("copper_pickaxe", new ItemPickaxe(4800, ItemTier.COPPER, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("copper_axe", new ItemAxe(4800, ItemTier.COPPER, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("copper_sword", new ItemSword(3200, ItemTier.COPPER, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("copper_hoe", new ItemHoe(3200, ItemTier.COPPER, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+         //SILVER
+         registerItem("silver_shovel", new ItemSpade(1600, ItemTier.SILVER, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("silver_pickaxe", new ItemPickaxe(4800, ItemTier.SILVER, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("silver_axe", new ItemAxe(4800, ItemTier.SILVER, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("silver_sword", new ItemSword(3200, ItemTier.SILVER, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("silver_hoe", new ItemHoe(3200, ItemTier.SILVER, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+
+         //ANCIENT METAL
+         registerItem("ancient_metal_shovel", new ItemSpade(6400, ItemTier.ANCIENT_METAL, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("ancient_metal_pickaxe", new ItemPickaxe(19200, ItemTier.ANCIENT_METAL, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("ancient_metal_axe", new ItemAxe(19200, ItemTier.ANCIENT_METAL, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("ancient_metal_sword", new ItemSword(12800, ItemTier.ANCIENT_METAL, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("ancient_metal_hoe", new ItemHoe(12800, ItemTier.ANCIENT_METAL, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+         //MITHRIL
+         registerItem("mithril_shovel", new ItemSpade(25600, ItemTier.MITHRIL, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("mithril_pickaxe", new ItemPickaxe(76800, ItemTier.MITHRIL, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("mithril_axe", new ItemAxe(76800, ItemTier.MITHRIL, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("mithril_sword", new ItemSword(51200, ItemTier.MITHRIL, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("mithril_hoe", new ItemHoe(51200, ItemTier.MITHRIL, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+         //TUNGSTEN
+         registerItem("tungsten_shovel", new ItemSpade(51200, ItemTier.TUNGSTEN, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("tungsten_pickaxe", new ItemPickaxe(153600, ItemTier.TUNGSTEN, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("tungsten_axe", new ItemAxe(153600, ItemTier.TUNGSTEN, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("tungsten_sword", new ItemSword(102400, ItemTier.TUNGSTEN, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("tungsten_hoe", new ItemHoe(102400, ItemTier.TUNGSTEN, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+
+         //ADAMANTIUN
+         registerItem("adamantium_shovel", new ItemSpade(102400, ItemTier.ADAMANTIUM, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("adamantium_pickaxe", new ItemPickaxe(307200, ItemTier.ADAMANTIUM, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("adamantium_axe", new ItemAxe(307200, ItemTier.ADAMANTIUM, 3, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+         registerItem("adamantium_sword", new ItemSword(204800, ItemTier.ADAMANTIUM, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+         registerItem("adamantium_hoe", new ItemHoe(409600, ItemTier.ADAMANTIUM, 0.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      }
+      //MITEFOODS
+      {
+         registerItem("bowl_salad", new ItemFood(1, 1F, false, (new Item.Properties()).setItemGroup(ItemGroup.FOOD)));
+      }
    }
 
    private static void register(Block p_179216_0_) {
