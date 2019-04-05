@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public enum ItemTier implements IItemTier {
     WOOD(0, 2.0F, 0.0F, 2, () -> {
         return Ingredient.fromTag(ItemTags.PLANKS);
-    }), FLINT(1, 0.6F, 0.5F, 5, () -> {
+    }), FLINT(1, 2.0F, 0.5F, 5, () -> {
         return Ingredient.fromItems(Items.FLINT);
     }), COPPER(2, 3.5F, 2.0F, 8, () -> {
         return Ingredient.fromItems(Items.COPPER_NUGGET);
