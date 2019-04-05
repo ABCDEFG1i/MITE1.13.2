@@ -1,4 +1,8 @@
-[English Version](https://github.com/XiaoYuOvO/MITE1.13.2/blob/B0.3.X/ChangeLogEN.md)
+[English Version](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogEN.md)
+# B0.3.1更新日志
+## 游戏机制
+* 世界生成时血量为20，应为6
+
 # B0.3.0更新日志
 ## 游戏机制:
 * 1、升级需要更高经验值:
