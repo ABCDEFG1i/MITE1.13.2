@@ -779,10 +779,10 @@ public class Item implements IItemProvider {
       registerItem("golden_pickaxe", new ItemPickaxe(4800,ItemTier.GOLD, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("golden_axe", new ItemAxe(4800,ItemTier.GOLD, 6.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
 
-      registerItem("iron_shovel", new ItemSpade(3200,ItemTier.IRON, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("iron_pickaxe", new ItemPickaxe(9600,ItemTier.IRON, 1, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("iron_axe", new ItemAxe(9600,ItemTier.IRON, 6.0F, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-      registerItem("iron_sword", new ItemSword(6400,ItemTier.IRON, 3, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
+      registerItem("iron_shovel", new ItemSpade(3200,ItemTier.IRON, 1F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_pickaxe", new ItemPickaxe(9600,ItemTier.IRON, 2, -2.8F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_axe", new ItemAxe(9600,ItemTier.IRON, 3, -3.1F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
+      registerItem("iron_sword", new ItemSword(6400,ItemTier.IRON, 4, -2.4F, (new Item.Properties()).setItemGroup(ItemGroup.COMBAT)));
 
       registerItem("iron_hoe", new ItemHoe(6400,ItemTier.IRON, -1.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
       registerItem("golden_hoe", new ItemHoe(3200,ItemTier.GOLD, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));

@@ -12,21 +12,21 @@ public enum ItemTier implements IItemTier {
         return Ingredient.fromTag(ItemTags.PLANKS);
     }), FLINT(1, 3.0F, 0.5F, 5, () -> {
         return Ingredient.fromItems(Items.FLINT);
-    }), COPPER(2, 3.5F, 3.0F, 8, () -> {
+    }), COPPER(2, 3.5F, 2.0F, 8, () -> {
         return Ingredient.fromItems(Items.COPPER_NUGGET);
-    }), SILVER(2, 3.5F, 3.0F, 10, () -> {
+    }), SILVER(2, 3.5F, 2.0F, 10, () -> {
         return Ingredient.fromItems(Items.SILVER_NUGGRET);
     }), GOLD(2, 12.0F, 0.0F, 22, () -> {
         return Ingredient.fromItems(Items.GOLD_NUGGET);
-    }), IRON(3, 6.0F, 2.0F, 14, () -> {
+    }), IRON(3, 6.0F, 3.0F, 14, () -> {
         return Ingredient.fromItems(Items.IRON_NUGGET);
-    }), ANCIENT_METAL(3, 6.0F, 2.3F, 16, () -> {
+    }), ANCIENT_METAL(3, 6.0F, 3.0F, 16, () -> {
         return Ingredient.fromItems(Items.ANCIENT_METAL_NUGGET);
-    }), MITHRIL(4, 8.0F, 3.0F, 22, () -> {
+    }), MITHRIL(4, 8.0F, 4.0F, 22, () -> {
         return Ingredient.fromItems(Items.MITHRIL_NUGGET);
-    }), TUNGSTEN(5, 9.0F, 4.0F, 20, () -> {
+    }), TUNGSTEN(5, 9.0F, 5.0F, 20, () -> {
         return Ingredient.fromItems(Items.TUNGSTEN_NUGGET);
-    }), ADAMANTIUM(5, 10.0F, 4.0F, 18, () -> {
+    }), ADAMANTIUM(5, 10.0F, 5.0F, 18, () -> {
         return Ingredient.fromItems(Items.ADAMANTIUM_NUGGET);
     });
 
