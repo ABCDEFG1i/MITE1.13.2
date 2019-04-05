@@ -1,5 +1,5 @@
 [中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogCN.md)
-# B0.4. ChangeLog
+# B0.4.0 ChangeLog
 ## Game mechanics:
 * Now the item is more easily damaged: \
   The recived damage value of tools is 100 times the hardness of the digging block\
