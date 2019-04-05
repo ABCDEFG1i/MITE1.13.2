@@ -1,4 +1,17 @@
 [中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogCN.md)
+# B0.4. ChangeLog
+## Game mechanics:
+* Now the item is more easily damaged: \
+  The recived damage value of tools is 100 times the hardness of the digging block\
+ The received damage value of swords is twice as much as the damage
+     
+## Item
+* 1, Add swords, pickaxes, shovels, axes, hoe of all levels of the vanilla 1.6.4 MITE.
+* 2, adding a new material - tungsten, better than Mithril, worse than Adamantium, durability is twice the size of Mithril's
+
+## Blocks
+* Add new ores and metal blocks of various materials
+
 # B0.3.1 ChangeLog
 ## Bug Fix
 * Health is 20 when craft world,it should be 6

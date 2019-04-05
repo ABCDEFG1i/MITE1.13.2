@@ -32,7 +32,7 @@ public class ItemTool extends ItemTiered {
 
    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
       //MITEMODDED
-      p_77644_1_.damageItem(Math.round(this.attackDamage), p_77644_3_);
+      p_77644_1_.damageItem(Math.round(this.attackDamage)*2, p_77644_3_);
       return true;
    }
 

@@ -250,6 +250,7 @@ public class PlayerControllerMP {
       }
    }
 
+   //MITEMODDED
    public float getBlockReachDistance() {
       return this.currentGameType.isCreative() ? 5.0F : 4.5F;
    }
