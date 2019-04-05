@@ -2386,13 +2386,13 @@ public class Block implements IItemProvider {
 
             register("adamantium_block",
                     new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(307.2F, 3600000.0F),
-                            6));
+                            7));
             register("tungsten_block",
                     new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(153.6F, 1800000.0F),
-                            5));
+                            6));
             register("mithril_block",
                     new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(76.8F, 90000.0F),
-                            4));
+                            5));
             register("ancient_metal_block",
                     new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(19.2F,90000.0F),
                             4));
