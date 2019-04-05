@@ -43,19 +43,24 @@ public class RecipeProvider implements IDataProvider {
             if (!set.add(p_200410_4_.getID())) {
                 throw new IllegalStateException("Duplicate recipe " + p_200410_4_.getID());
             } else {
-                this.saveRecipe(p_200398_1_, p_200410_4_.getRecipeJson(), path.resolve("data/" + p_200410_4_.getID()
-                        .getNamespace() + "/recipes/" + p_200410_4_.getID().getPath() + ".json"));
+                this.saveRecipe(p_200398_1_,
+                        p_200410_4_.getRecipeJson(),
+                        path.resolve("data/" + p_200410_4_.getID().getNamespace() + "/recipes/" + p_200410_4_.getID()
+                                .getPath() + ".json"));
                 JsonObject jsonobject = p_200410_4_.getAdvancementJson();
                 if (jsonobject != null) {
-                    this.saveRecipeAdvancement(p_200398_1_, jsonobject, path.resolve("data/" + p_200410_4_.getID()
-                            .getNamespace() + "/advancements/" + p_200410_4_.getAdvancementID().getPath() + ".json"));
+                    this.saveRecipeAdvancement(p_200398_1_,
+                            jsonobject,
+                            path.resolve("data/" + p_200410_4_.getID()
+                                    .getNamespace() + "/advancements/" + p_200410_4_.getAdvancementID()
+                                    .getPath() + ".json"));
                 }
 
             }
         });
-        this.saveRecipeAdvancement(p_200398_1_, Advancement.Builder.builder()
-                .withCriterion("impossible", new ImpossibleTrigger.Instance())
-                .serialize(), path.resolve("data/minecraft/advancements/recipes/root.json"));
+        this.saveRecipeAdvancement(p_200398_1_,
+                Advancement.Builder.builder().withCriterion("impossible", new ImpossibleTrigger.Instance()).serialize(),
+                path.resolve("data/minecraft/advancements/recipes/root.json"));
     }
 
     public String getName() {
@@ -79,7 +84,10 @@ public class RecipeProvider implements IDataProvider {
     }
 
     private InventoryChangeTrigger.Instance hasItem(ItemPredicate... p_200405_1_) {
-        return new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, p_200405_1_);
+        return new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.UNBOUNDED,
+                MinMaxBounds.IntBound.UNBOUNDED,
+                MinMaxBounds.IntBound.UNBOUNDED,
+                p_200405_1_);
     }
 
     private void registerRecipes(Consumer<IFinishedRecipe> p_200404_1_) {
@@ -404,7 +412,8 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_packed_ice", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Blocks.PACKED_ICE))
+                .addCriterion("has_at_least_9_packed_ice",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Blocks.PACKED_ICE))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.BLUE_STAINED_GLASS, 8)
                 .key('#', Blocks.GLASS)
@@ -460,7 +469,8 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Items.BONE_MEAL, 9)
                 .addIngredient(Blocks.BONE_BLOCK)
                 .setGroup("bonemeal")
-                .addCriterion("has_at_least_9_bonemeal", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.BONE_MEAL))
+                .addCriterion("has_at_least_9_bonemeal",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.BONE_MEAL))
                 .addCriterion("has_bone_block", this.hasItem(Blocks.BONE_BLOCK))
                 .build(p_200404_1_, "bone_meal_from_bone_block");
         ShapelessRecipeBuilder.shapelessRecipe(Items.BOOK)
@@ -625,7 +635,11 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("# #")
                 .patternLine("###")
-                .addCriterion("has_lots_of_items", new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.func_211340_b(10), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new ItemPredicate[0]))
+                .addCriterion("has_lots_of_items",
+                        new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.func_211340_b(10),
+                                MinMaxBounds.IntBound.UNBOUNDED,
+                                MinMaxBounds.IntBound.UNBOUNDED,
+                                new ItemPredicate[0]))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.CHEST_MINECART)
                 .key('A', Blocks.CHEST)
@@ -933,7 +947,8 @@ public class RecipeProvider implements IDataProvider {
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.DIAMOND, 9)
                 .addIngredient(Blocks.DIAMOND_BLOCK)
-                .addCriterion("has_at_least_9_diamond", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DIAMOND))
+                .addCriterion("has_at_least_9_diamond",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DIAMOND))
                 .addCriterion("has_diamond_block", this.hasItem(Blocks.DIAMOND_BLOCK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.DIAMOND_BLOCK)
@@ -941,7 +956,8 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_diamond", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DIAMOND))
+                .addCriterion("has_at_least_9_diamond",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DIAMOND))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.DIAMOND_BOOTS)
                 .key('X', Items.DIAMOND)
@@ -995,7 +1011,8 @@ public class RecipeProvider implements IDataProvider {
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.EMERALD, 9)
                 .addIngredient(Blocks.EMERALD_BLOCK)
-                .addCriterion("has_at_least_9_emerald", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.EMERALD))
+                .addCriterion("has_at_least_9_emerald",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.EMERALD))
                 .addCriterion("has_emerald_block", this.hasItem(Blocks.EMERALD_BLOCK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.EMERALD_BLOCK)
@@ -1003,7 +1020,8 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_emerald", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.EMERALD))
+                .addCriterion("has_at_least_9_emerald",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.EMERALD))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.ENCHANTING_TABLE)
                 .key('B', Items.BOOK)
@@ -1225,12 +1243,14 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_gold_ingot", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_INGOT))
+                .addCriterion("has_at_least_9_gold_ingot",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_INGOT))
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.GOLD_INGOT, 9)
                 .addIngredient(Blocks.GOLD_BLOCK)
                 .setGroup("gold_ingot")
-                .addCriterion("has_at_least_9_gold_ingot", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_INGOT))
+                .addCriterion("has_at_least_9_gold_ingot",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_INGOT))
                 .addCriterion("has_gold_block", this.hasItem(Blocks.GOLD_BLOCK))
                 .build(p_200404_1_, "gold_ingot_from_gold_block");
         ShapedRecipeBuilder.shapedRecipe(Items.GOLD_INGOT)
@@ -1239,11 +1259,13 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .setGroup("gold_ingot")
-                .addCriterion("has_at_least_9_gold_nugget", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_NUGGET))
+                .addCriterion("has_at_least_9_gold_nugget",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_NUGGET))
                 .build(p_200404_1_, "gold_ingot_from_nuggets");
         ShapelessRecipeBuilder.shapelessRecipe(Items.GOLD_NUGGET, 9)
                 .addIngredient(Items.GOLD_INGOT)
-                .addCriterion("has_at_least_9_gold_nugget", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_NUGGET))
+                .addCriterion("has_at_least_9_gold_nugget",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.GOLD_NUGGET))
                 .addCriterion("has_gold_ingot", this.hasItem(Items.GOLD_INGOT))
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.GRANITE)
@@ -1439,7 +1461,8 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_iron_ingot", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_INGOT))
+                .addCriterion("has_at_least_9_iron_ingot",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_INGOT))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.IRON_BOOTS)
                 .key('X', Items.IRON_INGOT)
@@ -1478,7 +1501,8 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Items.IRON_INGOT, 9)
                 .addIngredient(Blocks.IRON_BLOCK)
                 .setGroup("iron_ingot")
-                .addCriterion("has_at_least_9_iron_ingot", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_INGOT))
+                .addCriterion("has_at_least_9_iron_ingot",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_INGOT))
                 .addCriterion("has_iron_block", this.hasItem(Blocks.IRON_BLOCK))
                 .build(p_200404_1_, "iron_ingot_from_iron_block");
         ShapedRecipeBuilder.shapedRecipe(Items.IRON_INGOT)
@@ -1487,7 +1511,8 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .setGroup("iron_ingot")
-                .addCriterion("has_at_least_9_iron_nugget", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_NUGGET))
+                .addCriterion("has_at_least_9_iron_nugget",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_NUGGET))
                 .build(p_200404_1_, "iron_ingot_from_nuggets");
         ShapedRecipeBuilder.shapedRecipe(Items.IRON_LEGGINGS)
                 .key('X', Items.IRON_INGOT)
@@ -1498,7 +1523,8 @@ public class RecipeProvider implements IDataProvider {
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.IRON_NUGGET, 9)
                 .addIngredient(Items.IRON_INGOT)
-                .addCriterion("has_at_least_9_iron_nugget", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_NUGGET))
+                .addCriterion("has_at_least_9_iron_nugget",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.IRON_NUGGET))
                 .addCriterion("has_iron_ingot", this.hasItem(Items.IRON_INGOT))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.IRON_PICKAXE)
@@ -1634,11 +1660,13 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_lapis", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.LAPIS_LAZULI))
+                .addCriterion("has_at_least_9_lapis",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.LAPIS_LAZULI))
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.LAPIS_LAZULI, 9)
                 .addIngredient(Blocks.LAPIS_BLOCK)
-                .addCriterion("has_at_least_9_lapis", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.LAPIS_LAZULI))
+                .addCriterion("has_at_least_9_lapis",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.LAPIS_LAZULI))
                 .addCriterion("has_lapis_block", this.hasItem(Blocks.LAPIS_BLOCK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.LEAD, 2)
@@ -2627,14 +2655,16 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Items.REDSTONE, 9)
                 .addIngredient(Blocks.REDSTONE_BLOCK)
                 .addCriterion("has_redstone_block", this.hasItem(Blocks.REDSTONE_BLOCK))
-                .addCriterion("has_at_least_9_redstone", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.REDSTONE))
+                .addCriterion("has_at_least_9_redstone",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.REDSTONE))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.REDSTONE_BLOCK)
                 .key('#', Items.REDSTONE)
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_redstone", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.REDSTONE))
+                .addCriterion("has_at_least_9_redstone",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.REDSTONE))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.REDSTONE_LAMP)
                 .key('R', Items.REDSTONE)
@@ -2722,14 +2752,20 @@ public class RecipeProvider implements IDataProvider {
                 .addCriterion("has_sand", this.hasItem(Blocks.RED_SAND))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.RED_SANDSTONE_SLAB, 6)
-                .key('#', Ingredient.fromItems(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE, Blocks.CUT_RED_SANDSTONE))
+                .key('#',
+                        Ingredient.fromItems(Blocks.RED_SANDSTONE,
+                                Blocks.CHISELED_RED_SANDSTONE,
+                                Blocks.CUT_RED_SANDSTONE))
                 .patternLine("###")
                 .addCriterion("has_red_sandstone", this.hasItem(Blocks.RED_SANDSTONE))
                 .addCriterion("has_chiseled_red_sandstone", this.hasItem(Blocks.CHISELED_RED_SANDSTONE))
                 .addCriterion("has_cut_red_sandstone", this.hasItem(Blocks.CUT_RED_SANDSTONE))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.RED_SANDSTONE_STAIRS, 4)
-                .key('#', Ingredient.fromItems(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE, Blocks.CUT_RED_SANDSTONE))
+                .key('#',
+                        Ingredient.fromItems(Blocks.RED_SANDSTONE,
+                                Blocks.CHISELED_RED_SANDSTONE,
+                                Blocks.CUT_RED_SANDSTONE))
                 .patternLine("#  ")
                 .patternLine("## ")
                 .patternLine("###")
@@ -2833,11 +2869,13 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine("###")
                 .patternLine("###")
                 .patternLine("###")
-                .addCriterion("has_at_least_9_slime_ball", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SLIME_BALL))
+                .addCriterion("has_at_least_9_slime_ball",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SLIME_BALL))
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.SLIME_BALL, 9)
                 .addIngredient(Blocks.SLIME_BLOCK)
-                .addCriterion("has_at_least_9_slime_ball", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SLIME_BALL))
+                .addCriterion("has_at_least_9_slime_ball",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SLIME_BALL))
                 .addCriterion("has_slime", this.hasItem(Blocks.SLIME_BLOCK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.CUT_RED_SANDSTONE, 4)
@@ -3229,12 +3267,14 @@ public class RecipeProvider implements IDataProvider {
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Items.DRIED_KELP, 9)
                 .addIngredient(Blocks.DRIED_KELP_BLOCK)
-                .addCriterion("has_at_least_9_dried_kelp", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DRIED_KELP))
+                .addCriterion("has_at_least_9_dried_kelp",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DRIED_KELP))
                 .addCriterion("has_dried_kelp_block", this.hasItem(Blocks.DRIED_KELP_BLOCK))
                 .build(p_200404_1_);
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.DRIED_KELP_BLOCK)
                 .addIngredient(Items.DRIED_KELP, 9)
-                .addCriterion("has_at_least_9_dried_kelp", this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DRIED_KELP))
+                .addCriterion("has_at_least_9_dried_kelp",
+                        this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.DRIED_KELP))
                 .addCriterion("has_dried_kelp_block", this.hasItem(Blocks.DRIED_KELP_BLOCK))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.CONDUIT)
@@ -3280,9 +3320,10 @@ public class RecipeProvider implements IDataProvider {
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromTag(ItemTags.LOGS), Items.CHARCOAL, 0.15F, 200)
                 .addCriterion("has_log", this.hasItem(ItemTags.LOGS))
                 .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.CHORUS_FRUIT), Items.POPPED_CHORUS_FRUIT, 0.1F, 200)
-                .addCriterion("has_chorus_fruit", this.hasItem(Items.CHORUS_FRUIT))
-                .build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.CHORUS_FRUIT),
+                Items.POPPED_CHORUS_FRUIT,
+                0.1F,
+                200).addCriterion("has_chorus_fruit", this.hasItem(Items.CHORUS_FRUIT)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COAL_ORE.asItem()), Items.COAL, 0.1F, 200)
                 .addCriterion("has_coal_ore", this.hasItem(Blocks.COAL_ORE))
                 .build(p_200404_1_, "coal_from_smelting");
@@ -3313,7 +3354,10 @@ public class RecipeProvider implements IDataProvider {
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.DIAMOND_ORE.asItem()), Items.DIAMOND, 1.0F, 200)
                 .addCriterion("has_diamond_ore", this.hasItem(Blocks.DIAMOND_ORE))
                 .build(p_200404_1_, "diamond_from_smelting");
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LAPIS_ORE.asItem()), Items.LAPIS_LAZULI, 0.2F, 200)
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LAPIS_ORE.asItem()),
+                Items.LAPIS_LAZULI,
+                0.2F,
+                200)
                 .addCriterion("has_lapis_ore", this.hasItem(Blocks.LAPIS_ORE))
                 .build(p_200404_1_, "lapis_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.EMERALD_ORE.asItem()), Items.EMERALD, 1.0F, 200)
@@ -3331,7 +3375,16 @@ public class RecipeProvider implements IDataProvider {
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CACTUS.asItem()), Items.CACTUS_GREEN, 1.0F, 200)
                 .addCriterion("has_cactus", this.hasItem(Blocks.CACTUS))
                 .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.GOLDEN_PICKAXE, Items.GOLDEN_SHOVEL, Items.GOLDEN_AXE, Items.GOLDEN_HOE, Items.GOLDEN_SWORD, Items.GOLDEN_HELMET, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_LEGGINGS, Items.GOLDEN_BOOTS, Items.GOLDEN_HORSE_ARMOR), Items.GOLD_NUGGET, 0.1F, 200)
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.GOLDEN_PICKAXE,
+                Items.GOLDEN_SHOVEL,
+                Items.GOLDEN_AXE,
+                Items.GOLDEN_HOE,
+                Items.GOLDEN_SWORD,
+                Items.GOLDEN_HELMET,
+                Items.GOLDEN_CHESTPLATE,
+                Items.GOLDEN_LEGGINGS,
+                Items.GOLDEN_BOOTS,
+                Items.GOLDEN_HORSE_ARMOR), Items.GOLD_NUGGET, 0.1F, 200)
                 .addCriterion("has_golden_pickaxe", this.hasItem(Items.GOLDEN_PICKAXE))
                 .addCriterion("has_golden_shovel", this.hasItem(Items.GOLDEN_SHOVEL))
                 .addCriterion("has_golden_axe", this.hasItem(Items.GOLDEN_AXE))
@@ -3343,7 +3396,20 @@ public class RecipeProvider implements IDataProvider {
                 .addCriterion("has_golden_boots", this.hasItem(Items.GOLDEN_BOOTS))
                 .addCriterion("has_golden_horse_armor", this.hasItem(Items.GOLDEN_HORSE_ARMOR))
                 .build(p_200404_1_, "gold_nugget_from_smelting");
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.IRON_PICKAXE, Items.IRON_SHOVEL, Items.IRON_AXE, Items.IRON_HOE, Items.IRON_SWORD, Items.IRON_HELMET, Items.IRON_CHESTPLATE, Items.IRON_LEGGINGS, Items.IRON_BOOTS, Items.IRON_HORSE_ARMOR, Items.CHAINMAIL_HELMET, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_BOOTS), Items.IRON_NUGGET, 0.1F, 200)
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.IRON_PICKAXE,
+                Items.IRON_SHOVEL,
+                Items.IRON_AXE,
+                Items.IRON_HOE,
+                Items.IRON_SWORD,
+                Items.IRON_HELMET,
+                Items.IRON_CHESTPLATE,
+                Items.IRON_LEGGINGS,
+                Items.IRON_BOOTS,
+                Items.IRON_HORSE_ARMOR,
+                Items.CHAINMAIL_HELMET,
+                Items.CHAINMAIL_CHESTPLATE,
+                Items.CHAINMAIL_LEGGINGS,
+                Items.CHAINMAIL_BOOTS), Items.IRON_NUGGET, 0.1F, 200)
                 .addCriterion("has_iron_pickaxe", this.hasItem(Items.IRON_PICKAXE))
                 .addCriterion("has_iron_shovel", this.hasItem(Items.IRON_SHOVEL))
                 .addCriterion("has_iron_axe", this.hasItem(Items.IRON_AXE))
@@ -3380,97 +3446,447 @@ public class RecipeProvider implements IDataProvider {
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COBBLESTONE), Blocks.STONE.asItem(), 0.1F, 200)
                 .addCriterion("has_cobblestone", this.hasItem(Blocks.COBBLESTONE))
                 .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.STONE_BRICKS), Blocks.CRACKED_STONE_BRICKS.asItem(), 0.1F, 200)
-                .addCriterion("has_stone_bricks", this.hasItem(Blocks.STONE_BRICKS))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLACK_TERRACOTTA), Blocks.BLACK_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_black_terracotta", this.hasItem(Blocks.BLACK_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLUE_TERRACOTTA), Blocks.BLUE_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_blue_terracotta", this.hasItem(Blocks.BLUE_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BROWN_TERRACOTTA), Blocks.BROWN_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_brown_terracotta", this.hasItem(Blocks.BROWN_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CYAN_TERRACOTTA), Blocks.CYAN_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_cyan_terracotta", this.hasItem(Blocks.CYAN_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GRAY_TERRACOTTA), Blocks.GRAY_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_gray_terracotta", this.hasItem(Blocks.GRAY_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GREEN_TERRACOTTA), Blocks.GREEN_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_green_terracotta", this.hasItem(Blocks.GREEN_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_BLUE_TERRACOTTA), Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.STONE_BRICKS),
+                Blocks.CRACKED_STONE_BRICKS.asItem(),
+                0.1F,
+                200).addCriterion("has_stone_bricks", this.hasItem(Blocks.STONE_BRICKS)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLACK_TERRACOTTA),
+                Blocks.BLACK_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_black_terracotta", this.hasItem(Blocks.BLACK_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLUE_TERRACOTTA),
+                Blocks.BLUE_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_blue_terracotta", this.hasItem(Blocks.BLUE_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BROWN_TERRACOTTA),
+                Blocks.BROWN_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_brown_terracotta", this.hasItem(Blocks.BROWN_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CYAN_TERRACOTTA),
+                Blocks.CYAN_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_cyan_terracotta", this.hasItem(Blocks.CYAN_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GRAY_TERRACOTTA),
+                Blocks.GRAY_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_gray_terracotta", this.hasItem(Blocks.GRAY_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GREEN_TERRACOTTA),
+                Blocks.GREEN_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_green_terracotta", this.hasItem(Blocks.GREEN_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_BLUE_TERRACOTTA),
+                Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200)
                 .addCriterion("has_light_blue_terracotta", this.hasItem(Blocks.LIGHT_BLUE_TERRACOTTA))
                 .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_GRAY_TERRACOTTA), Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_GRAY_TERRACOTTA),
+                Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200)
                 .addCriterion("has_light_gray_terracotta", this.hasItem(Blocks.LIGHT_GRAY_TERRACOTTA))
                 .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIME_TERRACOTTA), Blocks.LIME_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_lime_terracotta", this.hasItem(Blocks.LIME_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.MAGENTA_TERRACOTTA), Blocks.MAGENTA_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_magenta_terracotta", this.hasItem(Blocks.MAGENTA_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.ORANGE_TERRACOTTA), Blocks.ORANGE_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_orange_terracotta", this.hasItem(Blocks.ORANGE_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PINK_TERRACOTTA), Blocks.PINK_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_pink_terracotta", this.hasItem(Blocks.PINK_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PURPLE_TERRACOTTA), Blocks.PURPLE_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_purple_terracotta", this.hasItem(Blocks.PURPLE_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.RED_TERRACOTTA), Blocks.RED_GLAZED_TERRACOTTA.asItem(), 0.1F, 200)
-                .addCriterion("has_red_terracotta", this.hasItem(Blocks.RED_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.WHITE_TERRACOTTA), Blocks.WHITE_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_white_terracotta", this.hasItem(Blocks.WHITE_TERRACOTTA))
-                .build(p_200404_1_);
-        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.YELLOW_TERRACOTTA), Blocks.YELLOW_GLAZED_TERRACOTTA
-                .asItem(), 0.1F, 200)
-                .addCriterion("has_yellow_terracotta", this.hasItem(Blocks.YELLOW_TERRACOTTA))
-                .build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIME_TERRACOTTA),
+                Blocks.LIME_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_lime_terracotta", this.hasItem(Blocks.LIME_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.MAGENTA_TERRACOTTA),
+                Blocks.MAGENTA_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_magenta_terracotta", this.hasItem(Blocks.MAGENTA_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.ORANGE_TERRACOTTA),
+                Blocks.ORANGE_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_orange_terracotta", this.hasItem(Blocks.ORANGE_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PINK_TERRACOTTA),
+                Blocks.PINK_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_pink_terracotta", this.hasItem(Blocks.PINK_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PURPLE_TERRACOTTA),
+                Blocks.PURPLE_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_purple_terracotta", this.hasItem(Blocks.PURPLE_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.RED_TERRACOTTA),
+                Blocks.RED_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_red_terracotta", this.hasItem(Blocks.RED_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.WHITE_TERRACOTTA),
+                Blocks.WHITE_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_white_terracotta", this.hasItem(Blocks.WHITE_TERRACOTTA)).build(p_200404_1_);
+        FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.YELLOW_TERRACOTTA),
+                Blocks.YELLOW_GLAZED_TERRACOTTA.asItem(),
+                0.1F,
+                200).addCriterion("has_yellow_terracotta", this.hasItem(Blocks.YELLOW_TERRACOTTA)).build(p_200404_1_);
 
         //MITE Recipes Start
-        ShapedRecipeBuilder.shapedRecipe(Items.FLINT_AXE)
-                .key('#', Items.STICK)
-                .key('X', Items.FLINT)
-                .patternLine("XX")
-                .patternLine("X#")
-                .patternLine(" #")
-                .addCriterion("has_flint", this.hasItem(Items.FLINT))
-                .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Items.FLINT_SHOVEL)
-                .key('#', Items.STICK)
-                .key('X', Items.FLINT)
-                .patternLine("X")
-                .patternLine("#")
-                .patternLine("#")
-                .addCriterion("has_flint", this.hasItem(Items.FLINT))
-                .build(p_200404_1_);
-        ShapelessRecipeBuilder.shapelessRecipe(Items.SALAD)
-                .addIngredient(Ingredient.fromItems(Blocks.DANDELION),3)
-                .addIngredient(Ingredient.fromItems(Items.BOWL))
-                .addCriterion("has_dandelion", this.hasItem(Blocks.DANDELION))
-                .addCriterion("has_bowl", this.hasItem(Items.BOWL))
-                .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Items.FLINT_HATCHET)
-                .key('S',Items.STICK)
-                .key('F',Items.FLINT)
-                .patternLine("SF")
-                .addCriterion("has_flint", this.hasItem(Items.FLINT))
-                .build(p_200404_1_);
+        {
+            //MITE Tools
+            {
+                ShapedRecipeBuilder.shapedRecipe(Items.FLINT_AXE)
+                        .key('#', Items.STICK)
+                        .key('X', Items.FLINT)
+                        .patternLine("XX")
+                        .patternLine("X#")
+                        .patternLine(" #")
+                        .addCriterion("has_flint", this.hasItem(Items.FLINT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.FLINT_SHOVEL)
+                        .key('#', Items.STICK)
+                        .key('X', Items.FLINT)
+                        .patternLine("X")
+                        .patternLine("#")
+                        .patternLine("#")
+                        .addCriterion("has_flint", this.hasItem(Items.FLINT))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.FLINT_HATCHET)
+                        .key('S', Items.STICK)
+                        .key('F', Items.FLINT)
+                        .patternLine("SF")
+                        .addCriterion("has_flint", this.hasItem(Items.FLINT))
+                        .build(p_200404_1_);
+                //AXES
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Items.COPPER_AXE)
+                            .key('M',Items.COPPER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.COPPER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.SILVER_AXE)
+                            .key('M',Items.SILVER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_AXE)
+                            .key('M',Items.ANCIENT_METAL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.ANCIENT_METAL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_AXE)
+                            .key('M',Items.MITHRIL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.MITHRIL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_AXE)
+                            .key('M',Items.TUNGSTEN_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.TUNGSTEN_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_AXE)
+                            .key('M',Items.ADAMANTIUM_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine("MS")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.ADAMANTIUM_INGOT))
+                            .build(p_200404_1_);
+                }
+                //SHOVEL
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Items.COPPER_SHOVEL)
+                            .key('M',Items.COPPER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.COPPER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.SILVER_SHOVEL)
+                            .key('M',Items.SILVER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_SHOVEL)
+                            .key('M',Items.ANCIENT_METAL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.ANCIENT_METAL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_SHOVEL)
+                            .key('M',Items.MITHRIL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.MITHRIL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_SHOVEL)
+                            .key('M',Items.TUNGSTEN_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.TUNGSTEN_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_SHOVEL)
+                            .key('M',Items.ADAMANTIUM_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("S")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.ADAMANTIUM_INGOT))
+                            .build(p_200404_1_);
+                }
+                //SWORDS
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Items.COPPER_SWORD)
+                            .key('M',Items.COPPER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.COPPER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.SILVER_SWORD)
+                            .key('M',Items.SILVER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_SWORD)
+                            .key('M',Items.ANCIENT_METAL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.ANCIENT_METAL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_SWORD)
+                            .key('M',Items.MITHRIL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.MITHRIL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_SWORD)
+                            .key('M',Items.TUNGSTEN_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.TUNGSTEN_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_SWORD)
+                            .key('M',Items.ADAMANTIUM_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("M")
+                            .patternLine("M")
+                            .patternLine("S")
+                            .addCriterion("has_martial",this.hasItem(Items.ADAMANTIUM_INGOT))
+                            .build(p_200404_1_);
+                }
+                //PICKAXES
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Items.COPPER_PICKAXE)
+                        .key('M',Items.COPPER_INGOT)
+                        .key('S',Items.STICK)
+                        .patternLine("MMM")
+                        .patternLine(" S ")
+                        .patternLine(" S ")
+                        .addCriterion("has_martial",this.hasItem(Items.COPPER_INGOT))
+                        .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.SILVER_PICKAXE)
+                            .key('M',Items.SILVER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MMM")
+                            .patternLine(" S ")
+                            .patternLine(" S ")
+                            .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_PICKAXE)
+                            .key('M',Items.ANCIENT_METAL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MMM")
+                            .patternLine(" S ")
+                            .patternLine(" S ")
+                            .addCriterion("has_martial",this.hasItem(Items.ANCIENT_METAL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_PICKAXE)
+                            .key('M',Items.MITHRIL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MMM")
+                            .patternLine(" S ")
+                            .patternLine(" S ")
+                            .addCriterion("has_martial",this.hasItem(Items.MITHRIL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_PICKAXE)
+                            .key('M',Items.TUNGSTEN_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MMM")
+                            .patternLine(" S ")
+                            .patternLine(" S ")
+                            .addCriterion("has_martial",this.hasItem(Items.TUNGSTEN_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_PICKAXE)
+                            .key('M',Items.ADAMANTIUM_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MMM")
+                            .patternLine(" S ")
+                            .patternLine(" S ")
+                            .addCriterion("has_martial",this.hasItem(Items.ADAMANTIUM_INGOT))
+                            .build(p_200404_1_);
+                }
+                //HOE
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Items.COPPER_HOE)
+                            .key('M',Items.COPPER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.COPPER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.SILVER_HOE)
+                            .key('M',Items.SILVER_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.SILVER_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_PICKAXE)
+                            .key('M',Items.ANCIENT_METAL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.ANCIENT_METAL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_HOE)
+                            .key('M',Items.MITHRIL_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.MITHRIL_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_HOE)
+                            .key('M',Items.TUNGSTEN_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.TUNGSTEN_INGOT))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_HOE)
+                            .key('M',Items.ADAMANTIUM_INGOT)
+                            .key('S',Items.STICK)
+                            .patternLine("MM")
+                            .patternLine(" S")
+                            .patternLine(" S")
+                            .addCriterion("has_martial",this.hasItem(Items.ADAMANTIUM_INGOT))
+                            .build(p_200404_1_);
+                }
+            }
+            //MITE Foods
+            {
+                ShapelessRecipeBuilder.shapelessRecipe(Items.SALAD)
+                        .addIngredient(Ingredient.fromItems(Blocks.DANDELION), 3)
+                        .addIngredient(Ingredient.fromItems(Items.BOWL))
+                        .addCriterion("has_dandelion", this.hasItem(Blocks.DANDELION))
+                        .addCriterion("has_bowl", this.hasItem(Items.BOWL))
+                        .build(p_200404_1_);
+            }
+            //MITE MARTIAL
+            {
+                ShapedRecipeBuilder.shapedRecipe(Items.COPPER_INGOT)
+                        .key('#', Items.COPPER_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_copper_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.COPPER_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.SILVER_INGOT)
+                        .key('#', Items.SILVER_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_silver_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SILVER_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.ANCIENT_METAL_INGOT)
+                        .key('#', Items.ANCIENT_METAL_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_ancient_metal_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ANCIENT_METAL_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.MITHRIL_INGOT)
+                        .key('#', Items.MITHRIL_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_mithril_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.MITHRIL_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.TUNGSTEN_INGOT)
+                        .key('#', Items.TUNGSTEN_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_tungsten_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.TUNGSTEN_NUGGET))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.ADAMANTIUM_INGOT)
+                        .key('#', Items.ADAMANTIUM_NUGGET)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .addCriterion("has_at_least_9_adamantium_nugget",
+                                this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ADAMANTIUM_NUGGET))
+                        .build(p_200404_1_);
+
+                ShapelessRecipeBuilder.shapelessRecipe(Items.COPPER_NUGGET, 9)
+                        .addIngredient(Items.COPPER_INGOT)
+                        .addCriterion("has_copper_ingot", this.hasItem(Items.COPPER_INGOT))
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.SILVER_NUGGET, 9)
+                        .addIngredient(Items.SILVER_INGOT)
+                        .addCriterion("has_silver_ingot", this.hasItem(Items.SILVER_INGOT))
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.ANCIENT_METAL_NUGGET, 9)
+                        .addIngredient(Items.ANCIENT_METAL_INGOT)
+                        .addCriterion("has_ancient_metal_ingot", this.hasItem(Items.ANCIENT_METAL_INGOT))
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.MITHRIL_NUGGET, 9)
+                        .addIngredient(Items.MITHRIL_INGOT)
+                        .addCriterion("has_mithril_ingot", this.hasItem(Items.MITHRIL_INGOT))
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.TUNGSTEN_NUGGET, 9)
+                        .addIngredient(Items.TUNGSTEN_INGOT)
+                        .addCriterion("has_tungsten_ingot", this.hasItem(Items.TUNGSTEN_INGOT))
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.ADAMANTIUM_NUGGET, 9)
+                        .addIngredient(Items.ADAMANTIUM_INGOT)
+                        .addCriterion("has_adamantium_ingot", this.hasItem(Items.ADAMANTIUM_INGOT))
+                        .build(p_200404_1_);
+            }
+        }
     }
 
     private void saveRecipe(DirectoryCache p_208311_1_, JsonObject p_208311_2_, Path p_208311_3_) {

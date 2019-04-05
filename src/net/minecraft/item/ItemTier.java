@@ -15,7 +15,7 @@ public enum ItemTier implements IItemTier {
     }), COPPER(2, 3.5F, 2.0F, 8, () -> {
         return Ingredient.fromItems(Items.COPPER_NUGGET);
     }), SILVER(2, 3.5F, 2.0F, 10, () -> {
-        return Ingredient.fromItems(Items.SILVER_NUGGRET);
+        return Ingredient.fromItems(Items.SILVER_NUGGET);
     }), GOLD(2, 12.0F, 0.0F, 22, () -> {
         return Ingredient.fromItems(Items.GOLD_NUGGET);
     }), IRON(3, 6.0F, 3.0F, 14, () -> {

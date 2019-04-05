@@ -327,7 +327,7 @@ public class Items {
       public static final Item TUNGSTEN_NUGGET;
       public static final Item MITHRIL_NUGGET;
       public static final Item ANCIENT_METAL_NUGGET;
-      public static final Item SILVER_NUGGRET;
+      public static final Item SILVER_NUGGET;
       public static final Item COPPER_NUGGET;
    //MITETOOLS
       public static final Item SILVER_SHOVEL;
@@ -697,7 +697,7 @@ public class Items {
             TUNGSTEN_NUGGET = getRegisteredItem("tungsten_nugget");
             MITHRIL_NUGGET = getRegisteredItem("mithril_nugget");
             ANCIENT_METAL_NUGGET = getRegisteredItem("ancient_metal_nugget");
-            SILVER_NUGGRET = getRegisteredItem("silver_nugget");
+            SILVER_NUGGET = getRegisteredItem("silver_nugget");
             COPPER_NUGGET = getRegisteredItem("copper_nugget");
 
          }
@@ -708,7 +708,7 @@ public class Items {
 
          //MITETOOLS
          {
-            //FLINT
+
             FLINT_SHOVEL = getRegisteredItem("flint_shovel");
             FLINT_AXE = getRegisteredItem("flint_axe");
             FLINT_HATCHET = getRegisteredItem("flint_hatchet");
