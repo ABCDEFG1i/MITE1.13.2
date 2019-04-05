@@ -31,13 +31,15 @@ public class ItemTool extends ItemTiered {
    }
 
    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
-      p_77644_1_.damageItem(2, p_77644_3_);
+      //MITEMODDED
+      p_77644_1_.damageItem(Math.round(this.attackDamage), p_77644_3_);
       return true;
    }
 
    public boolean onBlockDestroyed(ItemStack p_179218_1_, World p_179218_2_, IBlockState p_179218_3_, BlockPos p_179218_4_, EntityLivingBase p_179218_5_) {
       if (!p_179218_2_.isRemote && p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) != 0.0F) {
-         p_179218_1_.damageItem(1, p_179218_5_);
+         //MITEMODDED
+         p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_,p_179218_4_)*100), p_179218_5_);
       }
 
       return true;

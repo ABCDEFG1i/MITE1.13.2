@@ -204,7 +204,7 @@ public class Block implements IItemProvider {
         Block air = new BlockAir(Block.Properties.createBlockProperties(Material.AIR).setNonSolid());
         register(IRegistry.field_212618_g.func_212609_b(), air);
         Block stone = new BlockStone(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.STONE)
-                .setHardnessAndResistance(1.5F, 6.0F));
+                .setHardnessAndResistance(2.4F, 6.0F));
         register("stone", stone);
         register("granite", new Block(Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.DIRT)
                 .setHardnessAndResistance(1.5F, 6.0F)));
