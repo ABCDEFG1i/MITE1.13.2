@@ -1112,7 +1112,7 @@ public class Item implements IItemProvider {
          //FLINT
          registerItem("flint_shovel", new ItemSpade(400, ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
          registerItem("flint_axe", new ItemAxe(1200, ItemTier.FLINT, 2.0F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
-         registerItem("flint_hatchet", new ItemAxe(400, ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS).setMaxDamage(43)));
+         registerItem("flint_hatchet", new ItemAxe(400, ItemTier.FLINT, 1.5F, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));
 
          //COPPER
          registerItem("copper_shovel", new ItemSpade(1600, ItemTier.COPPER, 1, -3.0F, (new Item.Properties()).setItemGroup(ItemGroup.TOOLS)));

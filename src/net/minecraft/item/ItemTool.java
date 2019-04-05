@@ -37,11 +37,20 @@ public class ItemTool extends ItemTiered {
    }
 
    public boolean onBlockDestroyed(ItemStack p_179218_1_, World p_179218_2_, IBlockState p_179218_3_, BlockPos p_179218_4_, EntityLivingBase p_179218_5_) {
-      if (!p_179218_2_.isRemote && p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) != 0.0F) {
-         //MITEMODDED
-         p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_,p_179218_4_)*100), p_179218_5_);
-      }
+       if (!p_179218_2_.isRemote && p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) != 0.0F) {
+           if (!p_179218_3_.getMaterial().isToolNotRequired()) {
 
+               p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 100F), p_179218_5_);
+           } else {
+               if (effectiveBlocks.contains(p_179218_3_.getBlock())) {
+                   p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 40F),
+                           p_179218_5_);
+               } else {
+                   p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 10F),
+                           p_179218_5_);
+               }
+           }
+       }
       return true;
    }
 

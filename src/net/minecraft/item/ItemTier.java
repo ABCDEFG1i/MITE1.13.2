@@ -8,9 +8,9 @@ import net.minecraft.util.LazyLoadBase;
 import java.util.function.Supplier;
 
 public enum ItemTier implements IItemTier {
-    WOOD(0, 2.0F, 0.0F, 15, () -> {
+    WOOD(0, 2.0F, 0.0F, 2, () -> {
         return Ingredient.fromTag(ItemTags.PLANKS);
-    }), FLINT(1, 3.0F, 0.5F, 5, () -> {
+    }), FLINT(1, 0.6F, 0.5F, 5, () -> {
         return Ingredient.fromItems(Items.FLINT);
     }), COPPER(2, 3.5F, 2.0F, 8, () -> {
         return Ingredient.fromItems(Items.COPPER_NUGGET);
@@ -22,7 +22,7 @@ public enum ItemTier implements IItemTier {
         return Ingredient.fromItems(Items.IRON_NUGGET);
     }), ANCIENT_METAL(3, 6.0F, 3.0F, 16, () -> {
         return Ingredient.fromItems(Items.ANCIENT_METAL_NUGGET);
-    }), MITHRIL(4, 8.0F, 4.0F, 22, () -> {
+    }), MITHRIL(4, 7.5F, 4.0F, 22, () -> {
         return Ingredient.fromItems(Items.MITHRIL_NUGGET);
     }), TUNGSTEN(5, 9.0F, 5.0F, 20, () -> {
         return Ingredient.fromItems(Items.TUNGSTEN_NUGGET);

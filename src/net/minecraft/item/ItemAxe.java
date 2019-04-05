@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -27,6 +28,28 @@ public class ItemAxe extends ItemTool {
    @Override
    public boolean canHarvestBlock(IBlockState p_150897_1_) {
       return EFFECTIVE_ON.contains(p_150897_1_.getBlock());
+   }
+
+   @Override
+   public boolean onBlockDestroyed(ItemStack p_179218_1_, World p_179218_2_, IBlockState p_179218_3_, BlockPos p_179218_4_, EntityLivingBase p_179218_5_) {
+      //MITEMODDED
+      if (!p_179218_2_.isRemote && p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) != 0.0F) {
+         if (!p_179218_3_.getMaterial().isToolNotRequired()) {
+
+            p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 45F), p_179218_5_);
+         } else {
+            if (EFFECTIVE_ON.contains(p_179218_3_.getBlock())) {
+               p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 20F),
+                       p_179218_5_);
+            } else {
+               p_179218_1_.damageItem(Math.round(p_179218_3_.getBlockHardness(p_179218_2_, p_179218_4_) * 10F),
+                       p_179218_5_);
+            }
+         }
+      }
+
+
+      return true;
    }
 
    public float getDestroySpeed(ItemStack p_150893_1_, IBlockState p_150893_2_) {
