@@ -14,4 +14,7 @@ Go to the underground world and dig diamonds then get rich overnight._**
 * Replace the original version of 1.13.2.jar
 * Start the game.Have fun
  
+ #About
+This version of Minecraft is based on the source code of vanilla 1.13.2 provided by 
+MinecraftForge and its srg file for deobfuscation, so it inherits the LGPL2.1 license from MinecraftForge.
  
