@@ -12,3 +12,6 @@
 * 将下载下来的MITE1.13.2.jar重命名为1.13.2.jar
 * 替换原版的1.13.2.jar
 * 启动游戏
+# 关于
+此版本的Minecraft基于MinecraftForge提供的原版1.13.2的源代码及其用于反混淆的srg文件修改而成，
+因此它继承了MinecraftForge的LGPL2.1许可证。
