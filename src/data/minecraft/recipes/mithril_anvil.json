@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:mithril_block"
+    },
+    "i": {
+      "item": "minecraft:mithril_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:mithril_anvil"
+  }
+}

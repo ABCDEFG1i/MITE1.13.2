@@ -3936,6 +3936,65 @@ public class RecipeProvider implements IDataProvider {
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.ADAMANTIUM_INGOT))
                         .build(p_200404_1_);
             }
+            //MITE Functional Blocks
+            {
+                ShapedRecipeBuilder.shapedRecipe(Blocks.COPPER_ANVIL)
+                        .key('I', Blocks.COPPER_BLOCK)
+                        .key('i', Items.COPPER_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_copper_block", this.hasItem(Blocks.COPPER_BLOCK))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.SILVER_ANVIL)
+                        .key('I', Blocks.SILVER_BLOCK)
+                        .key('i', Items.SILVER_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_silver_block", this.hasItem(Blocks.SILVER_BLOCK))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.GOLD_ANVIL)
+                        .key('I', Blocks.GOLD_BLOCK)
+                        .key('i', Items.GOLD_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_gold_block", this.hasItem(Blocks.GOLD_BLOCK))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.ANCIENT_METAL_ANVIL)
+                        .key('I', Blocks.ANCIENT_METAL_BLOCK)
+                        .key('i', Items.ANCIENT_METAL_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_ancient_metal_block", this.hasItem(Blocks.ANCIENT_METAL_BLOCK))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.MITHRIL_ANVIL)
+                        .key('I', Blocks.MITHRIL_BLOCK)
+                        .key('i', Items.MITHRIL_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_mithril_block", this.hasItem(Blocks.MITHRIL_ANVIL))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.TUNGSTEN_ANVIL)
+                        .key('I', Blocks.TUNGSTEN_BLOCK)
+                        .key('i', Items.TUNGSTEN_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_tungsten_block", this.hasItem(Blocks.TUNGSTEN_BLOCK))
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Blocks.ADAMANTIUM_ANVIL)
+                        .key('I', Blocks.ADAMANTIUM_BLOCK)
+                        .key('i', Items.ADAMANTIUM_INGOT)
+                        .patternLine("III")
+                        .patternLine(" i ")
+                        .patternLine("iii")
+                        .addCriterion("has_adamantium_block", this.hasItem(Blocks.ADAMANTIUM_BLOCK))
+                        .build(p_200404_1_);
+            }
             //MITE Furnace Recipes
             {
                 FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COPPER_ORE.asItem()),

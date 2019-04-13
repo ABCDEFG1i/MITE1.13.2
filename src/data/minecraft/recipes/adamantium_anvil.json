@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:adamantium_block"
+    },
+    "i": {
+      "item": "minecraft:adamantium_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "result": {
+    "item": "minecraft:adamantium_anvil"
+  }
+}
