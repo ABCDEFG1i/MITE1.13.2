@@ -164,9 +164,7 @@ public class ContainerRepair extends Container {
 
     public void onCraftMatrixChanged(IInventory p_75130_1_) {
         super.onCraftMatrixChanged(p_75130_1_);
-        if (p_75130_1_ == this.inputSlots) {
-            this.updateRepairOutput();
-        }
+        this.updateRepairOutput();
 
     }
 

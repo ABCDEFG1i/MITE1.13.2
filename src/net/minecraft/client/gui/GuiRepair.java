@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GuiRepair extends GuiContainer {
+public class GuiRepair extends GuiContainer implements IContainerListener{
     private static final ResourceLocation ANVIL_RESOURCE = new ResourceLocation("textures/gui/container/anvil.png");
     private final ContainerRepair anvil;
     private final InventoryPlayer playerInventory;
@@ -57,6 +57,8 @@ public class GuiRepair extends GuiContainer {
         this.nameField.setMaxStringLength(35);
         this.nameField.setTextAcceptHandler(this::func_195393_a);
         this.eventListeners.add(this.nameField);
+        this.inventorySlots.removeListener(this);
+        this.inventorySlots.addListener(this);
     }
 
     public void render(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
@@ -97,6 +99,7 @@ public class GuiRepair extends GuiContainer {
     public void onGuiClosed() {
         super.onGuiClosed();
         this.mc.keyboardListener.enableRepeatEvents(false);
+        this.inventorySlots.removeListener(this);
     }
 
     public void onResize(Minecraft p_175273_1_, int p_175273_2_, int p_175273_3_) {
@@ -114,6 +117,16 @@ public class GuiRepair extends GuiContainer {
             this.nameField.setText(p_71111_3_.isEmpty() ? "" : p_71111_3_.getDisplayName().getString());
             this.nameField.setEnabled(!p_71111_3_.isEmpty());
         }
+
+    }
+
+    @Override
+    public void sendWindowProperty(Container p_71112_1_, int p_71112_2_, int p_71112_3_) {
+
+    }
+
+    @Override
+    public void sendAllWindowProperties(Container p_175173_1_, IInventory p_175173_2_) {
 
     }
 
