@@ -1019,9 +1019,9 @@
   "block.minecraft.nether_wart": "Nether Wart",
   "block.minecraft.cauldron": "Cauldron",
   "block.minecraft.enchanting_table": "Enchanting Table",
-  "block.minecraft.anvil": "Anvil",
-  "block.minecraft.chipped_anvil": "Chipped Anvil",
-  "block.minecraft.damaged_anvil": "Damaged Anvil",
+  "block.minecraft.iron_anvil": "Iron Anvil",
+  "block.minecraft.chipped_iron_anvil": "Chipped Iron Anvil",
+  "block.minecraft.damaged_iron_anvil": "Damaged Iron Anvil",
   "block.minecraft.end_stone": "End Stone",
   "block.minecraft.end_portal_frame": "End Portal Frame",
   "block.minecraft.mycelium": "Mycelium",
@@ -4058,5 +4058,33 @@
   "block.minecraft.mithril_block": "Mithril Block",
   "block.minecraft.ancient_metal_block": "Ancient Metal Block",
   "block.minecraft.silver_block": "Silver Block",
-  "block.minecraft.copper_block": "Copper Block"
+  "block.minecraft.copper_block": "Copper Block",
+
+  "block.minecraft.copper_anvil": "Copper Anvil",
+  "block.minecraft.chipped_copper_anvil": "Chipped Copper Anvil",
+  "block.minecraft.damaged_copper_anvil": "Damaged Copper Anvil",
+
+  "block.minecraft.silver_anvil": "Silver Anvil",
+  "block.minecraft.chipped_silver_anvil": "Chipped Silver Anvil",
+  "block.minecraft.damaged_silver_anvil": "Damaged Silver Anvil",
+
+  "block.minecraft.gold_anvil": "Gold Anvil",
+  "block.minecraft.chipped_gold_anvil": "Chipped Gold Anvil",
+  "block.minecraft.damaged_gold_anvil": "Damaged Gold Anvil",
+
+  "block.minecraft.ancient_metal_anvil": "Ancient Metal Anvil",
+  "block.minecraft.chipped_ancient_metal_anvil": "Chipped Ancient Metal Anvil",
+  "block.minecraft.damaged_ancient_metal_anvil": "Damaged Ancient Metal Anvil",
+
+  "block.minecraft.mithril_anvil": "Mithril Anvil",
+  "block.minecraft.chipped_mithril_anvil": "Chipped Mithril Anvil",
+  "block.minecraft.damaged_mithril_anvil": "Damaged Mithril Anvil",
+
+  "block.minecraft.tungsten_anvil": "Tungsten Anvil",
+  "block.minecraft.chipped_tungsten_anvil": "Chipped Tungsten Anvil",
+  "block.minecraft.damaged_tungsten_anvil": "Damaged Tungsten Anvil",
+
+  "block.minecraft.adamantium_anvil": "Adamantium Anvil",
+  "block.minecraft.chipped_adamantium_anvil": "Chipped Adamantium Anvil",
+  "block.minecraft.damaged_adamantium_anvil": "Damaged Adamantium Anvil"
 }

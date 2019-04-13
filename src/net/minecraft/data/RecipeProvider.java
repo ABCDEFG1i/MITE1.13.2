@@ -180,7 +180,7 @@ public class RecipeProvider implements IDataProvider {
                 .addIngredient(Blocks.COBBLESTONE)
                 .addCriterion("has_stone", this.hasItem(Blocks.DIORITE))
                 .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Blocks.ANVIL)
+        ShapedRecipeBuilder.shapedRecipe(Blocks.IRON_ANVIL)
                 .key('I', Blocks.IRON_BLOCK)
                 .key('i', Items.IRON_INGOT)
                 .patternLine("III")

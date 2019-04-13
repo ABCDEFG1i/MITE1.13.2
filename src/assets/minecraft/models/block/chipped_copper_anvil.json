@@ -1,0 +1,6 @@
+{
+    "parent": "block/copper_anvil",
+    "textures": {
+        "top": "block/chipped_copper_anvil_top"
+    }
+}

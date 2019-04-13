@@ -12,5 +12,7 @@ public interface IItemTier {
 
    int getEnchantability();
 
+   int getRepairDurability();
+
    Ingredient getRepairMaterial();
 }

@@ -1,8 +1,8 @@
 package net.minecraft.block;
 
-import javax.annotation.Nullable;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -10,12 +10,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerRepair;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.Rotation;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityAnvil;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -24,11 +28,16 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-public class BlockAnvil extends BlockFalling {
-   private static final Logger LOGGER = LogManager.getLogger();
+import javax.annotation.Nullable;
+
+public class BlockAnvil extends BlockFalling implements ITileEntityProvider {
+   private int currentDamage;
+   private final int maxDamage;
+   private final int repairLevel;
+   private BlockPos blockAt;
+   private World worldIn;
+   private final ItemTier tier;
    public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
    private static final VoxelShape field_196436_c = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
    private static final VoxelShape field_196439_y = Block.makeCuboidShape(3.0D, 4.0D, 4.0D, 13.0D, 5.0D, 12.0D);
@@ -40,10 +49,45 @@ public class BlockAnvil extends BlockFalling {
    private static final VoxelShape X_AXIS_AABB = VoxelShapes.func_197872_a(field_196436_c, VoxelShapes.func_197872_a(field_196439_y, VoxelShapes.func_197872_a(field_196440_z, field_196434_A)));
    private static final VoxelShape Z_AXIS_AABB = VoxelShapes.func_197872_a(field_196436_c, VoxelShapes.func_197872_a(field_196435_B, VoxelShapes.func_197872_a(field_196437_C, field_196438_D)));
 
-   public BlockAnvil(Block.Properties p_i48450_1_) {
+   BlockAnvil(Block.Properties p_i48450_1_, ItemTier tier, int maxDamage, int repairLevel) {
       super(p_i48450_1_);
+      this.repairLevel = repairLevel;
+      this.maxDamage = maxDamage;
+      this.tier =tier;
       this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH));
    }
+   BlockAnvil(Block.Properties p_i48450_1_,ItemTier tier, int currentDamage, int maxDamage, int repairLevel) {
+      super(p_i48450_1_);
+      this.repairLevel = repairLevel;
+      this.currentDamage = currentDamage;
+      this.maxDamage = maxDamage;
+      this.tier = tier;
+      this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH));
+   }
+
+   @Override
+   public void fillItemGroup(ItemGroup p_149666_1_, NonNullList<ItemStack> p_149666_2_) {
+      ItemStack shownItem = new ItemStack(this);
+      NBTTagCompound tag = new NBTTagCompound();
+      NBTTagCompound blockEntityTag = new NBTTagCompound();
+      blockEntityTag.setString("id", "minecraft:anvil");
+      blockEntityTag.setInteger("Damage",currentDamage);
+      tag.setTag("BlockEntityTag", blockEntityTag);
+      tag.setInteger("Damage",currentDamage);
+      shownItem.setTag(tag);
+      p_149666_2_.add(shownItem);
+   }
+
+   @Nullable
+   @Override
+   public TileEntity createNewTileEntity(IBlockReader p_196283_1_) {
+      return new TileEntityAnvil();
+   }
+
+   public int getRepairLevel() {
+      return repairLevel;
+   }
+
 
    public boolean isFullCube(IBlockState p_149686_1_) {
       return false;
@@ -59,10 +103,25 @@ public class BlockAnvil extends BlockFalling {
 
    public boolean onBlockActivated(IBlockState p_196250_1_, World p_196250_2_, BlockPos p_196250_3_, EntityPlayer p_196250_4_, EnumHand p_196250_5_, EnumFacing p_196250_6_, float p_196250_7_, float p_196250_8_, float p_196250_9_) {
       if (!p_196250_2_.isRemote) {
-         p_196250_4_.displayGui(new BlockAnvil.Anvil(p_196250_2_, p_196250_3_));
+         this.blockAt = p_196250_3_;
+         this.worldIn = p_196250_2_;
+         p_196250_4_.displayGui(new BlockAnvil.Anvil(p_196250_2_, p_196250_3_,this.repairLevel));
       }
 
       return true;
+   }
+   @Override
+   public void dropBlockAsItemWithChance(IBlockState blockCurrentState, World worldIn, BlockPos blockAt, float chanceToDrop, int fortuneLevel) {
+      ItemStack result = new ItemStack(((IItemProvider) this).asItem());
+      NBTTagCompound tag = new NBTTagCompound();
+      NBTTagCompound blockEntityTag = new NBTTagCompound();
+      blockEntityTag.setString("id", "minecraft:anvil");
+      int damage =  ((TileEntityAnvil)worldIn.getTileEntity(blockAt)).getDamage();
+      blockEntityTag.setInteger("Damage",damage);
+      tag.setTag("BlockEntityTag", blockEntityTag);
+      tag.setInteger("Damage",damage);
+      result.setTag(tag);
+      spawnAsEntity(worldIn, blockAt, result);
    }
 
    public VoxelShape getShape(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
@@ -83,12 +142,65 @@ public class BlockAnvil extends BlockFalling {
    }
 
    @Nullable
-   public static IBlockState damage(IBlockState p_196433_0_) {
-      Block block = p_196433_0_.getBlock();
-      if (block == Blocks.ANVIL) {
-         return Blocks.CHIPPED_ANVIL.getDefaultState().with(FACING, p_196433_0_.get(FACING));
-      } else {
-         return block == Blocks.CHIPPED_ANVIL ? Blocks.DAMAGED_ANVIL.getDefaultState().with(FACING, p_196433_0_.get(FACING)) : null;
+   public IBlockState damage(int p_196433_0_) {
+      TileEntity tileEntityAnvil = this.worldIn.getTileEntity(this.blockAt);
+      if (tileEntityAnvil instanceof TileEntityAnvil){
+         TileEntityAnvil anvilTileEntity =  (TileEntityAnvil) tileEntityAnvil;
+         anvilTileEntity.setDamage(anvilTileEntity.getDamage() + p_196433_0_);
+         this.currentDamage = anvilTileEntity.getDamage();
+      }
+      if (currentDamage>=this.maxDamage){
+         return null;
+      }
+      if (this.currentDamage>=maxDamage/3*2){
+         return this.getDamagedState().with(FACING,this.worldIn.getBlockState(blockAt).get(FACING));
+      }else if (currentDamage<=maxDamage/3){
+         return this.getDefaultState().with(FACING,this.worldIn.getBlockState(blockAt).get(FACING));
+      } else if(currentDamage<=maxDamage/3*2 && currentDamage>=maxDamage/3) {
+         return this.getChippedState().with(FACING,this.worldIn.getBlockState(blockAt).get(FACING));
+      }
+
+      return null;
+   }
+
+   private IBlockState getChippedState(){
+     switch (this.tier){
+        case COPPER:
+           return Blocks.CHIPPED_COPPER_ANVIL.getDefaultState();
+        case SILVER:
+           return Blocks.CHIPPED_SILVER_ANVIL.getDefaultState();
+        case GOLD:
+           return Blocks.CHIPPED_GOLD_ANVIL.getDefaultState();
+        case ANCIENT_METAL:
+           return Blocks.CHIPPED_ANCIENT_METAL_ANVIL.getDefaultState();
+        case MITHRIL:
+           return Blocks.CHIPPED_MITHRIL_ANVIL.getDefaultState();
+        case TUNGSTEN:
+           return Blocks.CHIPPED_TUNGSTEN_ANVIL.getDefaultState();
+        case ADAMANTIUM:
+           return Blocks.CHIPPED_ADAMANTIUM_ANVIL.getDefaultState();
+           default:
+              return Blocks.CHIPPED_IRON_ANVIL.getDefaultState();
+     }
+   }
+   private IBlockState getDamagedState(){
+      switch (this.tier){
+         case COPPER:
+            return Blocks.DAMAGED_COPPER_ANVIL.getDefaultState();
+         case SILVER:
+            return Blocks.DAMAGED_SILVER_ANVIL.getDefaultState();
+         case GOLD:
+            return Blocks.DAMAGED_GOLD_ANVIL.getDefaultState();
+         case ANCIENT_METAL:
+            return Blocks.DAMAGED_ANCIENT_METAL_ANVIL.getDefaultState();
+         case MITHRIL:
+            return Blocks.DAMAGED_MITHRIL_ANVIL.getDefaultState();
+         case TUNGSTEN:
+            return Blocks.DAMAGED_TUNGSTEN_ANVIL.getDefaultState();
+         case ADAMANTIUM:
+            return Blocks.DAMAGED_ADAMANTIUM_ANVIL.getDefaultState();
+         default:
+            return Blocks.DAMAGED_IRON_ANVIL.getDefaultState();
       }
    }
 
@@ -107,14 +219,16 @@ public class BlockAnvil extends BlockFalling {
    public static class Anvil implements IInteractionObject {
       private final World world;
       private final BlockPos position;
+      private final int repairLevel;
 
-      public Anvil(World p_i45741_1_, BlockPos p_i45741_2_) {
+      public Anvil(World p_i45741_1_, BlockPos p_i45741_2_,int repairLevel) {
          this.world = p_i45741_1_;
          this.position = p_i45741_2_;
+         this.repairLevel = repairLevel;
       }
 
       public ITextComponent getName() {
-         return new TextComponentTranslation(Blocks.ANVIL.getTranslationKey());
+         return new TextComponentTranslation(Blocks.IRON_ANVIL.getTranslationKey());
       }
 
       public boolean hasCustomName() {
@@ -127,7 +241,11 @@ public class BlockAnvil extends BlockFalling {
       }
 
       public Container createContainer(InventoryPlayer p_174876_1_, EntityPlayer p_174876_2_) {
-         return new ContainerRepair(p_174876_1_, this.world, this.position, p_174876_2_);
+         return new ContainerRepair(p_174876_1_, this.world, this.position, p_174876_2_,this.repairLevel);
+      }
+
+      public int getGuiLevel() {
+         return repairLevel;
       }
 
       public String getGuiID() {

@@ -1,36 +1,11 @@
 package net.minecraft.client.entity;
 
 import com.google.common.collect.Lists;
-import java.util.Iterator;
-import java.util.List;
-import javax.annotation.Nullable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ElytraSound;
-import net.minecraft.client.audio.IAmbientSoundHandler;
-import net.minecraft.client.audio.MovingSoundMinecartRiding;
-import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.audio.UnderwaterAmbientSoundHandler;
-import net.minecraft.client.audio.UnderwaterAmbientSounds;
-import net.minecraft.client.gui.GuiCommandBlock;
-import net.minecraft.client.gui.GuiEditCommandBlockMinecart;
-import net.minecraft.client.gui.GuiEnchantment;
-import net.minecraft.client.gui.GuiHopper;
-import net.minecraft.client.gui.GuiMerchant;
-import net.minecraft.client.gui.GuiRepair;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiScreenBook;
-import net.minecraft.client.gui.inventory.GuiBeacon;
-import net.minecraft.client.gui.inventory.GuiBrewingStand;
-import net.minecraft.client.gui.inventory.GuiChest;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.client.gui.inventory.GuiDispenser;
-import net.minecraft.client.gui.inventory.GuiEditSign;
-import net.minecraft.client.gui.inventory.GuiEditStructure;
-import net.minecraft.client.gui.inventory.GuiFurnace;
-import net.minecraft.client.gui.inventory.GuiScreenHorseInventory;
-import net.minecraft.client.gui.inventory.GuiShulkerBox;
+import net.minecraft.client.audio.*;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.inventory.*;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.util.RecipeBookClient;
 import net.minecraft.entity.Entity;
@@ -52,17 +27,7 @@ import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.play.client.CPacketAnimation;
-import net.minecraft.network.play.client.CPacketChatMessage;
-import net.minecraft.network.play.client.CPacketClientStatus;
-import net.minecraft.network.play.client.CPacketCloseWindow;
-import net.minecraft.network.play.client.CPacketEntityAction;
-import net.minecraft.network.play.client.CPacketInput;
-import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.network.play.client.CPacketPlayerAbilities;
-import net.minecraft.network.play.client.CPacketPlayerDigging;
-import net.minecraft.network.play.client.CPacketRecipeInfo;
-import net.minecraft.network.play.client.CPacketVehicleMove;
+import net.minecraft.network.play.client.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatisticsManager;
@@ -71,17 +36,8 @@ import net.minecraft.tileentity.CommandBlockBaseLogic;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.tileentity.TileEntityStructure;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec2f;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.*;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IInteractionObject;
@@ -89,6 +45,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public class EntityPlayerSP extends AbstractClientPlayer {
@@ -550,25 +510,30 @@ public class EntityPlayerSP extends AbstractClientPlayer {
    }
 
    public void displayGUIChest(IInventory p_71007_1_) {
-      String s = p_71007_1_ instanceof IInteractionObject ? ((IInteractionObject)p_71007_1_).getGuiID() : "minecraft:container";
-      if ("minecraft:chest".equals(s)) {
-         this.mc.displayGuiScreen(new GuiChest(this.inventory, p_71007_1_));
-      } else if ("minecraft:hopper".equals(s)) {
-         this.mc.displayGuiScreen(new GuiHopper(this.inventory, p_71007_1_));
-      } else if ("minecraft:furnace".equals(s)) {
-         this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_));
-      } else if ("minecraft:brewing_stand".equals(s)) {
-         this.mc.displayGuiScreen(new GuiBrewingStand(this.inventory, p_71007_1_));
-      } else if ("minecraft:beacon".equals(s)) {
-         this.mc.displayGuiScreen(new GuiBeacon(this.inventory, p_71007_1_));
-      } else if (!"minecraft:dispenser".equals(s) && !"minecraft:dropper".equals(s)) {
-         if ("minecraft:shulker_box".equals(s)) {
+      String s = p_71007_1_ instanceof IInteractionObject ? ((IInteractionObject) p_71007_1_).getGuiID() : "minecraft:container";
+      switch (s) {
+         case "minecraft:hopper":
+            this.mc.displayGuiScreen(new GuiHopper(this.inventory, p_71007_1_));
+            break;
+         case "minecraft:furnace":
+            this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_));
+            break;
+         case "minecraft:brewing_stand":
+            this.mc.displayGuiScreen(new GuiBrewingStand(this.inventory, p_71007_1_));
+            break;
+         case "minecraft:beacon":
+            this.mc.displayGuiScreen(new GuiBeacon(this.inventory, p_71007_1_));
+            break;
+         case "minecraft:dispenser":
+         case "minecraft:dropper":
+            this.mc.displayGuiScreen(new GuiDispenser(this.inventory, p_71007_1_));
+            break;
+         case "minecraft:shulker_box":
             this.mc.displayGuiScreen(new GuiShulkerBox(this.inventory, p_71007_1_));
-         } else {
+            break;
+         default:
             this.mc.displayGuiScreen(new GuiChest(this.inventory, p_71007_1_));
-         }
-      } else {
-         this.mc.displayGuiScreen(new GuiDispenser(this.inventory, p_71007_1_));
+            break;
       }
 
    }
@@ -579,12 +544,16 @@ public class EntityPlayerSP extends AbstractClientPlayer {
 
    public void displayGui(IInteractionObject p_180468_1_) {
       String s = p_180468_1_.getGuiID();
-      if ("minecraft:crafting_table".equals(s)) {
-         this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world));
-      } else if ("minecraft:enchanting_table".equals(s)) {
-         this.mc.displayGuiScreen(new GuiEnchantment(this.inventory, this.world, p_180468_1_));
-      } else if ("minecraft:anvil".equals(s)) {
-         this.mc.displayGuiScreen(new GuiRepair(this.inventory, this.world));
+      switch (s) {
+         case "minecraft:crafting_table":
+            this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world));
+            break;
+         case "minecraft:enchanting_table":
+            this.mc.displayGuiScreen(new GuiEnchantment(this.inventory, this.world, p_180468_1_));
+            break;
+         case "minecraft:anvil":
+            this.mc.displayGuiScreen(new GuiRepair(this.inventory, this.world, p_180468_1_.getGuiLevel()));
+            break;
       }
 
    }

@@ -360,7 +360,7 @@
   "block.minecraft.air": "\u7a7a\u6c14",
   "block.minecraft.allium": "\u7ed2\u7403\u8471",
   "block.minecraft.andesite": "\u5b89\u5c71\u5ca9",
-  "block.minecraft.anvil": "\u94c1\u7827",
+  "block.minecraft.iron_anvil": "\u94c1\u7827",
   "block.minecraft.attached_melon_stem": "\u7ed3\u679c\u7684\u897f\u74dc\u830e",
   "block.minecraft.attached_pumpkin_stem": "\u7ed3\u679c\u7684\u5357\u74dc\u830e",
   "block.minecraft.azure_bluet": "\u831c\u8349\u82b1",
@@ -1058,7 +1058,7 @@
   "block.minecraft.cave_air": "\u6d1e\u7a74\u7a7a\u6c14",
   "block.minecraft.chain_command_block": "\u8fde\u9501\u578b\u547d\u4ee4\u65b9\u5757",
   "block.minecraft.chest": "\u7bb1\u5b50",
-  "block.minecraft.chipped_anvil": "\u5f00\u88c2\u7684\u94c1\u7827",
+  "block.minecraft.chipped_iron_anvil": "\u5f00\u88c2\u7684\u94c1\u7827",
   "block.minecraft.chiseled_quartz_block": "\u933e\u5236\u77f3\u82f1\u5757",
   "block.minecraft.chiseled_red_sandstone": "\u933e\u5236\u7ea2\u7802\u5ca9",
   "block.minecraft.chiseled_sandstone": "\u933e\u5236\u7802\u5ca9",
@@ -1095,7 +1095,7 @@
   "block.minecraft.cyan_stained_glass_pane": "\u9752\u8272\u67d3\u8272\u73bb\u7483\u677f",
   "block.minecraft.cyan_terracotta": "\u9752\u8272\u9676\u74e6",
   "block.minecraft.cyan_wool": "\u9752\u8272\u7f8a\u6bdb",
-  "block.minecraft.damaged_anvil": "\u635f\u574f\u7684\u94c1\u7827",
+  "block.minecraft.damaged_iron_anvil": "\u635f\u574f\u7684\u94c1\u7827",
   "block.minecraft.dandelion": "\u84b2\u516c\u82f1",
   "block.minecraft.dark_oak_button": "\u6df1\u8272\u6a61\u6728\u6309\u94ae",
   "block.minecraft.dark_oak_door": "\u6df1\u8272\u6a61\u6728\u95e8",
@@ -4063,5 +4063,33 @@
   "block.minecraft.mithril_block": "\u79d8\u94f6\u5757",
   "block.minecraft.ancient_metal_block": "\u8fdc\u53e4\u91d1\u5c5e\u5757",
   "block.minecraft.silver_block": "\u94f6\u5757",
-  "block.minecraft.copper_block": "\u94dc\u5757"
+  "block.minecraft.copper_block": "\u94dc\u5757",
+
+  "block.minecraft.copper_anvil": "\u94dc\u7827",
+  "block.minecraft.chipped_copper_anvil": "\u5f00\u88c2\u7684\u94dc\u7827",
+  "block.minecraft.damaged_copper_anvil": "\u635f\u574f\u7684\u94dc\u7827",
+
+  "block.minecraft.silver_anvil": "\u94f6\u7827",
+  "block.minecraft.chipped_silver_anvil": "\u5f00\u88c2\u7684\u94f6\u7827",
+  "block.minecraft.damaged_silver_anvil": "\u635f\u574f\u7684\u94f6\u7827",
+
+  "block.minecraft.gold_anvil": "\u91d1\u7827",
+  "block.minecraft.chipped_gold_anvil": "\u5f00\u88c2\u7684\u91d1\u7827",
+  "block.minecraft.damaged_gold_anvil": "\u635f\u574f\u7684\u91d1\u7827",
+
+  "block.minecraft.ancient_metal_anvil": "\u8fdc\u53e4\u91d1\u5c5e\u7827",
+  "block.minecraft.chipped_ancient_metal_anvil": "\u5f00\u88c2\u7684\u8fdc\u53e4\u91d1\u5c5e\u7827",
+  "block.minecraft.damaged_ancient_metal_anvil": "\u635f\u574f\u7684\u8fdc\u53e4\u91d1\u5c5e\u7827",
+
+  "block.minecraft.mithril_anvil": "\u79d8\u94f6\u7827",
+  "block.minecraft.chipped_mithril_anvil": "\u5f00\u88c2\u7684\u79d8\u94f6\u7827",
+  "block.minecraft.damaged_mithril_anvil": "\u635f\u574f\u7684\u79d8\u94f6\u7827",
+
+  "block.minecraft.tungsten_anvil": "\u94a8\u7827",
+  "block.minecraft.chipped_tungsten_anvil": "\u5f00\u88c2\u7684\u94a8\u7827",
+  "block.minecraft.damaged_tungsten_anvil": "\u635f\u574f\u7684\u94a8\u7827",
+
+  "block.minecraft.adamantium_anvil": "\u827e\u5fb7\u66fc\u7827",
+  "block.minecraft.chipped_adamantium_anvil": "\u5f00\u88c2\u7684\u827e\u5fb7\u66fc\u7827",
+  "block.minecraft.damaged_adamantium_anvil": "\u635f\u574f\u7684\u827e\u5fb7\u66fc\u7827"
 }

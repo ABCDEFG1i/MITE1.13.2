@@ -1,0 +1,6 @@
+{
+    "parent": "block/gold_anvil",
+    "textures": {
+        "top": "block/chipped_gold_anvil_top"
+    }
+}

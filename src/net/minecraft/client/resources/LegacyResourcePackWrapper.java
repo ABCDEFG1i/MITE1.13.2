@@ -26,10 +26,10 @@ public class LegacyResourcePackWrapper implements IResourcePack {
    public static final Map<ResourceLocation, ResourceLocation> NEW_TO_LEGACY_MAP = Util.make(() -> {
       Builder<ResourceLocation, ResourceLocation> builder = ImmutableMap.builder();
       builder.put(new ResourceLocation("textures/block/melon_stem.png"), new ResourceLocation("textures/block/pumpkin_stem.png"));
-      builder.put(new ResourceLocation("textures/block/anvil.png"), new ResourceLocation("textures/blocks/anvil_base.png"));
-      builder.put(new ResourceLocation("textures/block/anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_0.png"));
-      builder.put(new ResourceLocation("textures/block/chipped_anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_1.png"));
-      builder.put(new ResourceLocation("textures/block/damaged_anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_2.png"));
+      builder.put(new ResourceLocation("textures/block/iron_anvil.png"), new ResourceLocation("textures/blocks/anvil_base.png"));
+      builder.put(new ResourceLocation("textures/block/iron_anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_0.png"));
+      builder.put(new ResourceLocation("textures/block/chipped_iron_anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_1.png"));
+      builder.put(new ResourceLocation("textures/block/damaged_iron_anvil_top.png"), new ResourceLocation("textures/blocks/anvil_top_damaged_2.png"));
       builder.put(new ResourceLocation("textures/block/beacon.png"), new ResourceLocation("textures/blocks/beacon.png"));
       builder.put(new ResourceLocation("textures/block/bedrock.png"), new ResourceLocation("textures/blocks/bedrock.png"));
       builder.put(new ResourceLocation("textures/block/beetroots_stage0.png"), new ResourceLocation("textures/blocks/beetroots_stage_0.png"));

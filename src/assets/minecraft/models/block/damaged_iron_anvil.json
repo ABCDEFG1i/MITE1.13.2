@@ -1,6 +1,6 @@
 {
     "parent": "block/anvil",
     "textures": {
-        "top": "block/chipped_anvil_top"
+        "top": "block/damaged_iron_anvil_top"
     }
 }

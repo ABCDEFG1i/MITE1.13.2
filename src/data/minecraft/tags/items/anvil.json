@@ -1,8 +1,29 @@
 {
   "replace": false,
   "values": [
-    "minecraft:anvil",
-    "minecraft:chipped_anvil",
-    "minecraft:damaged_anvil"
+    "minecraft:copper_anvil",
+    "minecraft:chipped_copper_anvil",
+    "minecraft:damaged_copper_anvil",
+    "minecraft:silver_anvil",
+    "minecraft:chipped_silver_anvil",
+    "minecraft:damaged_silver_anvil",
+    "minecraft:gold_anvil",
+    "minecraft:chipped_gold_anvil",
+    "minecraft:damaged_gold_anvil",
+    "minecraft:iron_anvil",
+    "minecraft:chipped_iron_anvil",
+    "minecraft:damaged_iron_anvil",
+    "minecraft:ancient_metal_anvil",
+    "minecraft:chipped_ancient_metal_anvil",
+    "minecraft:damaged_ancient_metal_anvil",
+    "minecraft:mithril_anvil",
+    "minecraft:chipped_mithril_anvil",
+    "minecraft:damaged_mithril_anvil",
+    "minecraft:tungsten_anvil",
+    "minecraft:chipped_tungsten_anvil",
+    "minecraft:damaged_tungsten_anvil",
+    "minecraft:adamantium_anvil",
+    "minecraft:chipped_adamantium_anvil",
+    "minecraft:damaged_adamantium_anvil"
   ]
 }

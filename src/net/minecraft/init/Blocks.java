@@ -333,9 +333,9 @@ public class Blocks {
    public static final Block CREEPER_HEAD;
    public static final Block DRAGON_WALL_HEAD;
    public static final Block DRAGON_HEAD;
-   public static final Block ANVIL;
-   public static final Block CHIPPED_ANVIL;
-   public static final Block DAMAGED_ANVIL;
+   public static final Block IRON_ANVIL;
+   public static final Block CHIPPED_IRON_ANVIL;
+   public static final Block DAMAGED_IRON_ANVIL;
    public static final Block TRAPPED_CHEST;
    public static final Block LIGHT_WEIGHTED_PRESSURE_PLATE;
    public static final Block HEAVY_WEIGHTED_PRESSURE_PLATE;
@@ -619,6 +619,32 @@ public class Blocks {
    public static final Block MITHRIL_BLOCK;
    public static final Block SILVER_BLOCK;
    public static final Block COPPER_BLOCK;
+
+   //ANVIL
+   public static final Block COPPER_ANVIL;
+   public static final Block SILVER_ANVIL;
+   public static final Block GOLD_ANVIL;
+   public static final Block ANCIENT_METAL_ANVIL;
+   public static final Block MITHRIL_ANVIL;
+   public static final Block TUNGSTEN_ANVIL;
+   public static final Block ADAMANTIUM_ANVIL;
+
+   public static final Block DAMAGED_COPPER_ANVIL;
+   public static final Block DAMAGED_SILVER_ANVIL;
+   public static final Block DAMAGED_GOLD_ANVIL;
+   public static final Block DAMAGED_ANCIENT_METAL_ANVIL;
+   public static final Block DAMAGED_MITHRIL_ANVIL;
+   public static final Block DAMAGED_TUNGSTEN_ANVIL;
+   public static final Block DAMAGED_ADAMANTIUM_ANVIL;
+
+   public static final Block CHIPPED_COPPER_ANVIL;
+   public static final Block CHIPPED_SILVER_ANVIL;
+   public static final Block CHIPPED_GOLD_ANVIL;
+   public static final Block CHIPPED_ANCIENT_METAL_ANVIL;
+   public static final Block CHIPPED_MITHRIL_ANVIL;
+   public static final Block CHIPPED_TUNGSTEN_ANVIL;
+   public static final Block CHIPPED_ADAMANTIUM_ANVIL;
+
 
    private static Block getRegisteredBlock(String p_180383_0_) {
       Block block = IRegistry.field_212618_g.func_82594_a(new ResourceLocation(p_180383_0_));
@@ -959,9 +985,9 @@ public class Blocks {
          CREEPER_HEAD = getRegisteredBlock("creeper_head");
          DRAGON_WALL_HEAD = getRegisteredBlock("dragon_wall_head");
          DRAGON_HEAD = getRegisteredBlock("dragon_head");
-         ANVIL = getRegisteredBlock("anvil");
-         CHIPPED_ANVIL = getRegisteredBlock("chipped_anvil");
-         DAMAGED_ANVIL = getRegisteredBlock("damaged_anvil");
+         IRON_ANVIL = getRegisteredBlock("iron_anvil");
+         CHIPPED_IRON_ANVIL = getRegisteredBlock("chipped_iron_anvil");
+         DAMAGED_IRON_ANVIL = getRegisteredBlock("damaged_iron_anvil");
          TRAPPED_CHEST = getRegisteredBlock("trapped_chest");
          LIGHT_WEIGHTED_PRESSURE_PLATE = getRegisteredBlock("light_weighted_pressure_plate");
          HEAVY_WEIGHTED_PRESSURE_PLATE = getRegisteredBlock("heavy_weighted_pressure_plate");
@@ -1236,18 +1262,58 @@ public class Blocks {
 
          //MITE Blocks Start
          {
-            COPPER_ORE = getRegisteredBlock("copper_ore");
-            SILVER_ORE = getRegisteredBlock("silver_ore");
-            MITHRIL_ORE = getRegisteredBlock("mithril_ore");
-            TUNGSTEN_ORE = getRegisteredBlock("tungsten_ore");
-            ADAMANTIUM_ORE = getRegisteredBlock("adamantium_ore");
+            //Ores
+            {
+               COPPER_ORE = getRegisteredBlock("copper_ore");
+               SILVER_ORE = getRegisteredBlock("silver_ore");
+               MITHRIL_ORE = getRegisteredBlock("mithril_ore");
+               TUNGSTEN_ORE = getRegisteredBlock("tungsten_ore");
+               ADAMANTIUM_ORE = getRegisteredBlock("adamantium_ore");
+            }
 
-            COPPER_BLOCK = getRegisteredBlock("copper_block");
-            SILVER_BLOCK = getRegisteredBlock("silver_block");
-            ANCIENT_METAL_BLOCK = getRegisteredBlock("ancient_metal_block");
-            MITHRIL_BLOCK = getRegisteredBlock("mithril_block");
-            TUNGSTEN_BLOCK = getRegisteredBlock("tungsten_block");
-            ADAMANTIUM_BLOCK = getRegisteredBlock("adamantium_block");
+            //Material Blocks
+            {
+               COPPER_BLOCK = getRegisteredBlock("copper_block");
+               SILVER_BLOCK = getRegisteredBlock("silver_block");
+               ANCIENT_METAL_BLOCK = getRegisteredBlock("ancient_metal_block");
+               MITHRIL_BLOCK = getRegisteredBlock("mithril_block");
+               TUNGSTEN_BLOCK = getRegisteredBlock("tungsten_block");
+               ADAMANTIUM_BLOCK = getRegisteredBlock("adamantium_block");
+            }
+
+            //Anvils
+            {
+                //Normal
+                {
+                    COPPER_ANVIL = getRegisteredBlock("copper_anvil");
+                    SILVER_ANVIL = getRegisteredBlock("silver_anvil");
+                    GOLD_ANVIL = getRegisteredBlock("gold_anvil");
+                    ANCIENT_METAL_ANVIL = getRegisteredBlock("ancient_metal_anvil");
+                    MITHRIL_ANVIL = getRegisteredBlock("mithril_anvil");
+                    TUNGSTEN_ANVIL = getRegisteredBlock("tungsten_anvil");
+                    ADAMANTIUM_ANVIL = getRegisteredBlock("adamantium_anvil");
+                }
+                //Chipped
+                {
+                    CHIPPED_COPPER_ANVIL = getRegisteredBlock("chipped_copper_anvil");
+                    CHIPPED_SILVER_ANVIL = getRegisteredBlock("chipped_silver_anvil");
+                    CHIPPED_GOLD_ANVIL = getRegisteredBlock("chipped_gold_anvil");
+                    CHIPPED_ANCIENT_METAL_ANVIL = getRegisteredBlock("chipped_ancient_metal_anvil");
+                    CHIPPED_MITHRIL_ANVIL = getRegisteredBlock("chipped_mithril_anvil");
+                    CHIPPED_TUNGSTEN_ANVIL = getRegisteredBlock("chipped_tungsten_anvil");
+                    CHIPPED_ADAMANTIUM_ANVIL = getRegisteredBlock("chipped_adamantium_anvil");
+                }
+                //Damaged
+                {
+                    DAMAGED_COPPER_ANVIL = getRegisteredBlock("damaged_copper_anvil");
+                    DAMAGED_SILVER_ANVIL = getRegisteredBlock("damaged_silver_anvil");
+                    DAMAGED_GOLD_ANVIL = getRegisteredBlock("damaged_gold_anvil");
+                    DAMAGED_ANCIENT_METAL_ANVIL = getRegisteredBlock("damaged_ancient_metal_anvil");
+                    DAMAGED_MITHRIL_ANVIL = getRegisteredBlock("damaged_mithril_anvil");
+                    DAMAGED_TUNGSTEN_ANVIL = getRegisteredBlock("damaged_tungsten_anvil");
+                    DAMAGED_ADAMANTIUM_ANVIL = getRegisteredBlock("damaged_adamantium_anvil");
+                }
+            }
          }
 
 

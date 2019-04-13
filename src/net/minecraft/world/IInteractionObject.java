@@ -9,4 +9,9 @@ public interface IInteractionObject extends INameable {
    Container createContainer(InventoryPlayer p_174876_1_, EntityPlayer p_174876_2_);
 
    String getGuiID();
+
+   //For crafting tables , anvils and furnaces
+   default int getGuiLevel(){
+      return 0;
+   }
 }

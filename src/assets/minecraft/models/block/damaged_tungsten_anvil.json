@@ -1,0 +1,6 @@
+{
+    "parent": "block/tungsten_anvil",
+    "textures": {
+        "top": "block/damaged_tungsten_anvil_top"
+    }
+}

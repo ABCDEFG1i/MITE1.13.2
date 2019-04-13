@@ -186,15 +186,15 @@ public class EntityFallingBlock extends Entity {
          int i = MathHelper.ceil(p_180430_1_ - 1.0F);
          if (i > 0) {
             List<Entity> list = Lists.newArrayList(this.world.func_72839_b(this, this.getEntityBoundingBox()));
-            boolean flag = this.fallTile.isIn(BlockTags.ANVIL);
-            DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+            boolean isInAnvil = this.fallTile.isIn(BlockTags.ANVIL);
+            DamageSource damagesource = isInAnvil ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 
             for(Entity entity : list) {
                entity.attackEntityFrom(damagesource, (float)Math.min(MathHelper.floor((float)i * this.fallHurtAmount), this.fallHurtMax));
             }
 
-            if (flag && (double)this.rand.nextFloat() < (double)0.05F + (double)i * 0.05D) {
-               IBlockState iblockstate = BlockAnvil.damage(this.fallTile);
+            if (isInAnvil && (double)this.rand.nextFloat() < (double)0.05F + (double)i * 0.05D) {
+               IBlockState iblockstate = ((BlockAnvil)this.fallTile.getBlock()).damage(0);
                if (iblockstate == null) {
                   this.dontSetBlock = true;
                } else {

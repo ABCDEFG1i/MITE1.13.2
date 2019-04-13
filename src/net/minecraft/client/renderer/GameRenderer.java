@@ -271,7 +271,6 @@ public class GameRenderer implements AutoCloseable, IResourceManagerReloadListen
             this.field_78531_r.objectMouseOver = entity.rayTrace(d0, p_78473_1_, RayTraceFluidMode.NEVER);
             Vec3d vec3d = entity.getEyePosition(p_78473_1_);
             boolean flag = false;
-            int i = 3;
             double d1 = d0;
             if (this.field_78531_r.playerController.extendedReach()) {
                d1 = 6.0D;
@@ -281,7 +280,6 @@ public class GameRenderer implements AutoCloseable, IResourceManagerReloadListen
                   flag = true;
                }
 
-               d0 = d0;
             }
 
             if (this.field_78531_r.objectMouseOver != null) {
@@ -292,13 +290,12 @@ public class GameRenderer implements AutoCloseable, IResourceManagerReloadListen
             Vec3d vec3d2 = vec3d.add(vec3d1.x * d0, vec3d1.y * d0, vec3d1.z * d0);
             this.field_78528_u = null;
             Vec3d vec3d3 = null;
-            float f = 1.0F;
             List<Entity> list = this.field_78531_r.world.func_175674_a(entity, entity.getEntityBoundingBox().expand(vec3d1.x * d0, vec3d1.y * d0, vec3d1.z * d0).grow(1.0D, 1.0D, 1.0D), EntitySelectors.NOT_SPECTATING.and(Entity::canBeCollidedWith));
             double d2 = d1;
 
-            for(int j = 0; j < list.size(); ++j) {
-               Entity entity1 = list.get(j);
-               AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow((double)entity1.getCollisionBorderSize());
+            for (Entity entity1 : list) {
+               AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox()
+                       .grow((double) entity1.getCollisionBorderSize());
                RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(vec3d, vec3d2);
                if (axisalignedbb.contains(vec3d)) {
                   if (d2 >= 0.0D) {

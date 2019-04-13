@@ -724,13 +724,7 @@ public final class ItemStack {
       return this.isEmpty ? null : this.itemFrame;
    }
 
-   public int getRepairCost() {
-      return this.hasTag() && this.tag.hasKey("RepairCost", 3) ? this.tag.getInteger("RepairCost") : 0;
-   }
 
-   public void setRepairCost(int p_82841_1_) {
-      this.getOrCreateTag().setInteger("RepairCost", p_82841_1_);
-   }
 
    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot p_111283_1_) {
       Multimap<String, AttributeModifier> multimap;

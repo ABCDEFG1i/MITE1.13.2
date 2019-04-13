@@ -1,0 +1,6 @@
+{
+    "parent": "block/mithril_anvil",
+    "textures": {
+        "top": "block/damaged_mithril_anvil_top"
+    }
+}
