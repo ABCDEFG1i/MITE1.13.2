@@ -110,7 +110,6 @@ public abstract class GuiContainer extends GuiScreen {
       InventoryPlayer inventoryplayer = this.mc.player.inventory;
       ItemStack itemstack = this.draggedStack.isEmpty() ? inventoryplayer.getItemStack() : this.draggedStack;
       if (!itemstack.isEmpty()) {
-         int j2 = 8;
          int k2 = this.draggedStack.isEmpty() ? 8 : 16;
          String s = null;
          if (!this.draggedStack.isEmpty() && this.isRightMouseClick) {

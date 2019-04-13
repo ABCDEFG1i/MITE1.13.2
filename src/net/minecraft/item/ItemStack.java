@@ -626,10 +626,12 @@ public final class ItemStack {
          }
       }
 
+      //MITEMODDED Changed to make can always see the durability
+      if (this.isDamageable()) {
+         list.add(new TextComponentTranslation("item.durability", this.getMaxDamage() - this.getDamage(), this.getMaxDamage()));
+      }
       if (p_82840_2_.isAdvanced()) {
-         if (this.isDamaged()) {
-            list.add(new TextComponentTranslation("item.durability", this.getMaxDamage() - this.getDamage(), this.getMaxDamage()));
-         }
+
 
          list.add((new TextComponentString(IRegistry.field_212630_s.func_177774_c(this.getItem()).toString())).applyTextStyle(TextFormatting.DARK_GRAY));
          if (this.hasTag()) {
