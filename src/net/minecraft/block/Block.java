@@ -1256,17 +1256,17 @@ public class Block implements IItemProvider {
                 Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
         register("dragon_head", new BlockSkull(BlockSkull.Types.DRAGON,
                 Block.Properties.createBlockProperties(Material.CIRCUITS).setHardnessAndResistance(1.0F)));
-        register("anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
-                .setHardnessAndResistance(5.0F, 1200.0F)
-                .setSoundType(SoundType.ANVIL)));
-        register("chipped_anvil", new BlockAnvil(
+        register("iron_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                .setHardnessAndResistance(2.5F, 1200.0F)
+                .setSoundType(SoundType.ANVIL),ItemTier.IRON,396800,3));
+        register("chipped_iron_anvil", new BlockAnvil(
                 Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
-                        .setHardnessAndResistance(5.0F, 1200.0F)
-                        .setSoundType(SoundType.ANVIL)));
-        register("damaged_anvil", new BlockAnvil(
+                        .setHardnessAndResistance(2.4F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.IRON,132267,396800,3));
+        register("damaged_iron_anvil", new BlockAnvil(
                 Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
-                        .setHardnessAndResistance(5.0F, 1200.0F)
-                        .setSoundType(SoundType.ANVIL)));
+                        .setHardnessAndResistance(2.3F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.IRON,264533,396800,3));
         register("trapped_chest", new BlockTrappedChest(Block.Properties.createBlockProperties(Material.WOOD)
                 .setHardnessAndResistance(2.5F)
                 .setSoundType(SoundType.WOOD)));
@@ -2402,6 +2402,99 @@ public class Block implements IItemProvider {
             register("copper_block",
                     new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(4.8F, 45000.0F),
                             3));
+            //ANVILS
+            {
+                //copper
+                register("copper_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.BROWN)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.COPPER,198400,2));
+                register("chipped_copper_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.COPPER,66133,198400,2));
+                register("damaged_copper_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.COPPER,132266,198400,2));
+
+                //silver
+                register("silver_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.SILVER)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.SILVER,198400,2));
+                register("chipped_silver_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.SILVER,66133,198400,2));
+                register("damaged_silver_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.SILVER,132266,198400,2));
+
+                //gold
+                register("gold_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.GOLD)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.GOLD,198400,2));
+                register("chipped_gold_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.GOLD,66133,198400,2));
+                register("damaged_gold_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.GOLD,132266,198400,2));
+
+                //ancient_metal
+                register("ancient_metal_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.ANCIENT_METAL,793600,3));
+                register("chipped_ancient_metal_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.ANCIENT_METAL,264533,793600,3));
+                register("damaged_ancient_metal_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.ANCIENT_METAL,529066,793600,3));
+
+                //mithril
+                register("mithril_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.SILVER)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.MITHRIL,3174400,4));
+                register("chipped_mithril_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.MITHRIL,1058133,3174400,4));
+                register("damaged_mithril_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.MITHRIL,2116266,3174400,4));
+
+                //tungsten
+                register("tungsten_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.GRAY)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.TUNGSTEN,6348800,5));
+                register("chipped_tungsten_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.TUNGSTEN,2116266,6348800,5));
+                register("damaged_tungsten_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.TUNGSTEN,4232532,6348800,5));
+
+                //adamantium
+                register("adamantium_anvil", new BlockAnvil(Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.PURPLE)
+                        .setHardnessAndResistance(2.5F, 1200.0F)
+                        .setSoundType(SoundType.ANVIL),ItemTier.ADAMANTIUM,12697600,6));
+                register("chipped_adamantium_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.4F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.ADAMANTIUM,4232533,12697600,6));
+                register("damaged_adamantium_anvil", new BlockAnvil(
+                        Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
+                                .setHardnessAndResistance(2.3F, 1200.0F)
+                                .setSoundType(SoundType.ANVIL),ItemTier.ADAMANTIUM,8465066,12697600,6));
+            }
         }
 
         for (Block block85 : IRegistry.field_212618_g) {

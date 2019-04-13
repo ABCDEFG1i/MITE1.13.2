@@ -101,9 +101,7 @@ public class TileEntityHopper extends TileEntityLockableLoot implements IHopper,
          this.tickedGameTime = this.world.getTotalWorldTime();
          if (!this.isOnTransferCooldown()) {
             this.setTransferCooldown(0);
-            this.updateHopper(() -> {
-               return pullItems(this);
-            });
+            this.updateHopper(() -> pullItems(this));
          }
 
       }

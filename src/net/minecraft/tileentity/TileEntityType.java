@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class TileEntityType<T extends TileEntity> {
    private static final Logger LOGGER = LogManager.getLogger();
+   public static final TileEntityType<TileEntityAnvil> ANVIL = registerTileEntityType("anvil",TileEntityType.Builder.create(TileEntityAnvil::new));
    public static final TileEntityType<TileEntityFurnace> FURNACE = registerTileEntityType("furnace", TileEntityType.Builder.create(TileEntityFurnace::new));
    public static final TileEntityType<TileEntityChest> CHEST = registerTileEntityType("chest", TileEntityType.Builder.create(TileEntityChest::new));
    public static final TileEntityType<TileEntityTrappedChest> TRAPPED_CHEST = registerTileEntityType("trapped_chest", TileEntityType.Builder.create(TileEntityTrappedChest::new));
@@ -52,12 +53,10 @@ public class TileEntityType<T extends TileEntity> {
 
       try {
          type = DataFixesManager.getDataFixer().getSchema(DataFixUtils.makeKey(1631)).getChoiceType(TypeReferences.BLOCK_ENTITY, p_200966_0_);
-      } catch (IllegalStateException illegalstateexception) {
-         if (SharedConstants.developmentMode) {
-            throw illegalstateexception;
+      } catch (Exception interception) {
+         if (SharedConstants.developmentMode){
+            LOGGER.warn("No data fixer registered for block entity {}", p_200966_0_);
          }
-
-         LOGGER.warn("No data fixer registered for block entity {}", p_200966_0_);
       }
 
       TileEntityType<T> tileentitytype = p_200966_1_.build(type);

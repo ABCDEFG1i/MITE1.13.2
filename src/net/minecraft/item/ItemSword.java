@@ -43,7 +43,8 @@ public class ItemSword extends ItemTiered {
    }
 
    public boolean hitEntity(ItemStack p_77644_1_, EntityLivingBase p_77644_2_, EntityLivingBase p_77644_3_) {
-      p_77644_1_.damageItem(Math.round(this.attackDamage)*2, p_77644_3_);
+      //MITEMODDED make swords gets damage quickly
+      p_77644_1_.damageItem(50, p_77644_3_);
       return true;
    }
 
@@ -54,6 +55,7 @@ public class ItemSword extends ItemTiered {
 
       return true;
    }
+
 
    public boolean canHarvestBlock(IBlockState p_150897_1_) {
       return p_150897_1_.getBlock() == Blocks.COBWEB;

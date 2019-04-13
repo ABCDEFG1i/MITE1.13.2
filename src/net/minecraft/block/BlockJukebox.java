@@ -30,7 +30,7 @@ public class BlockJukebox extends BlockContainer {
    public boolean onBlockActivated(IBlockState p_196250_1_, World p_196250_2_, BlockPos p_196250_3_, EntityPlayer p_196250_4_, EnumHand p_196250_5_, EnumFacing p_196250_6_, float p_196250_7_, float p_196250_8_, float p_196250_9_) {
       if (p_196250_1_.get(HAS_RECORD)) {
          this.func_203419_a(p_196250_2_, p_196250_3_);
-         p_196250_1_ = p_196250_1_.with(HAS_RECORD, Boolean.valueOf(false));
+         p_196250_1_ = p_196250_1_.with(HAS_RECORD, Boolean.FALSE);
          p_196250_2_.setBlockState(p_196250_3_, p_196250_1_, 2);
          return true;
       } else {
@@ -42,7 +42,7 @@ public class BlockJukebox extends BlockContainer {
       TileEntity tileentity = p_176431_1_.getTileEntity(p_176431_2_);
       if (tileentity instanceof TileEntityJukebox) {
          ((TileEntityJukebox)tileentity).setRecord(p_176431_4_.copy());
-         p_176431_1_.setBlockState(p_176431_2_, p_176431_3_.with(HAS_RECORD, Boolean.valueOf(true)), 2);
+         p_176431_1_.setBlockState(p_176431_2_, p_176431_3_.with(HAS_RECORD, Boolean.TRUE), 2);
       }
    }
 

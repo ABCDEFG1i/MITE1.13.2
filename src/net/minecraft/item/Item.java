@@ -545,9 +545,9 @@ public class Item implements IItemProvider {
       register(Blocks.JUNGLE_BUTTON, ItemGroup.REDSTONE);
       register(Blocks.ACACIA_BUTTON, ItemGroup.REDSTONE);
       register(Blocks.DARK_OAK_BUTTON, ItemGroup.REDSTONE);
-      register(Blocks.ANVIL, ItemGroup.DECORATIONS);
-      register(Blocks.CHIPPED_ANVIL, ItemGroup.DECORATIONS);
-      register(Blocks.DAMAGED_ANVIL, ItemGroup.DECORATIONS);
+      register(new ItemBlock(Blocks.IRON_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(396800))));
+      register(new ItemBlock(Blocks.CHIPPED_IRON_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(396800))));
+      register(new ItemBlock(Blocks.DAMAGED_IRON_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(396800))));
       register(Blocks.TRAPPED_CHEST, ItemGroup.REDSTONE);
       register(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, ItemGroup.REDSTONE);
       register(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, ItemGroup.REDSTONE);
@@ -1181,6 +1181,39 @@ public class Item implements IItemProvider {
             register(Blocks.TUNGSTEN_BLOCK, ItemGroup.BUILDING_BLOCKS);
             register(Blocks.ADAMANTIUM_BLOCK, ItemGroup.BUILDING_BLOCKS);
 
+         }
+         //Anvils
+         {
+            //Normal
+            {
+               register(new ItemBlock(Blocks.COPPER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.SILVER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.GOLD_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.ANCIENT_METAL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(793600))));
+               register(new ItemBlock(Blocks.MITHRIL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(3174400))));
+               register(new ItemBlock(Blocks.TUNGSTEN_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(6348800))));
+               register(new ItemBlock(Blocks.ADAMANTIUM_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(12697600))));
+            }
+            //Chipped
+            {
+               register(new ItemBlock(Blocks.CHIPPED_COPPER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.CHIPPED_SILVER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.CHIPPED_GOLD_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.CHIPPED_ANCIENT_METAL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(793600))));
+               register(new ItemBlock(Blocks.CHIPPED_MITHRIL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(3174400))));
+               register(new ItemBlock(Blocks.CHIPPED_TUNGSTEN_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(6348800))));
+               register(new ItemBlock(Blocks.CHIPPED_ADAMANTIUM_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(12697600))));
+            }
+            //Damaged
+            {
+               register(new ItemBlock(Blocks.DAMAGED_COPPER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.DAMAGED_SILVER_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.DAMAGED_GOLD_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(198400))));
+               register(new ItemBlock(Blocks.DAMAGED_ANCIENT_METAL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(793600))));
+               register(new ItemBlock(Blocks.DAMAGED_MITHRIL_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(3174400))));
+               register(new ItemBlock(Blocks.DAMAGED_TUNGSTEN_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(6348800))));
+               register(new ItemBlock(Blocks.DAMAGED_ADAMANTIUM_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(12697600))));
+            }
          }
       }
    }

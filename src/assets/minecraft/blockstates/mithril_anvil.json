@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=south": { "model": "block/mithril_anvil" },
+        "facing=west": { "model": "block/mithril_anvil", "y": 90 },
+        "facing=north": { "model": "block/mithril_anvil", "y": 180 },
+        "facing=east": { "model": "block/mithril_anvil", "y": 270 }
+    }
+}
