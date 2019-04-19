@@ -115,9 +115,6 @@ public class ContainerRepair extends Container {
 
     }
 
-    public void addListener(IContainerListener p_75132_1_) {
-        super.addListener(p_75132_1_);
-    }
 
     public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -272,7 +269,8 @@ public class ContainerRepair extends Container {
                                 int j2 = map1.get(enchantment1);
                                 j2 = i2 == j2 ? j2 + 1 : Math.max(j2, i2);
                                 boolean flag1 = enchantment1.canApply(tool);
-                                if (this.player.capabilities.isCreativeMode || tool.getItem() == Items.ENCHANTED_BOOK) {
+                                //MITEMODDED Make the enchantedBook cannot merge together
+                                if (this.player.capabilities.isCreativeMode ) {
                                     flag1 = true;
                                 }
 
