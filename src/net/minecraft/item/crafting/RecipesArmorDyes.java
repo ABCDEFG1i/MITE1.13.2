@@ -13,9 +13,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RecipesArmorDyes extends IRecipeHidden {
+public class RecipesArmorDyes extends IRecipeHidden implements ITimedRecipe{
    public RecipesArmorDyes(ResourceLocation p_i48173_1_) {
       super(p_i48173_1_);
+   }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      return 2000;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {

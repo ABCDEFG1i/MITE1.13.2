@@ -6,6 +6,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBanner;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityBanner;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -13,9 +14,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BannerDuplicateRecipe extends IRecipeHidden {
+public class BannerDuplicateRecipe extends IRecipeHidden implements ITimedRecipe{
    public BannerDuplicateRecipe(ResourceLocation p_i48171_1_) {
       super(p_i48171_1_);
+   }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      ItemStack result = this.getCraftingResult(inventory);
+      NBTTagCompound nbttagcompound1 = result.getOrCreateChildTag("BlockEntityTag");
+      if (nbttagcompound1.hasKey("Patterns",9)){
+         return nbttagcompound1.getTagList("Patterns",10).size()*1000;
+      }else return 1500;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {

@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FireworkStarRecipe extends IRecipeHidden {
+public class FireworkStarRecipe extends IRecipeHidden implements ITimedRecipe{
    private static final Ingredient INGREDIENT_SHAPE = Ingredient.fromItems(Items.FIRE_CHARGE, Items.FEATHER, Items.GOLD_NUGGET, Items.SKELETON_SKULL, Items.WITHER_SKELETON_SKULL, Items.CREEPER_HEAD, Items.PLAYER_HEAD, Items.DRAGON_HEAD, Items.ZOMBIE_HEAD);
    private static final Ingredient INGREDIENT_FLICKER = Ingredient.fromItems(Items.DIAMOND);
    private static final Ingredient INGREDIENT_TRAIL = Ingredient.fromItems(Items.GLOWSTONE_DUST);
@@ -38,6 +38,21 @@ public class FireworkStarRecipe extends IRecipeHidden {
    public FireworkStarRecipe(ResourceLocation p_i48166_1_) {
       super(p_i48166_1_);
    }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      ItemStack itemStack = this.getCraftingResult(inventory);
+      int effects = 0;
+      NBTTagCompound nbttagcompound = itemStack.getOrCreateChildTag("Explosion");
+      if (nbttagcompound.hasKey("Flicker")) effects++;
+      if (nbttagcompound.hasKey("Trail")) effects++;
+      if (nbttagcompound.hasKey("Colors")){
+         return effects*2000+ nbttagcompound.getIntArray("Colors").length*700;
+      }else{
+         return effects*2000+100;
+      }
+   }
+
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {
       if (!(p_77569_1_ instanceof InventoryCrafting)) {

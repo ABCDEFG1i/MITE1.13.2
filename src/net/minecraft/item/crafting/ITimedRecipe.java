@@ -1,5 +1,7 @@
 package net.minecraft.item.crafting;
 
-public interface ITimedRecipe {
-    int getCraftingTime();
+import net.minecraft.inventory.IInventory;
+
+public interface ITimedRecipe extends IRecipe {
+    int getCraftingTime(IInventory inventory);
 }

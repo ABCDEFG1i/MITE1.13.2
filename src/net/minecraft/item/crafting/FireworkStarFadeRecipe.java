@@ -13,11 +13,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FireworkStarFadeRecipe extends IRecipeHidden {
+public class FireworkStarFadeRecipe extends IRecipeHidden implements ITimedRecipe {
    private static final Ingredient INGREDIENT_FIREWORK_STAR = Ingredient.fromItems(Items.FIREWORK_STAR);
 
    public FireworkStarFadeRecipe(ResourceLocation p_i48167_1_) {
       super(p_i48167_1_);
+   }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      return this.getCraftingResult(inventory).getOrCreateChildTag("Explosion").getIntArray("FadeColors").length*1300;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {

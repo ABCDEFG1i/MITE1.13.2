@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 //MITEMODDED
-public class ShapedRecipe implements IRecipe,ITimedRecipe {
+public class ShapedRecipe implements ITimedRecipe {
    private final int recipeWidth;
    private final int recipeHeight;
    private final NonNullList<Ingredient> recipeItems;
@@ -45,7 +45,7 @@ public class ShapedRecipe implements IRecipe,ITimedRecipe {
    }
 
    @Override
-   public int getCraftingTime() {
+   public int getCraftingTime(IInventory inventory) {
       return craftingTime;
    }
 
