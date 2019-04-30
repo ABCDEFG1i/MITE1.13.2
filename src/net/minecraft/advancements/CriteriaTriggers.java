@@ -3,35 +3,8 @@ package net.minecraft.advancements;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import javax.annotation.Nullable;
-import net.minecraft.advancements.criterion.BredAnimalsTrigger;
-import net.minecraft.advancements.criterion.BrewedPotionTrigger;
-import net.minecraft.advancements.criterion.ChangeDimensionTrigger;
-import net.minecraft.advancements.criterion.ChanneledLightningTrigger;
-import net.minecraft.advancements.criterion.ConstructBeaconTrigger;
-import net.minecraft.advancements.criterion.ConsumeItemTrigger;
-import net.minecraft.advancements.criterion.CuredZombieVillagerTrigger;
-import net.minecraft.advancements.criterion.EffectsChangedTrigger;
-import net.minecraft.advancements.criterion.EnchantedItemTrigger;
-import net.minecraft.advancements.criterion.EnterBlockTrigger;
-import net.minecraft.advancements.criterion.EntityHurtPlayerTrigger;
-import net.minecraft.advancements.criterion.FilledBucketTrigger;
-import net.minecraft.advancements.criterion.FishingRodHookedTrigger;
-import net.minecraft.advancements.criterion.ImpossibleTrigger;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.advancements.criterion.ItemDurabilityTrigger;
-import net.minecraft.advancements.criterion.KilledTrigger;
-import net.minecraft.advancements.criterion.LevitationTrigger;
-import net.minecraft.advancements.criterion.NetherTravelTrigger;
-import net.minecraft.advancements.criterion.PlacedBlockTrigger;
-import net.minecraft.advancements.criterion.PlayerHurtEntityTrigger;
-import net.minecraft.advancements.criterion.PositionTrigger;
-import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
-import net.minecraft.advancements.criterion.SummonedEntityTrigger;
-import net.minecraft.advancements.criterion.TameAnimalTrigger;
-import net.minecraft.advancements.criterion.TickTrigger;
-import net.minecraft.advancements.criterion.UsedEnderEyeTrigger;
-import net.minecraft.advancements.criterion.UsedTotemTrigger;
-import net.minecraft.advancements.criterion.VillagerTradeTrigger;
+
+import net.minecraft.advancements.criterion.*;
 import net.minecraft.util.ResourceLocation;
 
 public class CriteriaTriggers {
@@ -67,6 +40,8 @@ public class CriteriaTriggers {
    public static final NetherTravelTrigger NETHER_TRAVEL = register(new NetherTravelTrigger());
    public static final FishingRodHookedTrigger FISHING_ROD_HOOKED = register(new FishingRodHookedTrigger());
    public static final ChanneledLightningTrigger CHANNELED_LIGHTNING = register(new ChanneledLightningTrigger());
+   public static final LevelTrigger LEVEL_TRIGGER = register(new LevelTrigger());
+   public static final DaysTrigger DAYS_TRIGGER = register(new DaysTrigger());
 
    public static <T extends ICriterionTrigger<?>> T register(T p_192118_0_) {
       if (REGISTRY.containsKey(p_192118_0_.getId())) {

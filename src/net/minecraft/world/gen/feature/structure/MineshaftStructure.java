@@ -2,6 +2,8 @@ package net.minecraft.world.gen.feature.structure;
 
 import java.util.Random;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -37,6 +39,11 @@ public class MineshaftStructure extends Structure<MineshaftConfig> {
 
    public int getSize() {
       return 8;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Items.CHEST_MINECART;
    }
 
    public static class Start extends StructureStart {

@@ -4091,5 +4091,51 @@
 
   "block.minecraft.adamantium_anvil": "\u827e\u5fb7\u66fc\u7827",
   "block.minecraft.chipped_adamantium_anvil": "\u5f00\u88c2\u7684\u827e\u5fb7\u66fc\u7827",
-  "block.minecraft.damaged_adamantium_anvil": "\u635f\u574f\u7684\u827e\u5fb7\u66fc\u7827"
+  "block.minecraft.damaged_adamantium_anvil": "\u635f\u574f\u7684\u827e\u5fb7\u66fc\u7827",
+
+  "MITEADVANCEMENTS":"-----------------------------------------",
+  "advancements.structure.root.title": "\u7ed3\u6784!",
+  "advancements.structure.root.description": "\u5347\u5230\u5341\u7ea7\u7136\u540e\u751f\u5b58\u4e8c\u5341\u5929\u6765\u751f\u6210\u7ed3\u6784",
+
+  "advancements.structure.jungle_pyramid.title": "\u4e1b\u6797\u795e\u6bbf",
+  "advancements.structure.jungle_pyramid.description":"to generate jungle pyramid",
+
+  "advancements.structure.monument.title": "\u6d77\u5e95\u795e\u6bbf",
+  "advancements.structure.monument.description": "1,\u751f\u5b58\u523080\u5929\n2,\u8fbe\u523040\u7ea7\n3,\u83b7\u5f97\u79d8\u94f6\u9550\u548c\u4e00\u4e2a\u91d1\u5757",
+
+  "advancements.structure.desert_pyramid.title": "\u6c99\u6f20\u795e\u6bbf",
+  "advancements.structure.desert_pyramid.description": "to generate desert pyramid",
+
+  "advancements.structure.mineshaft.title": "\u4eba\u5de5\u77ff\u6d1e",
+  "advancements.structure.mineshaft.description": "to generate Mineshaft",
+
+  "advancements.structure.ocean_ruin.title": "\u6c34\u4e0b\u5e9f\u589f",
+  "advancements.structure.ocean_ruin.description": "to generate ocean ruin",
+
+  "advancements.structure.shipwreck.title": "\u6c89\u8239",
+  "advancements.structure.shipwreck.description": "to generate shipwreck",
+
+  "advancements.structure.fortress.title": "\u4e0b\u754c\u8981\u585e",
+  "advancements.structure.fortress.description":"to generate fortress",
+
+  "advancements.structure.buried_treasure.title": "\u57cb\u85cf\u7684\u5b9d\u85cf",
+  "advancements.structure.buried_treasure.description": "to generate buried treasure",
+
+  "advancements.structure.swamp_hut.title": "\u6cbc\u6cfd\u5c0f\u5c4b",
+  "advancements.structure.swamp_hut.description": "to generate swamp hut",
+
+  "advancements.structure.igloo.title": "\u96ea\u5c4b",
+  "advancements.structure.igloo.description": "to generate igloo",
+
+  "advancements.structure.village.title": "\u6751\u5e84",
+  "advancements.structure.village.description": "\u0031\u002c\u8fbe\u5230\u516d\u5341\u7ea7\n\u0032\u002c\u751f\u5b58\u5230\u0031\u0033\u0030\u5929\n\u0033\u002c\u83b7\u5f97\u94a8\u9550\u548c\u5404\u79cd\u519c\u4f5c\u7269\u0028\u80e1\u841d\u535c\u002c\u9a6c\u94c3\u85af\u002c\u5c0f\u9ea6\u002c\u751c\u83dc\u6839\u0029",
+
+  "advancements.structure.endcity.title": "\u672b\u5730\u57ce",
+  "advancements.structure.endcity.description": "to generate end city",
+
+  "advancements.structure.stronghold.title": "\u8981\u585e",
+  "advancements.structure.stronghold.description": "to generate stronghold",
+
+  "advancements.structure.mansion.title": "\u6797\u90b8\u5e9c\u5740",
+  "advancements.structure.mansion.description": "1,\u751f\u5b5890\u5929.\n2,\u5347\u523060\u7ea7.\n3,\u6740\u6b7b\u672b\u5f71\u9f99"
 }

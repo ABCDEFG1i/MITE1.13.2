@@ -7,6 +7,7 @@ import net.minecraft.util.LazyLoadBase;
 
 import java.util.function.Supplier;
 
+//MITEMODDED Add
 public enum ItemTier implements IItemTier {
     WOOD(0, 2.0F, 0.0F, 2,-1, () -> {
         return Ingredient.fromTag(ItemTags.PLANKS);

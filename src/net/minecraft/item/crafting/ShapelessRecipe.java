@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ShapelessRecipe implements IRecipe,ITimedRecipe {
+public class ShapelessRecipe implements ITimedRecipe {
    private final ResourceLocation id;
    private final String group;
    private final ItemStack recipeOutput;
@@ -30,14 +30,15 @@ public class ShapelessRecipe implements IRecipe,ITimedRecipe {
       this.craftingTime = craftingTime;
    }
 
-   public ResourceLocation getId() {
-      return this.id;
-   }
-
-   public int getCraftingTime(){
+   @Override
+   public int getCraftingTime(IInventory inventory) {
       return craftingTime;
    }
 
+   public ResourceLocation getId() {
+      return this.id;
+   }
+   
    public IRecipeSerializer<?> getSerializer() {
       return RecipeSerializers.CRAFTING_SHAPELESS;
    }

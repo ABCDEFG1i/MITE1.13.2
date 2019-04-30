@@ -4086,5 +4086,51 @@
 
   "block.minecraft.adamantium_anvil": "Adamantium Anvil",
   "block.minecraft.chipped_adamantium_anvil": "Chipped Adamantium Anvil",
-  "block.minecraft.damaged_adamantium_anvil": "Damaged Adamantium Anvil"
+  "block.minecraft.damaged_adamantium_anvil": "Damaged Adamantium Anvil",
+
+  "MITEADVANCEMENTS":"-----------------------------------------",
+  "advancements.structure.root.title": "Structures!",
+  "advancements.structure.root.description": "Get to level 10 and survive to 20 days to generate structures",
+
+  "advancements.structure.jungle_pyramid.title": "Jungle Pyramid",
+  "advancements.structure.jungle_pyramid.description":"to generate jungle pyramid",
+
+  "advancements.structure.monument.title": "Monument",
+  "advancements.structure.monument.description": "1,Survive to 80 days.\n2,Get to 40 levels.\n3,Obtain a mithril pickaxe and a gold block",
+
+  "advancements.structure.desert_pyramid.title": "Desert Pyramid",
+  "advancements.structure.desert_pyramid.description": "to generate desert pyramid",
+
+  "advancements.structure.mineshaft.title": "Mineshaft",
+  "advancements.structure.mineshaft.description": "to generate Mineshaft",
+
+  "advancements.structure.ocean_ruin.title": "Ocean Ruin",
+  "advancements.structure.ocean_ruin.description": "to generate ocean ruin",
+
+  "advancements.structure.shipwreck.title": "Shipwreck",
+  "advancements.structure.shipwreck.description": "to generate shipwreck",
+
+  "advancements.structure.fortress.title": "Fortress",
+  "advancements.structure.fortress.description":"to generate fortress",
+
+  "advancements.structure.buried_treasure.title": "Buried Treasure",
+  "advancements.structure.buried_treasure.description": "to generate buried treasure",
+
+  "advancements.structure.swamp_hut.title": "Swamp Hut",
+  "advancements.structure.swamp_hut.description": "to generate swamp hut",
+
+  "advancements.structure.igloo.title": "Igloo",
+  "advancements.structure.igloo.description": "to generate igloo",
+
+  "advancements.structure.village.title": "Village",
+  "advancements.structure.village.description": "1,Get to 60 levels\n2,Survive to 130 days\n3,Obtain a tungsten pickaxe and all kinds of vegetables(carrot,potato,wheat,beetroot)",
+
+  "advancements.structure.endcity.title": "End City",
+  "advancements.structure.endcity.description": "to generate end city",
+
+  "advancements.structure.stronghold.title": "Stronghold",
+  "advancements.structure.stronghold.description": "to generate stronghold",
+
+  "advancements.structure.mansion.title": "Mansion",
+  "advancements.structure.mansion.description": "to generate mansion"
 }

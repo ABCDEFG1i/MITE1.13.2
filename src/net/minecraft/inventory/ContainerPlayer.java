@@ -91,11 +91,12 @@ public class ContainerPlayer extends ContainerRecipeBook {
     private void craftOne() throws InterruptedException {
         this.isCrafting = true;
         this.totalCraftingTime = ((ITimedRecipe) Objects.requireNonNull(this.craftResult.getRecipeUsed()))
-                .getCraftingTime();
+                .getCraftingTime(craftMatrix);
         ItemStack targetResult = craftingSlot.getStack();
         for (int i = 0; i < totalCraftingTime; i++) {
             synchronized (this) {
-                if (!craftingSlot.getStack().isItemEqual(targetResult)) {
+                ItemStack current = craftingSlot.getStack();
+                if (!current.isItemEqual(targetResult)||(current.getTag()!=null&&!current.getTag().equals(targetResult.getTag()))) {
                     this.craftingTime = 0;
                     this.isCrafting = false;
                     //To break up the loop in the method startCraftingProgress()

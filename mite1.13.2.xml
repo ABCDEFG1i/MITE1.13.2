@@ -212,6 +212,9 @@
     <copydir src="src/data" dest="out/production/MITE1.13.2/data"/>
   </target>
 
+  <target name="coverChineseLanguageFileToASCII" description="Cover the chinese chars in file zh_cn.json to ASCII">
+    <exec command="native2ascii -encoding UTF-8 H:\IDEAProjects\MITE1.13.2\src\assets\minecraft\lang\zh_cn.json H:\IDEAProjects\MITE1.13.2\src\assets\minecraft\lang\zh_cn.json"/>
+  </target>
 
   <target name="compile.module.mite1.13.2.production" description="Compile module MITE1.13.2; production classes">
     <mkdir dir="${mite1.13.2.output.dir}"/>

@@ -41,6 +41,6 @@ public class OpenInventoryStep implements ITutorialStep {
    }
 
    public void openInventory() {
-      this.tutorial.setStep(TutorialSteps.CRAFT_PLANKS);
+      this.tutorial.setStep(TutorialSteps.NONE);
    }
 }

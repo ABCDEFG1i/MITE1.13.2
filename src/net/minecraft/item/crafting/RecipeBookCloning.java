@@ -12,9 +12,15 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class RecipeBookCloning extends IRecipeHidden {
+public class RecipeBookCloning extends IRecipeHidden implements ITimedRecipe{
    public RecipeBookCloning(ResourceLocation p_i48170_1_) {
       super(p_i48170_1_);
+   }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      NBTTagCompound tag = this.getCraftingResult(inventory).getTag();
+      return ItemWrittenBook.validBookTagContents(tag)? tag.getTagList("pages",8).size()*3000:2000;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {

@@ -2,6 +2,8 @@ package net.minecraft.world.gen.feature.structure;
 
 import java.util.Random;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -62,6 +64,11 @@ public class EndCityStructure extends Structure<EndCityConfig> {
 
    public int getSize() {
       return 9;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.END_STONE_BRICKS.asItem();
    }
 
    private static int getYPosForStructure(int p_191070_0_, int p_191070_1_, IChunkGenerator<?> p_191070_2_) {

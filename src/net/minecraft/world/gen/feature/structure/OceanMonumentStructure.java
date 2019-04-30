@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.Set;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -77,6 +79,16 @@ public class OceanMonumentStructure extends Structure<OceanMonumentConfig> {
 
    public int getSize() {
       return 8;
+   }
+
+   @Override
+   public StructureRequirements getRequirements() {
+      return StructureRequirements.MONUMENT;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.PRISMARINE.asItem();
    }
 
    public List<Biome.SpawnListEntry> getSpawnList() {

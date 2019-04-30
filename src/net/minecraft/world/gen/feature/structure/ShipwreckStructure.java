@@ -1,5 +1,7 @@
 package net.minecraft.world.gen.feature.structure;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +17,11 @@ public class ShipwreckStructure extends ScatteredStructure<ShipwreckConfig> {
 
    public int getSize() {
       return 3;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Items.OAK_BOAT;
    }
 
    protected StructureStart makeStart(IWorld p_202369_1_, IChunkGenerator<?> p_202369_2_, SharedSeedRandom p_202369_3_, int p_202369_4_, int p_202369_5_) {

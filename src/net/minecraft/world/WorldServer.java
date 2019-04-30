@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEventData;
 import net.minecraft.block.state.IBlockState;
@@ -153,6 +155,7 @@ public class WorldServer extends World implements IThreadListener {
 
    public void tick(BooleanSupplier p_72835_1_) {
       this.insideTick = true;
+      long day = this.worldInfo.getWorldTime() / 24000L;
       super.tick(p_72835_1_);
       if (this.getWorldInfo().isHardcoreModeEnabled() && this.getDifficulty() != EnumDifficulty.HARD) {
          this.getWorldInfo().setDifficulty(EnumDifficulty.HARD);
@@ -172,7 +175,8 @@ public class WorldServer extends World implements IThreadListener {
       this.profiler.startSection("spawner");
       if (this.getGameRules().getBoolean("doMobSpawning") && this.worldInfo.getTerrainType() != WorldType.DEBUG_ALL_BLOCK_STATES) {
          //MITEMODDED spawn animals per 128 day
-         this.entitySpawner.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTime() / 24000L % 2147483647L % 128L == 0L);
+         this.spawnPeacefulMobs = day % 128L == 0L;
+         this.entitySpawner.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTime() % 400L == 0L);
          this.getChunkProvider().spawnMobs(this, this.spawnHostileMobs, this.spawnPeacefulMobs);
       }
 
@@ -184,6 +188,9 @@ public class WorldServer extends World implements IThreadListener {
       }
 
       this.worldInfo.setWorldTotalTime(this.worldInfo.getWorldTotalTime() + 1L);
+      if (this.getWorldInfo().getWorldTime() % 24000L  == 0){
+         CriteriaTriggers.DAYS_TRIGGER.trigger(this,day);
+      }
       if (this.getGameRules().getBoolean("doDaylightCycle")) {
          this.worldInfo.setWorldTime(this.worldInfo.getWorldTime() + 1L);
       }

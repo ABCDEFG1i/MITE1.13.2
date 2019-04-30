@@ -13,12 +13,10 @@ import java.util.Map;
 import java.util.Set;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionType;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
@@ -78,6 +76,7 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
       private final MinMaxBounds.IntBound full;
       private final MinMaxBounds.IntBound empty;
       private final ItemPredicate[] items;
+      private boolean isGlobal;
 
       public Instance(MinMaxBounds.IntBound p_i49710_1_, MinMaxBounds.IntBound p_i49710_2_, MinMaxBounds.IntBound p_i49710_3_, ItemPredicate[] p_i49710_4_) {
          super(InventoryChangeTrigger.ID);
@@ -87,11 +86,12 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
          this.items = p_i49710_4_;
       }
 
-      public static InventoryChangeTrigger.Instance func_203923_a(ItemPredicate... p_203923_0_) {
+
+      public static InventoryChangeTrigger.Instance createFromItems(ItemPredicate... p_203923_0_) {
          return new InventoryChangeTrigger.Instance(MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, p_203923_0_);
       }
 
-      public static InventoryChangeTrigger.Instance func_203922_a(IItemProvider... p_203922_0_) {
+      public static InventoryChangeTrigger.Instance createFromItemItems(IItemProvider... p_203922_0_) {
          ItemPredicate[] aitempredicate = new ItemPredicate[p_203922_0_.length];
 
          for(int i = 0; i < p_203922_0_.length; ++i) {
@@ -99,7 +99,17 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
                     null, NBTPredicate.ANY);
          }
 
-         return func_203923_a(aitempredicate);
+         return createFromItems(aitempredicate);
+      }
+      public static InventoryChangeTrigger.Instance createFromItemItems(List<? extends IItemProvider> p_203922_0_) {
+         ItemPredicate[] aitempredicate = new ItemPredicate[p_203922_0_.size()];
+
+         for(int i = 0; i < p_203922_0_.size(); ++i) {
+            aitempredicate[i] = new ItemPredicate(null, p_203922_0_.get(i).asItem(), MinMaxBounds.IntBound.UNBOUNDED, MinMaxBounds.IntBound.UNBOUNDED, new EnchantmentPredicate[0],
+                    null, NBTPredicate.ANY);
+         }
+
+         return createFromItems(aitempredicate);
       }
 
       public JsonElement serialize() {
@@ -123,6 +133,11 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
          }
 
          return jsonobject;
+      }
+
+      public Instance setGlobal() {
+         isGlobal = true;
+         return this;
       }
 
       public boolean test(InventoryPlayer p_192265_1_) {
@@ -185,18 +200,28 @@ public class InventoryChangeTrigger implements ICriterionTrigger<InventoryChange
 
       public void trigger(InventoryPlayer p_192486_1_) {
          List<ICriterionTrigger.Listener<InventoryChangeTrigger.Instance>> list = null;
-
+         boolean isGlobal = false;
          for(ICriterionTrigger.Listener<InventoryChangeTrigger.Instance> listener : this.listeners) {
             if (listener.getCriterionInstance().test(p_192486_1_)) {
                if (list == null) {
                   list = Lists.newArrayList();
                }
+               isGlobal = listener.getCriterionInstance().isGlobal;
 
                list.add(listener);
             }
          }
 
          if (list != null) {
+            if (isGlobal){
+               for(ICriterionTrigger.Listener<InventoryChangeTrigger.Instance> listener1 : list) {
+                  for (EntityPlayer playerEntity : p_192486_1_.player.world.playerEntities) {
+                     if (playerEntity instanceof EntityPlayerMP){
+                        listener1.grantCriterion(((EntityPlayerMP) playerEntity).getAdvancements());
+                     }
+                  }
+               }
+            }
             for(ICriterionTrigger.Listener<InventoryChangeTrigger.Instance> listener1 : list) {
                listener1.grantCriterion(this.playerAdvancements);
             }

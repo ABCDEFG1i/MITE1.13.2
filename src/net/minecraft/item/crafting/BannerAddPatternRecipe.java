@@ -18,9 +18,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BannerAddPatternRecipe extends IRecipeHidden {
+public class BannerAddPatternRecipe extends IRecipeHidden implements ITimedRecipe{
    public BannerAddPatternRecipe(ResourceLocation p_i48172_1_) {
       super(p_i48172_1_);
+   }
+
+   @Override
+   public int getCraftingTime(IInventory inventory) {
+      ItemStack result = this.getCraftingResult(inventory);
+      NBTTagCompound nbttagcompound1 = result.getOrCreateChildTag("BlockEntityTag");
+      if (nbttagcompound1.hasKey("Patterns",9)){
+         return nbttagcompound1.getTagList("Patterns",10).size()*1000;
+      }else return 1500;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {

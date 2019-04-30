@@ -36,15 +36,19 @@
       </root>
     </artifact>
   </component>
+  <component name="Encoding" native2AsciiForPropertiesFiles="true">
+    <file url="file://$PROJECT_DIR$/src/assets/minecraft/lang/zh_cn.json" charset="UTF-8" />
+  </component>
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
       <option name="myName" value="Project Default" />
       <inspection_tool class="Duplicates" enabled="true" level="WEAK WARNING" enabled_by_default="true">
         <Java>
-          <minSize>131</minSize>
+          <minSize>228</minSize>
           <isEnabled>true</isEnabled>
         </Java>
       </inspection_tool>
+      <inspection_tool class="UnnecessaryUnicodeEscape" enabled="true" level="WARNING" enabled_by_default="true" />
     </profile>
     <version value="1.0" />
   </component>
@@ -218,14 +222,18 @@
         <w>blockstates</w>
         <w>diorite</w>
         <w>enchantability</w>
+        <w>ender</w>
         <w>havent</w>
+        <w>hipwreck</w>
         <w>itemstack</w>
         <w>mcassetsroot</w>
         <w>miecraft</w>
         <w>minecraft</w>
+        <w>miteadvancements</w>
         <w>mitefoods</w>
         <w>mitemodded</w>
         <w>mithril</w>
+        <w>multiplayer</w>
         <w>pickaxe</w>
         <w>prismarine</w>
       </words>
@@ -297,6 +305,7 @@
         <root url="file://$PROJECT_DIR$/src" />
         <root url="jar://$USER_HOME$/.ideaLibSources/lwjgl-stb-3.1.6-sources.jar!/" />
         <root url="jar://$USER_HOME$/.ideaLibSources/lwjgl-3.1.6-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.ideaLibSources/netty-all-4.1.25.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="natives">
