@@ -34,12 +34,12 @@ public class EndAdvancements implements Consumer<Consumer<Advancement>> {
       Advancement advancement4 = Advancement.Builder.builder().withParent(advancement2).withDisplay(Blocks.PURPUR_BLOCK, new TextComponentTranslation("advancements.end.find_end_city.title"), new TextComponentTranslation("advancements.end.find_end_city.description"),
               null, FrameType.TASK, true, true, false).withCriterion("in_city", PositionTrigger.Instance.func_203932_a(LocationPredicate.func_204007_a("EndCity"))).register(p_accept_1_, "end/find_end_city");
       Advancement advancement5 = Advancement.Builder.builder().withParent(advancement1).withDisplay(Items.DRAGON_BREATH, new TextComponentTranslation("advancements.end.dragon_breath.title"), new TextComponentTranslation("advancements.end.dragon_breath.description"),
-              null, FrameType.GOAL, true, true, false).withCriterion("dragon_breath", InventoryChangeTrigger.Instance.func_203922_a(Items.DRAGON_BREATH)).register(p_accept_1_, "end/dragon_breath");
+              null, FrameType.GOAL, true, true, false).withCriterion("dragon_breath", InventoryChangeTrigger.Instance.createFromItemItems(Items.DRAGON_BREATH)).register(p_accept_1_, "end/dragon_breath");
       Advancement advancement6 = Advancement.Builder.builder().withParent(advancement4).withDisplay(Items.SHULKER_SHELL, new TextComponentTranslation("advancements.end.levitate.title"), new TextComponentTranslation("advancements.end.levitate.description"),
               null, FrameType.CHALLENGE, true, true, false).withRewards(AdvancementRewards.Builder.experience(50)).withCriterion("levitated", LevitationTrigger.Instance.func_203930_a(DistancePredicate.func_203993_b(MinMaxBounds.FloatBound.func_211355_b(50.0F)))).register(p_accept_1_, "end/levitate");
       Advancement advancement7 = Advancement.Builder.builder().withParent(advancement4).withDisplay(Items.ELYTRA, new TextComponentTranslation("advancements.end.elytra.title"), new TextComponentTranslation("advancements.end.elytra.description"),
-              null, FrameType.GOAL, true, true, false).withCriterion("elytra", InventoryChangeTrigger.Instance.func_203922_a(Items.ELYTRA)).register(p_accept_1_, "end/elytra");
+              null, FrameType.GOAL, true, true, false).withCriterion("elytra", InventoryChangeTrigger.Instance.createFromItemItems(Items.ELYTRA)).register(p_accept_1_, "end/elytra");
       Advancement advancement8 = Advancement.Builder.builder().withParent(advancement1).withDisplay(Blocks.DRAGON_EGG, new TextComponentTranslation("advancements.end.dragon_egg.title"), new TextComponentTranslation("advancements.end.dragon_egg.description"),
-              null, FrameType.GOAL, true, true, false).withCriterion("dragon_egg", InventoryChangeTrigger.Instance.func_203922_a(Blocks.DRAGON_EGG)).register(p_accept_1_, "end/dragon_egg");
+              null, FrameType.GOAL, true, true, false).withCriterion("dragon_egg", InventoryChangeTrigger.Instance.createFromItemItems(Blocks.DRAGON_EGG)).register(p_accept_1_, "end/dragon_egg");
    }
 }

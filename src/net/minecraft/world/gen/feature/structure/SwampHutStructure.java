@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -19,6 +21,11 @@ public class SwampHutStructure extends ScatteredStructure<SwampHutConfig> {
 
    public int getSize() {
       return 3;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.VINE.asItem();
    }
 
    protected StructureStart makeStart(IWorld p_202369_1_, IChunkGenerator<?> p_202369_2_, SharedSeedRandom p_202369_3_, int p_202369_4_, int p_202369_5_) {

@@ -31,15 +31,15 @@ public class DisplayInfo {
    private float x;
    private float y;
 
-   public DisplayInfo(ItemStack p_i47586_1_, ITextComponent p_i47586_2_, ITextComponent p_i47586_3_, @Nullable ResourceLocation p_i47586_4_, FrameType p_i47586_5_, boolean p_i47586_6_, boolean p_i47586_7_, boolean p_i47586_8_) {
-      this.title = p_i47586_2_;
-      this.description = p_i47586_3_;
-      this.icon = p_i47586_1_;
-      this.background = p_i47586_4_;
-      this.frame = p_i47586_5_;
-      this.showToast = p_i47586_6_;
-      this.announceToChat = p_i47586_7_;
-      this.hidden = p_i47586_8_;
+   public DisplayInfo(ItemStack icon, ITextComponent title, ITextComponent description, @Nullable ResourceLocation background, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {
+      this.title = title;
+      this.description = description;
+      this.icon = icon;
+      this.background = background;
+      this.frame = frame;
+      this.showToast = showToast;
+      this.announceToChat = announceToChat;
+      this.hidden = hidden;
    }
 
    public void setPosition(float p_192292_1_, float p_192292_2_) {

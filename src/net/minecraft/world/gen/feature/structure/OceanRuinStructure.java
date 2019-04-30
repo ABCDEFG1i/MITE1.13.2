@@ -1,5 +1,7 @@
 package net.minecraft.world.gen.feature.structure;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +18,11 @@ public class OceanRuinStructure extends ScatteredStructure<OceanRuinConfig> {
 
    public int getSize() {
       return 3;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.MOSSY_STONE_BRICKS.asItem();
    }
 
    protected int getBiomeFeatureDistance(IChunkGenerator<?> p_204030_1_) {

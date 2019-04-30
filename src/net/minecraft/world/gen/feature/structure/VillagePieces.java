@@ -1,24 +1,8 @@
 package net.minecraft.world.gen.feature.structure;
 
 import com.google.common.collect.Lists;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import javax.annotation.Nullable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFence;
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.block.BlockGlassPane;
-import net.minecraft.block.BlockLadder;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockStairs;
-import net.minecraft.block.BlockTorchWall;
+import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Blocks;
@@ -35,6 +19,10 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.storage.loot.LootTableList;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class VillagePieces {
    public static void registerVillagePieces() {
@@ -56,21 +44,16 @@ public class VillagePieces {
    public static List<VillagePieces.PieceWeight> getStructureVillageWeightedPieceList(Random p_75084_0_, int p_75084_1_) {
       List<VillagePieces.PieceWeight> list = Lists.newArrayList();
       list.add(new VillagePieces.PieceWeight(VillagePieces.House4Garden.class, 4, MathHelper.nextInt(p_75084_0_, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
-      list.add(new VillagePieces.PieceWeight(VillagePieces.Church.class, 20, MathHelper.nextInt(p_75084_0_, 0 + p_75084_1_, 1 + p_75084_1_)));
-      list.add(new VillagePieces.PieceWeight(VillagePieces.House1.class, 20, MathHelper.nextInt(p_75084_0_, 0 + p_75084_1_, 2 + p_75084_1_)));
+      list.add(new VillagePieces.PieceWeight(VillagePieces.Church.class, 20, MathHelper.nextInt(p_75084_0_, p_75084_1_, 1 + p_75084_1_)));
+      list.add(new VillagePieces.PieceWeight(VillagePieces.House1.class, 20, MathHelper.nextInt(p_75084_0_, p_75084_1_, 2 + p_75084_1_)));
       list.add(new VillagePieces.PieceWeight(VillagePieces.WoodHut.class, 3, MathHelper.nextInt(p_75084_0_, 2 + p_75084_1_, 5 + p_75084_1_ * 3)));
-      list.add(new VillagePieces.PieceWeight(VillagePieces.Hall.class, 15, MathHelper.nextInt(p_75084_0_, 0 + p_75084_1_, 2 + p_75084_1_)));
+      list.add(new VillagePieces.PieceWeight(VillagePieces.Hall.class, 15, MathHelper.nextInt(p_75084_0_, p_75084_1_, 2 + p_75084_1_)));
       list.add(new VillagePieces.PieceWeight(VillagePieces.Field1.class, 3, MathHelper.nextInt(p_75084_0_, 1 + p_75084_1_, 4 + p_75084_1_)));
       list.add(new VillagePieces.PieceWeight(VillagePieces.Field2.class, 3, MathHelper.nextInt(p_75084_0_, 2 + p_75084_1_, 4 + p_75084_1_ * 2)));
       list.add(new VillagePieces.PieceWeight(VillagePieces.House2.class, 15, MathHelper.nextInt(p_75084_0_, 0, 1 + p_75084_1_)));
-      list.add(new VillagePieces.PieceWeight(VillagePieces.House3.class, 8, MathHelper.nextInt(p_75084_0_, 0 + p_75084_1_, 3 + p_75084_1_ * 2)));
-      Iterator<VillagePieces.PieceWeight> iterator = list.iterator();
+      list.add(new VillagePieces.PieceWeight(VillagePieces.House3.class, 8, MathHelper.nextInt(p_75084_0_, p_75084_1_, 3 + p_75084_1_ * 2)));
 
-      while(iterator.hasNext()) {
-         if ((iterator.next()).villagePiecesLimit == 0) {
-            iterator.remove();
-         }
-      }
+      list.removeIf(pieceWeight -> (pieceWeight).villagePiecesLimit == 0);
 
       return list;
    }
@@ -248,21 +231,36 @@ public class VillagePieces {
          this.setBlockState(p_74875_1_, iblockstate1, 3, 1, 5, p_74875_3_);
          this.setBlockState(p_74875_1_, iblockstate2, 1, 2, 7, p_74875_3_);
          this.setBlockState(p_74875_1_, iblockstate3, 3, 2, 7, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 2, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 3, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 4, 2, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 4, 3, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 6, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 7, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 4, 6, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 4, 7, 2, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.valueOf(true)).with(BlockGlassPane.WEST, Boolean.valueOf(true)), 2, 6, 0, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.valueOf(true)).with(BlockGlassPane.WEST, Boolean.valueOf(true)), 2, 7, 0, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.valueOf(true)).with(BlockGlassPane.WEST, Boolean.valueOf(true)), 2, 6, 4, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.valueOf(true)).with(BlockGlassPane.WEST, Boolean.valueOf(true)), 2, 7, 4, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 3, 6, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 4, 3, 6, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.valueOf(true)).with(BlockGlassPane.WEST, Boolean.valueOf(true)), 2, 3, 8, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 0, 2, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 0, 3, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 4, 2, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 4, 3, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 0, 6, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 0, 7, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 4, 6, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 4, 7, 2, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.TRUE).with(BlockGlassPane.WEST,
+                 Boolean.TRUE), 2, 6, 0, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.TRUE).with(BlockGlassPane.WEST,
+                 Boolean.TRUE), 2, 7, 0, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.TRUE).with(BlockGlassPane.WEST,
+                 Boolean.TRUE), 2, 6, 4, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.TRUE).with(BlockGlassPane.WEST,
+                 Boolean.TRUE), 2, 7, 4, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 0, 3, 6, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.TRUE).with(BlockGlassPane.NORTH,
+                 Boolean.TRUE), 4, 3, 6, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.EAST, Boolean.TRUE).with(BlockGlassPane.WEST,
+                 Boolean.TRUE), 2, 3, 8, p_74875_3_);
          this.placeTorch(p_74875_1_, EnumFacing.SOUTH, 2, 4, 7, p_74875_3_);
          this.placeTorch(p_74875_1_, EnumFacing.EAST, 1, 4, 6, p_74875_3_);
          this.placeTorch(p_74875_1_, EnumFacing.WEST, 3, 4, 6, p_74875_3_);
@@ -312,10 +310,10 @@ public class VillagePieces {
          super(p_i45570_1_, p_i45570_2_);
          this.setCoordBaseMode(p_i45570_5_);
          this.boundingBox = p_i45570_4_;
-         this.cropTypeA = VillagePieces.Field2.func_197529_b(p_i45570_3_);
-         this.cropTypeB = VillagePieces.Field2.func_197529_b(p_i45570_3_);
-         this.cropTypeC = VillagePieces.Field2.func_197529_b(p_i45570_3_);
-         this.cropTypeD = VillagePieces.Field2.func_197529_b(p_i45570_3_);
+         this.cropTypeA = VillagePieces.Field2.genCropType(p_i45570_3_);
+         this.cropTypeB = VillagePieces.Field2.genCropType(p_i45570_3_);
+         this.cropTypeC = VillagePieces.Field2.genCropType(p_i45570_3_);
+         this.cropTypeD = VillagePieces.Field2.genCropType(p_i45570_3_);
       }
 
       protected void writeStructureToNBT(NBTTagCompound p_143012_1_) {
@@ -379,27 +377,16 @@ public class VillagePieces {
          this.fillWithBlocks(p_74875_1_, p_74875_3_, 3, 0, 1, 3, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
          this.fillWithBlocks(p_74875_1_, p_74875_3_, 9, 0, 1, 9, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
 
+         //MITEMODDED Make plants need to grow when found village too
          for(int i = 1; i <= 7; ++i) {
-            BlockCrops blockcrops = (BlockCrops)this.cropTypeA.getBlock();
-            int j = blockcrops.getMaxAge();
-            int k = j / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeA.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k, j))), 1, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeA.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k, j))), 2, 1, i, p_74875_3_);
-            blockcrops = (BlockCrops)this.cropTypeB.getBlock();
-            int l = blockcrops.getMaxAge();
-            int i1 = l / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeB.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i1, l))), 4, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeB.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i1, l))), 5, 1, i, p_74875_3_);
-            blockcrops = (BlockCrops)this.cropTypeC.getBlock();
-            int j1 = blockcrops.getMaxAge();
-            int k1 = j1 / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeC.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k1, j1))), 7, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeC.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k1, j1))), 8, 1, i, p_74875_3_);
-            blockcrops = (BlockCrops)this.cropTypeD.getBlock();
-            int l1 = blockcrops.getMaxAge();
-            int i2 = l1 / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeD.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i2, l1))), 10, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeD.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i2, l1))), 11, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeA, 1, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeA, 2, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeB, 4, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeB, 5, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeC, 7, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeC, 8, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeD, 10, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeD, 11, 1, i, p_74875_3_);
          }
 
          for(int j2 = 0; j2 < 9; ++j2) {
@@ -424,8 +411,8 @@ public class VillagePieces {
          super(p_i45569_1_, p_i45569_2_);
          this.setCoordBaseMode(p_i45569_5_);
          this.boundingBox = p_i45569_4_;
-         this.cropTypeA = func_197529_b(p_i45569_3_);
-         this.cropTypeB = func_197529_b(p_i45569_3_);
+         this.cropTypeA = genCropType(p_i45569_3_);
+         this.cropTypeB = genCropType(p_i45569_3_);
       }
 
       protected void writeStructureToNBT(NBTTagCompound p_143012_1_) {
@@ -440,18 +427,18 @@ public class VillagePieces {
          this.cropTypeB = NBTUtil.readBlockState(p_143011_1_.getCompoundTag("CB"));
       }
 
-      private static IBlockState func_197529_b(Random p_197529_0_) {
-         switch(p_197529_0_.nextInt(10)) {
-         case 0:
-         case 1:
-            return Blocks.CARROTS.getDefaultState();
-         case 2:
-         case 3:
-            return Blocks.POTATOES.getDefaultState();
-         case 4:
-            return Blocks.BEETROOTS.getDefaultState();
-         default:
-            return Blocks.WHEAT.getDefaultState();
+      private static IBlockState genCropType(Random p_197529_0_) {
+         switch (p_197529_0_.nextInt(10)) {
+            case 0:
+            case 1:
+               return Blocks.CARROTS.getDefaultState();
+            case 2:
+            case 3:
+               return Blocks.POTATOES.getDefaultState();
+            case 4:
+               return Blocks.BEETROOTS.getDefaultState();
+            default:
+               return Blocks.WHEAT.getDefaultState();
          }
       }
 
@@ -480,17 +467,12 @@ public class VillagePieces {
          this.fillWithBlocks(p_74875_1_, p_74875_3_, 1, 0, 8, 5, 0, 8, iblockstate, iblockstate, false);
          this.fillWithBlocks(p_74875_1_, p_74875_3_, 3, 0, 1, 3, 0, 7, Blocks.WATER.getDefaultState(), Blocks.WATER.getDefaultState(), false);
 
+         //MITEMODDED Make plants need to grow when found village too
          for(int i = 1; i <= 7; ++i) {
-            BlockCrops blockcrops = (BlockCrops)this.cropTypeA.getBlock();
-            int j = blockcrops.getMaxAge();
-            int k = j / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeA.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k, j))), 1, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeA.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, k, j))), 2, 1, i, p_74875_3_);
-            blockcrops = (BlockCrops)this.cropTypeB.getBlock();
-            int l = blockcrops.getMaxAge();
-            int i1 = l / 3;
-            this.setBlockState(p_74875_1_, this.cropTypeB.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i1, l))), 4, 1, i, p_74875_3_);
-            this.setBlockState(p_74875_1_, this.cropTypeB.with(blockcrops.getAgeProperty(), Integer.valueOf(MathHelper.nextInt(p_74875_2_, i1, l))), 5, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeA, 1, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeA, 2, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeB, 4, 1, i, p_74875_3_);
+            this.setBlockState(p_74875_1_, this.cropTypeB, 5, 1, i, p_74875_3_);
          }
 
          for(int j1 = 0; j1 < 9; ++j1) {

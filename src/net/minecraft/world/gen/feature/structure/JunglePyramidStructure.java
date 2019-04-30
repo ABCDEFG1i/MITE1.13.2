@@ -1,6 +1,8 @@
 package net.minecraft.world.gen.feature.structure;
 
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -14,6 +16,11 @@ public class JunglePyramidStructure extends ScatteredStructure<JunglePyramidConf
 
    public int getSize() {
       return 3;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.MOSSY_COBBLESTONE.asItem();
    }
 
    protected StructureStart makeStart(IWorld p_202369_1_, IChunkGenerator<?> p_202369_2_, SharedSeedRandom p_202369_3_, int p_202369_4_, int p_202369_5_) {

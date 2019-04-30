@@ -212,7 +212,7 @@ public class PlayerAdvancements {
       return flag;
    }
 
-   private void registerListeners(Advancement p_193764_1_) {
+   public void registerListeners(Advancement p_193764_1_) {
       AdvancementProgress advancementprogress = this.getProgress(p_193764_1_);
       if (!advancementprogress.isDone()) {
          for(Entry<String, Criterion> entry : p_193764_1_.getCriteria().entrySet()) {

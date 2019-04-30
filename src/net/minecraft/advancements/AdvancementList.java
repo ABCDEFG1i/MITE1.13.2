@@ -58,6 +58,22 @@ public class AdvancementList {
 
    }
 
+   //MITEMODDED A way to add a single advancement
+   public void addAdvancements(ResourceLocation resourceLocation, Advancement advancement){
+      this.advancements.put(resourceLocation, advancement);
+      if (advancement.getParent() == null) {
+         this.roots.add(advancement);
+         if (this.listener != null) {
+            this.listener.rootAdvancementAdded(advancement);
+         }
+      } else {
+         this.nonRoots.add(advancement);
+         if (this.listener != null) {
+            this.listener.nonRootAdvancementAdded(advancement);
+         }
+      }
+   }
+
    public void loadAdvancements(Map<ResourceLocation, Advancement.Builder> p_192083_1_) {
       Function<ResourceLocation, Advancement> function = Functions.forMap(this.advancements, null);
 

@@ -48,7 +48,7 @@ public class SPacketUpdateHealth implements Packet<INetHandlerPlayClient> {
         this.health = p_148837_1_.readFloat();
         this.foodLevel = p_148837_1_.readVarInt();
         this.saturationLevel = p_148837_1_.readFloat();
-        this.maxFoodLevel = p_148837_1_.readVarInt();
+        this.maxFoodLevel = p_148837_1_.readInt();
     }
 
     public void writePacketData(PacketBuffer p_148840_1_) throws IOException {

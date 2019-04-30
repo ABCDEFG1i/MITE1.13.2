@@ -556,7 +556,8 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant {
         }
 
         return false;
-    }    public void useRecipe(MerchantRecipe p_70933_1_) {
+    }
+    public void useRecipe(MerchantRecipe p_70933_1_) {
         p_70933_1_.incrementToolUses();
         this.livingSoundTime = -this.getTalkInterval();
         this.playSound(SoundEvents.ENTITY_VILLAGER_YES, this.getSoundVolume(), this.getSoundPitch());

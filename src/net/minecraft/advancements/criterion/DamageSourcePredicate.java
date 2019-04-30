@@ -129,6 +129,11 @@ public class DamageSourcePredicate {
          return this;
       }
 
+      public DamageSourcePredicate.Builder func_203980_b(EntityPredicate.Builder p_203980_1_) {
+         this.field_203990_i = p_203980_1_.func_204000_b();
+         return this;
+      }
+
       public DamageSourcePredicate func_203979_b() {
          return new DamageSourcePredicate(this.field_203982_a, this.field_203983_b, this.field_203984_c, this.field_203985_d, this.field_203986_e, this.field_203987_f, this.field_203988_g, this.field_203989_h, this.field_203990_i);
       }

@@ -32,11 +32,11 @@ public class AdvancementRewards {
    private final ResourceLocation[] recipes;
    private final FunctionObject.CacheableFunction function;
 
-   public AdvancementRewards(int p_i47587_1_, ResourceLocation[] p_i47587_2_, ResourceLocation[] p_i47587_3_, FunctionObject.CacheableFunction p_i47587_4_) {
-      this.experience = p_i47587_1_;
-      this.loot = p_i47587_2_;
-      this.recipes = p_i47587_3_;
-      this.function = p_i47587_4_;
+   public AdvancementRewards(int experience, ResourceLocation[] loot, ResourceLocation[] recipes, FunctionObject.CacheableFunction function) {
+      this.experience = experience;
+      this.loot = loot;
+      this.recipes = recipes;
+      this.function = function;
    }
 
    public void apply(EntityPlayerMP p_192113_1_) {

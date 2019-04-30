@@ -3,6 +3,8 @@ package net.minecraft.world.gen.feature.structure;
 import java.util.List;
 import java.util.Random;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -19,6 +21,11 @@ public class VillageStructure extends Structure<VillageConfig> {
 
    public int getSize() {
       return 8;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Items.EMERALD;
    }
 
    protected boolean isEnabledIn(IWorld p_202365_1_) {
@@ -40,6 +47,11 @@ public class VillageStructure extends Structure<VillageConfig> {
       k1 = k1 + p_211744_2_.nextInt(i - j);
       l1 = l1 + p_211744_2_.nextInt(i - j);
       return new ChunkPos(k1, l1);
+   }
+
+   @Override
+   public StructureRequirements getRequirements() {
+      return StructureRequirements.NORMAL_VILLAGE;
    }
 
    protected boolean hasStartAt(IChunkGenerator<?> p_202372_1_, Random p_202372_2_, int p_202372_3_, int p_202372_4_) {
@@ -65,6 +77,8 @@ public class VillageStructure extends Structure<VillageConfig> {
 
       public Start(IWorld p_i48753_1_, IChunkGenerator<?> p_i48753_2_, SharedSeedRandom p_i48753_3_, int p_i48753_4_, int p_i48753_5_, Biome p_i48753_6_) {
          super(p_i48753_4_, p_i48753_5_, p_i48753_6_, p_i48753_3_, p_i48753_1_.getSeed());
+         System.out.println("Village start spawn");
+
          VillageConfig villageconfig = (VillageConfig)p_i48753_2_.getStructureConfig(p_i48753_6_, Feature.VILLAGE);
          List<VillagePieces.PieceWeight> list = VillagePieces.getStructureVillageWeightedPieceList(p_i48753_3_, villageconfig.field_202461_a);
          VillagePieces.Start villagepieces$start = new VillagePieces.Start(0, p_i48753_3_, (p_i48753_4_ << 4) + 2, (p_i48753_5_ << 4) + 2, list, villageconfig);
@@ -72,7 +86,6 @@ public class VillageStructure extends Structure<VillageConfig> {
          villagepieces$start.buildComponent(villagepieces$start, this.components, p_i48753_3_);
          List<StructurePiece> list1 = villagepieces$start.pendingRoads;
          List<StructurePiece> list2 = villagepieces$start.pendingHouses;
-
          while(!list1.isEmpty() || !list2.isEmpty()) {
             if (list1.isEmpty()) {
                int i = p_i48753_3_.nextInt(list2.size());

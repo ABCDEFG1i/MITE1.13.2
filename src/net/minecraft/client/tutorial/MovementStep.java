@@ -61,7 +61,7 @@ public class MovementStep implements ITutorialStep {
 
       if (this.moveCompleted != -1 && this.lookCompleted != -1) {
          if (this.tutorial.getGameType() == GameType.SURVIVAL) {
-            this.tutorial.setStep(TutorialSteps.FIND_TREE);
+            this.tutorial.setStep(TutorialSteps.OPEN_INVENTORY);
          } else {
             this.tutorial.setStep(TutorialSteps.NONE);
          }

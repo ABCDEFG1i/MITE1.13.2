@@ -100,6 +100,11 @@ public class DamagePredicate {
          return this;
       }
 
+      public DamagePredicate.Builder source(EntityPredicate sourceEntity){
+         this.sourceEntity = sourceEntity;
+         return this;
+      }
+
       public DamagePredicate build() {
          return new DamagePredicate(this.dealt, this.taken, this.sourceEntity, this.blocked, this.type);
       }

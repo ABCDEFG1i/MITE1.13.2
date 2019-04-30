@@ -1,32 +1,28 @@
 package net.minecraft.world.storage;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.DataFixTypes;
 import com.mojang.datafixers.DataFixer;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-import javax.annotation.Nullable;
 import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.nbt.INBTBase;
-import net.minecraft.nbt.NBTDynamicOps;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.nbt.NBTUtil;
+import net.minecraft.nbt.*;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.GameRules;
-import net.minecraft.world.GameType;
-import net.minecraft.world.WorldSettings;
-import net.minecraft.world.WorldType;
+import net.minecraft.world.*;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.StructureRequirements;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class WorldInfo {
    private String versionName;
@@ -76,6 +72,7 @@ public class WorldInfo {
    private int borderWarningTime = 15;
    private final Set<String> disabledDataPacks = Sets.newHashSet();
    private final Set<String> enabledDataPacks = Sets.newLinkedHashSet();
+   public final List<StructureRequirements> hadRequirements = Lists.newArrayList();
    private final Map<DimensionType, NBTTagCompound> dimensionData = Maps.newIdentityHashMap();
    private NBTTagCompound customBossEvents;
    private final GameRules gameRules = new GameRules();
@@ -234,6 +231,13 @@ public class WorldInfo {
          }
       }
 
+      if (p_i49564_1_.hasKey("Structures")){
+         NBTTagList structureList = p_i49564_1_.getTagList("Structures",8);
+         for (int i = 0;i < structureList.size();++i){
+            this.hadRequirements.add(StructureRequirements.valueOf(structureList.getStringTagAt(i)));
+         }
+      }
+
       if (p_i49564_1_.hasKey("CustomBossEvents", 10)) {
          this.customBossEvents = p_i49564_1_.getCompoundTag("CustomBossEvents");
       }
@@ -350,6 +354,12 @@ public class WorldInfo {
 
       nbttagcompound2.setTag("Disabled", nbttaglist1);
       p_76064_1_.setTag("DataPacks", nbttagcompound2);
+
+      NBTTagList structList = new NBTTagList();
+      for (StructureRequirements requirements : this.hadRequirements){
+         structList.add(new NBTTagString(requirements.name()));
+      }
+      p_76064_1_.setTag("Structures",structList);
       if (this.customBossEvents != null) {
          p_76064_1_.setTag("CustomBossEvents", this.customBossEvents);
       }
@@ -672,12 +682,14 @@ public class WorldInfo {
          String s = "Unknown?";
 
          try {
-            switch(this.saveVersion) {
-            case 19132:
-               s = "McRegion";
-               break;
-            case 19133:
-               s = "Anvil";
+            switch (this.saveVersion) {
+               case 19132:
+                  s = "McRegion";
+                  break;
+               case 19133:
+                  s = "Anvil";
+               case 413495445:
+                  s = "MITE";
             }
          } catch (Throwable var3) {
          }

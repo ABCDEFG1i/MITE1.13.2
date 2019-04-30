@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -34,6 +35,11 @@ public class WoodlandMansionStructure extends Structure<WoodlandMansionConfig> {
       k1 = k1 + (p_211744_2_.nextInt(i - j) + p_211744_2_.nextInt(i - j)) / 2;
       l1 = l1 + (p_211744_2_.nextInt(i - j) + p_211744_2_.nextInt(i - j)) / 2;
       return new ChunkPos(k1, l1);
+   }
+
+   @Override
+   public StructureRequirements getRequirements() {
+      return StructureRequirements.MANSION;
    }
 
    protected boolean hasStartAt(IChunkGenerator<?> p_202372_1_, Random p_202372_2_, int p_202372_3_, int p_202372_4_) {
@@ -66,6 +72,11 @@ public class WoodlandMansionStructure extends Structure<WoodlandMansionConfig> {
 
    public int getSize() {
       return 8;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.DARK_OAK_LOG.asItem();
    }
 
    public static class Start extends StructureStart {

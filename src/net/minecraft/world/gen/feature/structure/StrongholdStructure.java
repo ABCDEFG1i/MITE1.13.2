@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
 import net.minecraft.init.Biomes;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -67,6 +69,11 @@ public class StrongholdStructure extends Structure<StrongholdConfig> {
 
    public int getSize() {
       return 8;
+   }
+
+   @Override
+   public Item getSymbolItem() {
+      return Blocks.END_PORTAL_FRAME.asItem();
    }
 
    @Nullable

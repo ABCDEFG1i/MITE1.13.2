@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Nullable;
+
+import net.minecraft.item.Item;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -46,10 +48,9 @@ public abstract class Structure<C extends IFeatureConfig> extends Feature<C> {
             for(int l1 = k - i; l1 <= k + i; ++l1) {
                long i2 = ChunkPos.asLong(k1, l1);
                StructureStart structurestart = this.getStructureStart(p_212245_1_, p_212245_2_, (SharedSeedRandom)p_212245_3_, i2);
-               if (structurestart != NO_STRUCTURE && structurestart.getBoundingBox().intersectsWith(l, i1, l + 15, i1 + 15)) {
-                  p_212245_2_.getStructurePositionToReferenceMap(this).computeIfAbsent(j1, (p_208203_0_) -> {
-                     return new LongOpenHashSet();
-                  }).add(i2);
+               //MITEMODDED Make structures spawn with conditions
+               if (structurestart != NO_STRUCTURE && structurestart.getBoundingBox().intersectsWith(l, i1, l + 15, i1 + 15) && (p_212245_1_.getWorld().getWorldInfo().hadRequirements.contains(this.getRequirements()))) {
+                  p_212245_2_.getStructurePositionToReferenceMap(this).computeIfAbsent(j1, (p_208203_0_) -> new LongOpenHashSet()).add(i2);
                   p_212245_1_.getChunkProvider().func_201713_d(j, k, true).addStructureReference(this.getStructureName(), i2);
                   structurestart.generateStructure(p_212245_1_, p_212245_3_, new MutableBoundingBox(l, i1, l + 15, i1 + 15), new ChunkPos(j, k));
                   structurestart.notifyPostProcessAt(new ChunkPos(j, k));
@@ -194,8 +195,8 @@ public abstract class Structure<C extends IFeatureConfig> extends Feature<C> {
             }
 
             if (this.hasStartAt(p_202373_2_, p_202373_3_, chunkpos.x, chunkpos.z)) {
-               StructureStart structurestart1 = this.makeStart(p_202373_1_, p_202373_2_, p_202373_3_, chunkpos.x, chunkpos.z);
-               structurestart = structurestart1.isSizeableStructure() ? structurestart1 : NO_STRUCTURE;
+                  StructureStart structurestart1 = this.makeStart(p_202373_1_, p_202373_2_, p_202373_3_, chunkpos.x, chunkpos.z);
+                  structurestart = structurestart1.isSizeableStructure() ? structurestart1 : NO_STRUCTURE;
             } else {
                structurestart = NO_STRUCTURE;
             }
@@ -223,4 +224,10 @@ public abstract class Structure<C extends IFeatureConfig> extends Feature<C> {
    protected abstract String getStructureName();
 
    public abstract int getSize();
+
+   public abstract Item getSymbolItem();
+
+   public StructureRequirements getRequirements(){
+      return StructureRequirements.ALL;
+   }
 }

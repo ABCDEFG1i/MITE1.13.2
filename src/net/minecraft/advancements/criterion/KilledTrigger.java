@@ -13,6 +13,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -69,6 +70,7 @@ public class KilledTrigger implements ICriterionTrigger<KilledTrigger.Instance> 
    public static class Instance extends AbstractCriterionInstance {
       private final EntityPredicate entity;
       private final DamageSourcePredicate killingBlow;
+      private boolean isGlobal;
 
       public Instance(ResourceLocation p_i47454_1_, EntityPredicate p_i47454_2_, DamageSourcePredicate p_i47454_3_) {
          super(p_i47454_1_);
@@ -90,6 +92,11 @@ public class KilledTrigger implements ICriterionTrigger<KilledTrigger.Instance> 
 
       public static KilledTrigger.Instance func_203926_d() {
          return new KilledTrigger.Instance(CriteriaTriggers.ENTITY_KILLED_PLAYER.id, EntityPredicate.ANY, DamageSourcePredicate.ANY);
+      }
+
+      public KilledTrigger.Instance setGlobal(boolean global) {
+         isGlobal = global;
+         return this;
       }
 
       public boolean test(EntityPlayerMP p_192270_1_, Entity p_192270_2_, DamageSource p_192270_3_) {
@@ -140,6 +147,13 @@ public class KilledTrigger implements ICriterionTrigger<KilledTrigger.Instance> 
          if (list != null) {
             for(ICriterionTrigger.Listener<KilledTrigger.Instance> listener1 : list) {
                listener1.grantCriterion(this.playerAdvancements);
+               if (listener1.getCriterionInstance().isGlobal){
+                  for (EntityPlayer playerEntity : p_192503_1_.world.playerEntities) {
+                     if (playerEntity instanceof EntityPlayerMP){
+                      listener1.grantCriterion(((EntityPlayerMP) playerEntity).getAdvancements());
+                     }
+                  }
+               }
             }
          }
 

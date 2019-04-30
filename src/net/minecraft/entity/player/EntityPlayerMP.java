@@ -421,6 +421,8 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
       });
    }
 
+
+
    public void onDeath(DamageSource p_70645_1_) {
       if (this.experienceLevel <= 0) {
          this.respawnXpLevel = this.experienceLevel - 1;
@@ -1048,6 +1050,12 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
       s = s.substring(s.indexOf("/") + 1);
       s = s.substring(0, s.indexOf(":"));
       return s;
+   }
+
+   @Override
+   protected void onLevelUpdate(int experienceLevel) {
+      super.onLevelUpdate(experienceLevel);
+      CriteriaTriggers.LEVEL_TRIGGER.trigger(this,experienceLevel);
    }
 
    public void handleClientSettings(CPacketClientSettings p_147100_1_) {
