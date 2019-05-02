@@ -41,7 +41,7 @@ public class ShapedRecipeBuilder {
       this.result = p_i48261_1_.asItem();
       this.count = p_i48261_2_;
       this.craftTime = 1000;
-      this.craftTier = 1;
+      this.craftTier = 0;
    }
 
    public static ShapedRecipeBuilder shapedRecipe(IItemProvider p_200470_0_) {
