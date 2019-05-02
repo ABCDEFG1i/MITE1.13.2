@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:crafting_table"
+            "item": "minecraft:flint_crafting_table"
           }
         ]
       }

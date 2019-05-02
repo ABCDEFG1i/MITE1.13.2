@@ -40,7 +40,6 @@ public class Main {
 
    private static void deleteDir(String dirPath)
    {
-      System.out.println(dirPath);
       File file = new File(dirPath);
       if(file.isFile())
       {

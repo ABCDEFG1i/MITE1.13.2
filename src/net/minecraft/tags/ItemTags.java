@@ -41,6 +41,7 @@ public class ItemTags {
    public static final Tag<Item> TRAPDOORS = makeWrapperTag("trapdoors");
    public static final Tag<Item> BOATS = makeWrapperTag("boats");
    public static final Tag<Item> FISHES = makeWrapperTag("fishes");
+   public static final Tag<Item> CRAFTING_TABLE = makeWrapperTag("crafting_table");
 
    public static void setCollection(TagCollection<Item> p_199902_0_) {
       collection = p_199902_0_;

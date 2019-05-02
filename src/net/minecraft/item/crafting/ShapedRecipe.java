@@ -25,7 +25,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 //MITEMODDED
-public class ShapedRecipe implements ITimedRecipe {
+public class ShapedRecipe implements ITimedRecipe,ITieredRecipe {
    private final int recipeWidth;
    private final int recipeHeight;
    private final NonNullList<Ingredient> recipeItems;
@@ -33,8 +33,9 @@ public class ShapedRecipe implements ITimedRecipe {
    private final ResourceLocation id;
    private final String group;
    private final int craftingTime;
+   private final int craftingTier;
 
-   public ShapedRecipe(ResourceLocation p_i48162_1_, String p_i48162_2_, int p_i48162_3_, int p_i48162_4_, NonNullList<Ingredient> p_i48162_5_, ItemStack p_i48162_6_,int craftingTime) {
+   public ShapedRecipe(ResourceLocation p_i48162_1_, String p_i48162_2_, int p_i48162_3_, int p_i48162_4_, NonNullList<Ingredient> p_i48162_5_, ItemStack p_i48162_6_,int craftingTime,int craftingTier) {
       this.id = p_i48162_1_;
       this.group = p_i48162_2_;
       this.craftingTime = craftingTime;
@@ -42,6 +43,7 @@ public class ShapedRecipe implements ITimedRecipe {
       this.recipeHeight = p_i48162_4_;
       this.recipeItems = p_i48162_5_;
       this.recipeOutput = p_i48162_6_;
+      this.craftingTier = craftingTier;
    }
 
    @Override
@@ -73,6 +75,11 @@ public class ShapedRecipe implements ITimedRecipe {
    @OnlyIn(Dist.CLIENT)
    public boolean canFit(int p_194133_1_, int p_194133_2_) {
       return p_194133_1_ >= this.recipeWidth && p_194133_2_ >= this.recipeHeight;
+   }
+
+   @Override
+   public int getTier() {
+      return this.craftingTier;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {
@@ -269,11 +276,12 @@ public class ShapedRecipe implements ITimedRecipe {
          Map<String, Ingredient> map = ShapedRecipe.deserializeKey(JsonUtils.getJsonObject(p_199425_2_, "key"));
          String[] astring = ShapedRecipe.shrink(ShapedRecipe.patternFromJson(JsonUtils.getJsonArray(p_199425_2_, "pattern")));
          int craftingTime = JsonUtils.getInt(p_199425_2_,"craftTime");
+         int craftingTier = JsonUtils.getInt(p_199425_2_,"craftTier");
          int i = astring[0].length();
          int j = astring.length;
          NonNullList<Ingredient> nonnulllist = ShapedRecipe.deserializeIngredients(astring, map, i, j);
          ItemStack itemstack = ShapedRecipe.deserializeItem(JsonUtils.getJsonObject(p_199425_2_, "result"));
-         return new ShapedRecipe(p_199425_1_, s, i, j, nonnulllist, itemstack,craftingTime);
+         return new ShapedRecipe(p_199425_1_, s, i, j, nonnulllist, itemstack,craftingTime,craftingTier);
       }
 
       public String getId() {
@@ -291,9 +299,10 @@ public class ShapedRecipe implements ITimedRecipe {
          }
 
          int craftingTime = p_199426_2_.readInt();
+         int craftingTier = p_199426_2_.readInt();
 
          ItemStack itemstack = p_199426_2_.readItemStack();
-         return new ShapedRecipe(p_199426_1_, s, i, j, nonnulllist, itemstack,craftingTime);
+         return new ShapedRecipe(p_199426_1_, s, i, j, nonnulllist, itemstack,craftingTime,craftingTier);
       }
 
       public void write(PacketBuffer p_199427_1_, ShapedRecipe p_199427_2_) {
@@ -306,6 +315,7 @@ public class ShapedRecipe implements ITimedRecipe {
          }
          //MITEMODDED Add
          p_199427_1_.writeInt(p_199427_2_.craftingTime);
+         p_199427_1_.writeInt(p_199427_2_.craftingTier);
 
          p_199427_1_.writeItemStack(p_199427_2_.recipeOutput);
       }

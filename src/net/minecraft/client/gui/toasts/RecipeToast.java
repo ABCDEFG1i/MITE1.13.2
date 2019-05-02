@@ -43,7 +43,7 @@ public class RecipeToast implements IToast {
          if (irecipe instanceof FurnaceRecipe) {
             itemstack = new ItemStack(Blocks.FURNACE);
          } else {
-            itemstack = new ItemStack(Blocks.CRAFTING_TABLE);
+            itemstack = new ItemStack(Blocks.ADAMANTIUM_CRAFTING_TABLE);
          }
 
          GlStateManager.pushMatrix();

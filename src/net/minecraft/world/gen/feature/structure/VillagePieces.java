@@ -693,7 +693,7 @@ public class VillagePieces {
          this.setBlockState(p_74875_1_, Blocks.OAK_PRESSURE_PLATE.getDefaultState(), 6, 2, 3, p_74875_3_);
          this.setBlockState(p_74875_1_, iblockstate6, 4, 1, 3, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.OAK_PRESSURE_PLATE.getDefaultState(), 4, 2, 3, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.CRAFTING_TABLE.getDefaultState(), 7, 1, 1, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.COPPER_CRAFTING_TABLE.getDefaultState(), 7, 1, 1, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 1, 1, 0, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 1, 2, 0, p_74875_3_);
          this.createVillageDoor(p_74875_1_, p_74875_3_, p_74875_2_, 1, 1, 0, EnumFacing.NORTH);

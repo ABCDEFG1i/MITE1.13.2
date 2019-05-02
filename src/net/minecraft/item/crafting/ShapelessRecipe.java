@@ -15,19 +15,21 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ShapelessRecipe implements ITimedRecipe {
+public class ShapelessRecipe implements ITimedRecipe,ITieredRecipe {
    private final ResourceLocation id;
    private final String group;
    private final ItemStack recipeOutput;
    private final NonNullList<Ingredient> recipeItems;
    private final int craftingTime;
+   private final int craftingTier;
 
-   public ShapelessRecipe(ResourceLocation p_i48161_1_, String p_i48161_2_, ItemStack p_i48161_3_, NonNullList<Ingredient> p_i48161_4_,int craftingTime) {
+   public ShapelessRecipe(ResourceLocation p_i48161_1_, String p_i48161_2_, ItemStack p_i48161_3_, NonNullList<Ingredient> p_i48161_4_,int craftingTime,int craftingTier) {
       this.id = p_i48161_1_;
       this.group = p_i48161_2_;
       this.recipeOutput = p_i48161_3_;
       this.recipeItems = p_i48161_4_;
       this.craftingTime = craftingTime;
+      this.craftingTier = craftingTier;
    }
 
    @Override
@@ -54,6 +56,11 @@ public class ShapelessRecipe implements ITimedRecipe {
 
    public NonNullList<Ingredient> getIngredients() {
       return this.recipeItems;
+   }
+
+   @Override
+   public int getTier() {
+      return craftingTier;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {
@@ -90,6 +97,7 @@ public class ShapelessRecipe implements ITimedRecipe {
       public ShapelessRecipe read(ResourceLocation p_199425_1_, JsonObject p_199425_2_) {
          String s = JsonUtils.getString(p_199425_2_, "group", "");
          int craftingTime = JsonUtils.getInt(p_199425_2_,"craftTime");
+         int craftingTier = JsonUtils.getInt(p_199425_2_,"craftTier");
          NonNullList<Ingredient> nonnulllist = readIngredients(JsonUtils.getJsonArray(p_199425_2_, "ingredients"));
          if (nonnulllist.isEmpty()) {
             throw new JsonParseException("No ingredients for shapeless recipe");
@@ -97,7 +105,7 @@ public class ShapelessRecipe implements ITimedRecipe {
             throw new JsonParseException("Too many ingredients for shapeless recipe");
          } else {
             ItemStack itemstack = ShapedRecipe.deserializeItem(JsonUtils.getJsonObject(p_199425_2_, "result"));
-            return new ShapelessRecipe(p_199425_1_, s, itemstack, nonnulllist,craftingTime);
+            return new ShapelessRecipe(p_199425_1_, s, itemstack, nonnulllist,craftingTime,craftingTier);
          }
       }
 
@@ -128,7 +136,9 @@ public class ShapelessRecipe implements ITimedRecipe {
          }
 
          ItemStack itemstack = p_199426_2_.readItemStack();
-         return new ShapelessRecipe(p_199426_1_, s, itemstack, nonnulllist,p_199426_2_.readInt());
+         int craftingTime = p_199426_2_.readInt();
+         int craftingTier = p_199426_2_.readInt();
+         return new ShapelessRecipe(p_199426_1_, s, itemstack, nonnulllist,craftingTime,craftingTier);
       }
 
       public void write(PacketBuffer p_199427_1_, ShapelessRecipe p_199427_2_) {
@@ -142,6 +152,7 @@ public class ShapelessRecipe implements ITimedRecipe {
          p_199427_1_.writeItemStack(p_199427_2_.recipeOutput);
          //MITEMODDED Add
          p_199427_1_.writeInt(p_199427_2_.craftingTime);
+         p_199427_1_.writeInt(p_199427_2_.craftingTier);
       }
    }
 }

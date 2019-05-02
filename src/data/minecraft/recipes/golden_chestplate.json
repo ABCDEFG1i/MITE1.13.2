@@ -11,6 +11,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 1,
   "result": {
     "item": "minecraft:golden_chestplate"
   }

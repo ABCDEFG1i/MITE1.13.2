@@ -178,7 +178,6 @@ public class Blocks {
    public static final Block REDSTONE_WIRE;
    public static final Block DIAMOND_ORE;
    public static final Block DIAMOND_BLOCK;
-   public static final Block CRAFTING_TABLE;
    public static final Block WHEAT;
    public static final Block FARMLAND;
    public static final Block FURNACE;
@@ -644,6 +643,17 @@ public class Blocks {
    public static final Block CHIPPED_MITHRIL_ANVIL;
    public static final Block CHIPPED_TUNGSTEN_ANVIL;
    public static final Block CHIPPED_ADAMANTIUM_ANVIL;
+   //Crafting Table
+   public static final Block FLINT_CRAFTING_TABLE;
+   public static final Block COPPER_CRAFTING_TABLE;
+   public static final Block SILVER_CRAFTING_TABLE;
+   public static final Block IRON_CRAFTING_TABLE;
+   public static final Block GOLD_CRAFTING_TABLE;
+   public static final Block ANCIENT_METAL_CRAFTING_TABLE;
+   public static final Block MITHRIL_CRAFTING_TABLE;
+   public static final Block TUNGSTEN_CRAFTING_TABLE;
+   public static final Block ADAMANTIUM_CRAFTING_TABLE;
+   public static final Block OBSIDIAN_CRAFTING_TABLE;
 
 
    private static Block getRegisteredBlock(String p_180383_0_) {
@@ -830,7 +840,6 @@ public class Blocks {
          REDSTONE_WIRE = getRegisteredBlock("redstone_wire");
          DIAMOND_ORE = getRegisteredBlock("diamond_ore");
          DIAMOND_BLOCK = getRegisteredBlock("diamond_block");
-         CRAFTING_TABLE = getRegisteredBlock("crafting_table");
          WHEAT = getRegisteredBlock("wheat");
          FARMLAND = getRegisteredBlock("farmland");
          FURNACE = getRegisteredBlock("furnace");
@@ -1313,6 +1322,19 @@ public class Blocks {
                     DAMAGED_TUNGSTEN_ANVIL = getRegisteredBlock("damaged_tungsten_anvil");
                     DAMAGED_ADAMANTIUM_ANVIL = getRegisteredBlock("damaged_adamantium_anvil");
                 }
+            }
+            //Crafting Tables
+            {
+               FLINT_CRAFTING_TABLE = getRegisteredBlock("flint_crafting_table");
+               COPPER_CRAFTING_TABLE = getRegisteredBlock("copper_crafting_table");
+               SILVER_CRAFTING_TABLE = getRegisteredBlock("silver_crafting_table");
+               IRON_CRAFTING_TABLE = getRegisteredBlock("iron_crafting_table");
+               GOLD_CRAFTING_TABLE = getRegisteredBlock("gold_crafting_table");
+               ANCIENT_METAL_CRAFTING_TABLE = getRegisteredBlock("ancient_metal_crafting_table");
+               MITHRIL_CRAFTING_TABLE = getRegisteredBlock("mithril_crafting_table");
+               TUNGSTEN_CRAFTING_TABLE = getRegisteredBlock("tungsten_crafting_table");
+               ADAMANTIUM_CRAFTING_TABLE = getRegisteredBlock("adamantium_crafting_table");
+               OBSIDIAN_CRAFTING_TABLE = getRegisteredBlock("obsidian_crafting_table");
             }
          }
 

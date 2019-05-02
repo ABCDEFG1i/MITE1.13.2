@@ -546,7 +546,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
       String s = p_180468_1_.getGuiID();
       switch (s) {
          case "minecraft:crafting_table":
-            this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world));
+            this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world,p_180468_1_.getGuiLevel()));
             break;
          case "minecraft:enchanting_table":
             this.mc.displayGuiScreen(new GuiEnchantment(this.inventory, this.world, p_180468_1_));

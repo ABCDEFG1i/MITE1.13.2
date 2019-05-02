@@ -366,6 +366,8 @@ public class Items {
       public static final Item ADAMANTIUM_SWORD;
       public static final Item ADAMANTIUM_HOE;
 
+      public static final Item SINEW;
+
 
    private static Item getRegisteredItem(String p_179554_0_) {
       Item item = IRegistry.field_212630_s.func_212608_b(new ResourceLocation(p_179554_0_));
@@ -699,6 +701,8 @@ public class Items {
             ANCIENT_METAL_NUGGET = getRegisteredItem("ancient_metal_nugget");
             SILVER_NUGGET = getRegisteredItem("silver_nugget");
             COPPER_NUGGET = getRegisteredItem("copper_nugget");
+
+            SINEW = getRegisteredItem("sinew");
 
          }
          //MITE FOOD

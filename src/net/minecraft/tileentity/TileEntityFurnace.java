@@ -26,6 +26,7 @@ import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.EnumFacing;
@@ -93,7 +94,7 @@ public class TileEntityFurnace extends TileEntityLockable implements ISidedInven
       setBurnTime(map, Blocks.JUKEBOX, 300);
       setBurnTime(map, Blocks.CHEST, 300);
       setBurnTime(map, Blocks.TRAPPED_CHEST, 300);
-      setBurnTime(map, Blocks.CRAFTING_TABLE, 300);
+      setBurnTime(map, ItemTags.CRAFTING_TABLE, 300);
       setBurnTime(map, Blocks.DAYLIGHT_DETECTOR, 300);
       setBurnTime(map, ItemTags.BANNERS, 300);
       setBurnTime(map, Items.BOW, 300);

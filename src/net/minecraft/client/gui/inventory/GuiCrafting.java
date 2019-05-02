@@ -11,6 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,8 +25,8 @@ public class GuiCrafting extends GuiContainer implements IRecipeShownListener {
    private boolean widthTooNarrow;
    private final InventoryPlayer field_212354_A;
 
-   public GuiCrafting(InventoryPlayer p_i45504_1_, World p_i45504_2_) {
-      super(new ContainerWorkbench(p_i45504_1_,p_i45504_2_, BlockPos.ORIGIN));
+   public GuiCrafting(InventoryPlayer p_i45504_1_, World p_i45504_2_, int craftingLevel) {
+      super(new ContainerWorkbench(p_i45504_1_,p_i45504_2_, BlockPos.ORIGIN,craftingLevel));
       this.field_212354_A = p_i45504_1_;
       this.workbench = (ContainerWorkbench) super.inventorySlots;
    }
