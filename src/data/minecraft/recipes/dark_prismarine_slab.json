@@ -9,7 +9,7 @@
     }
   },
   "craftTime": 1000,
-  "craftTier": 1,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:dark_prismarine_slab",
     "count": 6

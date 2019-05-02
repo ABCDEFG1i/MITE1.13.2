@@ -16,7 +16,7 @@
     }
   },
   "craftTime": 1000,
-  "craftTier": 1,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:flint_hatchet"
   }

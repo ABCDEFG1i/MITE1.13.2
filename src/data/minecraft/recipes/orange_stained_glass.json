@@ -15,7 +15,7 @@
     }
   },
   "craftTime": 1000,
-  "craftTier": 1,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:orange_stained_glass",
     "count": 8
