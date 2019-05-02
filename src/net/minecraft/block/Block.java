@@ -748,9 +748,6 @@ public class Block implements IItemProvider {
                 .setHardnessAndResistance(0.6F)
                 .setSoundType(SoundType.GROUND));
         register("farmland", block33);
-        register("furnace", new BlockFurnace(Block.Properties.createBlockProperties(Material.FURNACE)
-                .setHardnessAndResistance(3.5F)
-                .setLightLevel(13)));
         register("sign", new BlockStandingSign(Block.Properties.createBlockProperties(Material.WOOD)
                 .setNonSolid()
                 .setHardnessAndResistance(1.0F)
@@ -2531,6 +2528,27 @@ public class Block implements IItemProvider {
                 register("adamantium_crafting_table", new BlockWorkbench(7,Block.Properties.createBlockProperties(Material.WORKBENCH)
                         .setHardnessAndResistance(2.5F)
                         .setSoundType(SoundType.WOOD)));
+            }
+            //Furnaces
+            {
+                register("clay_furnace", new BlockFurnace(0,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("cobblestone_furnace", new BlockFurnace(2,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("hardened_clay_furnace", new BlockFurnace(1,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("netherrack_furnace", new BlockFurnace(4,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("obsidian_furnace", new BlockFurnace(3,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("sandstone_furnace", new BlockFurnace(1,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
             }
         }
 

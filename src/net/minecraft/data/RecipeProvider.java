@@ -1114,18 +1114,12 @@ public class RecipeProvider implements IDataProvider {
                 .patternLine(" # ")
                 .addCriterion("has_brick", this.hasItem(Items.BRICK))
                 .build(p_200404_1_);
-        ShapedRecipeBuilder.shapedRecipe(Blocks.FURNACE)
-                .key('#', Blocks.COBBLESTONE)
-                .patternLine("###")
-                .patternLine("# #")
-                .patternLine("###")
-                .addCriterion("has_cobblestone", this.hasItem(Blocks.COBBLESTONE))
-                .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.FURNACE_MINECART)
-                .key('A', Blocks.FURNACE)
+                .key('A', Blocks.COBBLESTONE_FURNACE)
                 .key('B', Items.MINECART)
                 .patternLine("A")
                 .patternLine("B")
+                .setCraftTier(3)
                 .addCriterion("has_minecart", this.hasItem(Items.MINECART))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.GLASS_BOTTLE, 3)
@@ -3362,6 +3356,7 @@ public class RecipeProvider implements IDataProvider {
                 200).addCriterion("has_chorus_fruit", this.hasItem(Items.CHORUS_FRUIT)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COAL_ORE.asItem()), Items.COAL, 0.1F, 200)
                 .addCriterion("has_coal_ore", this.hasItem(Blocks.COAL_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "coal_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.BEEF), Items.COOKED_BEEF, 0.35F, 200)
                 .addCriterion("has_beef", this.hasItem(Items.BEEF))
@@ -3389,27 +3384,34 @@ public class RecipeProvider implements IDataProvider {
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.DIAMOND_ORE.asItem()), Items.DIAMOND, 1.0F, 200)
                 .addCriterion("has_diamond_ore", this.hasItem(Blocks.DIAMOND_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "diamond_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LAPIS_ORE.asItem()),
                 Items.LAPIS_LAZULI,
                 0.2F,
                 200)
+                .setHeatLevel(2)
                 .addCriterion("has_lapis_ore", this.hasItem(Blocks.LAPIS_ORE))
                 .build(p_200404_1_, "lapis_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.EMERALD_ORE.asItem()), Items.EMERALD, 1.0F, 200)
                 .addCriterion("has_emerald_ore", this.hasItem(Blocks.EMERALD_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "emerald_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromTag(ItemTags.SAND), Blocks.GLASS.asItem(), 0.1F, 200)
                 .addCriterion("has_sand", this.hasItem(ItemTags.SAND))
+                .setHeatLevel(2)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GOLD_ORE.asItem()), Items.GOLD_INGOT, 1.0F, 200)
                 .addCriterion("has_gold_ore", this.hasItem(Blocks.GOLD_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.SEA_PICKLE.asItem()), Items.LIME_DYE, 0.1F, 200)
                 .addCriterion("has_sea_pickle", this.hasItem(Blocks.SEA_PICKLE))
+                .setHeatLevel(1)
                 .build(p_200404_1_, "lime_dye_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CACTUS.asItem()), Items.CACTUS_GREEN, 1.0F, 200)
                 .addCriterion("has_cactus", this.hasItem(Blocks.CACTUS))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.GOLDEN_PICKAXE,
                 Items.GOLDEN_SHOVEL,
@@ -3431,6 +3433,7 @@ public class RecipeProvider implements IDataProvider {
                 .addCriterion("has_golden_leggings", this.hasItem(Items.GOLDEN_LEGGINGS))
                 .addCriterion("has_golden_boots", this.hasItem(Items.GOLDEN_BOOTS))
                 .addCriterion("has_golden_horse_armor", this.hasItem(Items.GOLDEN_HORSE_ARMOR))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "gold_nugget_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Items.IRON_PICKAXE,
                 Items.IRON_SHOVEL,
@@ -3460,48 +3463,59 @@ public class RecipeProvider implements IDataProvider {
                 .addCriterion("has_chainmail_chestplate", this.hasItem(Items.CHAINMAIL_CHESTPLATE))
                 .addCriterion("has_chainmail_leggings", this.hasItem(Items.CHAINMAIL_LEGGINGS))
                 .addCriterion("has_chainmail_boots", this.hasItem(Items.CHAINMAIL_BOOTS))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "iron_nugget_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.IRON_ORE.asItem()), Items.IRON_INGOT, 0.7F, 200)
                 .addCriterion("has_iron_ore", this.hasItem(Blocks.IRON_ORE.asItem()))
+                .setHeatLevel(2)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CLAY), Blocks.TERRACOTTA.asItem(), 0.35F, 200)
                 .addCriterion("has_clay_block", this.hasItem(Blocks.CLAY))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.NETHERRACK), Items.NETHER_BRICK, 0.1F, 200)
                 .addCriterion("has_netherrack", this.hasItem(Blocks.NETHERRACK))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.NETHER_QUARTZ_ORE), Items.QUARTZ, 0.2F, 200)
                 .addCriterion("has_nether_quartz_ore", this.hasItem(Blocks.NETHER_QUARTZ_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.REDSTONE_ORE), Items.REDSTONE, 0.7F, 200)
                 .addCriterion("has_redstone_ore", this.hasItem(Blocks.REDSTONE_ORE))
+                .setHeatLevel(2)
                 .build(p_200404_1_, "redstone_from_smelting");
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.WET_SPONGE), Blocks.SPONGE.asItem(), 0.15F, 200)
                 .addCriterion("has_wet_sponge", this.hasItem(Blocks.WET_SPONGE))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.COBBLESTONE), Blocks.STONE.asItem(), 0.1F, 200)
                 .addCriterion("has_cobblestone", this.hasItem(Blocks.COBBLESTONE))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.STONE_BRICKS),
                 Blocks.CRACKED_STONE_BRICKS.asItem(),
                 0.1F,
-                200).addCriterion("has_stone_bricks", this.hasItem(Blocks.STONE_BRICKS)).build(p_200404_1_);
+                200)
+                .addCriterion("has_stone_bricks", this.hasItem(Blocks.STONE_BRICKS))
+                .setHeatLevel(1)
+                .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLACK_TERRACOTTA),
                 Blocks.BLACK_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_black_terracotta", this.hasItem(Blocks.BLACK_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_black_terracotta", this.hasItem(Blocks.BLACK_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BLUE_TERRACOTTA),
                 Blocks.BLUE_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_blue_terracotta", this.hasItem(Blocks.BLUE_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_blue_terracotta", this.hasItem(Blocks.BLUE_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.BROWN_TERRACOTTA),
                 Blocks.BROWN_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_brown_terracotta", this.hasItem(Blocks.BROWN_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_brown_terracotta", this.hasItem(Blocks.BROWN_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.CYAN_TERRACOTTA),
                 Blocks.CYAN_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_cyan_terracotta", this.hasItem(Blocks.CYAN_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_cyan_terracotta", this.hasItem(Blocks.CYAN_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GRAY_TERRACOTTA),
                 Blocks.GRAY_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
@@ -3509,51 +3523,53 @@ public class RecipeProvider implements IDataProvider {
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.GREEN_TERRACOTTA),
                 Blocks.GREEN_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_green_terracotta", this.hasItem(Blocks.GREEN_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_green_terracotta", this.hasItem(Blocks.GREEN_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_BLUE_TERRACOTTA),
                 Blocks.LIGHT_BLUE_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
                 200)
                 .addCriterion("has_light_blue_terracotta", this.hasItem(Blocks.LIGHT_BLUE_TERRACOTTA))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIGHT_GRAY_TERRACOTTA),
                 Blocks.LIGHT_GRAY_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
                 200)
                 .addCriterion("has_light_gray_terracotta", this.hasItem(Blocks.LIGHT_GRAY_TERRACOTTA))
+                .setHeatLevel(1)
                 .build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.LIME_TERRACOTTA),
                 Blocks.LIME_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_lime_terracotta", this.hasItem(Blocks.LIME_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_lime_terracotta", this.hasItem(Blocks.LIME_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.MAGENTA_TERRACOTTA),
                 Blocks.MAGENTA_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_magenta_terracotta", this.hasItem(Blocks.MAGENTA_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_magenta_terracotta", this.hasItem(Blocks.MAGENTA_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.ORANGE_TERRACOTTA),
                 Blocks.ORANGE_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_orange_terracotta", this.hasItem(Blocks.ORANGE_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_orange_terracotta", this.hasItem(Blocks.ORANGE_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PINK_TERRACOTTA),
                 Blocks.PINK_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_pink_terracotta", this.hasItem(Blocks.PINK_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_pink_terracotta", this.hasItem(Blocks.PINK_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.PURPLE_TERRACOTTA),
                 Blocks.PURPLE_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_purple_terracotta", this.hasItem(Blocks.PURPLE_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_purple_terracotta", this.hasItem(Blocks.PURPLE_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.RED_TERRACOTTA),
                 Blocks.RED_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_red_terracotta", this.hasItem(Blocks.RED_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_red_terracotta", this.hasItem(Blocks.RED_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.WHITE_TERRACOTTA),
                 Blocks.WHITE_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_white_terracotta", this.hasItem(Blocks.WHITE_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_white_terracotta", this.hasItem(Blocks.WHITE_TERRACOTTA)).build(p_200404_1_);
         FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.YELLOW_TERRACOTTA),
                 Blocks.YELLOW_GLAZED_TERRACOTTA.asItem(),
                 0.1F,
-                200).addCriterion("has_yellow_terracotta", this.hasItem(Blocks.YELLOW_TERRACOTTA)).build(p_200404_1_);
+                200).setHeatLevel(1).addCriterion("has_yellow_terracotta", this.hasItem(Blocks.YELLOW_TERRACOTTA)).build(p_200404_1_);
 
         //MITE Recipes Start
         {
@@ -4211,6 +4227,56 @@ public class RecipeProvider implements IDataProvider {
                             .addCriterion("has_stick",this.hasItem(Items.STICK))
                             .build(p_200404_1_);
                 }
+                //Furnaces
+                {
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.CLAY_FURNACE)
+                            .key('B',Blocks.CLAY)
+                            .patternLine("BB")
+                            .patternLine("BB")
+                            .setCraftTier(0)
+                            .addCriterion("has_block",this.hasItem(Blocks.CLAY))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.HARDENED_CLAY_FURNACE)
+                            .key('B',Blocks.TERRACOTTA)
+                            .patternLine("BBB")
+                            .patternLine("B B")
+                            .patternLine("BBB")
+                            .setCraftTier(1)
+                            .addCriterion("has_block",this.hasItem(Blocks.TERRACOTTA))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.COBBLESTONE_FURNACE)
+                            .key('B',Blocks.COBBLESTONE)
+                            .patternLine("BBB")
+                            .patternLine("B B")
+                            .patternLine("BBB")
+                            .setCraftTier(1)
+                            .addCriterion("has_block",this.hasItem(Blocks.TERRACOTTA))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.OBSIDIAN_FURNACE)
+                            .key('B',Blocks.OBSIDIAN)
+                            .patternLine("BBB")
+                            .patternLine("B B")
+                            .patternLine("BBB")
+                            .setCraftTier(3)
+                            .addCriterion("has_block",this.hasItem(Blocks.OBSIDIAN))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.NETHERRACK_FURNACE)
+                            .key('B',Blocks.NETHERRACK)
+                            .patternLine("BBB")
+                            .patternLine("B B")
+                            .patternLine("BBB")
+                            .setCraftTier(4)
+                            .addCriterion("has_block",this.hasItem(Blocks.NETHERRACK))
+                            .build(p_200404_1_);
+                    ShapedRecipeBuilder.shapedRecipe(Blocks.SANDSTONE_FURNACE)
+                            .key('B',Blocks.SANDSTONE)
+                            .patternLine("BBB")
+                            .patternLine("B B")
+                            .patternLine("BBB")
+                            .setCraftTier(1)
+                            .addCriterion("has_block",this.hasItem(Blocks.SANDSTONE))
+                            .build(p_200404_1_);
+                }
 
             }
             //MITE Furnace Recipes
@@ -4219,26 +4285,31 @@ public class RecipeProvider implements IDataProvider {
                         Items.COPPER_INGOT,
                         10F,
                         200).addCriterion("has_ore", this.hasItem(Blocks.COPPER_ORE))
+                        .setHeatLevel(2)
                         .build(p_200404_1_);
                 FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.SILVER_ORE),
                         Items.SILVER_INGOT,
                         10F,
                         200).addCriterion("has_ore", this.hasItem(Blocks.SILVER_ORE))
+                        .setHeatLevel(2)
                         .build(p_200404_1_);
                 FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.MITHRIL_ORE),
                         Items.MITHRIL_INGOT,
                         40F,
                         200).addCriterion("has_ore", this.hasItem(Blocks.MITHRIL_ORE))
+                        .setHeatLevel(2)
                         .build(p_200404_1_);
                 FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.TUNGSTEN_ORE),
                         Items.TUNGSTEN_INGOT,
                         60F,
                         200).addCriterion("has_ore", this.hasItem(Blocks.TUNGSTEN_ORE))
+                        .setHeatLevel(3)
                         .build(p_200404_1_);
                 FurnaceRecipeBuilder.furnaceRecipe(Ingredient.fromItems(Blocks.ADAMANTIUM_ORE),
                         Items.ADAMANTIUM_INGOT,
                         100F,
                         200).addCriterion("has_ore", this.hasItem(Blocks.ADAMANTIUM_ORE))
+                        .setHeatLevel(4)
                         .build(p_200404_1_);
             }
         }

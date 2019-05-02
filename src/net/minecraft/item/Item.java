@@ -451,7 +451,6 @@ public class Item implements IItemProvider {
       register(Blocks.DIAMOND_ORE, ItemGroup.BUILDING_BLOCKS);
       register(Blocks.DIAMOND_BLOCK, ItemGroup.BUILDING_BLOCKS);
       register(Blocks.FARMLAND, ItemGroup.DECORATIONS);
-      register(Blocks.FURNACE, ItemGroup.DECORATIONS);
       register(Blocks.LADDER, ItemGroup.DECORATIONS);
       register(Blocks.RAIL, ItemGroup.TRANSPORTATION);
       register(Blocks.COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS);
@@ -1228,6 +1227,15 @@ public class Item implements IItemProvider {
             register(Blocks.TUNGSTEN_CRAFTING_TABLE, ItemGroup.DECORATIONS);
             register(Blocks.ADAMANTIUM_CRAFTING_TABLE, ItemGroup.DECORATIONS);
             register(Blocks.OBSIDIAN_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+         }
+         //Furnaces
+         {
+            register(Blocks.CLAY_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.HARDENED_CLAY_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.COBBLESTONE_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.NETHERRACK_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.OBSIDIAN_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.SANDSTONE_FURNACE,ItemGroup.DECORATIONS);
          }
       }
    }

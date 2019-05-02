@@ -41,7 +41,7 @@ public class RecipeToast implements IToast {
          IRecipe irecipe = this.recipes.get((int)(p_193653_2_ / (5000L / (long)this.recipes.size()) % (long)this.recipes.size()));
          ItemStack itemstack;
          if (irecipe instanceof FurnaceRecipe) {
-            itemstack = new ItemStack(Blocks.FURNACE);
+            itemstack = new ItemStack(Blocks.COBBLESTONE_FURNACE);
          } else {
             itemstack = new ItemStack(Blocks.ADAMANTIUM_CRAFTING_TABLE);
          }

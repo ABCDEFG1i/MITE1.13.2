@@ -31,10 +31,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class BlockFurnace extends BlockContainer {
    public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
    public static final BooleanProperty LIT = BlockRedstoneTorch.LIT;
+   private final int maxHeatLevel;
 
-   protected BlockFurnace(Block.Properties p_i48393_1_) {
+   protected BlockFurnace(int maxHeatLevel,Block.Properties p_i48393_1_) {
       super(p_i48393_1_);
-      this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(LIT, Boolean.valueOf(false)));
+      this.maxHeatLevel = maxHeatLevel;
+      this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(LIT, Boolean.FALSE));
    }
 
    public int getLightValue(IBlockState p_149750_1_) {
@@ -47,7 +49,7 @@ public class BlockFurnace extends BlockContainer {
       } else {
          TileEntity tileentity = p_196250_2_.getTileEntity(p_196250_3_);
          if (tileentity instanceof TileEntityFurnace) {
-            p_196250_4_.displayGUIChest((TileEntityFurnace)tileentity);
+            p_196250_4_.displayGUIChest(((TileEntityFurnace) tileentity).setMaxHeatLevel(maxHeatLevel));
             p_196250_4_.addStat(StatList.INTERACT_WITH_FURNACE);
          }
 

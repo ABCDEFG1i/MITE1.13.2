@@ -180,7 +180,6 @@ public class Blocks {
    public static final Block DIAMOND_BLOCK;
    public static final Block WHEAT;
    public static final Block FARMLAND;
-   public static final Block FURNACE;
    public static final Block SIGN;
    public static final Block OAK_DOOR;
    public static final Block SPRUCE_DOOR;
@@ -654,6 +653,13 @@ public class Blocks {
    public static final Block TUNGSTEN_CRAFTING_TABLE;
    public static final Block ADAMANTIUM_CRAFTING_TABLE;
    public static final Block OBSIDIAN_CRAFTING_TABLE;
+   //Furnaces
+   public static final Block CLAY_FURNACE;
+   public static final Block COBBLESTONE_FURNACE;
+   public static final Block HARDENED_CLAY_FURNACE;
+   public static final Block NETHERRACK_FURNACE;
+   public static final Block OBSIDIAN_FURNACE;
+   public static final Block SANDSTONE_FURNACE;
 
 
    private static Block getRegisteredBlock(String p_180383_0_) {
@@ -842,7 +848,6 @@ public class Blocks {
          DIAMOND_BLOCK = getRegisteredBlock("diamond_block");
          WHEAT = getRegisteredBlock("wheat");
          FARMLAND = getRegisteredBlock("farmland");
-         FURNACE = getRegisteredBlock("furnace");
          SIGN = getRegisteredBlock("sign");
          OAK_DOOR = getRegisteredBlock("oak_door");
          SPRUCE_DOOR = getRegisteredBlock("spruce_door");
@@ -1335,6 +1340,15 @@ public class Blocks {
                TUNGSTEN_CRAFTING_TABLE = getRegisteredBlock("tungsten_crafting_table");
                ADAMANTIUM_CRAFTING_TABLE = getRegisteredBlock("adamantium_crafting_table");
                OBSIDIAN_CRAFTING_TABLE = getRegisteredBlock("obsidian_crafting_table");
+            }
+            //Furnaces
+            {
+               CLAY_FURNACE = getRegisteredBlock("clay_furnace");
+               HARDENED_CLAY_FURNACE = getRegisteredBlock("hardened_clay_furnace");
+               COBBLESTONE_FURNACE = getRegisteredBlock("cobblestone_furnace");
+               NETHERRACK_FURNACE = getRegisteredBlock("netherrack_furnace");
+               OBSIDIAN_FURNACE = getRegisteredBlock("obsidian_furnace");
+               SANDSTONE_FURNACE = getRegisteredBlock("sandstone_furnace");
             }
          }
 

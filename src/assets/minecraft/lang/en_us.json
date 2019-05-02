@@ -4100,6 +4100,13 @@
   "block.minecraft.tungsten_crafting_table": "Tungsten Crafting Table",
   "block.minecraft.adamantium_crafting_table": "Adamantium Crafting Table",
 
+  "block.minecraft.clay_furnace": "Clay Furnace",
+  "block.minecraft.cobblestone_furnace": "Cobblestone Furnace",
+  "block.minecraft.hardened_clay_furnace": "Hardened Clay Furnace",
+  "block.minecraft.netherrack_furnace": "Netherrack Furnace",
+  "block.minecraft.obsidian_furnace": "Obsidian Furnace",
+  "block.minecraft.sandstone_furnace": "Sandstone Furnace",
+
   "MITEADVANCEMENTS":"-----------------------------------------",
   "advancements.structure.root.title": "Structures!",
   "advancements.structure.root.description": "Get to level 10 and survive to 20 days to generate structures",

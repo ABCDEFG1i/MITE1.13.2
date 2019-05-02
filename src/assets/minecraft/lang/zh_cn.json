@@ -4104,6 +4104,13 @@
   "block.minecraft.tungsten_crafting_table": "\u94a8\u5de5\u4f5c\u53f0",
   "block.minecraft.adamantium_crafting_table": "\u827e\u5fb7\u66fc\u5de5\u4f5c\u53f0",
 
+  "block.minecraft.clay_furnace": "\u7c98\u571f\u7089",
+  "block.minecraft.cobblestone_furnace": "\u77f3\u7194\u7089",
+  "block.minecraft.hardened_clay_furnace": "\u786c\u5316\u7c98\u571f\u7089",
+  "block.minecraft.netherrack_furnace": "\u5730\u72f1\u5ca9\u7194\u7089",
+  "block.minecraft.obsidian_furnace": "\u9ed1\u66dc\u77f3\u7194\u7089",
+  "block.minecraft.sandstone_furnace": "\u6c99\u77f3\u7089",
+
   "MITEADVANCEMENTS":"-----------------------------------------",
   "advancements.structure.root.title": "\u7ed3\u6784!",
   "advancements.structure.root.description": "\u5347\u5230\u5341\u7ea7\u7136\u540e\u751f\u5b58\u4e8c\u5341\u5929\u6765\u751f\u6210\u7ed3\u6784",

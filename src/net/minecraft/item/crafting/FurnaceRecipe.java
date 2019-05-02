@@ -14,21 +14,28 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FurnaceRecipe implements IRecipe {
+public class FurnaceRecipe implements IRecipe ,ITieredRecipe {
    private final ResourceLocation id;
    private final String group;
    private final Ingredient input;
    private final ItemStack output;
    private final float experience;
    private final int cookingTime;
+   private final int heatLevel;
 
-   public FurnaceRecipe(ResourceLocation p_i48715_1_, String p_i48715_2_, Ingredient p_i48715_3_, ItemStack p_i48715_4_, float p_i48715_5_, int p_i48715_6_) {
+   public FurnaceRecipe(ResourceLocation p_i48715_1_, String p_i48715_2_, Ingredient p_i48715_3_, ItemStack p_i48715_4_, float p_i48715_5_, int p_i48715_6_, int heatLevel) {
       this.id = p_i48715_1_;
       this.group = p_i48715_2_;
       this.input = p_i48715_3_;
       this.output = p_i48715_4_;
       this.experience = p_i48715_5_;
       this.cookingTime = p_i48715_6_;
+      this.heatLevel = heatLevel;
+   }
+
+   @Override
+   public int getTier() {
+      return heatLevel;
    }
 
    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {
@@ -91,7 +98,8 @@ public class FurnaceRecipe implements IRecipe {
             ItemStack itemstack = new ItemStack(item);
             float lvt_8_1_ = JsonUtils.getFloat(p_199425_2_, "experience", 0.0F);
             int lvt_9_1_ = JsonUtils.getInt(p_199425_2_, "cookingtime", 200);
-            return new FurnaceRecipe(p_199425_1_, s, ingredient, itemstack, lvt_8_1_, lvt_9_1_);
+            int heatLevel = JsonUtils.getInt(p_199425_2_,"heatLevel");
+            return new FurnaceRecipe(p_199425_1_, s, ingredient, itemstack, lvt_8_1_, lvt_9_1_, heatLevel);
          } else {
             throw new IllegalStateException(s1 + " did not exist");
          }
@@ -103,7 +111,8 @@ public class FurnaceRecipe implements IRecipe {
          ItemStack itemstack = p_199426_2_.readItemStack();
          float f = p_199426_2_.readFloat();
          int i = p_199426_2_.readVarInt();
-         return new FurnaceRecipe(p_199426_1_, s, ingredient, itemstack, f, i);
+         int j = p_199426_2_.readVarInt();
+         return new FurnaceRecipe(p_199426_1_, s, ingredient, itemstack, f, i, j);
       }
 
       public void write(PacketBuffer p_199427_1_, FurnaceRecipe p_199427_2_) {
@@ -112,6 +121,7 @@ public class FurnaceRecipe implements IRecipe {
          p_199427_1_.writeItemStack(p_199427_2_.output);
          p_199427_1_.writeFloat(p_199427_2_.experience);
          p_199427_1_.writeVarInt(p_199427_2_.cookingTime);
+         p_199427_1_.writeVarInt(p_199427_2_.heatLevel);
       }
 
       public String getId() {

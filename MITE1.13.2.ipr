@@ -44,7 +44,7 @@
       <option name="myName" value="Project Default" />
       <inspection_tool class="Duplicates" enabled="true" level="WEAK WARNING" enabled_by_default="true">
         <Java>
-          <minSize>228</minSize>
+          <minSize>287</minSize>
           <isEnabled>true</isEnabled>
         </Java>
       </inspection_tool>
@@ -234,6 +234,7 @@
         <w>mitemodded</w>
         <w>mithril</w>
         <w>multiplayer</w>
+        <w>netherrack</w>
         <w>pickaxe</w>
         <w>prismarine</w>
         <w>redstone</w>

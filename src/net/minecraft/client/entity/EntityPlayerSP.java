@@ -516,7 +516,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             this.mc.displayGuiScreen(new GuiHopper(this.inventory, p_71007_1_));
             break;
          case "minecraft:furnace":
-            this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_));
+            this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_,((IInteractionObject) p_71007_1_).getGuiLevel()));
             break;
          case "minecraft:brewing_stand":
             this.mc.displayGuiScreen(new GuiBrewingStand(this.inventory, p_71007_1_));
