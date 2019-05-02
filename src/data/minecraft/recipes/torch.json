@@ -18,7 +18,7 @@
     ]
   },
   "craftTime": 1000,
-  "craftTier": 1,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:torch",
     "count": 4

@@ -3580,7 +3580,7 @@ public class RecipeProvider implements IDataProvider {
                         .key('F', Items.FLINT)
                         .key('L', Items.SINEW)
                         .patternLine("LF")
-                        .patternLine("S")
+                        .patternLine(" S")
                         .addCriterion("has_flint", this.hasItem(Items.FLINT))
                         .addCriterion("has_sinew",this.hasItem(Items.SINEW))
                         .build(p_200404_1_);

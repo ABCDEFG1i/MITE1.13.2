@@ -11,7 +11,7 @@
     }
   },
   "craftTime": 1000,
-  "craftTier": 1,
+  "craftTier": 2,
   "result": {
     "item": "minecraft:golden_leggings"
   }
