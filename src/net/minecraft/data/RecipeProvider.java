@@ -137,6 +137,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.ACACIA_PLANKS, 4)
                 .addIngredient(ItemTags.ACACIA_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_logs", this.hasItem(ItemTags.ACACIA_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.ACACIA_PRESSURE_PLATE)
@@ -271,6 +272,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.BIRCH_PLANKS, 4)
                 .addIngredient(ItemTags.BIRCH_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_log", this.hasItem(ItemTags.BIRCH_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.BIRCH_PRESSURE_PLATE)
@@ -868,6 +870,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.DARK_OAK_PLANKS, 4)
                 .addIngredient(ItemTags.DARK_OAK_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_logs", this.hasItem(ItemTags.DARK_OAK_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.DARK_OAK_PRESSURE_PLATE)
@@ -1646,6 +1649,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.JUNGLE_PLANKS, 4)
                 .addIngredient(ItemTags.JUNGLE_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_log", this.hasItem(ItemTags.JUNGLE_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.JUNGLE_PRESSURE_PLATE)
@@ -2225,6 +2229,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.OAK_PLANKS, 4)
                 .addIngredient(ItemTags.OAK_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_log", this.hasItem(ItemTags.OAK_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.OAK_PRESSURE_PLATE)
@@ -2992,6 +2997,7 @@ public class RecipeProvider implements IDataProvider {
         ShapelessRecipeBuilder.shapelessRecipe(Blocks.SPRUCE_PLANKS, 4)
                 .addIngredient(ItemTags.SPRUCE_LOGS)
                 .setGroup("planks")
+                .setCraftTier(1)
                 .addCriterion("has_log", this.hasItem(ItemTags.SPRUCE_LOGS))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Blocks.SPRUCE_PRESSURE_PLATE)
