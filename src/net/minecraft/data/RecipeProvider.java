@@ -669,6 +669,7 @@ public class RecipeProvider implements IDataProvider {
                 .key('#', Items.CLAY_BALL)
                 .patternLine("##")
                 .patternLine("##")
+                .setCraftTier(0)
                 .addCriterion("has_clay_ball", this.hasItem(Items.CLAY_BALL))
                 .build(p_200404_1_);
         ShapedRecipeBuilder.shapedRecipe(Items.CLOCK)
