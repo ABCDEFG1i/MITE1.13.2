@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:ancient_metal_ingot"
+    }
+  ],
+  "craftTime": 1000,
+  "craftTier": 3,
+  "result": {
+    "item": "minecraft:ancient_metal_crafting_table"
+  }
+}

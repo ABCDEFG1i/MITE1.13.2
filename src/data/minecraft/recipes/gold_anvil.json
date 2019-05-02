@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:gold_block"
+    },
+    "i": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "craftTier": 3,
+  "result": {
+    "item": "minecraft:gold_anvil"
+  }
+}

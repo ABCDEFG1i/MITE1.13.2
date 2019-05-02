@@ -1,0 +1,18 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:mithril_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "craftTier": 5,
+  "result": {
+    "item": "minecraft:mithril_block"
+  }
+}

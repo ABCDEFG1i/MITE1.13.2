@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "MM",
+    " S",
+    " S"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:adamantium_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "craftTime": 1000,
+  "craftTier": 7,
+  "result": {
+    "item": "minecraft:adamantium_hoe"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "III",
+    " i ",
+    "iii"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:ancient_metal_block"
+    },
+    "i": {
+      "item": "minecraft:ancient_metal_ingot"
+    }
+  },
+  "craftTime": 1000,
+  "craftTier": 4,
+  "result": {
+    "item": "minecraft:ancient_metal_anvil"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:adamantium_nugget"
+    ]
+  },
+  "criteria": {
+    "has_adamantium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:adamantium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:adamantium_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_adamantium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

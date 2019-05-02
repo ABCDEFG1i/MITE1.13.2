@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "item": "minecraft:dandelion"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "craftTime": 1000,
+  "craftTier": 0,
+  "result": {
+    "item": "minecraft:bowl_salad"
+  }
+}

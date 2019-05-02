@@ -1,0 +1,21 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "MMM",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:ancient_metal_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "craftTime": 1000,
+  "craftTier": 4,
+  "result": {
+    "item": "minecraft:ancient_metal_pickaxe"
+  }
+}
