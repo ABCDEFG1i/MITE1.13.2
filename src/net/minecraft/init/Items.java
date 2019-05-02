@@ -368,6 +368,13 @@ public class Items {
 
       public static final Item SINEW;
 
+      public static final Item DIAMOND_SHARD;
+      public static final Item EMERALD_SHARD;
+      public static final Item FLINT_SHARD;
+      public static final Item GLASS_SHARD;
+      public static final Item OBSIDIAN_SHARD;
+      public static final Item QUARTZ_SHARD;
+
 
    private static Item getRegisteredItem(String p_179554_0_) {
       Item item = IRegistry.field_212630_s.func_212608_b(new ResourceLocation(p_179554_0_));
@@ -704,6 +711,12 @@ public class Items {
 
             SINEW = getRegisteredItem("sinew");
 
+            DIAMOND_SHARD = getRegisteredItem("diamond_shard");
+            EMERALD_SHARD = getRegisteredItem("emerald_shard");
+            FLINT_SHARD = getRegisteredItem("flint_shard");
+            GLASS_SHARD = getRegisteredItem("glass_shard");
+            OBSIDIAN_SHARD = getRegisteredItem("obsidian_shard");
+            QUARTZ_SHARD = getRegisteredItem("quartz_shard");
          }
          //MITE FOOD
          {

@@ -2515,7 +2515,7 @@ public class RecipeProvider implements IDataProvider {
                 .addCriterion("has_carved_pumpkin", this.hasItem(Blocks.CARVED_PUMPKIN))
                 .addCriterion("has_pumpkin", this.hasItem(Blocks.PUMPKIN))
                 .build(p_200404_1_);
-        ShapelessRecipeBuilder.shapelessRecipe(Items.PUMPKIN_SEEDS, 4)
+        ShapelessRecipeBuilder.shapelessRecipe(Items.PUMPKIN_SEEDS, 1)
                 .addIngredient(Blocks.PUMPKIN)
                 .addCriterion("has_pumpkin", this.hasItem(Blocks.PUMPKIN))
                 .build(p_200404_1_);
@@ -3903,7 +3903,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .patternLine("###")
-                        .setCraftTier(2)
+                        .setCraftTier(1)
                         .addCriterion("has_at_least_9_copper_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.COPPER_NUGGET))
                         .build(p_200404_1_,"copper_ingot_from_nugget");
@@ -3912,7 +3912,7 @@ public class RecipeProvider implements IDataProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .patternLine("###")
-                        .setCraftTier(2)
+                        .setCraftTier(1)
                         .addCriterion("has_at_least_9_silver_nugget",
                                 this.hasItem(MinMaxBounds.IntBound.func_211340_b(9), Items.SILVER_NUGGET))
                         .build(p_200404_1_,"silver_ingot_from_nugget");
@@ -3988,6 +3988,83 @@ public class RecipeProvider implements IDataProvider {
                         .addCriterion("has_leather",this.hasItem(Items.LEATHER))
                         .setCraftTier(0)
                         .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.DIAMOND_SHARD,9)
+                        .addIngredient(Items.DIAMOND)
+                        .addCriterion("has_parent",this.hasItem(Items.DIAMOND))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.EMERALD_SHARD,9)
+                        .addIngredient(Items.EMERALD)
+                        .addCriterion("has_parent",this.hasItem(Items.EMERALD))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.OBSIDIAN_SHARD,9)
+                        .addIngredient(Blocks.OBSIDIAN)
+                        .addCriterion("has_parent",this.hasItem(Blocks.OBSIDIAN))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.GLASS_SHARD,9)
+                        .addIngredient(Blocks.GLASS)
+                        .addCriterion("has_parent",this.hasItem(Blocks.GLASS))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.FLINT_SHARD,4)
+                        .addIngredient(Items.FLINT)
+                        .addCriterion("has_parent",this.hasItem(Items.FLINT))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapelessRecipeBuilder.shapelessRecipe(Items.QUARTZ_SHARD,9)
+                        .addIngredient(Items.QUARTZ)
+                        .addCriterion("has_parent",this.hasItem(Items.QUARTZ))
+                        .setCraftTier(0)
+                        .build(p_200404_1_);
+                ShapedRecipeBuilder.shapedRecipe(Items.DIAMOND)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .key('#', Items.DIAMOND_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.DIAMOND_SHARD))
+                        .setCraftTier(2)
+                        .build(p_200404_1_,"diamond_from_nugget");
+                ShapedRecipeBuilder.shapedRecipe(Items.EMERALD)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .key('#', Items.EMERALD_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.EMERALD_SHARD))
+                        .setCraftTier(2)
+                        .build(p_200404_1_,"emerald_from_nugget");
+                ShapedRecipeBuilder.shapedRecipe(Blocks.OBSIDIAN)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .key('#', Items.OBSIDIAN_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.OBSIDIAN_SHARD))
+                        .setCraftTier(1)
+                        .build(p_200404_1_,"obsidian_from_nugget");
+                ShapedRecipeBuilder.shapedRecipe(Blocks.GLASS)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .key('#', Items.GLASS_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.GLASS_SHARD))
+                        .setCraftTier(1)
+                        .build(p_200404_1_,"glass_from_nugget");
+                ShapedRecipeBuilder.shapedRecipe(Items.QUARTZ)
+                        .patternLine("###")
+                        .patternLine("###")
+                        .patternLine("###")
+                        .key('#', Items.QUARTZ_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.QUARTZ_SHARD))
+                        .setCraftTier(1)
+                        .build(p_200404_1_,"quartz_from_nugget");
+                ShapedRecipeBuilder.shapedRecipe(Items.FLINT)
+                        .patternLine("##")
+                        .patternLine("##")
+                        .key('#', Items.FLINT_SHARD)
+                        .addCriterion("has_child",this.hasItem(Items.FLINT_SHARD))
+                        .setCraftTier(0)
+                        .build(p_200404_1_,"flint_from_nugget");
 
                 //Ore blocks
                 ShapedRecipeBuilder.shapedRecipe(Blocks.COPPER_BLOCK)

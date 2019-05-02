@@ -1105,6 +1105,16 @@ public class Item implements IItemProvider {
          registerItem("silver_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
          registerItem("copper_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
 
+         //SHARDS
+         {
+            registerItem("diamond_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("emerald_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("flint_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("glass_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("obsidian_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("quartz_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         }
+         //OTHER
          registerItem("sinew",new Item(new Item.Properties().setItemGroup(ItemGroup.MATERIALS)));
       }
       //MITETOOLS

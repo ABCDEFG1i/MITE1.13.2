@@ -17,13 +17,37 @@ public class BlockGravel extends BlockFalling {
       if (fortuneLevel > 3) {
          fortuneLevel = 3;
       }
-
-      //Changed to make it more hard to get flint
-      if (worldIn.rand.nextInt(32 - fortuneLevel * 6) == 0) {
-         return Items.FLINT;
-      } else {
-         return super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel);
+      if (worldIn.rand.nextInt(31) <= 4) {
+         return Items.FLINT_SHARD;
       }
+      if (worldIn.rand.nextInt(17)== 0){
+         return Items.COPPER_NUGGET;
+      }
+      if (worldIn.rand.nextInt(53)==0){
+         return Items.SILVER_NUGGET;
+      }
+      if (worldIn.rand.nextInt(95)==0){
+         return Items.FLINT;
+      }
+      if (worldIn.rand.nextInt(161)==0){
+         return Items.GOLD_NUGGET;
+      }
+      if (worldIn.rand.nextInt(495)==0){
+         return Items.OBSIDIAN_SHARD;
+      }
+      if (worldIn.rand.nextInt(1457)==0){
+         return Items.EMERALD_SHARD;
+      }
+      if (worldIn.rand.nextInt(4373)==0){
+         return Items.DIAMOND_SHARD;
+      }
+      if (worldIn.rand.nextInt(13121)==0){
+         return Items.MITHRIL_NUGGET;
+      }
+      if (worldIn.rand.nextInt(26243)==0){
+         return Items.ADAMANTIUM_NUGGET;
+      }
+      return super.getItemDropped(blockCurrentState, worldIn, blockAt, fortuneLevel);
    }
 
    @OnlyIn(Dist.CLIENT)
