@@ -25,8 +25,8 @@ public class GuiFurnace extends GuiContainer implements IRecipeShownListener {
    public final GuiFurnaceRecipeBook recipeBook = new GuiFurnaceRecipeBook();
    private boolean canRenderRecipeBook;
 
-   public GuiFurnace(InventoryPlayer p_i45501_1_, IInventory p_i45501_2_) {
-      super(new ContainerFurnace(p_i45501_1_, p_i45501_2_));
+   public GuiFurnace(InventoryPlayer p_i45501_1_, IInventory p_i45501_2_,int heatLevel) {
+      super(new ContainerFurnace(p_i45501_1_, p_i45501_2_,heatLevel));
       this.playerInventory = p_i45501_1_;
       this.tileFurnace = p_i45501_2_;
    }

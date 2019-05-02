@@ -11,6 +11,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 6,
   "result": {
     "item": "minecraft:tungsten_block"
   }

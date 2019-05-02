@@ -450,9 +450,7 @@ public class Item implements IItemProvider {
       register(Blocks.CHEST, ItemGroup.DECORATIONS);
       register(Blocks.DIAMOND_ORE, ItemGroup.BUILDING_BLOCKS);
       register(Blocks.DIAMOND_BLOCK, ItemGroup.BUILDING_BLOCKS);
-      register(Blocks.CRAFTING_TABLE, ItemGroup.DECORATIONS);
       register(Blocks.FARMLAND, ItemGroup.DECORATIONS);
-      register(Blocks.FURNACE, ItemGroup.DECORATIONS);
       register(Blocks.LADDER, ItemGroup.DECORATIONS);
       register(Blocks.RAIL, ItemGroup.TRANSPORTATION);
       register(Blocks.COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS);
@@ -1106,6 +1104,18 @@ public class Item implements IItemProvider {
          registerItem("ancient_metal_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
          registerItem("silver_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
          registerItem("copper_nugget", new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+
+         //SHARDS
+         {
+            registerItem("diamond_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("emerald_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("flint_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("glass_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("obsidian_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+            registerItem("quartz_shard",new Item((new Item.Properties()).setItemGroup(ItemGroup.MATERIALS)));
+         }
+         //OTHER
+         registerItem("sinew",new Item(new Item.Properties().setItemGroup(ItemGroup.MATERIALS)));
       }
       //MITETOOLS
       {
@@ -1214,6 +1224,28 @@ public class Item implements IItemProvider {
                register(new ItemBlock(Blocks.DAMAGED_TUNGSTEN_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(6348800))));
                register(new ItemBlock(Blocks.DAMAGED_ADAMANTIUM_ANVIL, (new Item.Properties().setItemGroup(ItemGroup.DECORATIONS).setMaxDamage(12697600))));
             }
+         }
+         //Crafting Tables
+         {
+            register(Blocks.FLINT_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.COPPER_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.SILVER_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.IRON_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.GOLD_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.ANCIENT_METAL_CRAFTING_TABLE,ItemGroup.DECORATIONS);
+            register(Blocks.MITHRIL_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.TUNGSTEN_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.ADAMANTIUM_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+            register(Blocks.OBSIDIAN_CRAFTING_TABLE, ItemGroup.DECORATIONS);
+         }
+         //Furnaces
+         {
+            register(Blocks.CLAY_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.HARDENED_CLAY_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.COBBLESTONE_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.NETHERRACK_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.OBSIDIAN_FURNACE,ItemGroup.DECORATIONS);
+            register(Blocks.SANDSTONE_FURNACE,ItemGroup.DECORATIONS);
          }
       }
    }

@@ -24,6 +24,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:rabbit_stew"
   }

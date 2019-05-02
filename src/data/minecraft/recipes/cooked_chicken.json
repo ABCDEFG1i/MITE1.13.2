@@ -5,5 +5,6 @@
   },
   "result": "minecraft:cooked_chicken",
   "experience": 0.35,
-  "cookingtime": 200
+  "cookingtime": 200,
+  "heatLevel": 0
 }

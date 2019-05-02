@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:planks"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "craftTime": 1000,
+  "craftTier": 1,
+  "result": {
+    "item": "minecraft:gold_crafting_table"
+  }
+}

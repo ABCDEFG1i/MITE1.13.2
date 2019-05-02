@@ -29,7 +29,7 @@ public class EndDimension extends Dimension {
 
    public IChunkGenerator<?> createChunkGenerator() {
       EndGenSettings endgensettings = ChunkGeneratorType.FLOATING_ISLANDS.createChunkGenSettings();
-      endgensettings.setDefautBlock(Blocks.END_STONE.getDefaultState());
+      endgensettings.setDefaultBlock(Blocks.END_STONE.getDefaultState());
       endgensettings.setDefaultFluid(Blocks.AIR.getDefaultState());
       endgensettings.setSpawnPos(this.getSpawnCoordinate());
       return ChunkGeneratorType.FLOATING_ISLANDS.create(this.world, BiomeProviderType.THE_END.create(BiomeProviderType.THE_END.createSettings().setSeed(this.world.getSeed())), endgensettings);

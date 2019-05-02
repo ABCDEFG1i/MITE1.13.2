@@ -38,7 +38,7 @@ public class NetherDimension extends Dimension {
 
    public IChunkGenerator<?> createChunkGenerator() {
       NetherGenSettings nethergensettings = ChunkGeneratorType.CAVES.createChunkGenSettings();
-      nethergensettings.setDefautBlock(Blocks.NETHERRACK.getDefaultState());
+      nethergensettings.setDefaultBlock(Blocks.NETHERRACK.getDefaultState());
       nethergensettings.setDefaultFluid(Blocks.LAVA.getDefaultState());
       return ChunkGeneratorType.CAVES.create(this.world, BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(Biomes.NETHER)), nethergensettings);
    }

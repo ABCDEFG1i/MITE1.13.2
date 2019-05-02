@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ITieredRecipe;
 import net.minecraft.item.crafting.ITimedRecipe;
 import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -281,6 +282,11 @@ public class ContainerPlayer extends ContainerRecipeBook {
         IRecipe recipeUsed = this.craftResult.getRecipeUsed();
         if (isCrafting | !(recipeUsed instanceof ITimedRecipe)) {
             return;
+        }
+        if (recipeUsed instanceof ITieredRecipe){
+            if (((ITieredRecipe)recipeUsed).getTier()>0){
+                return;
+            }
         }
         this.craftingThread = new Thread(() -> {
             try {

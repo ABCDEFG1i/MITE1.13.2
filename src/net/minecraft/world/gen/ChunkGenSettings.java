@@ -100,7 +100,7 @@ public class ChunkGenSettings implements IChunkGenSettings {
       return this.defaultFluid;
    }
 
-   public void setDefautBlock(IBlockState p_205535_1_) {
+   public void setDefaultBlock(IBlockState p_205535_1_) {
       this.defaultBlock = p_205535_1_;
    }
 

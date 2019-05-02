@@ -143,7 +143,7 @@ public class OverworldDimension extends Dimension {
             ResourceLocation resourcelocation1 = new ResourceLocation(jsonobject.getAsJsonObject("chunk_generator").getAsJsonPrimitive("type").getAsString());
             if (ChunkGeneratorType.CAVES.getId().equals(resourcelocation1)) {
                NetherGenSettings nethergensettings = chunkgeneratortype2.createChunkGenSettings();
-               nethergensettings.setDefautBlock(iblockstate);
+               nethergensettings.setDefaultBlock(iblockstate);
                nethergensettings.setDefaultFluid(iblockstate1);
                return chunkgeneratortype2.create(this.world, biomeprovider, nethergensettings);
             }
@@ -151,14 +151,14 @@ public class OverworldDimension extends Dimension {
             if (ChunkGeneratorType.FLOATING_ISLANDS.getId().equals(resourcelocation1)) {
                EndGenSettings endgensettings = chunkgeneratortype3.createChunkGenSettings();
                endgensettings.setSpawnPos(new BlockPos(0, 64, 0));
-               endgensettings.setDefautBlock(iblockstate);
+               endgensettings.setDefaultBlock(iblockstate);
                endgensettings.setDefaultFluid(iblockstate1);
                return chunkgeneratortype3.create(this.world, biomeprovider, endgensettings);
             }
          }
 
          OverworldGenSettings overworldgensettings1 = chunkgeneratortype4.createChunkGenSettings();
-         overworldgensettings1.setDefautBlock(iblockstate);
+         overworldgensettings1.setDefaultBlock(iblockstate);
          overworldgensettings1.setDefaultFluid(iblockstate1);
          return chunkgeneratortype4.create(this.world, biomeprovider, overworldgensettings1);
       }

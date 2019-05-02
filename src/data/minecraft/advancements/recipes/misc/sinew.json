@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:furnace"
+      "minecraft:sinew"
     ]
   },
   "criteria": {
-    "has_cobblestone": {
+    "has_leather": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:cobblestone"
+            "item": "minecraft:leather"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:furnace"
+        "recipe": "minecraft:sinew"
       }
     }
   },
   "requirements": [
     [
-      "has_cobblestone",
+      "has_leather",
       "has_the_recipe"
     ]
   ]

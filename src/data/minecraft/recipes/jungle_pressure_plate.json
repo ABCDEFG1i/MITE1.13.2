@@ -10,6 +10,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:jungle_pressure_plate"
   }

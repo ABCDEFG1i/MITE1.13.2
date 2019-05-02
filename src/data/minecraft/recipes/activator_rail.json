@@ -17,6 +17,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 3,
   "result": {
     "item": "minecraft:activator_rail",
     "count": 6

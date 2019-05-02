@@ -516,7 +516,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
             this.mc.displayGuiScreen(new GuiHopper(this.inventory, p_71007_1_));
             break;
          case "minecraft:furnace":
-            this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_));
+            this.mc.displayGuiScreen(new GuiFurnace(this.inventory, p_71007_1_,((IInteractionObject) p_71007_1_).getGuiLevel()));
             break;
          case "minecraft:brewing_stand":
             this.mc.displayGuiScreen(new GuiBrewingStand(this.inventory, p_71007_1_));
@@ -546,7 +546,7 @@ public class EntityPlayerSP extends AbstractClientPlayer {
       String s = p_180468_1_.getGuiID();
       switch (s) {
          case "minecraft:crafting_table":
-            this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world));
+            this.mc.displayGuiScreen(new GuiCrafting(this.inventory, this.world,p_180468_1_.getGuiLevel()));
             break;
          case "minecraft:enchanting_table":
             this.mc.displayGuiScreen(new GuiEnchantment(this.inventory, this.world, p_180468_1_));

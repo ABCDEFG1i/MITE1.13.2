@@ -31,6 +31,7 @@ public class ShapedRecipeBuilder {
    private final Item result;
    private final int count;
    private int craftTime;
+   private int craftTier;
    private final List<String> pattern = Lists.newArrayList();
    private final Map<Character, Ingredient> key = Maps.newLinkedHashMap();
    private final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
@@ -40,6 +41,7 @@ public class ShapedRecipeBuilder {
       this.result = p_i48261_1_.asItem();
       this.count = p_i48261_2_;
       this.craftTime = 1000;
+      this.craftTier = 0;
    }
 
    public static ShapedRecipeBuilder shapedRecipe(IItemProvider p_200470_0_) {
@@ -93,6 +95,11 @@ public class ShapedRecipeBuilder {
       return this;
    }
 
+   public ShapedRecipeBuilder setCraftTier(int craftTier) {
+      this.craftTier = craftTier;
+      return this;
+   }
+
    public void build(Consumer<IFinishedRecipe> p_200464_1_) {
       this.build(p_200464_1_, IRegistry.field_212630_s.func_177774_c(this.result));
    }
@@ -109,7 +116,8 @@ public class ShapedRecipeBuilder {
    public void build(Consumer<IFinishedRecipe> p_200467_1_, ResourceLocation p_200467_2_) {
       this.validate(p_200467_2_);
       this.advancementBuilder.withParentId(new ResourceLocation("minecraft:recipes/root")).withCriterion("has_the_recipe", new RecipeUnlockedTrigger.Instance(p_200467_2_)).withRewards(AdvancementRewards.Builder.recipe(p_200467_2_)).withRequirementsStrategy(RequirementsStrategy.OR);
-      p_200467_1_.accept(new ShapedRecipeBuilder.Result(p_200467_2_, this.result, this.count,this.craftTime, this.group == null ? "" : this.group, this.pattern, this.key, this.advancementBuilder, new ResourceLocation(p_200467_2_.getNamespace(), "recipes/" + this.result.getGroup().func_200300_c() + "/" + p_200467_2_.getPath())));
+      p_200467_1_.accept(new ShapedRecipeBuilder.Result(p_200467_2_, this.result, this.count,this.craftTime, this.craftTier,
+              this.group == null ? "" : this.group, this.pattern, this.key, this.advancementBuilder, new ResourceLocation(p_200467_2_.getNamespace(), "recipes/" + this.result.getGroup().func_200300_c() + "/" + p_200467_2_.getPath())));
    }
 
    private void validate(ResourceLocation p_200463_1_) {
@@ -145,17 +153,19 @@ public class ShapedRecipeBuilder {
       private final Item result;
       private final int count;
       private final int craftTime;
+      private final int craftTier;
       private final String group;
       private final List<String> pattern;
       private final Map<Character, Ingredient> key;
       private final Advancement.Builder advancementBuilder;
       private final ResourceLocation advancementId;
 
-      public Result(ResourceLocation p_i48271_2_, Item p_i48271_3_, int p_i48271_4_,int craftTime, String p_i48271_5_, List<String> p_i48271_6_, Map<Character, Ingredient> p_i48271_7_, Advancement.Builder p_i48271_8_, ResourceLocation p_i48271_9_) {
+      public Result(ResourceLocation p_i48271_2_, Item p_i48271_3_, int p_i48271_4_, int craftTime, int craftTier, String p_i48271_5_, List<String> p_i48271_6_, Map<Character, Ingredient> p_i48271_7_, Advancement.Builder p_i48271_8_, ResourceLocation p_i48271_9_) {
          this.id = p_i48271_2_;
          this.result = p_i48271_3_;
          this.count = p_i48271_4_;
          this.craftTime = craftTime;
+         this.craftTier = craftTier;
          this.group = p_i48271_5_;
          this.pattern = p_i48271_6_;
          this.key = p_i48271_7_;
@@ -191,6 +201,7 @@ public class ShapedRecipeBuilder {
          }
 
          jsonobject.addProperty("craftTime", this.craftTime);
+         jsonobject.addProperty("craftTier",this.craftTier);
          jsonobject.add("result", jsonobject2);
          return jsonobject;
       }

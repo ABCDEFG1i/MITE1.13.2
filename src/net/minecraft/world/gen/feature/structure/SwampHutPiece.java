@@ -60,7 +60,7 @@ public class SwampHutPiece extends ScatteredStructurePiece {
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 5, 3, 4, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 5, 3, 5, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.POTTED_RED_MUSHROOM.getDefaultState(), 1, 3, 5, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.CRAFTING_TABLE.getDefaultState(), 3, 2, 6, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.FLINT_CRAFTING_TABLE.getDefaultState(), 3, 2, 6, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.CAULDRON.getDefaultState(), 4, 2, 6, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.OAK_FENCE.getDefaultState(), 1, 2, 1, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.OAK_FENCE.getDefaultState(), 5, 2, 1, p_74875_3_);

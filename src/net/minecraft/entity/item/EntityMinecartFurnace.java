@@ -69,7 +69,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
    public void killMinecart(DamageSource p_94095_1_) {
       super.killMinecart(p_94095_1_);
       if (!p_94095_1_.isExplosion() && this.world.getGameRules().getBoolean("doEntityDrops")) {
-         this.entityDropItem(Blocks.FURNACE);
+         this.entityDropItem(Blocks.COBBLESTONE_FURNACE);
       }
 
    }
@@ -152,6 +152,6 @@ public class EntityMinecartFurnace extends EntityMinecart {
    }
 
    public IBlockState getDefaultDisplayTile() {
-      return Blocks.FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.NORTH).with(BlockFurnace.LIT, Boolean.valueOf(this.isMinecartPowered()));
+      return Blocks.COBBLESTONE_FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.NORTH).with(BlockFurnace.LIT, Boolean.valueOf(this.isMinecartPowered()));
    }
 }

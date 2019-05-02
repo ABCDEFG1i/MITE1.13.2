@@ -693,7 +693,7 @@ public class VillagePieces {
          this.setBlockState(p_74875_1_, Blocks.OAK_PRESSURE_PLATE.getDefaultState(), 6, 2, 3, p_74875_3_);
          this.setBlockState(p_74875_1_, iblockstate6, 4, 1, 3, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.OAK_PRESSURE_PLATE.getDefaultState(), 4, 2, 3, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.CRAFTING_TABLE.getDefaultState(), 7, 1, 1, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.COPPER_CRAFTING_TABLE.getDefaultState(), 7, 1, 1, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 1, 1, 0, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.AIR.getDefaultState(), 1, 2, 0, p_74875_3_);
          this.createVillageDoor(p_74875_1_, p_74875_3_, p_74875_2_, 1, 1, 0, EnumFacing.NORTH);
@@ -787,8 +787,8 @@ public class VillagePieces {
          this.setBlockState(p_74875_1_, Blocks.IRON_BARS.getDefaultState().with(BlockPane.NORTH, Boolean.valueOf(true)), 9, 2, 4, p_74875_3_);
          this.fillWithBlocks(p_74875_1_, p_74875_3_, 7, 2, 4, 8, 2, 5, Blocks.AIR.getDefaultState(), Blocks.AIR.getDefaultState(), false);
          this.setBlockState(p_74875_1_, iblockstate, 6, 1, 3, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.SOUTH), 6, 2, 3, p_74875_3_);
-         this.setBlockState(p_74875_1_, Blocks.FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.SOUTH), 6, 3, 3, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.COBBLESTONE_FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.SOUTH), 6, 2, 3, p_74875_3_);
+         this.setBlockState(p_74875_1_, Blocks.COBBLESTONE_FURNACE.getDefaultState().with(BlockFurnace.FACING, EnumFacing.SOUTH), 6, 3, 3, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.STONE_SLAB.getDefaultState().with(BlockSlab.TYPE, SlabType.DOUBLE), 8, 1, 1, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 2, 2, p_74875_3_);
          this.setBlockState(p_74875_1_, Blocks.GLASS_PANE.getDefaultState().with(BlockGlassPane.SOUTH, Boolean.valueOf(true)).with(BlockGlassPane.NORTH, Boolean.valueOf(true)), 0, 2, 4, p_74875_3_);

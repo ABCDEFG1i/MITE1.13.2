@@ -13,6 +13,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:diorite",
     "count": 2

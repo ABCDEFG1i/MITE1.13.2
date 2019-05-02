@@ -24,12 +24,14 @@ public class FurnaceRecipeBuilder {
    private final int cookingTime;
    private final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
    private String group;
+   private int heatLevel;
 
    public FurnaceRecipeBuilder(Ingredient p_i48737_1_, IItemProvider p_i48737_2_, float experience, int p_i48737_4_) {
       this.result = p_i48737_2_.asItem();
       this.ingredient = p_i48737_1_;
       this.experience = experience;
       this.cookingTime = p_i48737_4_;
+      this.heatLevel = 0;
    }
 
    public static FurnaceRecipeBuilder furnaceRecipe(Ingredient p_202138_0_, IItemProvider p_202138_1_, float experience, int p_202138_3_) {
@@ -38,6 +40,11 @@ public class FurnaceRecipeBuilder {
 
    public FurnaceRecipeBuilder addCriterion(String p_202139_1_, ICriterionInstance p_202139_2_) {
       this.advancementBuilder.withCriterion(p_202139_1_, p_202139_2_);
+      return this;
+   }
+
+   public FurnaceRecipeBuilder setHeatLevel(int heatLevel){
+      this.heatLevel = heatLevel;
       return this;
    }
 
@@ -57,7 +64,8 @@ public class FurnaceRecipeBuilder {
    public void build(Consumer<IFinishedRecipe> p_202143_1_, ResourceLocation p_202143_2_) {
       this.validate(p_202143_2_);
       this.advancementBuilder.withParentId(new ResourceLocation("minecraft:recipes/root")).withCriterion("has_the_recipe", new RecipeUnlockedTrigger.Instance(p_202143_2_)).withRewards(AdvancementRewards.Builder.recipe(p_202143_2_)).withRequirementsStrategy(RequirementsStrategy.OR);
-      p_202143_1_.accept(new FurnaceRecipeBuilder.Result(p_202143_2_, this.group == null ? "" : this.group, this.ingredient, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(p_202143_2_.getNamespace(), "recipes/" + this.result.getGroup().func_200300_c() + "/" + p_202143_2_.getPath())));
+      p_202143_1_.accept(new FurnaceRecipeBuilder.Result(p_202143_2_, this.group == null ? "" : this.group, this.ingredient, this.result, this.experience, this.cookingTime, this.advancementBuilder, new ResourceLocation(p_202143_2_.getNamespace(), "recipes/" + this.result.getGroup().func_200300_c() + "/" + p_202143_2_.getPath()),
+              heatLevel));
    }
 
    private void validate(ResourceLocation p_202142_1_) {
@@ -75,8 +83,9 @@ public class FurnaceRecipeBuilder {
       private final int cookingTime;
       private final Advancement.Builder advancementBuilder;
       private final ResourceLocation advancementId;
+      private final int heatLevel;
 
-      public Result(ResourceLocation p_i48774_1_, String p_i48774_2_, Ingredient p_i48774_3_, Item p_i48774_4_, float p_i48774_5_, int p_i48774_6_, Advancement.Builder p_i48774_7_, ResourceLocation p_i48774_8_) {
+      public Result(ResourceLocation p_i48774_1_, String p_i48774_2_, Ingredient p_i48774_3_, Item p_i48774_4_, float p_i48774_5_, int p_i48774_6_, Advancement.Builder p_i48774_7_, ResourceLocation p_i48774_8_, int heatLevel) {
          this.id = p_i48774_1_;
          this.group = p_i48774_2_;
          this.ingredient = p_i48774_3_;
@@ -85,6 +94,7 @@ public class FurnaceRecipeBuilder {
          this.cookingTime = p_i48774_6_;
          this.advancementBuilder = p_i48774_7_;
          this.advancementId = p_i48774_8_;
+         this.heatLevel = heatLevel;
       }
 
       public JsonObject getRecipeJson() {
@@ -98,6 +108,7 @@ public class FurnaceRecipeBuilder {
          jsonobject.addProperty("result", IRegistry.field_212630_s.func_177774_c(this.result).toString());
          jsonobject.addProperty("experience", this.experience);
          jsonobject.addProperty("cookingtime", this.cookingTime);
+         jsonobject.addProperty("heatLevel",this.heatLevel);
          return jsonobject;
       }
 

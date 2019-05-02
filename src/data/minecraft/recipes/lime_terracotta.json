@@ -15,6 +15,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:lime_terracotta",
     "count": 8

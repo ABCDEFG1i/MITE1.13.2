@@ -12,6 +12,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:birch_stairs",
     "count": 4

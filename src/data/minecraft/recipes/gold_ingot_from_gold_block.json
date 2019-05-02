@@ -7,6 +7,7 @@
     }
   ],
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:gold_ingot",
     "count": 9

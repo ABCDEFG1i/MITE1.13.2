@@ -1,4 +1,26 @@
 [中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogCN.md)
+# B0.5.2 ChangeLog
+## Blocks
+* 1、Add various crafting tables
+* 2、Add various furnace
+## Items
+* Add emerald,diamond,quartz,glass,obsidian and flint's shard
+## Item Dropping
+* Modify the drop rate of various drops of gravel, as shown in the following table
+
+Drop| Chance
+------------ | -------------
+Gravel |3/4 
+Flint Shard |5/32 
+Copper Nugget |1/18 
+Silver Nugget |1/54 
+Flint |1/96 
+Gold Nugget |1/162 
+Obsidian Shard |1/486 
+Emerald Shard |1/1458 
+Diamond Shard |1/4374 
+Mithril Nugget |1/13122 
+Adamantium |1/26244 
 # B0.5.0 ChangeLog
 ## Blocks
 * Add all kinds of material anvils

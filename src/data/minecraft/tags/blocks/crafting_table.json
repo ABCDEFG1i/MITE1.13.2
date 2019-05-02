@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:flint_crafting_table",
+    "minecraft:copper_crafting_table",
+    "minecraft:silver_crafting_table",
+    "minecraft:iron_crafting_table",
+    "minecraft:gold_crafting_table",
+    "minecraft:ancient_metal_crafting_table",
+    "minecraft:mithril_crafting_table",
+    "minecraft:tungsten_crafting_table",
+    "minecraft:adamantium_crafting_table",
+    "minecraft:obsidian_crafting_table"
+  ]
+}

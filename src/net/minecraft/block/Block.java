@@ -738,9 +738,6 @@ public class Block implements IItemProvider {
                 Block.Properties.createBlockProperties(Material.IRON, MaterialColor.DIAMOND)
                         .setHardnessAndResistance(5.0F, 6.0F)
                         .setSoundType(SoundType.METAL), 5));
-        register("crafting_table", new BlockWorkbench(Block.Properties.createBlockProperties(Material.WORKBENCH)
-                .setHardnessAndResistance(2.5F)
-                .setSoundType(SoundType.WOOD)));
         register("wheat", new BlockCrops(Block.Properties.createBlockProperties(Material.PLANTS)
                 .setNonSolid()
                 .needsRandomTick()
@@ -751,9 +748,6 @@ public class Block implements IItemProvider {
                 .setHardnessAndResistance(0.6F)
                 .setSoundType(SoundType.GROUND));
         register("farmland", block33);
-        register("furnace", new BlockFurnace(Block.Properties.createBlockProperties(Material.FURNACE)
-                .setHardnessAndResistance(3.5F)
-                .setLightLevel(13)));
         register("sign", new BlockStandingSign(Block.Properties.createBlockProperties(Material.WOOD)
                 .setNonSolid()
                 .setHardnessAndResistance(1.0F)
@@ -2368,40 +2362,46 @@ public class Block implements IItemProvider {
 
         //MITE Block Start
         {
-            register("copper_ore",
-                    new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.5F, 3.0F),
-                            2));
-            register("silver_ore",
-                    new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.5F, 3.0F),
-                            2));
-            register("mithril_ore",
-                    new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F, 6.0F),
-                            3));
-            register("tungsten_ore",
-                    new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(4.0F, 15.0F),
-                            4));
-            register("adamantium_ore",
-                    new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(4.5F, 30.0F),
-                            5));
+            //Ores
+            {
+                register("copper_ore",
+                        new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.5F, 3.0F),
+                                2));
+                register("silver_ore",
+                        new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.5F, 3.0F),
+                                2));
+                register("mithril_ore",
+                        new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(3.5F, 6.0F),
+                                3));
+                register("tungsten_ore",
+                        new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(4.0F, 15.0F),
+                                4));
+                register("adamantium_ore",
+                        new BlockOre(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(4.5F, 30.0F),
+                                5));
+            }
 
-            register("adamantium_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(307.2F, 3600000.0F),
-                            7));
-            register("tungsten_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(153.6F, 1800000.0F),
-                            6));
-            register("mithril_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(76.8F, 90000.0F),
-                            5));
-            register("ancient_metal_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(19.2F,90000.0F),
-                            4));
-            register("silver_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(4.8F, 45000.0F),
-                            3));
-            register("copper_block",
-                    new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(4.8F, 45000.0F),
-                            3));
+            //Material Blocks
+            {
+                register("adamantium_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(307.2F, 3600000.0F),
+                                7));
+                register("tungsten_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(153.6F, 1800000.0F),
+                                6));
+                register("mithril_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(76.8F, 90000.0F),
+                                5));
+                register("ancient_metal_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(19.2F,90000.0F),
+                                4));
+                register("silver_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(4.8F, 45000.0F),
+                                3));
+                register("copper_block",
+                        new BlockMaterial(Block.Properties.createBlockProperties(Material.IRON).setHardnessAndResistance(4.8F, 45000.0F),
+                                3));
+            }
             //ANVILS
             {
                 //copper
@@ -2494,6 +2494,61 @@ public class Block implements IItemProvider {
                         Block.Properties.createBlockProperties(Material.ANVIL, MaterialColor.IRON)
                                 .setHardnessAndResistance(2.3F, 1200.0F)
                                 .setSoundType(SoundType.ANVIL),ItemTier.ADAMANTIUM,8465066,12697600,6));
+            }
+
+            //Crafting Tables
+            {
+                register("flint_crafting_table", new BlockWorkbench(1,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("obsidian_crafting_table", new BlockWorkbench(1,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("copper_crafting_table", new BlockWorkbench(2,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("silver_crafting_table", new BlockWorkbench(2,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("iron_crafting_table", new BlockWorkbench(3,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("gold_crafting_table", new BlockWorkbench(2,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("ancient_metal_crafting_table", new BlockWorkbench(4,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("mithril_crafting_table", new BlockWorkbench(5,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("tungsten_crafting_table", new BlockWorkbench(6,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+                register("adamantium_crafting_table", new BlockWorkbench(7,Block.Properties.createBlockProperties(Material.WORKBENCH)
+                        .setHardnessAndResistance(2.5F)
+                        .setSoundType(SoundType.WOOD)));
+            }
+            //Furnaces
+            {
+                register("clay_furnace", new BlockFurnace(0,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("cobblestone_furnace", new BlockFurnace(2,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("hardened_clay_furnace", new BlockFurnace(1,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("netherrack_furnace", new BlockFurnace(4,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("obsidian_furnace", new BlockFurnace(3,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
+                register("sandstone_furnace", new BlockFurnace(1,Block.Properties.createBlockProperties(Material.FURNACE)
+                        .setHardnessAndResistance(3.5F)
+                        .setLightLevel(13)));
             }
         }
 

@@ -1,7 +1,8 @@
 {
   "type": "crafting_shaped",
   "pattern": [
-    "SF"
+    "LF",
+    " S"
   ],
   "key": {
     "S": {
@@ -9,9 +10,13 @@
     },
     "F": {
       "item": "minecraft:flint"
+    },
+    "L": {
+      "item": "minecraft:sinew"
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:flint_hatchet"
   }

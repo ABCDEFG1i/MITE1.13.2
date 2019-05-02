@@ -1,0 +1,22 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "minecraft:logs"
+    },
+    {
+      "item": "minecraft:stick"
+    },
+    {
+      "item": "minecraft:sinew"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "craftTime": 1000,
+  "craftTier": 0,
+  "result": {
+    "item": "minecraft:obsidian_crafting_table"
+  }
+}

@@ -16,6 +16,7 @@
     ]
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:purpur_stairs",
     "count": 4

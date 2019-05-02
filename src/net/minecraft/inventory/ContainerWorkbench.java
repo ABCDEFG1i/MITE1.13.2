@@ -5,8 +5,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ITieredRecipe;
 import net.minecraft.item.crafting.ITimedRecipe;
 import net.minecraft.item.crafting.RecipeItemHelper;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,11 +27,13 @@ public class ContainerWorkbench extends ContainerRecipeBook {
     private int craftingTime;
     private boolean isCrafting;
     private int totalCraftingTime;
+    private final int craftingTier;
 
-    public ContainerWorkbench(InventoryPlayer inventoryPlayer, World world, BlockPos pos) {
+    public ContainerWorkbench(InventoryPlayer inventoryPlayer, World world, BlockPos pos,int craftingTier) {
         this.world = world;
         this.pos = pos;
         this.player = inventoryPlayer.player;
+        this.craftingTier = craftingTier;
         this.craftingSlot = new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 124, 35);
         this.addSlot(craftingSlot);
 
@@ -170,7 +174,7 @@ public class ContainerWorkbench extends ContainerRecipeBook {
         if (this.world.getBlockState(this.pos.up()).getBlock() != Blocks.AIR) {
             return false;
         }
-        if (this.world.getBlockState(this.pos).getBlock() != Blocks.CRAFTING_TABLE) {
+        if (!this.world.getBlockState(this.pos).getBlock().isIn(BlockTags.CRAFTING_TABLE)) {
             return false;
         } else {
             return p_75145_1_.getDistanceSq((double) this.pos.getX() + 0.5D,
@@ -223,6 +227,11 @@ public class ContainerWorkbench extends ContainerRecipeBook {
         IRecipe recipeUsed = this.craftResult.getRecipeUsed();
         if (isCrafting | !(recipeUsed instanceof ITimedRecipe)) {
             return;
+        }
+        if (recipeUsed instanceof ITieredRecipe){
+            if (((ITieredRecipe)recipeUsed).getTier()>craftingTier){
+                return;
+            }
         }
         this.craftingThread = new Thread(() -> {
             try {

@@ -9,6 +9,7 @@
     }
   },
   "craftTime": 1000,
+  "craftTier": 0,
   "result": {
     "item": "minecraft:nether_brick_slab",
     "count": 6

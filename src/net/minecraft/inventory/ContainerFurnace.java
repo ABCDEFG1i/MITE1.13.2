@@ -17,11 +17,13 @@ public class ContainerFurnace extends ContainerRecipeBook {
    private int cookTime;
    private int totalCookTime;
    private int furnaceBurnTime;
+   private int heatLevel;
    private int currentItemBurnTime;
 
-   public ContainerFurnace(InventoryPlayer p_i45794_1_, IInventory p_i45794_2_) {
+   public ContainerFurnace(InventoryPlayer p_i45794_1_, IInventory p_i45794_2_,int heatLevel) {
       this.tileFurnace = p_i45794_2_;
       this.world = p_i45794_1_.player.world;
+      this.heatLevel = heatLevel;
       this.addSlot(new Slot(p_i45794_2_, 0, 56, 17));
       this.addSlot(new SlotFurnaceFuel(p_i45794_2_, 1, 56, 53));
       this.addSlot(new SlotFurnaceOutput(p_i45794_1_.player, p_i45794_2_, 2, 116, 35));
@@ -94,12 +96,16 @@ public class ContainerFurnace extends ContainerRecipeBook {
          if (this.totalCookTime != this.tileFurnace.getField(3)) {
             icontainerlistener.sendWindowProperty(this, 3, this.tileFurnace.getField(3));
          }
+         if (this.heatLevel != this.tileFurnace.getField(4)) {
+            icontainerlistener.sendWindowProperty(this, 4, this.tileFurnace.getField(4));
+         }
       }
 
       this.cookTime = this.tileFurnace.getField(2);
       this.furnaceBurnTime = this.tileFurnace.getField(0);
       this.currentItemBurnTime = this.tileFurnace.getField(1);
       this.totalCookTime = this.tileFurnace.getField(3);
+      this.heatLevel = this.tileFurnace.getField(4);
    }
 
    @OnlyIn(Dist.CLIENT)

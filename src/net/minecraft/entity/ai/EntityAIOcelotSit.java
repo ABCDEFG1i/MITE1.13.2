@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.init.Blocks;
 import net.minecraft.state.properties.BedPart;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReaderBase;
@@ -52,7 +53,7 @@ public class EntityAIOcelotSit extends EntityAIMoveToBlock {
          Block block = iblockstate.getBlock();
          if (block == Blocks.CHEST) {
             return TileEntityChest.getPlayersUsing(p_179488_1_, p_179488_2_) < 1;
-         } else if (block == Blocks.FURNACE && iblockstate.get(BlockFurnace.LIT)) {
+         } else if (BlockTags.FURNACE.contains(block) && iblockstate.get(BlockFurnace.LIT)) {
             return true;
          } else {
             return block instanceof BlockBed && iblockstate.get(BlockBed.PART) != BedPart.HEAD;
