@@ -1,6 +1,5 @@
 package net.minecraft.entity.passive;
 
-import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -110,7 +109,7 @@ public class EntityOcelot extends EntityTameable {
       this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.3F);
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {

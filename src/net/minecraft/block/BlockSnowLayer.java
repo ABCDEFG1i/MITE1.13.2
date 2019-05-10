@@ -32,20 +32,19 @@ public class BlockSnowLayer extends Block {
 
    protected BlockSnowLayer(Block.Properties p_i48328_1_) {
       super(p_i48328_1_);
-      this.setDefaultState(this.stateContainer.getBaseState().with(LAYERS, Integer.valueOf(1)));
+      this.setDefaultState(this.stateContainer.getBaseState().with(LAYERS, 1));
    }
 
    public boolean allowsMovement(IBlockState p_196266_1_, IBlockReader p_196266_2_, BlockPos p_196266_3_, PathType p_196266_4_) {
-      switch(p_196266_4_) {
-      case LAND:
+      if (p_196266_4_ == PathType.LAND) {
          return p_196266_1_.get(LAYERS) < 5;
-      case WATER:
-         return false;
-      case AIR:
-         return false;
-      default:
-         return false;
       }
+      return false;
+   }
+
+   @Override
+   public float getBlockHardness(IBlockState p_176195_1_, IBlockReader p_176195_2_, BlockPos p_176195_3_) {
+      return p_176195_1_.get(LAYERS)*0.4F;
    }
 
    public boolean isFullCube(IBlockState p_149686_1_) {

@@ -704,7 +704,7 @@ public class Block implements IItemProvider {
                 new Block(Block.Properties.createBlockProperties(Material.ROCK).setHardnessAndResistance(2.0F, 6.0F)));
         register("obsidian", new BlockMaterial(
                 Block.Properties.createBlockProperties(Material.ROCK, MaterialColor.BLACK)
-                        .setHardnessAndResistance(50.0F, 1200.0F), 3));
+                        .setHardnessAndResistance(25.0F, 1200.0F), 3));
         register("torch", new BlockTorch(Block.Properties.createBlockProperties(Material.CIRCUITS)
                 .setNonSolid()
                 .instantDestruction()
@@ -828,16 +828,16 @@ public class Block implements IItemProvider {
                 .setHardnessAndResistance(0.5F)));
         register("snow", new BlockSnowLayer(Block.Properties.createBlockProperties(Material.SNOW)
                 .needsRandomTick()
-                .setHardnessAndResistance(0.1F)
+                .setHardnessAndResistance(0.9F,0.1F)
                 .setSoundType(SoundType.SNOW)));
         register("ice", new BlockIce(Block.Properties.createBlockProperties(Material.ICE)
                 .setSlipperiness(0.98F)
                 .needsRandomTick()
-                .setHardnessAndResistance(0.5F)
+                .setHardnessAndResistance(0.1F)
                 .setSoundType(SoundType.GLASS)));
         register("snow_block", new BlockSnow(Block.Properties.createBlockProperties(Material.CRAFTED_SNOW)
                 .needsRandomTick()
-                .setHardnessAndResistance(0.2F)
+                .setHardnessAndResistance(1.2F)
                 .setSoundType(SoundType.SNOW)));
         Block cactus = new BlockCactus(Block.Properties.createBlockProperties(Material.CACTUS)
                 .needsRandomTick()
@@ -850,7 +850,7 @@ public class Block implements IItemProvider {
         register("sugar_cane", new BlockReed(Block.Properties.createBlockProperties(Material.PLANTS)
                 .setNonSolid()
                 .needsRandomTick()
-                .instantDestruction()
+                .setHardnessAndResistance(0.8F)
                 .setSoundType(SoundType.PLANT)));
         register("jukebox", new BlockJukebox(Block.Properties.createBlockProperties(Material.WOOD, MaterialColor.DIRT)
                 .setHardnessAndResistance(2.0F, 6.0F)));
@@ -3144,7 +3144,7 @@ public class Block implements IItemProvider {
     }
 
     public void onFallenUpon(World p_180658_1_, BlockPos p_180658_2_, Entity p_180658_3_, float p_180658_4_) {
-        p_180658_3_.fall(p_180658_4_, 1.0F);
+        p_180658_3_.fall(p_180658_4_, 1.0F, true);
     }
 
     public void onLanded(IBlockReader p_176216_1_, Entity p_176216_2_) {

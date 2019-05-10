@@ -171,7 +171,7 @@ public class ContainerWorkbench extends ContainerRecipeBook {
     }
 
     public boolean canInteractWith(EntityPlayer p_75145_1_) {
-        if (this.world.getBlockState(this.pos.up()).getBlock() != Blocks.AIR) {
+        if (!this.world.getBlockState(this.pos.up()).getBlock().isAir(null)) {
             return false;
         }
         if (!this.world.getBlockState(this.pos).getBlock().isIn(BlockTags.CRAFTING_TABLE)) {

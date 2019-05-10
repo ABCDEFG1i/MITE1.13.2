@@ -2,7 +2,6 @@ package net.minecraft.entity.player;
 
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockBubbleColumn;
@@ -1470,13 +1469,13 @@ public abstract class EntityPlayer extends EntityLivingBase {
         return p_184588_1_ > 4 ? SoundEvents.ENTITY_PLAYER_BIG_FALL : SoundEvents.ENTITY_PLAYER_SMALL_FALL;
     }
 
-    public void fall(float p_180430_1_, float p_180430_2_) {
+    public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
         if (!this.capabilities.allowFlying) {
             if (p_180430_1_ >= 2.0F) {
                 this.func_195067_a(StatList.FALL_ONE_CM, (int) Math.round((double) p_180430_1_ * 100.0D));
             }
 
-            super.fall(p_180430_1_, p_180430_2_);
+            super.fall(p_180430_1_, p_180430_2_, isNormalBlock);
         }
     }
 

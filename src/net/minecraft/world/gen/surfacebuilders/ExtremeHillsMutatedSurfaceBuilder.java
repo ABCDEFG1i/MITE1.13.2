@@ -14,7 +14,7 @@ public class ExtremeHillsMutatedSurfaceBuilder implements ISurfaceBuilder<Surfac
             Biome.DEFAULT_SURFACE_BUILDER.buildSurface(p_205610_1_, p_205610_2_, p_205610_3_, p_205610_4_, p_205610_5_, p_205610_6_, p_205610_7_, p_205610_9_, p_205610_10_, p_205610_11_, p_205610_12_, Biome.GRASS_DIRT_GRAVEL_SURFACE);
          }
       } else {
-         Biome.DEFAULT_SURFACE_BUILDER.buildSurface(p_205610_1_, p_205610_2_, p_205610_3_, p_205610_4_, p_205610_5_, p_205610_6_, p_205610_7_, p_205610_9_, p_205610_10_, p_205610_11_, p_205610_12_, Biome.GRAVEL_SURFACE);
+         Biome.DEFAULT_SURFACE_BUILDER.buildSurface(p_205610_1_, p_205610_2_, p_205610_3_, p_205610_4_, p_205610_5_, p_205610_6_, p_205610_7_, p_205610_9_, p_205610_10_, p_205610_11_, p_205610_12_, Biome.STONE_STONE_GRAVEL_SURFACE);
       }
 
    }

@@ -521,6 +521,15 @@ public abstract class World implements IEntityReader, IWorld, IWorldReader, Auto
       return this.skylightSubtracted < 4;
    }
 
+   boolean isSleepTime(){
+      long currentDayTime = this.getWorldTime()%24000;
+      return currentDayTime>15000&&currentDayTime<23000;
+   }
+
+   void setTimeToSunrise(){
+      this.setWorldTime(this.getWorldTime()+23000-this.getWorldTime()%24000);
+   }
+
    @Nullable
    public RayTraceResult rayTraceBlocks(Vec3d p_72933_1_, Vec3d p_72933_2_) {
       return this.rayTraceBlocks(p_72933_1_, p_72933_2_, RayTraceFluidMode.NEVER, false, false);

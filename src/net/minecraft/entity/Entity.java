@@ -44,7 +44,6 @@ import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagDouble;
 import net.minecraft.nbt.NBTTagFloat;
@@ -83,7 +82,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.event.ClickEvent;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
@@ -918,10 +916,10 @@ public abstract class Entity implements INameable, ICommandSource {
       return this.isImmuneToFire;
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
       if (this.isBeingRidden()) {
          for(Entity entity : this.getPassengers()) {
-            entity.fall(p_180430_1_, p_180430_2_);
+            entity.fall(p_180430_1_, p_180430_2_, isNormalBlock);
          }
       }
 

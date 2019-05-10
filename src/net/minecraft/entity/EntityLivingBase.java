@@ -11,7 +11,6 @@ import java.util.Random;
 import java.util.UUID;
 import javax.annotation.Nullable;
 
-import com.google.common.eventbus.Subscribe;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLadder;
@@ -48,7 +47,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
@@ -1047,11 +1045,19 @@ public abstract class EntityLivingBase extends Entity {
       return !this.isDead && this.getHealth() > 0.0F;
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
-      super.fall(p_180430_1_, p_180430_2_);
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
+      super.fall(p_180430_1_, p_180430_2_, isNormalBlock);
+
       PotionEffect potioneffect = this.getActivePotionEffect(MobEffects.JUMP_BOOST);
       float f = potioneffect == null ? 0.0F : (float)(potioneffect.getAmplifier() + 1);
-      int i = MathHelper.ceil((p_180430_1_ - 3.0F - f) * p_180430_2_);
+      int i ;
+      if (isNormalBlock&&p_180430_1_<=4){
+        return;
+      }else if (p_180430_1_>4&&isNormalBlock){
+         i= MathHelper.ceil((p_180430_1_ - 4.0F - f) * p_180430_2_)+1;
+      }else {
+         i= MathHelper.ceil((p_180430_1_ - 4.0F - f) * p_180430_2_);
+      }
       if (i > 0) {
          this.playSound(this.getFallSound(i), 1.0F, 1.0F);
          this.attackEntityFrom(DamageSource.FALL, (float)i);

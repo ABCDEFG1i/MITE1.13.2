@@ -207,7 +207,6 @@ public abstract class Biome {
    public static final SurfaceBuilderConfig DIRT_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(DIRT, DIRT, GRAVEL);
    public static final SurfaceBuilderConfig GRASS_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(GRASS_BLOCK, DIRT, GRAVEL);
    public static final SurfaceBuilderConfig STONE_STONE_GRAVEL_SURFACE = new SurfaceBuilderConfig(STONE, STONE, GRAVEL);
-   public static final SurfaceBuilderConfig GRAVEL_SURFACE = new SurfaceBuilderConfig(GRAVEL, GRAVEL, GRAVEL);
    public static final SurfaceBuilderConfig COARSE_DIRT_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(COARSE_DIRT, DIRT, GRAVEL);
    public static final SurfaceBuilderConfig PODZOL_DIRT_GRAVEL_SURFACE = new SurfaceBuilderConfig(PODZOL, DIRT, GRAVEL);
    public static final SurfaceBuilderConfig SAND_SURFACE = new SurfaceBuilderConfig(SAND, SAND, SAND);
@@ -726,6 +725,9 @@ public abstract class Biome {
          this.entityType = entityType;
          this.minGroupCount = minGroupCount;
          this.maxGroupCount = maxGroupCount;
+         if (minGroupCount>maxGroupCount){
+            throw new IllegalArgumentException("MIN cannot bigger than MAX");
+         }
       }
 
       public String toString() {

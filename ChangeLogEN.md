@@ -21,6 +21,7 @@ Emerald Shard |1/1458
 Diamond Shard |1/4374 
 Mithril Nugget |1/13122 
 Adamantium |1/26244 
+---
 # B0.5.0 ChangeLog
 ## Blocks
 * Add all kinds of material anvils

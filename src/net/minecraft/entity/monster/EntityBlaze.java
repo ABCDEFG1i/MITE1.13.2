@@ -126,7 +126,7 @@ public class EntityBlaze extends EntityMob {
       super.updateAITasks();
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    public boolean isBurning() {
