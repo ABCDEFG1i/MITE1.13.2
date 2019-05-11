@@ -11,6 +11,7 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.ChunkGeneratorType;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.NetherGenSettings;
+import net.minecraft.world.gen.UnderworldGenSetting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -37,10 +38,10 @@ public class UnderworldDimension extends Dimension {
 
 
     public IChunkGenerator<?> createChunkGenerator() {
-        NetherGenSettings nethergensettings = ChunkGeneratorType.CAVES.createChunkGenSettings();
-        nethergensettings.setDefaultBlock(Blocks.STONE.getDefaultState());
-        nethergensettings.setDefaultFluid(Blocks.WATER.getDefaultState());
-        return ChunkGeneratorType.CAVES.create(this.world, BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(Biomes.PLAINS)), nethergensettings);
+        UnderworldGenSetting underworldGenSetting = ChunkGeneratorType.UNDERWORLD.createChunkGenSettings();
+        underworldGenSetting.setDefaultBlock(Blocks.STONE.getDefaultState());
+        underworldGenSetting.setDefaultFluid(Blocks.WATER.getDefaultState());
+        return ChunkGeneratorType.UNDERWORLD.create(this.world, BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(Biomes.UNDERWORLD)), underworldGenSetting);
     }
 
     public boolean isSurfaceWorld() {
@@ -67,7 +68,7 @@ public class UnderworldDimension extends Dimension {
 
     @OnlyIn(Dist.CLIENT)
     public boolean doesXZShowFog(int p_76568_1_, int p_76568_2_) {
-        return true;
+        return false;
     }
 
     public WorldBorder createWorldBorder() {

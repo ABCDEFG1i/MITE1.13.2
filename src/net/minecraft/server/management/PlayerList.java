@@ -5,11 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
-import java.io.File;
-import java.net.SocketAddress;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import javax.annotation.Nullable;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.Entity;
@@ -20,24 +15,7 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SPacketChangeGameState;
-import net.minecraft.network.play.server.SPacketChat;
-import net.minecraft.network.play.server.SPacketCustomPayload;
-import net.minecraft.network.play.server.SPacketEntityEffect;
-import net.minecraft.network.play.server.SPacketEntityStatus;
-import net.minecraft.network.play.server.SPacketHeldItemChange;
-import net.minecraft.network.play.server.SPacketJoinGame;
-import net.minecraft.network.play.server.SPacketPlayerAbilities;
-import net.minecraft.network.play.server.SPacketPlayerListItem;
-import net.minecraft.network.play.server.SPacketRespawn;
-import net.minecraft.network.play.server.SPacketServerDifficulty;
-import net.minecraft.network.play.server.SPacketSetExperience;
-import net.minecraft.network.play.server.SPacketSpawnPosition;
-import net.minecraft.network.play.server.SPacketTagsList;
-import net.minecraft.network.play.server.SPacketTeams;
-import net.minecraft.network.play.server.SPacketTimeUpdate;
-import net.minecraft.network.play.server.SPacketUpdateRecipes;
-import net.minecraft.network.play.server.SPacketWorldBorder;
+import net.minecraft.network.play.server.*;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
@@ -65,6 +43,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
+import java.io.File;
+import java.net.SocketAddress;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 public abstract class PlayerList {
    public static final File FILE_PLAYERBANS = new File("banned-players.json");
@@ -498,6 +485,15 @@ public abstract class PlayerList {
          if (p_82448_1_.isEntityAlive()) {
             p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
          }
+      } else if (p_82448_1_.dimension == DimensionType.UNDERWORLD) {
+         d0 = MathHelper.clamp(d0 * 8.0D, p_82448_4_.getWorldBorder().minX() + 16.0D,
+                 p_82448_4_.getWorldBorder().maxX() - 16.0D);
+         d1 = MathHelper.clamp(d1 * 8.0D, p_82448_4_.getWorldBorder().minZ() + 16.0D,
+                 p_82448_4_.getWorldBorder().maxZ() - 16.0D);
+         p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
+         if (p_82448_1_.isEntityAlive()) {
+            p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
+         }
       } else {
          BlockPos blockpos;
          if (p_82448_2_ == DimensionType.THE_END) {
@@ -506,9 +502,9 @@ public abstract class PlayerList {
             blockpos = p_82448_4_.getSpawnCoordinate();
          }
 
-         d0 = (double)blockpos.getX();
-         p_82448_1_.posY = (double)blockpos.getY();
-         d1 = (double)blockpos.getZ();
+         d0 = (double) blockpos.getX();
+         p_82448_1_.posY = (double) blockpos.getY();
+         d1 = (double) blockpos.getZ();
          p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, 90.0F, 0.0F);
          if (p_82448_1_.isEntityAlive()) {
             p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);

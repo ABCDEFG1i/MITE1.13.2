@@ -4157,5 +4157,7 @@
   "advancements.structure.stronghold.description": "to generate stronghold",
 
   "advancements.structure.mansion.title": "Mansion",
-  "advancements.structure.mansion.description": "to generate mansion"
+  "advancements.structure.mansion.description": "to generate mansion",
+  "MITEBIOMES": "--------------------------------------------------------",
+  "biome.minecraft.underworld": "Underworld"
 }

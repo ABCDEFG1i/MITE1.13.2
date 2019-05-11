@@ -57,6 +57,7 @@ public abstract class Biomes {
    public static final Biome DEEP_LUKEWARM_OCEAN;
    public static final Biome DEEP_COLD_OCEAN;
    public static final Biome DEEP_FROZEN_OCEAN;
+   public static final Biome UNDERWORLD;
    public static final Biome THE_VOID;
    public static final Biome SUNFLOWER_PLAINS;
    public static final Biome DESERT_LAKES;
@@ -145,6 +146,7 @@ public abstract class Biomes {
          DEEP_LUKEWARM_OCEAN = getRegisteredBiome("deep_lukewarm_ocean");
          DEEP_COLD_OCEAN = getRegisteredBiome("deep_cold_ocean");
          DEEP_FROZEN_OCEAN = getRegisteredBiome("deep_frozen_ocean");
+         UNDERWORLD = getRegisteredBiome("underworld");
          THE_VOID = getRegisteredBiome("the_void");
          SUNFLOWER_PLAINS = getRegisteredBiome("sunflower_plains");
          DESERT_LAKES = getRegisteredBiome("desert_lakes");

@@ -77,8 +77,6 @@ public class VillageStructure extends Structure<VillageConfig> {
 
       public Start(IWorld p_i48753_1_, IChunkGenerator<?> p_i48753_2_, SharedSeedRandom p_i48753_3_, int p_i48753_4_, int p_i48753_5_, Biome p_i48753_6_) {
          super(p_i48753_4_, p_i48753_5_, p_i48753_6_, p_i48753_3_, p_i48753_1_.getSeed());
-         System.out.println("Village start spawn");
-
          VillageConfig villageconfig = (VillageConfig)p_i48753_2_.getStructureConfig(p_i48753_6_, Feature.VILLAGE);
          List<VillagePieces.PieceWeight> list = VillagePieces.getStructureVillageWeightedPieceList(p_i48753_3_, villageconfig.field_202461_a);
          VillagePieces.Start villagepieces$start = new VillagePieces.Start(0, p_i48753_3_, (p_i48753_4_ << 4) + 2, (p_i48753_5_ << 4) + 2, list, villageconfig);

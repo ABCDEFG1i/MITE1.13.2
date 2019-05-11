@@ -30,7 +30,7 @@ public class Teleporter {
    public void placeInPortal(Entity p_180266_1_, float p_180266_2_) {
       if (this.world.dimension.getType() != DimensionType.THE_END) {
          if (!this.placeInExistingPortal(p_180266_1_, p_180266_2_)) {
-            this.makePortal(p_180266_1_);
+            this.makeNetherPortal(p_180266_1_);
             this.placeInExistingPortal(p_180266_1_, p_180266_2_);
          }
       } else {
@@ -43,9 +43,9 @@ public class Teleporter {
          for(int j1 = -2; j1 <= 2; ++j1) {
             for(int k1 = -2; k1 <= 2; ++k1) {
                for(int l1 = -1; l1 < 3; ++l1) {
-                  int i2 = i + k1 * 1 + j1 * 0;
+                  int i2 = i + k1;
                   int j2 = j + l1;
-                  int k2 = k + k1 * 0 - j1 * 1;
+                  int k2 = k - j1;
                   boolean flag = l1 < 0;
                   this.world.setBlockState(new BlockPos(i2, j2, k2), flag ? Blocks.OBSIDIAN.getDefaultState() : Blocks.AIR.getDefaultState());
                }
@@ -60,7 +60,6 @@ public class Teleporter {
    }
 
    public boolean placeInExistingPortal(Entity p_180620_1_, float p_180620_2_) {
-      int i = 128;
       double d0 = -1.0D;
       int j = MathHelper.floor(p_180620_1_.posX);
       int k = MathHelper.floor(p_180620_1_.posZ);
@@ -154,7 +153,11 @@ public class Teleporter {
       }
    }
 
-   public boolean makePortal(Entity p_85188_1_) {
+   public boolean makeUnderworldPortal(){
+      return true;
+   }
+
+   public boolean makeNetherPortal(Entity p_85188_1_) {
       int i = 16;
       double d0 = -1.0D;
       int j = MathHelper.floor(p_85188_1_.posX);
@@ -300,12 +303,12 @@ public class Teleporter {
          }
       }
 
-      IBlockState iblockstate = BLOCK_NETHER_PORTAL.getDefaultState().with(BlockPortal.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
+      IBlockState block_nether_portal = BLOCK_NETHER_PORTAL.getDefaultState().with(BlockPortal.AXIS, l6 == 0 ? EnumFacing.Axis.Z : EnumFacing.Axis.X);
 
       for(int k8 = 0; k8 < 2; ++k8) {
          for(int j9 = 0; j9 < 3; ++j9) {
             blockpos$mutableblockpos.setPos(i6 + k8 * l6, k2 + j9, k6 + k8 * i3);
-            this.world.setBlockState(blockpos$mutableblockpos, iblockstate, 18);
+            this.world.setBlockState(blockpos$mutableblockpos, block_nether_portal, 18);
          }
       }
 

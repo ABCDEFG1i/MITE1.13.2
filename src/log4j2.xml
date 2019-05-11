@@ -2,7 +2,7 @@
 <Configuration status="WARN" packages="com.mojang.util">
     <Appenders>
         <Console name="SysOut" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss}] [%t/%level]: %msg%n" />
+            <PatternLayout pattern="%highlight{[%d{HH:mm:ss}] [%t/%level]: %msg%n}{FATAL=red, ERROR=red, WARN=yellow, INFO=white, DEBUG=cyan, TRACE=blue}" />
         </Console>
         <Queue name="ServerGuiConsole">
             <PatternLayout pattern="[%d{HH:mm:ss} %level]: %msg%n" />

@@ -47,11 +47,7 @@ public class ChunkGeneratorNether extends AbstractChunkGenerator<NetherGenSettin
    }
 
    public void prepareHeights(int p_185936_1_, int p_185936_2_, IChunk p_185936_3_) {
-      int i = 4;
       int j = this.world.getSeaLevel() / 2 + 1;
-      int k = 5;
-      int l = 17;
-      int i1 = 5;
       double[] adouble = this.func_202104_a(p_185936_1_ * 4, 0, p_185936_2_ * 4, 5, 17, 5);
       BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 
@@ -59,24 +55,22 @@ public class ChunkGeneratorNether extends AbstractChunkGenerator<NetherGenSettin
          for(int k1 = 0; k1 < 4; ++k1) {
             for(int l1 = 0; l1 < 16; ++l1) {
                double d0 = 0.125D;
-               double d1 = adouble[((j1 + 0) * 5 + k1 + 0) * 17 + l1 + 0];
-               double d2 = adouble[((j1 + 0) * 5 + k1 + 1) * 17 + l1 + 0];
-               double d3 = adouble[((j1 + 1) * 5 + k1 + 0) * 17 + l1 + 0];
-               double d4 = adouble[((j1 + 1) * 5 + k1 + 1) * 17 + l1 + 0];
-               double d5 = (adouble[((j1 + 0) * 5 + k1 + 0) * 17 + l1 + 1] - d1) * 0.125D;
-               double d6 = (adouble[((j1 + 0) * 5 + k1 + 1) * 17 + l1 + 1] - d2) * 0.125D;
-               double d7 = (adouble[((j1 + 1) * 5 + k1 + 0) * 17 + l1 + 1] - d3) * 0.125D;
+               double d1 = adouble[(j1 * 5 + k1) * 17 + l1];
+               double d2 = adouble[((j1) * 5 + k1 + 1) * 17 + l1];
+               double d3 = adouble[((j1 + 1) * 5 + k1) * 17 + l1];
+               double d4 = adouble[((j1 + 1) * 5 + k1 + 1) * 17 + l1];
+               double d5 = (adouble[(j1 * 5 + k1) * 17 + l1 + 1] - d1) * 0.125D;
+               double d6 = (adouble[(j1 * 5 + k1 + 1) * 17 + l1 + 1] - d2) * 0.125D;
+               double d7 = (adouble[((j1 + 1) * 5 + k1) * 17 + l1 + 1] - d3) * 0.125D;
                double d8 = (adouble[((j1 + 1) * 5 + k1 + 1) * 17 + l1 + 1] - d4) * 0.125D;
 
                for(int i2 = 0; i2 < 8; ++i2) {
-                  double d9 = 0.25D;
                   double d10 = d1;
                   double d11 = d2;
                   double d12 = (d3 - d1) * 0.25D;
                   double d13 = (d4 - d2) * 0.25D;
 
                   for(int j2 = 0; j2 < 4; ++j2) {
-                     double d14 = 0.25D;
                      double d15 = d10;
                      double d16 = (d11 - d10) * 0.25D;
 
@@ -134,7 +128,6 @@ public class ChunkGeneratorNether extends AbstractChunkGenerator<NetherGenSettin
    }
 
    public double[] generateNoiseRegion(int p_205473_1_, int p_205473_2_) {
-      double d0 = 0.03125D;
       return this.slowsandGravelNoiseGen.func_202647_a(p_205473_1_ << 4, p_205473_2_ << 4, 0, 16, 16, 1, 0.0625D, 0.0625D, 0.0625D);
    }
 
@@ -155,8 +148,6 @@ public class ChunkGeneratorNether extends AbstractChunkGenerator<NetherGenSettin
 
    private double[] func_202104_a(int p_202104_1_, int p_202104_2_, int p_202104_3_, int p_202104_4_, int p_202104_5_, int p_202104_6_) {
       double[] adouble = new double[p_202104_4_ * p_202104_5_ * p_202104_6_];
-      double d0 = 684.412D;
-      double d1 = 2053.236D;
       this.scaleNoise.func_202647_a(p_202104_1_, p_202104_2_, p_202104_3_, p_202104_4_, 1, p_202104_6_, 1.0D, 0.0D, 1.0D);
       this.depthNoise.func_202647_a(p_202104_1_, p_202104_2_, p_202104_3_, p_202104_4_, 1, p_202104_6_, 100.0D, 0.0D, 100.0D);
       double[] adouble1 = this.perlinNoise1.func_202647_a(p_202104_1_, p_202104_2_, p_202104_3_, p_202104_4_, p_202104_5_, p_202104_6_, 8.555150000000001D, 34.2206D, 8.555150000000001D);

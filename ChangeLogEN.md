@@ -1,4 +1,20 @@
 [中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogCN.md)
+# B0.5.5 ChangeLog
+## World
+* Add a new world--Underworld\
+(Now only can into it by using`/execute in minecraft:underworld run tp @s ~ ~ ~`)
+## Generating
+* Add the generating of all kinds of ores except adamantium
+---
+# B0.5.3 ChangeLog
+## Bug Fix
+* Correct the sleep time, let the time after sleeping be sunrise,\
+make the sleep not reset the number of days
+* Fix the bug that the workbench can't be opened in caves
+* Correct the fall damage to make it the same as the vanilla MITE
+## Generating
+* Reduce the size and range of gravel generating in the world
+---
 # B0.5.2 ChangeLog
 ## Blocks
 * 1、Add various crafting tables
@@ -30,7 +46,7 @@ Adamantium |1/26244
     the advancement page,you need to get to 10 levels to unlock the root advancement of all structures
 * 2,Make enchanted books cannot merge together
 
-## Generate
+## Generating
 * The animals in Taiga is fewer now
 
 ## Rendering
@@ -46,7 +62,7 @@ Adamantium |1/26244
 * Removed tutorial step of punching trees
 ---
 # B0.4.0 ChangeLog
-## Game mechanics:
+## Game mechanics
 * Now the item is more easily damaged: \
   The received damage value of tools is 100 times the hardness of the digging block(Axes are 45 times)\
  The received damage value of swords is 50
@@ -63,7 +79,7 @@ Adamantium |1/26244
 * The health of player is 20 when join world for first time,it should be 6
 ---
 # B0.3.0 ChangeLog
-## Game mechanics:
+## Game mechanics
 * 1, Upgrade requires a higher experience value:\
    Set the level to n\
    Required experience per level = 10 (n + 1)\
@@ -73,17 +89,17 @@ Adamantium |1/26244
    11s 10.5s 10s
 * 4, death drops one-third of the experience before death, if there is no level, it will fall to a negative number
 
-## Generate:
+## Generating
 * 1, the animal production rate is reduced, generating weights, halving the size of each group
 * 2, generate creatures every 128 days
 
-## Item:
+## Item
 * Remove wooden pickaxe, wooden axe, wooden hoe
 
-## Bug fix:
+## Bug fix
 * Player's health is no real 3 hearts on respawn
 
-## Anti-cheating:
+## Anti-cheating
 * 1, coordinate deletion
 * 2, prohibiting the use of cheating
 * 3, update the saves file version, now only supports the opening of the MITE saves
