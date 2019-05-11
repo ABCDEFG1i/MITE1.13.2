@@ -1,6 +1,5 @@
 package net.minecraft.entity.passive;
 
-import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCarpet;
@@ -354,7 +353,7 @@ public class EntityLlama extends AbstractChestHorse implements IRangedAttackMob 
       this.didSpit = p_190714_1_;
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
       int i = MathHelper.ceil((p_180430_1_ * 0.5F - 3.0F) * p_180430_2_);
       if (i > 0) {
          if (p_180430_1_ >= 6.0F) {

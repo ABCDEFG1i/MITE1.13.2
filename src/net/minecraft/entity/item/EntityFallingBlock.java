@@ -181,7 +181,7 @@ public class EntityFallingBlock extends Entity {
       }
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
       if (this.hurtEntities) {
          int i = MathHelper.ceil(p_180430_1_ - 1.0F);
          if (i > 0) {

@@ -18,8 +18,8 @@ public class MinableConfig implements IFeatureConfig {
    public final int size;
    public final IBlockState state;
 
-   public MinableConfig(Predicate<IBlockState> p_i48673_1_, IBlockState p_i48673_2_, int p_i48673_3_) {
-      this.size = p_i48673_3_;
+   public MinableConfig(Predicate<IBlockState> p_i48673_1_, IBlockState p_i48673_2_, int maxSize) {
+      this.size = maxSize;
       this.state = p_i48673_2_;
       this.canReplace = p_i48673_1_;
    }

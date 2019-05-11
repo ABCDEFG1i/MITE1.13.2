@@ -34,7 +34,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
@@ -455,7 +454,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob {
       return 15728880;
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    public boolean addPotionEffect(PotionEffect p_195064_1_) {

@@ -4,14 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.properties.PropertyMap.Serializer;
-import java.io.File;
-import java.net.Authenticator;
-import java.net.InetSocketAddress;
-import java.net.PasswordAuthentication;
-import java.net.Proxy;
-import java.net.Proxy.Type;
-import java.util.List;
-import java.util.Optional;
 import joptsimple.ArgumentAcceptingOptionSpec;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -23,6 +15,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.File;
+import java.net.Authenticator;
+import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.util.List;
+import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class Main {
@@ -86,6 +87,7 @@ public class Main {
       SharedConstants.developmentMode = optionset.has("devMode");
       if (SharedConstants.developmentMode) {
          LOGGER.info("Running in development mode");
+         LOGGER.debug("Running in debug");
       }
       int i = func_206236_a(optionset, optionspec13);
       int j = func_206236_a(optionset, optionspec14);

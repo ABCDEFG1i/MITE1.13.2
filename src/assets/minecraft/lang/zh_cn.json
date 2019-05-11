@@ -4161,5 +4161,7 @@
   "advancements.structure.stronghold.description": "to generate stronghold",
 
   "advancements.structure.mansion.title": "\u6797\u90b8\u5e9c\u5740",
-  "advancements.structure.mansion.description": "1,\u751f\u5b5890\u5929.\n2,\u5347\u523060\u7ea7.\n3,\u6740\u6b7b\u672b\u5f71\u9f99"
+  "advancements.structure.mansion.description": "1,\u751f\u5b5890\u5929.\n2,\u5347\u523060\u7ea7.\n3,\u6740\u6b7b\u672b\u5f71\u9f99",
+  "MITEBIOMES": "--------------------------------------------------------",
+  "biome.minecraft.underworld": "\u5730\u5e95\u4e16\u754c"
 }

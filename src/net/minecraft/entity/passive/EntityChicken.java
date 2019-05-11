@@ -92,7 +92,7 @@ public class EntityChicken extends EntityAnimal {
 
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    protected SoundEvent getAmbientSound() {

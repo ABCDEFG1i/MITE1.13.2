@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.IRegistry;
 
 public class DimensionType {
+   public static final DimensionType UNDERWORLD = func_212677_a("underworld",new DimensionType(3,"_underworld","DIM2",UnderworldDimension::new));
    public static final DimensionType OVERWORLD = func_212677_a("overworld", new DimensionType(1, "", "", OverworldDimension::new));
    public static final DimensionType NETHER = func_212677_a("the_nether", new DimensionType(0, "_nether", "DIM-1", NetherDimension::new));
    public static final DimensionType THE_END = func_212677_a("the_end", new DimensionType(2, "_end", "DIM1", EndDimension::new));

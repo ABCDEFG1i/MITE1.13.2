@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.IRegistry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.UnderworldBiome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -11,6 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ChunkGeneratorType<C extends IChunkGenSettings, T extends IChunkGenerator<C>> implements IChunkGeneratorFactory<C, T> {
    public static final ChunkGeneratorType<OverworldGenSettings, ChunkGeneratorOverworld> SURFACE = func_212676_a("surface", ChunkGeneratorOverworld::new, OverworldGenSettings::new, true);
    public static final ChunkGeneratorType<NetherGenSettings, ChunkGeneratorNether> CAVES = func_212676_a("caves", ChunkGeneratorNether::new, NetherGenSettings::new, true);
+   public static final ChunkGeneratorType<UnderworldGenSetting,ChunkGeneratorUnderworld> UNDERWORLD = func_212676_a("underworld",ChunkGeneratorUnderworld::new,UnderworldGenSetting::new ,true);
    public static final ChunkGeneratorType<EndGenSettings, ChunkGeneratorEnd> FLOATING_ISLANDS = func_212676_a("floating_islands", ChunkGeneratorEnd::new, EndGenSettings::new, true);
    public static final ChunkGeneratorType<DebugGenSettings, ChunkGeneratorDebug> DEBUG = func_212676_a("debug", ChunkGeneratorDebug::new, DebugGenSettings::new, false);
    public static final ChunkGeneratorType<FlatGenSettings, ChunkGeneratorFlat> FLAT = func_212676_a("flat", ChunkGeneratorFlat::new, FlatGenSettings::new, false);

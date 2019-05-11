@@ -13,7 +13,7 @@ public abstract class EntityGolem extends EntityCreature implements IAnimal {
       super(p_i48569_1_, p_i48569_2_);
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    @Nullable

@@ -1,6 +1,7 @@
 package net.minecraft.block;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -34,7 +35,14 @@ public class BlockLeaves extends Block {
 
    public BlockLeaves(Block.Properties p_i48370_1_) {
       super(p_i48370_1_);
-      this.setDefaultState(this.stateContainer.getBaseState().with(DISTANCE, Integer.valueOf(7)).with(PERSISTENT, Boolean.valueOf(false)));
+      this.setDefaultState(this.stateContainer.getBaseState().with(DISTANCE, 7).with(PERSISTENT, Boolean.FALSE));
+   }
+
+   @Override
+   public void onFallenUpon(World p_180658_1_, BlockPos p_180658_2_, Entity p_180658_3_, float p_180658_4_) {
+      if (p_180658_4_>=10){
+         p_180658_3_.fall(p_180658_4_-6,1, false);
+      }
    }
 
    public boolean getTickRandomly(IBlockState p_149653_1_) {

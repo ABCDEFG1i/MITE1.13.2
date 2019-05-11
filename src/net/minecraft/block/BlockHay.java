@@ -12,6 +12,6 @@ public class BlockHay extends BlockRotatedPillar {
    }
 
    public void onFallenUpon(World p_180658_1_, BlockPos p_180658_2_, Entity p_180658_3_, float p_180658_4_) {
-      p_180658_3_.fall(p_180658_4_, 0.2F);
+      p_180658_3_.fall(p_180658_4_, 0.2F, false);
    }
 }

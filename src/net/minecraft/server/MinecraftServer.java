@@ -305,6 +305,13 @@ public abstract class MinecraftServer implements IThreadListener, ISnooperInfo, 
          worldservermulti1.getWorldInfo().setGameType(this.getGameType());
       }
 
+      WorldServerMulti worldservermulti2 = (new WorldServerMulti(this, p_212369_1_, DimensionType.UNDERWORLD, worldserver, this.profiler)).func_212251_i__();
+      this.worlds.put(DimensionType.UNDERWORLD,worldservermulti2);
+      worldservermulti2.addEventListener(new ServerWorldEventHandler(this,worldservermulti2));
+      if (!this.isSinglePlayer()){
+         worldservermulti2.getWorldInfo().setGameType(this.getGameType());
+      }
+
       this.getPlayerList().func_212504_a(worldserver);
       if (p_212369_3_.getCustomBossEvents() != null) {
          this.getCustomBossEvents().read(p_212369_3_.getCustomBossEvents());

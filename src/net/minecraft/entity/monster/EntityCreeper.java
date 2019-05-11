@@ -72,8 +72,8 @@ public class EntityCreeper extends EntityMob {
       return this.getAttackTarget() == null ? 3 : 3 + (int)(this.getHealth() - 1.0F);
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
-      super.fall(p_180430_1_, p_180430_2_);
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
+      super.fall(p_180430_1_, p_180430_2_, isNormalBlock);
       this.timeSinceIgnited = (int)((float)this.timeSinceIgnited + p_180430_1_ * 1.5F);
       if (this.timeSinceIgnited > this.fuseTime - 5) {
          this.timeSinceIgnited = this.fuseTime - 5;

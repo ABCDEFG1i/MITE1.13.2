@@ -1,12 +1,12 @@
 package net.minecraft.block.material;
 
 public final class Material {
-    public static final Material AIR = (new Material.Builder(MaterialColor.AIR)).doesNotBlockMovement().notOpaque()
+    public static final Material AIR = (new Material.Builder(MaterialColor.AIR)).doesNotBlocksMovement().notOpaque()
                                                                                 .notSolid().replaceable().build();
     public static final Material ANVIL = (new Material.Builder(MaterialColor.IRON)).pushBlocks().build();
     public static final Material BARRIER = (new Material.Builder(MaterialColor.AIR)).requiresTool().pushBlocks()
                                                                                     .build();
-    public static final Material BUBBLE_COLUMN = (new Material.Builder(MaterialColor.WATER)).doesNotBlockMovement()
+    public static final Material BUBBLE_COLUMN = (new Material.Builder(MaterialColor.WATER)).doesNotBlocksMovement()
                                                                                             .notOpaque().notSolid()
                                                                                             .pushDestroys()
                                                                                             .replaceable().liquid()
@@ -14,16 +14,16 @@ public final class Material {
     public static final Material CACTUS = (new Material.Builder(MaterialColor.FOLIAGE)).notOpaque().pushDestroys()
                                                                                        .build();
     public static final Material CAKE = (new Material.Builder(MaterialColor.AIR)).pushDestroys().build();
-    public static final Material CARPET = (new Material.Builder(MaterialColor.CLOTH)).doesNotBlockMovement().notOpaque()
+    public static final Material CARPET = (new Material.Builder(MaterialColor.CLOTH)).doesNotBlocksMovement().notOpaque()
                                                                                      .notSolid().flammable().build();
-    public static final Material CIRCUITS = (new Material.Builder(MaterialColor.AIR)).doesNotBlockMovement().notOpaque()
+    public static final Material CIRCUITS = (new Material.Builder(MaterialColor.AIR)).doesNotBlocksMovement().notOpaque()
                                                                                      .notSolid().pushDestroys().build();
     public static final Material CLAY = (new Material.Builder(MaterialColor.CLAY)).build();
     public static final Material CLOTH = (new Material.Builder(MaterialColor.CLOTH)).flammable().build();
     public static final Material CORAL = (new Material.Builder(MaterialColor.FOLIAGE)).pushDestroys().build();
     public static final Material CRAFTED_SNOW = (new Material.Builder(MaterialColor.SNOW)).requiresTool().build();
     public static final Material DRAGON_EGG = (new Material.Builder(MaterialColor.FOLIAGE)).pushDestroys().build();
-    public static final Material FIRE = (new Material.Builder(MaterialColor.AIR)).doesNotBlockMovement().notOpaque()
+    public static final Material FIRE = (new Material.Builder(MaterialColor.AIR)).doesNotBlocksMovement().notOpaque()
                                                                                  .notSolid().pushDestroys()
                                                                                  .replaceable().build();
     public static final Material FURNACE = (new Material.Builder(MaterialColor.STONE)).flammable().build();
@@ -31,45 +31,45 @@ public final class Material {
     public static final Material GOURD = (new Material.Builder(MaterialColor.FOLIAGE)).pushDestroys().build();
     public static final Material GRASS = (new Material.Builder(MaterialColor.GRASS)).build();
     public static final Material GROUND = (new Material.Builder(MaterialColor.DIRT)).build();
-    public static final Material ICE = (new Material.Builder(MaterialColor.ICE)).notOpaque().build();
+    public static final Material ICE = (new Material.Builder(MaterialColor.ICE)).notOpaque().requiresTool().build();
     public static final Material IRON = (new Material.Builder(MaterialColor.IRON)).requiresTool().build();
-    public static final Material LAVA = (new Material.Builder(MaterialColor.TNT)).doesNotBlockMovement().notOpaque()
+    public static final Material LAVA = (new Material.Builder(MaterialColor.TNT)).doesNotBlocksMovement().notOpaque()
                                                                                  .notSolid().pushDestroys()
                                                                                  .replaceable().liquid().build();
     public static final Material LEAVES = (new Material.Builder(MaterialColor.FOLIAGE)).flammable().notOpaque()
                                                                                        .pushDestroys().build();
-    public static final Material OCEAN_PLANT = (new Material.Builder(MaterialColor.WATER)).doesNotBlockMovement()
+    public static final Material OCEAN_PLANT = (new Material.Builder(MaterialColor.WATER)).doesNotBlocksMovement()
                                                                                           .notOpaque().notSolid()
                                                                                           .pushDestroys().build();
     public static final Material PACKED_ICE = (new Material.Builder(MaterialColor.ICE)).build();
     public static final Material PISTON = (new Material.Builder(MaterialColor.STONE)).pushBlocks().build();
-    public static final Material PLANTS = (new Material.Builder(MaterialColor.FOLIAGE)).doesNotBlockMovement()
+    public static final Material PLANTS = (new Material.Builder(MaterialColor.FOLIAGE)).doesNotBlocksMovement()
                                                                                        .notOpaque().notSolid()
                                                                                        .pushDestroys().build();
-    public static final Material PORTAL = (new Material.Builder(MaterialColor.AIR)).doesNotBlockMovement().notOpaque()
+    public static final Material PORTAL = (new Material.Builder(MaterialColor.AIR)).doesNotBlocksMovement().notOpaque()
                                                                                    .notSolid().pushBlocks().build();
     public static final Material REDSTONE_LIGHT = (new Material.Builder(MaterialColor.AIR)).build();
     public static final Material ROCK = (new Material.Builder(MaterialColor.STONE)).requiresTool().build();
     public static final Material SAND = (new Material.Builder(MaterialColor.SAND)).build();
-    public static final Material SEA_GRASS = (new Material.Builder(MaterialColor.WATER)).doesNotBlockMovement()
+    public static final Material SEA_GRASS = (new Material.Builder(MaterialColor.WATER)).doesNotBlocksMovement()
                                                                                         .notOpaque().notSolid()
                                                                                         .pushDestroys().replaceable()
                                                                                         .build();
-    public static final Material SNOW = (new Material.Builder(MaterialColor.SNOW)).doesNotBlockMovement().notOpaque()
+    public static final Material SNOW = (new Material.Builder(MaterialColor.SNOW)).doesNotBlocksMovement().notOpaque()
                                                                                   .notSolid().pushDestroys()
-                                                                                  .replaceable().requiresTool().build();
+                                                                                  .replaceable().build();
     public static final Material SPONGE = (new Material.Builder(MaterialColor.YELLOW)).build();
-    public static final Material STRUCTURE_VOID = (new Material.Builder(MaterialColor.AIR)).doesNotBlockMovement()
+    public static final Material STRUCTURE_VOID = (new Material.Builder(MaterialColor.AIR)).doesNotBlocksMovement()
                                                                                            .notOpaque().notSolid()
                                                                                            .replaceable().build();
     public static final Material TNT = (new Material.Builder(MaterialColor.TNT)).flammable().notOpaque().build();
-    public static final Material VINE = (new Material.Builder(MaterialColor.FOLIAGE)).doesNotBlockMovement().notOpaque()
+    public static final Material VINE = (new Material.Builder(MaterialColor.FOLIAGE)).doesNotBlocksMovement().notOpaque()
                                                                                      .notSolid().pushDestroys()
                                                                                      .replaceable().flammable().build();
-    public static final Material WATER = (new Material.Builder(MaterialColor.WATER)).doesNotBlockMovement().notOpaque()
+    public static final Material WATER = (new Material.Builder(MaterialColor.WATER)).doesNotBlocksMovement().notOpaque()
                                                                                     .notSolid().pushDestroys()
                                                                                     .replaceable().liquid().build();
-    public static final Material WEB = (new Material.Builder(MaterialColor.CLOTH)).doesNotBlockMovement().notOpaque()
+    public static final Material WEB = (new Material.Builder(MaterialColor.CLOTH)).doesNotBlocksMovement().notOpaque()
                                                                                   .pushDestroys().requiresTool()
                                                                                   .build();
     public static final Material WOOD = (new Material.Builder(MaterialColor.WOOD)).requiresTool().flammable().build();
@@ -152,7 +152,7 @@ public final class Material {
                                 this.requiresNoTool, this.canBurn, this.isReplaceable, this.pushReaction);
         }
 
-        public Material.Builder doesNotBlockMovement() {
+        public Material.Builder doesNotBlocksMovement() {
             this.blocksMovement = false;
             return this;
         }

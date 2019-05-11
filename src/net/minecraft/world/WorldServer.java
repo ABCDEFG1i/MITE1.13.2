@@ -164,8 +164,8 @@ public class WorldServer extends World implements IThreadListener {
       this.chunkProvider.getChunkGenerator().getBiomeProvider().tick();
       if (this.areAllPlayersAsleep()) {
          if (this.getGameRules().getBoolean("doDaylightCycle")) {
-            if (this.worldInfo.isThundering()|!this.getWorld().isDaytime()) {
-               this.worldInfo.setWorldTime(22000L);
+            if (this.worldInfo.isThundering()|this.getWorld().isSleepTime()) {
+               this.getWorld().setTimeToSunrise();
             }
          }
       //MITEMODDED Removed

@@ -14,7 +14,7 @@ public class SphereReplaceFeature extends Feature<SphereReplaceConfig> {
          return false;
       } else {
          int i = 0;
-         int j = p_212245_3_.nextInt(p_212245_5_.field_202432_b - 2) + 2;
+         int j = p_212245_3_.nextInt(p_212245_5_.maxRange - 2) + 2;
 
          for(int k = p_212245_4_.getX() - j; k <= p_212245_4_.getX() + j; ++k) {
             for(int l = p_212245_4_.getZ() - j; l <= p_212245_4_.getZ() + j; ++l) {

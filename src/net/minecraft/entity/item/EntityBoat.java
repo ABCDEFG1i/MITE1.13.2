@@ -688,8 +688,7 @@ public class EntityBoat extends Entity {
                   this.fallDistance = 0.0F;
                   return;
                }
-
-               this.fall(this.fallDistance, 1.0F);
+               this.fall(this.fallDistance, 1.0F, false);
                if (!this.world.isRemote && !this.isDead) {
                   this.setDead();
                   if (this.world.getGameRules().getBoolean("doEntityDrops")) {

@@ -21,7 +21,7 @@ public class BlockSlime extends BlockBreakable {
       if (p_180658_3_.isSneaking()) {
          super.onFallenUpon(p_180658_1_, p_180658_2_, p_180658_3_, p_180658_4_);
       } else {
-         p_180658_3_.fall(p_180658_4_, 0.0F);
+         p_180658_3_.fall(p_180658_4_, 0.0F, false);
       }
 
    }

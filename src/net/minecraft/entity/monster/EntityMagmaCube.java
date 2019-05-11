@@ -89,7 +89,7 @@ public class EntityMagmaCube extends EntitySlime {
 
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
    }
 
    protected boolean canDamagePlayer() {

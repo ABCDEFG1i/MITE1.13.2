@@ -3,7 +3,6 @@ package net.minecraft.entity.item;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Blocks;
@@ -99,13 +98,13 @@ public class EntityMinecartTNT extends EntityMinecart {
 
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
       if (p_180430_1_ >= 3.0F) {
          float f = p_180430_1_ / 10.0F;
          this.explodeCart((double)(f * f));
       }
 
-      super.fall(p_180430_1_, p_180430_2_);
+      super.fall(p_180430_1_, p_180430_2_, isNormalBlock);
    }
 
    public void onActivatorRailPass(int p_96095_1_, int p_96095_2_, int p_96095_3_, boolean p_96095_4_) {

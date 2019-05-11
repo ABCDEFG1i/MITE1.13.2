@@ -219,7 +219,7 @@ public abstract class AbstractHorse extends EntityAnimal implements IInventoryCh
 
    }
 
-   public void fall(float p_180430_1_, float p_180430_2_) {
+   public void fall(float p_180430_1_, float p_180430_2_, boolean isNormalBlock) {
       if (p_180430_1_ > 1.0F) {
          this.playSound(SoundEvents.ENTITY_HORSE_LAND, 0.4F, 1.0F);
       }
