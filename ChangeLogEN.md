@@ -1,4 +1,12 @@
 [中文版](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogCN.md)
+# B0.5.7 ChangeLog
+## Generating
+* Add the two bedrock layers and its stone hole in the underworld's underground
+## Block
+* Add two portals to get to underworld and world spawn point\
+ (Going to the underworld needs to build a portal in the overworld where Y is less than 16.)\
+ (Going to the nether needs to build a portal in the underworld where Y is less than 16.)
+---
 # B0.5.5 ChangeLog
 ## World
 * Add a new world--Underworld\

@@ -1,4 +1,12 @@
 [English Version](https://github.com/XiaoYuOvO/MITE1.13.2/blob/master/ChangeLogEN.md)
+# B0.5.7 更新日志
+## 世界生成
+* 添加了地底世界地下的两层基岩及其中的石头空洞
+## 方块
+* 添加了前往地底世界和在主世界返回世界出生点的传送门\
+ (前往地底世界需要在主世界的Y小于16的地方搭建传送门)\
+ (前往地狱需要在地底世界的Y小于16的地方搭建传送门)
+---
 # B0.5.5 更新日志
 ## 世界
 * 添加了新的世界--地底世界(暂时只能使用`/execute in minecraft:underworld run tp @s ~ ~ ~`来进入)
