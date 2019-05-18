@@ -111,11 +111,11 @@ public class EntityEnderPearl extends EntityThrowable {
    }
 
    @Nullable
-   public Entity func_212321_a(DimensionType p_212321_1_) {
-      if (this.thrower.dimension != p_212321_1_) {
+   public Entity func_212321_a(DimensionType target) {
+      if (this.thrower.dimension != target) {
          this.thrower = null;
       }
 
-      return super.func_212321_a(p_212321_1_);
+      return super.func_212321_a(target);
    }
 }

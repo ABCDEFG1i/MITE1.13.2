@@ -660,6 +660,10 @@ public class Blocks {
    public static final Block NETHERRACK_FURNACE;
    public static final Block OBSIDIAN_FURNACE;
    public static final Block SANDSTONE_FURNACE;
+   //Portals
+   public static final Block WORLDSPAWN_PORTAL;
+   public static final Block UNDERWORLD_PORTAL;
+   public static final Block OVERWORLD_PORTAL;
 
 
    private static Block getRegisteredBlock(String p_180383_0_) {
@@ -1349,6 +1353,12 @@ public class Blocks {
                NETHERRACK_FURNACE = getRegisteredBlock("netherrack_furnace");
                OBSIDIAN_FURNACE = getRegisteredBlock("obsidian_furnace");
                SANDSTONE_FURNACE = getRegisteredBlock("sandstone_furnace");
+            }
+            //Portals
+            {
+               WORLDSPAWN_PORTAL = getRegisteredBlock("worldspawn_portal");
+               UNDERWORLD_PORTAL = getRegisteredBlock("underworld_portal");
+               OVERWORLD_PORTAL = getRegisteredBlock("overworld_portal");
             }
          }
 

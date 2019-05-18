@@ -9,12 +9,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -24,19 +22,19 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockPortal extends Block {
+public class BlockNetherPortal extends Block {
    public static final EnumProperty<EnumFacing.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
    protected static final VoxelShape X_AABB = Block.makeCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
    protected static final VoxelShape Z_AABB = Block.makeCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
 
-   public BlockPortal(Block.Properties p_i48352_1_) {
+   public BlockNetherPortal(Block.Properties p_i48352_1_) {
       super(p_i48352_1_);
       this.setDefaultState(this.stateContainer.getBaseState().with(AXIS, EnumFacing.Axis.X));
    }
@@ -75,7 +73,7 @@ public class BlockPortal extends Block {
    }
 
    public boolean trySpawnPortal(IWorld p_176548_1_, BlockPos p_176548_2_) {
-      BlockPortal.Size blockportal$size = this.func_201816_b(p_176548_1_, p_176548_2_);
+      BlockNetherPortal.Size blockportal$size = this.func_201816_b(p_176548_1_, p_176548_2_);
       if (blockportal$size != null) {
          blockportal$size.placePortalBlocks();
          return true;
@@ -85,12 +83,12 @@ public class BlockPortal extends Block {
    }
 
    @Nullable
-   public BlockPortal.Size func_201816_b(IWorld p_201816_1_, BlockPos p_201816_2_) {
-      BlockPortal.Size blockportal$size = new BlockPortal.Size(p_201816_1_, p_201816_2_, EnumFacing.Axis.X);
+   public BlockNetherPortal.Size func_201816_b(IWorld p_201816_1_, BlockPos p_201816_2_) {
+      BlockNetherPortal.Size blockportal$size = new BlockNetherPortal.Size(p_201816_1_, p_201816_2_, EnumFacing.Axis.X);
       if (blockportal$size.isValid() && blockportal$size.portalBlockCount == 0) {
          return blockportal$size;
       } else {
-         BlockPortal.Size blockportal$size1 = new BlockPortal.Size(p_201816_1_, p_201816_2_, EnumFacing.Axis.Z);
+         BlockNetherPortal.Size blockportal$size1 = new BlockNetherPortal.Size(p_201816_1_, p_201816_2_, EnumFacing.Axis.Z);
          return blockportal$size1.isValid() && blockportal$size1.portalBlockCount == 0 ? blockportal$size1 : null;
       }
    }
@@ -99,7 +97,7 @@ public class BlockPortal extends Block {
       EnumFacing.Axis enumfacing$axis = p_196271_2_.getAxis();
       EnumFacing.Axis enumfacing$axis1 = p_196271_1_.get(AXIS);
       boolean flag = enumfacing$axis1 != enumfacing$axis && enumfacing$axis.isHorizontal();
-      return !flag && p_196271_3_.getBlock() != this && !(new BlockPortal.Size(p_196271_4_, p_196271_5_, enumfacing$axis1)).func_208508_f() ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(p_196271_1_, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
+      return !flag && p_196271_3_.getBlock() != this && !(new BlockNetherPortal.Size(p_196271_4_, p_196271_5_, enumfacing$axis1)).func_208508_f() ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(p_196271_1_, p_196271_2_, p_196271_3_, p_196271_4_, p_196271_5_, p_196271_6_);
    }
 
    public int quantityDropped(IBlockState p_196264_1_, Random p_196264_2_) {
@@ -112,7 +110,7 @@ public class BlockPortal extends Block {
 
    public void onEntityCollision(IBlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity p_196262_4_) {
       if (!p_196262_4_.isRiding() && !p_196262_4_.isBeingRidden() && p_196262_4_.isNonBoss()) {
-         p_196262_4_.setPortal(p_196262_3_);
+         p_196262_4_.setPortal(p_196262_3_,DimensionType.NETHER);
       }
 
    }
@@ -171,11 +169,11 @@ public class BlockPortal extends Block {
 
    public BlockPattern.PatternHelper createPatternHelper(IWorld p_181089_1_, BlockPos p_181089_2_) {
       EnumFacing.Axis enumfacing$axis = EnumFacing.Axis.Z;
-      BlockPortal.Size blockportal$size = new BlockPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
+      BlockNetherPortal.Size blockportal$size = new BlockNetherPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.X);
       LoadingCache<BlockPos, BlockWorldState> loadingcache = BlockPattern.createLoadingCache(p_181089_1_, true);
       if (!blockportal$size.isValid()) {
          enumfacing$axis = EnumFacing.Axis.X;
-         blockportal$size = new BlockPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.Z);
+         blockportal$size = new BlockNetherPortal.Size(p_181089_1_, p_181089_2_, EnumFacing.Axis.Z);
       }
 
       if (!blockportal$size.isValid()) {
@@ -215,14 +213,14 @@ public class BlockPortal extends Block {
    }
 
    public static class Size {
-      private final IWorld world;
-      private final EnumFacing.Axis axis;
-      private final EnumFacing rightDir;
-      private final EnumFacing leftDir;
-      private int portalBlockCount;
-      private BlockPos bottomLeft;
-      private int height;
-      private int width;
+      final IWorld world;
+      final EnumFacing.Axis axis;
+      final EnumFacing rightDir;
+      final EnumFacing leftDir;
+      int portalBlockCount;
+      BlockPos bottomLeft;
+      int height;
+      int width;
 
       public Size(IWorld p_i48740_1_, BlockPos p_i48740_2_, EnumFacing.Axis p_i48740_3_) {
          this.world = p_i48740_1_;
@@ -335,7 +333,7 @@ public class BlockPortal extends Block {
             BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
 
             for(int j = 0; j < this.height; ++j) {
-               this.world.setBlockState(blockpos.up(j), Blocks.NETHER_PORTAL.getDefaultState().with(BlockPortal.AXIS, this.axis), 18);
+               this.world.setBlockState(blockpos.up(j), Blocks.NETHER_PORTAL.getDefaultState().with(BlockNetherPortal.AXIS, this.axis), 18);
             }
          }
 

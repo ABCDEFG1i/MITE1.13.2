@@ -547,15 +547,15 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
    }
 
    @Nullable
-   public Entity func_212321_a(DimensionType p_212321_1_) {
+   public Entity func_212321_a(DimensionType target) {
       this.invulnerableDimensionChange = true;
-      if (this.dimension == DimensionType.OVERWORLD && p_212321_1_ == DimensionType.NETHER) {
+      if (this.dimension == DimensionType.UNDERWORLD && target == DimensionType.NETHER) {
          this.enteredNetherPosition = new Vec3d(this.posX, this.posY, this.posZ);
-      } else if (this.dimension != DimensionType.NETHER && p_212321_1_ != DimensionType.OVERWORLD) {
+      } else if (this.dimension != DimensionType.NETHER && target != DimensionType.UNDERWORLD) {
          this.enteredNetherPosition = null;
       }
 
-      if (this.dimension == DimensionType.THE_END && p_212321_1_ == DimensionType.THE_END) {
+      if (this.dimension == DimensionType.THE_END && target == DimensionType.THE_END) {
          this.world.removeEntity(this);
          if (!this.queuedEndExit) {
             this.queuedEndExit = true;
@@ -565,11 +565,11 @@ public class EntityPlayerMP extends EntityPlayer implements IContainerListener {
 
          return this;
       } else {
-         if (this.dimension == DimensionType.OVERWORLD && p_212321_1_ == DimensionType.THE_END) {
-            p_212321_1_ = DimensionType.THE_END;
+         if (this.dimension == DimensionType.OVERWORLD && target == DimensionType.THE_END) {
+            target = DimensionType.THE_END;
          }
 
-         this.server.getPlayerList().func_187242_a(this, p_212321_1_);
+         this.server.getPlayerList().func_187242_a(this, target);
          this.connection.sendPacket(new SPacketEffect(1032, BlockPos.ORIGIN, 0, false));
          this.lastExperience = -1;
          this.lastHealth = -1.0F;

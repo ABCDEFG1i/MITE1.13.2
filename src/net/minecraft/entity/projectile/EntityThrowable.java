@@ -1,8 +1,6 @@
 package net.minecraft.entity.projectile;
 
-import java.util.List;
-import java.util.UUID;
-import javax.annotation.Nullable;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
@@ -17,8 +15,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
 
 public abstract class EntityThrowable extends Entity implements IProjectile {
    private int xTile = -1;
@@ -176,8 +179,24 @@ public abstract class EntityThrowable extends Entity implements IProjectile {
       }
 
       if (raytraceresult != null) {
-         if (raytraceresult.type == RayTraceResult.Type.BLOCK && this.world.getBlockState(raytraceresult.getBlockPos()).getBlock() == Blocks.NETHER_PORTAL) {
-            this.setPortal(raytraceresult.getBlockPos());
+         Block target = this.world.getBlockState(raytraceresult.getBlockPos()).getBlock();
+         if (raytraceresult.type == RayTraceResult.Type.BLOCK) {
+            if (target == Blocks.UNDERWORLD_PORTAL) {
+               if (this.dimension == DimensionType.UNDERWORLD) {
+                  this.setPortal(raytraceresult.getBlockPos(), DimensionType.OVERWORLD);
+               } else {
+                  this.setPortal(raytraceresult.getBlockPos(), DimensionType.UNDERWORLD);
+               }
+            } else if (target == Blocks.WORLDSPAWN_PORTAL) {
+               this.setPortal(raytraceresult.getBlockPos(), DimensionType.OVERWORLD);
+            } else if (target == Blocks.NETHER_PORTAL) {
+               if (this.dimension == DimensionType.NETHER) {
+                  this.setPortal(raytraceresult.getBlockPos(), DimensionType.UNDERWORLD);
+               } else {
+                  this.setPortal(raytraceresult.getBlockPos(), DimensionType.NETHER);
+               }
+            }
+
          } else {
             this.onImpact(raytraceresult);
          }

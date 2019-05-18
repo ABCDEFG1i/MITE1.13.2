@@ -36,7 +36,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.border.IBorderListener;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.chunk.storage.AnvilChunkLoader;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.storage.IPlayerFileData;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.api.distmarker.Dist;
@@ -45,6 +47,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import javax.swing.plaf.DimensionUIResource;
 import java.io.File;
 import java.net.SocketAddress;
 import java.text.SimpleDateFormat;
@@ -442,21 +445,21 @@ public abstract class PlayerList {
       this.sendPlayerPermissionLevel(p_187243_1_, i);
    }
 
-   public void func_187242_a(EntityPlayerMP p_187242_1_, DimensionType p_187242_2_) {
+   public void func_187242_a(EntityPlayerMP p_187242_1_, DimensionType target) {
       DimensionType dimensiontype = p_187242_1_.dimension;
-      WorldServer worldserver = this.server.func_71218_a(p_187242_1_.dimension);
-      p_187242_1_.dimension = p_187242_2_;
-      WorldServer worldserver1 = this.server.func_71218_a(p_187242_1_.dimension);
+      WorldServer fromServer = this.server.func_71218_a(p_187242_1_.dimension);
+      p_187242_1_.dimension = target;
+      WorldServer toServer = this.server.func_71218_a(p_187242_1_.dimension);
       p_187242_1_.connection.sendPacket(new SPacketRespawn(p_187242_1_.dimension, p_187242_1_.world.getDifficulty(), p_187242_1_.world.getWorldInfo().getTerrainType(), p_187242_1_.interactionManager.getGameType()));
       this.updatePermissionLevel(p_187242_1_);
-      worldserver.removeEntityDangerously(p_187242_1_);
+      fromServer.removeEntityDangerously(p_187242_1_);
       p_187242_1_.isDead = false;
-      this.func_82448_a(p_187242_1_, dimensiontype, worldserver, worldserver1);
-      this.preparePlayer(p_187242_1_, worldserver);
+      this.func_82448_a(p_187242_1_, dimensiontype, fromServer, toServer);
+      this.preparePlayer(p_187242_1_, fromServer);
       p_187242_1_.connection.setPlayerLocation(p_187242_1_.posX, p_187242_1_.posY, p_187242_1_.posZ, p_187242_1_.rotationYaw, p_187242_1_.rotationPitch);
-      p_187242_1_.interactionManager.setWorld(worldserver1);
+      p_187242_1_.interactionManager.setWorld(toServer);
       p_187242_1_.connection.sendPacket(new SPacketPlayerAbilities(p_187242_1_.capabilities));
-      this.updateTimeAndWeatherForPlayer(p_187242_1_, worldserver1);
+      this.updateTimeAndWeatherForPlayer(p_187242_1_, toServer);
       this.syncPlayerInventory(p_187242_1_);
 
       for(PotionEffect potioneffect : p_187242_1_.getActivePotionEffects()) {
@@ -465,68 +468,79 @@ public abstract class PlayerList {
 
    }
 
-   public void func_82448_a(Entity p_82448_1_, DimensionType p_82448_2_, WorldServer p_82448_3_, WorldServer p_82448_4_) {
-      double d0 = p_82448_1_.posX;
-      double d1 = p_82448_1_.posZ;
+   public void func_82448_a(Entity invoker, DimensionType fromType, WorldServer from, WorldServer to) {
+      double d0 = invoker.posX;
+      double d1 = invoker.posZ;
       double d2 = 8.0D;
-      float f = p_82448_1_.rotationYaw;
-      p_82448_3_.profiler.startSection("moving");
-      if (p_82448_1_.dimension == DimensionType.NETHER) {
-         d0 = MathHelper.clamp(d0 / 8.0D, p_82448_4_.getWorldBorder().minX() + 16.0D, p_82448_4_.getWorldBorder().maxX() - 16.0D);
-         d1 = MathHelper.clamp(d1 / 8.0D, p_82448_4_.getWorldBorder().minZ() + 16.0D, p_82448_4_.getWorldBorder().maxZ() - 16.0D);
-         p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-         if (p_82448_1_.isEntityAlive()) {
-            p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
+      float f = invoker.rotationYaw;
+      DimensionType targetDim = invoker.dimension;
+      from.profiler.startSection("moving");
+      //Now the dimension of invoker is target dimension
+      if (targetDim == DimensionType.NETHER&&fromType==DimensionType.UNDERWORLD) {
+         d0 = MathHelper.clamp(d0 / 8.0D, to.getWorldBorder().minX() + 16.0D, to.getWorldBorder().maxX() - 16.0D);
+         d1 = MathHelper.clamp(d1 / 8.0D, to.getWorldBorder().minZ() + 16.0D, to.getWorldBorder().maxZ() - 16.0D);
+         invoker.setLocationAndAngles(d0, invoker.posY, d1, invoker.rotationYaw, invoker.rotationPitch);
+         if (invoker.isEntityAlive()) {
+            from.updateEntityWithOptionalForce(invoker, false);
          }
-      } else if (p_82448_1_.dimension == DimensionType.OVERWORLD) {
-         d0 = MathHelper.clamp(d0 * 8.0D, p_82448_4_.getWorldBorder().minX() + 16.0D, p_82448_4_.getWorldBorder().maxX() - 16.0D);
-         d1 = MathHelper.clamp(d1 * 8.0D, p_82448_4_.getWorldBorder().minZ() + 16.0D, p_82448_4_.getWorldBorder().maxZ() - 16.0D);
-         p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-         if (p_82448_1_.isEntityAlive()) {
-            p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
+      } else if (targetDim == DimensionType.UNDERWORLD&&fromType==DimensionType.NETHER) {
+         d0 = MathHelper.clamp(d0 * 8.0D, to.getWorldBorder().minX() + 16.0D, to.getWorldBorder().maxX() - 16.0D);
+         d1 = MathHelper.clamp(d1 * 8.0D, to.getWorldBorder().minZ() + 16.0D, to.getWorldBorder().maxZ() - 16.0D);
+         invoker.setLocationAndAngles(d0, invoker.posY, d1, invoker.rotationYaw, invoker.rotationPitch);
+         if (invoker.isEntityAlive()) {
+            from.updateEntityWithOptionalForce(invoker, false);
          }
-      } else if (p_82448_1_.dimension == DimensionType.UNDERWORLD) {
-         d0 = MathHelper.clamp(d0 * 8.0D, p_82448_4_.getWorldBorder().minX() + 16.0D,
-                 p_82448_4_.getWorldBorder().maxX() - 16.0D);
-         d1 = MathHelper.clamp(d1 * 8.0D, p_82448_4_.getWorldBorder().minZ() + 16.0D,
-                 p_82448_4_.getWorldBorder().maxZ() - 16.0D);
-         p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-         if (p_82448_1_.isEntityAlive()) {
-            p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
+      } else if (fromType==DimensionType.OVERWORLD&&targetDim==DimensionType.UNDERWORLD){
+         d0 = MathHelper.clamp(d0, to.getWorldBorder().minX() + 16.0D,
+                 to.getWorldBorder().maxX() - 16.0D);
+         d1 = MathHelper.clamp(d1, to.getWorldBorder().minZ() + 16.0D,
+                 to.getWorldBorder().maxZ() - 16.0D);
+         invoker.setLocationAndAngles(d0, invoker.posY, d1, invoker.rotationYaw, invoker.rotationPitch);
+         if (invoker.isEntityAlive()) {
+            from.updateEntityWithOptionalForce(invoker, false);
          }
-      } else {
+      } else  if (fromType==DimensionType.UNDERWORLD&&targetDim==DimensionType.OVERWORLD){
+         d0 = MathHelper.clamp(d0, to.getWorldBorder().minX() + 16.0D,
+                 to.getWorldBorder().maxX() - 16.0D);
+         d1 = MathHelper.clamp(d1, to.getWorldBorder().minZ() + 16.0D,
+                 to.getWorldBorder().maxZ() - 16.0D);
+         invoker.setLocationAndAngles(d0, invoker.posY, d1, invoker.rotationYaw, invoker.rotationPitch);
+         if (invoker.isEntityAlive()) {
+            from.updateEntityWithOptionalForce(invoker, false);
+         }
+      }else {
          BlockPos blockpos;
-         if (p_82448_2_ == DimensionType.THE_END) {
-            blockpos = p_82448_4_.getSpawnPoint();
+         if (fromType == DimensionType.THE_END) {
+            blockpos = to.getSpawnPoint();
          } else {
-            blockpos = p_82448_4_.getSpawnCoordinate();
+            blockpos = to.getSpawnCoordinate();
          }
 
          d0 = (double) blockpos.getX();
-         p_82448_1_.posY = (double) blockpos.getY();
+         invoker.posY = (double) blockpos.getY();
          d1 = (double) blockpos.getZ();
-         p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, 90.0F, 0.0F);
-         if (p_82448_1_.isEntityAlive()) {
-            p_82448_3_.updateEntityWithOptionalForce(p_82448_1_, false);
+         invoker.setLocationAndAngles(d0, invoker.posY, d1, 90.0F, 0.0F);
+         if (invoker.isEntityAlive()) {
+            from.updateEntityWithOptionalForce(invoker, false);
          }
       }
 
-      p_82448_3_.profiler.endSection();
-      if (p_82448_2_ != DimensionType.THE_END) {
-         p_82448_3_.profiler.startSection("placing");
+      from.profiler.endSection();
+      if (fromType != DimensionType.THE_END&&!(fromType==DimensionType.OVERWORLD&&targetDim==DimensionType.OVERWORLD)) {
+         from.profiler.startSection("placing");
          d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
          d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
-         if (p_82448_1_.isEntityAlive()) {
-            p_82448_1_.setLocationAndAngles(d0, p_82448_1_.posY, d1, p_82448_1_.rotationYaw, p_82448_1_.rotationPitch);
-            p_82448_4_.getDefaultTeleporter().placeInPortal(p_82448_1_, f);
-            p_82448_4_.spawnEntity(p_82448_1_);
-            p_82448_4_.updateEntityWithOptionalForce(p_82448_1_, false);
+         if (invoker.isEntityAlive()) {
+            invoker.setLocationAndAngles(d0, invoker.posY, d1, invoker.rotationYaw, invoker.rotationPitch);
+            to.getDefaultTeleporter().placeInPortal(invoker, f,fromType);
+            to.spawnEntity(invoker);
+            to.updateEntityWithOptionalForce(invoker, false);
          }
 
-         p_82448_3_.profiler.endSection();
+         from.profiler.endSection();
       }
 
-      p_82448_1_.setWorld(p_82448_4_);
+      invoker.setWorld(to);
    }
 
    public void tick() {

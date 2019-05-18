@@ -4117,6 +4117,10 @@
   "block.minecraft.obsidian_furnace": "\u9ed1\u66dc\u77f3\u7194\u7089",
   "block.minecraft.sandstone_furnace": "\u6c99\u77f3\u7089",
 
+  "block.minecraft.worldspawn_portal": "\u4e16\u754c\u51fa\u751f\u70b9\u4f20\u9001\u95e8",
+  "block.minecraft.underworld_portal": "\u5730\u5e95\u4e16\u754c\u4f20\u9001\u95e8",
+  "block.minecraft.overworld_portal": "\u4e3b\u4e16\u754c\u4f20\u9001\u95e8",
+
   "MITEADVANCEMENTS":"-----------------------------------------",
   "advancements.structure.root.title": "\u7ed3\u6784!",
   "advancements.structure.root.description": "\u5347\u5230\u5341\u7ea7\u7136\u540e\u751f\u5b58\u4e8c\u5341\u5929\u6765\u751f\u6210\u7ed3\u6784",

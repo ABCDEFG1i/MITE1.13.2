@@ -52,6 +52,7 @@ public class BlockTags {
    public static final Tag<Block> CRAFTING_TABLE = makeWrapperTag("crafting_table");
    public static final Tag<Block> FURNACE = makeWrapperTag("furnace");
    public static final Tag<Block> UNDERGROUND_FILL = makeWrapperTag("underground_fill");
+   public static final Tag<Block> PORTALS = makeWrapperTag("portals");
 
    public static void setCollection(TagCollection<Block> p_199895_0_) {
       collection = p_199895_0_;

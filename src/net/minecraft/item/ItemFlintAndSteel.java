@@ -2,7 +2,7 @@ package net.minecraft.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.BlockFire;
-import net.minecraft.block.BlockPortal;
+import net.minecraft.block.BlockNetherPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -47,7 +47,7 @@ public class ItemFlintAndSteel extends Item {
       boolean flag = false;
 
       for(EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-         if (p_201825_0_.getBlockState(p_201825_1_.offset(enumfacing)).getBlock() == Blocks.OBSIDIAN && ((BlockPortal)Blocks.NETHER_PORTAL).func_201816_b(p_201825_0_, p_201825_1_) != null) {
+         if (p_201825_0_.getBlockState(p_201825_1_.offset(enumfacing)).getBlock() == Blocks.OBSIDIAN && ((BlockNetherPortal)Blocks.NETHER_PORTAL).func_201816_b(p_201825_0_, p_201825_1_) != null) {
             flag = true;
          }
       }

@@ -1,0 +1,7 @@
+{
+   "parent": "block/overworld_portal_ns",
+   "textures": {
+      "particle": "block/underworld_portal",
+      "portal": "block/underworld_portal"
+   }
+}

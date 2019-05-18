@@ -4113,6 +4113,10 @@
   "block.minecraft.obsidian_furnace": "Obsidian Furnace",
   "block.minecraft.sandstone_furnace": "Sandstone Furnace",
 
+  "block.minecraft.worldspawn_portal": "World Spawn Point Portal",
+  "block.minecraft.underworld_portal": "Underworld Portal",
+  "block.minecraft.overworld_portal": "Overworld Portal",
+
   "MITEADVANCEMENTS":"-----------------------------------------",
   "advancements.structure.root.title": "Structures!",
   "advancements.structure.root.description": "Get to level 10 and survive to 20 days to generate structures",

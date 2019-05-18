@@ -3,6 +3,8 @@ package net.minecraft.entity;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
+import java.awt.geom.Dimension2D;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +19,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.BlockPortal;
+import net.minecraft.block.BlockNetherPortal;
 import net.minecraft.block.BlockWall;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -88,6 +90,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
@@ -175,8 +178,11 @@ public abstract class Entity implements INameable, ICommandSource {
    public boolean isAirBorne;
    public int timeUntilPortal;
    protected boolean inPortal;
+   public boolean inWorldspawnPortal;
+   public boolean inNetherPortal;
    protected int portalCounter;
    public DimensionType dimension;
+   public DimensionType teleportTarget;
    protected BlockPos lastPortalPos;
    protected Vec3d lastPortalVec;
    protected EnumFacing teleportDirection;
@@ -206,6 +212,7 @@ public abstract class Entity implements INameable, ICommandSource {
       this.pistonDeltas = new double[]{0.0D, 0.0D, 0.0D};
       this.type = p_i48580_1_;
       this.world = p_i48580_2_;
+      this.teleportTarget = DimensionType.OVERWORLD;
       this.setPosition(0.0D, 0.0D, 0.0D);
       if (p_i48580_2_ != null) {
          this.dimension = p_i48580_2_.dimension.getType();
@@ -377,14 +384,17 @@ public abstract class Entity implements INameable, ICommandSource {
                   if (this.portalCounter++ >= i) {
                      this.portalCounter = i;
                      this.timeUntilPortal = this.getPortalCooldown();
-                     DimensionType dimensiontype;
-                     if (this.world.dimension.getType() == DimensionType.NETHER) {
-                        dimensiontype = DimensionType.OVERWORLD;
+                     if (inWorldspawnPortal) {
+                        BlockPos blockpos = this.world.getSpawnPoint();
+                        double d0 = (double) blockpos.getX();
+                        double d1 = (double) blockpos.getZ();
+                        this.setLocationAndAngles(d0, this.posY, d1, 90.0F, 0.0F);
+                        if (this instanceof EntityPlayerMP){
+                           ((EntityPlayerMP)this).connection.setPlayerLocation(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+                        }
                      } else {
-                        dimensiontype = DimensionType.NETHER;
+                        this.func_212321_a(teleportTarget);
                      }
-
-                     this.func_212321_a(dimensiontype);
                   }
                }
 
@@ -1721,13 +1731,13 @@ public abstract class Entity implements INameable, ICommandSource {
       return Vec3d.fromPitchYaw(this.getPitchYaw());
    }
 
-   public void setPortal(BlockPos p_181015_1_) {
+   public void setPortal(BlockPos p_181015_1_, DimensionType dist) {
       if (this.timeUntilPortal > 0) {
          this.timeUntilPortal = this.getPortalCooldown();
       } else {
          if (!this.world.isRemote && !p_181015_1_.equals(this.lastPortalPos)) {
             this.lastPortalPos = new BlockPos(p_181015_1_);
-            BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockPortal)Blocks.NETHER_PORTAL).createPatternHelper(this.world, this.lastPortalPos);
+            BlockPattern.PatternHelper blockpattern$patternhelper = ((BlockNetherPortal)Blocks.NETHER_PORTAL).createPatternHelper(this.world, this.lastPortalPos);
             double d0 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? (double)blockpattern$patternhelper.getFrontTopLeft().getZ() : (double)blockpattern$patternhelper.getFrontTopLeft().getX();
             double d1 = blockpattern$patternhelper.getForwards().getAxis() == EnumFacing.Axis.X ? this.posZ : this.posX;
             d1 = Math.abs(MathHelper.pct(d1 - (double)(blockpattern$patternhelper.getForwards().rotateY().getAxisDirection() == EnumFacing.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double)blockpattern$patternhelper.getWidth()));
@@ -1735,8 +1745,9 @@ public abstract class Entity implements INameable, ICommandSource {
             this.lastPortalVec = new Vec3d(d1, d2, 0.0D);
             this.teleportDirection = blockpattern$patternhelper.getForwards();
          }
-
          this.inPortal = true;
+         this.teleportTarget=dist;
+         this.inNetherPortal = dist == DimensionType.NETHER;
       }
    }
 
@@ -2050,15 +2061,15 @@ public abstract class Entity implements INameable, ICommandSource {
    }
 
    @Nullable
-   public Entity func_212321_a(DimensionType p_212321_1_) {
+   public Entity func_212321_a(DimensionType target) {
       if (!this.world.isRemote && !this.isDead) {
          this.world.profiler.startSection("changeDimension");
          MinecraftServer minecraftserver = this.getServer();
-         DimensionType dimensiontype = this.dimension;
-         WorldServer worldserver = minecraftserver.func_71218_a(dimensiontype);
-         WorldServer worldserver1 = minecraftserver.func_71218_a(p_212321_1_);
-         this.dimension = p_212321_1_;
-         if (dimensiontype == DimensionType.THE_END && p_212321_1_ == DimensionType.THE_END) {
+         DimensionType original = this.dimension;
+         WorldServer worldserver = minecraftserver.func_71218_a(original);
+         WorldServer worldserver1 = minecraftserver.func_71218_a(target);
+         this.dimension = target;
+         if (original == DimensionType.THE_END && target == DimensionType.THE_END) {
             worldserver1 = minecraftserver.func_71218_a(DimensionType.OVERWORLD);
             this.dimension = DimensionType.OVERWORLD;
          }
@@ -2067,16 +2078,15 @@ public abstract class Entity implements INameable, ICommandSource {
          this.isDead = false;
          this.world.profiler.startSection("reposition");
          BlockPos blockpos;
-         if (p_212321_1_ == DimensionType.THE_END) {
+         if (target == DimensionType.THE_END) {
             blockpos = worldserver1.getSpawnCoordinate();
          } else {
             double d0 = this.posX;
             double d1 = this.posZ;
-            double d2 = 8.0D;
-            if (p_212321_1_ == DimensionType.NETHER) {
+            if (original==DimensionType.UNDERWORLD&&target==DimensionType.NETHER){
                d0 = MathHelper.clamp(d0 / 8.0D, worldserver1.getWorldBorder().minX() + 16.0D, worldserver1.getWorldBorder().maxX() - 16.0D);
                d1 = MathHelper.clamp(d1 / 8.0D, worldserver1.getWorldBorder().minZ() + 16.0D, worldserver1.getWorldBorder().maxZ() - 16.0D);
-            } else if (p_212321_1_ == DimensionType.OVERWORLD) {
+            } else if (target == DimensionType.UNDERWORLD&&original==DimensionType.NETHER){
                d0 = MathHelper.clamp(d0 * 8.0D, worldserver1.getWorldBorder().minX() + 16.0D, worldserver1.getWorldBorder().maxX() - 16.0D);
                d1 = MathHelper.clamp(d1 * 8.0D, worldserver1.getWorldBorder().minZ() + 16.0D, worldserver1.getWorldBorder().maxZ() - 16.0D);
             }
@@ -2084,9 +2094,10 @@ public abstract class Entity implements INameable, ICommandSource {
             d0 = (double)MathHelper.clamp((int)d0, -29999872, 29999872);
             d1 = (double)MathHelper.clamp((int)d1, -29999872, 29999872);
             float f = this.rotationYaw;
-            this.setLocationAndAngles(d0, this.posY, d1, 90.0F, 0.0F);
             Teleporter teleporter = worldserver1.getDefaultTeleporter();
             teleporter.placeInExistingPortal(this, f);
+            BlockPos blockpos1 = worldserver1.getHeight(Heightmap.Type.WORLD_SURFACE, new BlockPos(d0,this.posY,d1));
+            this.setLocationAndAngles(blockpos1.getX(), blockpos1.getY(), blockpos1.getZ(), 90.0F, 0.0F);
             blockpos = new BlockPos(this);
          }
 
@@ -2095,11 +2106,12 @@ public abstract class Entity implements INameable, ICommandSource {
          Entity entity = this.getType().create(worldserver1);
          if (entity != null) {
             entity.copyDataFromOld(this);
-            if (dimensiontype == DimensionType.THE_END && p_212321_1_ == DimensionType.THE_END) {
+            if (original == DimensionType.THE_END && target == DimensionType.THE_END) {
                BlockPos blockpos1 = worldserver1.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, worldserver1.getSpawnPoint());
                entity.moveToBlockPosAndAngles(blockpos1, entity.rotationYaw, entity.rotationPitch);
             } else {
-               entity.moveToBlockPosAndAngles(blockpos, entity.rotationYaw, entity.rotationPitch);
+               BlockPos blockpos1 = worldserver1.getHeight(Heightmap.Type.WORLD_SURFACE, blockpos);
+               entity.moveToBlockPosAndAngles(blockpos1, entity.rotationYaw, entity.rotationPitch);
             }
 
             boolean flag = entity.forceSpawn;
