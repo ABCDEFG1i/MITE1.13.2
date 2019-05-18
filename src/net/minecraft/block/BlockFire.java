@@ -26,6 +26,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.dimension.EndDimension;
 import net.minecraftforge.api.distmarker.Dist;
@@ -236,7 +237,22 @@ public class BlockFire extends Block {
 
    public void onBlockAdded(IBlockState p_196259_1_, World p_196259_2_, BlockPos p_196259_3_, IBlockState p_196259_4_) {
       if (p_196259_4_.getBlock() != p_196259_1_.getBlock()) {
-         if (p_196259_2_.dimension.getType() != DimensionType.OVERWORLD && p_196259_2_.dimension.getType() != DimensionType.NETHER || !((BlockPortal)Blocks.NETHER_PORTAL).trySpawnPortal(p_196259_2_, p_196259_3_)) {
+         DimensionType type = p_196259_2_.dimension.getType();
+         BlockNetherPortal portalBlock = (BlockNetherPortal) Blocks.NETHER_PORTAL;
+         if (type == DimensionType.OVERWORLD) {
+            if (p_196259_3_.getY() < 16) {
+               portalBlock = (BlockNetherPortal) Blocks.UNDERWORLD_PORTAL;
+            } else {
+               portalBlock = (BlockNetherPortal) Blocks.WORLDSPAWN_PORTAL;
+            }
+         }
+         if (type == DimensionType.UNDERWORLD) {
+            if (p_196259_3_.getY() >= 16) {
+               portalBlock = (BlockNetherPortal) Blocks.OVERWORLD_PORTAL;
+            }
+         }
+
+         if (p_196259_2_.dimension.getType() != DimensionType.OVERWORLD && p_196259_2_.dimension.getType() != DimensionType.NETHER &&p_196259_2_.dimension.getType() != DimensionType.UNDERWORLD ||portalBlock.trySpawnPortal(p_196259_2_, p_196259_3_)) {
             if (!p_196259_1_.isValidPosition(p_196259_2_, p_196259_3_)) {
                p_196259_2_.removeBlock(p_196259_3_);
             } else {

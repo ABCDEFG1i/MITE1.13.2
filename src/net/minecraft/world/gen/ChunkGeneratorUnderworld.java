@@ -120,21 +120,77 @@ public class ChunkGeneratorUnderworld extends AbstractChunkGenerator<UnderworldG
 
     }
 
-    protected void makeBedrock(IChunk p_205472_1_, Random p_205472_2_) {
+    protected void makeBedrock(IChunk p_205472_1_, Random rand) {
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
         int i = p_205472_1_.getPos().getXStart();
         int j = p_205472_1_.getPos().getZStart();
 
         for(BlockPos blockpos : BlockPos.getAllInBox(i, 0, j, i + 16, 0, j + 16)) {
             for(int k = 256; k > 253; --k) {
-                if (k >= 255 - p_205472_2_.nextInt(5)) {
+                if (k >= 255 - rand.nextInt(5)) {
                     p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), k, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
                 }
             }
+            //First Layer
+            for (int y = 100; y>94;--y){
+                p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+            }
+            for (int y = 93; y>89;--y){
+                if (rand.nextInt(96-y)==0){
+                    p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+                }
+            }
+            for (int y = 104; y>100;--y){
+                if (rand.nextInt(y-98)==0){
+                    p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+                }
+            }
 
-            for(int l = 4; l >= 0; --l) {
-                if (l <= p_205472_2_.nextInt(5)) {
+            //Second Layer
+            for (int y = 74; y>70;--y){
+                p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+            }
+            for (int y = 70; y>65;--y){
+                if (rand.nextInt(71-y)==0){
+                    p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+                }
+            }
+            for (int y = 76; y>74;--y){
+                if (rand.nextInt(y-73)==0){
+                    p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), y, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+                }
+            }
+
+            for(int l = 6; l >= 0; --l) {
+                if (l <= rand.nextInt(7)) {
                     p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(blockpos.getX(), l, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+                }
+            }
+
+
+        }
+        //Make a hole to enter deeper
+        //First Layer hole
+        if (rand.nextInt(10)==0){
+            int xConer = rand.nextInt(14);
+            int zConer = rand.nextInt(14);
+            for (int y=104;y>89;--y){
+                for (int x=0;x<2;x++){
+                    for (int z=0;z<2;z++){
+                        p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(xConer+x,y,zConer+z),Blocks.STONE.getDefaultState(),false);
+                    }
+                }
+            }
+        }
+        //Second Layer hole
+        if (rand.nextInt(8)==0){
+            int xConer = rand.nextInt(12);
+            int zConer = rand.nextInt(12);
+            for (int y=76;y>65;--y){
+                for (int x=0;x<4;x++){
+                    for (int z=0;z<4;z++){
+                        p_205472_1_.setBlockState(blockpos$mutableblockpos.setPos(xConer+x,y,zConer+z),Blocks.STONE.getDefaultState(),false);
+                    }
                 }
             }
         }

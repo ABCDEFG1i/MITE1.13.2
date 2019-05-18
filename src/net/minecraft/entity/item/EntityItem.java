@@ -287,8 +287,8 @@ public class EntityItem extends Entity {
    }
 
    @Nullable
-   public Entity func_212321_a(DimensionType p_212321_1_) {
-      Entity entity = super.func_212321_a(p_212321_1_);
+   public Entity func_212321_a(DimensionType target) {
+      Entity entity = super.func_212321_a(target);
       if (!this.world.isRemote && entity instanceof EntityItem) {
          ((EntityItem)entity).searchForOtherItemsNearby();
       }

@@ -198,14 +198,8 @@ public abstract class EntityMinecart extends Entity implements INameable {
                if (!this.isRiding() && this.portalCounter++ >= i) {
                   this.portalCounter = i;
                   this.timeUntilPortal = this.getPortalCooldown();
-                  DimensionType dimensiontype;
-                  if (this.world.dimension.getType() == DimensionType.NETHER) {
-                     dimensiontype = DimensionType.OVERWORLD;
-                  } else {
-                     dimensiontype = DimensionType.NETHER;
-                  }
 
-                  this.func_212321_a(dimensiontype);
+                  this.func_212321_a(teleportTarget);
                }
 
                this.inPortal = false;

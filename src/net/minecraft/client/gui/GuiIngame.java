@@ -42,6 +42,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.GameType;
 import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -892,14 +893,25 @@ public class GuiIngame extends Gui {
         GlStateManager.disableAlphaTest();
         GlStateManager.disableDepthTest();
         GlStateManager.depthMask(false);
+
+
         GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA,
                                          GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
                                          GlStateManager.SourceFactor.ONE,
                                          GlStateManager.DestFactor.ZERO);
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, p_194805_1_);
         this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        TextureAtlasSprite textureatlassprite = this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(
-                Blocks.NETHER_PORTAL.getDefaultState());
+        TextureAtlasSprite textureatlassprite;
+        if (this.getCurrentPlayer().inNetherPortal){
+            textureatlassprite = this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(
+                    Blocks.NETHER_PORTAL.getDefaultState());
+        }else if(this.getCurrentPlayer().teleportTarget== DimensionType.UNDERWORLD){
+            textureatlassprite = this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(
+                    Blocks.UNDERWORLD_PORTAL.getDefaultState());
+        }else {
+            textureatlassprite = this.mc.getBlockRendererDispatcher().getBlockModelShapes().getTexture(
+                    Blocks.OVERWORLD_PORTAL.getDefaultState());
+        }
         float f = textureatlassprite.getMinU();
         float f1 = textureatlassprite.getMinV();
         float f2 = textureatlassprite.getMaxU();

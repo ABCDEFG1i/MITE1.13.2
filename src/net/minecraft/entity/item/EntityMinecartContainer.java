@@ -121,9 +121,9 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
    }
 
    @Nullable
-   public Entity func_212321_a(DimensionType p_212321_1_) {
+   public Entity func_212321_a(DimensionType target) {
       this.dropContentsWhenDead = false;
-      return super.func_212321_a(p_212321_1_);
+      return super.func_212321_a(target);
    }
 
    public void setDead() {

@@ -236,9 +236,12 @@
         <w>mithril</w>
         <w>multiplayer</w>
         <w>netherrack</w>
+        <w>overworld</w>
         <w>pickaxe</w>
         <w>prismarine</w>
         <w>redstone</w>
+        <w>teleport</w>
+        <w>worldspawn</w>
       </words>
     </dictionary>
   </component>
@@ -310,6 +313,8 @@
         <root url="jar://$USER_HOME$/.ideaLibSources/lwjgl-3.1.6-sources.jar!/" />
         <root url="jar://$USER_HOME$/.ideaLibSources/netty-all-4.1.25.Final-sources.jar!/" />
         <root url="jar://$USER_HOME$/.ideaLibSources/log4j-core-2.8.1-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.ideaLibSources/fastutil-8.2.1-sources.jar!/" />
+        <root url="jar://$USER_HOME$/.ideaLibSources/lwjgl-opengl-3.1.6-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="natives">
